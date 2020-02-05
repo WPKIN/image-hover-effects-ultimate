@@ -1,0 +1,70 @@
+<?php
+
+/*
+  Plugin Name: Image Hover Effects Ultimate (Photo Gallery, Effects, Lightbox, Comparison or Magnifier)
+  Plugin URI: https://www.oxilab.org/downloads/image-hover-ultimate-pro/
+  Description: Image Hover Effects Ultimate is an impressive, lightweight, responsive Image hover effects. Use modern and elegant CSS hover effects and animations.
+  Author: Biplob Adhikari
+  Author URI: http://www.oxilab.org/
+  Version: 9.3.0
+ */
+
+if (!defined('ABSPATH'))
+    exit;
+
+define('OXI_IMAGE_HOVER_FILE', __FILE__);
+define('OXI_IMAGE_HOVER_BASENAME', plugin_basename(__FILE__));
+define('OXI_IMAGE_HOVER_PATH', plugin_dir_path(__FILE__));
+define('OXI_IMAGE_HOVER_URL', plugins_url('/', __FILE__));
+define('OXI_IMAGE_HOVER_PLUGIN_VERSION', '9.3.0');
+define('OXI_IMAGE_HOVER_TEXTDOMAIN', 'oxi-image-hover-plugin');
+$upload = wp_upload_dir();
+define('OXI_IMAGE_HOVER_UPLOAD_PATH', $upload['basedir'] . '/oxi-image-hover/');
+define('OXI_IMAGE_HOVER_UPLOAD_URL', $upload['baseurl'] . '/oxi-image-hover/');
+
+/**
+ * Including composer autoloader globally.
+ *
+ * @since 9.3.0
+ */
+require_once OXI_IMAGE_HOVER_PATH . 'autoloader.php';
+
+/**
+ * Run plugin after all others plugins
+ *
+ * @since 9.3.0
+ */
+add_action('plugins_loaded', function () {
+    \OXI_IMAGE_HOVER_PLUGINS\Classes\Bootstrap::instance();
+});
+
+
+/**
+ * Activation hook
+ *
+ * @since 9.3.0
+ */
+register_activation_hook(__FILE__, function () {
+    $Installation = new \OXI_IMAGE_HOVER_PLUGINS\Classes\Installation();
+    $Installation->plugin_activation_hook();
+});
+
+/**
+ * Deactivation hook
+ *
+ * @since 9.3.0
+ */
+register_deactivation_hook(__FILE__, function () {
+    $Installation = new \OXI_IMAGE_HOVER_PLUGINS\Classes\Installation();
+    $Installation->plugin_deactivation_hook();
+});
+
+/**
+ * Upgrade hook
+ *
+ * @since 9.3.0
+ */
+add_action('upgrader_process_complete', function ($upgrader_object, $options) {
+    $Installation = new \OXI_IMAGE_HOVER_PLUGINS\Classes\Installation();
+    $Installation->plugin_upgrade_hook($upgrader_object, $options);
+}, 10, 2);
