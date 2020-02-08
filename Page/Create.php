@@ -259,9 +259,8 @@ class Create {
                                     <?php echo $value['name']; ?>
                                 </div>
                                 <div class="oxi-addons-style-preview-bottom-right">
-
                                     <?php
-                                    if (apply_filters('oxi-image-hover-plugin-version', false) == false && array_key_exists($key, $this->pre_clecked)):
+                                    if (apply_filters('oxi-image-hover-plugin-version', false) == true):
                                         ?>
                                         <button class="btn btn-success oxi-addons-addons-style-btn-active" title="Active Templates" data-value="<?php echo $id; ?>" data-effects="<?php echo $this->effects; ?>" type="button" value="Active" name="styleactive<?php echo $id; ?>">Active Templates</button>  
                                         <?php
