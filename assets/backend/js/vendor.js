@@ -57,6 +57,7 @@ jQuery.noConflict();
     });
     $(document.body).on("click", ".shortcode-form-responsive-switcher-desktop", function () {
         $("#oxi-addons-form-submit").toggleClass('shortcode-responsive-switchers-open');
+        $("#oxi-template-modal-form").toggleClass('shortcode-responsive-switchers-open');
         $(".shortcode-form-responsive-switcher-tablet").removeClass('active');
         $(".shortcode-form-responsive-switcher-mobile").removeClass('active');
         $(".shortcode-addons-form-responsive-laptop").removeClass('shortcode-addons-responsive-display-none');

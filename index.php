@@ -3,7 +3,7 @@
 /*
   Plugin Name: Image Hover Effects Ultimate (Photo Gallery, Effects, Lightbox, Comparison or Magnifier)
   Plugin URI: https://www.oxilab.org/downloads/image-hover-ultimate-pro/
-  Description: Image Hover Effects Ultimate is an impressive, lightweight, responsive Image hover effects. Use modern and elegant CSS hover effects and animations.
+  Description: Create Awesome Image Hover Effects as Image Gallery, Lightbox, Comparison or Magnifier with Impressive, Lightweight, Responsive Image Hover Effects Ultimate. Use 500+ modern and elegant CSS hover effects and animations.
   Author: Biplob Adhikari
   Author URI: http://www.oxilab.org/
   Version: 9.3.0

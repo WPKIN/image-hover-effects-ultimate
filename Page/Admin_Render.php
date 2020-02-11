@@ -125,6 +125,7 @@ abstract class Admin_Render {
      * @since 9.3.0
      */
     public $StyleName;
+    public $repeater;
 
     public function __construct($type = '') {
         global $wpdb;
@@ -365,7 +366,6 @@ abstract class Admin_Render {
                 <div class="oxi-addons-row">
                     <?php
                     apply_filters('oxi-image-hover-support-and-comments', TRUE);
-                    $this->modal_form();
                     ?>
                     <div class="oxi-addons-wrapper oxi-addons-image-tabs-mode">
                         <div class="oxi-addons-settings" id="oxisettingsreload">
@@ -398,6 +398,7 @@ abstract class Admin_Render {
                                     $this->shortcode_info();
                                     $this->shortcode_rearrange();
                                 endif;
+                                $this->modal_form();
                                 ?>
                             </div>
                         </div>
@@ -420,6 +421,11 @@ abstract class Admin_Render {
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="shortcode-addons-form-repeater-store" style="display: none">
+                            <?php
+                            echo $this->repeater;
+                            ?>
                         </div>
                     </div>
                     <div id="OXIAADDONSCHANGEDPOPUP" class="modal fade">

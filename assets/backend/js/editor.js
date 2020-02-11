@@ -891,4 +891,101 @@ jQuery.noConflict();
         $("#image-hover-preview-color").val($input);
     });
 
+    if ($('div').hasClass('shortcode-form-repeater-fields-wrapper')) {
+        $(".shortcode-form-repeater-fields-wrapper").sortable({
+            axis: 'y',
+            handle: ".shortcode-form-repeater-controls-title"
+        });
+    }
+    if ($('div').hasClass('shortcode-form-rearrange-fields-wrapper')) {
+        $(".shortcode-form-rearrange-fields-wrapper").sortable({
+            axis: 'y',
+            handle: ".shortcode-form-repeater-controls-title",
+            update: function (event, ui) {
+                var list_sortable = jQuery(this).sortable('toArray').toString();
+                jQuery(jQuery(this).attr('vlid')).val(list_sortable);
+            }
+        });
+    }
+
+    function RepeaterTitle() {
+        $(".shortcode-form-repeater-controls-title").each(function (index, value) {
+            $patent = $(this).parents('.shortcode-form-repeater-fields');
+            $t = $patent.attr('tab-title');
+            $value = $patent.find("input").filter('[id$=\'' + $t + '\']').val();
+            $(this).html($value);
+        });
+    }
+    $(document.body).on("click", ".shortcode-form-repeater-fields-wrapper .shortcode-form-repeater-controls-remove", function () {
+        event.preventDefault();
+        $(this).parents('.shortcode-form-repeater-fields').remove();
+        $(this).parents('.shortcode-form-repeater-fields-wrapper').trigger('sortupdate');
+        OxiAddonsPreviewDataLoader();
+    });
+
+    $(document.body).on("click", ".shortcode-form-repeater-controls-title", function () {
+        event.preventDefault();
+        RepeaterTitle();
+        $(this).parents('.shortcode-form-repeater-fields').toggleClass('shortcode-form-repeater-controls-open');
+        OxiAddonsPreviewDataLoader();
+    });
+    function childRecursive(element, func) {
+        func(element);
+        var children = element.children();
+        if (children.length > 0) {
+            children.each(function () {
+                childRecursive($(this), func);
+            });
+        }
+    }
+    function getNewAttr(str, newNum, REP) {
+        return str.replace(REP, 'saarsarep' + newNum);
+    }
+    function setCloneAttr(element, value, REP) {
+
+        if (element.attr('id') !== undefined) {
+            element.attr('id', getNewAttr(element.attr('id'), value, REP));
+        }
+        if (element.attr('name') !== undefined) {
+            element.attr('name', getNewAttr(element.attr('name'), value, REP));
+        }
+        if (element.attr('for') !== undefined) {
+            element.attr('for', getNewAttr(element.attr('for'), value, REP));
+        }
+        if (element.attr('data-condition') !== undefined) {
+            element.attr('data-condition', getNewAttr(element.attr('data-condition'), value, REP));
+        }
+    }
+    $(document.body).on("click", ".shortcode-form-repeater-button", function () {
+        event.preventDefault();
+        $This = $(this);
+        $inputVAL = $This.parent().siblings('.shortcode-control-type-hidden').children().find('input').val(parseInt($This.parent().siblings('.shortcode-control-type-hidden').children().find('input').val()) + 1).val();
+        var REP = 'saarsarepidrep';
+        var newItem = $('#repeater-' + $This.attr('parent-id') + '-initial-data').children().clone();
+        childRecursive(newItem, function (e) {
+            setCloneAttr(e, $inputVAL, REP);
+        });
+        newItem.appendTo($This.parent().siblings('.shortcode-form-repeater-fields-wrapper'));
+        $Current = $This.parent().siblings('.shortcode-form-repeater-fields-wrapper').children(':last');
+        OxiAddonsPreviewDataLoader();
+    });
+
+    $(document.body).on("click", ".shortcode-form-repeater-fields-wrapper .shortcode-form-repeater-controls-duplicate", function () {
+        event.preventDefault();
+        $patent = $(this).parents('.shortcode-form-repeater-fields');
+        var REP = 'saarsa' + $patent.find('*').filter(':input').attr('name').split('saarsa')[1];
+        $inputVAL = $patent.parent().siblings('.shortcode-control-type-hidden').children().find('input').val(parseInt($patent.parent().siblings('.shortcode-control-type-hidden').children().find('input').val()) + 1).val();
+        var newItem = $patent.clone();
+        childRecursive(newItem, function (e) {
+            setCloneAttr(e, $inputVAL, REP);
+        });
+        newItem.insertAfter($patent);
+        $(this).parents('.shortcode-form-repeater-fields-wrapper').trigger('sortupdate');
+        OxiAddonsPreviewDataLoader();
+    });
+
+
+
+
+
 })(jQuery);

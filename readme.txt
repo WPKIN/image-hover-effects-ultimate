@@ -9,8 +9,8 @@ Requires PHP: 5.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Image Hover Effects Ultimate - Captions Hover with Visual Composer is an impressive, lightweight, responsive Image hover effects. Use 150+ modern and elegant CSS hover effects and animations.
 
+Create Awesome Image Hover Effects as Image Gallery, Lightbox, Comparison or Magnifier with Impressive, Lightweight, Responsive Image Hover Effects Ultimate. Use 500+ modern and elegant CSS hover effects and animations.
 
 == Description ==
 
