@@ -33,7 +33,7 @@ class Welcome {
                 </div>
                 <div class="feature-section">
                     <div class="about-container">
-                        <div class="about-addons-videos"><iframe src="https://www.youtube.com/embed/3M6jrL_Ytes" frameborder="0" allowfullscreen="" class="about-video"></iframe></div>
+                        <div class="about-addons-videos"><iframe src="https://www.youtube.com/embed/SGHeoNPogbE" frameborder="0" allowfullscreen="" class="about-video"></iframe></div>
                     </div>
                 </div>
             </div>
@@ -83,7 +83,7 @@ class Welcome {
                                 </div>
                                 <div class="oxi-docs-admin-block-content">
                                     <p>Unable to use Image Hover Ultimate? Don't worry you can check your web tutorials to make easier to use :) </p>
-                                    <a href="https://www.youtube.com/playlist?list=PLUIlGSU2bl8gFKe5UBZJqvZN7Z-tvE-w7" class="oxi-docs-button" target="_blank">Video Tutorials</a>
+                                    <a href="https://www.youtube.com/playlist?list=PLUIlGSU2bl8hv8JNPhyvYR_O5Krj-ZYCw" class="oxi-docs-button" target="_blank">Video Tutorials</a>
                                 </div>
                             </div>
                         </div>
