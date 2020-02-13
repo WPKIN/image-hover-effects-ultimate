@@ -55,7 +55,8 @@
 .oxi-image-hover  img{
     box-shadow: none;
 }
-.oxi-image-hover:hover{
+oxi-image-hover:hover,
+oxi-image-hover.oxi-touch{
     z-index: 5;
 }
 
@@ -451,18 +452,18 @@
 .oxi-image-hover:hover .iheu-zoom-out,
 .oxi-image-hover:hover .iheu-flip-x,
 .oxi-image-hover:hover .iheu-flip-y,
-.oxi-image-hover.iheu-touch .iheu-fade-up,
-.oxi-image-hover.iheu-touch .iheu-fade-down,
-.oxi-image-hover.iheu-touch .iheu-fade-left,
-.oxi-image-hover.iheu-touch .iheu-fade-right,
-.oxi-image-hover.iheu-touch .iheu-fade-up-big,
-.oxi-image-hover.iheu-touch .iheu-fade-down-big,
-.oxi-image-hover.iheu-touch .iheu-fade-left-big,
-.oxi-image-hover.iheu-touch .iheu-fade-right-big,
-.oxi-image-hover.iheu-touch .iheu-zoom-in,
-.oxi-image-hover.iheu-touch .iheu-zoom-out,
-.oxi-image-hover.iheu-touch .iheu-flip-x,
-.oxi-image-hover.iheu-touch .iheu-flip-y{
+.oxi-image-hover.oxi-touch .iheu-fade-up,
+.oxi-image-hover.oxi-touch .iheu-fade-down,
+.oxi-image-hover.oxi-touch .iheu-fade-left,
+.oxi-image-hover.oxi-touch .iheu-fade-right,
+.oxi-image-hover.oxi-touch .iheu-fade-up-big,
+.oxi-image-hover.oxi-touch .iheu-fade-down-big,
+.oxi-image-hover.oxi-touch .iheu-fade-left-big,
+.oxi-image-hover.oxi-touch .iheu-fade-right-big,
+.oxi-image-hover.oxi-touch .iheu-zoom-in,
+.oxi-image-hover.oxi-touch .iheu-zoom-out,
+.oxi-image-hover.oxi-touch .iheu-flip-x,
+.oxi-image-hover.oxi-touch .iheu-flip-y{
     -webkit-transform: translate(0, 0) scale(1) rotate(0);
     -moz-transform: translate(0, 0) scale(1) rotate(0);
     -ms-transform: translate(0, 0) scale(1) rotate(0);
@@ -480,42 +481,42 @@
 }
 
 .oxi-image-hover:hover .oxi-image-hover-delay-xs,
-.oxi-image-hover.iheu-touch .oxi-image-hover-delay-xs {
+.oxi-image-hover.oxi-touch .oxi-image-hover-delay-xs {
     -webkit-transition-delay: 0.175s !important;
     -moz-transition-delay: 0.175s !important;
     -o-transition-delay: 0.175s !important;
     transition-delay: 0.175s !important;
 }
 .oxi-image-hover:hover .oxi-image-hover-delay-sm, 
-.oxi-image-hover.iheu-touch .oxi-image-hover-delay-sm {
+.oxi-image-hover.oxi-touch .oxi-image-hover-delay-sm {
     -webkit-transition-delay: 0.35s !important;
     -moz-transition-delay: 0.35s !important;
     -o-transition-delay: 0.35s !important;
     transition-delay: 0.35s !important;
 }
 .oxi-image-hover:hover .oxi-image-hover-delay-md,
-.oxi-image-hover.iheu-touch .oxi-image-hover-delay-md {
+.oxi-image-hover.oxi-touch .oxi-image-hover-delay-md {
     -webkit-transition-delay: 0.525s !important;
     -moz-transition-delay: 0.525s !important;
     -o-transition-delay: 0.525s !important;
     transition-delay: 0.525s !important;
 }
 .oxi-image-hover:hover .oxi-image-hover-delay-lg, 
-.oxi-image-hover.iheu-touch .oxi-image-hover-delay-lg {
+.oxi-image-hover.oxi-touch .oxi-image-hover-delay-lg {
     -webkit-transition-delay: 0.7s !important;
     -moz-transition-delay: 0.7s !important;
     -o-transition-delay: 0.7s !important;
     transition-delay: 0.7s !important;
 }
 .oxi-image-hover:hover .oxi-image-hover-delay-xl, 
-.oxi-image-hover.iheu-touch .oxi-image-hover-delay-xl {
+.oxi-image-hover.oxi-touch .oxi-image-hover-delay-xl {
     -webkit-transition-delay: 0.875s !important;
     -moz-transition-delay: 0.875s !important;
     -o-transition-delay: 0.875s !important;
     transition-delay: 0.875s !important;
 }
 .oxi-image-hover:hover .oxi-image-hover-delay-xxl,
-.oxi-image-hover.iheu-touch .oxi-image-hover-delay-xxl {
+.oxi-image-hover.oxi-touch .oxi-image-hover-delay-xxl {
     -webkit-transition-delay: 1.05s !important;
     -moz-transition-delay: 1.05s !important;
     -o-transition-delay: 1.05s  !important;
@@ -525,14 +526,14 @@
 .oxi-image-hover:hover .oxi-image-hover-delay-xl, 
 .oxi-image-hover:hover .oxi-image-hover-delay-lg,
 .oxi-image-hover:hover .oxi-image-hover-delay-md, 
-.oxi-image-hover:hover .oxi-image-hover-delay-sm,
-.oxi-image-hover:hover .oxi-image-hover-delay-xs,
-.oxi-image-hover.iheu-touch .oxi-image-hover-delay-xxl,
-.oxi-image-hover.iheu-touch .oxi-image-hover-delay-xl, 
-.oxi-image-hover.iheu-touch .oxi-image-hover-delay-lg,
-.oxi-image-hover.iheu-touch .oxi-image-hover-delay-md, 
-.oxi-image-hover.iheu-touch .oxi-image-hover-delay-sm,
-.oxi-image-hover.iheu-touch .oxi-image-hover-delay-xs{
+oxi-image-hover:hover .oxi-image-hover-delay-sm,
+oxi-image-hover:hover .oxi-image-hover-delay-xs,
+oxi-image-hover.oxi-touch .oxi-image-hover-delay-xxl,
+oxi-image-hover.oxi-touch .oxi-image-hover-delay-xl, 
+oxi-image-hover.oxi-touch .oxi-image-hover-delay-lg,
+oxi-image-hover.oxi-touch .oxi-image-hover-delay-md, 
+oxi-image-hover.oxi-touch .oxi-image-hover-delay-sm,
+oxi-image-hover.oxi-touch .oxi-image-hover-delay-xs{
     opacity: 1;
 }
 
