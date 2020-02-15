@@ -317,6 +317,10 @@ Its too easy Chose your style from Effects List and click at Clone.
 
 
 == Changelog ==
+= 9.3 = 
+*New Amdin panel
+*8 type of Effects 
+
 = 9.2 = 
 *Fixed Bugs 
 
@@ -433,6 +437,10 @@ Its too easy Chose your style from Effects List and click at Clone.
 
 
 == Upgrade Notice ==
+= 9.2 = 
+New Admin Panel
+8 Type of Elements
+
 = 9.2 = 
 Fixed bugs
 
