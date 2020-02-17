@@ -93,11 +93,11 @@ class Bootstrap {
      * @access public
      */
     protected function Shortcode_loader() {
-//        add_shortcode('iheu_ultimate_oxi', [$this, 'WP_Shortcode']);
-//        new \OXI_IMAGE_HOVER_PLUGINS\Modules\Visual_Composer();
-//        $ImageWidget = new \OXI_IMAGE_HOVER_PLUGINS\Modules\Widget();
-//        add_filter('widget_text', 'do_shortcode');
-//        add_action('widgets_init', array($ImageWidget, 'iheu_widget_widget'));
+        add_shortcode('iheu_ultimate_oxi', [$this, 'WP_Shortcode']);
+        new \OXI_IMAGE_HOVER_PLUGINS\Modules\Visual_Composer();
+        $ImageWidget = new \OXI_IMAGE_HOVER_PLUGINS\Modules\Widget();
+        add_filter('widget_text', 'do_shortcode');
+        add_action('widgets_init', array($ImageWidget, 'iheu_widget_widget'));
     }
 
     /**
