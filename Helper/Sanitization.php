@@ -687,10 +687,13 @@ trait Sanitization {
                     if (strpos($file, '{{') !== FALSE):
                         $file = $this->multiple_selector_handler($data, $file);
                     endif;
+                    // if (!empty($val)):
                     $this->CSSDATA[$arg['responsive']][$class][$file] = $file;
+                    //  endif;
                 }
             endif;
         endif;
+
         $defualt = ['min' => 0, 'max' => 1000, 'step' => 1,];
         $arg = array_merge($defualt, $arg);
         echo '  <div class="shortcode-form-control-input-wrapper">
@@ -931,7 +934,7 @@ trait Sanitization {
         if (array_key_exists('selector-data', $arg) && $arg['selector-data'] == TRUE) {
             if (array_key_exists('selector', $arg) && $value != '') :
                 foreach ($arg['selector'] as $key => $val) {
-                    if ($arg['render'] == TRUE) :
+                    if ($arg['render'] == TRUE && !empty($val)) :
                         $key = (strpos($key, '{{KEY}}') ? str_replace('{{KEY}}', explode('saarsa', $id)[1], $key) : $key);
                         $class = str_replace('{{WRAPPER}}', $this->WRAPPER, $key);
                         $file = str_replace('{{VALUE}}', str_replace("+", ' ', $value), $val);
@@ -1012,7 +1015,7 @@ trait Sanitization {
         $unlink = (count(array_unique($ar)) === 1 ? '' : 'link-dimensions-unlink');
         if (array_key_exists('selector-data', $arg) && $arg['selector-data'] == TRUE && $arg['render'] == TRUE) {
             if (array_key_exists('selector', $arg)) :
-                if ($top > -1111) :
+                if (!empty($top)) :
                     foreach ($arg['selector'] as $key => $val) {
                         $key = (strpos($key, '{{KEY}}') ? str_replace('{{KEY}}', explode('saarsa', $id)[1], $key) : $key);
                         $class = str_replace('{{WRAPPER}}', $this->WRAPPER, $key);
@@ -1418,7 +1421,6 @@ trait Sanitization {
         endif;
 
         if (array_key_exists($id . '-shadow', $data) && $data[$id . '-shadow'] == 'yes' && array_key_exists($id . '-color', $data) && array_key_exists($id . '-blur-size', $data) && array_key_exists($id . '-spread-size', $data) && array_key_exists($id . '-horizontal-size', $data) && array_key_exists($id . '-vertical-size', $data)) :
-            echo 'ashdjk';
             $true = ($data[$id . '-blur-size'] == 0 || empty($data[$id . '-blur-size'])) && ($data[$id . '-spread-size'] == 0 || empty($data[$id . '-spread-size'])) && ($data[$id . '-horizontal-size'] == 0 || empty($data[$id . '-horizontal-size'])) && ($data[$id . '-vertical-size'] == 0 || empty($data[$id . '-vertical-size'])) ? TRUE : FALSE;
             $boxshadow = ($true == FALSE ? '-webkit-box-shadow:' . (array_key_exists($id . '-type', $data) ? $data[$id . '-type'] : '') . ' ' . $data[$id . '-horizontal-size'] . 'px ' . $data[$id . '-vertical-size'] . 'px ' . $data[$id . '-blur-size'] . 'px ' . $data[$id . '-spread-size'] . 'px ' . $data[$id . '-color'] . ';' : '');
             $boxshadow .= ($true == FALSE ? '-moz-box-shadow:' . (array_key_exists($id . '-type', $data) ? $data[$id . '-type'] : '') . ' ' . $data[$id . '-horizontal-size'] . 'px ' . $data[$id . '-vertical-size'] . 'px ' . $data[$id . '-blur-size'] . 'px ' . $data[$id . '-spread-size'] . 'px ' . $data[$id . '-color'] . ';' : '');
