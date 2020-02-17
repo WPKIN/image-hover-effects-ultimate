@@ -107,6 +107,21 @@ jQuery.noConflict();
             });
         });
     });
+    $("#oxi-addons-setting-rebuild").on("click", function (e) {
+        e.preventDefault();
+        $(this).html('Wait..');
+        var rawdata = 'rebuild';
+        var styleid = $(this).data('value');
+        var functionname = "elements_template_rebuild_data";
+        OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, function (callback) {
+            console.log(callback);
+            if (callback === "success") {
+                setTimeout(function () {
+                    location.reload();
+                }, 1500);
+            }
+        });
+    });
 
     $("#oxi-addons-list-rearrange-submit").on("click", function (e) {
         e.preventDefault();

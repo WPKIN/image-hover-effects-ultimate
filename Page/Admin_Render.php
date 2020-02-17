@@ -378,6 +378,14 @@ abstract class Admin_Render {
                                             ?>
                                         </div>
                                         <div class="oxi-addons-setting-save">
+
+                                            <?php
+                                            if (array_key_exists('css', $this->dbdata)):
+                                                ?>
+                                                <button type="button" class="btn btn-secondary"  data-value="<?php echo $this->dbdata['id']; ?>" id="oxi-addons-setting-rebuild">Rebuild</button>
+                                                <?php
+                                            endif;
+                                            ?>
                                             <button type="button" class="btn btn-danger" id="oxi-addons-setting-reload">Reload</button>
                                             <input type="hidden"  id="image-hover-preview-color" name="image-hover-preview-color" value="<?php echo(is_array($this->style) ? array_key_exists('image-hover-preview-color', $this->style) ? $this->style['image-hover-preview-color'] : '#FFF' : '#FFF'); ?>">
                                             <input type="hidden"  id="image-hover-style-id" name="image-hover-style-id" value="<?php echo $this->dbdata['id']; ?>">

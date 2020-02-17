@@ -8,7 +8,9 @@ namespace OXI_IMAGE_HOVER_PLUGINS\Classes;
  * @author $biplob018
  */
 class Admin_Ajax {
+
     use \OXI_IMAGE_HOVER_PLUGINS\Helper\Uplaod;
+
     /**
      * Define $wpdb
      *
@@ -282,6 +284,22 @@ class Admin_Ajax {
         $CLASS = new $cls;
         $styledata = ['rawdata' => $rawdata, 'id' => $styleid, 'style_name' => $StyleName, 'stylesheet' => ''];
         $CLASS->__construct($styledata, $child, 'admin');
+    }
+
+    /**
+     * Template Rebuild Render
+     *
+     * @since 9.3.0
+     */
+    public function elements_template_rebuild_data($rawdata = '', $styleid = '') {
+        $style = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $styleid), ARRAY_A);
+        $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid), ARRAY_A);
+        $style['rawdata'] = $style['stylesheet'] = $style['font_family'] = '';
+        $name = explode('-', $style['style_name']);
+        $cls = '\OXI_IMAGE_HOVER_UPLOADS\\' . ucfirst($name[0]) . '\Render\Effects' . $name[1];
+        $CLASS = new $cls;
+        $CLASS->__construct($style, $child, 'admin');
+        echo 'success';
     }
 
     /**

@@ -1404,7 +1404,21 @@ trait Sanitization {
         endif;
         $true = TRUE;
         $selector_key = $selector = $selectorvalue = $loader = $loadervalue = '';
+        if (!array_key_exists($id . '-shadow', $data)):
+            $data[$id . '-shadow'] = 'yes';
+        endif;
+        if (!array_key_exists($id . '-blur-size', $data)):
+            $data[$id . '-blur-size'] = 0;
+        endif;
+        if (!array_key_exists($id . '-horizontal-size', $data)):
+            $data[$id . '-horizontal-size'] = 0;
+        endif;
+        if (!array_key_exists($id . '-vertical-size', $data)):
+            $data[$id . '-vertical-size'] = 0;
+        endif;
+
         if (array_key_exists($id . '-shadow', $data) && $data[$id . '-shadow'] == 'yes' && array_key_exists($id . '-color', $data) && array_key_exists($id . '-blur-size', $data) && array_key_exists($id . '-spread-size', $data) && array_key_exists($id . '-horizontal-size', $data) && array_key_exists($id . '-vertical-size', $data)) :
+            echo 'ashdjk';
             $true = ($data[$id . '-blur-size'] == 0 || empty($data[$id . '-blur-size'])) && ($data[$id . '-spread-size'] == 0 || empty($data[$id . '-spread-size'])) && ($data[$id . '-horizontal-size'] == 0 || empty($data[$id . '-horizontal-size'])) && ($data[$id . '-vertical-size'] == 0 || empty($data[$id . '-vertical-size'])) ? TRUE : FALSE;
             $boxshadow = ($true == FALSE ? '-webkit-box-shadow:' . (array_key_exists($id . '-type', $data) ? $data[$id . '-type'] : '') . ' ' . $data[$id . '-horizontal-size'] . 'px ' . $data[$id . '-vertical-size'] . 'px ' . $data[$id . '-blur-size'] . 'px ' . $data[$id . '-spread-size'] . 'px ' . $data[$id . '-color'] . ';' : '');
             $boxshadow .= ($true == FALSE ? '-moz-box-shadow:' . (array_key_exists($id . '-type', $data) ? $data[$id . '-type'] : '') . ' ' . $data[$id . '-horizontal-size'] . 'px ' . $data[$id . '-vertical-size'] . 'px ' . $data[$id . '-blur-size'] . 'px ' . $data[$id . '-spread-size'] . 'px ' . $data[$id . '-color'] . ';' : '');

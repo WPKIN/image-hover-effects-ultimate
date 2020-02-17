@@ -42,9 +42,6 @@
     cursor: pointer;
     box-shadow: none;
 }
-.oxi-image-hover .oxi-image-hover-image:before{
-    z-index: +1;
-}
 .oxi-image-hover .oxi-image-hover-image img{
     width: 100% !important;
     height: 100% !important;
@@ -471,9 +468,10 @@ oxi-image-hover.oxi-touch{
     transform: translate(0, 0) scale(1) rotate(0);
     opacity: 1;
 }
-.oxi-image-hover-heading,
-.oxi-image-hover-content,
-.oxi-image-btn{
+.oxi-addons-container .oxi-image-hover-figure-heading,
+.oxi-addons-container .oxi-image-hover-heading,
+.oxi-addons-container .oxi-image-hover-content,
+.oxi-addons-container .oxi-image-btn{
     -webkit-transition: all 0.25s ease 0.25s;
     -o-transition: all 0.25s ease 0.25s;
     -moz-transition: all 0.25s ease 0.25s;
