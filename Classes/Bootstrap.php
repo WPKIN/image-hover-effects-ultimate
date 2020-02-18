@@ -63,7 +63,7 @@ class Bootstrap {
     }
 
     public function __construct() {
-        do_action('oxi-image-hover-plugin/before_init');
+        do_action('image-hover-effects-ultimate/before_init');
         // Load translation
         add_action('init', array($this, 'i18n'));
         $this->Shortcode_loader();
@@ -83,7 +83,7 @@ class Bootstrap {
      * @access public
      */
     public function i18n() {
-        load_plugin_textdomain('oxi-image-hover-plugin');
+        load_plugin_textdomain('image-hover-effects-ultimate');
     }
 
     /**
