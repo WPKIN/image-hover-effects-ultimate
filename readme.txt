@@ -310,10 +310,16 @@ Its too easy Chose your style from Effects List and click at Clone.
 
 == Screenshots ==
 
-1. Image hover Template Demo
-2. Visual Composer Add element.
-2. Admin panel With Live Preview.
-3. Popup Data Input form.
+1. Image hover Elements with Extensions
+2. Selecting layouts from Template Library.
+3. Set Image hover Shortcode Name.
+4. Fullly Customizable Admin panel.
+5. Popup Data Input form.
+6. Background Settings with Gradient and Image.
+7. Typography settings with Heading or Descriptions.
+8. WP Post Extension with Image Hover.
+9. Carousel or Slider Extension with Image Hover.
+1. Filter or Sorting or Slider Extension with Image Hover.
 
 
 == Changelog ==
