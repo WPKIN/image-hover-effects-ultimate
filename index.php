@@ -36,6 +36,7 @@ require_once OXI_IMAGE_HOVER_PATH . 'autoloader.php';
  */
 add_action('plugins_loaded', function () {
     \OXI_IMAGE_HOVER_PLUGINS\Classes\Bootstrap::instance();
+    
 });
 
 
@@ -58,13 +59,3 @@ register_deactivation_hook(__FILE__, function () {
     $Installation = new \OXI_IMAGE_HOVER_PLUGINS\Classes\Installation();
     $Installation->plugin_deactivation_hook();
 });
-
-/**
- * Upgrade hook
- *
- * @since 9.3.0
- */
-add_action('upgrader_process_complete', function ($upgrader_object, $options) {
-    $Installation = new \OXI_IMAGE_HOVER_PLUGINS\Classes\Installation();
-    $Installation->plugin_upgrade_hook($upgrader_object, $options);
-}, 10, 2);

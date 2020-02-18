@@ -141,14 +141,10 @@ class Installation {
      *
      * @since 9.3.0
      */
-    public function plugin_upgrade_hook($upgrader_object, $options) {
-        if ($options['action'] == 'update' && $options['type'] == 'plugin') {
-            if (isset($options['plugins'][OXI_IMAGE_HOVER_BASENAME])) {
-                $this->Image_Hover_Menu();
-                $this->Image_Hover_version_Check();
-                $this->Image_Hover_Database();
-            }
-        }
+    public function plugin_upgrade_hook() {
+        $this->Image_Hover_Menu();
+        $this->Image_Hover_version_Check();
+        $this->Image_Hover_Database();
     }
 
 }

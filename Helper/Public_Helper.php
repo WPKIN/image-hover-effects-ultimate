@@ -70,8 +70,12 @@ trait Public_Helper {
                 echo '<p> Shortcode Deleted, kindly add currect Shortcode</p>';
                 return;
             endif;
+            if (!array_key_exists('rawdata', $style)):
+                $Installation = new \OXI_IMAGE_HOVER_PLUGINS\Classes\Installation();
+                $Installation->plugin_upgrade_hook();
+            endif;
             $name = explode('-', ucfirst($style['style_name']));
-            $C = '\OXI_IMAGE_HOVER_UPLOADS\\' . $name[0] . '\Render\Effects' . $name[1];
+            $C = '\OXI_IMAGE_HOVER_UPLOADS\\' . ucfirst($name[0]) . '\Render\Effects' . $name[1];
             if (class_exists($C)):
                 new $C($style, $child, $user);
             else:
