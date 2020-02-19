@@ -165,7 +165,7 @@ class Public_Render {
         $inlinejs = $this->inline_public_jquery();
         if ($this->CSSDATA == '' && $this->admin == 'admin') {
             $name = explode('-', $this->dbdata['style_name']);
-            $cls = '\OXI_IMAGE_HOVER_UPLOADS\\' . $name[0] . '\Admin\\Effects' . $name[1];
+            $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $name[0] . '\Admin\\Effects' . $name[1];
             $CLASS = new $cls('admin');
             $inlinecss .= $CLASS->inline_template_css_render($this->style);
         } else {

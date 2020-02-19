@@ -12,7 +12,6 @@ if (!defined('ABSPATH'))
  */
 class Bootstrap {
 
-    use \OXI_IMAGE_HOVER_PLUGINS\Helper\Uplaod;
     use \OXI_IMAGE_HOVER_PLUGINS\Helper\Public_Helper;
     use \OXI_IMAGE_HOVER_PLUGINS\Helper\Admin_helper;
 
@@ -72,7 +71,6 @@ class Bootstrap {
             $this->Admin_Filters();
             $this->User_Admin();
             $this->User_Reviews();
-            $this->upload_folder();
         }
     }
 

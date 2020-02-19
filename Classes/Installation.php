@@ -12,12 +12,10 @@ if (!defined('ABSPATH'))
  */
 class Installation {
 
-    use \OXI_IMAGE_HOVER_PLUGINS\Helper\Uplaod;
 
     protected static $lfe_instance = NULL;
 
     const ADMINMENU = 'get_oxilab_addons_menu';
-    const IMAGEHOVERVERSION = 'get_oxilab_image_hover_version';
 
     /**
      * Constructor of Shortcode Addons
@@ -69,13 +67,7 @@ class Installation {
         delete_transient(self::ADMINMENU);
     }
 
-    /**
-     * Image Hover Version Checking.
-     * @return mixed
-     */
-    public function Image_Hover_version_Check() {
-        delete_transient(self::IMAGEHOVERVERSION);
-    }
+    
 
     public function Image_Hover_Database() {
         global $wpdb;
@@ -121,7 +113,6 @@ class Installation {
     public function plugin_activation_hook() {
         $this->Image_Hover_Menu();
         $this->Image_Hover_Database();
-        $this->upload_folder();
         // Redirect to options page
         set_transient('oxi_image_hover_activation_redirect', true, 30);
     }
@@ -133,7 +124,6 @@ class Installation {
      */
     public function plugin_deactivation_hook() {
         $this->Image_Hover_Menu_Deactive();
-        $this->Image_Hover_version_Check();
     }
 
     /**
@@ -143,7 +133,6 @@ class Installation {
      */
     public function plugin_upgrade_hook() {
         $this->Image_Hover_Menu();
-        $this->Image_Hover_version_Check();
         $this->Image_Hover_Database();
     }
 

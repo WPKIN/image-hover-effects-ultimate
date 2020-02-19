@@ -176,7 +176,7 @@ class Create {
                                     $style = json_decode($v, true);
                                     $s = explode('-', $style['style']['style_name']);
                                     echo '<div class="oxi-bt-col-lg-4 oxi-bt-col-md-6 oxi-bt-col-sm-12">';
-                                    $CLASS = 'OXI_IMAGE_HOVER_UPLOADS\\' . ucfirst($s[0]) . '\Render\Effects' . $s[1];
+                                    $CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($s[0]) . '\Render\Effects' . $s[1];
                                     if (class_exists($CLASS)):
                                         new $CLASS($style['style'], $style['child']);
                                     endif;
@@ -245,7 +245,7 @@ class Create {
                                     $style = json_decode($v, true);
                                     $s = explode('-', $style['style']['style_name']);
                                     echo '<div class="oxi-bt-col-lg-4 oxi-bt-col-md-6 oxi-bt-col-sm-12">';
-                                    $CLASS = 'OXI_IMAGE_HOVER_UPLOADS\\' . ucfirst($s[0]) . '\Render\Effects' . $s[1];
+                                    $CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($s[0]) . '\Render\Effects' . $s[1];
                                     if (class_exists($CLASS)):
                                         new $CLASS($style['style'], $style['child']);
                                     endif;

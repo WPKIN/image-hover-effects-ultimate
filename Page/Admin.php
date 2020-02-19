@@ -32,8 +32,6 @@ class Admin {
      */
     public $wpdb;
 
-    const IMAGEHOVERVERSION = 'get_oxilab_image_hover_version';
-    const API = 'https://www.image-hover.oxilab.org/wp-json/api/';
 
     use \OXI_IMAGE_HOVER_PLUGINS\Helper\Public_Helper;
     use \OXI_IMAGE_HOVER_PLUGINS\Helper\CSS_JS_Loader;
@@ -85,52 +83,11 @@ class Admin {
         return ucwords($data);
     }
 
-    public function get_image_hover_public_version() {
-        $response = get_transient(self::IMAGEHOVERVERSION);
-        if (!$response) {
-            $URL = self::API . 'version';
-            $request = wp_remote_request($URL);
-            if (!is_wp_error($request)) {
-                $response = json_decode(wp_remote_retrieve_body($request), true);
-                set_transient(self::IMAGEHOVERVERSION, $response, 365 * DAY_IN_SECONDS);
-            } else {
-                $response = $request->get_error_message();
-            }
-        }
-        return $response;
-    }
+   
 
-    public function get_image_hover_local_version() {
-        if (class_exists('\OXI_IMAGE_HOVER_UPLOADS\IMAGEHOVER')):
-            return \OXI_IMAGE_HOVER_UPLOADS\IMAGEHOVER::get_instance()->public_version();
-        endif;
-        return '0.0.0';
-    }
+    
 
     public function Render() {
-        if (version_compare($this->get_image_hover_public_version(), $this->get_image_hover_local_version()) > 0):
-            ?>
-            <div class="image-hover-effects-update image-hover-effects-update-mode">
-                <div class="oxi-addons-oxi-docs-paren-loader">
-                    <div id="loading">
-                        <div id="loading-center">
-                            <div id="loading-center-absolute">
-                                <div class="object" id="object_one"></div>
-                                <div class="object" id="object_two"></div>
-                                <div class="object" id="object_three"></div>
-                                <div class="object" id="object_four"></div>
-                                <div class="object" id="object_five"></div>
-                                <div class="object" id="object_six"></div>
-                                <div class="object" id="object_seven"></div>
-                                <div class="object" id="object_eight"></div>
-                                <div class="object" id="object_big"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <?php
-        endif;
         ?>
         <div class="oxi-addons-row">
             <?php

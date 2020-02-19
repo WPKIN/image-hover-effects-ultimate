@@ -9,7 +9,6 @@ namespace OXI_IMAGE_HOVER_PLUGINS\Classes;
  */
 class Admin_Ajax {
 
-    use \OXI_IMAGE_HOVER_PLUGINS\Helper\Uplaod;
 
     /**
      * Define $wpdb
@@ -62,21 +61,6 @@ class Admin_Ajax {
         return $arr;
     }
 
-    public function image_hover_upgrade($data = '', $styleid = '', $itemid = '') {
-        require_once(ABSPATH . 'wp-admin/includes/file.php');
-        $tmpfile = download_url('https://image-hover.oxilab.org/wp-content/uploads/oxi-image-hover/image-hover.zip', $timeout = 500);
-        $this->upload_folder();
-        if (is_string($tmpfile)):
-            WP_Filesystem();
-            $unzipfile = unzip_file($tmpfile, OXI_IMAGE_HOVER_UPLOAD_PATH);
-            if ($unzipfile) {
-                echo 'Done';
-            } else {
-                echo 'There was an error unzipping the file.';
-            }
-        endif;
-    }
-
     public function create_new($data = '', $styleid = '', $itemid = '') {
         if (!empty($styleid)):
             $styleid = (int) $styleid;
@@ -87,7 +71,7 @@ class Admin_Ajax {
                 $raw = json_decode(stripslashes($newdata['rawdata']), true);
                 $raw['image-hover-style-id'] = $redirect_id;
                 $s = explode('-', $newdata['style_name']);
-                $CLASS = 'OXI_IMAGE_HOVER_UPLOADS\\' . ucfirst($s[0]) . '\Admin\Effects' . $s[1];
+                $CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($s[0]) . '\Admin\Effects' . $s[1];
                 $C = new $CLASS('admin');
                 $f = $C->template_css_render($raw);
                 $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid), ARRAY_A);
@@ -108,7 +92,7 @@ class Admin_Ajax {
                 $raw = json_decode(stripslashes($style['rawdata']), true);
                 $raw['image-hover-style-id'] = $redirect_id;
                 $s = explode('-', $style['style_name']);
-                $CLASS = 'OXI_IMAGE_HOVER_UPLOADS\\' . ucfirst($s[0]) . '\Admin\Effects' . $s[1];
+                $CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($s[0]) . '\Admin\Effects' . $s[1];
                 $C = new $CLASS('admin');
                 $f = $C->template_css_render($raw);
                 foreach ($child as $value) {
@@ -193,7 +177,7 @@ class Admin_Ajax {
         if ((int) $styleid):
             $this->wpdb->query($this->wpdb->prepare("UPDATE {$this->parent_table} SET rawdata = %s, stylesheet = %s WHERE id = %d", $rawdata, $stylesheet, $styleid));
             $name = explode('-', $StyleName);
-            $cls = '\OXI_IMAGE_HOVER_UPLOADS\\' . $name[0] . '\Admin\Effects' . $name[1];
+            $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $name[0] . '\Admin\Effects' . $name[1];
             $CLASS = new $cls('admin');
             echo $CLASS->template_css_render($settings);
         endif;
@@ -279,7 +263,7 @@ class Admin_Ajax {
         $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid), ARRAY_A);
         $StyleName = $settings['image-hover-template'];
         $name = explode('-', $StyleName);
-        $cls = '\OXI_IMAGE_HOVER_UPLOADS\\' . $name[0] . '\Render\Effects' . $name[1];
+        $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $name[0] . '\Render\Effects' . $name[1];
         $CLASS = new $cls;
         $styledata = ['rawdata' => $rawdata, 'id' => $styleid, 'style_name' => $StyleName, 'stylesheet' => ''];
         $CLASS->__construct($styledata, $child, 'admin');
@@ -295,7 +279,7 @@ class Admin_Ajax {
         $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid), ARRAY_A);
         $style['rawdata'] = $style['stylesheet'] = $style['font_family'] = '';
         $name = explode('-', $style['style_name']);
-        $cls = '\OXI_IMAGE_HOVER_UPLOADS\\' . ucfirst($name[0]) . '\Render\Effects' . $name[1];
+        $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($name[0]) . '\Render\Effects' . $name[1];
         $CLASS = new $cls;
         $CLASS->__construct($style, $child, 'admin');
         echo 'success';

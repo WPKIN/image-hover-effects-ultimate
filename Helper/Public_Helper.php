@@ -75,13 +75,8 @@ trait Public_Helper {
                 $Installation->plugin_upgrade_hook();
             endif;
             $name = explode('-', ucfirst($style['style_name']));
-            $C = '\OXI_IMAGE_HOVER_UPLOADS\\' . ucfirst($name[0]) . '\Render\Effects' . $name[1];
+            $C = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($name[0]) . '\Render\Effects' . $name[1];
             if (class_exists($C)):
-                new $C($style, $child, $user);
-            else:
-                ob_start();
-                $dt = new \OXI_IMAGE_HOVER_PLUGINS\Classes\Admin_Ajax('image_hover_upgrade', 'upgrade', 0, 0);
-                ob_end_clean();
                 new $C($style, $child, $user);
             endif;
         endif;

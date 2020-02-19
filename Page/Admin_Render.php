@@ -152,7 +152,10 @@ abstract class Admin_Render {
         $this->dbdata = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $this->oxiid), ARRAY_A);
         $this->child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $this->oxiid), ARRAY_A);
         if (!empty($this->dbdata['rawdata'])):
-            $this->style = json_decode(stripslashes($this->dbdata['rawdata']), true);
+            $s = json_decode(stripslashes($this->dbdata['rawdata']), true);
+            if (is_array($s)):
+                $this->style = $s;
+            endif;
         endif;
         $this->StyleName = explode('-', ucfirst($this->dbdata['style_name']));
         $this->oxitype = $this->StyleName[0];
@@ -423,7 +426,7 @@ abstract class Admin_Render {
                                     </div>
                                     <div class="oxi-addons-preview-data" id="oxi-addons-preview-data" template-wrapper="<?php echo $this->WRAPPER; ?>" style="background:<?php echo(is_array($this->style) ? array_key_exists('image-hover-preview-color', $this->style) ? $this->style['image-hover-preview-color'] : '#FFF' : '#FFF'); ?>">
                                         <?php
-                                        $cls = '\OXI_IMAGE_HOVER_UPLOADS\\' . $this->StyleName[0] . '\Render\Effects' . $this->StyleName[1];
+                                        $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($this->StyleName[0]) . '\Render\Effects' . $this->StyleName[1];
                                         new $cls($this->dbdata, $this->child, 'admin');
                                         ?>
                                     </div>

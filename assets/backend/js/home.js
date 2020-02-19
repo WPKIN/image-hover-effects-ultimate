@@ -22,17 +22,5 @@ jQuery.noConflict();
             });
         }
     }
-    if ($(".image-hover-effects-update").hasClass("image-hover-effects-update-mode")) {
-        var functionname = "image_hover_upgrade";
-        var rawdata = 'upgrade';
-        Oxi_Image_Admin_Home(functionname, rawdata, styleid, childid, function (callback) {
-            setTimeout(function () {
-                $(".image-hover-effects-update-mode").remove();
-            }, 1000);
-        });
-    }
-
-
-
 
 })(jQuery)

@@ -195,19 +195,14 @@ trait Admin_helper {
         if (!empty($effects) && !empty($styleid)):
             $style = $this->wpdb->get_row($this->wpdb->prepare('SELECT style_name FROM ' . $this->parent_table . ' WHERE id = %d ', $styleid), ARRAY_A);
             $name = explode('-', $style['style_name']);
-            $cls = '\OXI_IMAGE_HOVER_UPLOADS\\' . $effects . '\Admin\\Effects' . $name[1];
+            $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $effects . '\Admin\\Effects' . $name[1];
             if (class_exists($cls)):
                 new $cls();
-            else:
-                new \OXI_IMAGE_HOVER_PLUGINS\Classes\Admin_Ajax('image_hover_upgrade', 'upgrade', 0, 0);
             endif;
-
         elseif (!empty($effects)):
-            $cls = '\OXI_IMAGE_HOVER_UPLOADS\\' . $effects . '\\' . $effects . '';
+            $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $effects . '\\' . $effects . '';
             if (class_exists($cls)):
                 new $cls();
-            else:
-                new \OXI_IMAGE_HOVER_PLUGINS\Classes\Admin_Ajax('image_hover_upgrade', 'upgrade', 0, 0);
             endif;
         else:
             new \OXI_IMAGE_HOVER_PLUGINS\Page\Admin();
