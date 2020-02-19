@@ -36,7 +36,6 @@ require_once OXI_IMAGE_HOVER_PATH . 'autoloader.php';
  */
 add_action('plugins_loaded', function () {
     \OXI_IMAGE_HOVER_PLUGINS\Classes\Bootstrap::instance();
-    
 });
 
 

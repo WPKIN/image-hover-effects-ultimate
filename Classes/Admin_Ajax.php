@@ -65,16 +65,15 @@ class Admin_Ajax {
     public function image_hover_upgrade($data = '', $styleid = '', $itemid = '') {
         require_once(ABSPATH . 'wp-admin/includes/file.php');
         $tmpfile = download_url('https://image-hover.oxilab.org/wp-content/uploads/oxi-image-hover/image-hover.zip', $timeout = 500);
+        $this->upload_folder();
         if (is_string($tmpfile)):
-            $permfile = 'image-hover.zip';
-            $zip = new \ZipArchive();
-            if ($zip->open($tmpfile) !== TRUE):
-                echo 'Problem 2';
-            endif;
-            $this->upload_folder();
-            $zip->extractTo(OXI_IMAGE_HOVER_UPLOAD_PATH);
-            $zip->close();
-            echo 'Done';
+            WP_Filesystem();
+            $unzipfile = unzip_file($tmpfile, OXI_IMAGE_HOVER_UPLOAD_PATH);
+            if ($unzipfile) {
+                echo 'Done';
+            } else {
+                echo 'There was an error unzipping the file.';
+            }
         endif;
     }
 
