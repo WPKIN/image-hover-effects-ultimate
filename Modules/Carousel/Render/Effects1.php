@@ -11,7 +11,7 @@ use OXI_IMAGE_HOVER_PLUGINS\Page\Public_Render;
 class Effects1 extends Public_Render {
 
     public function public_jquery() {
-        wp_enqueue_script('oxi-image-carousel-slick.min', OXI_IMAGE_HOVER_URL . '/ModulesCarousel/Files/slick.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_script('oxi-image-carousel-slick.min', OXI_IMAGE_HOVER_URL . '/Modules/Carousel/Files/slick.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         $this->JSHANDLE = 'oxi-image-carousel-slick.min';
     }
 

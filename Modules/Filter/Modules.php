@@ -12,7 +12,7 @@ use OXI_IMAGE_HOVER_PLUGINS\Page\Admin_Render as Admin_Render;
 
 class Modules extends Admin_Render {
 
-    public $allcatrgory = [];
+    public $allcategory = [];
 
     public function register_controls() {
         $this->start_section_header(
@@ -86,7 +86,7 @@ class Modules extends Admin_Render {
         $all_category_data = (array_key_exists('category_menu_settings', $this->style) && is_array($this->style['category_menu_settings'])) ? $this->style['category_menu_settings'] : [];
 
         foreach ($all_category_data as $value) :
-            $this->allcatrgory[$value['category_item_text']] = $value['category_item_text'];
+            $this->allcategory[$value['category_item_text']] = $value['category_item_text'];
         endforeach;
 
         $this->add_control(
@@ -97,8 +97,7 @@ class Modules extends Admin_Render {
                     'type' => Controls::SELECT,
                     'description' => __('New Category show after save and reload', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'loader' => TRUE,
-                    'default' => (count($this->allcatrgory) > 0 ? array_key_first($this->allcatrgory) : ''),
-                    'options' => $this->allcatrgory,
+                    'options' => $this->allcategory,
                 ]
         );
 
@@ -676,8 +675,7 @@ class Modules extends Admin_Render {
             'label' => __('Category Select', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'multiple' => TRUE,
-            'default' => array_key_first($this->allcatrgory),
-            'options' => $this->allcatrgory,
+            'options' => $this->allcategory,
             'description' => 'Select Category For your Shortcode. '
                 ]
         );

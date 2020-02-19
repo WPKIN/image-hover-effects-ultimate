@@ -11,7 +11,7 @@ use OXI_IMAGE_HOVER_PLUGINS\Page\Public_Render;
 class Effects3 extends Public_Render {
 
     public function public_jquery() {
-        wp_enqueue_script('oxi-image-carousel-swiper.min.js', OXI_IMAGE_HOVER_URL . '/ModulesCarousel/Files/swiper.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_script('oxi-image-carousel-swiper.min.js', OXI_IMAGE_HOVER_URL . '/Modules/Carousel/Files/swiper.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         $this->JSHANDLE = 'oxi-image-carousel-swiper.min.js';
     }
 

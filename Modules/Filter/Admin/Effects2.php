@@ -54,7 +54,6 @@ class Effects2 extends Modules {
             'label' => __('Category Select', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'multiple' => TRUE,
-            'default' => array_key_first($this->allcatrgory),
             'options' => $this->allcatrgory,
             'description' => 'Select Category For your Shortcode. '
                 ]

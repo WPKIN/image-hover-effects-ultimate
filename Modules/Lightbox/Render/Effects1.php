@@ -15,16 +15,16 @@ class Effects1 extends Public_Render
     {
         wp_enqueue_style('oxi-image-hover-light-box', OXI_IMAGE_HOVER_URL . '/Modules/Lightbox/Files/Lightbox.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         wp_enqueue_style('oxi-image-hover-light-style-1', OXI_IMAGE_HOVER_URL . '/Modules/Lightbox/Files/style-1.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        wp_enqueue_style('oxi_addons__light_box_style_1', OXI_IMAGE_HOVER_URL . '/ModulesLightbox/Files/lightgallery.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi_addons__light_box_style_1', OXI_IMAGE_HOVER_URL . '/Modules/Lightbox/Files/lightgallery.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
 
     public function public_jquery()
     {
-        wp_enqueue_script('oxi_addons__light_box_picturefill', OXI_IMAGE_HOVER_URL . '/ModulesLightbox/Files/picturefill.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_script('oxi_addons__light_box_picturefill', OXI_IMAGE_HOVER_URL . '/Modules/Lightbox/Files/picturefill.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         $this->JSHANDLE = 'oxi_addons__light_box_picturefill';
-        wp_enqueue_script('oxi_addons__light_box_lightgallery_all', OXI_IMAGE_HOVER_URL . '/ModulesLightbox/Files/lightgallery_all.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_script('oxi_addons__light_box_lightgallery_all', OXI_IMAGE_HOVER_URL . '/Modules/Lightbox/Files/lightgallery_all.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         $this->JSHANDLE = 'oxi_addons__light_box_lightgallery_all';
-        wp_enqueue_script('oxi_addons__light_box_mousewheel', OXI_IMAGE_HOVER_URL . '/ModulesLightbox/Files/jquery.mousewheel.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_script('oxi_addons__light_box_mousewheel', OXI_IMAGE_HOVER_URL . '/Modules/Lightbox/Files/jquery.mousewheel.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         $this->JSHANDLE = 'oxi_addons__light_box_mousewheel';
     }
 

@@ -11,7 +11,7 @@ use OXI_IMAGE_HOVER_PLUGINS\Page\Public_Render;
 class Effects2 extends Public_Render {
 
     public function public_jquery() {
-        wp_enqueue_script('oxi-image-carousel-flipster.min.js', OXI_IMAGE_HOVER_URL . '/ModulesCarousel/Files/jquery.flipster.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_script('oxi-image-carousel-flipster.min.js', OXI_IMAGE_HOVER_URL . '/Modules/Carousel/Files/jquery.flipster.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         $this->JSHANDLE = 'oxi-image-carousel-flipster.min.js';
     }
 
