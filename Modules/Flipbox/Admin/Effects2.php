@@ -65,7 +65,7 @@ class Effects2 extends Modules {
                 'image_hover_front_heading', $this->style, [
             'label' => __('Front Title', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::TEXT,
-            'default' => 'Heading',
+            'default' => '',
             'placeholder' => 'Heading',
             'description' => 'Add Your Flipbox Front Title.'
                 ]

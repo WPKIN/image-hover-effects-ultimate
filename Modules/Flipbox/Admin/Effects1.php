@@ -127,7 +127,7 @@ class Effects1 extends Modules {
                 'image_hover_back_heading', $this->style, [
             'label' => __('Title', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::TEXT,
-            'default' => 'Heading',
+            'default' => '',
             'placeholder' => 'Heading',
             'description' => 'Add Your Flipbox Backend Title.'
                 ]
@@ -139,7 +139,7 @@ class Effects1 extends Modules {
                 'image_hover_back_description', $this->style, [
             'label' => __('Short Description', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::TEXTAREA,
-            'default' => 'General Effects Of Image Hover Ultimate.',
+            'default' => '',
             'description' => 'Add Your Description Unless make it blank.'
                 ]
         );

@@ -364,7 +364,7 @@ class Effects23 extends Modules {
                 'image_hover_back_heading', $this->style, [
             'label' => __('Backend Title', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::TEXT,
-            'default' => 'Heading',
+            'default' => '',
             'placeholder' => 'Heading',
             'description' => 'Add Your Flipbox Backend Title.'
                 ]

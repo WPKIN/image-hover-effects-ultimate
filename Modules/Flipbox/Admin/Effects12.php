@@ -463,7 +463,7 @@ class Effects12 extends Modules {
             'label' => __('Front Title', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::TEXT,
             'default' => 'Border Flipbox',
-            'placeholder' => 'Heading',
+            'placeholder' => '',
             'description' => 'Add Your Flipbox Front Title.'
                 ]
         );
