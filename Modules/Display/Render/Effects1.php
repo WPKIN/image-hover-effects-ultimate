@@ -12,7 +12,7 @@ use OXI_IMAGE_HOVER_PLUGINS\Modules\Display\Files\Style_1_Post_Query as Post_Que
 class Effects1 extends Public_Render {
 
     public function public_jquery() {
-        wp_enqueue_script('oxi_image_style-1-loader', OXI_IMAGE_HOVER_URL . '/ModulesDisplay/Files/style-1-loader.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_script('oxi_image_style-1-loader', OXI_IMAGE_HOVER_URL . '/Modules/Display/Files/style-1-loader.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         $this->JSHANDLE = 'oxi_image_style-1-loader';
         wp_localize_script('oxi_image_style-1-loader', 'oxi_image_hover_editor', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-image-hover-editor')));
     }
