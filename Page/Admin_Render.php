@@ -50,6 +50,13 @@ abstract class Admin_Render {
     public $CSSDATA = [];
 
     /**
+     * Current Elements Global CSS Data
+     *
+     * @since 9.3.0
+     */
+    public $StyleChanger = [];
+
+    /**
      * Current Elements Global DATA WRAPPER
      *
      * @since 9.3.0
@@ -212,6 +219,20 @@ abstract class Admin_Render {
             'type' => Controls::SHORTCODEINFO,
             'title' => __('Shortcode', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'showing' => TRUE,
+        ]);
+    }
+
+    /**
+     * Template Information
+     * Parent Sector where users will get Information
+     *
+     * @since 9.3.0
+     */
+    public function shortcode_style_changer() {
+        $this->add_substitute_control($this->oxiid, $this->dbdata, [
+            'type' => Controls::SHORTCODESTYLE,
+            'title' => __('Effects Changer', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'showing' => false,
         ]);
     }
 
@@ -403,10 +424,12 @@ abstract class Admin_Render {
                                 if ($this->form == 'single'):
                                     $this->shortcode_name();
                                     $this->shortcode_info();
+                                    $this->shortcode_style_changer();
                                 else:
                                     $this->modal_opener();
                                     $this->shortcode_name();
                                     $this->shortcode_info();
+                                    $this->shortcode_style_changer();
                                     $this->shortcode_rearrange();
                                 endif;
                                 $this->modal_form();

@@ -223,6 +223,10 @@ class Controls {
      * Shortcode Name.
      */
     const SHORTCODEINFO = 'shortcodeinfo';
+    /**
+     * Shortcode Style.
+     */
+    const SHORTCODESTYLE = 'shortcodestyle';
 
     /**
      *  Box Shadow control.

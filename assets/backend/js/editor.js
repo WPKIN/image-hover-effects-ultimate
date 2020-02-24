@@ -176,6 +176,7 @@ jQuery.noConflict();
             }
         });
     });
+
     $("#oxi-template-modal-submit").on("click", function (e) {
         e.preventDefault();
         var rawdata = JSON.stringify($("#oxi-template-modal-form").serializeJSON({checkboxUncheckedValue: "0"}));
@@ -191,6 +192,21 @@ jQuery.noConflict();
             OxiAddonsModalConfirm("#oxi-template-modal-submit", "Submit");
             OxiAddonsPreviewDataLoader();
         });
+    });
+    $("#shortcode-addons-style-change-submit-button").on("click", function (e) {
+        e.preventDefault();
+        var status = confirm("Do you Want to Change Template? If you change Template sometimes style not work properlly and you need to customize it.");
+        if (status === false) {
+            return false;
+        } else {
+            var functionname = "elements_template_style_change";
+            var rawdata = $("#shortcode-current-style-name").val();
+            var styleid = $("#shortcode-addons-style-change-submit-id").val();
+            $(this).html('Wait');
+            OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, function (callback) {
+                location.reload();
+            });
+        }
     });
     function ShortCodeMultipleSelector_Handler($value) {
         return $value.replace(/{{[0-9a-zA-Z.?:_-]+}}/g, function (match, contents, offset, input_string) {

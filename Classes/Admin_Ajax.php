@@ -9,7 +9,6 @@ namespace OXI_IMAGE_HOVER_PLUGINS\Classes;
  */
 class Admin_Ajax {
 
-
     /**
      * Define $wpdb
      *
@@ -180,6 +179,18 @@ class Admin_Ajax {
             $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $name[0] . '\Admin\Effects' . $name[1];
             $CLASS = new $cls('admin');
             echo $CLASS->template_css_render($settings);
+        endif;
+    }
+
+    /**
+     * Template Style Data
+     *
+     * @since 9.3.0
+     */
+    public function elements_template_style_change($rawdata = '', $styleid = '') {
+        $rawdata = sanitize_text_field($rawdata);
+        if ((int) $styleid):
+           $this->wpdb->query($this->wpdb->prepare("UPDATE {$this->parent_table} SET style_name = %s WHERE id = %d", $rawdata, $styleid));
         endif;
     }
 

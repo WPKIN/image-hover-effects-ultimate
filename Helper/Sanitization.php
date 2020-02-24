@@ -2363,18 +2363,58 @@ trait Sanitization {
          * $arg['sub-title'] = 'Add New Items 02';
          * 
          */
-        echo ' <div class = "oxi-addons-item-form shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '">
-                    <div class = "oxi-addons-item-form-heading shortcode-addons-templates-right-panel-heading">
+        echo ' <div class="oxi-addons-item-form shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '">
+                    <div class="oxi-addons-item-form-heading shortcode-addons-templates-right-panel-heading">
                         ' . $arg['title'] . '
-                         <div class = "oxi-head-toggle"></div>
+                         <div class="oxi-head-toggle"></div>
                          </div>
-                    <div class = "oxi-addons-item-form-item shortcode-addons-templates-right-panel-body" id = "oxi-addons-list-data-modal-open">
+                    <div class="oxi-addons-item-form-item shortcode-addons-templates-right-panel-body" id="oxi-addons-list-data-modal-open">
                         <span>
-                            <i class = "dashicons dashicons-plus-alt oxi-icons"></i>
+                            <i class="dashicons dashicons-plus-alt oxi-icons"></i>
                             ' . $arg['sub-title'] . '
                         </span>
                     </div>
                 </div>';
+    }
+
+    public function shortcodestyle_substitute_control($id, array $data = [], array $arg = []) {
+        if (count($this->StyleChanger) > 0):
+            $default = [
+                'showing' => FALSE,
+                'title' => 'Effects Changer',
+            ];
+            $arg = array_merge($default, $arg);
+            /*
+             * $arg['title'] = 'Add New Items';
+             * $arg['sub-title'] = 'Add New Items 02';
+             * 
+             */
+            echo '  <div class="oxi-addons-shortcode  shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '">
+                        <div class="oxi-addons-shortcode-heading  shortcode-addons-templates-right-panel-heading">
+                            ' . $arg['title'] . '
+                            <div class="oxi-head-toggle"></div>
+                        </div>
+                        <div class="oxi-addons-shortcode-body  shortcode-addons-templates-right-panel-body">
+                            <form method="post" id="shortcode-addons-style-change-submit">
+                                <div class="form-row">
+                                    <div class="form-group col-md-8">
+                                        <label for="exampleFormControlSelect1">Current Template</label>
+                                        <select class="form-control" name="shortcode-current-style-name" id="shortcode-current-style-name">';
+            foreach ($this->StyleChanger as $val) {
+                echo '                      <option value="' . $val . '" ' . (ucfirst($this->dbdata['style_name']) == $val ? 'selected' : '') . '>' . $val . '</option>';
+            }
+            echo '                      </select>
+                                    </div>
+                                    <div class="form-group col-md-4 pt-4 mt-2">
+                                        <input type="hidden" class="form-control" name="shortcode-addons-style-change-submit-id" id="shortcode-addons-style-change-submit-id" value="' . $this->oxiid . '">
+                                         <button type="submit" id="shortcode-addons-style-change-submit-button" class="btn btn-primary">Save</button>
+                                    </div>
+                                </div>
+                              <p>Template change is not recommended. We suggest it only for developer. Please change it if you have much knowledge in HTML or can create style from zero level</p>
+                            </form>
+                        </div>
+                    </div>';
+        endif;
     }
 
     /*
@@ -2395,23 +2435,23 @@ trait Sanitization {
          * $arg['sub-title'] = 'Add New Items 02';
          * 
          */
-        echo '  <div class = "oxi-addons-shortcode  shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '">
-                    <div class = "oxi-addons-shortcode-heading  shortcode-addons-templates-right-panel-heading">
-                        ' . $arg['title'] . '
-                        <div class = "oxi-head-toggle"></div>
-                    </div>
-                    <div class = "oxi-addons-shortcode-body  shortcode-addons-templates-right-panel-body">
-                        <form method = "post" id = "shortcode-addons-name-change-submit">
-                            <div class = "input-group my-2">
-                                <input type = "hidden" class = "form-control" name = "addonsstylenameid" value = "' . $data['id'] . '">
-                                <input type = "text" class = "form-control" name = "addonsstylename" placeholder = " ' . $arg['placeholder'] . '" value = "' . $data['name'] . '">
-                                <div class = "input-group-append">
-                                   <button type = "button" class = "btn btn-success" id = "addonsstylenamechange">Save</button>
-                                </div>
+        echo ' <div class="oxi-addons-shortcode  shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '">
+                <div class="oxi-addons-shortcode-heading  shortcode-addons-templates-right-panel-heading">
+                    ' . $arg['title'] . '
+                    <div class="oxi-head-toggle"></div>
+                </div>
+                <div class="oxi-addons-shortcode-body  shortcode-addons-templates-right-panel-body">
+                    <form method="post" id="shortcode-addons-name-change-submit">
+                        <div class="input-group my-2">
+                            <input type="hidden" class="form-control" name="addonsstylenameid" value="' . $data['id'] . '  ">
+                            <input type="text" class="form-control" name="addonsstylename" placeholder=" ' . $arg['placeholder'] . '" value="' . $data['name'] . '">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-success" id="addonsstylenamechange">Save</button>
                             </div>
-                        </form>
-                    </div>
-                </div>';
+                        </div>
+                    </form>
+                </div>
+            </div>';
     }
 
     /*
@@ -2431,24 +2471,24 @@ trait Sanitization {
          * $arg['sub-title'] = 'Add New Items 02';
          * 
          */
-        echo '  <div class = "oxi-addons-shortcode shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '">
-                    <div class = "oxi-addons-shortcode-heading  shortcode-addons-templates-right-panel-heading">
-                        ' . $arg['title'] . '
-                        <div class = "oxi-head-toggle"></div>
-                    </div>
-                    <div class = "oxi-addons-shortcode-body shortcode-addons-templates-right-panel-body">
-                        <em>Shortcode for posts/pages/plugins</em>
-                        <p>Copy &amp;
-                        paste the shortcode directly into any WordPress post, page or Page Builder.</p>
-                        <input type = "text" class = "form-control" onclick = "this.setSelectionRange(0, this.value.length)" value = "[iheu_ultimate_oxi id=&quot;' . $id . '&quot;]">
-                        <span></span>
-                        <em>Shortcode for templates/themes</em>
-                        <p>Copy &amp;
-                        paste this code into a template file to include the slideshow within your theme.</p>
-                        <input type = "text" class = "form-control" onclick = "this.setSelectionRange(0, this.value.length)" value = "<?php echo do_shortcode(\'[iheu_ultimate_oxi  id=&quot;' . $id . '&quot;]\'); ?>">
-                        <span></span>
-                    </div>
-                </div>';
+        echo ' <div class="oxi-addons-shortcode shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '">
+                <div class="oxi-addons-shortcode-heading  shortcode-addons-templates-right-panel-heading">
+                    ' . $arg['title'] . '
+                    <div class="oxi-head-toggle"></div>
+                </div>
+                <div class="oxi-addons-shortcode-body shortcode-addons-templates-right-panel-body">
+                    <em>Shortcode for posts/pages/plugins</em>
+                    <p>Copy &amp;
+                    paste the shortcode directly into any WordPress post, page or Page Builder.</p>
+                    <input type="text" class="form-control" onclick="this.setSelectionRange(0, this.value.length)" value="[iheu_ultimate_oxi id=&quot;' . $id . '&quot;]">
+                    <span></span>
+                    <em>Shortcode for templates/themes</em>
+                    <p>Copy &amp;
+                    paste this code into a template file to include the slideshow within your theme.</p>
+                    <input type="text" class="form-control" onclick="this.setSelectionRange(0, this.value.length)" value="<?php echo do_shortcode(\'[iheu_ultimate_oxi  id=&quot;' . $id . '&quot;]\'); ?>">
+                    <span></span>
+                </div>
+            </div>';
     }
 
     public function rearrange_substitute_control($id, array $data = [], array $arg = []) {
@@ -2463,45 +2503,46 @@ trait Sanitization {
          * $arg['sub-title'] = 'Add New Items 02';
          * 
          */
-        echo ' <div class="oxi-addons-item-form shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '">
-            <div class="oxi-addons-item-form-heading shortcode-addons-templates-right-panel-heading">
-                ' . $arg['title'] . '
-                 <div class="oxi-head-toggle"></div>
-            </div>
-            <div class="oxi-addons-item-form-item shortcode-addons-templates-right-panel-body" id="oxi-addons-rearrange-data-modal-open">
-                <span>
-                    <i class="dashicons dashicons-plus-alt oxi-icons"></i>
-                    ' . $arg['sub-title'] . '
-                </span>
-            </div>
-        </div>
-        <div id="oxi-addons-list-rearrange-modal" class="modal fade bd-example-modal-sm" role="dialog">
-            <div class="modal-dialog modal-sm">
-                <form id="oxi-addons-form-rearrange-submit">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Image Rearrange</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="col-12 alert text-center" id="oxi-addons-list-rearrange-saving">
-                               <i class="fa fa-spinner fa-spin"></i>
-                            </div>
-                            <ul class="col-12 list-group" id="oxi-addons-modal-rearrange">
-                            </ul>
-                        </div>
-                        <div class="modal-footer">    
-                            <input type="hidden" id="oxi-addons-list-rearrange-data">
-                            <button type="button" id="oxi-addons-list-rearrange-close" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            <input type="submit" id="oxi-addons-list-rearrange-submit" class="btn btn-primary" value="Save">
-                        </div>
+        echo '  <div class="oxi-addons-item-form shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '">
+                    <div class="oxi-addons-item-form-heading shortcode-addons-templates-right-panel-heading">
+                        ' . $arg['title'] . '
+                        <div class="oxi-head-toggle"></div>
                     </div>
-                </form>
-                <div id="modal-rearrange-store-file">  
-                    ' . $id . '
+                    <div class="oxi-addons-item-form-item shortcode-addons-templates-right-panel-body" id="oxi-addons-rearrange-data-modal-open">
+                        <span>
+                        <i class="dashicons dashicons-plus-alt oxi-icons"></i>
+                        ' . $arg['sub-title'] . '
+                        </span>
+                    </div>
                 </div>
-            </div>
-         </div>';
+                <div id="oxi-addons-list-rearrange-modal" class="modal fade bd-example-modal-sm" role="dialog">
+                    <div class="modal-dialog modal-sm">
+                        <form id="oxi-addons-form-rearrange-submit">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Image Rearrange</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="col-12 alert text-center" id="oxi-addons-list-rearrange-saving">
+                                    <i class="fa fa-spinner fa-spin"></i>
+                                </div>
+                                <ul class="col-12 list-group" id="oxi-addons-modal-rearrange">
+                                </ul>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="hidden" id="oxi-addons-list-rearrange-data">
+                                <button type="button" id="oxi-addons-list-rearrange-close" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                <input type="submit" id="oxi-addons-list-rearrange-submit" class="btn btn-primary" value="Save">
+                            </div>
+                        </div>
+                        </form>
+                    <div id="modal-rearrange-store-file">
+                        ' . $id . '
+                    </div>
+                </div>
+            </div>';
     }
 
 }

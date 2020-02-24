@@ -31,6 +31,10 @@ jQuery.noConflict();
         e.preventDefault();
         return false;
     });
+    $("#shortcode-addons-style-change-submit").submit(function (e) {
+        e.preventDefault();
+        return false;
+    });
     $("#shortcode-addons-name-change-submit").submit(function (e) {
         e.preventDefault();
         return false;

@@ -12,7 +12,45 @@ use OXI_IMAGE_HOVER_PLUGINS\Classes\Controls as Controls;
 
 class Modules extends Admin_Render {
 
+    public $StyleChanger = [
+        'General-1',
+        'General-2',
+        'General-3',
+        'General-4',
+        'General-5',
+        'General-6',
+        'General-7',
+        'General-8',
+        'General-9',
+        'General-10',
+        'General-11',
+        'General-12',
+        'General-13',
+        'General-14',
+        'General-15',
+        'General-16',
+        'General-17',
+        'General-18',
+        'General-19',
+        'General-20',
+        'General-21',
+        'General-22',
+        'General-23',
+        'General-24',
+        'General-25',
+        'General-25',
+        'General-27',
+        'General-28',
+        'General-29',
+        'General-30',
+        'General-31',
+        'General-32',
+        'General-33',
+    ];
+
     public function register_effects() {
+
+
         return '';
     }
 
