@@ -9,12 +9,29 @@ namespace OXI_IMAGE_HOVER_PLUGINS\Modules;
  */
 class Visual_Composer {
 
+    /**
+     * Define $wpdb
+     *
+     * @since 9.3.0
+     */
+    public $wpdb;
+
+    /**
+     * Database Parent Table
+     *
+     * @since 9.3.0
+     */
+    public $parent_table;
+
     public function __construct() {
-        add_action('vc_before_init', [$this, 'VC_extension']);
-        add_shortcode('oxi_image_hover_VC', [$this, 'VC_Shortcode']);
+        global $wpdb;
+        $this->wpdb = $wpdb;
+        $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
+        add_action('vc_before_init', [$this, 'iheu_oxi_VC_extension']);
+        add_shortcode('iheu_oxi_VC', [$this, 'iheu_oxi_VC_shortcode']);
     }
 
-    public function VC_Shortcode($atts) {
+    public function iheu_oxi_VC_shortcode($atts) {
         extract(shortcode_atts(array(
             'id' => ''
                         ), $atts));
@@ -24,18 +41,26 @@ class Visual_Composer {
         return ob_get_clean();
     }
 
-    public function VC_extension() {
+    public function iheu_oxi_VC_extension() {
+        global $wpdb;
+        $data = $wpdb->get_results('SELECT * FROM ' . $this->parent_table . ' ORDER BY id DESC', ARRAY_A);
+        $vcdata = array();
+        foreach ($data as $value) {
+            $vcdata[] = $value['id'];
+        }
         vc_map(array(
-            "name" => __("Flip Boxes and Image Overlay"),
-            "base" => "oxi_image_hover_VC",
+            "name" => __("Image Hover Ultimate"),
+            "base" => "iheu_oxi_VC",
             "category" => __("Content"),
             "params" => array(
                 array(
-                    "type" => "textfield",
-                    "holder" => "div",
-                    "heading" => __("ID"),
+                    "type" => "dropdown",
+                    "heading" => "Image Hover Select",
                     "param_name" => "id",
-                    "description" => __("Input your Flip ID in input box")
+                    "value" => $vcdata,
+                    'save_always' => true,
+                    "description" => "Select your Image Hover ID",
+                    "group" => 'Settings',
                 ),
             )
         ));
