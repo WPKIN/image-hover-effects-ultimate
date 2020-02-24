@@ -23,7 +23,7 @@ class Effects26 extends Public_Render {
                 $text = '<h3 class="oxi-image-hover-heading ' . $this->style['oxi-image-hover-heading-animation'] . ' ' . $this->style['oxi-image-hover-heading-animation-delay'] . ' ' . $this->style['oxi-image-hover-heading-underline'] . '">' . $this->text_render($value['image_hover_heading']) . '</h3>';
             endif;
             if ($value['image_hover_description'] != ''):
-                $content = '<p class="oxi-image-hover-content ' . $this->style['oxi-image-hover-desc-animation'] . ' ' . $this->style['oxi-image-hover-desc-animation-delay'] . '">' . $this->text_render($value['image_hover_description']) . '</p>';
+                $content = '<div class="oxi-image-hover-content ' . $this->style['oxi-image-hover-desc-animation'] . ' ' . $this->style['oxi-image-hover-desc-animation-delay'] . '">' . $this->text_render($value['image_hover_description']) . '</div>';
             endif;
             if ($value['image_hover_button_text'] != '' && $this->url_render('image_hover_button_link', $value) != ''):
                 $button = '<div class="oxi-image-hover-button ' . $this->style['oxi-image-hover-button-animation'] . ' ' . $this->style['oxi-image-hover-button-animation-delay'] . '">
