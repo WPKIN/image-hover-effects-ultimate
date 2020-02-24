@@ -12,6 +12,40 @@ use OXI_IMAGE_HOVER_PLUGINS\Classes\Controls as Controls;
 
 class Modules extends Admin_Render {
 
+    public $StyleChanger = [
+        'Caption-1',
+        'Caption-2',
+        'Caption-3',
+        'Caption-4',
+        'Caption-5',
+        'Caption-6',
+        'Caption-7',
+        'Caption-8',
+        'Caption-9',
+        'Caption-10',
+        'Caption-11',
+        'Caption-12',
+        'Caption-13',
+        'Caption-14',
+        'Caption-15',
+        'Caption-16',
+        'Caption-17',
+        'Caption-18',
+        'Caption-19',
+        'Caption-20',
+        'Caption-21',
+        'Caption-22',
+        'Caption-23',
+        'Caption-24',
+        'Caption-25',
+        'Caption-25',
+        'Caption-27',
+        'Caption-28',
+        'Caption-29',
+        'Caption-30',
+        'Caption-31',
+    ];
+
     public function register_effects() {
         return '';
     }

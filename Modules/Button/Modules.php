@@ -12,6 +12,20 @@ use OXI_IMAGE_HOVER_PLUGINS\Classes\Controls as Controls;
 
 class Modules extends Admin_Render {
 
+    public $StyleChanger = [
+        'Button-1',
+        'Button-2',
+        'Button-3',
+        'Button-4',
+        'Button-5',
+        'Button-6',
+        'Button-7',
+        'Button-8',
+        'Button-9',
+        'Button-10',
+        'Button-11',
+    ];
+
     public function register_effects() {
         return '';
     }

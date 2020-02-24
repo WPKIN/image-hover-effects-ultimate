@@ -12,6 +12,30 @@ use OXI_IMAGE_HOVER_PLUGINS\Classes\Controls as Controls;
 
 class Modules extends Admin_Render {
 
+    public $StyleChanger = [
+        'Square-1',
+        'Square-2',
+        'Square-3',
+        'Square-4',
+        'Square-5',
+        'Square-6',
+        'Square-7',
+        'Square-8',
+        'Square-9',
+        'Square-10',
+        'Square-11',
+        'Square-12',
+        'Square-13',
+        'Square-14',
+        'Square-15',
+        'Square-16',
+        'Square-17',
+        'Square-18',
+        'Square-19',
+        'Square-20',
+        'Square-21',
+    ];
+
     public function register_effects() {
         return '';
     }

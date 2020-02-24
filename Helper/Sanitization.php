@@ -2381,7 +2381,7 @@ trait Sanitization {
         if (count($this->StyleChanger) > 0):
             $default = [
                 'showing' => FALSE,
-                'title' => 'Effects Changer',
+                'title' => 'Template Changer',
             ];
             $arg = array_merge($default, $arg);
             /*
@@ -2391,7 +2391,7 @@ trait Sanitization {
              */
             echo '  <div class="oxi-addons-shortcode  shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '">
                         <div class="oxi-addons-shortcode-heading  shortcode-addons-templates-right-panel-heading">
-                            ' . $arg['title'] . '
+                            ' . $arg['title'] . ' ' . ( (apply_filters('oxi-image-hover-plugin-version', false) == false) ? '<span style="color:red">Pro Only</span>' : '') . '
                             <div class="oxi-head-toggle"></div>
                         </div>
                         <div class="oxi-addons-shortcode-body  shortcode-addons-templates-right-panel-body">
@@ -2407,10 +2407,10 @@ trait Sanitization {
                                     </div>
                                     <div class="form-group col-md-4 pt-4 mt-2">
                                         <input type="hidden" class="form-control" name="shortcode-addons-style-change-submit-id" id="shortcode-addons-style-change-submit-id" value="' . $this->oxiid . '">
-                                         <button type="submit" id="shortcode-addons-style-change-submit-button" class="btn btn-primary">Save</button>
+                                        <button type="submit" id="shortcode-addons-style-change-submit-button" class="btn btn-primary" premium="' . ( (apply_filters('oxi-image-hover-plugin-version', false) == false) ? '' : 'ache') . '">Save</button>
                                     </div>
                                 </div>
-                              <p>Template change is not recommended. We suggest it only for developer. Please change it if you have much knowledge in HTML or can create style from zero level</p>
+                              <p style="color:red" >Template change is not recommended. We suggest it only for developer. Please change it if you have much knowledge in HTML or can create style from zero level</p>
                             </form>
                         </div>
                     </div>';

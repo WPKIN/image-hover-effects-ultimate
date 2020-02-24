@@ -195,6 +195,11 @@ jQuery.noConflict();
     });
     $("#shortcode-addons-style-change-submit-button").on("click", function (e) {
         e.preventDefault();
+        var tr = $(this).attr('premium');
+        if(tr !== 'ache'){
+                alert("Sorry Template Changer Works with only Premium Version :( ")
+             return false;
+        }
         var status = confirm("Do you Want to Change Template? If you change Template sometimes style not work properlly and you need to customize it.");
         if (status === false) {
             return false;
