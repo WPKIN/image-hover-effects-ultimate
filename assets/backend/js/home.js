@@ -23,4 +23,15 @@ jQuery.noConflict();
         }
     }
 
+    $(".addons-pre-check").on("click", function (e) {
+        var data = $(this).attr('sub-type');
+        if (data === 'premium') {
+            alert("Sorry Extension will Works with only Premium Version");
+            return false;
+        } else {
+            return true;
+        }
+
+    });
+
 })(jQuery)

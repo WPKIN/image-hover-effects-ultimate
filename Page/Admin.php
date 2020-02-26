@@ -32,7 +32,6 @@ class Admin {
      */
     public $wpdb;
 
-
     use \OXI_IMAGE_HOVER_PLUGINS\Helper\Public_Helper;
     use \OXI_IMAGE_HOVER_PLUGINS\Helper\CSS_JS_Loader;
 
@@ -82,10 +81,6 @@ class Admin {
         $data = str_replace('+', ' ', $data);
         return ucwords($data);
     }
-
-   
-
-    
 
     public function Render() {
         ?>
@@ -142,18 +137,21 @@ class Admin {
 
                 <?php
                 foreach ($Elements as $key => $elements) {
+
+                    $check = apply_filters('oxi-image-hover-plugin-version', false) == false && $key == 'Extension' ? '<b style="color: red;font-weight: 600;font-size: 12px;">Pro Only</b>' : '';
+                    $pre = apply_filters('oxi-image-hover-plugin-version', false) == false && $key == 'Extension' ? 'premium' : '';
                     $elementshtml = '';
                     $elementsnumber = 0;
                     foreach ($elements as $k => $value) {
                         $oxilink = 'admin.php?page=oxi-image-hover-ultimate&effects=' . $k;
                         $elementsnumber++;
                         $elementshtml .= ' <div class="oxi-addons-shortcode-import" id="' . $value['name'] . '" oxi-addons-search="' . $value['name'] . '">
-                                                <a class="addons-pre-check" href="' . admin_url($oxilink) . '" sub-type="">
+                                                <a class="addons-pre-check" href="' . admin_url($oxilink) . '" sub-type="' . $pre . '">
                                                     <div class="oxi-addons-shortcode-import-top">
                                                        ' . $this->font_awesome_render((array_key_exists('icon', $value) ? $value['icon'] : 'fas fa-cloud-download-alt')) . '
                                                     </div>
                                                     <div class="oxi-addons-shortcode-import-bottom">
-                                                        <span>' . $this->name_converter($value['name']) . '</span>
+                                                        <span>' . $this->name_converter($value['name']) . ' ' . $check . '</span>
                                                     </div>
                                                 </a>
                                            </div>';
