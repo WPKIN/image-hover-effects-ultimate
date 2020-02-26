@@ -143,9 +143,9 @@ oxi-image-hover.oxi-touch{
         max-width: 33.333333%;
     }
     .oxi-bt-col-sm-5 {
-        -ms-flex: 0 0 41.666667%;
-        flex: 0 0 41.666667%;
-        max-width: 41.666667%;
+        -ms-flex: 0 0 20%;
+        flex: 0 0 20%;
+        max-width: 20%;
     }
     .oxi-bt-col-sm-6 {
         -ms-flex: 0 0 50%;
@@ -220,9 +220,9 @@ oxi-image-hover.oxi-touch{
         max-width: 33.333333%;
     }
     .oxi-bt-col-md-5 {
-        -ms-flex: 0 0 41.666667%;
-        flex: 0 0 41.666667%;
-        max-width: 41.666667%;
+        -ms-flex: 0 0 20%;
+        flex: 0 0 20%;
+        max-width: 20%;
     }
     .oxi-bt-col-md-6 {
         -ms-flex: 0 0 50%;
@@ -297,9 +297,9 @@ oxi-image-hover.oxi-touch{
         max-width: 33.333333%;
     }
     .oxi-bt-col-lg-5 {
-        -ms-flex: 0 0 41.666667%;
-        flex: 0 0 41.666667%;
-        max-width: 41.666667%;
+        -ms-flex: 0 0 20%;
+        flex: 0 0 20%;
+        max-width: 20%;
     }
     .oxi-bt-col-lg-6 {
         -ms-flex: 0 0 50%;

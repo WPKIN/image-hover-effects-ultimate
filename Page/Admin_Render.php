@@ -231,7 +231,7 @@ abstract class Admin_Render {
     public function shortcode_style_changer() {
         $this->add_substitute_control($this->oxiid, $this->dbdata, [
             'type' => Controls::SHORTCODESTYLE,
-            'title' => __('Effects Changer', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'title' => __('Template Changer', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'showing' => false,
         ]);
     }

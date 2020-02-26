@@ -103,7 +103,6 @@
     align-items: center;
     justify-content: center;
     padding: 15px;
-    background: rgba(149, 0, 194, 1);
 }
 .oxi-image-button-hover .oxi-image-hover-caption-tab.image-hover-align-top-left{
     justify-content: flex-start;align-items: flex-start;

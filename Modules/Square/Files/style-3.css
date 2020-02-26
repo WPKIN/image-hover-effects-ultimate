@@ -1,5 +1,5 @@
 .oxi-image-square-hover-style-3 .oxi-image-hover-figure .oxi-image-hover-caption-tab {
-   background: rgba(0, 146, 194, 0.5);
+ 
     z-index: 22;
 }
 .oxi-image-square-hover-style-3 .oxi-image-hover-figure{
@@ -16,7 +16,6 @@
 
 .oxi-image-square-hover-style-3 .oxi-image-hover-figure .mask1,
 .oxi-image-square-hover-style-3 .oxi-image-hover-figure .mask2 {
-    background: rgba(0, 146, 194, 0.5);
     position: absolute;
     width: 200%;
     height: 200%;
