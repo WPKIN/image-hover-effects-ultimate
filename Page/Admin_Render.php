@@ -405,9 +405,12 @@ abstract class Admin_Render {
 
                                             <?php
                                             if (array_key_exists('css', $this->dbdata)):
-                                                ?>
-                                                <button type="button" class="btn btn-secondary"  data-value="<?php echo $this->dbdata['id']; ?>" id="oxi-addons-setting-rebuild">Rebuild</button>
-                                                <?php
+                                                if ($this->dbdata['css'] != ''):
+                                                    ?>
+                                                    <button type="button" class="btn btn-secondary"  data-value="<?php echo $this->dbdata['id']; ?>" id="oxi-addons-setting-rebuild">Rebuild</button>
+                                                    <?php
+                                                endif;
+
                                             endif;
                                             ?>
                                             <button type="button" class="btn btn-danger" id="oxi-addons-setting-reload">Reload</button>
