@@ -300,7 +300,7 @@ trait Admin_helper {
         if (!empty($this->admin_notice_status())):
             return;
         endif;
-        if (strtotime('-7 minute') < $this->installation_date()):
+        if (strtotime('-7 days') < $this->installation_date()):
             return;
         endif;
         new \OXI_IMAGE_HOVER_PLUGINS\Classes\Support_Reviews();
