@@ -43,7 +43,7 @@ trait Admin_helper {
         if ($vs == $this->fixed_data('76616c6964')) {
             return TRUE;
         } else {
-            return TRUE;
+            return false;
         }
     }
 
@@ -290,7 +290,7 @@ trait Admin_helper {
         if (!empty($this->admin_recommended_status())):
             return;
         endif;
-        if (strtotime('-30 minute') < $this->installation_date()):
+        if (strtotime('-1 days') < $this->installation_date()):
             return;
         endif;
         new \OXI_IMAGE_HOVER_PLUGINS\Classes\Support_Recommended();

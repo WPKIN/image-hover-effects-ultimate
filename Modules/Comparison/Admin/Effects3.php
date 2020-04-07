@@ -262,7 +262,7 @@ class Effects3 extends Modules
                 'range' => [
                     '%' => [
                         'min' => 10,
-                        'max' => 100,
+                        'max' => 200,
                         'step' => 1,
                     ],
                     'px' => [

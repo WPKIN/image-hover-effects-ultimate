@@ -45,7 +45,7 @@ class Effects4 extends Modules {
      public function register_content_settings() {
         $this->start_controls_section(
                 'oxi-image-hover', [
-            'label' => esc_html__('Content Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('General Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'showing' => TRUE,
                 ]
         );

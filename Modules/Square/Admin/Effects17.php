@@ -32,7 +32,7 @@ class Effects17 extends Modules {
     public function register_general_style() {
         $this->start_controls_section(
                 'oxi-image-hover', [
-            'label' => esc_html__('General Style', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Width & Height', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'showing' => true,
                 ]
         );
@@ -82,7 +82,7 @@ class Effects17 extends Modules {
                 ],
                 '%' => [
                     'min' => 1,
-                    'max' => 100,
+                    'max' => 200,
                     'step' => 1,
                 ],
             ],
