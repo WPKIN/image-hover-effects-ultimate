@@ -43,7 +43,7 @@ trait Admin_helper {
         if ($vs == $this->fixed_data('76616c6964')) {
             return TRUE;
         } else {
-            return false;
+            return TRUE;
         }
     }
 
@@ -159,7 +159,7 @@ trait Admin_helper {
         endif;
         $menu .= '              </ul>
                             <ul class="oxilab-sa-admin-menu2">
-                               ' . (apply_filters('oxi-image-hover-plugin-version', false) == FALSE ? ' <li class="fazil-class" ><a target="_blank" href="https://www.oxilab.org/downloads/flipbox-image-overlay/">Upgrade</a></li>' : '') . '
+                               ' . (apply_filters('oxi-image-hover-plugin-version', false) == FALSE ? ' <li class="fazil-class" ><a target="_blank" href="https://www.oxilab.org/downloads/image-hover-ultimate-pro/">Upgrade</a></li>' : '') . '
                                <li class="saadmin-doc"><a target="_black" href="https://www.image-hover.oxilab.org/docs/">Docs</a></li>
                                <li class="saadmin-doc"><a target="_black" href="https://wordpress.org/support/plugin/image-hover-effects-ultimate/">Support</a></li>
                                <li class="saadmin-set"><a href="' . admin_url('admin.php?page=oxi-image-hover-ultimate-settings') . '"><span class="dashicons dashicons-admin-generic"></span></a></li>
