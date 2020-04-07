@@ -43,7 +43,7 @@ trait Admin_helper {
         if ($vs == $this->fixed_data('76616c6964')) {
             return TRUE;
         } else {
-            return TRUE;
+            return false;
         }
     }
 
