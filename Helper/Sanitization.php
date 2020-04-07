@@ -687,7 +687,7 @@ trait Sanitization {
                     if (strpos($file, '{{') !== FALSE):
                         $file = $this->multiple_selector_handler($data, $file);
                     endif;
-                    if (!empty($val)):
+                    if (!empty($value)):
                         $this->CSSDATA[$arg['responsive']][$class][$file] = $file;
                     endif;
                 }
@@ -723,7 +723,7 @@ trait Sanitization {
                         if (strpos($file, '{{') !== FALSE):
                             $file = $this->multiple_selector_handler($data, $file);
                         endif;
-                        if (!empty($val)):
+                        if (!empty($size)):
                             $this->CSSDATA[$arg['responsive']][$class][$file] = $file;
                         endif;
                     endif;
@@ -772,7 +772,7 @@ trait Sanitization {
                         if (strpos($file, '{{') !== FALSE):
                             $file = $this->multiple_selector_handler($data, $file);
                         endif;
-                        if (!empty($val)):
+                        if (!empty($value)):
                             $this->CSSDATA[$arg['responsive']][$class][$file] = $file;
                         endif;
                     }
@@ -830,7 +830,7 @@ trait Sanitization {
                         if (strpos($file, '{{') !== FALSE):
                             $file = $this->multiple_selector_handler($data, $file);
                         endif;
-                        if (!empty($val)):
+                        if (!empty($value)):
                             $this->CSSDATA[$arg['responsive']][$class][$file] = $file;
                         endif;
                     }
@@ -898,7 +898,7 @@ trait Sanitization {
                     $key = (strpos($key, '{{KEY}}') ? str_replace('{{KEY}}', explode('saarsa', $id)[1], $key) : $key);
                     $class = str_replace('{{WRAPPER}}', $this->WRAPPER, $key);
                     $file = str_replace('{{VALUE}}', $value, $val);
-                    if (!empty($val)):
+                    if (!empty($value)):
                         $this->CSSDATA[$arg['responsive']][$class][$file] = $file;
                     endif;
                 }
@@ -946,7 +946,7 @@ trait Sanitization {
                         $key = (strpos($key, '{{KEY}}') ? str_replace('{{KEY}}', explode('saarsa', $id)[1], $key) : $key);
                         $class = str_replace('{{WRAPPER}}', $this->WRAPPER, $key);
                         $file = str_replace('{{VALUE}}', str_replace("+", ' ', $value), $val);
-                        if (!empty($val)):
+                        if (!empty($value)):
                             $this->CSSDATA[$arg['responsive']][$class][$file] = $file;
                         endif;
                     endif;
@@ -997,7 +997,7 @@ trait Sanitization {
                         $key = (strpos($key, '{{KEY}}') ? str_replace('{{KEY}}', explode('saarsa', $id)[1], $key) : $key);
                         $class = str_replace('{{WRAPPER}}', $this->WRAPPER, $key);
                         $file = str_replace('{{VALUE}}', $value, $val);
-                        if (!empty($val)):
+                        if (!empty($value)):
                             $this->CSSDATA[$arg['responsive']][$class][$file] = $file;
                         endif;
                     endif;
@@ -1027,7 +1027,7 @@ trait Sanitization {
         $unlink = (count(array_unique($ar)) === 1 ? '' : 'link-dimensions-unlink');
         if (array_key_exists('selector-data', $arg) && $arg['selector-data'] == TRUE && $arg['render'] == TRUE) {
             if (array_key_exists('selector', $arg)) :
-                if (isset($top)) :
+                if (!empty($top)) :
                     foreach ($arg['selector'] as $key => $val) {
                         $key = (strpos($key, '{{KEY}}') ? str_replace('{{KEY}}', explode('saarsa', $id)[1], $key) : $key);
                         $class = str_replace('{{WRAPPER}}', $this->WRAPPER, $key);
@@ -1997,208 +1997,229 @@ trait Sanitization {
      */
 
     public function background_admin_group_control($id, array $data = [], array $arg = []) {
+        if ($this->backgroundtype == 'custom'):
 
-        $backround = '';
-        $render = FALSE;
-        if (array_key_exists($id . '-color', $data)) :
-            $color = $data[$id . '-color'];
-            if (array_key_exists($id . '-img', $data) && $data[$id . '-img'] == 'yes') :
-                if (strpos(strtolower($color), 'gradient') === FALSE) :
-                    $color = 'linear-gradient(0deg, ' . $color . ' 0%, ' . $color . ' 100%)';
-                endif;
-                if ($data[$id . '-select'] == 'media-library') :
-                    $backround .= 'background: ' . $color . ', url(\'' . $data[$id . '-image'] . '\') ' . $data[$id . '-repeat'] . ' ' . $data[$id . '-position'] . ';';
+            $backround = '';
+            $render = FALSE;
+            if (array_key_exists($id . '-color', $data)) :
+                $color = $data[$id . '-color'];
+                if (array_key_exists($id . '-img', $data) && $data[$id . '-img'] == 'yes') :
+                    if (strpos(strtolower($color), 'gradient') === FALSE) :
+                        $color = 'linear-gradient(0deg, ' . $color . ' 0%, ' . $color . ' 100%)';
+                    endif;
+                    if ($data[$id . '-select'] == 'media-library') :
+                        $backround .= 'background: ' . $color . ', url(\'' . $data[$id . '-image'] . '\') ' . $data[$id . '-repeat'] . ' ' . $data[$id . '-position'] . ';';
+                    else :
+                        $backround .= 'background: ' . $color . ', url(\'' . $data[$id . '-url'] . '\') ' . $data[$id . '-repeat'] . ' ' . $data[$id . '-position'] . ';';
+                    endif;
                 else :
-                    $backround .= 'background: ' . $color . ', url(\'' . $data[$id . '-url'] . '\') ' . $data[$id . '-repeat'] . ' ' . $data[$id . '-position'] . ';';
+                    $backround .= 'background: ' . $color . ';';
                 endif;
-            else :
-                $backround .= 'background: ' . $color . ';';
             endif;
-        endif;
-        if (array_key_exists('selector', $arg)) :
-            foreach ($arg['selector'] as $key => $val) {
-                $key = (strpos($key, '{{KEY}}') ? str_replace('{{KEY}}', explode('saarsa', $id)[1], $key) : $key);
-                $class = str_replace('{{WRAPPER}}', $this->WRAPPER, $key);
-                $this->CSSDATA['laptop'][$class][$backround] = $backround;
-                $render = TRUE;
-            }
-        endif;
+            if (array_key_exists('selector', $arg)) :
+                foreach ($arg['selector'] as $key => $val) {
+                    $key = (strpos($key, '{{KEY}}') ? str_replace('{{KEY}}', explode('saarsa', $id)[1], $key) : $key);
+                    $class = str_replace('{{WRAPPER}}', $this->WRAPPER, $key);
+                    $this->CSSDATA['laptop'][$class][$backround] = $backround;
+                    $render = TRUE;
+                }
+            endif;
 
-        $selector_key = $selector = $selectorvalue = $loader = $loadervalue = '';
-        if (array_key_exists('selector', $arg)) :
-            $selectorvalue = 'selector-value';
-            $selector_key = 'selector';
-            $selector = $arg['selector'];
-        endif;
-        if (array_key_exists('loader', $arg)) :
-            $loader = 'loader';
-            $loadervalue = $arg['loader'];
-        endif;
-        $separator = array_key_exists('separator', $arg) ? $arg['separator'] : FALSE;
-        $this->start_popover_control(
-                $id, [
-            'label' => __('Background', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'condition' => array_key_exists('condition', $arg) ? $arg['condition'] : '',
-            'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
-            'separator' => $separator,
-                ]
-        );
-        $this->add_control(
-                $id . '-color', $data, [
-            'label' => __('Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::GRADIENT,
-            'gradient' => $id,
-            'oparetor' => 'RGB',
-            'render' => FALSE,
-            $selectorvalue => '',
-            $selector_key => $selector,
-                ]
-        );
+            $selector_key = $selector = $selectorvalue = $loader = $loadervalue = '';
+            if (array_key_exists('selector', $arg)) :
+                $selectorvalue = 'selector-value';
+                $selector_key = 'selector';
+                $selector = $arg['selector'];
+            endif;
+            if (array_key_exists('loader', $arg)) :
+                $loader = 'loader';
+                $loadervalue = $arg['loader'];
+            endif;
+            $separator = array_key_exists('separator', $arg) ? $arg['separator'] : FALSE;
+            $this->start_popover_control(
+                    $id, [
+                'label' => __('Background', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'condition' => array_key_exists('condition', $arg) ? $arg['condition'] : '',
+                'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
+                'separator' => $separator,
+                    ]
+            );
+            $this->add_control(
+                    $id . '-color', $data, [
+                'label' => __('Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::GRADIENT,
+                'gradient' => $id,
+                'oparetor' => 'RGB',
+                'render' => FALSE,
+                $selectorvalue => '',
+                $selector_key => $selector,
+                    ]
+            );
 
-        $this->add_control(
-                $id . '-img', $data, [
-            'label' => __('Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::SWITCHER,
-            'loader' => TRUE,
-            'label_on' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'label_off' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'return_value' => 'yes',
-                ]
-        );
-        $this->add_control(
-                $id . '-select', $data, [
-            'label' => __('Photo Source', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'separator' => TRUE,
-            'loader' => TRUE,
-            'type' => Controls::CHOOSE,
-            'default' => 'media-library',
-            'options' => [
-                'media-library' => [
-                    'title' => __('Media Library', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'icon' => 'fa fa-align-left',
+            $this->add_control(
+                    $id . '-img', $data, [
+                'label' => __('Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::SWITCHER,
+                'loader' => TRUE,
+                'label_on' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label_off' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'return_value' => 'yes',
+                    ]
+            );
+            $this->add_control(
+                    $id . '-select', $data, [
+                'label' => __('Photo Source', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'separator' => TRUE,
+                'loader' => TRUE,
+                'type' => Controls::CHOOSE,
+                'default' => 'media-library',
+                'options' => [
+                    'media-library' => [
+                        'title' => __('Media Library', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'icon' => 'fa fa-align-left',
+                    ],
+                    'custom-url' => [
+                        'title' => __('Custom URL', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'icon' => 'fa fa-align-center',
+                    ]
                 ],
-                'custom-url' => [
-                    'title' => __('Custom URL', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'icon' => 'fa fa-align-center',
-                ]
-            ],
-            'condition' => [
-                $id . '-img' => 'yes',
-            ],
-                ]
-        );
-        $this->add_control(
-                $id . '-image', $data, [
-            'label' => __('Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::IMAGE,
-            'default' => '',
-            'loader' => TRUE,
-            'condition' => [
-                $id . '-select' => 'media-library',
-                $id . '-img' => 'yes',
-            ],
-                ]
-        );
-        $this->add_control(
-                $id . '-url', $data, [
-            'label' => __('Image URL', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::TEXT,
-            'default' => '',
-            'loader' => TRUE,
-            'placeholder' => 'www.example.com/image.jpg',
-            'condition' => [
-                $id . '-select' => 'custom-url',
-                $id . '-img' => 'yes',
-            ],
-                ]
-        );
-        $this->add_control(
-                $id . '-position', $data, [
-            'label' => __('Position', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::SELECT,
-            'default' => 'center center',
-            'render' => $render,
-            'options' => [
-                '' => __('Default', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'top left' => __('Top Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'top center' => __('Top Center', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'top right' => __('Top Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'center left' => __('Center Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'center center' => __('Center Center', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'center right' => __('Center Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'bottom left' => __('Bottom Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'bottom center' => __('Bottom Center', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'bottom right' => __('Bottom Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            ],
-            'loader' => TRUE,
-            'condition' => [
-                $id . '-img' => 'yes',
-                '((' . $id . '-select === \'media-library\' && ' . $id . '-image !== \'\') || (' . $id . '-select === \'custom-url\' && ' . $id . '-url !== \'\'))' => 'COMPILED',
-            ],
-                ]
-        );
-        $this->add_control(
-                $id . '-attachment', $data, [
-            'label' => __('Attachment', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::SELECT,
-            'default' => '',
-            'render' => $render,
-            'options' => [
-                '' => __('Default', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'scroll' => __('Scroll', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'fixed' => __('Fixed', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            ],
-            $loader => $loadervalue,
-            $selectorvalue => 'background-attachment: {{VALUE}};',
-            $selector_key => $selector,
-            'condition' => [
-                $id . '-img' => 'yes',
-                '((' . $id . '-select === \'media-library\' && ' . $id . '-image !== \'\') || (' . $id . '-select === \'custom-url\' && ' . $id . '-url !== \'\'))' => 'COMPILED',
-            ],
-                ]
-        );
-        $this->add_control(
-                $id . '-repeat', $data, [
-            'label' => __('Repeat', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::SELECT,
-            'default' => 'no-repeat',
-            'render' => $render,
-            'options' => [
-                '' => __('Default', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'no-repeat' => __('No-Repeat', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'repeat' => __('Repeat', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'repeat-x' => __('Repeat-x', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'repeat-y' => __('Repeat-y', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            ],
-            'loader' => TRUE,
-            'condition' => [
-                $id . '-img' => 'yes',
-                '((' . $id . '-select === \'media-library\' && ' . $id . '-image !== \'\') || (' . $id . '-select === \'custom-url\' && ' . $id . '-url !== \'\'))' => 'COMPILED',
-            ],
-                ]
-        );
-        $this->add_responsive_control(
-                $id . '-size', $data, [
-            'label' => __('Size', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::SELECT,
-            'default' => 'cover',
-            'render' => $render,
-            'options' => [
-                '' => __('Default', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'auto' => __('Auto', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'cover' => __('Cover', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'contain' => __('Contain', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            ],
-            $loader => $loadervalue,
-            $selectorvalue => 'background-size: {{VALUE}};',
-            $selector_key => $selector,
-            'condition' => [
-                $id . '-img' => 'yes',
-                '((' . $id . '-select === \'media-library\' && ' . $id . '-image !== \'\') || (' . $id . '-select === \'custom-url\' && ' . $id . '-url !== \'\'))' => 'COMPILED',
-            ],
-                ]
-        );
-        $this->end_popover_control();
+                'condition' => [
+                    $id . '-img' => 'yes',
+                ],
+                    ]
+            );
+            $this->add_control(
+                    $id . '-image', $data, [
+                'label' => __('Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::IMAGE,
+                'default' => '',
+                'loader' => TRUE,
+                'condition' => [
+                    $id . '-select' => 'media-library',
+                    $id . '-img' => 'yes',
+                ],
+                    ]
+            );
+            $this->add_control(
+                    $id . '-url', $data, [
+                'label' => __('Image URL', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::TEXT,
+                'default' => '',
+                'loader' => TRUE,
+                'placeholder' => 'www.example.com/image.jpg',
+                'condition' => [
+                    $id . '-select' => 'custom-url',
+                    $id . '-img' => 'yes',
+                ],
+                    ]
+            );
+            $this->add_control(
+                    $id . '-position', $data, [
+                'label' => __('Position', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::SELECT,
+                'default' => 'center center',
+                'render' => $render,
+                'options' => [
+                    '' => __('Default', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'top left' => __('Top Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'top center' => __('Top Center', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'top right' => __('Top Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'center left' => __('Center Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'center center' => __('Center Center', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'center right' => __('Center Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'bottom left' => __('Bottom Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'bottom center' => __('Bottom Center', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'bottom right' => __('Bottom Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                ],
+                'loader' => TRUE,
+                'condition' => [
+                    $id . '-img' => 'yes',
+                    '((' . $id . '-select === \'media-library\' && ' . $id . '-image !== \'\') || (' . $id . '-select === \'custom-url\' && ' . $id . '-url !== \'\'))' => 'COMPILED',
+                ],
+                    ]
+            );
+            $this->add_control(
+                    $id . '-attachment', $data, [
+                'label' => __('Attachment', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::SELECT,
+                'default' => '',
+                'render' => $render,
+                'options' => [
+                    '' => __('Default', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'scroll' => __('Scroll', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'fixed' => __('Fixed', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                ],
+                $loader => $loadervalue,
+                $selectorvalue => 'background-attachment: {{VALUE}};',
+                $selector_key => $selector,
+                'condition' => [
+                    $id . '-img' => 'yes',
+                    '((' . $id . '-select === \'media-library\' && ' . $id . '-image !== \'\') || (' . $id . '-select === \'custom-url\' && ' . $id . '-url !== \'\'))' => 'COMPILED',
+                ],
+                    ]
+            );
+            $this->add_control(
+                    $id . '-repeat', $data, [
+                'label' => __('Repeat', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::SELECT,
+                'default' => 'no-repeat',
+                'render' => $render,
+                'options' => [
+                    '' => __('Default', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'no-repeat' => __('No-Repeat', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'repeat' => __('Repeat', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'repeat-x' => __('Repeat-x', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'repeat-y' => __('Repeat-y', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                ],
+                'loader' => TRUE,
+                'condition' => [
+                    $id . '-img' => 'yes',
+                    '((' . $id . '-select === \'media-library\' && ' . $id . '-image !== \'\') || (' . $id . '-select === \'custom-url\' && ' . $id . '-url !== \'\'))' => 'COMPILED',
+                ],
+                    ]
+            );
+            $this->add_responsive_control(
+                    $id . '-size', $data, [
+                'label' => __('Size', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::SELECT,
+                'default' => 'cover',
+                'render' => $render,
+                'options' => [
+                    '' => __('Default', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'auto' => __('Auto', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'cover' => __('Cover', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'contain' => __('Contain', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                ],
+                $loader => $loadervalue,
+                $selectorvalue => 'background-size: {{VALUE}};',
+                $selector_key => $selector,
+                'condition' => [
+                    $id . '-img' => 'yes',
+                    '((' . $id . '-select === \'media-library\' && ' . $id . '-image !== \'\') || (' . $id . '-select === \'custom-url\' && ' . $id . '-url !== \'\'))' => 'COMPILED',
+                ],
+                    ]
+            );
+            $this->end_popover_control();
+
+        else:
+            $selector = '';
+            $selectorarray = [];
+            if (array_key_exists('selector', $arg)) :
+                $selectorvalue = 'selector-value';
+                $selector = 'selector';
+                foreach ($arg['selector'] as $k => $value) {
+                    $selectorarray[$k] = 'background: {{VALUE}};';
+                }
+            endif;
+            $this->add_control(
+                    $id . '-color', $this->style, [
+                'label' => __('Background', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::GRADIENT,
+                'default' => 'rgba(171, 0, 201, 1)',
+                $selector => $selectorarray,
+                    ]
+            );
+        endif;
     }
 
     /*

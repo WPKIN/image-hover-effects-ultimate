@@ -98,6 +98,16 @@ class Settings {
                                     <label class="description" for="oxi_addons_way_points"><?php _e('Load Way Points at shortcode loading while animated, If your theme already loaded select No for faster loading'); ?></label>
                                 </td>
                             </tr> 
+                            <tr valign="top">
+                                <td scope="row">Background Type</td>
+                                <td>
+                                    <input type="radio" name="oxi_addons_background_type" value="" <?php checked('', get_option('oxi_addons_background_type'), true); ?>>Simple
+                                    <input type="radio" name="oxi_addons_background_type" value="custom" <?php checked('custom', get_option('oxi_addons_background_type'), true); ?>>Customizable 
+                                </td>
+                                <td>
+                                    <label class="description" for="oxi_addons_background_type"><?php _e('Set Background Type  while editing Image Hover, If you have knowledge into background CSS properties so Customizable is better for you else Set it Simple'); ?></label>
+                                </td>
+                            </tr> 
                         </tbody>
                     </table>
                     <?php submit_button(); ?>

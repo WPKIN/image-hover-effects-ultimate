@@ -80,12 +80,13 @@ class Modules extends Admin_Render {
             ]
                 ]
         );
+        $this->end_controls_section();
     }
 
     public function register_general_style() {
         $this->start_controls_section(
                 'oxi-image-hover', [
-            'label' => esc_html__('General Style', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Width & Height', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'showing' => true,
                 ]
         );
@@ -174,12 +175,13 @@ class Modules extends Admin_Render {
             ],
                 ]
         );
+        $this->end_controls_section();
     }
 
     public function register_content_settings() {
         $this->start_controls_section(
                 'oxi-image-hover', [
-            'label' => esc_html__('Content Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('General Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'showing' => TRUE,
                 ]
         );
@@ -358,6 +360,7 @@ class Modules extends Admin_Render {
             ]
                 ]
         );
+        $this->end_controls_section();
     }
 
     public function register_icon_settings() {
@@ -600,6 +603,7 @@ class Modules extends Admin_Render {
             ]
                 ]
         );
+        $this->end_controls_section();
     }
 
     public function register_controls() {
@@ -607,7 +611,6 @@ class Modules extends Admin_Render {
                 'shortcode-addons-start-tabs', [
             'options' => [
                 'button-settings' => esc_html__('General Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'typography' => esc_html__('Typography', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 'custom' => esc_html__('Custom CSS', OXI_IMAGE_HOVER_TEXTDOMAIN),
             ]
                 ]
@@ -621,31 +624,14 @@ class Modules extends Admin_Render {
         );
         $this->start_section_devider();
         $this->register_column_effects();
-
-        $this->end_controls_section();
+        $this->register_icon_settings();
         $this->end_section_devider();
         $this->start_section_devider();
         $this->register_general_style();
-        $this->end_controls_section();
-        $this->end_section_devider();
-        $this->end_section_tabs();
-        $this->start_section_tabs(
-                'oxi-image-hover-start-tabs', [
-            'condition' => [
-                'oxi-image-hover-start-tabs' => 'typography'
-            ]
-                ]
-        );
-        $this->start_section_devider();
         $this->register_content_settings();
-        $this->end_controls_section();
-        $this->end_section_devider();
-        $this->start_section_devider();
-        $this->register_icon_settings();
-        $this->end_controls_section();
         $this->end_section_devider();
         $this->end_section_tabs();
-
+        
         $this->start_section_tabs(
                 'oxi-image-hover-start-tabs', [
             'condition' => [

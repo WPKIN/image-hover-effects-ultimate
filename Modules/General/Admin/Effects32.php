@@ -11,10 +11,12 @@ use OXI_IMAGE_HOVER_PLUGINS\Modules\General\Modules as Modules;
 use OXI_IMAGE_HOVER_PLUGINS\Classes\Controls as Controls;
 
 class Effects32 extends Modules {
-     public function register_content_settings() {
+
+    public function register_content_settings() {
+
         $this->start_controls_section(
                 'oxi-image-hover', [
-            'label' => esc_html__('Content Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('General Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'showing' => TRUE,
                 ]
         );
@@ -193,7 +195,7 @@ class Effects32 extends Modules {
             ]
                 ]
         );
-         $this->add_responsive_control(
+        $this->add_responsive_control(
                 'oxi-image-hover-content-margin', $this->style, [
             'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
@@ -226,4 +228,5 @@ class Effects32 extends Modules {
         );
         $this->end_controls_section();
     }
+
 }
