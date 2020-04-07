@@ -687,9 +687,9 @@ trait Sanitization {
                     if (strpos($file, '{{') !== FALSE):
                         $file = $this->multiple_selector_handler($data, $file);
                     endif;
-                    // if (!empty($val)):
-                    $this->CSSDATA[$arg['responsive']][$class][$file] = $file;
-                    //  endif;
+                    if (!empty($val)):
+                        $this->CSSDATA[$arg['responsive']][$class][$file] = $file;
+                    endif;
                 }
             endif;
         endif;
@@ -723,7 +723,9 @@ trait Sanitization {
                         if (strpos($file, '{{') !== FALSE):
                             $file = $this->multiple_selector_handler($data, $file);
                         endif;
-                        $this->CSSDATA[$arg['responsive']][$class][$file] = $file;
+                        if (!empty($val)):
+                            $this->CSSDATA[$arg['responsive']][$class][$file] = $file;
+                        endif;
                     endif;
                 }
             endif;
@@ -770,7 +772,9 @@ trait Sanitization {
                         if (strpos($file, '{{') !== FALSE):
                             $file = $this->multiple_selector_handler($data, $file);
                         endif;
-                        $this->CSSDATA[$arg['responsive']][$class][$file] = $file;
+                        if (!empty($val)):
+                            $this->CSSDATA[$arg['responsive']][$class][$file] = $file;
+                        endif;
                     }
                     $retun[$key][$key]['type'] = ($val != '' ? 'CSS' : 'HTML');
                     $retun[$key][$key]['value'] = $val;
@@ -826,7 +830,9 @@ trait Sanitization {
                         if (strpos($file, '{{') !== FALSE):
                             $file = $this->multiple_selector_handler($data, $file);
                         endif;
-                        $this->CSSDATA[$arg['responsive']][$class][$file] = $file;
+                        if (!empty($val)):
+                            $this->CSSDATA[$arg['responsive']][$class][$file] = $file;
+                        endif;
                     }
                     $retun[$key][$key]['type'] = ($val != '' ? 'CSS' : 'HTML');
                     $retun[$key][$key]['value'] = $val;
@@ -892,7 +898,9 @@ trait Sanitization {
                     $key = (strpos($key, '{{KEY}}') ? str_replace('{{KEY}}', explode('saarsa', $id)[1], $key) : $key);
                     $class = str_replace('{{WRAPPER}}', $this->WRAPPER, $key);
                     $file = str_replace('{{VALUE}}', $value, $val);
-                    $this->CSSDATA[$arg['responsive']][$class][$file] = $file;
+                    if (!empty($val)):
+                        $this->CSSDATA[$arg['responsive']][$class][$file] = $file;
+                    endif;
                 }
             endif;
         }
@@ -938,7 +946,9 @@ trait Sanitization {
                         $key = (strpos($key, '{{KEY}}') ? str_replace('{{KEY}}', explode('saarsa', $id)[1], $key) : $key);
                         $class = str_replace('{{WRAPPER}}', $this->WRAPPER, $key);
                         $file = str_replace('{{VALUE}}', str_replace("+", ' ', $value), $val);
-                        $this->CSSDATA[$arg['responsive']][$class][$file] = $file;
+                        if (!empty($val)):
+                            $this->CSSDATA[$arg['responsive']][$class][$file] = $file;
+                        endif;
                     endif;
                 }
             endif;
@@ -987,7 +997,9 @@ trait Sanitization {
                         $key = (strpos($key, '{{KEY}}') ? str_replace('{{KEY}}', explode('saarsa', $id)[1], $key) : $key);
                         $class = str_replace('{{WRAPPER}}', $this->WRAPPER, $key);
                         $file = str_replace('{{VALUE}}', $value, $val);
-                        $this->CSSDATA[$arg['responsive']][$class][$file] = $file;
+                        if (!empty($val)):
+                            $this->CSSDATA[$arg['responsive']][$class][$file] = $file;
+                        endif;
                     endif;
                 }
             endif;
