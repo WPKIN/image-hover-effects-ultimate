@@ -18,7 +18,6 @@ class Effects30 extends Public_Render {
     public function inline_public_jquery() {
         $js = 'function Effects30height' . $this->oxiid . '() {
                     var effects30height = jQuery(".oxi-image-general-hover-style-30-' . $this->oxiid . ' .oxi-image-hover-figure-caption-body").outerHeight();
-                        console.log(effects30height);
                     jQuery("<style type=\'text/css\'> .oxi-image-general-hover-style-30-' . $this->oxiid . ' .oxi-image-hover-caption-tab{transform: translateY(" + effects30height / 2 + "px);-mos-transform: translateY(" + effects30height / 2 + "px);-webkit-transform: translateY(" + effects30height / 2 + "px);} </style>").appendTo(".oxi-image-general-hover-style-30-' . $this->oxiid . '");
                 }
                 Effects30height' . $this->oxiid . '();';

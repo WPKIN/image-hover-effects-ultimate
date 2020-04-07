@@ -13,7 +13,6 @@ jQuery.noConflict();
                 notice: $(this).attr('sup-data'),
             },
             success: function (response) {
-                console.log(response);
                 $('.oxi-addons-admin-notifications').remove();
             },
             error: function (error) {

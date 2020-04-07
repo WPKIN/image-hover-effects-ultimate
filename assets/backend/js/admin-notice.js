@@ -14,7 +14,6 @@ jQuery.noConflict();
                 notice: $(this).attr('sup-data'),
             },
             success: function (response) {
-                console.log(response);
                 $('.shortcode-addons-review-notice').remove();
             },
             error: function (error) {
