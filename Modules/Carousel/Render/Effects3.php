@@ -37,7 +37,7 @@ class Effects3 extends Public_Render {
             ';
         }
 
-        echo '<div class="oxi-addons-container ' . $this->WRAPPER . ' oxi-image-hover-wrapper-' . (array_key_exists('carousel_register_style', $this->style) ? $this->style['carousel_register_style'] : '') . '">
+        echo '<div class="oxi-addons-container ' . $this->WRAPPER . ' oxi-image-hover-wrapper-' . (array_key_exists('carousel_register_style', $this->style) ? $this->style['carousel_register_style'] : '') . '" id="' . $this->WRAPPER . '">
                 <div class="oxi-addons-row swiper-container oxi-addons-swiper-wrapper">
                     <div class="swiper-wrapper">';
         $this->default_render($this->style, $this->child, 'request');

@@ -21,7 +21,7 @@ class Effects1 extends Public_Render {
     }
 
     public function render() {
-        echo '<div class="oxi-addons-container ' . $this->WRAPPER . ' oxi-image-hover-wrapper-' . (array_key_exists('carousel_register_style', $this->style) ? $this->style['carousel_register_style'] : '') . '">
+        echo '<div class="oxi-addons-container ' . $this->WRAPPER . ' oxi-image-hover-wrapper-' . (array_key_exists('carousel_register_style', $this->style) ? $this->style['carousel_register_style'] : '') . '" id="' . $this->WRAPPER . '">
                  <div class="oxi-addons-row">';
         $this->default_render($this->style, $this->child, $this->admin);
         echo '   </div>

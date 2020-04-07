@@ -2293,6 +2293,7 @@ trait Sanitization {
             'responsive' => 'tab',
             'default' => 'oxi-bt-col-md-12',
             'options' => [
+                '' => __('Default', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 'oxi-bt-col-md-12' => __('Col 1', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 'oxi-bt-col-md-6' => __('Col 2', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 'oxi-bt-col-md-4' => __('Col 3', OXI_IMAGE_HOVER_TEXTDOMAIN),
@@ -2313,6 +2314,7 @@ trait Sanitization {
             'default' => 'oxi-bt-col-lg-12',
             'responsive' => 'mobile',
             'options' => [
+                '' => __('Default', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 'oxi-bt-col-sm-12' => __('Col 1', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 'oxi-bt-col-sm-6' => __('Col 2', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 'oxi-bt-col-sm-4' => __('Col 3', OXI_IMAGE_HOVER_TEXTDOMAIN),

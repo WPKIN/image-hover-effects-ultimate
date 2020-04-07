@@ -238,7 +238,7 @@ class Public_Render {
         if ($this->admin == 'request'):
             $this->default_render($this->style, $this->child, $this->admin);
         else:
-            echo '<div class="oxi-addons-container ' . $this->WRAPPER . '">
+            echo '<div class="oxi-addons-container ' . $this->WRAPPER . '" id="' . $this->WRAPPER . '">
                  <div class="oxi-addons-row">';
             $this->default_render($this->style, $this->child, $this->admin);
             echo '   </div>
@@ -375,10 +375,49 @@ class Public_Render {
         return $files;
     }
 
+    public function tab_column_render($id, $style) {
+        if ($style[$id . '-lap'] == 'oxi-bt-col-lg-12'):
+            return ' oxi-bt-col-md-12 ';
+        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-6'):
+            return ' oxi-bt-col-md-12 ';
+        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-5'):
+            return ' oxi-bt-col-md-6 ';
+        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-4'):
+            return ' oxi-bt-col-md-6 ';
+        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-3'):
+            return ' oxi-bt-col-md-6 ';
+        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-2'):
+            return ' oxi-bt-col-md-4 ';
+        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-2'):
+            return ' oxi-bt-col-md-4 ';
+        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-1'):
+            return ' oxi-bt-col-md-3 ';
+        endif;
+    }
+
+    public function mob_column_render($id, $style) {
+
+        if ($style[$id . '-lap'] == 'oxi-bt-col-lg-2'):
+            return ' oxi-bt-col-sm-6 ';
+        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-1'):
+            return ' oxi-bt-col-sm-6 ';
+        else:
+            return ' oxi-bt-col-sm-12 ';
+        endif;
+    }
+
     public function column_render($id, $style) {
         $file = $style[$id . '-lap'] . ' ';
-        $file .= $style[$id . '-tab'] . ' ';
-        $file .= $style[$id . '-mob'] . ' ';
+        if ($style[$id . '-tab'] == ''):
+            $file .= $this->tab_column_render($id, $style);
+        else:
+            $file .= $style[$id . '-tab'] . ' ';
+        endif;
+        if ($style[$id . '-mob'] == ''):
+            $file .= $this->mob_column_render($id, $style);
+        else:
+            $file .= $style[$id . '-mob'] . ' ';
+        endif;
         return $file;
     }
 
