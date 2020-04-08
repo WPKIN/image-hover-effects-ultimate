@@ -108,7 +108,7 @@ oxi-image-hover.oxi-touch{
     float: left;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 20px) {
     .oxi-bt-col-sm {
         -ms-flex-preferred-size: 0;
         flex-basis: 0;
