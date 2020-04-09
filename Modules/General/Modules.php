@@ -59,6 +59,7 @@ class Modules extends Admin_Render {
                 'oxi-image-hover-effects-time', $this->style, [
             'label' => __('Effects Time (S)', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::SLIDER,
+            'simpleenable' => TRUE,
             'default' => [
                 'unit' => 'ms',
                 'size' => '',
@@ -563,6 +564,7 @@ class Modules extends Admin_Render {
                 'oxi-image-hover-heading-margin', $this->style, [
             'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
+            'simpledimensions' => 'heading',
             'default' => [
                 'unit' => 'px',
                 'size' => '',
@@ -953,6 +955,7 @@ class Modules extends Admin_Render {
                 $this->style,
                 [
                     'type' => Controls::BORDER,
+                    'simpleborder'=> true,
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-hover-caption-tab .oxi-image-hover-button a.oxi-image-btn:hover' => ''
                     ],
@@ -1014,6 +1017,7 @@ class Modules extends Admin_Render {
             'label' => __('Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'separator' => TRUE,
+            'simpledimensions' => 'double',
             'default' => [
                 'unit' => 'px',
                 'size' => '',
@@ -1044,6 +1048,7 @@ class Modules extends Admin_Render {
                 'oxi-image-hover-button-margin', $this->style, [
             'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
+            'simpledimensions' => 'double',
             'default' => [
                 'unit' => 'px',
                 'size' => '',

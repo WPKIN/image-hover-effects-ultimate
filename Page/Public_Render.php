@@ -407,13 +407,13 @@ class Public_Render {
     }
 
     public function column_render($id, $style) {
-        $file = $style[$id . '-lap'] . ' ';
-        if ($style[$id . '-tab'] == ''):
+        $file = $style[$id . '-lap'];
+        if (!array_key_exists($id . '-tab', $style) || $style[$id . '-tab'] == ''):
             $file .= $this->tab_column_render($id, $style);
         else:
             $file .= $style[$id . '-tab'] . ' ';
         endif;
-        if ($style[$id . '-mob'] == ''):
+        if (!array_key_exists($id . '-mob', $style) || $style[$id . '-mob'] == ''):
             $file .= $this->mob_column_render($id, $style);
         else:
             $file .= $style[$id . '-mob'] . ' ';

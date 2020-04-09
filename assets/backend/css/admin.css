@@ -2756,6 +2756,14 @@ span.multiselect-native-select{position:relative}span.multiselect-native-select 
 .shortcode-control-type-number .shortcode-form-control-input-wrapper {
     max-width:25%;
 }
+.shortcode-control-type-number .shortcode-form-control-input-wrapper.shortcode-form-control-input-double {
+    max-width:55%;
+    display: flex;
+}
+.shortcode-control-type-number .shortcode-form-control-input-wrapper.shortcode-form-control-input-double input:first-child{
+    margin-right: 10px;
+}
+
 .shortcode-control-type-textarea .shortcode-form-control-input-wrapper,
 .shortcode-control-type-wysiwyg .shortcode-form-control-input-wrapper,
 .shortcode-control-type-dimensions .shortcode-form-control-input-wrapper{

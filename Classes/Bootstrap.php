@@ -148,7 +148,8 @@ class Bootstrap {
         register_setting('oxi-image-hover-settings-group', 'oxi_addons_font_awesome');
         register_setting('oxi-image-hover-settings-group', 'image_hover_ultimate_mobile_device_key');
         register_setting('oxi-image-hover-settings-group', 'oxi_addons_way_points');
-        register_setting('oxi-image-hover-settings-group', 'oxi_addons_background_type');
+        register_setting('oxi-image-hover-settings-group', 'image_hover_ultimate_interface');
+  //      register_setting('oxi-image-hover-settings-group', 'oxi_addons_background_type');
     }
 
     public function register_license() {

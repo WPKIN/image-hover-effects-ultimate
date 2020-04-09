@@ -56,18 +56,38 @@ class Settings {
                         <?php do_settings_sections('oxi-image-hover-settings-group'); ?>
                         <tbody>
                             <tr valign="top">
-                                <td scope="row">Who Can Edit?</td>
-                                <td>
+                                <td scope="row" width="200">Who Can Edit?</td>
+                                <td  width="200">
                                     <select name="oxi_addons_user_permission">
                                         <?php foreach ($this->roles as $key => $role) { ?>
                                             <option value="<?php echo $key; ?>" <?php selected($this->saved_role, $key); ?>><?php echo $role; ?></option>
                                         <?php } ?>
                                     </select>
                                 </td>
-                                <td>
+                                <td >
                                     <label class="description" for="oxi_addons_user_permission"><?php _e('Select the Role who can manage This Plugins.'); ?> <a target="_blank" href="https://codex.wordpress.org/Roles_and_Capabilities#Capability_vs._Role_Table">Help</a></label>
                                 </td>
-                            </tr>                        
+                            </tr>     
+                            <tr valign="top">
+                                <td scope="row">Mobile or Touch Device Behaviour</td>
+                                <td>
+                                    <input type="radio" name="image_hover_ultimate_mobile_device_key" value="" <?php checked('', get_option('image_hover_ultimate_mobile_device_key'), true); ?>>YES
+                                    <input type="radio" name="image_hover_ultimate_mobile_device_key" value="normal" <?php checked('normal', get_option('image_hover_ultimate_mobile_device_key'), true); ?>>No
+                                </td>
+                                <td>
+                                    <label class="description" for="image_hover_ultimate_mobile_device_key"><?php _e('Select option as Effects first with second tap to open link or works normally as click to open link.'); ?></label>
+                                </td>
+                            </tr>
+                            <tr valign="top">
+                                <td scope="row">Admin Interface</td>
+                                <td>
+                                    <input type="radio" name="image_hover_ultimate_interface" value="" <?php checked('', get_option('image_hover_ultimate_interface'), true); ?>>Simple
+                                    <input type="radio" name="image_hover_ultimate_interface" value="customizable" <?php checked('customizable', get_option('image_hover_ultimate_interface'), true); ?>>Customizable
+                                </td>
+                                <td>
+                                    <label class="description" for="image_hover_ultimate_interface"><?php _e('Select Your Customization Interface at Editing Page. As a beginners we Recommend Simple Interface else You can Customize all into Customizable Interface'); ?></label>
+                                </td>
+                            </tr>
                             <tr valign="top">
                                 <td scope="row">Font Awesome Support</td>
                                 <td>
@@ -78,16 +98,7 @@ class Settings {
                                     <label class="description" for="oxi_addons_font_awesome"><?php _e('Load Font Awesome CSS at shortcode loading, If your theme already loaded select No for faster loading'); ?></label>
                                 </td>
                             </tr> 
-                            <tr valign="top">
-                                <td scope="row">Mobile or Touch Device Behaviour</td>
-                                <td>
-                                    <input type="radio" name="image_hover_ultimate_mobile_device_key" value="" <?php checked('', get_option('image_hover_ultimate_mobile_device_key'), true); ?>>YES
-                                    <input type="radio" name="image_hover_ultimate_mobile_device_key" value="normal" <?php checked('normal', get_option('image_hover_ultimate_mobile_device_key'), true); ?>>No
-                                </td>
-                                <td>
-                                    <label class="description" for="image_hover_ultimate_mobile_device_key"><?php _e('Select option as Effects first with second tap to open link or works normally as click to open link.'); ?></label>
-                                </td>
-                            </tr> 
+                            
                             <tr valign="top">
                                 <td scope="row">Waypoints Support</td>
                                 <td>
@@ -96,16 +107,6 @@ class Settings {
                                 </td>
                                 <td>
                                     <label class="description" for="oxi_addons_way_points"><?php _e('Load Way Points at shortcode loading while animated, If your theme already loaded select No for faster loading'); ?></label>
-                                </td>
-                            </tr> 
-                            <tr valign="top">
-                                <td scope="row">Background Type</td>
-                                <td>
-                                    <input type="radio" name="oxi_addons_background_type" value="" <?php checked('', get_option('oxi_addons_background_type'), true); ?>>Simple
-                                    <input type="radio" name="oxi_addons_background_type" value="custom" <?php checked('custom', get_option('oxi_addons_background_type'), true); ?>>Customizable 
-                                </td>
-                                <td>
-                                    <label class="description" for="oxi_addons_background_type"><?php _e('Set Background Type  while editing Image Hover, If you have knowledge into background CSS properties so Customizable is better for you else Set it Simple'); ?></label>
                                 </td>
                             </tr> 
                         </tbody>
