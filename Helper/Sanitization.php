@@ -160,6 +160,10 @@ trait Sanitization {
         $defualt = ['showing' => FALSE];
         $arg = array_merge($defualt, $arg);
         $condition = $this->forms_condition($arg);
+        if (isset($arg['simpleenable']) && $arg['simpleenable'] == false):
+            $this->ShowOnAdvanceOnly = false;
+            return;
+        endif;
 
         echo '<div class="oxi-addons-content-div ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '" ' . $condition . '>
                     <div class="oxi-head">
@@ -176,6 +180,11 @@ trait Sanitization {
      */
 
     public function end_controls_section() {
+        if ($this->ShowOnAdvanceOnly == false):
+            $this->ShowOnAdvanceOnly = true;
+            return;
+        endif;
+        $this->ShowOnAdvanceOnly = true;
         echo '</div></div>';
     }
 
@@ -251,7 +260,7 @@ trait Sanitization {
                                 <span class="dashicons popover-set"></span>
                             </div>
                         </div>
-                        ' . (array_key_exists('description', $arg) ? '<div class="shortcode-form-control-description">' . $arg['description'] . '</div>' : '') . '
+                        ' . (array_key_exists('description', $arg) && $this->ShowShortInfo ? '<div class="shortcode-form-control-description">' . $arg['description'] . '</div>' : '') . '
                         
                     </div>
                     <div class="shortcode-form-control-content shortcode-form-control-content-popover-body">
@@ -277,7 +286,7 @@ trait Sanitization {
      */
 
     public function add_control($id, array $data = [], array $arg = []) {
-        if (isset($arg['simpleenable'])):
+        if ((isset($arg['simpleenable']) && $this->SimpleInterface) || $this->ShowOnAdvanceOnly == false):
             return true;
         endif;
         /*
@@ -315,7 +324,8 @@ trait Sanitization {
             'placeholder' => __('', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'selector-data' => TRUE,
             'render' => TRUE,
-            'responsive' => 'laptop'
+            'responsive' => 'laptop',
+            'ShowShortInfo' => false,
         ];
 
         /*
@@ -350,20 +360,29 @@ trait Sanitization {
 
         $loader = (array_key_exists('loader', $arg) ? $arg['loader'] == TRUE ? ' shortcode-addons-control-loader ' : '' : '');
         $arg['simpleenable'] = $arg['type'];
-        if ($this->interface != 'customizable' && ($arg['type'] == 'slider' || $arg['type'] == 'dimensions')):
+        if ($this->SimpleInterface && ($arg['type'] == 'slider' || $arg['type'] == 'dimensions')):
             $arg['type'] = 'number';
         endif;
 
         echo '<div class="shortcode-form-control shortcode-control-type-' . $arg['type'] . ' ' . $separator . ' ' . $toggle . ' ' . $responsiveclass . ' ' . $loader . '" ' . $condition . '>
                 <div class="shortcode-form-control-content">
-                    <div class="shortcode-form-control-field">
-                    <label for="" class="shortcode-form-control-title">' . $arg['label'] . '</label>';
+                    <div class="shortcode-form-control-field">';
+
+        if (isset($arg['simpledimensions']) && $arg['simpledimensions'] == 'heading' && $this->SimpleInterface):
+            echo '<label for="" class="shortcode-form-control-title" ' . (array_key_exists('simpledescription', $arg) && $this->SimpleInterface && $this->ShowShortInfo ? ' data-toggle="tooltip" title="' . $arg['simpledescription'] . '"' : '') . '>' . $arg['label'] . ' Bottom</label>';
+        else:
+            echo '<label for="" class="shortcode-form-control-title" ' . (array_key_exists('simpledescription', $arg) && $this->SimpleInterface && $this->ShowShortInfo ? ' data-toggle="tooltip" title="' . $arg['simpledescription'] . '"' : '') . '>' . $arg['label'] . '</label>';
+        endif;
+
+
         echo $responsive;
         $fun = $arg['simpleenable'] . '_admin_control';
         echo $this->$fun($id, $data, $arg);
-        echo '      </div>
-                ' . (array_key_exists('description', $arg) ? '<div class="shortcode-form-control-description">' . $arg['description'] . '</div>' : '') . '
-                </div>
+        echo '      </div>';
+        if (($this->ShowShortInfo || $arg['ShowShortInfo']) && ($this->SimpleInterface == false || $arg['type'] == 'text' || $arg['type'] == 'textarea' || $arg['type'] == 'wysiwyg' || $arg['type'] == 'image' || $arg['type'] == 'icon')):
+            echo (array_key_exists('description', $arg) ? '<div class="shortcode-form-control-description">' . $arg['description'] . '</div>' : '');
+        endif;
+        echo ' </div>
         </div>';
     }
 
@@ -376,7 +395,9 @@ trait Sanitization {
 
     public function add_responsive_control($id, array $data = [], array $arg = []) {
         $lap = $id . '-lap';
-        if ($this->interface == 'customizable'):
+        if ($this->SimpleInterface):
+            $this->add_control($lap, $data, $arg);
+        else:
             $tab = $id . '-tab';
             $mob = $id . '-mob';
             $laparg = ['responsive' => 'laptop'];
@@ -385,8 +406,6 @@ trait Sanitization {
             $this->add_control($lap, $data, array_merge($arg, $laparg));
             $this->add_control($tab, $data, array_merge($arg, $tabarg));
             $this->add_control($mob, $data, array_merge($arg, $mobarg));
-        else:
-            $this->add_control($lap, $data, $arg);
         endif;
     }
 
@@ -397,7 +416,12 @@ trait Sanitization {
      */
 
     public function add_group_control($id, array $data = [], array $arg = []) {
-        $defualt = ['type' => 'text', 'label' => 'Input Text'];
+        $defualt = [
+            'type' => 'text',
+            'label' => 'Input Text',
+            'description' => '',
+            'simpledescription' => ''
+        ];
         $arg = array_merge($defualt, $arg);
         $fun = $arg['type'] . '_admin_group_control';
         echo $this->$fun($id, $data, $arg);
@@ -724,7 +748,39 @@ trait Sanitization {
         $unit = array_key_exists($id . '-choices', $data) ? $data[$id . '-choices'] : $arg['default']['unit'];
         $size = array_key_exists($id . '-size', $data) ? $data[$id . '-size'] : $arg['default']['size'];
         $retunvalue = array_key_exists('selector', $arg) ? htmlspecialchars(json_encode($arg['selector'])) : '';
-        if ($this->interface == 'customizable'):
+        if ($this->SimpleInterface):
+            $unit = isset($arg['default']['unit']) ? $arg['default']['unit'] : $data[$id . '-choices'];
+            $this->add_control(
+                    $id . '-choices', $data,
+                    [
+                        'type' => Controls::HIDDEN,
+                    ]
+            );
+            $retunvalue = str_replace('SIZE', 'VALUE', str_replace('UNIT', $id . '-choices.VALUE', $retunvalue));
+            if (array_key_exists('selector-data', $arg) && $arg['selector-data'] == TRUE && $arg['render'] == TRUE && $this->render_condition_control($id, $data, $arg)) :
+                if (array_key_exists('selector', $arg)) :
+
+                    foreach ($arg['selector'] as $key => $val) {
+                        if ($size != '' && $val != '') :
+                            $key = (strpos($key, '{{KEY}}') ? str_replace('{{KEY}}', explode('saarsa', $id)[1], $key) : $key);
+                            $val = str_replace('SIZE', 'VALUE', str_replace('UNIT', $id . '-choices.VALUE', $val));
+                            $class = str_replace('{{WRAPPER}}', $this->WRAPPER, $key);
+                            $file = str_replace('{{VALUE}}', $size, $val);
+                            if (strpos($file, '{{') !== FALSE):
+                                $file = $this->multiple_selector_handler($data, $file);
+                            endif;
+                            if (!empty($size)):
+                                $this->CSSDATA[$arg['responsive']][$class][$file] = $file;
+                            endif;
+                        endif;
+                    }
+                endif;
+            endif;
+            $unitvalue = array_key_exists($id . '-choices', $data) ? 'unit="' . $data[$id . '-choices'] . '"' : '';
+            echo '  <div class="shortcode-form-control-input-wrapper">
+                    <input input name="' . $id . '-size" custom="' . (array_key_exists('custom', $arg) ? '' . $arg['custom'] . '' : '') . '" id="' . $id . '-size' . '" type="number" min="' . $arg['range'][$unit]['min'] . '" max="' . $arg['range'][$unit]['max'] . '" step="' . $arg['range'][$unit]['step'] . '" value="' . $size . '" default-value="' . $size . '" ' . $unitvalue . ' responsive="' . $arg['responsive'] . '" retundata=\'' . $retunvalue . '\'>
+                </div>';
+        else:
             if (array_key_exists('selector-data', $arg) && $arg['selector-data'] == TRUE && $arg['render'] == TRUE && $this->render_condition_control($id, $data, $arg)) :
                 if (array_key_exists('selector', $arg)) :
                     foreach ($arg['selector'] as $key => $val) {
@@ -760,38 +816,6 @@ trait Sanitization {
                     <div class="shortcode-form-slider-input">
                         <input name="' . $id . '-size" custom="' . (array_key_exists('custom', $arg) ? '' . $arg['custom'] . '' : '') . '" id="' . $id . '-size' . '" type="number" min="' . $arg['range'][$unit]['min'] . '" max="' . $arg['range'][$unit]['max'] . '" step="' . $arg['range'][$unit]['step'] . '" value="' . $size . '" default-value="' . $size . '" ' . $unitvalue . ' responsive="' . $arg['responsive'] . '" retundata=\'' . $retunvalue . '\'>
                     </div>
-                </div>';
-        else:
-            $unit = isset($arg['default']['unit']) ? $arg['default']['unit'] : $data[$id . '-choices'];
-            $this->add_control(
-                    $id . '-choices', $data,
-                    [
-                        'type' => Controls::HIDDEN,
-                    ]
-            );
-            $retunvalue = str_replace('SIZE', 'VALUE', str_replace('UNIT', $id . '-choices.VALUE', $retunvalue));
-            if (array_key_exists('selector-data', $arg) && $arg['selector-data'] == TRUE && $arg['render'] == TRUE && $this->render_condition_control($id, $data, $arg)) :
-                if (array_key_exists('selector', $arg)) :
-
-                    foreach ($arg['selector'] as $key => $val) {
-                        if ($size != '' && $val != '') :
-                            $key = (strpos($key, '{{KEY}}') ? str_replace('{{KEY}}', explode('saarsa', $id)[1], $key) : $key);
-                            $val = str_replace('SIZE', 'VALUE', str_replace('UNIT', $id . '-choices.VALUE', $val));
-                            $class = str_replace('{{WRAPPER}}', $this->WRAPPER, $key);
-                            $file = str_replace('{{VALUE}}', $size, $val);
-                            if (strpos($file, '{{') !== FALSE):
-                                $file = $this->multiple_selector_handler($data, $file);
-                            endif;
-                            if (!empty($size)):
-                                $this->CSSDATA[$arg['responsive']][$class][$file] = $file;
-                            endif;
-                        endif;
-                    }
-                endif;
-            endif;
-            $unitvalue = array_key_exists($id . '-choices', $data) ? 'unit="' . $data[$id . '-choices'] . '"' : '';
-            echo '  <div class="shortcode-form-control-input-wrapper">
-                    <input input name="' . $id . '-size" custom="' . (array_key_exists('custom', $arg) ? '' . $arg['custom'] . '' : '') . '" id="' . $id . '-size' . '" type="number" min="' . $arg['range'][$unit]['min'] . '" max="' . $arg['range'][$unit]['max'] . '" step="' . $arg['range'][$unit]['step'] . '" value="' . $size . '" default-value="' . $size . '" ' . $unitvalue . ' responsive="' . $arg['responsive'] . '" retundata=\'' . $retunvalue . '\'>
                 </div>';
         endif;
     }
@@ -1086,7 +1110,39 @@ trait Sanitization {
                 endif;
             endif;
         }
-        if ($this->interface == 'customizable'):
+        if ($this->SimpleInterface):
+            $this->add_control(
+                    $id . '-choices', $data,
+                    [
+                        'type' => Controls::HIDDEN,
+                    ]
+            );
+            $defualt = ['min' => 0, 'max' => 1000, 'step' => 1,];
+            $arg['range'][$unit] = array_merge($defualt, $arg['range'][$unit]);
+            if (isset($arg['simpledimensions']) && $arg['simpledimensions'] == 'double'):
+                $search = ['TOP', 'RIGHT', 'BOTTOM', 'LEFT', 'UNIT'];
+                $replace = [$id . '-top.VALUE', $id . '-left.VALUE', $id . '-top.VALUE', $id . '-left.VALUE', $id . '-choices.VALUE'];
+                $retunvalue = str_replace($search, $replace, $retunvalue);
+                echo '  <div class="shortcode-form-control-input-wrapper shortcode-form-control-input-double">
+                        <input id="' . $id . '-top" name="' . $id . '-top" type="number" min="' . $arg['range'][$unit]['min'] . '" max="' . $arg['range'][$unit]['max'] . '" step="' . $arg['range'][$unit]['step'] . '" value="' . $top . '"  responsive="' . $arg['responsive'] . '" retundata=\'' . $retunvalue . '\'>
+                        <input id="' . $id . '-left" name="' . $id . '-left" type="number" min="' . $arg['range'][$unit]['min'] . '" max="' . $arg['range'][$unit]['max'] . '" step="' . $arg['range'][$unit]['step'] . '" value="' . $left . '"  responsive="' . $arg['responsive'] . '" retundata=\'' . $retunvalue . '\'>
+                        </div>';
+            elseif (isset($arg['simpledimensions']) && $arg['simpledimensions'] == 'heading'):
+                $search = ['{{TOP}}', '{{RIGHT}}', 'BOTTOM', '{{LEFT}}', 'UNIT'];
+                $replace = ['0', '0', 'VALUE', '0', $id . '-choices.VALUE'];
+                $retunvalue = str_replace($search, $replace, $retunvalue);
+                echo '  <div class="shortcode-form-control-input-wrapper">
+                        <input id="' . $id . '-top" name="' . $id . '-top" type="number" min="' . $arg['range'][$unit]['min'] . '" max="' . $arg['range'][$unit]['max'] . '" step="' . $arg['range'][$unit]['step'] . '" value="' . $top . '"  responsive="' . $arg['responsive'] . '" retundata=\'' . $retunvalue . '\'>
+                        </div>';
+            else:
+                $search = ['TOP', 'RIGHT', 'BOTTOM', 'LEFT', 'UNIT'];
+                $replace = ['VALUE', 'VALUE', 'VALUE', 'VALUE', $id . '-choices.VALUE'];
+                $retunvalue = str_replace($search, $replace, $retunvalue);
+                echo '  <div class="shortcode-form-control-input-wrapper">
+                    <input id="' . $id . '-top" name="' . $id . '-top" type="number" min="' . $arg['range'][$unit]['min'] . '" max="' . $arg['range'][$unit]['max'] . '" step="' . $arg['range'][$unit]['step'] . '" value="' . $top . '"  responsive="' . $arg['responsive'] . '" retundata=\'' . $retunvalue . '\'>
+                    </div>';
+            endif;
+        else:
             if (array_key_exists('range', $arg)) :
                 if (count($arg['range']) > 1) :
                     echo ' <div class="shortcode-form-units-choices">';
@@ -1122,40 +1178,6 @@ trait Sanitization {
                     </li>
                 </ul>
             </div>';
-        else:
-            $this->add_control(
-                    $id . '-choices', $data,
-                    [
-                        'type' => Controls::HIDDEN,
-                    ]
-            );
-            $defualt = ['min' => 0, 'max' => 1000, 'step' => 1,];
-            $arg['range'][$unit] = array_merge($defualt, $arg['range'][$unit]);
-            if (isset($arg['simpledimensions']) && $arg['simpledimensions'] == 'double'):
-                $search = ['TOP', 'RIGHT', 'BOTTOM', 'LEFT', 'UNIT'];
-                $replace = [$id . '-top.VALUE', $id . '-left.VALUE', $id . '-top.VALUE', $id . '-left.VALUE', $id . '-choices.VALUE'];
-                $retunvalue = str_replace($search, $replace, $retunvalue);
-                echo '  <div class="shortcode-form-control-input-wrapper shortcode-form-control-input-double">
-                        <input id="' . $id . '-top" name="' . $id . '-top" type="number" min="' . $arg['range'][$unit]['min'] . '" max="' . $arg['range'][$unit]['max'] . '" step="' . $arg['range'][$unit]['step'] . '" value="' . $top . '"  responsive="' . $arg['responsive'] . '" retundata=\'' . $retunvalue . '\'>
-                        <input id="' . $id . '-left" name="' . $id . '-left" type="number" min="' . $arg['range'][$unit]['min'] . '" max="' . $arg['range'][$unit]['max'] . '" step="' . $arg['range'][$unit]['step'] . '" value="' . $left . '"  responsive="' . $arg['responsive'] . '" retundata=\'' . $retunvalue . '\'>
-                        </div>';
-            elseif (isset($arg['simpledimensions']) && $arg['simpledimensions'] == 'heading'):
-                $search = ['{{TOP}}', '{{RIGHT}}', 'BOTTOM', '{{LEFT}}', 'UNIT'];
-                $replace = ['0', '0', 'VALUE', '0', $id . '-choices.VALUE'];
-                $retunvalue = str_replace($search, $replace, $retunvalue);
-                echo '  <div class="shortcode-form-control-input-wrapper">
-                        <input id="' . $id . '-top" name="' . $id . '-top" type="number" min="' . $arg['range'][$unit]['min'] . '" max="' . $arg['range'][$unit]['max'] . '" step="' . $arg['range'][$unit]['step'] . '" value="' . $top . '"  responsive="' . $arg['responsive'] . '" retundata=\'' . $retunvalue . '\'>
-                        </div>';
-            else:
-                $search = ['TOP', 'RIGHT', 'BOTTOM', 'LEFT', 'UNIT'];
-                $replace = ['VALUE', 'VALUE', 'VALUE', 'VALUE', $id . '-choices.VALUE'];
-                $retunvalue = str_replace($search, $replace, $retunvalue);
-                echo '  <div class="shortcode-form-control-input-wrapper">
-                    <input id="' . $id . '-top" name="' . $id . '-top" type="number" min="' . $arg['range'][$unit]['min'] . '" max="' . $arg['range'][$unit]['max'] . '" step="' . $arg['range'][$unit]['step'] . '" value="' . $top . '"  responsive="' . $arg['responsive'] . '" retundata=\'' . $retunvalue . '\'>
-                    </div>';
-            endif;
-
-
 
         endif;
     }
@@ -1173,6 +1195,7 @@ trait Sanitization {
             $cond = 'condition';
             $condition = $arg['condition'];
         endif;
+
         $separator = array_key_exists('separator', $arg) ? $arg['separator'] : FALSE;
         $selector_key = $selector = $selectorvalue = $loader = $loadervalue = '';
         if (array_key_exists('selector', $arg)) :
@@ -1184,12 +1207,72 @@ trait Sanitization {
             $loader = 'loader';
             $loadervalue = $arg['loader'];
         endif;
-        if ($this->interface == 'customizable'):
+        if ($this->SimpleInterface):
+            $this->add_control(
+                    $id . '-size-lap-choices', $data,
+                    [
+                        'type' => Controls::HIDDEN,
+                    ]
+            );
+            $this->add_control(
+                    $id . '-size-lap-size', $data,
+                    [
+                        'label' => __('Font Size', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'type' => Controls::NUMBER,
+                        $loader => $loadervalue,
+                        $selectorvalue => 'font-size: {{VALUE}}px;',
+                        $selector_key => $selector,
+                        $cond => $condition,
+                        'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
+                        'separator' => $separator,
+                        'simpledescription' => 'Increase or decrease font size to fit with your design',
+                    ]
+            );
+            $this->add_control(
+                    $id . '-font', $data, [
+                'label' => __('Font Family', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::FONT,
+                $selectorvalue => 'font-family:"{{VALUE}}";',
+                $selector_key => $selector,
+                $loader => $loadervalue,
+                $cond => $condition,
+                'simpledescription' => 'Change font familly to mordernize your design',
+                'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
+                    ]
+            );
+            $this->add_control(
+                    $id . '-weight', $data, [
+                'label' => __('Font Weight', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::SELECT,
+                $selectorvalue => 'font-weight: {{VALUE}};',
+                $loader => $loadervalue,
+                $selector_key => $selector,
+                $cond => $condition,
+                'simpledescription' => 'Customize font with with your desire design',
+                'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
+                'options' => [
+                    '100' => __('100', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    '200' => __('200', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    '300' => __('300', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    '400' => __('400', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    '500' => __('500', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    '600' => __('600', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    '700' => __('700', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    '800' => __('800', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    '900' => __('900', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    '' => __('Default', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'normal' => __('Normal', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'bold' => __('Bold', OXI_IMAGE_HOVER_TEXTDOMAIN)
+                ],
+                    ]
+            );
+        else:
             $this->start_popover_control(
                     $id, [
                 'label' => __('Typography', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 $cond => $condition,
                 'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
+                'description' => $arg['description'],
                 'separator' => $separator,
                     ]
             );
@@ -1421,62 +1504,7 @@ trait Sanitization {
                     ]
             );
             $this->end_popover_control();
-        else:
-            $this->add_control(
-                    $id . '-size-lap-choices', $data,
-                    [
-                        'type' => Controls::HIDDEN,
-                    ]
-            );
-            $this->add_control(
-                    $id . '-size-lap-size', $data,
-                    [
-                        'label' => __('Font Size', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'type' => Controls::NUMBER,
-                        $loader => $loadervalue,
-                        $selectorvalue => 'font-size: {{VALUE}}px;',
-                        $selector_key => $selector,
-                        $cond => $condition,
-                        'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
-                        'separator' => $separator,
-                    ]
-            );
-            $this->add_control(
-                    $id . '-font', $data, [
-                'label' => __('Font Family', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'type' => Controls::FONT,
-                $selectorvalue => 'font-family:"{{VALUE}}";',
-                $selector_key => $selector,
-                $loader => $loadervalue,
-                $cond => $condition,
-                'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
-                    ]
-            );
-            $this->add_control(
-                    $id . '-weight', $data, [
-                'label' => __('Font Weight', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'type' => Controls::SELECT,
-                $selectorvalue => 'font-weight: {{VALUE}};',
-                $loader => $loadervalue,
-                $selector_key => $selector,
-                $cond => $condition,
-                'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
-                'options' => [
-                    '100' => __('100', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    '200' => __('200', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    '300' => __('300', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    '400' => __('400', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    '500' => __('500', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    '600' => __('600', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    '700' => __('700', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    '800' => __('800', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    '900' => __('900', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    '' => __('Default', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'normal' => __('Normal', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'bold' => __('Bold', OXI_IMAGE_HOVER_TEXTDOMAIN)
-                ],
-                    ]
-            );
+
         endif;
     }
 
@@ -1493,8 +1521,6 @@ trait Sanitization {
         $value = array_key_exists('default', $arg) ? $arg['default']['link'] : '';
         $level = array_key_exists('label', $arg) ? $arg['label'] : 'Photo Source';
         $separator = array_key_exists('separator', $arg) ? $arg['separator'] : FALSE;
-        $description = array_key_exists('description', $arg) ? 'description' : '';
-        $desc = array_key_exists('description', $arg) ? $arg['description'] : '';
         echo '<div class="shortcode-form-control" style="padding: 0;" ' . $this->forms_condition($arg) . '>';
         $this->add_control(
                 $id . '-select', $data, [
@@ -1524,7 +1550,8 @@ trait Sanitization {
             'condition' => [
                 $id . '-select' => 'media-library',
             ],
-            $description => $desc
+            'simpledescription' => $arg['description'],
+            'description' => $arg['description'],
                 ]
         );
         $this->add_control(
@@ -1537,7 +1564,8 @@ trait Sanitization {
             'condition' => [
                 $id . '-select' => 'custom-url',
             ],
-            $description => $desc
+            'simpledescription' => $arg['description'],
+            'description' => $arg['description'],
                 ]
         );
 
@@ -1552,7 +1580,9 @@ trait Sanitization {
      */
 
     public function boxshadow_admin_group_control($id, array $data = [], array $arg = []) {
-        if ($this->interface == 'customizable'):
+        if ($this->SimpleInterface):
+
+        else:
             $cond = $condition = $boxshadow = '';
             $separator = array_key_exists('separator', $arg) ? $arg['separator'] : FALSE;
             if (array_key_exists('condition', $arg)) :
@@ -1597,7 +1627,8 @@ trait Sanitization {
                 'label' => __('Box Shadow', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 $cond => $condition,
                 'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
-                'separator' => $separator
+                'separator' => $separator,
+                'description' => $arg['description'],
                     ]
             );
             $this->add_control(
@@ -1743,8 +1774,9 @@ trait Sanitization {
      */
 
     public function textshadow_admin_group_control($id, array $data = [], array $arg = []) {
-        if ($this->interface == 'customizable'):
+        if ($this->SimpleInterface):
 
+        else:
             $separator = array_key_exists('separator', $arg) ? $arg['separator'] : FALSE;
             $cond = $condition = $textshadow = '';
             if (array_key_exists('condition', $arg)) :
@@ -1772,7 +1804,8 @@ trait Sanitization {
                 'label' => __('Text Shadow', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 $cond => $condition,
                 'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
-                'separator' => $separator
+                'separator' => $separator,
+                'description' => $arg['description'],
                     ]
             );
             $this->add_control(
@@ -1872,13 +1905,105 @@ trait Sanitization {
         endif;
         $separator = array_key_exists('separator', $arg) ? $arg['separator'] : FALSE;
 
-        if ($this->interface == 'customizable'):
+        if ($this->SimpleInterface):
+            $this->add_control(
+                    $id . '-type', $data, [
+                'label' => __('Animation Type', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::SELECT,
+                'default' => '',
+                'options' => [
+                    'optgroup0' => [true, 'Attention Seekers'],
+                    '' => __('None', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'optgroup1' => [false],
+                    'optgroup2' => [true, 'Attention Seekers'],
+                    'bounce' => __('Bounce', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'flash' => __('Flash', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'pulse' => __('Pulse', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'rubberBand' => __('RubberBand', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'shake' => __('Shake', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'swing' => __('Swing', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'tada' => __('Tada', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'wobble' => __('Wobble', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'jello' => __('Jello', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'optgroup3' => [false],
+                    'optgroup4' => [true, 'Bouncing Entrances'],
+                    'bounceIn' => __('BounceIn', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'bounceInDown' => __('BounceInDown', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'bounceInLeft' => __('BounceInLeft', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'bounceInRight' => __('BounceInRight', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'bounceInUp' => __('BounceInUp', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'optgroup5' => [false],
+                    'optgroup6' => [true, 'Fading Entrances'],
+                    'fadeIn' => __('FadeIn', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'fadeInDown' => __('FadeInDown', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'fadeInDownBig' => __('FadeInDownBig', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'fadeInLeft' => __('FadeInLeft', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'fadeInLeftBig' => __('FadeInLeftBig', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'fadeInRight' => __('FadeInRight', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'fadeInRightBig' => __('FadeInRightBig', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'fadeInUp' => __('FadeInUp', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'fadeInUpBig' => __('FadeInUpBig', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'optgroup7' => [false],
+                    'optgroup8' => [true, 'Flippers'],
+                    'flip' => __('Flip', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'flipInX' => __('FlipInX', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'flipInY' => __('FlipInY', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'optgroup9' => [false],
+                    'optgroup10' => [true, 'Lightspeed'],
+                    'lightSpeedIn' => __('LightSpeedIn', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'optgroup11' => [false],
+                    'optgroup12' => [true, 'Rotating Entrances'],
+                    'rotateIn' => __('RotateIn', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'rotateInDownLeft' => __('RotateInDownLeft', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'rotateInDownRight' => __('RotateInDownRight', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'rotateInUpLeft' => __('RotateInUpLeft', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'rotateInUpRight' => __('RotateInUpRight', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'optgroup13' => [false],
+                    'optgroup14' => [true, 'Sliding Entrances'],
+                    'slideInUp' => __('SlideInUp', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'slideInDown' => __('SlideInDown', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'slideInLeft' => __('SlideInLeft', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'slideInRight' => __('SlideInRight', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'optgroup15' => [false],
+                    'optgroup16' => [true, 'Zoom Entrances'],
+                    'zoomIn' => __('ZoomIn', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'zoomInDown' => __('ZoomInDown', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'zoomInLeft' => __('ZoomInLeft', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'zoomInRight' => __('ZoomInRight', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'zoomInUp' => __('ZoomInUp', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'optgroup17' => [false],
+                    'optgroup18' => [true, 'Specials'],
+                    'hinge' => __('Hinge', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'rollIn' => __('RollIn', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'optgroup19' => [false],
+                ],
+                $cond => $condition,
+                'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
+                'separator' => $separator,
+                'simpledescription' => 'Customize animation from select list.',
+                'description' => 'Customize animation from select list.',
+                    ]
+            );
+            $this->add_control(
+                    $id . '-duration', $data, [
+                'label' => __('Animation Duration (ms)', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::NUMBER,
+                'simpledescription' => 'Customize how long your animation will works',
+                'description' => 'Customize how long your animation will works',
+                'condition' => [
+                    $id . '-type' => 'EMPTY',
+                ],
+                    ]
+            );
+        else:
             $this->start_popover_control(
                     $id, [
                 'label' => __('Animation', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 $cond => $condition,
                 'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
-                'separator' => $separator
+                'separator' => $separator,
+                'simpledescription' => 'Customize how long your animation will works',
+                'description' => 'Customize animation with animation type, Animation Duration with Delay and Looping Options',
                     ]
             );
             $this->add_control(
@@ -2030,92 +2155,8 @@ trait Sanitization {
             );
 
             $this->end_popover_control();
-        else:
-            $this->add_control(
-                    $id . '-type', $data, [
-                'label' => __('Animation Type', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'type' => Controls::SELECT,
-                'default' => '',
-                'options' => [
-                    'optgroup0' => [true, 'Attention Seekers'],
-                    '' => __('None', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'optgroup1' => [false],
-                    'optgroup2' => [true, 'Attention Seekers'],
-                    'bounce' => __('Bounce', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'flash' => __('Flash', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'pulse' => __('Pulse', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'rubberBand' => __('RubberBand', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'shake' => __('Shake', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'swing' => __('Swing', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'tada' => __('Tada', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'wobble' => __('Wobble', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'jello' => __('Jello', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'optgroup3' => [false],
-                    'optgroup4' => [true, 'Bouncing Entrances'],
-                    'bounceIn' => __('BounceIn', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'bounceInDown' => __('BounceInDown', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'bounceInLeft' => __('BounceInLeft', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'bounceInRight' => __('BounceInRight', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'bounceInUp' => __('BounceInUp', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'optgroup5' => [false],
-                    'optgroup6' => [true, 'Fading Entrances'],
-                    'fadeIn' => __('FadeIn', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'fadeInDown' => __('FadeInDown', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'fadeInDownBig' => __('FadeInDownBig', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'fadeInLeft' => __('FadeInLeft', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'fadeInLeftBig' => __('FadeInLeftBig', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'fadeInRight' => __('FadeInRight', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'fadeInRightBig' => __('FadeInRightBig', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'fadeInUp' => __('FadeInUp', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'fadeInUpBig' => __('FadeInUpBig', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'optgroup7' => [false],
-                    'optgroup8' => [true, 'Flippers'],
-                    'flip' => __('Flip', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'flipInX' => __('FlipInX', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'flipInY' => __('FlipInY', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'optgroup9' => [false],
-                    'optgroup10' => [true, 'Lightspeed'],
-                    'lightSpeedIn' => __('LightSpeedIn', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'optgroup11' => [false],
-                    'optgroup12' => [true, 'Rotating Entrances'],
-                    'rotateIn' => __('RotateIn', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'rotateInDownLeft' => __('RotateInDownLeft', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'rotateInDownRight' => __('RotateInDownRight', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'rotateInUpLeft' => __('RotateInUpLeft', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'rotateInUpRight' => __('RotateInUpRight', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'optgroup13' => [false],
-                    'optgroup14' => [true, 'Sliding Entrances'],
-                    'slideInUp' => __('SlideInUp', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'slideInDown' => __('SlideInDown', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'slideInLeft' => __('SlideInLeft', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'slideInRight' => __('SlideInRight', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'optgroup15' => [false],
-                    'optgroup16' => [true, 'Zoom Entrances'],
-                    'zoomIn' => __('ZoomIn', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'zoomInDown' => __('ZoomInDown', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'zoomInLeft' => __('ZoomInLeft', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'zoomInRight' => __('ZoomInRight', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'zoomInUp' => __('ZoomInUp', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'optgroup17' => [false],
-                    'optgroup18' => [true, 'Specials'],
-                    'hinge' => __('Hinge', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'rollIn' => __('RollIn', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'optgroup19' => [false],
-                ],
-                $cond => $condition,
-                'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
-                'separator' => $separator
-                    ]
-            );
-            $this->add_control(
-                    $id . '-duration', $data, [
-                'label' => __('Animation Duration (ms)', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'type' => Controls::NUMBER,
-                'condition' => [
-                    $id . '-type' => 'EMPTY',
-                ],
-                    ]
-            );
+
+
 
         endif;
     }
@@ -2147,13 +2188,58 @@ trait Sanitization {
         if (array_key_exists($id . '-type', $data) && $data[$id . '-type'] == '') :
             $render = 'render';
         endif;
-        if ($this->interface == 'customizable'):
+        if ($this->SimpleInterface):
+
+            $this->add_control(
+                    $id . '-type', $data,
+                    [
+                        'type' => Controls::HIDDEN,
+                    ]
+            );
+            $this->add_control(
+                    $id . '-width-lap-choices', $data,
+                    [
+                        'type' => Controls::HIDDEN,
+                    ]
+            );
+            if (!array_key_exists('simpleborder', $arg)):
+                $this->add_control(
+                        $id . '-width-lap-top', $data,
+                        [
+                            'label' => __('Border Width', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'type' => Controls::NUMBER,
+                            $loader => $loadervalue,
+                            $selectorvalue => 'border: {{VALUE}}{{' . $id . '-width-lap-choices.VALUE}} solid;',
+                            $selector_key => $selector,
+                            $cond => $condition,
+                            'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
+                            'separator' => $separator,
+                            'simpledescription' => 'Set Border Width with Your desise Design. Border type will be Solid',
+                        ]
+                );
+            endif;
+            $this->add_control(
+                    $id . '-color', $data, [
+                'label' => __('Border Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::COLOR,
+                $render => FALSE,
+                'default' => '',
+                $loader => $loadervalue,
+                $selectorvalue => 'border-color: {{VALUE}};',
+                $selector_key => $selector,
+                $cond => $condition,
+                'simpledescription' => 'Customize Border Color with Border width',
+                'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
+                    ]
+            );
+        else:
             $this->start_popover_control(
                     $id, [
                 'label' => __('Border', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 $cond => $condition,
                 'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
                 'separator' => $separator,
+                'description' => 'Customize Border with Width, Type and Color options',
                     ]
             );
             $this->add_control(
@@ -2222,47 +2308,6 @@ trait Sanitization {
                     ]
             );
             $this->end_popover_control();
-        else:
-            $this->add_control(
-                    $id . '-type', $data,
-                    [
-                        'type' => Controls::HIDDEN,
-                    ]
-            );
-            $this->add_control(
-                    $id . '-width-lap-choices', $data,
-                    [
-                        'type' => Controls::HIDDEN,
-                    ]
-            );
-            if (!array_key_exists('simpleborder', $arg)):
-                $this->add_control(
-                        $id . '-width-lap-top', $data,
-                        [
-                            'label' => __('Border Width', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                            'type' => Controls::NUMBER,
-                            $loader => $loadervalue,
-                            $selectorvalue => 'border: {{VALUE}}{{' . $id . '-width-lap-choices.VALUE}} solid;',
-                            $selector_key => $selector,
-                            $cond => $condition,
-                            'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
-                            'separator' => $separator,
-                        ]
-                );
-            endif;
-            $this->add_control(
-                    $id . '-color', $data, [
-                'label' => __('Border Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'type' => Controls::COLOR,
-                $render => FALSE,
-                'default' => '',
-                $loader => $loadervalue,
-                $selectorvalue => 'border-color: {{VALUE}};',
-                $selector_key => $selector,
-                $cond => $condition,
-                'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
-                    ]
-            );
         endif;
     }
 
@@ -2274,7 +2319,27 @@ trait Sanitization {
      */
 
     public function background_admin_group_control($id, array $data = [], array $arg = []) {
-        if ($this->interface == 'customizable'):
+        if ($this->SimpleInterface):
+            $selector = '';
+            $selectorarray = [];
+            if (array_key_exists('selector', $arg)) :
+                $selectorvalue = 'selector-value';
+                $selector = 'selector';
+                foreach ($arg['selector'] as $k => $value) {
+                    $selectorarray[$k] = 'background: {{VALUE}};';
+                }
+            endif;
+            $this->add_control(
+                    $id . '-color', $this->style, [
+                'label' => __('Background', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::COLOR,
+                'oparetor' => 'true',
+                'simpledescription' => 'Customize background Color with your design. Alpha Value works as Opacity Options',
+                'default' => 'rgba(171, 0, 201, 1)',
+                $selector => $selectorarray,
+                    ]
+            );
+        else:
             $backround = '';
             $render = FALSE;
             if (array_key_exists($id . '-color', $data)) :
@@ -2318,6 +2383,7 @@ trait Sanitization {
                 'condition' => array_key_exists('condition', $arg) ? $arg['condition'] : '',
                 'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
                 'separator' => $separator,
+                'description' => 'Customize Background with Color or Gradient or Image',
                     ]
             );
             $this->add_control(
@@ -2476,25 +2542,6 @@ trait Sanitization {
                     ]
             );
             $this->end_popover_control();
-        else:
-            $selector = '';
-            $selectorarray = [];
-            if (array_key_exists('selector', $arg)) :
-                $selectorvalue = 'selector-value';
-                $selector = 'selector';
-                foreach ($arg['selector'] as $k => $value) {
-                    $selectorarray[$k] = 'background: {{VALUE}};';
-                }
-            endif;
-            $this->add_control(
-                    $id . '-color', $this->style, [
-                'label' => __('Background', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'type' => Controls::COLOR,
-                'oparetor' => 'true',
-                'default' => 'rgba(171, 0, 201, 1)',
-                $selector => $selectorarray,
-                    ]
-            );
         endif;
     }
 
@@ -2537,7 +2584,8 @@ trait Sanitization {
             'return_value' => 'yes',
                 ]
         );
-        if ($this->interface == 'customizable'):
+        if ($this->SimpleInterface):
+        else:
             $this->add_control(
                     $id . '-follow', $data, [
                 'label' => __('No Follow', OXI_IMAGE_HOVER_TEXTDOMAIN),
@@ -2568,6 +2616,7 @@ trait Sanitization {
      */
 
     public function column_admin_group_control($id, array $data = [], array $arg = []) {
+
         $selector = array_key_exists('selector', $arg) ? $arg['selector'] : '';
         $select = array_key_exists('selector', $arg) ? 'selector' : '';
         $cond = $condition = '';
@@ -2575,12 +2624,35 @@ trait Sanitization {
             $cond = 'condition';
             $condition = $arg['condition'];
         endif;
-        if ($this->interface == 'customizable'):
+
+        if ($this->SimpleInterface):
+            $this->add_control(
+                    $lap = $id . '-lap', $data, [
+                'label' => __('Column Size', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::SELECT,
+                'default' => 'oxi-bt-col-lg-12',
+                'simpledescription' => $arg['simpledescription'],
+                'options' => [
+                    'oxi-bt-col-lg-12' => __('Col 1', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'oxi-bt-col-lg-6' => __('Col 2', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'oxi-bt-col-lg-4' => __('Col 3', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'oxi-bt-col-lg-3' => __('Col 4', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'oxi-bt-col-lg-5' => __('Col 5', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'oxi-bt-col-lg-2' => __('Col 6', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'oxi-bt-col-lg-1' => __('Col 12', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                ],
+                $select => $selector,
+                'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
+                $cond => $condition
+                    ]
+            );
+        else:
             $this->add_control(
                     $lap = $id . '-lap', $data, [
                 'label' => __('Column Size', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 'type' => Controls::SELECT,
                 'responsive' => 'laptop',
+                'description' => $arg['description'],
                 'default' => 'oxi-bt-col-lg-12',
                 'options' => [
                     'oxi-bt-col-lg-12' => __('Col 1', OXI_IMAGE_HOVER_TEXTDOMAIN),
@@ -2602,6 +2674,7 @@ trait Sanitization {
                 'type' => Controls::SELECT,
                 'responsive' => 'tab',
                 'default' => 'oxi-bt-col-md-12',
+                'description' => $arg['description'],
                 'options' => [
                     '' => __('Default', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'oxi-bt-col-md-12' => __('Col 1', OXI_IMAGE_HOVER_TEXTDOMAIN),
@@ -2623,6 +2696,7 @@ trait Sanitization {
                 'type' => Controls::SELECT,
                 'default' => 'oxi-bt-col-lg-12',
                 'responsive' => 'mobile',
+                'description' => $arg['description'],
                 'options' => [
                     '' => __('Default', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'oxi-bt-col-sm-12' => __('Col 1', OXI_IMAGE_HOVER_TEXTDOMAIN),
@@ -2632,26 +2706,6 @@ trait Sanitization {
                     'oxi-bt-col-sm-5' => __('Col 5', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'oxi-bt-col-sm-2' => __('Col 6', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'oxi-bt-col-sm-1' => __('Col 12', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                ],
-                $select => $selector,
-                'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
-                $cond => $condition
-                    ]
-            );
-        else:
-            $this->add_control(
-                    $lap = $id . '-lap', $data, [
-                'label' => __('Column Size', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'type' => Controls::SELECT,
-                'default' => 'oxi-bt-col-lg-12',
-                'options' => [
-                    'oxi-bt-col-lg-12' => __('Col 1', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'oxi-bt-col-lg-6' => __('Col 2', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'oxi-bt-col-lg-4' => __('Col 3', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'oxi-bt-col-lg-3' => __('Col 4', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'oxi-bt-col-lg-5' => __('Col 5', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'oxi-bt-col-lg-2' => __('Col 6', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'oxi-bt-col-lg-1' => __('Col 12', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 ],
                 $select => $selector,
                 'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),

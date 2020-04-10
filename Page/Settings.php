@@ -82,10 +82,20 @@ class Settings {
                                 <td scope="row">Admin Interface</td>
                                 <td>
                                     <input type="radio" name="image_hover_ultimate_interface" value="" <?php checked('', get_option('image_hover_ultimate_interface'), true); ?>>Simple
-                                    <input type="radio" name="image_hover_ultimate_interface" value="customizable" <?php checked('customizable', get_option('image_hover_ultimate_interface'), true); ?>>Customizable
+                                    <input type="radio" name="image_hover_ultimate_interface" value="advance" <?php checked('advance', get_option('image_hover_ultimate_interface'), true); ?>>Advanced
                                 </td>
                                 <td>
-                                    <label class="description" for="image_hover_ultimate_interface"><?php _e('Select Your Customization Interface at Editing Page. As a beginners we Recommend Simple Interface else You can Customize all into Customizable Interface'); ?></label>
+                                    <label class="description" for="image_hover_ultimate_interface"><?php _e('Select Your Customization Interface at Editing Page. As a beginners we Recommend Simple Interface else You can Customize all into Advanced Interface'); ?></label>
+                                </td>
+                            </tr>
+                            <tr valign="top">
+                                <td scope="row">Short Information</td>
+                                <td>
+                                    <input type="radio" name="image_hover_ultimate_info" value="" <?php checked('', get_option('image_hover_ultimate_info'), true); ?>>Yes, Sure
+                                    <input type="radio" name="image_hover_ultimate_info" value="no" <?php checked('no', get_option('image_hover_ultimate_info'), true); ?>>No, Thanks
+                                </td>
+                                <td>
+                                    <label class="description" for="image_hover_ultimate_info"><?php _e('Wanna Short Information with each Tools at Customization page? Kindly set as like as you want'); ?></label>
                                 </td>
                             </tr>
                             <tr valign="top">

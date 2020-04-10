@@ -133,7 +133,9 @@ abstract class Admin_Render {
      */
     public $StyleName;
     public $repeater;
-    public $interface;
+    public $SimpleInterface = true;
+    public $ShowOnAdvanceOnly = true;
+    public $ShowShortInfo = true;
 
     public function __construct($type = '') {
         global $wpdb;
@@ -143,7 +145,8 @@ abstract class Admin_Render {
         $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
         $this->oxiid = (!empty($_GET['styleid']) ? sanitize_text_field($_GET['styleid']) : '');
         $this->WRAPPER = '.oxi-image-hover-wrapper-' . $this->oxiid;
-        $this->interface = get_option('image_hover_ultimate_interface');
+        $this->SimpleInterface = (get_option('image_hover_ultimate_interface') == 'advance' ? false : true);
+        $this->ShowShortInfo = (get_option('image_hover_ultimate_info') == 'no' ? false : true);
         if ($type != 'admin') {
             $this->hooks();
             $this->render();

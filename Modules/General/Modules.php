@@ -59,7 +59,9 @@ class Modules extends Admin_Render {
                 'oxi-image-hover-effects-time', $this->style, [
             'label' => __('Effects Time (S)', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::SLIDER,
-            'simpleenable' => TRUE,
+            'simpleenable' => false,
+            'simpledescription' => '',
+            'description' => 'Set Effects Durations as How long you want to run Effects. Options available with Second or Milisecond ',
             'default' => [
                 'unit' => 'ms',
                 'size' => '',
@@ -93,6 +95,8 @@ class Modules extends Admin_Render {
         $this->add_group_control(
                 'oxi-image-hover-col', $this->style, [
             'type' => Controls::COLUMN,
+            'simpledescription' => 'How much column want to show into a single rows ',
+            'description' => 'Define how much column you want to show into single rows. Customize possible with desktop or tab or mobile Settings.',
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-style' => '',
             ]
@@ -123,6 +127,8 @@ class Modules extends Admin_Render {
                 'oxi-image-hover-width', $this->style, [
             'label' => __('Width', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::SLIDER,
+            'shortdescription' => 'Customize Image Width as like as you want, will be pixel Value.',
+            'description' => 'Customize Image Width with several options as Pixel, Percent or EM.',
             'default' => [
                 'unit' => 'px',
                 'size' => '',
@@ -153,6 +159,8 @@ class Modules extends Admin_Render {
                 'oxi-image-hover-height', $this->style, [
             'label' => __('Height', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::SLIDER,
+            'shortdescription' => 'Customize Image Height as like as you want, will be Percent Value.',
+            'description' => 'Customize Image Height with several options as Pixel, Percent or EM.',
             'default' => [
                 'unit' => 'px',
                 'size' => '',
@@ -168,6 +176,11 @@ class Modules extends Admin_Render {
                     'max' => 200,
                     'step' => 1,
                 ],
+                'em' => [
+                    'min' => 1,
+                    'max' => 100,
+                    'step' => 0.1,
+                ],
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-style-general:after ' => 'padding-bottom:{{SIZE}}{{UNIT}};',
@@ -178,6 +191,8 @@ class Modules extends Admin_Render {
                 'oxi-image-hover-margin', $this->style, [
             'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
+            'shortdescription' => 'margin properties are used to create space around Image.',
+            'description' => 'Margin properties are used to create space around Image with several options as Pixel, or Percent or EM.',
             'default' => [
                 'unit' => 'px',
                 'size' => '',
@@ -519,6 +534,7 @@ class Modules extends Admin_Render {
                     'type' => Controls::CHOOSE,
                     'operator' => Controls::OPERATOR_TEXT,
                     'default' => '',
+                    'simpleenable' => false,
                     'options' => [
                         'oxi-image-hover-heading-underline' => [
                             'title' => __('Show', OXI_IMAGE_HOVER_TEXTDOMAIN),
@@ -644,6 +660,7 @@ class Modules extends Admin_Render {
                 'oxi-image-hover-head-underline', [
             'label' => esc_html__('Heading Underline', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'showing' => false,
+            'simpleenable' => false,
             'condition' => [
                 'oxi-image-hover-heading-underline' => 'oxi-image-hover-heading-underline'
             ]
@@ -955,7 +972,7 @@ class Modules extends Admin_Render {
                 $this->style,
                 [
                     'type' => Controls::BORDER,
-                    'simpleborder'=> true,
+                    'simpleborder' => true,
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-hover-caption-tab .oxi-image-hover-button a.oxi-image-btn:hover' => ''
                     ],
@@ -1213,6 +1230,7 @@ class Modules extends Admin_Render {
             'label' => __('Title', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::TEXT,
             'default' => '',
+            'ShowShortInfo' => true,
             'placeholder' => 'Heading',
             'description' => 'Add Your Image Hover Title.'
                 ]
@@ -1220,6 +1238,7 @@ class Modules extends Admin_Render {
         $this->add_control(
                 'image_hover_description', $this->style, [
             'label' => __('Short Description', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'ShowShortInfo' => true,
             'type' => Controls::TEXTAREA,
             'default' => '',
             'description' => 'Add Your Description Unless make it blank.'
@@ -1241,6 +1260,7 @@ class Modules extends Admin_Render {
                 [
                     'label' => __('Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'type' => Controls::MEDIA,
+                    'ShowShortInfo' => true,
                     'description' => 'Add or Modify Your Image. You can use Media Library or Custom URL'
                 ]
         );
@@ -1253,6 +1273,7 @@ class Modules extends Admin_Render {
                 [
                     'label' => __('Feature Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'type' => Controls::MEDIA,
+                    'ShowShortInfo' => true,
                     'description' => 'Add or Modify Your Feature Image. Adjust background to get better design.'
                 ]
         );
@@ -1263,6 +1284,7 @@ class Modules extends Admin_Render {
             'label' => __('URL', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::URL,
             'separator' => TRUE,
+            'ShowShortInfo' => true,
             'default' => '',
             'placeholder' => 'https://www.yoururl.com',
             'description' => 'Add Your Desire Link or Url Unless make it blank'
@@ -1272,6 +1294,7 @@ class Modules extends Admin_Render {
                 'image_hover_button_text', $this->style, [
             'label' => __('Button Text', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::TEXT,
+            'ShowShortInfo' => true,
             'default' => '',
             'description' => 'Customize your button text. Button will only view while Url given'
                 ]
