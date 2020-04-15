@@ -135,5 +135,5 @@ class Installation {
         $this->Image_Hover_Menu();
         $this->Image_Hover_Database();
     }
-
+    
 }

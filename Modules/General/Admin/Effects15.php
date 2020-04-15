@@ -9,6 +9,7 @@ namespace OXI_IMAGE_HOVER_PLUGINS\Modules\General\Admin;
  */
 use OXI_IMAGE_HOVER_PLUGINS\Modules\General\Modules as Modules;
 use OXI_IMAGE_HOVER_PLUGINS\Classes\Controls as Controls;
+
 class Effects15 extends Modules {
 
     public function register_effects() {
@@ -23,7 +24,9 @@ class Effects15 extends Modules {
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-hover-figure' => '',
-                    ]
+                    ],
+                    'simpledescription' => 'Allows you to Set Effects Direction.',
+                    'description' => 'Allows you to Set Effects Direction.',
                         ]
         );
     }

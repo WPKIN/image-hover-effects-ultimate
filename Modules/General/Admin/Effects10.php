@@ -24,7 +24,9 @@ class Effects10 extends Modules {
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-hover-figure' => '',
-                    ]
+                    ],
+                    'simpledescription' => 'Allows you to Set Effects Direction, Set Content Align to fit Effects.',
+                    'description' => 'Allows you to Set Effects Direction, Set Content Align to fit Effects.',
                         ]
         );
     }

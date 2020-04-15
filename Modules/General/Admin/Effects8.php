@@ -26,10 +26,13 @@ class Effects8 extends Modules {
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-hover-figure' => '',
-                    ]
+                    ],
+                    'simpledescription' => 'Allows you to Set Effects Direction.',
+                    'description' => 'Allows you to Set Effects Direction.',
                         ]
         );
     }
+
     public function register_effects_time() {
         $this->add_control(
                 'oxi-image-hover-effects-time', $this->style, [
@@ -58,6 +61,7 @@ class Effects8 extends Modules {
                 '{{WRAPPER}} .oxi-image-general-hover-style-8 .oxi-image-hover-figure .oxi-image-hover-figure-caption' => '-webkit-transition: all {{SIZE}}{{UNIT}} ease-in-out {{SIZE}}{{UNIT}} ; -moz-transition: all {{SIZE}}{{UNIT}} ease-in-out {{SIZE}}{{UNIT}} ; transition: all {{SIZE}}{{UNIT}} ease-in-out {{SIZE}}{{UNIT}} ;',
                 '{{WRAPPER}} .oxi-image-general-hover-style-8 .oxi-image-hover-figure .oxi-image-hover-image' => '-webkit-transition: all {{SIZE}}{{UNIT}} ease-in-out {{SIZE}}{{UNIT}} ; -moz-transition: all {{SIZE}}{{UNIT}} ease-in-out {{SIZE}}{{UNIT}} ; transition: all {{SIZE}}{{UNIT}} ease-in-out {{SIZE}}{{UNIT}} ;',
             ],
+            'description' => 'Set Effects Durations as How long you want to run Effects. Options available with Second or Milisecond.',
                 ]
         );
     }

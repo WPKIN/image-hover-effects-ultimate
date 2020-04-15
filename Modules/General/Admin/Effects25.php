@@ -24,7 +24,9 @@ class Effects25 extends Modules {
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-hover-figure' => '',
-                    ]
+                    ],
+                    'simpledescription' => 'Allows you to Set Effects Direction.',
+                    'description' => 'Allows you to Set Effects Direction.',
                         ]
         );
     }

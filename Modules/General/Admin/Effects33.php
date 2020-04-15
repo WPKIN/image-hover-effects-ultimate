@@ -24,11 +24,14 @@ class Effects33 extends Modules {
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-hover-figure' => '',
-                    ]
+                    ],
+                    'simpledescription' => 'Allows you to Set Effects Direction.',
+                    'description' => 'Allows you to Set Effects Direction.',
                         ]
         );
     }
-       public function register_content_settings() {
+
+    public function register_content_settings() {
         $this->start_controls_section(
                 'oxi-image-hover', [
             'label' => esc_html__('General Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
@@ -40,7 +43,9 @@ class Effects33 extends Modules {
             'type' => Controls::BACKGROUND,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-general-hover-style-33 .oxi-image-hover-caption-tab:before, {{WRAPPER}} .oxi-image-general-hover-style-33 .oxi-image-hover-caption-tab:after' => '',
-            ]
+            ],
+            'simpledescription' => 'Customize Hover Background with transparent options.',
+            'description' => 'Customize Hover Background with Color or Gradient or Image properties.',
                 ]
         );
         $this->add_control(
@@ -61,7 +66,9 @@ class Effects33 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-caption-tab' => '',
-            ]
+            ],
+            'simpledescription' => 'Customize Content Aginment as Top, Bottom, Left or Center.',
+            'description' => 'Customize Content Aginment as Top, Bottom, Left or Center.',
                 ]
         );
         $this->start_controls_tabs(
@@ -110,6 +117,8 @@ class Effects33 extends Modules {
                 . '{{WRAPPER}} .oxi-image-hover-figure-caption:after,'
                 . '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-caption-tab' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
+            'simpledescription' => 'Allows you to add rounded corners to Image with options.',
+            'description' => 'Allows you to add rounded corners to Image with options.',
                 ]
         );
         $this->add_group_control(
@@ -118,6 +127,7 @@ class Effects33 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-image:before' => '',
             ],
+            'description' => 'Box Shadow property attaches one or more shadows into Image shape.',
                 ]
         );
         $this->end_controls_tab();
@@ -167,6 +177,8 @@ class Effects33 extends Modules {
                 . '{{WRAPPER}} .oxi-image-hover:hover .oxi-image-hover-figure .oxi-image-hover-figure-caption .oxi-image-hover-caption-tab,'
                 . '{{WRAPPER}} .oxi-image-hover.oxi-touch .oxi-image-hover-figure .oxi-image-hover-figure-caption .oxi-image-hover-caption-tab' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
+            'simpledescription' => 'Allows you to add rounded corners at Hover to Image with options.',
+            'description' => 'Allows you to add rounded corners at Hover to Image with options.',
                 ]
         );
         $this->add_group_control(
@@ -174,7 +186,8 @@ class Effects33 extends Modules {
             'type' => Controls::BOXSHADOW,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure .oxi-image-hover-figure-caption:before' => '',
-            ]
+            ],
+            'description' => 'Allows you at hover to attaches one or more shadows into Image shape.',
                 ]
         );
         $this->end_controls_tab();
@@ -207,11 +220,12 @@ class Effects33 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure .oxi-image-hover-caption-tab' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+            'simpledescription' => 'Padding used to generate space around an Image Hover content.',
+            'description' => 'Padding used to generate space around an Image Hover content.',
                 ]
         );
         $this->end_controls_section();
     }
-
 
 }

@@ -61,7 +61,7 @@ class Modules extends Admin_Render {
             'type' => Controls::SLIDER,
             'simpleenable' => false,
             'simpledescription' => '',
-            'description' => 'Set Effects Durations as How long you want to run Effects. Options available with Second or Milisecond ',
+            'description' => 'Set Effects Durations as How long you want to run Effects. Options available with Second or Milisecond.',
             'default' => [
                 'unit' => 'ms',
                 'size' => '',
@@ -127,7 +127,7 @@ class Modules extends Admin_Render {
                 'oxi-image-hover-width', $this->style, [
             'label' => __('Width', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::SLIDER,
-            'shortdescription' => 'Customize Image Width as like as you want, will be pixel Value.',
+            'simpledescription' => 'Customize Image Width as like as you want, will be pixel Value.',
             'description' => 'Customize Image Width with several options as Pixel, Percent or EM.',
             'default' => [
                 'unit' => 'px',
@@ -159,7 +159,7 @@ class Modules extends Admin_Render {
                 'oxi-image-hover-height', $this->style, [
             'label' => __('Height', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::SLIDER,
-            'shortdescription' => 'Customize Image Height as like as you want, will be Percent Value.',
+            'simpledescription' => 'Customize Image Height as like as you want, will be Percent Value.',
             'description' => 'Customize Image Height with several options as Pixel, Percent or EM.',
             'default' => [
                 'unit' => 'px',
@@ -191,7 +191,7 @@ class Modules extends Admin_Render {
                 'oxi-image-hover-margin', $this->style, [
             'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
-            'shortdescription' => 'margin properties are used to create space around Image.',
+            'simpledescription' => 'Margin properties are used to create space around Image.',
             'description' => 'Margin properties are used to create space around Image with several options as Pixel, or Percent or EM.',
             'default' => [
                 'unit' => 'px',
@@ -234,7 +234,10 @@ class Modules extends Admin_Render {
             'type' => Controls::BACKGROUND,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-caption-tab' => '',
-            ]
+            ],
+            //  'simpleenable' => false,
+            'simpledescription' => 'Customize Hover Background with transparent options.',
+            'description' => 'Customize Hover Background with Color or Gradient or Image properties.',
                 ]
         );
         $this->add_control(
@@ -255,7 +258,9 @@ class Modules extends Admin_Render {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-caption-tab' => '',
-            ]
+            ],
+            'simpledescription' => 'Customize Content Aginment as Top, Bottom, Left or Center.',
+            'description' => 'Customize Content Aginment as Top, Bottom, Left or Center.',
                 ]
         );
         $this->start_controls_tabs(
@@ -304,6 +309,8 @@ class Modules extends Admin_Render {
                 . '{{WRAPPER}} .oxi-image-hover-figure-caption:after,'
                 . '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-caption-tab' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
+            'simpledescription' => 'Allows you to add rounded corners to Image with options.',
+            'description' => 'Allows you to add rounded corners to Image with options.',
                 ]
         );
         $this->add_group_control(
@@ -312,6 +319,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-image:before' => '',
             ],
+            'description' => 'Box Shadow property attaches one or more shadows into Image shape.',
                 ]
         );
         $this->end_controls_tab();
@@ -361,6 +369,8 @@ class Modules extends Admin_Render {
                 . '{{WRAPPER}} .oxi-image-hover:hover .oxi-image-hover-figure .oxi-image-hover-figure-caption .oxi-image-hover-caption-tab,'
                 . '{{WRAPPER}} .oxi-image-hover.oxi-touch .oxi-image-hover-figure .oxi-image-hover-figure-caption .oxi-image-hover-caption-tab' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
+            'simpledescription' => 'Allows you to add rounded corners at Hover to Image with options.',
+            'description' => 'Allows you to add rounded corners at Hover to Image with options.',
                 ]
         );
         $this->add_group_control(
@@ -368,7 +378,8 @@ class Modules extends Admin_Render {
             'type' => Controls::BOXSHADOW,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure .oxi-image-hover-figure-caption:before' => '',
-            ]
+            ],
+            'description' => 'Allows you at hover to attaches one or more shadows into Image shape.',
                 ]
         );
         $this->end_controls_tab();
@@ -378,6 +389,7 @@ class Modules extends Admin_Render {
             'label' => __('Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'separator' => TRUE,
+            'simpledimensions' => 'double',
             'default' => [
                 'unit' => 'px',
                 'size' => '',
@@ -401,7 +413,9 @@ class Modules extends Admin_Render {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure .oxi-image-hover-caption-tab' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+            'simpledescription' => 'Padding used to generate space around an Image Hover content.',
+            'description' => 'Padding used to generate space around an Image Hover content.',
                 ]
         );
         $this->end_controls_section();
@@ -430,7 +444,9 @@ class Modules extends Admin_Render {
             'default' => '#ffffff',
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-content' => 'color: {{VALUE}};',
-            ]
+            ],
+            'simpledescription' => 'Color property is used to set the color of the Description.',
+            'description' => 'Color property is used to set the color of the Description.',
                 ]
         );
         $this->add_group_control(
@@ -438,7 +454,9 @@ class Modules extends Admin_Render {
             'type' => Controls::TEXTSHADOW,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-content' => '',
-            ]
+            ],
+            'simpledescription' => 'Text Shadow property adds shadow to Description.',
+            'description' => 'Text Shadow property adds shadow to Description.',
                 ]
         );
 
@@ -469,7 +487,9 @@ class Modules extends Admin_Render {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-content' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+            'simpledescription' => 'Margin properties are used to create space around Description.',
+            'description' => 'Margin properties are used to create space around Description.',
                 ]
         );
         $this->add_control(
@@ -494,7 +514,9 @@ class Modules extends Admin_Render {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-content' => '',
-            ]
+            ],
+            'simpledescription' => 'Allows you to animated Description while viewing.',
+            'description' => 'Allows you to animated Description while viewing.',
                 ]
         );
         $this->add_control(
@@ -513,7 +535,9 @@ class Modules extends Admin_Render {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-content' => '',
-            ]
+            ],
+            'simpledescription' => 'Allows you to animation delay at Description while viewing.',
+            'description' => 'Allows you to animation delay at Description while viewing.',
                 ]
         );
 
@@ -545,7 +569,9 @@ class Modules extends Admin_Render {
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-heading' => '',
-                    ]
+                    ],
+                    'simpledescription' => 'Wanna set Heading Underline? Works with heading color.',
+                    'description' => 'Wanna set Heading Underline? Customization Panel will viewing while values "Show".',
                 ]
         );
         $this->add_group_control(
@@ -564,7 +590,9 @@ class Modules extends Admin_Render {
             'default' => '#ffffff',
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-heading' => 'color: {{VALUE}};',
-            ]
+            ],
+            'simpledescription' => 'Color property is used to set the color of the Heading.',
+            'description' => 'Color property is used to set the color of the Heading.',
                 ]
         );
         $this->add_group_control(
@@ -572,7 +600,9 @@ class Modules extends Admin_Render {
             'type' => Controls::TEXTSHADOW,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-heading' => '',
-            ]
+            ],
+            'simpledescription' => 'Text Shadow property adds shadow to Heading.',
+            'description' => 'Text Shadow property adds shadow to Heading.',
                 ]
         );
 
@@ -604,7 +634,9 @@ class Modules extends Admin_Render {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-heading' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+            'simpledescription' => 'Margin properties are used to create space around Heading.',
+            'description' => 'Margin properties are used to create space around Heading.',
                 ]
         );
         $this->add_control(
@@ -629,7 +661,9 @@ class Modules extends Admin_Render {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-heading' => '',
-            ]
+            ],
+            'simpledescription' => 'Allows you to animated Heading while viewing.',
+            'description' => 'Allows you to animated Heading while viewing.',
                 ]
         );
         $this->add_control(
@@ -648,7 +682,9 @@ class Modules extends Admin_Render {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-heading' => '',
-            ]
+            ],
+            'simpledescription' => 'Allows you to animation delay at Heading while viewing.',
+            'description' => 'Allows you to animation delay at Heading while viewing.',
                 ]
         );
 
@@ -670,27 +706,20 @@ class Modules extends Admin_Render {
                 'oxi-image-hover-underline-position',
                 $this->style,
                 [
-                    'label' => __('Position', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'type' => Controls::CHOOSE,
-                    'operator' => Controls::OPERATOR_ICON,
-                    'default' => 'left: 50%; transform: translateX(-50%);',
+                    'label' => __('Underline Position', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'type' => Controls::SELECT,
+                    'default' => '',
                     'options' => [
-                        'left: 0; transform: translateX(0%);' => [
-                            'title' => __('Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                            'icon' => 'fa fa-align-left',
-                        ],
-                        'left: 50%; transform: translateX(-50%);' => [
-                            'title' => __('Center', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                            'icon' => 'fa fa-align-center',
-                        ],
-                        'left: 100%; transform: translateX(-100%);' => [
-                            'title' => __('Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                            'icon' => 'fa fa-align-right',
-                        ],
+                        '' => __('Default', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'left: 0; transform: translateX(0%);' => __('Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'left: 50%; transform: translateX(-50%);' => __('Center', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'left: 100%; transform: translateX(-100%);' => __('Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-heading.oxi-image-hover-heading-underline:before' => '{{VALUE}}',
-                    ]
+                    ],
+                    'simpledescription' => '',
+                    'description' => 'Allows you set Heading Underline Position while Default comes with parent values.',
                 ]
         );
 
@@ -701,7 +730,9 @@ class Modules extends Admin_Render {
             'default' => '#ffffff',
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-heading.oxi-image-hover-heading-underline:before' => 'border-bottom-color: {{VALUE}};',
-            ]
+            ],
+            'simpledescription' => 'Allows you set Heading Underline Color.',
+            'description' => 'Allows you set Heading Underline Color.',
                 ]
         );
         $this->add_control(
@@ -723,7 +754,9 @@ class Modules extends Admin_Render {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-heading.oxi-image-hover-heading-underline:before' => 'border-bottom-style: {{VALUE}};',
-            ]
+            ],
+            'simpledescription' => '',
+            'description' => 'Allows you set Heading Underline Type, Default comes with solid value.',
                 ]
         );
         $this->add_responsive_control(
@@ -753,7 +786,9 @@ class Modules extends Admin_Render {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-heading.oxi-image-hover-heading-underline:before' => 'width:{{SIZE}}{{UNIT}};',
-            ]
+            ],
+            'simpledescription' => '',
+            'description' => 'Allows you set Heading Underline Width, Default comes with 100%, You can set as like as you want.',
                 ]
         );
         $this->add_responsive_control(
@@ -778,7 +813,9 @@ class Modules extends Admin_Render {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-heading.oxi-image-hover-heading-underline:before' => 'border-bottom-width: {{SIZE}}{{UNIT}};',
-            ]
+            ],
+            'simpledescription' => '',
+            'description' => 'Allows you set Heading Underline Height, Default comes with 2px, You can set as like as you want.',
                 ]
         );
 
@@ -805,6 +842,8 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-heading.oxi-image-hover-heading-underline' => 'margin-bottom:{{SIZE}}{{UNIT}};',
             ],
+            'simpledescription' => '',
+            'description' => 'Allows you set Distance from another content.',
                 ]
         );
         $this->end_controls_section();
@@ -841,7 +880,9 @@ class Modules extends Admin_Render {
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-button' => 'text-align:{{VALUE}}',
-                    ]
+                    ],
+                    'simpledescription' => 'Allows you set Button Align as Left, Center or Right.',
+                    'description' => 'Allows you set Button Align as Left, Center or Right.',
                 ]
         );
 
@@ -871,7 +912,9 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-button a.oxi-image-btn' => 'color: {{VALUE}};',
                 '{{WRAPPER}} .oxi-image-hover-button a.oxi-image-btn:hover' => 'color: {{VALUE}};',
-            ]
+            ],
+            'simpledescription' => 'Color property is used to set the color of the Button.',
+            'description' => 'Color property is used to set the color of the Button.',
                 ]
         );
         $this->add_control(
@@ -882,7 +925,9 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-button a.oxi-image-btn' => 'background: {{VALUE}};',
                 '{{WRAPPER}} .oxi-image-hover-button a.oxi-image-btn:hover' => 'background: {{VALUE}};',
-            ]
+            ],
+            'simpledescription' => 'Background property is used to set the Background of the Button.',
+            'description' => 'Background property is used to set the Background of the Button.',
                 ]
         );
         $this->add_group_control(
@@ -893,7 +938,9 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-hover-button a.oxi-image-btn' => ''
                     ],
-                ]
+                    'simpledescription' => 'Button',
+                    'description' => 'Border property is used to set the Border of the Button.',
+                ],
         );
         $this->add_group_control(
                 'oxi-image-hover-button-tx-shadow', $this->style, [
@@ -901,7 +948,9 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-button a.oxi-image-btn' => '',
                 '{{WRAPPER}} .oxi-image-hover-button a.oxi-image-btn:hover' => '',
-            ]
+            ],
+            'simpledescription' => 'Text Shadow property adds shadow to Button.',
+            'description' => 'Text Shadow property adds shadow to Button.',
                 ]
         );
 
@@ -934,6 +983,8 @@ class Modules extends Admin_Render {
                 '{{WRAPPER}} .oxi-image-hover-button a.oxi-image-btn' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 '{{WRAPPER}} .oxi-image-hover-button a.oxi-image-btn:hover' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
+            'simpledescription' => 'Allows you to add rounded corners to Button with options.',
+            'description' => 'Allows you to add rounded corners to Button with options.',
                 ]
         );
         $this->add_group_control(
@@ -942,7 +993,8 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-button a.oxi-image-btn' => '',
                 '{{WRAPPER}} .oxi-image-hover-button a.oxi-image-btn:hover' => '',
-            ]
+            ],
+            'description' => 'Allows you to attaches one or more shadows into Button.',
                 ]
         );
         $this->end_controls_tab();
@@ -954,7 +1006,9 @@ class Modules extends Admin_Render {
             'default' => '#ffffff',
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-caption-tab .oxi-image-hover-button a.oxi-image-btn:hover' => 'color: {{VALUE}};',
-            ]
+            ],
+            'simpledescription' => 'Color property is used to set the Hover color of the Button.',
+            'description' => 'Color property is used to set the Hover color of the Button.',
                 ]
         );
         $this->add_control(
@@ -964,18 +1018,20 @@ class Modules extends Admin_Render {
             'default' => '#ffffff',
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-caption-tab .oxi-image-hover-button a.oxi-image-btn:hover' => 'background: {{VALUE}};',
-            ]
+            ],
+            'simpledescription' => 'Background property is used to set the Hover Background of the Button.',
+            'description' => 'Background property is used to set the Hover Background of the Button.',
                 ]
         );
         $this->add_group_control(
-                'oxi-image-hover-button-hover-border',
-                $this->style,
-                [
-                    'type' => Controls::BORDER,
-                    'simpleborder' => true,
-                    'selector' => [
-                        '{{WRAPPER}} .oxi-image-hover-caption-tab .oxi-image-hover-button a.oxi-image-btn:hover' => ''
-                    ],
+                'oxi-image-hover-button-hover-border', $this->style, [
+            'type' => Controls::BORDER,
+            'simpleborder' => true,
+            'selector' => [
+                '{{WRAPPER}} .oxi-image-hover-caption-tab .oxi-image-hover-button a.oxi-image-btn:hover' => ''
+            ],
+            'simpledescription' => 'Button',
+            'description' => 'Border property is used to set the Hover Border of the Button.',
                 ]
         );
         $this->add_group_control(
@@ -983,7 +1039,9 @@ class Modules extends Admin_Render {
             'type' => Controls::TEXTSHADOW,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-caption-tab .oxi-image-hover-button a.oxi-image-btn:hover' => '',
-            ]
+            ],
+            'simpledescription' => 'Text Shadow property adds shadow to Hover Button.',
+            'description' => 'Text Shadow property adds shadow to Hover Button.',
                 ]
         );
 
@@ -1015,6 +1073,8 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-caption-tab .oxi-image-hover-button a.oxi-image-btn:hover' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
+            'simpledescription' => 'Allows you to add rounded corners at hover to Button with options.',
+            'description' => 'Allows you to add rounded corners at hover to Button with options.',
                 ]
         );
         $this->add_group_control(
@@ -1022,7 +1082,8 @@ class Modules extends Admin_Render {
             'type' => Controls::BOXSHADOW,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-caption-tab .oxi-image-hover-button a.oxi-image-btn:hover' => '',
-            ]
+            ],
+            'description' => 'Allows you at hover to attaches one or more shadows into Button.',
                 ]
         );
 
@@ -1058,7 +1119,9 @@ class Modules extends Admin_Render {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-button a.oxi-image-btn' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+            'simpledescription' => 'Generate space around a Button, inside of any defined borders or Background.',
+            'description' => 'Generate space around a Button, inside of any defined borders or Background.',
                 ]
         );
         $this->add_responsive_control(
@@ -1089,7 +1152,9 @@ class Modules extends Admin_Render {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-button a.oxi-image-btn' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+            'simpledescription' => 'Generate space around a Button, Outside of Content.',
+            'description' => 'Generate space around a Button, Outside of Content.',
                 ]
         );
         $this->add_control(
@@ -1114,7 +1179,9 @@ class Modules extends Admin_Render {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-button' => '',
-            ]
+            ],
+            'simpledescription' => 'Allows you to animated Button while viewing.',
+            'description' => 'Allows you to animated Button while viewing.',
                 ]
         );
         $this->add_control(
@@ -1133,7 +1200,9 @@ class Modules extends Admin_Render {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-button' => '',
-            ]
+            ],
+            'simpledescription' => 'Allows you to animation delay at Button while viewing.',
+            'description' => 'Allows you to animation delay at Button while viewing.',
                 ]
         );
 
@@ -1203,7 +1272,7 @@ class Modules extends Admin_Render {
             'label' => __('', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::TEXTAREA,
             'default' => '',
-            'description' => 'Add Your Description Unless make it blank.'
+            'description' => 'Custom CSS Section. You can add custom css into textarea.'
                 ]
         );
         $this->end_controls_section();

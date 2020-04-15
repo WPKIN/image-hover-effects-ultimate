@@ -369,9 +369,9 @@ trait Sanitization {
                     <div class="shortcode-form-control-field">';
 
         if (isset($arg['simpledimensions']) && $arg['simpledimensions'] == 'heading' && $this->SimpleInterface):
-            echo '<label for="" class="shortcode-form-control-title" ' . (array_key_exists('simpledescription', $arg) && $this->SimpleInterface && $this->ShowShortInfo ? ' data-toggle="tooltip" title="' . $arg['simpledescription'] . '"' : '') . '>' . $arg['label'] . ' Bottom</label>';
+            echo '<label for="" class="shortcode-form-control-title">' . $arg['label'] . ' Bottom</label>';
         else:
-            echo '<label for="" class="shortcode-form-control-title" ' . (array_key_exists('simpledescription', $arg) && $this->SimpleInterface && $this->ShowShortInfo ? ' data-toggle="tooltip" title="' . $arg['simpledescription'] . '"' : '') . '>' . $arg['label'] . '</label>';
+            echo '<label for="" class="shortcode-form-control-title">' . $arg['label'] . '</label>';
         endif;
 
 
@@ -379,8 +379,14 @@ trait Sanitization {
         $fun = $arg['simpleenable'] . '_admin_control';
         echo $this->$fun($id, $data, $arg);
         echo '      </div>';
-        if (($this->ShowShortInfo || $arg['ShowShortInfo']) && ($this->SimpleInterface == false || $arg['type'] == 'text' || $arg['type'] == 'textarea' || $arg['type'] == 'wysiwyg' || $arg['type'] == 'image' || $arg['type'] == 'icon')):
-            echo (array_key_exists('description', $arg) ? '<div class="shortcode-form-control-description">' . $arg['description'] . '</div>' : '');
+        if ($this->ShowShortInfo || $arg['ShowShortInfo']):
+            if (($arg['type'] == 'text' || $arg['type'] == 'textarea' || $arg['type'] == 'wysiwyg' || $arg['type'] == 'image' || $arg['type'] == 'icon')):
+                echo (array_key_exists('description', $arg) ? '<div class="shortcode-form-control-description">' . $arg['description'] . '</div>' : '');
+            elseif ($this->SimpleInterface == true):
+                echo (array_key_exists('simpledescription', $arg) ? '<div class="shortcode-form-control-description">' . $arg['simpledescription'] . '</div>' : '');
+            else:
+                echo (array_key_exists('description', $arg) ? '<div class="shortcode-form-control-description">' . $arg['description'] . '</div>' : '');
+            endif;
         endif;
         echo ' </div>
         </div>';
@@ -2214,7 +2220,7 @@ trait Sanitization {
                             $cond => $condition,
                             'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
                             'separator' => $separator,
-                            'simpledescription' => 'Set Border Width with Your desise Design. Border type will be Solid',
+                            'simpledescription' => ($arg['simpledescription'] != '' ? 'Set '.$arg['simpledescription'].' Border Width with Your desise Design' : 'Set Border Width with Your desise Design').', Border type will be Solid',
                         ]
                 );
             endif;
@@ -2239,7 +2245,7 @@ trait Sanitization {
                 $cond => $condition,
                 'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
                 'separator' => $separator,
-                'description' => 'Customize Border with Width, Type and Color options',
+                'description' => $arg['description'],
                     ]
             );
             $this->add_control(
@@ -2334,7 +2340,8 @@ trait Sanitization {
                 'label' => __('Background', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 'type' => Controls::COLOR,
                 'oparetor' => 'true',
-                'simpledescription' => 'Customize background Color with your design. Alpha Value works as Opacity Options',
+                'simpledescription' => $arg['simpledescription'],
+                'description' => $arg['description'],
                 'default' => 'rgba(171, 0, 201, 1)',
                 $selector => $selectorarray,
                     ]
@@ -2383,7 +2390,8 @@ trait Sanitization {
                 'condition' => array_key_exists('condition', $arg) ? $arg['condition'] : '',
                 'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
                 'separator' => $separator,
-                'description' => 'Customize Background with Color or Gradient or Image',
+                'simpledescription' => $arg['simpledescription'],
+                'description' => $arg['description'],
                     ]
             );
             $this->add_control(
