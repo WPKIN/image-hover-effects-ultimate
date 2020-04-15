@@ -178,6 +178,7 @@ class Effects32 extends Modules {
                 'oxi-image-hover-padding', $this->style, [
             'label' => __('Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
+            'simpledimensions' => 'double',
             'separator' => TRUE,
             'default' => [
                 'unit' => 'px',
@@ -211,6 +212,7 @@ class Effects32 extends Modules {
                 'oxi-image-hover-content-margin', $this->style, [
             'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
+            'simpledimensions' => 'double',
             'separator' => TRUE,
             'default' => [
                 'unit' => 'px',
@@ -236,7 +238,7 @@ class Effects32 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure .oxi-image-hover-caption-tab' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-                     'simpledescription' => 'Margin used to generate space around to Outside content.',
+            'simpledescription' => 'Margin used to generate space around to Outside content.',
             'description' => 'Margin used to generate space around to Outside content.',
                 ]
         );

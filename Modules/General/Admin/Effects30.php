@@ -183,6 +183,7 @@ class Effects30 extends Modules {
             'label' => __('Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'separator' => TRUE,
+            'simpledimensions' => 'double',
             'default' => [
                 'unit' => 'px',
                 'size' => '',

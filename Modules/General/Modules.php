@@ -60,6 +60,7 @@ class Modules extends Admin_Render {
             'label' => __('Effects Time (S)', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'simpleenable' => false,
+            //    'simpledimensions' => 'double',
             'simpledescription' => '',
             'description' => 'Set Effects Durations as How long you want to run Effects. Options available with Second or Milisecond.',
             'default' => [
@@ -464,6 +465,7 @@ class Modules extends Admin_Render {
                 'oxi-image-hover-desc-margin', $this->style, [
             'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
+            'simpledimensions' => 'heading',
             'default' => [
                 'unit' => 'px',
                 'size' => '',

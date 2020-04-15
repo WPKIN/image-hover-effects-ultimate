@@ -24,7 +24,9 @@ class Effects17 extends Modules {
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-hover-figure' => '',
-                    ]
+                    ],
+                    'simpledescription' => 'Allows you to Set Effects Direction.',
+                    'description' => 'Allows you to Set Effects Direction.',
                         ]
         );
     }
@@ -64,6 +66,8 @@ class Effects17 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-style-square' => 'max-width:{{SIZE}}{{UNIT}};',
             ],
+            'simpledescription' => 'Customize Image Width as like as you want, will be pixel Value.',
+            'description' => 'Customize Image Width with several options as Pixel, Percent or EM.',
                 ]
         );
         $this->add_responsive_control(
@@ -89,6 +93,8 @@ class Effects17 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-style-square:after ' => 'padding-bottom:{{SIZE}}{{UNIT}};',
             ],
+            'simpledescription' => 'Customize Image Height as like as you want, will be Percent Value.',
+            'description' => 'Customize Image Height with several options as Pixel, Percent or EM.',
                 ]
         );
         $this->add_responsive_control(
@@ -118,6 +124,8 @@ class Effects17 extends Modules {
                 . '{{WRAPPER}} .oxi-image-square-hover-style-17.oxi-touch .oxi-image-hover-figure.bottom_to_top .oxi-image-hover-image' => '-webkit-transform: translateY(-{{SIZE}}{{UNIT}}); -moz-transform: translateY(-{{SIZE}}{{UNIT}}); -ms-transform: translateY(-{{SIZE}}{{UNIT}}); transform: translateY(-{{SIZE}}{{UNIT}});',
                 '{{WRAPPER}} .oxi-image-square-hover-style-17 .oxi-image-hover-figure .oxi-image-hover-figure-caption' => 'height: {{SIZE}}{{UNIT}};',
             ],
+            'simpledescription' => 'Customize Content Height as like as you want, will be Percent Value.',
+            'description' => 'Customize Content Height with several options as Pixel, Percent or EM.',
                 ]
         );
         $this->add_responsive_control(
@@ -126,7 +134,7 @@ class Effects17 extends Modules {
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
-                'size' => '',
+                'size' => 0,
             ],
             'range' => [
                 'px' => [
@@ -148,6 +156,8 @@ class Effects17 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-style' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
+            'simpledescription' => 'Margin properties are used to create space around Image.',
+            'description' => 'Margin properties are used to create space around Image with several options as Pixel, or Percent or EM.',
                 ]
         );
         $this->end_controls_section();
@@ -165,7 +175,9 @@ class Effects17 extends Modules {
             'type' => Controls::BACKGROUND,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-caption-tab' => '',
-            ]
+            ],
+            'simpledescription' => 'Customize Hover Background with transparent options.',
+            'description' => 'Customize Hover Background with Color or Gradient or Image properties.',
                 ]
         );
         $this->start_controls_tabs(
@@ -184,7 +196,7 @@ class Effects17 extends Modules {
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
-                'size' => '',
+                'size' => 0,
             ],
             'range' => [
                 'px' => [
@@ -207,6 +219,8 @@ class Effects17 extends Modules {
                 '{{WRAPPER}} .oxi-image-hover-figure,'
                 . '{{WRAPPER}} .oxi-image-hover-figure:before' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
+            'simpledescription' => 'Allows you to add rounded corners to Image with options.',
+            'description' => 'Allows you to add rounded corners to Image with options.',
                 ]
         );
         $this->add_group_control(
@@ -215,6 +229,7 @@ class Effects17 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure, {{WRAPPER}} .oxi-image-hover-figure:before' => '',
             ],
+            'description' => 'Box Shadow property attaches one or more shadows into Image shape.',
                 ]
         );
         $this->end_controls_tab();
@@ -225,7 +240,7 @@ class Effects17 extends Modules {
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
-                'size' => '',
+                'size' => 0,
             ],
             'range' => [
                 'px' => [
@@ -248,8 +263,10 @@ class Effects17 extends Modules {
                 '{{WRAPPER}} .oxi-image-hover:hover .oxi-image-hover-figure,'
                 . '{{WRAPPER}} .oxi-image-hover.oxi-touch .oxi-image-hover-figure,'
                 . '{{WRAPPER}} .oxi-image-hover:hover  .oxi-image-hover-figure:before,'
-                . '{{WRAPPER}} .oxi-image-hover.oxi-touch  .oxi-image-hover-figure:before'=> 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                . '{{WRAPPER}} .oxi-image-hover.oxi-touch  .oxi-image-hover-figure:before' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
+            'simpledescription' => 'Allows you to add rounded corners at Hover to Image with options.',
+            'description' => 'Allows you to add rounded corners at Hover to Image with options.',
                 ]
         );
         $this->add_group_control(
@@ -260,7 +277,8 @@ class Effects17 extends Modules {
                 . '{{WRAPPER}} .oxi-image-hover.oxi-touch .oxi-image-hover-figure,'
                 . '{{WRAPPER}} .oxi-image-hover:hover .oxi-image-hover-figure:before,'
                 . '{{WRAPPER}} .oxi-image-hover.oxi-touch .oxi-image-hover-figure:before' => '',
-            ]
+            ],
+            'description' => 'Allows you at hover to attaches one or more shadows into Image shape.',
                 ]
         );
         $this->end_controls_tab();
@@ -270,9 +288,10 @@ class Effects17 extends Modules {
             'label' => __('Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'separator' => TRUE,
+            'simpledimensions' => 'double',
             'default' => [
                 'unit' => 'px',
-                'size' => '',
+                'size' => 0,
             ],
             'range' => [
                 'px' => [
@@ -293,7 +312,9 @@ class Effects17 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure .oxi-image-hover-caption-tab' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+            'simpledescription' => 'Padding used to generate space around an Image Hover content.',
+            'description' => 'Padding used to generate space around an Image Hover content.',
                 ]
         );
         $this->end_controls_section();
@@ -322,7 +343,9 @@ class Effects17 extends Modules {
             'default' => '#ffffff',
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-heading' => 'color: {{VALUE}};',
-            ]
+            ],
+            'simpledescription' => 'Color property is used to set the color of the Heading.',
+            'description' => 'Color property is used to set the color of the Heading.',
                 ]
         );
         $this->add_group_control(
@@ -330,16 +353,19 @@ class Effects17 extends Modules {
             'type' => Controls::TEXTSHADOW,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-heading' => '',
-            ]
+            ],
+            'simpledescription' => 'Text Shadow property adds shadow to Heading.',
+            'description' => 'Text Shadow property adds shadow to Heading.',
                 ]
         );
         $this->add_responsive_control(
                 'oxi-image-hover-heading-padding', $this->style, [
-            'label' => __('Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
+            'simpledimensions' => 'heading',
             'default' => [
                 'unit' => 'px',
-                'size' => '',
+                'size' => 0,
             ],
             'range' => [
                 'px' => [
@@ -360,37 +386,9 @@ class Effects17 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-heading' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
-                ]
-        );
-        $this->add_responsive_control(
-                'oxi-image-hover-heading-margin', $this->style, [
-            'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::DIMENSIONS,
-            'default' => [
-                'unit' => 'px',
-                'size' => '',
             ],
-            'range' => [
-                'px' => [
-                    'min' => 0,
-                    'max' => 500,
-                    'step' => 1,
-                ],
-                '%' => [
-                    'min' => 0,
-                    'max' => 100,
-                    'step' => 1,
-                ],
-                'em' => [
-                    'min' => 0,
-                    'max' => 100,
-                    'step' => .1,
-                ],
-            ],
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-figure-heading' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            'simpledescription' => 'Margin properties are used to create space around Heading.',
+            'description' => 'Margin properties are used to create space around Heading.',
                 ]
         );
         $this->add_control(
@@ -415,7 +413,9 @@ class Effects17 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-figure-heading' => '',
-            ]
+            ],
+            'simpledescription' => 'Allows you to animated Heading while viewing.',
+            'description' => 'Allows you to animated Heading while viewing.',
                 ]
         );
         $this->add_control(
@@ -434,7 +434,9 @@ class Effects17 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-figure-heading' => '',
-            ]
+            ],
+            'simpledescription' => 'Allows you to animation delay at Heading while viewing.',
+            'description' => 'Allows you to animation delay at Heading while viewing.',
                 ]
         );
 

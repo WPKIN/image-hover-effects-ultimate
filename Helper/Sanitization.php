@@ -1094,9 +1094,28 @@ trait Sanitization {
     public function dimensions_admin_control($id, array $data = [], array $arg = []) {
         $unit = array_key_exists($id . '-choices', $data) ? $data[$id . '-choices'] : $arg['default']['unit'];
         $top = array_key_exists($id . '-top', $data) ? $data[$id . '-top'] : $arg['default']['size'];
-        $bottom = array_key_exists($id . '-bottom', $data) ? $data[$id . '-bottom'] : $top;
-        $left = array_key_exists($id . '-left', $data) ? $data[$id . '-left'] : $top;
-        $right = array_key_exists($id . '-right', $data) ? $data[$id . '-right'] : $left;
+        if ($this->SimpleInterface):
+            if (isset($arg['simpledimensions']) && $arg['simpledimensions'] == 'double'):
+                $bottom = array_key_exists($id . '-bottom', $data) ? $data[$id . '-bottom'] : $top;
+                $left = array_key_exists($id . '-left', $data) ? $data[$id . '-left'] : 0;
+                $right = array_key_exists($id . '-right', $data) ? $data[$id . '-right'] : $left;
+            elseif (isset($arg['simpledimensions']) && $arg['simpledimensions'] == 'heading'):
+                $top = 0;
+                $bottom = array_key_exists($id . '-bottom', $data) ? $data[$id . '-bottom'] : $arg['default']['size'];
+                $left = array_key_exists($id . '-left', $data) ? $data[$id . '-left'] : 0;
+                $right = array_key_exists($id . '-right', $data) ? $data[$id . '-right'] : 0;
+            else:
+                $bottom = array_key_exists($id . '-bottom', $data) ? $data[$id . '-bottom'] : $top;
+                $left = array_key_exists($id . '-left', $data) ? $data[$id . '-left'] : $top;
+                $right = array_key_exists($id . '-right', $data) ? $data[$id . '-right'] : $top;
+            endif;
+
+        else:
+            $bottom = array_key_exists($id . '-bottom', $data) ? $data[$id . '-bottom'] : $arg['default']['size'];
+            $left = array_key_exists($id . '-left', $data) ? $data[$id . '-left'] : $arg['default']['size'];
+            $right = array_key_exists($id . '-right', $data) ? $data[$id . '-right'] : $arg['default']['size'];
+        endif;
+
         $retunvalue = array_key_exists('selector', $arg) ? htmlspecialchars(json_encode($arg['selector'])) : '';
         $ar = [$top, $bottom, $left, $right];
         $unlink = (count(array_unique($ar)) === 1 ? '' : 'link-dimensions-unlink');
@@ -2220,7 +2239,7 @@ trait Sanitization {
                             $cond => $condition,
                             'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
                             'separator' => $separator,
-                            'simpledescription' => ($arg['simpledescription'] != '' ? 'Set '.$arg['simpledescription'].' Border Width with Your desise Design' : 'Set Border Width with Your desise Design').', Border type will be Solid',
+                            'simpledescription' => ($arg['simpledescription'] != '' ? 'Set ' . $arg['simpledescription'] . ' Border Width with Your desise Design' : 'Set Border Width with Your desise Design') . ', Border type will be Solid',
                         ]
                 );
             endif;

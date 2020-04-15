@@ -38,6 +38,7 @@ class Effects12 extends Modules {
                 'oxi-image-hover-effects-time', $this->style, [
             'label' => __('Effects Time (S)', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::SLIDER,
+                    'simpleenable' => false,
             'default' => [
                 'unit' => 'ms',
                 'size' => '',

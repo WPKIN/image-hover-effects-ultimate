@@ -69,7 +69,7 @@ class Effects11 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-caption-tab' => '',
             ],
-                     'simpledescription' => 'Customize Content Aginment as Top, Bottom, Left or Center.',
+            'simpledescription' => 'Customize Content Aginment as Top, Bottom, Left or Center.',
             'description' => 'Customize Content Aginment as Top, Bottom, Left or Center.',
                 ]
         );
@@ -120,7 +120,7 @@ class Effects11 extends Modules {
                 . '{{WRAPPER}} .oxi-image-hover-figure .overlayT'
                 . '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-caption-tab' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-                     'simpledescription' => 'Allows you to add rounded corners to Image with options.',
+            'simpledescription' => 'Allows you to add rounded corners to Image with options.',
             'description' => 'Allows you to add rounded corners to Image with options.',
                 ]
         );
@@ -130,7 +130,7 @@ class Effects11 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-image:before' => '',
             ],
-                    'description' => 'Box Shadow property attaches one or more shadows into Image shape.',
+            'description' => 'Box Shadow property attaches one or more shadows into Image shape.',
                 ]
         );
         $this->end_controls_tab();
@@ -182,7 +182,7 @@ class Effects11 extends Modules {
                 . '{{WRAPPER}} .oxi-image-hover:hover .oxi-image-hover-figure .oxi-image-hover-figure-caption .oxi-image-hover-caption-tab,'
                 . '{{WRAPPER}} .oxi-image-hover.oxi-touch .oxi-image-hover-figure .oxi-image-hover-figure-caption .oxi-image-hover-caption-tab' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-                     'simpledescription' => 'Allows you to add rounded corners at Hover to Image with options.',
+            'simpledescription' => 'Allows you to add rounded corners at Hover to Image with options.',
             'description' => 'Allows you to add rounded corners at Hover to Image with options.',
                 ]
         );
@@ -192,7 +192,7 @@ class Effects11 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure .oxi-image-hover-figure-caption:before' => '',
             ],
-                    'description' => 'Allows you at hover to attaches one or more shadows into Image shape.',
+            'description' => 'Allows you at hover to attaches one or more shadows into Image shape.',
                 ]
         );
         $this->end_controls_tab();
@@ -202,6 +202,7 @@ class Effects11 extends Modules {
             'label' => __('Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'separator' => TRUE,
+            'simpledimensions' => 'double',
             'default' => [
                 'unit' => 'px',
                 'size' => '',
@@ -226,7 +227,7 @@ class Effects11 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure .oxi-image-hover-caption-tab' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-                    'simpledescription' => 'Padding used to generate space around an Image Hover content.',
+            'simpledescription' => 'Padding used to generate space around an Image Hover content.',
             'description' => 'Padding used to generate space around an Image Hover content.',
                 ]
         );

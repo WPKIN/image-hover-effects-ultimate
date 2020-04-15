@@ -52,6 +52,7 @@ class Modules extends Admin_Render {
                 'oxi-image-hover-effects-time', $this->style, [
             'label' => __('Effects Time (S)', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::SLIDER,
+            'simpleenable' => false,
             'default' => [
                 'unit' => 'ms',
                 'size' => '',
@@ -156,6 +157,7 @@ class Modules extends Admin_Render {
                 'oxi-image-hover-margin', $this->style, [
             'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
+            'simpledimensions' => 'double',
             'default' => [
                 'unit' => 'px',
                 'size' => '',
@@ -610,7 +612,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-button-hover .oxi-image-hover-caption-tab .oxi-icons:hover' => '',
             ],
-                     'simpledescription' => 'Box Shadow property adds shadow at hover to Icon.',
+            'simpledescription' => 'Box Shadow property adds shadow at hover to Icon.',
             'description' => 'Box Shadow property adds shadow at hover to Icon.',
                 ]
         );
@@ -622,6 +624,7 @@ class Modules extends Admin_Render {
                 'oxi-image-hover-icon-margin', $this->style, [
             'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
+            'simpledimensions' => 'double',
             'separator' => TRUE,
             'default' => [
                 'unit' => 'px',
@@ -647,7 +650,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-button-hover .oxi-image-hover-caption-tab .oxi-image-hover-icon' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-                       'simpledescription' => 'Generate space around a Icon Box, Outside of icon.',
+            'simpledescription' => 'Generate space around a Icon Box, Outside of icon.',
             'description' => 'Generate space around a Icon Box, Outside of icon.',
                 ]
         );

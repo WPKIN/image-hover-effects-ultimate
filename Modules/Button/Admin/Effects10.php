@@ -205,6 +205,7 @@ class Effects10 extends Modules {
                 'oxi-image-hover-padding', $this->style, [
             'label' => __('Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
+            'simpledimensions' => 'double',
             'separator' => TRUE,
             'default' => [
                 'unit' => 'px',
