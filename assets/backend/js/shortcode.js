@@ -5,20 +5,19 @@ jQuery.noConflict();
     function Oxi_Image_Admin_Shortcode(functionname, rawdata, styleid, childid, callback) {
         if (functionname !== "") {
             $.ajax({
-                url: oxi_image_hover_editor.ajaxurl,
-                type: "post",
+                url: ImageHoverUltimate.root + 'ImageHoverUltimate/v1/' + functionname,
+                method: 'POST',
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-WP-Nonce', ImageHoverUltimate.nonce);
+                },
                 data: {
-                    action: "oxi_image_hover_data",
-                    _wpnonce: oxi_image_hover_editor.nonce,
-                    functionname: functionname,
                     styleid: styleid,
                     childid: childid,
                     rawdata: rawdata
-                },
-                success: function (response) {
-                    console.log(response);
-                    callback(response);
                 }
+            }).done(function (response) {
+                callback(response);
             });
         }
     }
@@ -32,7 +31,6 @@ jQuery.noConflict();
         e.preventDefault();
         var rawdata = 'export';
         var styleid = $(this).children('#oxiexportid').val();
-        console.log(styleid);
         var functionname = "shortcode_export";
         $(this).prepend('<span class="spinner sa-spinner-open"></span>');
         Oxi_Image_Admin_Shortcode(functionname, rawdata, styleid, childid, function (callback) {
@@ -51,7 +49,6 @@ jQuery.noConflict();
         var functionname = "create_new";
         $('.modal-footer').prepend('<span class="spinner sa-spinner-open-left"></span>');
         Oxi_Image_Admin_Shortcode(functionname, rawdata, styleid, childid, function (callback) {
-         
             setTimeout(function () {
                 document.location.href = callback;
             }, 1000);

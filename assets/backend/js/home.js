@@ -4,21 +4,20 @@ jQuery.noConflict();
     var childid = '';
     function Oxi_Image_Admin_Home(functionname, rawdata, styleid, childid, callback) {
         if (functionname !== "") {
-            $.ajax({
-                url: oxi_image_hover_editor.ajaxurl,
-                type: "post",
+           $.ajax({
+                url: ImageHoverUltimate.root + 'ImageHoverUltimate/v1/' + functionname,
+                method: 'POST',
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-WP-Nonce', ImageHoverUltimate.nonce);
+                },
                 data: {
-                    action: "oxi_image_hover_data",
-                    _wpnonce: oxi_image_hover_editor.nonce,
-                    functionname: functionname,
                     styleid: styleid,
                     childid: childid,
                     rawdata: rawdata
-                },
-                success: function (response) {
-                    console.log(response);
-                    callback(response);
                 }
+            }).done(function (response) {
+                callback(response);
             });
         }
     }

@@ -6,7 +6,6 @@ jQuery.noConflict();
     var styleid = urlParams.get("styleid");
     var childid = "";
     var WRAPPER = $('#oxi-addons-preview-data').attr('template-wrapper');
-
     function NEWRegExp(par = '') {
         return new RegExp(par, "g");
     }
@@ -18,6 +17,7 @@ jQuery.noConflict();
         return str;
     }
 
+
     function OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, callback) {
         var active = false;
         if (functionname !== "" && active === false) {
@@ -28,28 +28,26 @@ jQuery.noConflict();
             rawdata = rawdata.replace(/\n/g, '<br>');
             rawdata = rawdata.replace(/\\n/g, '<br>');
             $.ajax({
-                url: oxi_image_hover_editor.ajaxurl,
-                type: "post",
+                url: ImageHoverUltimate.root + 'ImageHoverUltimate/v1/' + functionname,
+                method: 'POST',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-WP-Nonce', ImageHoverUltimate.nonce);
+                },
                 data: {
-                    action: "oxi_image_hover_data",
-                    _wpnonce: oxi_image_hover_editor.nonce,
-                    functionname: functionname,
                     styleid: styleid,
                     childid: childid,
                     rawdata: rawdata
-                },
-                success: function (response) {
-                    callback(response);
-                    active = false;
                 }
+            }).done(function (response) {
+                console.log(response);
+                callback(response);
+                active = false;
             });
         }
-
     }
 
     function OxiAddonsPreviewDataLoader() {
         OxiAddonsTemplateSettings('elements_template_render_data', JSON.stringify($("#oxi-addons-form-submit").serializeJSON({checkboxUncheckedValue: "0"})), styleid, childid, function (callback) {
-            // console.log(callback);
             $("#oxi-addons-preview-data").html(callback);
         });
     }
@@ -66,7 +64,7 @@ jQuery.noConflict();
     $("#addonsstylenamechange").on("click", function (e) {
         e.preventDefault();
         var rawdata = JSON.stringify($("#shortcode-addons-name-change-submit").serializeJSON({checkboxUncheckedValue: "0"}));
-        var functionname = "elements_template_change_name";
+        var functionname = "template_name";
         $(this).html('<span class="dashicons dashicons-admin-generic"></span>');
         OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, function (callback) {
             if (callback === "success") {
@@ -122,7 +120,6 @@ jQuery.noConflict();
             }
         });
     });
-
     $("#oxi-addons-list-rearrange-submit").on("click", function (e) {
         e.preventDefault();
         $(this).val('Savings..');
@@ -161,7 +158,7 @@ jQuery.noConflict();
             }
         });
         var rawdata = JSON.stringify($("#oxi-addons-form-submit").serializeJSON({checkboxUncheckedValue: "0"}));
-        var functionname = "elements_template_style_data";
+        var functionname = "elements_template_style";
         $(this).html('<span class="dashicons dashicons-admin-generic"></span>');
         OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, function (callback) {
             console.log(callback);
@@ -176,7 +173,6 @@ jQuery.noConflict();
             }
         });
     });
-
     $("#oxi-template-modal-submit").on("click", function (e) {
         e.preventDefault();
         var rawdata = JSON.stringify($("#oxi-template-modal-form").serializeJSON({checkboxUncheckedValue: "0"}));
@@ -196,15 +192,15 @@ jQuery.noConflict();
     $("#shortcode-addons-style-change-submit-button").on("click", function (e) {
         e.preventDefault();
         var tr = $(this).attr('premium');
-        if(tr !== 'ache'){
-                alert("Sorry Template Changer Works with only Premium Version :( ")
-             return false;
+        if (tr !== 'ache') {
+            alert("Sorry Template Changer Works with only Premium Version :( ")
+            return false;
         }
         var status = confirm("Do you Want to Change Template? If you change Template sometimes style not work properlly and you need to customize it.");
         if (status === false) {
             return false;
         } else {
-            var functionname = "elements_template_style_change";
+            var functionname = "template_change";
             var rawdata = $("#shortcode-current-style-name").val();
             var styleid = $("#shortcode-addons-style-change-submit-id").val();
             $(this).html('Wait');
@@ -859,7 +855,6 @@ jQuery.noConflict();
                 // console.log($(this).children('input'));
                 var _VALUE = $This.val();
                 $id = $This.attr('background');
-
                 $imagecheck = $("#" + $id + "-img").is(":checked");
                 $imagesource = $('input[name="' + $id + '-select"]:checked').val();
                 $Image = ($imagecheck === true ? ($imagesource === 'media-library' ? $("#" + $id + "-image").val() : $("#" + $id + "-url").val()) : '');
@@ -885,7 +880,6 @@ jQuery.noConflict();
                         el = el.replace(NEWRegExp("{{KEY}}"), $This.attr('name').split('saarsa')[1]);
                     }
                     var cls = el.replace(NEWRegExp("{{WRAPPER}}"), WRAPPER);
-
                     Cval = $BACKGROUND;
                     if ($This.attr('responsive') === 'tab') {
                         $("#oxi-addons-preview-data").append('<style>@media only screen and (min-width : 669px) and (max-width : 993px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} < /style>');
@@ -926,7 +920,6 @@ jQuery.noConflict();
         $("#oxi-addons-preview-data").css('background', $input);
         $("#image-hover-preview-color").val($input);
     });
-
     if ($('div').hasClass('shortcode-form-repeater-fields-wrapper')) {
         $(".shortcode-form-repeater-fields-wrapper").sortable({
             axis: 'y',
@@ -958,7 +951,6 @@ jQuery.noConflict();
         $(this).parents('.shortcode-form-repeater-fields-wrapper').trigger('sortupdate');
         OxiAddonsPreviewDataLoader();
     });
-
     $(document.body).on("click", ".shortcode-form-repeater-controls-title", function () {
         event.preventDefault();
         RepeaterTitle();
@@ -1005,7 +997,6 @@ jQuery.noConflict();
         $Current = $This.parent().siblings('.shortcode-form-repeater-fields-wrapper').children(':last');
         OxiAddonsPreviewDataLoader();
     });
-
     $(document.body).on("click", ".shortcode-form-repeater-fields-wrapper .shortcode-form-repeater-controls-duplicate", function () {
         event.preventDefault();
         $patent = $(this).parents('.shortcode-form-repeater-fields');
@@ -1019,9 +1010,4 @@ jQuery.noConflict();
         $(this).parents('.shortcode-form-repeater-fields-wrapper').trigger('sortupdate');
         OxiAddonsPreviewDataLoader();
     });
-
-
-
-
-
 })(jQuery);

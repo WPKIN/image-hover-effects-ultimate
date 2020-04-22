@@ -1,41 +1,46 @@
 jQuery.noConflict();
 (function ($) {
-
     $(".oxi-image-hover-load-more-infinite").each(function () {
         var $WRAPPER = $(this);
         $(window).scroll(function () {
             if ($(window).scrollTop() > ($(document).height() - $(window).height() - 10)) {
                 if (!($WRAPPER.hasClass("post-loading"))) {
                     $WRAPPER.addClass("post-loading");
-                    $CLASS = $WRAPPER.data('class');
-                    $function = $WRAPPER.data('function');
-                    $args = $WRAPPER.data('args');
-                    $settings = $WRAPPER.data('settings');
-                    $page = parseInt($WRAPPER.data("page")) + 1;
+                    var $CLASS = $WRAPPER.data('class'),
+                            $function = $WRAPPER.data('function'),
+                            $args = $WRAPPER.data('args'),
+                            $settings = $WRAPPER.data('settings'),
+                            $page = parseInt($WRAPPER.data("page")) + 1;
 
                     $.ajax({
-                        url: oxi_image_hover_editor.ajaxurl,
-                        type: "post",
+                        url: ImageHoverUltimate.root + 'ImageHoverUltimate/v1/' + $function,
+                        method: 'POST',
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader('X-WP-Nonce', ImageHoverUltimate.nonce);
+                        },
                         data: {
-                            action: "oxi_image_hover_data",
-                            _wpnonce: oxi_image_hover_editor.nonce,
                             class: $CLASS,
                             functionname: $function,
                             rawdata: $settings,
                             args: $args,
-                            optional: $page,
-                        },
-                        success: function (response) {
-                            if (response == 'sdfghjklcns') {
-                                $WRAPPER.remove();
-                            } else {
-                                $WRAPPER.data("page", $page);
-                                $(response).insertBefore($WRAPPER);
-                                $WRAPPER.removeClass("post-loading");
-                            }
+                            optional: $page
+                        }
+                    }).done(function (response) {
+                        var word = 'Image Hover Empty Data';
+                        var regex = new RegExp('\\b' + word + '\\b');
+                        var button = regex.test(response);
+
+                        if (button) {
+                            response = response.replace(regex, '');
+                            $WRAPPER.data("page", $page);
+                            $(response).insertBefore($WRAPPER);
+                            $WRAPPER.remove();
+                        } else {
+                            $WRAPPER.data("page", $page);
+                            $(response).insertBefore($WRAPPER);
+                            $WRAPPER.removeClass("post-loading");
                         }
                     });
-
                 }
             }
         });
@@ -47,31 +52,37 @@ jQuery.noConflict();
         e.stopImmediatePropagation();
         var $WRAPPER = $(this);
         $WRAPPER.addClass("button--loading");
-        $CLASS = $WRAPPER.data('class');
-        $function = $WRAPPER.data('function');
-        $args = $WRAPPER.data('args');
-        $settings = $WRAPPER.data('settings');
-        $page = parseInt($WRAPPER.data("page")) + 1;
+        var $CLASS = $WRAPPER.data('class'),
+                $function = $WRAPPER.data('function'),
+                $args = $WRAPPER.data('args'),
+                $settings = $WRAPPER.data('settings'),
+                $page = parseInt($WRAPPER.data("page")) + 1;
         $.ajax({
-            url: oxi_image_hover_editor.ajaxurl,
-            type: "post",
+            url: ImageHoverUltimate.root + 'ImageHoverUltimate/v1/' + $function,
+            method: 'POST',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-WP-Nonce', ImageHoverUltimate.nonce);
+            },
             data: {
-                action: "oxi_image_hover_data",
-                _wpnonce: oxi_image_hover_editor.nonce,
                 class: $CLASS,
                 functionname: $function,
                 rawdata: $settings,
                 args: $args,
                 optional: $page,
-            },
-            success: function (response) {
-                if (response == 'sdfghjklcns') {
-                    $WRAPPER.parent().remove();
-                } else {
-                    $WRAPPER.data("page", $page);
-                    $(response).insertBefore($WRAPPER.parent());
-                    $WRAPPER.removeClass("button--loading");
-                }
+            }
+        }).done(function (response) {
+            var word = 'Image Hover Empty Data';
+            var regex = new RegExp('\\b' + word + '\\b');
+            var button = regex.test(response);
+            if (button) {
+                response = response.replace(regex, '');
+                $WRAPPER.data("page", $page);
+                $(response).insertBefore($WRAPPER.parent());
+                $WRAPPER.parent().remove();
+            } else {
+                $WRAPPER.data("page", $page);
+                $(response).insertBefore($WRAPPER.parent());
+                $WRAPPER.removeClass("button--loading");
             }
         });
 

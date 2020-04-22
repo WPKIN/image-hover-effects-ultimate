@@ -53,7 +53,7 @@ class Shortcode {
     public function CSSJS_load() {
         $this->admin_css_loader();
         $this->admin_home();
-        $this->admin_ajax_load();
+        $this->admin_rest_api();
         apply_filters('oxi-image-hover-plugin/admin_menu', TRUE);
     }
 
@@ -61,10 +61,9 @@ class Shortcode {
      * Admin Notice JS file loader
      * @return void
      */
-    public function admin_ajax_load() {
+    public function admin_rest_api() {
         wp_enqueue_script('oxi-image-hover-shortcode', OXI_IMAGE_HOVER_URL . '/assets/backend/js/shortcode.js', false, OXI_IMAGE_HOVER_TEXTDOMAIN);
-        wp_localize_script('oxi-image-hover-shortcode', 'oxi_image_hover_editor', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-image-hover-editor')));
-    }
+   }
 
     public function Render() {
         ?>

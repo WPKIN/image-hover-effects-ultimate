@@ -74,7 +74,7 @@ class Create {
         $this->JSON_DATA();
         $this->pre_clecked = array_flip($this->pre_active);
         $this->admin_css_loader();
-        $this->admin_ajax_load();
+        $this->admin_rest_api();
         $this->pre_active_check();
         apply_filters('oxi-image-hover-plugin/admin_menu', TRUE);
     }
@@ -83,9 +83,8 @@ class Create {
      * Admin Notice JS file loader
      * @return void
      */
-    public function admin_ajax_load() {
-        wp_enqueue_script('oxi-image-hover-create', OXI_IMAGE_HOVER_URL . '/assets/backend/js/create.js', false, OXI_IMAGE_HOVER_TEXTDOMAIN);
-        wp_localize_script('oxi-image-hover-create', 'oxi_image_hover_editor', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-image-hover-editor')));
+    public function admin_rest_api() {
+        wp_enqueue_script('oxi-image-hover-create', OXI_IMAGE_HOVER_URL . '/assets/backend/js/create.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
 
     /**

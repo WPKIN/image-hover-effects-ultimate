@@ -1109,11 +1109,22 @@ trait Sanitization {
                 $left = array_key_exists($id . '-left', $data) ? $data[$id . '-left'] : $top;
                 $right = array_key_exists($id . '-right', $data) ? $data[$id . '-right'] : $top;
             endif;
-
         else:
-            $bottom = array_key_exists($id . '-bottom', $data) ? $data[$id . '-bottom'] : $arg['default']['size'];
-            $left = array_key_exists($id . '-left', $data) ? $data[$id . '-left'] : $arg['default']['size'];
-            $right = array_key_exists($id . '-right', $data) ? $data[$id . '-right'] : $arg['default']['size'];
+            if (isset($arg['simpledimensions']) && $arg['simpledimensions'] == 'double'):
+                $bottom = array_key_exists($id . '-bottom', $data) ? $data[$id . '-bottom'] : $top;
+                $left = array_key_exists($id . '-left', $data) ? $data[$id . '-left'] : 0;
+                $right = array_key_exists($id . '-right', $data) ? $data[$id . '-right'] : $left;
+            elseif (isset($arg['simpledimensions']) && $arg['simpledimensions'] == 'heading'):
+                $top = 0;
+                $bottom = array_key_exists($id . '-bottom', $data) ? $data[$id . '-bottom'] : $arg['default']['size'];
+                $left = array_key_exists($id . '-left', $data) ? $data[$id . '-left'] : 0;
+                $right = array_key_exists($id . '-right', $data) ? $data[$id . '-right'] : 0;
+            else:
+                $bottom = array_key_exists($id . '-bottom', $data) ? $data[$id . '-bottom'] : $top;
+                $left = array_key_exists($id . '-left', $data) ? $data[$id . '-left'] : $top;
+                $right = array_key_exists($id . '-right', $data) ? $data[$id . '-right'] : $top;
+            endif;
+
         endif;
 
         $retunvalue = array_key_exists('selector', $arg) ? htmlspecialchars(json_encode($arg['selector'])) : '';
@@ -2860,7 +2871,7 @@ trait Sanitization {
                 <div class="oxi-addons-shortcode-body  shortcode-addons-templates-right-panel-body">
                     <form method="post" id="shortcode-addons-name-change-submit">
                         <div class="input-group my-2">
-                            <input type="hidden" class="form-control" name="addonsstylenameid" value="' . $data['id'] . '  ">
+                            <input type="hidden" class="form-control" name="addonsstylenameid" value="' . $data['id'] . '">
                             <input type="text" class="form-control" name="addonsstylename" placeholder=" ' . $arg['placeholder'] . '" value="' . $data['name'] . '">
                             <div class="input-group-append">
                                 <button type="button" class="btn btn-success" id="addonsstylenamechange">Save</button>

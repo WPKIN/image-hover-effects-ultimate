@@ -5,19 +5,19 @@ jQuery.noConflict();
     function Image_Hover_Admin_Create(functionname, rawdata, styleid, childid, callback) {
         if (functionname !== "") {
             $.ajax({
-                url: oxi_image_hover_editor.ajaxurl,
-                type: "post",
+                url: ImageHoverUltimate.root + 'ImageHoverUltimate/v1/' + functionname,
+                method: 'POST',
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('X-WP-Nonce', ImageHoverUltimate.nonce);
+                },
                 data: {
-                    action: "oxi_image_hover_data",
-                    _wpnonce: oxi_image_hover_editor.nonce,
-                    functionname: functionname,
                     styleid: styleid,
                     childid: childid,
                     rawdata: rawdata
-                },
-                success: function (response) {
-                    callback(response);
                 }
+            }).done(function (response) {
+                callback(response);
             });
         }
     }
@@ -33,8 +33,8 @@ jQuery.noConflict();
         $a = $('#oxistyledata').val() + "-" + $("input[name='image-hover-box-layouts']:checked").val();
         var data = {
             name: $('#style-name').val(),
-            style: JSON.parse($('#' + $a).val()),
-        }
+            style: JSON.parse($('#' + $a).val())
+        };
         var rawdata = JSON.stringify(data);
         var functionname = "create_new";
         $('.modal-footer').prepend('<span class="spinner sa-spinner-open-left"></span>');

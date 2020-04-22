@@ -196,7 +196,7 @@ class Modules extends Admin_Render {
             'description' => 'Margin properties are used to create space around Image with several options as Pixel, or Percent or EM.',
             'default' => [
                 'unit' => 'px',
-                'size' => '',
+                'size' => 0,
             ],
             'range' => [
                 'px' => [

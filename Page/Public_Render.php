@@ -169,13 +169,12 @@ class Public_Render {
             $CLASS = new $cls('admin');
             $inlinecss .= $CLASS->inline_template_css_render($this->style);
         } else {
+            echo $this->font_familly_validation(json_decode(($this->dbdata['font_family'] != '' ? $this->dbdata['font_family'] : "[]"), true));
             $inlinecss .= $this->CSSDATA;
         }
-        echo $this->font_familly_validation(json_decode(($this->dbdata['font_family'] != '' ? $this->dbdata['font_family'] : "[]"), true));
-
         if ($inlinejs != ''):
             if ($this->admin == 'admin'):
-                //only load while ajax called
+                //only load while Rest API called
                 echo _('<script>
                         (function ($) {
                             setTimeout(function () {');

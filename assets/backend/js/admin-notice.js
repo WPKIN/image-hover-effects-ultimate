@@ -4,21 +4,20 @@ jQuery.noConflict();
     "use strict";
     $(document).on("click", ".oxi-image-support-reviews", function (e) {
         e.preventDefault();
-      
+        var notice = $(this).attr('sup-data'),
+        $function = 'notice_dissmiss';
         $.ajax({
-            url: oxi_image_notice_dissmiss.ajaxurl,
-            type: 'post',
+            url: ImageHoverUltimate.root + 'ImageHoverUltimate/v1/' + $function,
+            method: 'POST',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-WP-Nonce', ImageHoverUltimate.nonce);
+            },
             data: {
-                action: 'oxi_image_notice_dissmiss',
-                _wpnonce: oxi_image_notice_dissmiss.nonce,
-                notice: $(this).attr('sup-data'),
-            },
-            success: function (response) {
-                $('.shortcode-addons-review-notice').remove();
-            },
-            error: function (error) {
-                console.log('Something went wrong!');
-            },
+                notice: notice,
+            }
+        }).done(function (response) {
+            console.log(response);
+            $('.shortcode-addons-review-notice').remove();
         });
     });
 })(jQuery);

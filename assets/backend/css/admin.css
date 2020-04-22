@@ -2242,7 +2242,7 @@ span.multiselect-native-select{position:relative}span.multiselect-native-select 
     position: absolute;
     top: 0;
     left: 0;
-   background-color: #db9e36;
+    background-color: #db9e36;
     z-index: 1000;
 }
 .oxi-addons-oxi-docs-paren-loader{
@@ -3897,4 +3897,8 @@ span.sa-spinner-open-left{
 .oxi-docs-admin-block-content .oxi-docs-button:focus{
     background: rgb(42, 169, 162);
     color: #fff;
+}
+#oxi-addons-modal-rearrange .list-group-item:hover{
+    cursor: move;
+    background: rgba(240, 248, 255, 1)
 }

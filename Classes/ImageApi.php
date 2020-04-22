@@ -3,11 +3,11 @@
 namespace OXI_IMAGE_HOVER_PLUGINS\Classes;
 
 /**
- * Description of Admin_Ajax
+ * Description of Image Hover Rest API
  *
  * @author $biplob018
  */
-class Admin_Ajax {
+class ImageApi {
 
     /**
      * Define $wpdb
@@ -36,20 +36,53 @@ class Admin_Ajax {
      * @since 9.3.0
      */
     public $child_table;
+    public $request;
+    public $rawdata;
+    public $styleid;
+    public $childid;
 
     /**
      * Constructor of plugin class
      *
      * @since 9.3.0
      */
-    public function __construct($type = '', $data = '', $styleid = '', $itemid = '') {
-        if (!empty($type) && !empty($data)):
-            global $wpdb;
-            $this->wpdb = $wpdb;
-            $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
-            $this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
-            $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
-            $this->$type($data, $styleid, $itemid);
+    public function __construct() {
+        global $wpdb;
+        $this->wpdb = $wpdb;
+        $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
+        $this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
+        $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
+        $this->build_api();
+    }
+
+    public function build_api() {
+        add_action('rest_api_init', function () {
+            register_rest_route(untrailingslashit('ImageHoverUltimate/v1/'), '/(?P<action>\w+)/', array(
+                'methods' => 'POST',
+                'callback' => [$this, 'api_action'],
+            ));
+        });
+    }
+
+    public function api_action($request) {
+        $this->request = $request;
+        $this->rawdata = $request['rawdata'];
+        $this->styleid = $request['styleid'];
+        $this->childid = $request['childid'];
+        $class = $request['class'];
+        $action_class = strtolower($request->get_method()) . '_' . sanitize_key($request['action']);
+        if ($class != ''):
+            $args = $request['args'];
+            $optional = $request['optional'];
+            ob_start();
+            $CLASS = new $class;
+            $CLASS->__construct($request['action'], $this->rawdata, $args, $optional);
+            return ob_get_clean();
+
+        else:
+            if (method_exists($this, $action_class)) {
+                return $this->{$action_class}();
+            }
         endif;
     }
 
@@ -60,9 +93,9 @@ class Admin_Ajax {
         return $arr;
     }
 
-    public function create_new($data = '', $styleid = '', $itemid = '') {
-        if (!empty($styleid)):
-            $styleid = (int) $styleid;
+    public function post_create_new() {
+        if (!empty($this->styleid)):
+            $styleid = (int) $this->styleid;
             $newdata = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $styleid), ARRAY_A);
             $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->parent_table} (name, style_name, rawdata) VALUES ( %s, %s, %s)", array($data, $newdata['style_name'], $newdata['rawdata'])));
             $redirect_id = $this->wpdb->insert_id;
@@ -77,10 +110,10 @@ class Admin_Ajax {
                 foreach ($child as $value) {
                     $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d, %s)", array($redirect_id, $value['rawdata'])));
                 }
-                echo admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$s[0]&styleid=$redirect_id");
+                return admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$s[0]&styleid=$redirect_id");
             endif;
         else:
-            $params = json_decode(stripslashes($data), true);
+            $params = json_decode($this->rawdata, true);
             $newname = $params['name'];
             $rawdata = $params['style'];
             $style = $rawdata['style'];
@@ -97,24 +130,24 @@ class Admin_Ajax {
                 foreach ($child as $value) {
                     $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d,  %s)", array($redirect_id, $value['rawdata'])));
                 }
-                echo admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$s[0]&styleid=$redirect_id");
+                return admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$s[0]&styleid=$redirect_id");
             endif;
         endif;
     }
 
-    public function shortcode_delete($data = '', $styleid = '', $itemid = '') {
-        $styleid = (int) $styleid;
+    public function post_shortcode_delete() {
+        $styleid = (int) $this->styleid;
         if ($styleid):
             $this->wpdb->query($this->wpdb->prepare("DELETE FROM {$this->parent_table} WHERE id = %d", $styleid));
             $this->wpdb->query($this->wpdb->prepare("DELETE FROM {$this->child_table} WHERE styleid = %d", $styleid));
-            echo 'done';
+            return 'done';
         else:
-            echo 'Silence is Golden';
+            return 'Silence is Golden';
         endif;
     }
 
-    public function shortcode_export($data = '', $styleid = '', $itemid = '') {
-        $styleid = (int) $styleid;
+    public function post_shortcode_export() {
+        $styleid = (int) $this->styleid;
         if ($styleid):
             $st = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM $this->parent_table WHERE id = %d", $styleid), ARRAY_A);
             $c = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid), ARRAY_A);
@@ -136,31 +169,31 @@ class Admin_Ajax {
                 ];
             }
             $newdata = ['plugin' => 'image-hover', 'style' => $style, 'child' => $child];
-            echo json_encode($newdata);
+            return json_encode($newdata);
         else:
-            echo 'Silence is Golden';
+            return 'Silence is Golden';
         endif;
     }
 
-    public function shortcode_deactive($data = '', $styleid = '', $itemid = '') {
-        $id = $data . '-' . (int) $styleid;
-        $effects = $data . '-ultimate';
-        if ($styleid > 0):
+    public function post_shortcode_deactive() {
+        $id = $this->rawdata . '-' . (int) $this->styleid;
+        $effects = $this->rawdata . '-ultimate';
+        if ($this->styleid > 0):
             $this->wpdb->query($this->wpdb->prepare("DELETE FROM {$this->import_table} WHERE name = %s and type = %s", $id, $effects));
-            echo 'done';
+            return 'done';
         else:
-            echo 'Silence is Golden';
+            return 'Silence is Golden';
         endif;
     }
 
-    public function shortcode_active($data = '', $styleid = '', $itemid = '') {
-        $id = $data . '-' . (int) $styleid;
-        $effects = $data . '-ultimate';
-        if ($styleid > 0):
+    public function post_shortcode_active() {
+        $id = $this->rawdata . '-' . (int) $this->styleid;
+        $effects = $this->rawdata . '-ultimate';
+        if ($this->styleid > 0):
             $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->import_table} (type, name) VALUES (%s, %s)", array($effects, $id)));
-            echo admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$data#" . $id);
+            return admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$this->rawdata#" . $id);
         else:
-            echo 'Silence is Golden';
+            return 'Silence is Golden';
         endif;
     }
 
@@ -169,16 +202,16 @@ class Admin_Ajax {
      *
      * @since 9.3.0
      */
-    public function elements_template_style_data($rawdata = '', $styleid = '') {
-        $settings = json_decode(stripslashes($rawdata), true);
+    public function post_elements_template_style() {
+        $settings = json_decode(stripslashes($this->rawdata), true);
         $StyleName = sanitize_text_field($settings['image-hover-template']);
         $stylesheet = '';
-        if ((int) $styleid):
-            $this->wpdb->query($this->wpdb->prepare("UPDATE {$this->parent_table} SET rawdata = %s, stylesheet = %s WHERE id = %d", $rawdata, $stylesheet, $styleid));
+        if ((int) $this->styleid):
+            $this->wpdb->query($this->wpdb->prepare("UPDATE {$this->parent_table} SET rawdata = %s, stylesheet = %s WHERE id = %d", $this->rawdata, $stylesheet, $this->styleid));
             $name = explode('-', $StyleName);
             $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $name[0] . '\Admin\Effects' . $name[1];
             $CLASS = new $cls('admin');
-            echo $CLASS->template_css_render($settings);
+            return $CLASS->template_css_render($settings);
         endif;
     }
 
@@ -187,10 +220,10 @@ class Admin_Ajax {
      *
      * @since 9.3.0
      */
-    public function elements_template_style_change($rawdata = '', $styleid = '') {
-        $rawdata = sanitize_text_field($rawdata);
-        if ((int) $styleid):
-           $this->wpdb->query($this->wpdb->prepare("UPDATE {$this->parent_table} SET style_name = %s WHERE id = %d", $rawdata, $styleid));
+    public function post_template_change() {
+        $rawdata = sanitize_text_field($this->rawdata);
+        if ((int) $this->styleid):
+            $this->wpdb->query($this->wpdb->prepare("UPDATE {$this->parent_table} SET style_name = %s WHERE id = %d", $rawdata, $this->styleid));
         endif;
     }
 
@@ -199,13 +232,13 @@ class Admin_Ajax {
      *
      * @since 9.3.0
      */
-    public function elements_template_change_name($rawdata = '') {
-        $settings = json_decode(stripslashes($rawdata), true);
+    public function post_template_name() {
+        $settings = json_decode(stripslashes($this->rawdata), true);
         $name = sanitize_text_field($settings['addonsstylename']);
         $id = $settings['addonsstylenameid'];
         if ((int) $id):
             $this->wpdb->query($this->wpdb->prepare("UPDATE {$this->parent_table} SET name = %s WHERE id = %d", $name, $id));
-            echo 'success';
+            return 'success';
         endif;
     }
 
@@ -214,15 +247,15 @@ class Admin_Ajax {
      *
      * @since 9.3.0
      */
-    public function elements_rearrange_modal_data($rawdata = '', $styleid = '', $childid) {
-        if ((int) $styleid):
-            $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid), ARRAY_A);
+    public function post_elements_rearrange_modal_data() {
+        if ((int) $this->styleid):
+            $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $this->styleid), ARRAY_A);
             $render = [];
-            foreach ($child as $key => $value) {
+            foreach ($child as $k => $value) {
                 $data = json_decode(stripcslashes($value['rawdata']));
                 $render[$value['id']] = $data;
             }
-            echo json_encode($render);
+            return json_encode($render);
         endif;
     }
 
@@ -231,8 +264,8 @@ class Admin_Ajax {
      *
      * @since 9.3.0
      */
-    public function elements_template_rearrange_save_data($rawdata = '', $styleid = '', $childid) {
-        $params = explode(',', $rawdata);
+    public function post_elements_template_rearrange_save_data() {
+        $params = explode(',', $this->rawdata);
         foreach ($params as $value) {
             if ((int) $value):
                 $data = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE id = %d ", $value), ARRAY_A);
@@ -246,7 +279,7 @@ class Admin_Ajax {
                 }
             endif;
         }
-        echo 'success';
+        return 'success';
     }
 
     /**
@@ -254,12 +287,12 @@ class Admin_Ajax {
      *
      * @since 9.3.0
      */
-    public function elements_template_modal_data($rawdata = '', $styleid = '', $childid) {
-        if ((int) $styleid):
-            if ((int) $childid):
-                $this->wpdb->query($this->wpdb->prepare("UPDATE {$this->child_table} SET rawdata = %s WHERE id = %d", $rawdata, $childid));
+    public function post_elements_template_modal_data() {
+        if ((int) $this->styleid):
+            if ((int) $this->childid):
+                $this->wpdb->query($this->wpdb->prepare("UPDATE {$this->child_table} SET rawdata = %s WHERE id = %d", $this->rawdata, $this->childid));
             else:
-                $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d, %s )", array($styleid, $rawdata)));
+                $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d, %s )", array($this->styleid, $this->rawdata)));
             endif;
         endif;
     }
@@ -269,15 +302,17 @@ class Admin_Ajax {
      *
      * @since 9.3.0
      */
-    public function elements_template_render_data($rawdata = '', $styleid = '') {
-        $settings = json_decode(stripslashes($rawdata), true);
-        $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid), ARRAY_A);
+    public function post_elements_template_render_data() {
+        $settings = json_decode(stripslashes($this->rawdata), true);
+        $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $this->styleid), ARRAY_A);
         $StyleName = $settings['image-hover-template'];
         $name = explode('-', $StyleName);
+        ob_start();
         $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $name[0] . '\Render\Effects' . $name[1];
         $CLASS = new $cls;
-        $styledata = ['rawdata' => $rawdata, 'id' => $styleid, 'style_name' => $StyleName, 'stylesheet' => ''];
+        $styledata = ['rawdata' => $this->rawdata, 'id' => $this->styleid, 'style_name' => $StyleName, 'stylesheet' => ''];
         $CLASS->__construct($styledata, $child, 'admin');
+        return ob_get_clean();
     }
 
     /**
@@ -285,15 +320,15 @@ class Admin_Ajax {
      *
      * @since 9.3.0
      */
-    public function elements_template_rebuild_data($rawdata = '', $styleid = '') {
-        $style = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $styleid), ARRAY_A);
-        $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid), ARRAY_A);
+    public function post_elements_template_rebuild_data() {
+        $style = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $this->styleid), ARRAY_A);
+        $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $this->styleid), ARRAY_A);
         $style['rawdata'] = $style['stylesheet'] = $style['font_family'] = '';
         $name = explode('-', $style['style_name']);
         $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($name[0]) . '\Render\Effects' . $name[1];
         $CLASS = new $cls;
         $CLASS->__construct($style, $child, 'admin');
-        echo 'success';
+        return 'success';
     }
 
     /**
@@ -301,14 +336,14 @@ class Admin_Ajax {
      *
      * @since 9.3.0
      */
-    public function elements_template_modal_data_edit($rawdata = '', $styleid = '', $childid) {
-        if ((int) $childid):
-            $listdata = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM {$this->child_table} WHERE id = %d ", $childid), ARRAY_A);
+    public function post_elements_template_modal_data_edit() {
+        if ((int) $this->childid):
+            $listdata = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM {$this->child_table} WHERE id = %d ", $this->childid), ARRAY_A);
             $returnfile = json_decode(stripslashes($listdata['rawdata']), true);
-            $returnfile['shortcodeitemid'] = $childid;
-            echo json_encode($returnfile);
+            $returnfile['shortcodeitemid'] = $this->childid;
+            return json_encode($returnfile);
         else:
-            echo 'Silence is Golden';
+            return 'Silence is Golden';
         endif;
     }
 
@@ -317,13 +352,38 @@ class Admin_Ajax {
      *
      * @since 9.3.0
      */
-    public function elements_template_modal_data_delete($rawdata = '', $styleid = '', $childid) {
-        if ((int) $childid):
-            $this->wpdb->query($this->wpdb->prepare("DELETE FROM {$this->child_table} WHERE id = %d ", $childid));
-            echo 'done';
+    public function post_elements_template_modal_data_delete() {
+        if ((int) $this->childid):
+            $this->wpdb->query($this->wpdb->prepare("DELETE FROM {$this->child_table} WHERE id = %d ", $this->childid));
+            return 'done';
         else:
-            echo 'Silence is Golden';
+            return 'Silence is Golden';
         endif;
+    }
+
+    /**
+     * Admin Notice API  loader
+     * @return void
+     */
+    public function post_oxi_recommended() {
+        $data = 'done';
+        update_option('oxi_image_hover_recommended', $data);
+        return $data;
+    }
+
+    /**
+     * Admin Notice Recommended  loader
+     * @return void
+     */
+    public function post_notice_dissmiss() {
+        $notice = $this->request['notice'];
+        if ($notice == 'maybe'):
+            $data = strtotime("now");
+            update_option('oxi_image_hover_activation_date', $data);
+        else:
+            update_option('oxi_image_hover_nobug', $notice);
+        endif;
+        return $notice;
     }
 
 }

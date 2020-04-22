@@ -16,7 +16,6 @@ class Support_Reviews {
     public function __construct() {
         add_action('admin_notices', array($this, 'first_install'));
         add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
-        add_action('wp_ajax_oxi_image_notice_dissmiss', array($this, 'notice_dissmiss'));
         add_action('admin_notices', array($this, 'dismiss_button_scripts'));
     }
 
@@ -81,28 +80,10 @@ class Support_Reviews {
      */
     public function dismiss_button_scripts() {
         wp_enqueue_script('oxi-image-admin-notice', OXI_IMAGE_HOVER_URL . '/assets/backend/js/admin-notice.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        wp_localize_script('oxi-image-admin-notice', 'oxi_image_notice_dissmiss', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi_image_notice_dissmiss')));
-    }
-
-    /**
-     * Admin Notice Ajax  loader
-     * @return void
-     */
-    public function notice_dissmiss() {
-        if (isset($_POST['_wpnonce']) || wp_verify_nonce(sanitize_key(wp_unslash($_POST['_wpnonce'])), 'oxi_image_notice_dissmiss')):
-            $notice = isset($_POST['notice']) ? sanitize_text_field($_POST['notice']) : '';
-            if ($notice == 'maybe'):
-                $data = strtotime("now");
-                update_option('oxi_image_hover_activation_date', $data);
-            else:
-                update_option('oxi_image_hover_nobug', $notice);
-            endif;
-            echo 'Its Complete';
-        else:
-            return;
-        endif;
-
-        die();
+        wp_localize_script('oxi-image-admin-notice', 'ImageHoverUltimate', array(
+            'root' => esc_url_raw(rest_url()),
+            'nonce' => wp_create_nonce('wp_rest')
+        ));
     }
 
 }

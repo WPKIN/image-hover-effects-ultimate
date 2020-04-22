@@ -10,6 +10,8 @@ if (!defined('ABSPATH'))
  *
  * @author $biplob018
  */
+use OXI_IMAGE_HOVER_PLUGINS\Classes\ImageApi as IMAGEAPI;
+
 class Bootstrap {
 
     use \OXI_IMAGE_HOVER_PLUGINS\Helper\Public_Helper;
@@ -67,6 +69,7 @@ class Bootstrap {
         add_action('init', array($this, 'i18n'));
         $this->Shortcode_loader();
         $this->Public_loader();
+        new IMAGEAPI();
         if (is_admin()) {
             $this->Admin_Filters();
             $this->User_Admin();
@@ -130,8 +133,6 @@ class Bootstrap {
         $this->Admin_Settings();
         add_action('admin_menu', [$this, 'Admin_Menu']);
         add_action('admin_head', [$this, 'Admin_Icon']);
-        add_action('wp_ajax_oxi_image_hover_data', array($this, 'data_process'));
-        add_action('wp_ajax_nopriv_oxi_image_hover_data', array($this, 'data_process'));
         add_action('admin_init', array($this, 'redirect_on_activation'));
     }
 

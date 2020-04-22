@@ -33,17 +33,16 @@ class Style_1_Post_Query {
     public $child_table;
 
     public function __construct($function = '', $rawdata = '', $args = '', $optional = '') {
-
         if (!empty($function) && !empty($rawdata)):
             global $wpdb;
             $this->wpdb = $wpdb;
             $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
             $this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
-            $this->$function($rawdata, $args, $optional);
+            return $this->$function($rawdata, $args, $optional);
         endif;
     }
 
-    public function __ajax_template($style, $args, $optional) {
+    public function __rest_api_post($style, $args, $optional) {
         $rawdata = '';
         if (!is_array($args)):
             $args = json_decode($args, TRUE);
@@ -52,7 +51,7 @@ class Style_1_Post_Query {
         if (!is_array($style)):
             $style = json_decode($style, TRUE);
         endif;
-        echo $this->post_query($rawdata, $args, $style);
+        return $this->post_query($rawdata, $args, $style);
     }
 
     public function post_query($rawdata, $args, $style) {
@@ -88,8 +87,11 @@ class Style_1_Post_Query {
                 $i++;
             }
         } else {
-            return 'sdfghjklcns';
+            echo 'Image Hover Empty Data';
         }
+        if (count($postdata) != $args['posts_per_page']):
+            echo 'Image Hover Empty Data';
+        endif;
         wp_reset_postdata();
         $StyleName = explode('-', ucfirst($styledata['style_name']));
         $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $StyleName[0] . '\Render\Effects' . $StyleName[1];

@@ -25,6 +25,10 @@ trait CSS_JS_Loader {
         wp_enqueue_script("jquery");
         wp_enqueue_script('oxilab-popper', OXI_IMAGE_HOVER_URL . '/assets/backend/js/popper.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         wp_enqueue_script('oxilab-bootstrap', OXI_IMAGE_HOVER_URL . '/assets/backend/js/bootstrap.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_localize_script('oxilab-bootstrap', 'ImageHoverUltimate', array(
+            'root' => esc_url_raw(rest_url()),
+            'nonce' => wp_create_nonce('wp_rest')
+        ));
     }
 
     public function admin_home() {

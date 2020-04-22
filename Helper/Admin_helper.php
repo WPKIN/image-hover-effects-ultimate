@@ -189,12 +189,22 @@ trait Admin_helper {
         add_submenu_page('oxi-image-hover-ultimate', 'Support', 'Support', $first_key, 'image-hover-ultimate-support', [$this, 'oxi_image_hover_support']);
     }
 
+    public function custom_redirect() {
+        
+    }
+
     public function Image_Parent() {
         $effects = (!empty($_GET['effects']) ? ucfirst($_GET['effects']) : '');
         $styleid = (!empty($_GET['styleid']) ? (int) $_GET['styleid'] : '');
         if (!empty($effects) && !empty($styleid)):
             $style = $this->wpdb->get_row($this->wpdb->prepare('SELECT style_name FROM ' . $this->parent_table . ' WHERE id = %d ', $styleid), ARRAY_A);
             $name = explode('-', $style['style_name']);
+            if ($effects != ucfirst($name[0])):
+                $url = admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$name[0]&styleid=$styleid");
+                echo $url;
+                echo '<script type="text/javascript"> document.location.href="' . $url . '"; </script>';
+                exit;
+            endif;
             $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $effects . '\Admin\\Effects' . $name[1];
             if (class_exists($cls)):
                 new $cls();
@@ -223,28 +233,6 @@ trait Admin_helper {
 
     public function oxi_image_hover_support() {
         new \OXI_IMAGE_HOVER_PLUGINS\Page\Welcome();
-    }
-
-    public function data_process() {
-        if (isset($_POST['_wpnonce']) && wp_verify_nonce(sanitize_key(wp_unslash($_POST['_wpnonce'])), 'oxi-image-hover-editor')):
-            $class = isset($_POST['class']) ? '\\' . str_replace('\\\\', '\\', sanitize_text_field($_POST['class'])) : '';
-            $functionname = isset($_POST['functionname']) ? sanitize_text_field($_POST['functionname']) : '';
-            $rawdata = isset($_POST['rawdata']) ? sanitize_post($_POST['rawdata']) : '';
-            if (!empty($functionname) && !empty($rawdata)):
-                if ($class != ''):
-                    $args = isset($_POST['args']) ? sanitize_post($_POST['args']) : '';
-                    $optional = isset($_POST['optional']) ? sanitize_text_field($_POST['optional']) : '';
-                    new $class($functionname, $rawdata, $args, $optional);
-                else:
-                    $styleid = isset($_POST['styleid']) ? (int) $_POST['styleid'] : '';
-                    $childid = isset($_POST['childid']) ? (int) $_POST['childid'] : '';
-                    new \OXI_IMAGE_HOVER_PLUGINS\Classes\Admin_Ajax($functionname, $rawdata, $styleid, $childid);
-                endif;
-            endif;
-        else:
-            return;
-        endif;
-        die();
     }
 
     /**
