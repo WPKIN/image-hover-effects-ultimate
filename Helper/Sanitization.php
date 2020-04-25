@@ -1097,13 +1097,13 @@ trait Sanitization {
         if ($this->SimpleInterface):
             if (isset($arg['simpledimensions']) && $arg['simpledimensions'] == 'double'):
                 $bottom = array_key_exists($id . '-bottom', $data) ? $data[$id . '-bottom'] : $top;
-                $left = array_key_exists($id . '-left', $data) ? $data[$id . '-left'] : 0;
+                $left = array_key_exists($id . '-left', $data) ? $data[$id . '-left'] : '0';
                 $right = array_key_exists($id . '-right', $data) ? $data[$id . '-right'] : $left;
             elseif (isset($arg['simpledimensions']) && $arg['simpledimensions'] == 'heading'):
-                $top = 0;
+                $top = array_key_exists($id . '-top', $data) ? $data[$id . '-top'] : '0';
                 $bottom = array_key_exists($id . '-bottom', $data) ? $data[$id . '-bottom'] : $arg['default']['size'];
-                $left = array_key_exists($id . '-left', $data) ? $data[$id . '-left'] : 0;
-                $right = array_key_exists($id . '-right', $data) ? $data[$id . '-right'] : 0;
+                $left = array_key_exists($id . '-left', $data) ? $data[$id . '-left'] : '0';
+                $right = array_key_exists($id . '-right', $data) ? $data[$id . '-right'] : '0';
             else:
                 $bottom = array_key_exists($id . '-bottom', $data) ? $data[$id . '-bottom'] : $top;
                 $left = array_key_exists($id . '-left', $data) ? $data[$id . '-left'] : $top;
@@ -1112,27 +1112,29 @@ trait Sanitization {
         else:
             if (isset($arg['simpledimensions']) && $arg['simpledimensions'] == 'double'):
                 $bottom = array_key_exists($id . '-bottom', $data) ? $data[$id . '-bottom'] : $top;
-                $left = array_key_exists($id . '-left', $data) ? $data[$id . '-left'] : 0;
+                $left = array_key_exists($id . '-left', $data) ? $data[$id . '-left'] : $arg['default']['size'];
                 $right = array_key_exists($id . '-right', $data) ? $data[$id . '-right'] : $left;
+                
             elseif (isset($arg['simpledimensions']) && $arg['simpledimensions'] == 'heading'):
-                $top = 0;
+                $top = array_key_exists($id . '-top', $data) ? $data[$id . '-top'] : '0';
                 $bottom = array_key_exists($id . '-bottom', $data) ? $data[$id . '-bottom'] : $arg['default']['size'];
-                $left = array_key_exists($id . '-left', $data) ? $data[$id . '-left'] : 0;
-                $right = array_key_exists($id . '-right', $data) ? $data[$id . '-right'] : 0;
+                $left = array_key_exists($id . '-left', $data) ? $data[$id . '-left'] : '0';
+                $right = array_key_exists($id . '-right', $data) ? $data[$id . '-right'] : '0';
             else:
                 $bottom = array_key_exists($id . '-bottom', $data) ? $data[$id . '-bottom'] : $top;
                 $left = array_key_exists($id . '-left', $data) ? $data[$id . '-left'] : $top;
                 $right = array_key_exists($id . '-right', $data) ? $data[$id . '-right'] : $top;
             endif;
-
+            
         endif;
-
+        
+        
         $retunvalue = array_key_exists('selector', $arg) ? htmlspecialchars(json_encode($arg['selector'])) : '';
         $ar = [$top, $bottom, $left, $right];
         $unlink = (count(array_unique($ar)) === 1 ? '' : 'link-dimensions-unlink');
         if (array_key_exists('selector-data', $arg) && $arg['selector-data'] == TRUE && $arg['render'] == TRUE) {
             if (array_key_exists('selector', $arg)) :
-                if (!empty($top)) :
+                if (isset($top) && isset($right) && isset($bottom) && isset($left)) :
                     foreach ($arg['selector'] as $key => $val) {
                         $key = (strpos($key, '{{KEY}}') ? str_replace('{{KEY}}', explode('saarsa', $id)[1], $key) : $key);
                         $class = str_replace('{{WRAPPER}}', $this->WRAPPER, $key);
@@ -1168,7 +1170,7 @@ trait Sanitization {
                 $replace = ['0', '0', 'VALUE', '0', $id . '-choices.VALUE'];
                 $retunvalue = str_replace($search, $replace, $retunvalue);
                 echo '  <div class="shortcode-form-control-input-wrapper">
-                        <input id="' . $id . '-top" name="' . $id . '-top" type="number" min="' . $arg['range'][$unit]['min'] . '" max="' . $arg['range'][$unit]['max'] . '" step="' . $arg['range'][$unit]['step'] . '" value="' . $top . '"  responsive="' . $arg['responsive'] . '" retundata=\'' . $retunvalue . '\'>
+                        <input id="' . $id . '-bottom" name="' . $id . '-bottom" type="number" min="' . $arg['range'][$unit]['min'] . '" max="' . $arg['range'][$unit]['max'] . '" step="' . $arg['range'][$unit]['step'] . '" value="' . $top . '"  responsive="' . $arg['responsive'] . '" retundata=\'' . $retunvalue . '\'>
                         </div>';
             else:
                 $search = ['TOP', 'RIGHT', 'BOTTOM', 'LEFT', 'UNIT'];

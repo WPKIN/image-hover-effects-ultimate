@@ -34,15 +34,17 @@ class Effects4 extends Modules {
                         'oxi-image-border-reveal-ccc-2' => __('Border Reveal CCC Two', OXI_IMAGE_HOVER_TEXTDOMAIN),
                         'oxi-image-border-reveal-cc-3' => __('Border Reveal CC Three', OXI_IMAGE_HOVER_TEXTDOMAIN),
                         'oxi-image-border-reveal-ccc-3' => __('Border Reveal CCC Three', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-caption-hover' => '',
-                    ]
+                    ],
+                    'simpledescription' => 'Allows you to Set Effects Direction.',
+                    'description' => 'Allows you to Set Effects Direction.',
                         ]
         );
     }
-     public function register_content_settings() {
+
+    public function register_content_settings() {
         $this->start_controls_section(
                 'oxi-image-hover', [
             'label' => esc_html__('General Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
@@ -65,7 +67,9 @@ class Effects4 extends Modules {
                 {{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-figure-caption,
                 {{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-figure-caption:before,
                 {{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-figure-caption:after' => 'background-color: {{VALUE}};',
-            ]
+            ],
+            'simpledescription' => 'Customize Hover Background with transparent options.',
+            'description' => 'Customize Hover Background with transparent options.',
                 ]
         );
         $this->add_control(
@@ -86,7 +90,9 @@ class Effects4 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-caption-tab' => '',
-            ]
+            ],
+            'simpledescription' => 'Customize Content Aginment as Top, Bottom, Left or Center.',
+            'description' => 'Customize Content Aginment as Top, Bottom, Left or Center.',
                 ]
         );
         $this->start_controls_tabs(
@@ -105,6 +111,7 @@ class Effects4 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-caption-hover' => '',
             ],
+            'description' => 'Box Shadow property attaches one or more shadows into Image shape.',
                 ]
         );
         $this->end_controls_tab();
@@ -115,7 +122,8 @@ class Effects4 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-caption-hover:hover,'
                 . '{{WRAPPER}} .oxi-image-caption-hover.oxi-touch' => '',
-            ]
+            ],
+            'description' => 'Allows you at hover to attaches one or more shadows into Image shape.',
                 ]
         );
         $this->end_controls_tab();
@@ -124,6 +132,7 @@ class Effects4 extends Modules {
                 'oxi-image-hover-padding', $this->style, [
             'label' => __('Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
+            'simpledimensions' => 'double',
             'separator' => TRUE,
             'default' => [
                 'unit' => 'px',
@@ -148,9 +157,12 @@ class Effects4 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-caption-tab' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+            'simpledescription' => 'Padding used to generate space around an Image Hover content.',
+            'description' => 'Padding used to generate space around an Image Hover content.',
                 ]
         );
         $this->end_controls_section();
     }
+
 }

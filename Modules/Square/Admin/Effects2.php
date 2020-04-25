@@ -24,7 +24,9 @@ class Effects2 extends Modules {
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-hover-figure' => '',
-                    ]
+                    ],
+                    'simpledescription' => 'Allows you to Set Effects Direction.',
+                    'description' => 'Allows you to Set Effects Direction.',
                         ]
         );
     }
@@ -41,7 +43,9 @@ class Effects2 extends Modules {
             'type' => Controls::BACKGROUND,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-caption-tab' => '',
-            ]
+            ],
+            'simpledescription' => 'Customize Hover Background with transparent options.',
+            'description' => 'Customize Hover Background with Color or Gradient or Image properties.',
                 ]
         );
         $this->start_controls_tabs(
@@ -83,6 +87,8 @@ class Effects2 extends Modules {
                 '{{WRAPPER}}  .oxi-image-hover-figure,'
                 . '{{WRAPPER}} .oxi-image-hover-figure:before' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
+            'simpledescription' => 'Allows you to add rounded corners to Image with options.',
+            'description' => 'Allows you to add rounded corners to Image with options.',
                 ]
         );
         $this->add_group_control(
@@ -91,6 +97,7 @@ class Effects2 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure, {{WRAPPER}} .oxi-image-hover-figure:before' => '',
             ],
+            'description' => 'Box Shadow property attaches one or more shadows into Image shape.',
                 ]
         );
         $this->end_controls_tab();
@@ -126,6 +133,8 @@ class Effects2 extends Modules {
                 . '{{WRAPPER}} .oxi-image-hover:hover  .oxi-image-hover-figure:before,'
                 . '{{WRAPPER}} .oxi-image-hover.oxi-touch  .oxi-image-hover-figure:before' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
+            'simpledescription' => 'Allows you to add rounded corners at Hover to Image with options.',
+            'description' => 'Allows you to add rounded corners at Hover to Image with options.',
                 ]
         );
         $this->add_group_control(
@@ -136,7 +145,8 @@ class Effects2 extends Modules {
                 . '{{WRAPPER}} .oxi-image-hover.oxi-touch .oxi-image-hover-figure,'
                 . '{{WRAPPER}} .oxi-image-hover:hover .oxi-image-hover-figure:before,'
                 . '{{WRAPPER}} .oxi-image-hover.oxi-touch .oxi-image-hover-figure:before' => '',
-            ]
+            ],
+            'description' => 'Allows you at hover to attaches one or more shadows into Image shape.',
                 ]
         );
         $this->end_controls_tab();
@@ -145,6 +155,7 @@ class Effects2 extends Modules {
                 'oxi-image-hover-padding', $this->style, [
             'label' => __('Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
+            'simpledimensions' => 'double',
             'separator' => TRUE,
             'default' => [
                 'unit' => 'px',
@@ -169,7 +180,9 @@ class Effects2 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure .oxi-image-hover-caption-tab' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+            'simpledescription' => 'Padding used to generate space around an Image Hover content.',
+            'description' => 'Padding used to generate space around an Image Hover content.',
                 ]
         );
         $this->end_controls_section();

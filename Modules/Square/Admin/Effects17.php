@@ -362,7 +362,7 @@ class Effects17 extends Modules {
                 'oxi-image-hover-heading-padding', $this->style, [
             'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
-            'simpledimensions' => 'heading',
+             'simpledimensions' => 'heading',
             'default' => [
                 'unit' => 'px',
                 'size' => 0,

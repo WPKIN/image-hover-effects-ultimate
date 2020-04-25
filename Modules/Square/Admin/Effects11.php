@@ -69,8 +69,8 @@ class Effects11 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-caption-tab' => '',
             ],
-            'simpledescription' => 'Allows you to add rounded corners to Image with options.',
-            'description' => 'Allows you to add rounded corners to Image with options.',
+            'simpledescription' => 'Customize Content Aginment as Top, Bottom, Left or Center.',
+            'description' => 'Customize Content Aginment as Top, Bottom, Left or Center.',
                 ]
         );
         $this->start_controls_tabs(
@@ -119,6 +119,8 @@ class Effects11 extends Modules {
                 . '{{WRAPPER}} .oxi-image-hover-figure-caption:after,'
                 . '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-caption-tab' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
+            'simpledescription' => 'Allows you to add rounded corners to Image with options.',
+            'description' => 'Allows you to add rounded corners to Image with options.',
                 ]
         );
         $this->add_group_control(
