@@ -119,6 +119,15 @@ class Settings {
                                     <label class="description" for="oxi_addons_way_points"><?php _e('Load Way Points at shortcode loading while animated, If your theme already loaded select No for faster loading'); ?></label>
                                 </td>
                             </tr> 
+                            <tr valign="top">
+                                <td scope="row">Custom Parent Class</td>
+                                <td>
+                                    <input type="text" id="oxi_addons_custom_parent_class" name="oxi_addons_custom_parent_class" value="<?php echo get_option('oxi_addons_custom_parent_class'); ?>" />
+                                </td>
+                                <td>
+                                    <label class="description" for="oxi_addons_custom_parent_class"><?php _e('Add custom panrent Class as Avoid Conflict with Theme or Plugins '); ?></label>
+                                </td>
+                            </tr> 
                         </tbody>
                     </table>
                     <?php submit_button(); ?>

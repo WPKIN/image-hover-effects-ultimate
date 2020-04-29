@@ -151,6 +151,7 @@ class Bootstrap {
         register_setting('oxi-image-hover-settings-group', 'oxi_addons_way_points');
         register_setting('oxi-image-hover-settings-group', 'image_hover_ultimate_interface');
         register_setting('oxi-image-hover-settings-group', 'image_hover_ultimate_info');
+        register_setting('oxi-image-hover-settings-group', 'oxi_addons_custom_parent_class');
     }
 
     public function register_license() {

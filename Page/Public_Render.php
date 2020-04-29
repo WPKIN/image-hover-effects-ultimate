@@ -237,7 +237,7 @@ class Public_Render {
         if ($this->admin == 'request'):
             $this->default_render($this->style, $this->child, $this->admin);
         else:
-            echo '<div class="oxi-addons-container ' . $this->WRAPPER . '" id="' . $this->WRAPPER . '">
+            echo '<div class="oxi-addons-container ' . $this->WRAPPER . ' '. get_option('oxi_addons_custom_parent_class').'" id="' . $this->WRAPPER . '">
                  <div class="oxi-addons-row">';
             $this->default_render($this->style, $this->child, $this->admin);
             echo '   </div>
@@ -375,45 +375,41 @@ class Public_Render {
     }
 
     public function tab_column_render($id, $style) {
-        if ($style[$id . '-lap'] == 'oxi-bt-col-lg-12'):
-            return ' oxi-bt-col-md-12 ';
-        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-6'):
-            return ' oxi-bt-col-md-12 ';
+        if ($style[$id . '-lap'] == 'oxi-bt-col-lg-8'):
+            return 'oxi-bt-col-md-3';
         elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-5'):
-            return ' oxi-bt-col-md-6 ';
+            return 'oxi-bt-col-md-6';
         elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-4'):
-            return ' oxi-bt-col-md-6 ';
+            return 'oxi-bt-col-md-6';
         elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-3'):
-            return ' oxi-bt-col-md-6 ';
-        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-2'):
-            return ' oxi-bt-col-md-4 ';
-        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-2'):
-            return ' oxi-bt-col-md-4 ';
-        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-1'):
-            return ' oxi-bt-col-md-3 ';
+            return 'oxi-bt-col-md-6';
+        else:
+            return 'oxi-bt-col-md-12';
         endif;
     }
 
     public function mob_column_render($id, $style) {
 
         if ($style[$id . '-lap'] == 'oxi-bt-col-lg-2'):
-            return ' oxi-bt-col-sm-6 ';
+            return 'oxi-bt-col-sm-6';
+        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-8'):
+            return 'oxi-bt-col-sm-6';
         elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-1'):
-            return ' oxi-bt-col-sm-6 ';
+            return 'oxi-bt-col-sm-6';
         else:
-            return ' oxi-bt-col-sm-12 ';
+            return 'oxi-bt-col-sm-12';
         endif;
     }
 
     public function column_render($id, $style) {
-        $file = $style[$id . '-lap'];
+        $file = $style[$id . '-lap'] . ' ';
         if (!array_key_exists($id . '-tab', $style) || $style[$id . '-tab'] == ''):
-            $file .= $this->tab_column_render($id, $style);
+            $file .= $this->tab_column_render($id, $style) . ' ';
         else:
             $file .= $style[$id . '-tab'] . ' ';
         endif;
         if (!array_key_exists($id . '-mob', $style) || $style[$id . '-mob'] == ''):
-            $file .= $this->mob_column_render($id, $style);
+            $file .= $this->mob_column_render($id, $style) . ' ';
         else:
             $file .= $style[$id . '-mob'] . ' ';
         endif;

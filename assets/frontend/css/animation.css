@@ -3217,11 +3217,13 @@
     animation-name: slideOutUp
 }
 .sa-data-animation{
-  opacity: 0;
+    opacity: 0;
+    visibility: hidden;
 }
- 
+
 .sa-data-animation.animated{
     opacity: 1;
+    visibility: visible;
 }
 
 .animated {
