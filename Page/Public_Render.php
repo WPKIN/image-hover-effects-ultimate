@@ -237,7 +237,7 @@ class Public_Render {
         if ($this->admin == 'request'):
             $this->default_render($this->style, $this->child, $this->admin);
         else:
-            echo '<div class="oxi-addons-container ' . $this->WRAPPER . ' '. get_option('oxi_addons_custom_parent_class').'" id="' . $this->WRAPPER . '">
+            echo '<div class="oxi-addons-container ' . $this->WRAPPER . ' ' . get_option('oxi_addons_custom_parent_class') . '" id="' . $this->WRAPPER . '">
                  <div class="oxi-addons-row">';
             $this->default_render($this->style, $this->child, $this->admin);
             echo '   </div>
@@ -307,13 +307,20 @@ class Public_Render {
     }
 
     public function font_familly_validation($data = []) {
+        $api = get_option('oxi_addons_google_font');
+        if ($api == 'no'):
+            return;
+        endif;
         foreach ($data as $value) {
             wp_enqueue_style('' . $value . '', 'https://fonts.googleapis.com/css?family=' . $value . '');
         }
     }
 
     public function font_familly($data = '') {
-        wp_enqueue_style('' . $data . '', 'https://fonts.googleapis.com/css?family=' . $data . '');
+        $api = get_option('oxi_addons_google_font');
+        if ($api != 'no'):
+            wp_enqueue_style('' . $data . '', 'https://fonts.googleapis.com/css?family=' . $data . '');
+        endif;
         $data = str_replace('+', ' ', $data);
         $data = explode(':', $data);
         return '"' . $data[0] . '"';

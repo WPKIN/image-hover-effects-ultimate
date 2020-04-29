@@ -120,6 +120,16 @@ class Settings {
                                 </td>
                             </tr> 
                             <tr valign="top">
+                                <td scope="row">Google Font Support</td>
+                                <td>
+                                    <input type="radio" name="oxi_addons_google_font" value="" <?php checked('', get_option('oxi_addons_google_font'), true); ?>>YES
+                                    <input type="radio" name="oxi_addons_google_font" value="no" <?php checked('no', get_option('oxi_addons_google_font'), true); ?>>No
+                                </td>
+                                <td>
+                                    <label class="description" for="oxi_addons_google_font"><?php _e('Load Google font from Google  while loading shortcode, If you already load those locally select No for faster loading'); ?></label>
+                                </td>
+                            </tr> 
+                            <tr valign="top">
                                 <td scope="row">Custom Parent Class</td>
                                 <td>
                                     <input type="text" id="oxi_addons_custom_parent_class" name="oxi_addons_custom_parent_class" value="<?php echo get_option('oxi_addons_custom_parent_class'); ?>" />
