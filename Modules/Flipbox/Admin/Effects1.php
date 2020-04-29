@@ -11,8 +11,7 @@ use OXI_IMAGE_HOVER_PLUGINS\Modules\Flipbox\Modules as Modules;
 use OXI_IMAGE_HOVER_PLUGINS\Classes\Controls as Controls;
 
 class Effects1 extends Modules {
-    
-    
+
     public function register_frontend_tabs() {
         $this->start_section_tabs(
                 'oxi-image-hover-start-tabs', [
@@ -39,7 +38,9 @@ class Effects1 extends Modules {
             'type' => Controls::BORDER,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section' => '',
-            ]
+            ],
+            'simpledescription' => 'Flipbox',
+            'description' => 'Border property is used to set the Hover Border of the Flipbox.',
                 ]
         );
 
@@ -79,6 +80,8 @@ class Effects1 extends Modules {
                 . '{{WRAPPER}} .oxi-image-hover-figure-backend:after, '
                 . '{{WRAPPER}} .oxi-image-hover-figure-back-section ' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
+            'simpledescription' => 'Allows you to add rounded corners to Flipbox with options.',
+            'description' => 'Allows you to add rounded corners to Flipbox with options.',
                 ]
         );
         $this->add_group_control(
@@ -88,11 +91,11 @@ class Effects1 extends Modules {
                 '{{WRAPPER}} .oxi-image-hover-figure-frontend:before' => '',
                 '{{WRAPPER}} .oxi-image-hover-figure-backend:before' => '',
             ],
+            'description' => 'Allows you at hover to attaches one or more shadows into Button.',
                 ]
         );
         $this->end_controls_section();
     }
-
 
     public function register_backend_tabs() {
         $this->start_section_tabs(
@@ -115,14 +118,14 @@ class Effects1 extends Modules {
 
         $this->end_section_tabs();
     }
-    
-      public function modal_form_data() {
+
+    public function modal_form_data() {
         echo '<div class="modal-header">                    
                     <h4 class="modal-title">Image Hover Form</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">';
-       
+
         $this->add_control(
                 'image_hover_back_heading', $this->style, [
             'label' => __('Title', OXI_IMAGE_HOVER_TEXTDOMAIN),
@@ -132,9 +135,9 @@ class Effects1 extends Modules {
             'description' => 'Add Your Flipbox Backend Title.'
                 ]
         );
-        
-       
-       
+
+
+
         $this->add_control(
                 'image_hover_back_description', $this->style, [
             'label' => __('Short Description', OXI_IMAGE_HOVER_TEXTDOMAIN),
@@ -198,7 +201,7 @@ class Effects1 extends Modules {
         );
         echo '</div>';
     }
-    
+
     /**
      * Template Parent Item Data Rearrange
      *

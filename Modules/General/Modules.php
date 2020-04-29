@@ -128,8 +128,6 @@ class Modules extends Admin_Render {
                 'oxi-image-hover-width', $this->style, [
             'label' => __('Width', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::SLIDER,
-            'simpledescription' => 'Customize Image Width as like as you want, will be pixel Value.',
-            'description' => 'Customize Image Width with several options as Pixel, Percent or EM.',
             'default' => [
                 'unit' => 'px',
                 'size' => '',
@@ -154,14 +152,14 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-style-general' => 'max-width:{{SIZE}}{{UNIT}};',
             ],
+            'simpledescription' => 'Customize Image Width as like as you want, will be pixel Value.',
+            'description' => 'Customize Image Width with several options as Pixel, Percent or EM.',
                 ]
         );
         $this->add_responsive_control(
                 'oxi-image-hover-height', $this->style, [
             'label' => __('Height', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::SLIDER,
-            'simpledescription' => 'Customize Image Height as like as you want, will be Percent Value.',
-            'description' => 'Customize Image Height with several options as Pixel, Percent or EM.',
             'default' => [
                 'unit' => 'px',
                 'size' => '',
@@ -186,14 +184,15 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-style-general:after ' => 'padding-bottom:{{SIZE}}{{UNIT}};',
             ],
+            'simpledescription' => 'Customize Image Height as like as you want, will be Percent Value.',
+            'description' => 'Customize Image Height with several options as Pixel, Percent or EM.',
                 ]
         );
         $this->add_responsive_control(
                 'oxi-image-hover-margin', $this->style, [
             'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
-            'simpledescription' => 'Margin properties are used to create space around Image.',
-            'description' => 'Margin properties are used to create space around Image with several options as Pixel, or Percent or EM.',
+            'simpledimensions' => 'double',
             'default' => [
                 'unit' => 'px',
                 'size' => 0,
@@ -218,6 +217,8 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-style' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
+            'simpledescription' => 'Margin properties are used to create space around Image.',
+            'description' => 'Margin properties are used to create space around Image with several options as Pixel, or Percent or EM.',
                 ]
         );
         $this->end_controls_section();
@@ -489,7 +490,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-content' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-            'simpledescription' => 'Margin properties are used to create space around Description.',
+            'simpledescription' => 'Margin bottom are used to create space at bottom of Description.',
             'description' => 'Margin properties are used to create space around Description.',
                 ]
         );
@@ -864,7 +865,8 @@ class Modules extends Admin_Render {
                     'label' => __('Position', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'type' => Controls::CHOOSE,
                     'operator' => Controls::OPERATOR_ICON,
-                    'default' => 'center',
+                    'default' => '',
+                    'toggle' => true,
                     'options' => [
                         'left' => [
                             'title' => __('Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
@@ -1129,7 +1131,7 @@ class Modules extends Admin_Render {
                 'oxi-image-hover-button-margin', $this->style, [
             'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
-            'simpledimensions' => 'double',
+            'simpledimensions' => 'heading',
             'default' => [
                 'unit' => 'px',
                 'size' => '',
@@ -1154,7 +1156,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-button a.oxi-image-btn' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-            'simpledescription' => 'Generate space around a Button, Outside of Content.',
+            'simpledescription' => 'Generate space at bottom of Button.',
             'description' => 'Generate space around a Button, Outside of Content.',
                 ]
         );
