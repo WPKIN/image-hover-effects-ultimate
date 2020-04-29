@@ -236,7 +236,6 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-caption-tab' => '',
             ],
-            //  'simpleenable' => false,
             'simpledescription' => 'Customize Hover Background with transparent options.',
             'description' => 'Customize Hover Background with Color or Gradient or Image properties.',
                 ]
@@ -637,7 +636,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-heading' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-            'simpledescription' => 'Margin properties are used to create space around Heading.',
+            'simpledescription' => 'Margin bottom are used to create space at bottom of Heading.',
             'description' => 'Margin properties are used to create space around Heading.',
                 ]
         );
