@@ -76,7 +76,8 @@ class Effects12 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon' => '',
-            ]
+            ],
+           'description' => 'Allows you to set Icon Underline.',
                 ]
         );
         $this->add_control(
@@ -102,8 +103,7 @@ class Effects12 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-back-section .oxi-image-hover-icon' => 'text-align:{{VALUE}}',
             ],
-            'simpledescription' => 'Allows you to set Icon Position.',
-            'description' => 'Allows you to set Icon Position.',
+             'description' => 'Allows you to set Icon Position.',
                 ]
         );
         $this->add_responsive_control(
@@ -134,6 +134,7 @@ class Effects12 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon .oxi-icons' => 'width:{{SIZE}}{{UNIT}}; height:{{SIZE}}{{UNIT}};',
             ],
+            'description' => 'Allows you to Set Icon Width Height.',
                 ]
         );
         $this->add_responsive_control(
@@ -164,15 +165,7 @@ class Effects12 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon .oxi-icons' => 'font-size:{{SIZE}}{{UNIT}};',
             ],
-                ]
-        );
-
-        $this->add_group_control(
-                'oxi-image-flip-back-icon-background', $this->style, [
-            'type' => Controls::BACKGROUND,
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon .oxi-icons' => '',
-            ]
+            'description' => 'Allows you to Set Icon Size.',
                 ]
         );
         $this->add_control(
@@ -182,15 +175,28 @@ class Effects12 extends Modules {
             'default' => '#b414c9',
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon .oxi-icons' => 'color: {{VALUE}};',
-            ]
+            ],
+            'description' => 'Color property is used to set the color of the Icon.',
                 ]
         );
+
+        $this->add_group_control(
+                'oxi-image-flip-back-icon-background', $this->style, [
+            'type' => Controls::BACKGROUND,
+            'selector' => [
+                '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon .oxi-icons' => '',
+            ],
+            'description' => 'Customize Icon Background with Color or Gradient or Image properties.',
+                ]
+        );
+
         $this->add_group_control(
                 'oxi-image-flip-back-icon-border', $this->style, [
             'type' => Controls::BORDER,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon .oxi-icons' => '',
-            ]
+            ],
+            'description' => 'Border property is used to set the Border of the Icon.',
                 ]
         );
 
@@ -221,7 +227,8 @@ class Effects12 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon .oxi-icons' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+            'description' => 'Allows you to add rounded corners to Icon with 4 values.',
                 ]
         );
         $this->add_responsive_control(
@@ -251,7 +258,8 @@ class Effects12 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+            'description' => 'Margin properties are used to create space around Icon.',
                 ]
         );
         $this->add_control(
@@ -276,7 +284,8 @@ class Effects12 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon' => '',
-            ]
+            ],
+            'description' => 'Allows you to animated Icon while viewing.',
                 ]
         );
         $this->add_control(
@@ -295,7 +304,8 @@ class Effects12 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon' => '',
-            ]
+            ],
+            'description' => 'Allows you to animation delay of Icon while viewing.',
                 ]
         );
 
@@ -316,6 +326,7 @@ class Effects12 extends Modules {
                     'label' => __('Position', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'type' => Controls::CHOOSE,
                     'operator' => Controls::OPERATOR_ICON,
+                    'toggle' => true,
                     'default' => 'left: 50%; transform: translateX(-50%);',
                     'options' => [
                         'left: 0; transform: translateX(0%);' => [
@@ -333,7 +344,8 @@ class Effects12 extends Modules {
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon.oxi-image-hover-icon-underline:before' => '{{VALUE}}',
-                    ]
+                    ],
+                   'description' => 'Allows you to set Icon Underline Position.',
                 ]
         );
 
@@ -344,7 +356,8 @@ class Effects12 extends Modules {
             'default' => '#ffffff',
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon.oxi-image-hover-icon-underline:before' => 'border-bottom-color: {{VALUE}};',
-            ]
+            ],
+            'description' => 'Allows you to set Icon Underline Color.',
                 ]
         );
         $this->add_control(
@@ -366,7 +379,8 @@ class Effects12 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon.oxi-image-hover-icon-underline:before' => 'border-bottom-style: {{VALUE}};',
-            ]
+            ],
+           'description' => 'Allows you to set Icon Underline Type.',
                 ]
         );
         $this->add_responsive_control(
@@ -396,7 +410,8 @@ class Effects12 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon.oxi-image-hover-icon-underline:before' => 'width:{{SIZE}}{{UNIT}};',
-            ]
+            ],
+             'description' => 'Allows you to set Icon Underline Width.',
                 ]
         );
         $this->add_responsive_control(
@@ -405,7 +420,7 @@ class Effects12 extends Modules {
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
-                'size' => 1,
+                'size' => 2,
             ],
             'range' => [
                 'px' => [
@@ -421,7 +436,8 @@ class Effects12 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon.oxi-image-hover-icon-underline:before' => 'border-bottom-width: {{SIZE}}{{UNIT}};',
-            ]
+            ],
+           'description' => 'Allows you to set Icon Underline Height.',
                 ]
         );
 
@@ -448,6 +464,7 @@ class Effects12 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon.oxi-image-hover-icon-underline' => 'margin-bottom:{{SIZE}}{{UNIT}};',
             ],
+           'description' => 'Allows you to set Icon Underline Distance.',
                 ]
         );
         $this->end_controls_section();

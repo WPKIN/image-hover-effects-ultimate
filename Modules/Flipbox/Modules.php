@@ -150,7 +150,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure' => '',
             ],
-            'simpledescription' => 'How much column want to show into a single rows ',
+            
             'description' => 'Define how much column you want to show into single rows. Customize possible with desktop or tab or mobile Settings.',
                 ]
         );
@@ -168,7 +168,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure' => '',
             ],
-            'simpledescription' => 'Set effects type as how your effects animated.',
+            
             'description' => 'Set effects type as how your effects animated.',
                 ]
         );
@@ -196,7 +196,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-style *,{{WRAPPER}} .oxi-image-hover-style *:before,{{WRAPPER}} .oxi-image-hover-style *:after' => '-webkit-transition: all {{SIZE}}{{UNIT}}; -moz-transition: all {{SIZE}}{{UNIT}}; transition: all {{SIZE}}{{UNIT}};',
             ],
-            'simpledescription' => '',
+          
             'description' => 'Set Effects Durations as How long you want to run Effects. Options available with Second or Milisecond.',
                 ]
         );
@@ -248,7 +248,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-style-flipbox' => 'max-width:{{SIZE}}{{UNIT}};',
             ],
-            'simpledescription' => 'Customize Flipbox Width as like as you want, will be pixel Value.',
+          
             'description' => 'Customize Flipbox Width with several options as Pixel, Percent or EM.',
                 ]
         );
@@ -275,7 +275,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-style-flipbox:after ' => 'padding-bottom:{{SIZE}}{{UNIT}};',
             ],
-            'simpledescription' => 'Customize Flipbox Height as like as you want, will be Percent Value.',
+            
             'description' => 'Customize FLipbox Height with several options as Pixel, Percent or EM.',
                 ]
         );
@@ -283,7 +283,7 @@ class Modules extends Admin_Render {
                 'oxi-image-hover-margin', $this->style, [
             'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
-            'simpledimensions' => 'double',
+         
             'default' => [
                 'unit' => 'px',
                 'size' => '',
@@ -308,7 +308,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-style' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-            'simpledescription' => 'Margin properties are used to create space around Flipbox.',
+           
             'description' => 'Margin properties are used to create space around Flipbox with several options as Pixel, or Percent or EM.',
                 ]
         );
@@ -341,7 +341,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section' => '',
             ],
-            'simpledescription' => 'Customize Content Aginment as Top, Bottom, Left or Center.',
+           
             'description' => 'Customize Content Aginment as Top, Bottom, Left or Center.',
                 ]
         );
@@ -351,7 +351,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section' => '',
             ],
-            'simpledescription' => 'Customize Hover Background with transparent options.',
+            
             'description' => 'Customize Hover Background with Color or Gradient or Image properties.',
                 ]
         );
@@ -362,7 +362,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section' => '',
             ],
-            'simpledescription' => 'Flipbox',
+           
             'description' => 'Border property is used to set the Hover Border of the Flipbox.',
                 ]
         );
@@ -402,7 +402,7 @@ class Modules extends Admin_Render {
                 . '{{WRAPPER}} .oxi-image-hover-figure-backend:after, '
                 . '{{WRAPPER}} .oxi-image-hover-figure-back-section ' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-            'simpledescription' => 'Allows you to add rounded corners to Flipbox with options.',
+            
             'description' => 'Allows you to add rounded corners to Flipbox with options.',
                 ]
         );
@@ -420,7 +420,7 @@ class Modules extends Admin_Render {
                 'oxi-image-flip-front-padding', $this->style, [
             'label' => __('Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
-            'simpledimensions' => 'double',
+           
             'separator' => TRUE,
             'default' => [
                 'unit' => 'px',
@@ -446,7 +446,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-            'simpledescription' => 'Generate space around a Flipbox, inside of any defined borders or Background.',
+            
             'description' => 'Generate space around a Flipbox, inside of any defined borders or Background.',
                 ]
         );
@@ -466,7 +466,6 @@ class Modules extends Admin_Render {
                     'label' => __('Haading Underline', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'type' => Controls::CHOOSE,
                     'operator' => Controls::OPERATOR_TEXT,
-                    'simpleenable' => false,
                     'default' => '',
                     'options' => [
                         'oxi-image-hover-heading-underline' => [
@@ -479,7 +478,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-heading' => '',
                     ],
-                    'simpledescription' => 'Wanna set Heading Underline? Works with heading color.',
+                   
                     'description' => 'Wanna set Heading Underline? Customization Panel will viewing while values "Show".',
                 ]
         );
@@ -501,7 +500,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-heading' => 'color: {{VALUE}};',
             ],
-            'simpledescription' => 'Color property is used to set the color of the Heading.',
+           
             'description' => 'Color property is used to set the color of the Heading.',
                 ]
         );
@@ -511,7 +510,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-heading' => '',
             ],
-            'simpledescription' => 'Text Shadow property adds shadow to Heading.',
+           
             'description' => 'Text Shadow property adds shadow to Heading.',
                 ]
         );
@@ -520,7 +519,7 @@ class Modules extends Admin_Render {
                 'oxi-image-flip-front-heading-margin', $this->style, [
             'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
-            'simpledimensions' => 'heading',
+            
             'default' => [
                 'unit' => 'px',
                 'size' => '',
@@ -545,7 +544,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-heading' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-            'simpledescription' => 'Margin bottom are used to create space at bottom of Heading.',
+            
             'description' => 'Margin properties are used to create space around Heading.',
                 ]
         );
@@ -554,7 +553,6 @@ class Modules extends Admin_Render {
                 'oxi-image-hover-head-underline', [
             'label' => esc_html__('Heading Underline', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'showing' => false,
-            'simpleenable' => false,
             'condition' => [
                 'oxi-image-flip-front-heading-underline' => 'oxi-image-hover-heading-underline'
             ]
@@ -585,7 +583,9 @@ class Modules extends Admin_Render {
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-heading.oxi-image-hover-heading-underline:before' => '{{VALUE}}',
-                    ]
+                    ],
+                    
+                    'description' => 'Allows you to set Heading Underline Position.',
                 ]
         );
 
@@ -596,13 +596,16 @@ class Modules extends Admin_Render {
             'default' => '#ffffff',
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-heading.oxi-image-hover-heading-underline:before' => 'border-bottom-color: {{VALUE}};',
-            ]
+            ],
+           
+            'description' => 'Allows you to set Heading Underline Color.',
                 ]
         );
         $this->add_control(
                 'oxi-image-flip-front-underline-type', $this->style, [
             'label' => __('Underline Type', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::SELECT,
+            'simpleenable' => false,
             'default' => 'solid',
             'options' => [
                 '' => __('None', OXI_IMAGE_HOVER_TEXTDOMAIN),
@@ -618,13 +621,16 @@ class Modules extends Admin_Render {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-heading.oxi-image-hover-heading-underline:before' => 'border-bottom-style: {{VALUE}};',
-            ]
+            ],
+           
+            'description' => 'Allows you to set Heading Underline Type.',
                 ]
         );
         $this->add_responsive_control(
                 'oxi-image-flip-front-underline-width', $this->style, [
             'label' => __('Width', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::SLIDER,
+            'simpleenable' => false,
             'default' => [
                 'unit' => 'px',
                 'size' => 100,
@@ -648,13 +654,16 @@ class Modules extends Admin_Render {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-heading.oxi-image-hover-heading-underline:before' => 'width:{{SIZE}}{{UNIT}};',
-            ]
+            ],
+           
+            'description' => 'Allows you to set Heading Underline Width.',
                 ]
         );
         $this->add_responsive_control(
                 'oxi-image-flip-front-underline-height', $this->style, [
             'label' => __('Size', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::SLIDER,
+            'simpleenable' => false,
             'default' => [
                 'unit' => 'px',
                 'size' => 1,
@@ -673,7 +682,9 @@ class Modules extends Admin_Render {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-heading.oxi-image-hover-heading-underline:before' => 'border-bottom-width: {{SIZE}}{{UNIT}};',
-            ]
+            ],
+            
+            'description' => 'Allows you to set Heading Underline Height.',
                 ]
         );
 
@@ -700,6 +711,8 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-heading.oxi-image-hover-heading-underline' => 'margin-bottom:{{SIZE}}{{UNIT}};',
             ],
+           
+            'description' => 'Allows you to set Heading Underline Distance.',
                 ]
         );
         $this->end_controls_section();
@@ -729,7 +742,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-content' => 'color: {{VALUE}};',
             ],
-            'simpledescription' => 'Color property is used to set the color of the Description.',
+           
             'description' => 'Color property is used to set the color of the Description.',
                 ]
         );
@@ -739,7 +752,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-content' => '',
             ],
-            'simpledescription' => 'Text Shadow property adds shadow to Description.',
+            
             'description' => 'Text Shadow property adds shadow to Description.',
                 ]
         );
@@ -748,7 +761,7 @@ class Modules extends Admin_Render {
                 'oxi-image-flip-front-desc-margin', $this->style, [
             'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
-            'simpledimensions' => 'heading',
+            
             'default' => [
                 'unit' => 'px',
                 'size' => '',
@@ -773,7 +786,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-content' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-            'simpledescription' => 'Margin bottom are used to create space at bottom of  Description.',
+            
             'description' => 'Margin properties are used to create space around Description.',
                 ]
         );
@@ -813,7 +826,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon' => 'text-align:{{VALUE}};',
                     ],
-                    'simpledescription' => 'Allows you to set Icon Position.',
+                   
                     'description' => 'Allows you to set Icon Position.',
                 ]
         );
@@ -845,7 +858,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon .oxi-icons' => 'width:{{SIZE}}{{UNIT}}; height:{{SIZE}}{{UNIT}};',
             ],
-            'simpledescription' => 'Allows you to Set Icon Width Height.',
+           
             'description' => 'Allows you to Set Icon Width Height.',
                 ]
         );
@@ -877,7 +890,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon .oxi-icons' => 'font-size:{{SIZE}}{{UNIT}};',
             ],
-            'simpledescription' => 'Allows you to Set Icon Size.',
+           
             'description' => 'Allows you to Set Icon Size.',
                 ]
         );
@@ -889,7 +902,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon .oxi-icons' => 'color: {{VALUE}};',
             ],
-            'simpledescription' => 'Color property is used to set the color of the Icon.',
+           
             'description' => 'Color property is used to set the color of the Icon.',
                 ]
         );
@@ -899,7 +912,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon .oxi-icons' => '',
             ],
-            'simpledescription' => 'Customize Icon Background with transparent options.',
+           
             'description' => 'Customize Icon Background with Color or Gradient or Image properties.',
                 ]
         );
@@ -910,7 +923,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon .oxi-icons' => '',
             ],
-            'simpledescription' => 'Icon',
+           
             'description' => 'Border property is used to set the Border of the Icon.',
                 ]
         );
@@ -943,7 +956,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon .oxi-icons' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-            'simpledescription' => 'Allows you to add rounded corners to Icon.',
+            
             'description' => 'Allows you to add rounded corners to Icon with 4 values.',
                 ]
         );
@@ -951,7 +964,7 @@ class Modules extends Admin_Render {
                 'oxi-image-flip-front-icon-margin', $this->style, [
             'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
-            'simpledimensions' => 'heading',
+           
             'default' => [
                 'unit' => 'px',
                 'size' => '',
@@ -976,7 +989,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon ' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-            'simpledescription' => 'Margin bottom properties are used to create space at bottom of Icon.',
+            
             'description' => 'Margin properties are used to create space around Icon.',
                 ]
         );
@@ -1009,7 +1022,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-back-section' => '',
             ],
-            'simpledescription' => 'Customize Content Aginment as Top, Bottom, Left or Center.',
+           
             'description' => 'Customize Content Aginment as Top, Bottom, Left or Center.',
                 ]
         );
@@ -1019,7 +1032,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-back-section' => '',
             ],
-            'simpledescription' => 'Customize Hover Background with transparent options.',
+         
             'description' => 'Customize Hover Background with Color or Gradient or Image properties.',
                 ]
         );
@@ -1030,7 +1043,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-back-section' => '',
             ],
-            'simpledescription' => 'Flipbox',
+          
             'description' => 'Border property is used to set the Hover Border of the Flipbox.',
                 ]
         );
@@ -1082,7 +1095,7 @@ class Modules extends Admin_Render {
                 . '{{WRAPPER}} .oxi-image-hover:hover .oxi-image-hover-figure .oxi-image-hover-figure-back-section, '
                 . '{{WRAPPER}} .oxi-image-hover.oxi-touch .oxi-image-hover-figure .oxi-image-hover-figure-back-section ' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-            'simpledescription' => 'Allows you to add rounded corners to Flipbox with options.',
+          
             'description' => 'Allows you to add rounded corners to Flipbox with options.',
                 ]
         );
@@ -1099,7 +1112,7 @@ class Modules extends Admin_Render {
                 'oxi-image-flip-back-padding', $this->style, [
             'label' => __('Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
-            'simpledimensions' => 'double',
+            
             'separator' => TRUE,
             'default' => [
                 'unit' => 'px',
@@ -1125,7 +1138,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-back-section' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-            'simpledescription' => 'Generate space around a Flipbox, inside of any defined borders or Background.',
+           
             'description' => 'Generate space around a Flipbox, inside of any defined borders or Background.',
                 ]
         );
@@ -1145,7 +1158,6 @@ class Modules extends Admin_Render {
                     'label' => __('Haading Underline', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'type' => Controls::CHOOSE,
                     'operator' => Controls::OPERATOR_TEXT,
-                    'simpleenable' => false,
                     'default' => '',
                     'options' => [
                         'oxi-image-hover-heading-underline' => [
@@ -1158,7 +1170,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-heading' => '',
                     ],
-                    'simpledescription' => 'Wanna set Heading Underline? Works with heading color.',
+                  
                     'description' => 'Wanna set Heading Underline? Customization Panel will viewing while values "Show".',
                 ]
         );
@@ -1180,7 +1192,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-heading' => 'color: {{VALUE}};',
             ],
-            'simpledescription' => 'Color property is used to set the color of the Heading.',
+          
             'description' => 'Color property is used to set the color of the Heading.',
                 ]
         );
@@ -1190,7 +1202,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-heading' => '',
             ],
-            'simpledescription' => 'Text Shadow property adds shadow to Heading.',
+           
             'description' => 'Text Shadow property adds shadow to Heading.',
                 ]
         );
@@ -1199,7 +1211,7 @@ class Modules extends Admin_Render {
                 'oxi-image-flip-back-heading-margin', $this->style, [
             'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
-            'simpledimensions' => 'heading',
+           
             'default' => [
                 'unit' => 'px',
                 'size' => '',
@@ -1224,7 +1236,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-heading' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-            'simpledescription' => 'Margin bottom are used to create space at bottom of Heading.',
+           
             'description' => 'Margin properties are used to create space around Heading.',
                 ]
         );
@@ -1251,7 +1263,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-heading' => '',
             ],
-            'simpledescription' => 'Allows you to animated Heading while viewing.',
+           
             'description' => 'Allows you to animated Heading while viewing.',
                 ]
         );
@@ -1272,7 +1284,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-heading' => '',
             ],
-            'simpledescription' => 'Allows you to animation delay at Heading while viewing.',
+            
             'description' => 'Allows you to animation delay at Heading while viewing.',
                 ]
         );
@@ -1284,7 +1296,7 @@ class Modules extends Admin_Render {
                 'oxi-image-flip-back-head-underline', [
             'label' => esc_html__('Heading Underline', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'showing' => false,
-            'simpleenable' => false,
+           
             'condition' => [
                 'oxi-image-flip-back-heading-underline' => 'oxi-image-hover-heading-underline'
             ]
@@ -1314,7 +1326,9 @@ class Modules extends Admin_Render {
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-heading.oxi-image-hover-heading-underline:before' => '{{VALUE}}',
-                    ]
+                    ],
+               
+                    'description' => 'Allows you to set Heading Underline Position.',
                 ]
         );
 
@@ -1325,13 +1339,16 @@ class Modules extends Admin_Render {
             'default' => '#ffffff',
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-heading.oxi-image-hover-heading-underline:before' => 'border-bottom-color: {{VALUE}};',
-            ]
+            ],
+          
+            'description' => 'Allows you to set Heading Underline Color.',
                 ]
         );
         $this->add_control(
                 'oxi-image-flip-back-underline-type', $this->style, [
             'label' => __('Underline Type', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::SELECT,
+            'simpleenable' => false,
             'default' => 'solid',
             'options' => [
                 '' => __('None', OXI_IMAGE_HOVER_TEXTDOMAIN),
@@ -1347,13 +1364,16 @@ class Modules extends Admin_Render {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-heading.oxi-image-hover-heading-underline:before' => 'border-bottom-style: {{VALUE}};',
-            ]
+            ],
+         
+            'description' => 'Allows you to set Heading Underline Type.',
                 ]
         );
         $this->add_responsive_control(
                 'oxi-image-flip-back-underline-width', $this->style, [
             'label' => __('Width', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::SLIDER,
+            'simpleenable' => false,
             'default' => [
                 'unit' => 'px',
                 'size' => 100,
@@ -1377,7 +1397,9 @@ class Modules extends Admin_Render {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-heading.oxi-image-hover-heading-underline:before' => 'width:{{SIZE}}{{UNIT}};',
-            ]
+            ],
+           
+            'description' => 'Allows you to set Heading Underline Width.',
                 ]
         );
         $this->add_responsive_control(
@@ -1402,7 +1424,9 @@ class Modules extends Admin_Render {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-heading.oxi-image-hover-heading-underline:before' => 'border-bottom-width: {{SIZE}}{{UNIT}};',
-            ]
+            ],
+            
+            'description' => 'Allows you to set Icon Underline Height.',
                 ]
         );
 
@@ -1429,6 +1453,8 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-heading.oxi-image-hover-heading-underline' => 'margin-bottom:{{SIZE}}{{UNIT}};',
             ],
+           
+            'description' => 'Allows you to set Heading Underline Distance.',
                 ]
         );
         $this->end_controls_section();
@@ -1458,7 +1484,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-content' => 'color: {{VALUE}};',
             ],
-            'simpledescription' => 'Color property is used to set the color of the Description.',
+          
             'description' => 'Color property is used to set the color of the Description.',
                 ]
         );
@@ -1468,7 +1494,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-content' => '',
             ],
-            'simpledescription' => 'Text Shadow property adds shadow to Description.',
+           
             'description' => 'Text Shadow property adds shadow to Description.',
                 ]
         );
@@ -1477,7 +1503,7 @@ class Modules extends Admin_Render {
                 'oxi-image-flip-back-desc-margin', $this->style, [
             'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
-            'simpledimensions' => 'heading',
+            
             'default' => [
                 'unit' => 'px',
                 'size' => '',
@@ -1502,7 +1528,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-content' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-            'simpledescription' => 'Margin bottom are used to create space at bottom of Description.',
+          
             'description' => 'Margin properties are used to create space around Description.',
                 ]
         );
@@ -1529,7 +1555,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-content' => '',
             ],
-            'simpledescription' => 'Allows you to animated Description while viewing.',
+           
             'description' => 'Allows you to animated Description while viewing.',
                 ]
         );
@@ -1550,7 +1576,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-content' => '',
             ],
-            'simpledescription' => 'Allows you to animation delay at Description while viewing.',
+            
             'description' => 'Allows you to animation delay at Description while viewing.',
                 ]
         );
@@ -1591,7 +1617,6 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-hover-figure-back-section .oxi-image-hover-icon' => 'text-align:{{VALUE}}',
                     ],
-                    'simpledescription' => 'Allows you to set Icon Position.',
                     'description' => 'Allows you to set Icon Position.',
                 ]
         );
@@ -1623,7 +1648,6 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon .oxi-icons' => 'width:{{SIZE}}{{UNIT}}; height:{{SIZE}}{{UNIT}};',
             ],
-            'simpledescription' => 'Allows you to Set Icon Width Height.',
             'description' => 'Allows you to Set Icon Width Height.',
                 ]
         );
@@ -1655,8 +1679,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon .oxi-icons' => 'font-size:{{SIZE}}{{UNIT}};',
             ],
-            'simpledescription' => 'Allows you to Set Icon Size.',
-            'description' => 'Allows you to Set Icon Size.',
+           'description' => 'Allows you to Set Icon Size.',
                 ]
         );
         $this->add_control(
@@ -1667,8 +1690,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon .oxi-icons' => 'color: {{VALUE}};',
             ],
-            'simpledescription' => 'Color property is used to set the color of the Icon.',
-            'description' => 'Color property is used to set the color of the Icon.',
+           'description' => 'Color property is used to set the color of the Icon.',
                 ]
         );
         $this->add_group_control(
@@ -1677,8 +1699,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon .oxi-icons' => '',
             ],
-            'simpledescription' => 'Customize Icon Background with transparent options.',
-            'description' => 'Customize Icon Background with Color or Gradient or Image properties.',
+           'description' => 'Customize Icon Background with Color or Gradient or Image properties.',
                 ]
         );
 
@@ -1688,8 +1709,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon .oxi-icons' => '',
             ],
-            'simpledescription' => 'Icon',
-            'description' => 'Border property is used to set the Border of the Icon.',
+           'description' => 'Border property is used to set the Border of the Icon.',
                 ]
         );
 
@@ -1721,15 +1741,13 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon .oxi-icons' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-            'simpledescription' => 'Allows you to add rounded corners to Icon.',
-            'description' => 'Allows you to add rounded corners to Icon with 4 values.',
+           'description' => 'Allows you to add rounded corners to Icon with 4 values.',
                 ]
         );
         $this->add_responsive_control(
                 'oxi-image-flip-back-icon-margin', $this->style, [
             'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
-            'simpledimensions' => 'heading',
             'default' => [
                 'unit' => 'px',
                 'size' => '',
@@ -1754,8 +1772,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-            'simpledescription' => 'Margin bottom properties are used to create space at bottom of Icon.',
-            'description' => 'Margin properties are used to create space around Icon.',
+             'description' => 'Margin properties are used to create space around Icon.',
                 ]
         );
         $this->add_control(
@@ -2054,7 +2071,7 @@ class Modules extends Admin_Render {
             'label' => __('Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'separator' => TRUE,
-            'simpledimensions' => 'double',
+          
             'default' => [
                 'unit' => 'px',
                 'size' => '',
@@ -2087,7 +2104,6 @@ class Modules extends Admin_Render {
                 'oxi-image-flip-back-button-margin', $this->style, [
             'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
-            'simpledimensions' => 'heading',
             'default' => [
                 'unit' => 'px',
                 'size' => '',

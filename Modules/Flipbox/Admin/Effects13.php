@@ -57,7 +57,8 @@ class Effects13 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section' => '',
-            ]
+            ],
+            'description' => 'Customize Content Aginment as Top, Bottom, Left or Center.',
                 ]
         );
         $this->add_group_control(
@@ -65,7 +66,8 @@ class Effects13 extends Modules {
             'type' => Controls::BACKGROUND,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section-body' => '',
-            ]
+            ],
+            'description' => 'Customize Hover Background with Color or Gradient or Image properties.',
                 ]
         );
 
@@ -74,7 +76,8 @@ class Effects13 extends Modules {
             'type' => Controls::BORDER,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section' => '',
-            ]
+            ],
+            'description' => 'Border property is used to set the Hover Border of the Flipbox.',
                 ]
         );
 
@@ -115,6 +118,7 @@ class Effects13 extends Modules {
                 . '{{WRAPPER}} .oxi-image-hover-figure-backend:after, '
                 . '{{WRAPPER}} .oxi-image-hover-figure-back-section ' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
+            'description' => 'Allows you to add rounded corners to Flipbox with options.',
                 ]
         );
         $this->add_group_control(
@@ -124,12 +128,14 @@ class Effects13 extends Modules {
                 '{{WRAPPER}} .oxi-image-hover-figure-frontend:before' => '',
                 '{{WRAPPER}} .oxi-image-hover-figure-backend:before' => '',
             ],
+            'description' => 'Allows you at hover to attaches one or more shadows into Button.',
                 ]
         );
         $this->add_responsive_control(
                 'oxi-image-flip-front-padding', $this->style, [
             'label' => __('Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
+            'simpledimensions' => 'double',
             'separator' => TRUE,
             'default' => [
                 'unit' => 'px',
@@ -154,13 +160,15 @@ class Effects13 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+            'description' => 'Generate space around a Flipbox, inside of any defined borders or Background.',
                 ]
         );
         $this->add_responsive_control(
                 'oxi-image-flip-front-margin', $this->style, [
             'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
+            'simpledimensions' => 'double',
             'separator' => TRUE,
             'default' => [
                 'unit' => 'px',
@@ -185,7 +193,8 @@ class Effects13 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+            'description' => 'Generate space outside a Flipbox.',
                 ]
         );
         $this->end_controls_section();
@@ -216,7 +225,8 @@ class Effects13 extends Modules {
             'default' => '#b414c9',
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-number' => 'color: {{VALUE}};',
-            ]
+            ],
+            'description' => 'Color property is used to set the color of the Number.',
                 ]
         );
         $this->add_group_control(
@@ -224,7 +234,8 @@ class Effects13 extends Modules {
             'type' => Controls::BACKGROUND,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-number' => '',
-            ]
+            ],
+            'description' => 'Customize Number Background with Color or Gradient or Image properties.',
                 ]
         );
 
@@ -233,7 +244,8 @@ class Effects13 extends Modules {
             'type' => Controls::BORDER,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-number' => '',
-            ]
+            ],
+            'description' => 'Border property is used to set the Border of the Number.',
                 ]
         );
 
@@ -241,6 +253,7 @@ class Effects13 extends Modules {
                 'oxi-image-flip-front-number-border-radius', $this->style, [
             'label' => __('Border Radius', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
+            'simpledimensions' => 'multiple',
             'default' => [
                 'unit' => 'px',
                 'size' => 100,
@@ -264,13 +277,15 @@ class Effects13 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-number' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+            'description' => 'Allows you to add rounded corners to Number with 4 values.',
                 ]
         );
         $this->add_responsive_control(
                 'oxi-image-flip-front-number-padding', $this->style, [
             'label' => __('Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
+            'simpledimensions' => 'multiple',
             'default' => [
                 'unit' => 'px',
                 'size' => '',
@@ -294,7 +309,8 @@ class Effects13 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-number ' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+             'description' => 'padding properties are used to create space around Number.',
                 ]
         );
         $this->add_group_control(
@@ -303,6 +319,7 @@ class Effects13 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-number' => '',
             ],
+            'description' => 'Allows you to attaches one or more shadows into Number.',
                 ]
         );
         $this->end_controls_section();

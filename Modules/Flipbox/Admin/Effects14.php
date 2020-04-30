@@ -57,7 +57,8 @@ class Effects14 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section' => '',
-            ]
+            ],
+            'description' => 'Customize Content Aginment as Top, Bottom, Left or Center.',
                 ]
         );
         $this->add_group_control(
@@ -65,7 +66,8 @@ class Effects14 extends Modules {
             'type' => Controls::BACKGROUND,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section-body' => '',
-            ]
+            ],
+            'description' => 'Customize Hover Background with Color or Gradient or Image properties.',
                 ]
         );
 
@@ -74,7 +76,8 @@ class Effects14 extends Modules {
             'type' => Controls::BORDER,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section' => '',
-            ]
+            ],
+            'description' => 'Border property is used to set the Hover Border of the Flipbox.',
                 ]
         );
 
@@ -115,6 +118,7 @@ class Effects14 extends Modules {
                 . '{{WRAPPER}} .oxi-image-hover-figure-backend:after, '
                 . '{{WRAPPER}} .oxi-image-hover-figure-back-section ' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
+            'description' => 'Allows you to add rounded corners to Flipbox with options.',
                 ]
         );
         $this->add_group_control(
@@ -124,6 +128,7 @@ class Effects14 extends Modules {
                 '{{WRAPPER}} .oxi-image-hover-figure-frontend:before' => '',
                 '{{WRAPPER}} .oxi-image-hover-figure-backend:before' => '',
             ],
+            'description' => 'Allows you at hover to attaches one or more shadows into Button.',
                 ]
         );
         $this->add_responsive_control(
@@ -154,7 +159,8 @@ class Effects14 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+            'description' => 'Generate space around a Flipbox, inside of any defined borders or Background.',
                 ]
         );
         $this->add_responsive_control(
@@ -185,7 +191,8 @@ class Effects14 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+            'description' => 'Generate space outside a Flipbox.',
                 ]
         );
         $this->end_controls_section();
@@ -228,9 +235,10 @@ class Effects14 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon  .oxi-icons' => 'font-size:{{SIZE}}{{UNIT}};',
             ],
+            'description' => 'Allows you to Set Icon Size.',
                 ]
         );
-        
+
         $this->add_control(
                 'oxi-image-flip-front-icon-color', $this->style, [
             'label' => __('Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
@@ -238,7 +246,8 @@ class Effects14 extends Modules {
             'default' => '#b414c9',
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon  .oxi-icons' => 'color: {{VALUE}};',
-            ]
+            ],
+            'description' => 'Color property is used to set the color of the Icon.',
                 ]
         );
         $this->add_group_control(
@@ -246,7 +255,8 @@ class Effects14 extends Modules {
             'type' => Controls::BACKGROUND,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon  .oxi-icons' => '',
-            ]
+            ],
+            'description' => 'Customize Icon Background with Color or Gradient or Image properties.',
                 ]
         );
 
@@ -255,7 +265,8 @@ class Effects14 extends Modules {
             'type' => Controls::BORDER,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon  .oxi-icons' => '',
-            ]
+            ],
+            'description' => 'Border property is used to set the Border of the Icon.',
                 ]
         );
 
@@ -286,7 +297,8 @@ class Effects14 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon  .oxi-icons' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+            'description' => 'Allows you to add rounded corners to Icon with 4 values.',
                 ]
         );
         $this->add_responsive_control(
@@ -316,7 +328,8 @@ class Effects14 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon  .oxi-icons ' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+            'description' => 'Padding properties are used to create space around Icon.',
                 ]
         );
         $this->add_group_control(
@@ -325,6 +338,7 @@ class Effects14 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon .oxi-icons' => '',
             ],
+            'description' => 'Allows you to attaches one or more shadows into Icon.',
                 ]
         );
         $this->end_controls_section();
@@ -376,7 +390,8 @@ class Effects14 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-back-section' => '',
-            ]
+            ],
+            'description' => 'Customize Content Aginment as Top, Bottom, Left or Center.',
                 ]
         );
         $this->add_group_control(
@@ -384,7 +399,8 @@ class Effects14 extends Modules {
             'type' => Controls::BACKGROUND,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend-section-body' => '',
-            ]
+            ],
+            'description' => 'Customize Hover Background with Color or Gradient or Image properties.',
                 ]
         );
 
@@ -393,7 +409,8 @@ class Effects14 extends Modules {
             'type' => Controls::BORDER,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-back-section' => '',
-            ]
+            ],
+            'description' => 'Border property is used to set the Hover Border of the Flipbox.',
                 ]
         );
 
@@ -444,6 +461,7 @@ class Effects14 extends Modules {
                 . '{{WRAPPER}} .oxi-image-hover:hover .oxi-image-hover-figure .oxi-image-hover-figure-back-section, '
                 . '{{WRAPPER}} .oxi-image-hover.oxi-touch .oxi-image-hover-figure .oxi-image-hover-figure-back-section ' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
+            'description' => 'Allows you to add rounded corners to Flipbox with options.',
                 ]
         );
         $this->add_group_control(
@@ -452,6 +470,8 @@ class Effects14 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend:before' => '',
             ],
+                    'description' => 'Allows you at hover to attaches one or more shadows into Button.',
+            
                 ]
         );
         $this->add_responsive_control(
@@ -482,7 +502,9 @@ class Effects14 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-back-section' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+                     'description' => 'Generate space around a Flipbox, inside of any defined borders or Background.',
+           
                 ]
         );
         $this->add_responsive_control(
@@ -513,7 +535,9 @@ class Effects14 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-back-section' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+                     'description' => 'Generate space Outside a Flipbox.',
+           
                 ]
         );
         $this->end_controls_section();

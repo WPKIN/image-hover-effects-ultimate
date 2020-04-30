@@ -825,7 +825,12 @@ jQuery.noConflict();
                     el = el.replace(NEWRegExp("{{KEY}}"), $input.attr('name').split('saarsa')[1]);
                 }
                 var cls = el.replace(NEWRegExp("{{WRAPPER}}"), WRAPPER);
-                var Cval = obj.replace(NEWRegExp("{{UNIT}}"), $("input[name=\"" + UNIT + "\"]:checked").val());
+                var type = $("input[name=\"" + UNIT + "\"]").attr('type');
+                if (type === 'hidden') {
+                    Cval = obj.replace(NEWRegExp("{{UNIT}}"), $('#' + UNIT).val());
+                } else {
+                    var Cval = obj.replace(NEWRegExp("{{UNIT}}"), $("input[name=\"" + UNIT + "\"]:checked").val());
+                }
                 Cval = Cval.replace(NEWRegExp("{{TOP}}"), $('#' + TOP).val());
                 Cval = Cval.replace(NEWRegExp("{{RIGHT}}"), $('#' + RIGHT).val());
                 Cval = Cval.replace(NEWRegExp("{{BOTTOM}}"), $('#' + BOTTOM).val());

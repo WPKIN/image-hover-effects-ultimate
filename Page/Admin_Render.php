@@ -64,6 +64,13 @@ abstract class Admin_Render {
     public $WRAPPER;
 
     /**
+     * Current Elements Global DATA WRAPPER
+     *
+     * @since 9.3.0
+     */
+    public $CSSWRAPPER;
+
+    /**
      * Database Parent Table
      *
      * @since 9.3.0
@@ -145,6 +152,8 @@ abstract class Admin_Render {
         $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
         $this->oxiid = (!empty($_GET['styleid']) ? sanitize_text_field($_GET['styleid']) : '');
         $this->WRAPPER = '.oxi-image-hover-wrapper-' . $this->oxiid;
+        $this->CSSWRAPPER = '.oxi-image-hover-wrapper-' . $this->oxiid . ' .oxi-addons-row';
+
         $this->SimpleInterface = (get_option('image_hover_ultimate_interface') == 'advance' ? false : true);
         $this->ShowShortInfo = (get_option('image_hover_ultimate_info') == 'no' ? false : true);
         if ($type != 'admin') {
@@ -306,6 +315,7 @@ abstract class Admin_Render {
         $styleid = $style['image-hover-style-id'];
         $this->oxiid = $styleid;
         $this->WRAPPER = '.oxi-image-hover-wrapper-' . $this->oxiid;
+        $this->CSSWRAPPER = '.oxi-image-hover-wrapper-' . $this->oxiid . ' .oxi-addons-row';
         $this->style = $style;
         ob_start();
         $dt = $this->import_font_family();
@@ -350,6 +360,8 @@ abstract class Admin_Render {
         $this->style = $style;
         $this->oxiid = $styleid;
         $this->WRAPPER = '.oxi-image-hover-wrapper-' . $this->oxiid;
+        $this->CSSWRAPPER = '.oxi-image-hover-wrapper-' . $this->oxiid . ' .oxi-addons-row';
+
         ob_start();
         $dt = $this->register_controls();
         ob_end_clean();

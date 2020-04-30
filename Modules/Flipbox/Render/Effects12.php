@@ -22,10 +22,10 @@ class Effects12 extends Public_Render {
             $frontheading = $backheading = $frontcontent = $backcontent = $fronticon = $backicon = $button = $hr = $ht = '';
 
             if ($value['image_hover_front_heading'] != ''):
-                $frontheading = '<div class="oxi-image-hover-heading '. $style['oxi-image-flip-front-heading-underline'] .'">' . $this->text_render($value['image_hover_front_heading']) . '</div>';
+                $frontheading = '<div class="oxi-image-hover-heading ' . (isset($style['oxi-image-flip-front-heading-underline']) ? $style['oxi-image-flip-front-heading-underline'] : '') . '">' . $this->text_render($value['image_hover_front_heading']) . '</div>';
             endif;
             if ($value['image_hover_back_heading'] != ''):
-                $backheading = '<div class="oxi-image-hover-heading '. $style['oxi-image-flip-back-heading-underline'] .'' . $this->style['oxi-image-flip-back-heading-animation'] . ' ' . $this->style['oxi-image-flip-back-animation-delay'] . '">' . $this->text_render($value['image_hover_back_heading']) . '</div>';
+                $backheading = '<div class="oxi-image-hover-heading ' . ((isset($style['oxi-image-flip-back-heading-underline']) ? $style['oxi-image-flip-back-heading-underline'] : '')) . '' . $this->style['oxi-image-flip-back-heading-animation'] . ' ' . $this->style['oxi-image-flip-back-animation-delay'] . '">' . $this->text_render($value['image_hover_back_heading']) . '</div>';
             endif;
 
 //            if ($value['image_hover_front_description'] != ''):
@@ -41,7 +41,7 @@ class Effects12 extends Public_Render {
             endif;
 
             if ($value['image_hover_back_icon'] != ''):
-                $backicon = '<div class="oxi-image-hover-icon ' . $style['oxi-image-flip-back-icon-underline'] . $this->style['oxi-image-flip-back-icon-animation'] . ' ' . $this->style['oxi-image-flip-back-icon-animation-delay'] . '">' . $this->font_awesome_render($value['image_hover_back_icon']) . '</div>';
+                $backicon = '<div class="oxi-image-hover-icon ' . ((isset($style['oxi-image-flip-back-icon-underline']) ? $style['oxi-image-flip-back-icon-underline'] : '')) . $this->style['oxi-image-flip-back-icon-animation'] . ' ' . $this->style['oxi-image-flip-back-icon-animation-delay'] . '">' . $this->font_awesome_render($value['image_hover_back_icon']) . '</div>';
             endif;
 //            if ($this->media_render('image_hover_front_image', $value) != ''):
 //                $image = ' <img ' . $this->media_render('image_hover_front_image', $value) . '>';

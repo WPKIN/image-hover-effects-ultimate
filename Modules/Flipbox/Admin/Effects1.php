@@ -39,7 +39,7 @@ class Effects1 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section' => '',
             ],
-            'simpledescription' => 'Flipbox',
+          
             'description' => 'Border property is used to set the Hover Border of the Flipbox.',
                 ]
         );
@@ -80,7 +80,7 @@ class Effects1 extends Modules {
                 . '{{WRAPPER}} .oxi-image-hover-figure-backend:after, '
                 . '{{WRAPPER}} .oxi-image-hover-figure-back-section ' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-            'simpledescription' => 'Allows you to add rounded corners to Flipbox with options.',
+          
             'description' => 'Allows you to add rounded corners to Flipbox with options.',
                 ]
         );
