@@ -101,7 +101,9 @@ class Effects12 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-back-section .oxi-image-hover-icon' => 'text-align:{{VALUE}}',
-            ]
+            ],
+            'simpledescription' => 'Allows you to set Icon Position.',
+            'description' => 'Allows you to set Icon Position.',
                 ]
         );
         $this->add_responsive_control(
