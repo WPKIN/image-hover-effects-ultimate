@@ -1,5 +1,5 @@
-.oxi-image-general-hover-style-19 .oxi-image-hover-figure.left_to_right .oxi-image-hover-image,
-.oxi-image-general-hover-style-19 .oxi-image-hover-figure.right_to_left .oxi-image-hover-image {
+.oxi-addons-container .oxi-image-general-hover-style-19 .oxi-image-hover-figure.left_to_right .oxi-image-hover-image,
+.oxi-addons-container .oxi-image-general-hover-style-19 .oxi-image-hover-figure.right_to_left .oxi-image-hover-image {
     -webkit-transition: all 0.35s linear;
     -moz-transition: all 0.35s linear;
     transition: all 0.35s linear;
@@ -9,8 +9,8 @@
     -o-transform-origin: 0% 50%;
     transform-origin: 0% 50%;
 }
-.oxi-image-general-hover-style-19 .oxi-image-hover-figure.top_to_bottom .oxi-image-hover-image,
-.oxi-image-general-hover-style-19 .oxi-image-hover-figure.bottom_to_top .oxi-image-hover-image {
+.oxi-addons-container .oxi-image-general-hover-style-19 .oxi-image-hover-figure.top_to_bottom .oxi-image-hover-image,
+.oxi-addons-container .oxi-image-general-hover-style-19 .oxi-image-hover-figure.bottom_to_top .oxi-image-hover-image {
     -webkit-transition: all 0.35s linear;
     -moz-transition: all 0.35s linear;
     transition: all 0.35s linear;
@@ -20,7 +20,7 @@
     -o-transform-origin: 50% 0%;
     transform-origin: 50% 0%;
 }
-.oxi-image-general-hover-style-19 .oxi-image-hover-figure .oxi-image-hover-figure-caption-2{
+.oxi-addons-container .oxi-image-general-hover-style-19 .oxi-image-hover-figure .oxi-image-hover-figure-caption-2{
     -webkit-transform-style: preserve-3d;
     -moz-transform-style: preserve-3d;
     -ms-transform-style: preserve-3d;
@@ -33,12 +33,12 @@
     bottom:0;
     pointer-events: none;
 }
-.oxi-image-general-hover-style-19.oxi-image-hover:hover .oxi-image-hover-figure .oxi-image-hover-figure-caption-2,
-.oxi-image-general-hover-style-19.oxi-image-hover.oxi-touch .oxi-image-hover-figure .oxi-image-hover-figure-caption-2{
+.oxi-addons-container .oxi-image-general-hover-style-19.oxi-image-hover:hover .oxi-image-hover-figure .oxi-image-hover-figure-caption-2,
+.oxi-addons-container .oxi-image-general-hover-style-19.oxi-image-hover.oxi-touch .oxi-image-hover-figure .oxi-image-hover-figure-caption-2{
     pointer-events: auto;
 }
-.oxi-image-general-hover-style-19 .oxi-image-hover-figure.left_to_right .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption,
-.oxi-image-general-hover-style-19 .oxi-image-hover-figure.right_to_left .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption {
+.oxi-addons-container .oxi-image-general-hover-style-19 .oxi-image-hover-figure.left_to_right .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption,
+.oxi-addons-container .oxi-image-general-hover-style-19 .oxi-image-hover-figure.right_to_left .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption {
     opacity: 1;
     visibility: hidden;
     -webkit-transition: all 0.35s linear;
@@ -52,8 +52,8 @@
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
 }
-.oxi-image-general-hover-style-19 .oxi-image-hover-figure.top_to_bottom .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption,
-.oxi-image-general-hover-style-19 .oxi-image-hover-figure.bottom_to_top .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption {
+.oxi-addons-container .oxi-image-general-hover-style-19 .oxi-image-hover-figure.top_to_bottom .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption,
+.oxi-addons-container .oxi-image-general-hover-style-19 .oxi-image-hover-figure.bottom_to_top .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption {
     opacity: 1;
     visibility: hidden;
     -webkit-transition: all 0.35s linear;
@@ -68,13 +68,13 @@
     backface-visibility: hidden;
 }
 
-.oxi-image-general-hover-style-19.oxi-image-hover:hover .oxi-image-hover-figure .oxi-image-hover-image,
-.oxi-image-general-hover-style-19.oxi-image-hover.oxi-touch .oxi-image-hover-figure .oxi-image-hover-image{
+.oxi-addons-container .oxi-image-general-hover-style-19.oxi-image-hover:hover .oxi-image-hover-figure .oxi-image-hover-image,
+.oxi-addons-container .oxi-image-general-hover-style-19.oxi-image-hover.oxi-touch .oxi-image-hover-figure .oxi-image-hover-image{
     opacity: 1;
     pointer-events: none;
 }
-.oxi-image-general-hover-style-19.oxi-image-hover:hover .oxi-image-hover-figure .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption,
-.oxi-image-general-hover-style-19.oxi-image-hover.oxi-touch .oxi-image-hover-figure .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption{
+.oxi-addons-container .oxi-image-general-hover-style-19.oxi-image-hover:hover .oxi-image-hover-figure .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption,
+.oxi-addons-container .oxi-image-general-hover-style-19.oxi-image-hover.oxi-touch .oxi-image-hover-figure .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption{
     opacity: 1;
     visibility: visible;
 }
@@ -82,15 +82,15 @@
 
 
 
-.oxi-image-general-hover-style-19.oxi-image-hover:hover .oxi-image-hover-figure.top_to_bottom .oxi-image-hover-image,
-.oxi-image-general-hover-style-19.oxi-image-hover.oxi-touch .oxi-image-hover-figure.top_to_bottom .oxi-image-hover-image{
+.oxi-addons-container .oxi-image-general-hover-style-19.oxi-image-hover:hover .oxi-image-hover-figure.top_to_bottom .oxi-image-hover-image,
+.oxi-addons-container .oxi-image-general-hover-style-19.oxi-image-hover.oxi-touch .oxi-image-hover-figure.top_to_bottom .oxi-image-hover-image{
     -webkit-transform: translate3d(0, 100%, 0) rotate3d(1, 0, 0, -90deg);
     -moz-transform: translate3d(0, 100%, 0) rotate3d(1, 0, 0, -90deg);
     -ms-transform: translate3d(0, 100%, 0) rotate3d(1, 0, 0, -90deg);
     -o-transform: translate3d(0, 100%, 0) rotate3d(1, 0, 0, -90deg);
     transform: translate3d(0, 100%, 0) rotate3d(1, 0, 0, -90deg);
 }
-.oxi-image-general-hover-style-19 .oxi-image-hover-figure.top_to_bottom .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption {
+.oxi-addons-container .oxi-image-general-hover-style-19 .oxi-image-hover-figure.top_to_bottom .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption {
     -webkit-transform: translate3d(0, 0, -220px) rotate3d(1, 0, 0, 90deg);
     -moz-transform: translate3d(0, 0, -220px) rotate3d(1, 0, 0, 90deg);
     -ms-transform: translate3d(0, 0, -220px) rotate3d(1, 0, 0, 90deg);
@@ -98,16 +98,16 @@
     transform: translate3d(0, 0, -220px) rotate3d(1, 0, 0, 90deg);
 }
 
-.oxi-image-general-hover-style-19.oxi-image-hover:hover .oxi-image-hover-figure.top_to_bottom .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption,
-.oxi-image-general-hover-style-19.oxi-image-hover.oxi-touch .oxi-image-hover-figure.top_to_bottom .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption{
+.oxi-addons-container .oxi-image-general-hover-style-19.oxi-image-hover:hover .oxi-image-hover-figure.top_to_bottom .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption,
+.oxi-addons-container .oxi-image-general-hover-style-19.oxi-image-hover.oxi-touch .oxi-image-hover-figure.top_to_bottom .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption{
     -webkit-transform: rotate3d(1, 0, 0, 0deg);
     -moz-transform: rotate3d(1, 0, 0, 0deg);
     -ms-transform: rotate3d(1, 0, 0, 0deg);
     -o-transform: rotate3d(1, 0, 0, 0deg);
     transform: rotate3d(1, 0, 0, 0deg);
 }
-.oxi-image-general-hover-style-19.oxi-image-hover:hover .oxi-image-hover-figure.bottom_to_top .oxi-image-hover-image,
-.oxi-image-general-hover-style-19.oxi-image-hover.oxi-touch .oxi-image-hover-figure.bottom_to_top .oxi-image-hover-image{
+.oxi-addons-container .oxi-image-general-hover-style-19.oxi-image-hover:hover .oxi-image-hover-figure.bottom_to_top .oxi-image-hover-image,
+.oxi-addons-container .oxi-image-general-hover-style-19.oxi-image-hover.oxi-touch .oxi-image-hover-figure.bottom_to_top .oxi-image-hover-image{
     -webkit-transform: translate3d(0, 0, -220px) rotate3d(1, 0, 0, 90deg);
     -moz-transform: translate3d(0, 0, -220px) rotate3d(1, 0, 0, 90deg);
     -ms-transform: translate3d(0, 0, -220px) rotate3d(1, 0, 0, 90deg);
@@ -115,7 +115,7 @@
     transform: translate3d(0, 0, -220px) rotate3d(1, 0, 0, 90deg);
 }
 
-.oxi-image-general-hover-style-19 .oxi-image-hover-figure.bottom_to_top .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption {
+.oxi-addons-container .oxi-image-general-hover-style-19 .oxi-image-hover-figure.bottom_to_top .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption {
     -webkit-transform: translate3d(0, 280px, 0) rotate3d(1, 0, 0, -90deg);
     -moz-transform: translate3d(0, 280px, 0) rotate3d(1, 0, 0, -90deg);
     -ms-transform: translate3d(0, 280px, 0) rotate3d(1, 0, 0, -90deg);
@@ -123,8 +123,8 @@
     transform: translate3d(0, 280px, 0) rotate3d(1, 0, 0, -90deg);
 }
 
-.oxi-image-general-hover-style-19.oxi-image-hover:hover .oxi-image-hover-figure.bottom_to_top .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption,
-.oxi-image-general-hover-style-19.oxi-image-hover.oxi-touch .oxi-image-hover-figure.bottom_to_top .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption{
+.oxi-addons-container .oxi-image-general-hover-style-19.oxi-image-hover:hover .oxi-image-hover-figure.bottom_to_top .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption,
+.oxi-addons-container .oxi-image-general-hover-style-19.oxi-image-hover.oxi-touch .oxi-image-hover-figure.bottom_to_top .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption{
     -webkit-transform: rotate3d(1, 0, 0, 0deg);
     -moz-transform: rotate3d(1, 0, 0, 0deg);
     -ms-transform: rotate3d(1, 0, 0, 0deg);
@@ -133,15 +133,15 @@
 }
 
 
-.oxi-image-general-hover-style-19.oxi-image-hover:hover .oxi-image-hover-figure.left_to_right .oxi-image-hover-image,
-.oxi-image-general-hover-style-19.oxi-image-hover.oxi-touch .oxi-image-hover-figure.left_to_right .oxi-image-hover-image{
+.oxi-addons-container .oxi-image-general-hover-style-19.oxi-image-hover:hover .oxi-image-hover-figure.left_to_right .oxi-image-hover-image,
+.oxi-addons-container .oxi-image-general-hover-style-19.oxi-image-hover.oxi-touch .oxi-image-hover-figure.left_to_right .oxi-image-hover-image{
     -webkit-transform: translate3d(100%, 0, 0) rotate3d(0, 1, 0, -90deg);
     -moz-transform: translate3d(100%, 0, 0) rotate3d(0, 1, 0, -90deg);
     -ms-transform: translate3d(100%, 0, 0) rotate3d(0, 1, 0, -90deg);
     -o-transform: translate3d(100%, 0, 0) rotate3d(0, 1, 0, -90deg);
     transform: translate3d(100%, 0, 0) rotate3d(0, 1, 0, -90deg);
 }
-.oxi-image-general-hover-style-19 .oxi-image-hover-figure.left_to_right .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption {
+.oxi-addons-container .oxi-image-general-hover-style-19 .oxi-image-hover-figure.left_to_right .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption {
     -webkit-transform: translate3d(0, 0, -220px) rotate3d(0, 1, 0, 90deg);
     -moz-transform: translate3d(0, 0, -220px) rotate3d(0, 1, 0, 90deg);
     -ms-transform: translate3d(0, 0, -220px) rotate3d(0, 1, 0, 90deg);
@@ -149,8 +149,8 @@
     transform: translate3d(0, 0, -220px) rotate3d(0, 1, 0, 90deg);
 }
 
-.oxi-image-general-hover-style-19.oxi-image-hover:hover .oxi-image-hover-figure.left_to_right .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption,
-.oxi-image-general-hover-style-19.oxi-image-hover.oxi-touch .oxi-image-hover-figure.left_to_right .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption{
+.oxi-addons-container .oxi-image-general-hover-style-19.oxi-image-hover:hover .oxi-image-hover-figure.left_to_right .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption,
+.oxi-addons-container .oxi-image-general-hover-style-19.oxi-image-hover.oxi-touch .oxi-image-hover-figure.left_to_right .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption{
     -webkit-transform: rotate3d(0, 1, 0, 0deg);
     -moz-transform: rotate3d(0, 1, 0, 0deg);
     -ms-transform: rotate3d(0, 1, 0, 0deg);
@@ -159,8 +159,8 @@
 }
 
 
-.oxi-image-general-hover-style-19.oxi-image-hover:hover .oxi-image-hover-figure.right_to_left .oxi-image-hover-image,
-.oxi-image-general-hover-style-19.oxi-image-hover.oxi-touch .oxi-image-hover-figure.right_to_left .oxi-image-hover-image{
+.oxi-addons-container .oxi-image-general-hover-style-19.oxi-image-hover:hover .oxi-image-hover-figure.right_to_left .oxi-image-hover-image,
+.oxi-addons-container .oxi-image-general-hover-style-19.oxi-image-hover.oxi-touch .oxi-image-hover-figure.right_to_left .oxi-image-hover-image{
     -webkit-transform: translate3d(0, 0, -220px) rotate3d(0, 1, 0, 90deg);
     -moz-transform: translate3d(0, 0, -220px) rotate3d(0, 1, 0, 90deg);
     -ms-transform: translate3d(0, 0, -220px) rotate3d(0, 1, 0, 90deg);
@@ -168,7 +168,7 @@
     transform:translate3d(0, 0, -220px) rotate3d(0, 1, 0, 90deg);
 }
 
-.oxi-image-general-hover-style-19 .oxi-image-hover-figure.right_to_left .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption {
+.oxi-addons-container .oxi-image-general-hover-style-19 .oxi-image-hover-figure.right_to_left .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption {
     -webkit-transform: translate3d(100%, 0, 0) rotate3d(0, 1, 0, 90deg);
     -moz-transform: translate3d(100%, 0, 0) rotate3d(0, 1, 0, 90deg);
     -ms-transform: translate3d(100%, 0, 0) rotate3d(0, 1, 0, 90deg);
@@ -176,8 +176,8 @@
     transform: translate3d(100%, 0, 0) rotate3d(0, 1, 0, 90deg);
 }
 
-.oxi-image-general-hover-style-19.oxi-image-hover:hover .oxi-image-hover-figure.right_to_left .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption,
-.oxi-image-general-hover-style-19.oxi-image-hover.oxi-touch .oxi-image-hover-figure.right_to_left .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption{
+.oxi-addons-container .oxi-image-general-hover-style-19.oxi-image-hover:hover .oxi-image-hover-figure.right_to_left .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption,
+.oxi-addons-container .oxi-image-general-hover-style-19.oxi-image-hover.oxi-touch .oxi-image-hover-figure.right_to_left .oxi-image-hover-figure-caption-2 .oxi-image-hover-figure-caption{
     -webkit-transform: rotate3d(0, 1, 0, 0deg);
     -moz-transform: rotate3d(0, 1, 0, 0deg);
     -ms-transform: rotate3d(0, 1, 0, 0deg);

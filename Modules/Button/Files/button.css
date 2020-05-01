@@ -1,26 +1,26 @@
-.oxi-image-hover-style{
+.oxi-addons-container .oxi-addons-row .oxi-image-hover-style{
     padding: 15px; 
 }
-.oxi-image-hover-style-button{
+.oxi-addons-container .oxi-addons-row .oxi-image-hover-style-button{
     max-width: 300px;
     width: 100%;
     margin: 0 auto;
     position: relative;
 }
-.oxi-image-hover-style-button:after {
+.oxi-addons-container .oxi-addons-row .oxi-image-hover-style-button:after {
     padding-bottom: 100%;
     content: "";
     display: block;
 }
-.oxi-image-hover-style-button .oxi-image-button-hover,
-.oxi-image-hover-style-button .oxi-image-hover-figure{
+.oxi-addons-container .oxi-image-hover-style-button .oxi-image-button-hover,
+.oxi-addons-container .oxi-image-hover-style-button .oxi-image-hover-figure{
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
 }
-.oxi-image-hover-style-button .oxi-image-hover-image{
+.oxi-addons-container .oxi-image-hover-style-button .oxi-image-hover-image{
     position: absolute;
     top: 0;
     left: 0;
@@ -29,7 +29,7 @@
     opacity: 1;
     pointer-events: none;
 }
-.oxi-image-hover-style-button .oxi-image-hover-figure:before{
+.oxi-addons-container .oxi-image-hover-style-button .oxi-image-hover-figure:before{
     position: absolute;
     width: 100%;
     height: 100%;
@@ -40,7 +40,7 @@
     pointer-events: none;
     z-index: 11;
 }
-.oxi-image-hover-style-button .oxi-image-hover-image:before{
+.oxi-addons-container .oxi-image-hover-style-button .oxi-image-hover-image:before{
     position: absolute;
     width: 100%;
     height: 100%;
@@ -51,21 +51,21 @@
     z-index: 11;
     display: block;
 }
-.oxi-image-hover-style-button .oxi-image-hover-image img{
+.oxi-addons-container .oxi-image-hover-style-button .oxi-image-hover-image img{
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
 } 
-.oxi-image-hover-style-button  .oxi-image-hover-figure-caption{
+.oxi-addons-container .oxi-image-hover-style-button  .oxi-image-hover-figure-caption{
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
 }
-.oxi-image-hover-style-button  .oxi-image-hover-figure-caption:before{
+.oxi-addons-container .oxi-image-hover-style-button  .oxi-image-hover-figure-caption:before{
     position: absolute;
     width: 100%;
     height: 100%;
@@ -76,7 +76,7 @@
     z-index: 11;
     pointer-events: none;
 }
-.oxi-image-hover-style-button  .oxi-image-hover-figure-caption:after{
+.oxi-addons-container .oxi-image-hover-style-button  .oxi-image-hover-figure-caption:after{
     position: absolute;
     width: 100%;
     height: 100%;
@@ -88,7 +88,7 @@
     pointer-events: none;
 
 }
-.oxi-image-button-hover .oxi-image-hover-caption-tab{
+.oxi-addons-container .oxi-image-button-hover .oxi-image-hover-caption-tab{
     overflow: hidden;
     z-index: 1;
     position: absolute;
@@ -98,52 +98,52 @@
     left: 0;
 
 }
-.oxi-image-hover-caption-tab{
+.oxi-addons-container .oxi-addons-row .oxi-image-hover-caption-tab{
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 15px;
 }
-.oxi-image-button-hover .oxi-image-hover-caption-tab.image-hover-align-top-left{
+.oxi-addons-container .oxi-image-button-hover .oxi-image-hover-caption-tab.image-hover-align-top-left{
     justify-content: flex-start;align-items: flex-start;
 }
-.oxi-image-button-hover .oxi-image-hover-caption-tab.image-hover-align-top-center{
+.oxi-addons-container .oxi-image-button-hover .oxi-image-hover-caption-tab.image-hover-align-top-center{
     justify-content: center;align-items: flex-start;
 }
-.oxi-image-button-hover .oxi-image-hover-caption-tab.image-hover-align-top-right{
+.oxi-addons-container  .oxi-image-button-hover .oxi-image-hover-caption-tab.image-hover-align-top-right{
     justify-content: flex-end;align-items: flex-start;
 }
-.oxi-image-button-hover .oxi-image-hover-caption-tab.image-hover-align-center-left{
+.oxi-addons-container  .oxi-image-button-hover .oxi-image-hover-caption-tab.image-hover-align-center-left{
     justify-content: flex-start;align-items: center;
 }
-.oxi-image-button-hover .oxi-image-hover-caption-tab.image-hover-align-center-center{
+.oxi-addons-container  .oxi-image-button-hover .oxi-image-hover-caption-tab.image-hover-align-center-center{
     justify-content: center;align-items:  center;
 }
-.oxi-image-button-hover .oxi-image-hover-caption-tab.image-hover-align-center-right{
+.oxi-addons-container  .oxi-image-button-hover .oxi-image-hover-caption-tab.image-hover-align-center-right{
     justify-content: flex-end;align-items: center;
 }
-.oxi-image-button-hover .oxi-image-hover-caption-tab.image-hover-align-bottom-left{
+.oxi-addons-container  .oxi-image-button-hover .oxi-image-hover-caption-tab.image-hover-align-bottom-left{
     justify-content: flex-start;align-items: flex-end;
 }
-.oxi-image-button-hover .oxi-image-hover-caption-tab.image-hover-align-bottom-center{
+.oxi-addons-container  .oxi-image-button-hover .oxi-image-hover-caption-tab.image-hover-align-bottom-center{
     justify-content: center;align-items: flex-end;
 }
-.oxi-image-button-hover .oxi-image-hover-caption-tab.image-hover-align-bottom-right{
+.oxi-addons-container  .oxi-image-button-hover .oxi-image-hover-caption-tab.image-hover-align-bottom-right{
     justify-content: flex-end;align-items: flex-end;
 }
-.oxi-image-hover:hover .oxi-image-hover-figure-caption,
-.oxi-image-hover.oxi-touch .oxi-image-hover-figure-caption{
+.oxi-addons-container  .oxi-image-hover:hover .oxi-image-hover-figure-caption,
+.oxi-addons-container  .oxi-image-hover.oxi-touch .oxi-image-hover-figure-caption{
     -webkit-backface-visibility: visible;
     backface-visibility: visible;
     opacity: 1;
 }
 
-.oxi-image-button-hover .oxi-image-hover-caption-tab .oxi-image-hover-icon{
+.oxi-addons-container .oxi-image-button-hover .oxi-image-hover-caption-tab .oxi-image-hover-icon{
     padding: 0 3px;
     display: inline-block;
 }
 
-.oxi-image-button-hover .oxi-image-hover-caption-tab .oxi-icons{
+.oxi-addons-container .oxi-image-button-hover .oxi-image-hover-caption-tab .oxi-icons{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -160,7 +160,7 @@
     transition: all 0.25s ease-in-out;
 
 }
-.oxi-image-button-hover .oxi-image-hover-caption-tab .oxi-icons:before{
+.oxi-addons-container .oxi-image-button-hover .oxi-image-hover-caption-tab .oxi-icons:before{
     -webkit-transition: all 0.25s ease-in-out;
     -moz-transition: all 0.25s ease-in-out;
     transition: all 0.25s ease-in-out;

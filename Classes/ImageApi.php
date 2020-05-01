@@ -93,6 +93,19 @@ class ImageApi {
         return $arr;
     }
 
+    public function update_image_hover_plugin() {
+        $stylelist = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->parent_table ORDER by id ASC"), ARRAY_A);
+        foreach ($stylelist as $value) {
+            $raw = json_decode(stripslashes($value['rawdata']), true);
+            $raw['image-hover-style-id'] = $value['id'];
+            $s = explode('-', $value['style_name']);
+            $CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($s[0]) . '\Admin\Effects' . $s[1];
+            $C = new $CLASS('admin');
+            $f = $C->template_css_render($raw);
+        }
+        update_option('image_hover_ultimate_update_complete', 'done');
+    }
+
     public function post_create_new() {
         if (!empty($this->styleid)):
             $styleid = (int) $this->styleid;

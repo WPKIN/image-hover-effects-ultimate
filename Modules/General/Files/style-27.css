@@ -1,19 +1,19 @@
-.oxi-image-general-hover-style-27 .oxi-image-hover-figure .oxi-image-hover-figure-caption {
+.oxi-addons-container .oxi-image-general-hover-style-27 .oxi-image-hover-figure .oxi-image-hover-figure-caption {
     z-index: 1;
 }
 
-.oxi-image-general-hover-style-27 .oxi-image-hover-figure .oxi-image-hover-image {
+.oxi-addons-container .oxi-image-general-hover-style-27 .oxi-image-hover-figure .oxi-image-hover-image {
     opacity: 1;
     -webkit-animation-duration: 1s;
     animation-duration: 1s;
     z-index: 11;
 }
-.oxi-image-general-hover-style-27 .oxi-image-hover-figure.left_to_right .oxi-image-hover-image {
+.oxi-addons-container .oxi-image-general-hover-style-27 .oxi-image-hover-figure.left_to_right .oxi-image-hover-image {
     -webkit-animation-name: tinRightIn;
     animation-name: tinRightIn;
 }
-.oxi-image-general-hover-style-27.oxi-image-hover:hover .oxi-image-hover-figure.left_to_right .oxi-image-hover-image,
-.oxi-image-general-hover-style-27.oxi-image-hover.oxi-touch .oxi-image-hover-figure.left_to_right .oxi-image-hover-image{
+.oxi-addons-container .oxi-image-general-hover-style-27.oxi-image-hover:hover .oxi-image-hover-figure.left_to_right .oxi-image-hover-image,
+.oxi-addons-container .oxi-image-general-hover-style-27.oxi-image-hover.oxi-touch .oxi-image-hover-figure.left_to_right .oxi-image-hover-image{
     -webkit-animation-name: tinRightOut;
     animation-name: tinRightOut;
     opacity: 0 ;
@@ -87,13 +87,13 @@
         transform: scale(1, 1) translateX(900%);
     }
 }
-.oxi-image-general-hover-style-27 .oxi-image-hover-figure.right_to_left .oxi-image-hover-image {
+.oxi-addons-container .oxi-image-general-hover-style-27 .oxi-image-hover-figure.right_to_left .oxi-image-hover-image {
     -webkit-animation-name: tinLeftIn;
     animation-name: tinLeftIn;
     opacity: 1;
 }
-.oxi-image-general-hover-style-27.oxi-image-hover:hover .oxi-image-hover-figure.right_to_left .oxi-image-hover-image,
-.oxi-image-general-hover-style-27.oxi-image-hover.oxi-touch .oxi-image-hover-figure.right_to_left .oxi-image-hover-image{
+.oxi-addons-container .oxi-image-general-hover-style-27.oxi-image-hover:hover .oxi-image-hover-figure.right_to_left .oxi-image-hover-image,
+.oxi-addons-container .oxi-image-general-hover-style-27.oxi-image-hover.oxi-touch .oxi-image-hover-figure.right_to_left .oxi-image-hover-image{
     -webkit-animation-name: tinLeftOut;
     animation-name: tinLeftOut;
     opacity: 0 ;
@@ -167,13 +167,13 @@
         transform: scale(1, 1) translateX(-900%);
     }
 }
-.oxi-image-general-hover-style-27 .oxi-image-hover-figure.top_to_bottom .oxi-image-hover-image {
+.oxi-addons-container .oxi-image-general-hover-style-27 .oxi-image-hover-figure.top_to_bottom .oxi-image-hover-image {
     -webkit-animation-name: tinTopIn;
     animation-name: tinTopIn;
     opacity: 1;
 }
-.oxi-image-general-hover-style-27.oxi-image-hover:hover .oxi-image-hover-figure.top_to_bottom .oxi-image-hover-image,
-.oxi-image-general-hover-style-27.oxi-image-hover.oxi-touch .oxi-image-hover-figure.top_to_bottom .oxi-image-hover-image{
+.oxi-addons-container .oxi-image-general-hover-style-27.oxi-image-hover:hover .oxi-image-hover-figure.top_to_bottom .oxi-image-hover-image,
+.oxi-addons-container .oxi-image-general-hover-style-27.oxi-image-hover.oxi-touch .oxi-image-hover-figure.top_to_bottom .oxi-image-hover-image{
     -webkit-animation-name: tinTopOut;
     animation-name: tinTopOut;
     opacity: 0 ;
@@ -248,13 +248,13 @@
     }
 }
 
-.oxi-image-general-hover-style-27 .oxi-image-hover-figure.bottom_to_top .oxi-image-hover-image {
+.oxi-addons-container .oxi-image-general-hover-style-27 .oxi-image-hover-figure.bottom_to_top .oxi-image-hover-image {
     -webkit-animation-name: tinBottomIn;
     animation-name: tinBottomIn;
     opacity: 1;
 }
-.oxi-image-general-hover-style-27.oxi-image-hover:hover .oxi-image-hover-figure.bottom_to_top .oxi-image-hover-image,
-.oxi-image-general-hover-style-27.oxi-image-hover.oxi-touch .oxi-image-hover-figure.bottom_to_top .oxi-image-hover-image{
+.oxi-addons-container .oxi-image-general-hover-style-27.oxi-image-hover:hover .oxi-image-hover-figure.bottom_to_top .oxi-image-hover-image,
+.oxi-addons-container .oxi-image-general-hover-style-27.oxi-image-hover.oxi-touch .oxi-image-hover-figure.bottom_to_top .oxi-image-hover-image{
     -webkit-animation-name: tinBottomOut;
     animation-name: tinBottomOut;
     opacity: 0 ;

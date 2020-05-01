@@ -75,6 +75,20 @@ class Bootstrap {
             $this->User_Admin();
             $this->User_Reviews();
         }
+        add_action('init', [$this, 'register_image_hover_ultimate_update']);
+    }
+
+    public function register_image_hover_ultimate_update() {
+        $check = get_option('image_hover_ultimate_update_complete');
+        if ($check != 'done'):
+            add_action('image_hover_ultimate_update', [$this, 'plugin_update']);
+            wp_schedule_single_event(time() + 10, 'image_hover_ultimate_update');
+        endif;
+    }
+
+    public function plugin_update() {
+        $upgrade = new \OXI_IMAGE_HOVER_PLUGINS\Classes\ImageApi();
+        $upgrade->update_image_hover_plugin();
     }
 
     /**

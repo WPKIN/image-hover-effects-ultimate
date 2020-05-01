@@ -3216,15 +3216,7 @@
     -webkit-animation-name: slideOutUp;
     animation-name: slideOutUp
 }
-.sa-data-animation{
-    opacity: 0;
-    visibility: hidden;
-}
 
-.sa-data-animation.animated{
-    opacity: 1;
-    visibility: visible;
-}
 
 .animated {
     -webkit-animation-duration: 1s;
