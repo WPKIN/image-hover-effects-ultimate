@@ -1,21 +1,21 @@
-.oxi-image-hover-style {
+.oxi-addons-container .oxi-image-hover-style {
     padding: 15px;
 }
 
-.oxi-image-hover-style-caption {
+.oxi-addons-container .oxi-image-hover-style-caption {
     max-width: 300px;
     width: 100%;
     margin: 0 auto;
     position: relative;
 }
 
-.oxi-image-hover-style-caption:after {
+.oxi-addons-container .oxi-image-hover-style-caption:after {
     padding-bottom: 80%;
     content: "";
     display: block;
 }
 
-.oxi-image-hover-style-caption .oxi-image-hover {
+.oxi-addons-container .oxi-image-hover-style-caption .oxi-image-hover {
     position: absolute;
     top: 0;
     left: 0;
@@ -23,7 +23,7 @@
     right: 0;
 }
 
-.oxi-image-caption-hover {
+.oxi-addons-container .oxi-image-caption-hover {
     position: absolute;
     top: 0;
     left: 0;
@@ -40,17 +40,17 @@
     transform: translateZ(0);
 }
 
-.oxi-image-caption-hover:hover,
-.oxi-image-caption-hover.oxi-touch {
+.oxi-addons-container .oxi-image-caption-hover:hover,
+.oxi-addons-container .oxi-image-caption-hover.oxi-touch {
     z-index: 5;
 }
 
-.oxi-image-caption-hover,
-.oxi-image-caption-hover:before,
-.oxi-image-caption-hover:after,
-.oxi-image-caption-hover *,
-.oxi-image-caption-hover *:before,
-.oxi-image-caption-hover *:after {
+.oxi-addons-container .oxi-image-caption-hover,
+.oxi-addons-container .oxi-image-caption-hover:before,
+.oxi-addons-container .oxi-image-caption-hover:after,
+.oxi-addons-container .oxi-image-caption-hover *,
+.oxi-addons-container .oxi-image-caption-hover *:before,
+.oxi-addons-container .oxi-image-caption-hover *:after {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -60,7 +60,7 @@
     transition: all 0.35s ease;
 }
 
-.oxi-image-caption-hover .oxi-image-hover-figure {
+.oxi-addons-container .oxi-image-caption-hover .oxi-image-hover-figure {
     position: absolute;
     top: 0;
     left: 0;
@@ -68,7 +68,7 @@
     right: 0;
 }
 
-.oxi-image-caption-hover .oxi-image-hover-image {
+.oxi-addons-container .oxi-image-caption-hover .oxi-image-hover-image {
     position: absolute;
     top: 0;
     left: 0;
@@ -77,7 +77,7 @@
     z-index: 1;
 }
 
-.oxi-image-caption-hover .oxi-image-hover-image img {
+.oxi-addons-container .oxi-image-caption-hover .oxi-image-hover-image img {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -85,7 +85,7 @@
     right: 0;
 }
 
-.oxi-image-caption-hover .oxi-image-hover-figure-caption {
+.oxi-addons-container .oxi-image-caption-hover .oxi-image-hover-figure-caption {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -94,11 +94,11 @@
     color: #ffffff;
 }
 
-.oxi-image-caption-hover .oxi-image-hover-caption-tab  {
+.oxi-addons-container .oxi-image-caption-hover .oxi-image-hover-caption-tab  {
     background: transparent;
 }
 
-.oxi-image-hover-caption-tab {
+.oxi-addons-container .oxi-image-hover-caption-tab {
     position: absolute;
     display: flex;
     align-items: center;
@@ -111,26 +111,26 @@
     bottom: 0;
 }
 
-[class^='oxi-image-caption-']:before,
-[class*='oxi-image-caption-']:before,
-[class*='oxi-image-caption-']:after,
-[class*='oxi-image-caption-']:after {
+.oxi-addons-container [class^='oxi-image-caption-']:before,
+.oxi-addons-container [class*='oxi-image-caption-']:before,
+.oxi-addons-container [class*='oxi-image-caption-']:after,
+.oxi-addons-container [class*='oxi-image-caption-']:after {
     z-index: 2;
 }
 
-[class^='oxi-image-caption-'] .oxi-image-hover-figure-caption,
-[class*='oxi-image-caption-'] .oxi-image-hover-figure-caption {
+.oxi-addons-container [class^='oxi-image-caption-'] .oxi-image-hover-figure-caption,
+.oxi-addons-container [class*='oxi-image-caption-'] .oxi-image-hover-figure-caption {
     z-index: 3;
 }
 
-.oxi-image-hover-style-caption .oxi-image-hover-heading {
+.oxi-addons-container .oxi-image-hover-style-caption .oxi-image-hover-heading {
     width: 100%;
     font-size: 20px;
     font-weight: 600;
     color: #ffffff;
 }
 
-.oxi-image-hover-figure-caption .oxi-image-hover-content {
+.oxi-addons-container .oxi-image-hover-figure-caption .oxi-image-hover-content {
     width: 100%;
     font-size: 15px;
     font-weight: 300;
@@ -138,13 +138,13 @@
     color: #ffffff;
 }
 
-.oxi-image-hover-style-caption .oxi-image-hover-button {
+.oxi-addons-container .oxi-image-hover-style-caption .oxi-image-hover-button {
     position: relative;
     width: 100%;
     display: block;
 }
 
-.oxi-image-hover-style-caption a.oxi-image-btn {
+.oxi-addons-container .oxi-image-hover-style-caption a.oxi-image-btn {
     display: inline-block;
     font-size: 12px;
     color: #00a88f;
@@ -160,7 +160,7 @@
     transition-delay: 0.0s;
 }
 
-.oxi-image-hover-style-caption a.oxi-image-btn:hover {
+.oxi-addons-container .oxi-image-hover-style-caption a.oxi-image-btn:hover {
     color: #fafafa;
     background: #00a88f;
 }
