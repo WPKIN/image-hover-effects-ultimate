@@ -1798,7 +1798,6 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon' => '',
             ],
-            'simpledescription' => 'Allows you to animated Icon while viewing.',
             'description' => 'Allows you to animated Icon while viewing.',
                 ]
         );
@@ -1819,7 +1818,6 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon' => '',
             ],
-            'simpledescription' => 'Allows you to animation delay of Icon while viewing.',
             'description' => 'Allows you to animation delay of Icon while viewing.',
                 ]
         );
@@ -1860,7 +1858,6 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}}  .oxi-image-hover-button' => 'text-align:{{VALUE}}',
                     ],
-                    'simpledescription' => 'Allows you set Button Align as Left, Center or Right.',
                     'description' => 'Allows you set Button Align as Left, Center or Right.',
                 ]
         );
@@ -1892,7 +1889,6 @@ class Modules extends Admin_Render {
                 '{{WRAPPER}}  .oxi-image-hover-button a.oxi-image-btn' => 'color: {{VALUE}};',
                 '{{WRAPPER}}  .oxi-image-hover-button a.oxi-image-btn:hover' => 'color: {{VALUE}};',
             ],
-            'simpledescription' => 'Color property is used to set the color of the Button.',
             'description' => 'Color property is used to set the color of the Button.',
                 ]
         );
@@ -1905,7 +1901,6 @@ class Modules extends Admin_Render {
                 '{{WRAPPER}} .oxi-image-hover-button a.oxi-image-btn' => 'background: {{VALUE}};',
                 '{{WRAPPER}} .oxi-image-hover-button a.oxi-image-btn:hover' => 'background: {{VALUE}};',
             ],
-            'simpledescription' => 'Background property is used to set the Background of the Button.',
             'description' => 'Background property is used to set the Background of the Button.',
                 ]
         );
@@ -1926,7 +1921,6 @@ class Modules extends Admin_Render {
                 '{{WRAPPER}} .oxi-image-hover-button  a.oxi-image-btn' => '',
                 '{{WRAPPER}} .oxi-image-hover-button  a.oxi-image-btn:hover' => '',
             ],
-            'simpledescription' => 'Text Shadow property adds shadow to Button.',
             'description' => 'Text Shadow property adds shadow to Button.',
                 ]
         );
@@ -1960,7 +1954,6 @@ class Modules extends Admin_Render {
                 '{{WRAPPER}} .oxi-image-hover-button a.oxi-image-btn' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 '{{WRAPPER}} .oxi-image-hover-button a.oxi-image-btn:hover' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-            'simpledescription' => 'Allows you to add rounded corners to Button with options.',
             'description' => 'Allows you to add rounded corners to Button with options.',
                 ]
         );
@@ -1984,8 +1977,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure .oxi-image-hover-button a.oxi-image-btn:hover' => 'color: {{VALUE}};',
             ],
-            'simpledescription' => 'Color property is used to set the Hover color of the Button.',
-            'description' => 'Color property is used to set the Hover color of the Button.',
+           'description' => 'Color property is used to set the Hover color of the Button.',
                 ]
         );
         $this->add_control(
@@ -1996,7 +1988,6 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure .oxi-image-hover-button a.oxi-image-btn:hover' => 'background: {{VALUE}};',
             ],
-            'simpledescription' => 'Background property is used to set the Hover Background of the Button.',
             'description' => 'Background property is used to set the Hover Background of the Button.',
                 ]
         );
@@ -2006,7 +1997,6 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure .oxi-image-hover-button a.oxi-image-btn:hover' => '',
             ],
-            'simpledescription' => 'Button',
             'description' => 'Border property is used to set the Hover Border of the Button.',
                 ]
         );
@@ -2016,7 +2006,6 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure .oxi-image-hover-button a.oxi-image-btn:hover' => '',
             ],
-            'simpledescription' => 'Text Shadow property adds shadow to Hover Button.',
             'description' => 'Text Shadow property adds shadow to Hover Button.',
                 ]
         );
@@ -2049,7 +2038,6 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure .oxi-image-hover-button a.oxi-image-btn:hover' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-            'simpledescription' => 'Allows you to add rounded corners at hover to Button with options.',
             'description' => 'Allows you to add rounded corners at hover to Button with options.',
                 ]
         );
@@ -2110,7 +2098,7 @@ class Modules extends Admin_Render {
             ],
             'range' => [
                 'px' => [
-                    'min' => 1,
+                    'min' => -100,
                     'max' => 500,
                     'step' => 1,
                 ],
@@ -2128,7 +2116,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-button a.oxi-image-btn' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-            'simpledescription' => 'Generate space at bottom of Button.',
+           
             'description' => 'Generate space around a Button, Outside of Content.',
                 ]
         );
@@ -2155,7 +2143,6 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-button' => '',
             ],
-            'simpledescription' => 'Allows you to animated Button while viewing.',
             'description' => 'Allows you to animated Button while viewing.',
                 ]
         );
@@ -2176,7 +2163,6 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-button' => '',
             ],
-            'simpledescription' => 'Allows you to animation delay at Button while viewing.',
             'description' => 'Allows you to animation delay at Button while viewing.',
                 ]
         );

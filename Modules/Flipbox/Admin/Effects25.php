@@ -47,7 +47,7 @@ class Effects25 extends Modules {
             'type' => Controls::BORDER,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section' => '',
-            ]
+            ], 'description' => 'Customize Hover Background with Color or Gradient or Image properties.',
                 ]
         );
 
@@ -86,7 +86,7 @@ class Effects25 extends Modules {
                 . '{{WRAPPER}} .oxi-image-hover-figure-backend:before, '
                 . '{{WRAPPER}} .oxi-image-hover-figure-backend:after, '
                 . '{{WRAPPER}} .oxi-image-hover-figure-back-section ' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ],
+            ], 'description' => 'Allows you to add rounded corners to Flipbox with options.',
                 ]
         );
         $this->add_group_control(
@@ -95,7 +95,7 @@ class Effects25 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-frontend:before' => '',
                 '{{WRAPPER}} .oxi-image-hover-figure-backend:before' => '',
-            ],
+            ], 'description' => 'Allows you at hover to attaches one or more shadows into Button.',
                 ]
         );
         $this->end_controls_section();
@@ -152,7 +152,7 @@ class Effects25 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}}  .oxi-image-hover-button' => 'text-align:{{VALUE}}',
-            ]
+            ], 'description' => 'Allows you set Button Align as Left, Center or Right.',
                 ]
         );
         $this->add_responsive_control(
@@ -183,6 +183,7 @@ class Effects25 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-button .oxi-icons' => 'font-size:{{SIZE}}{{UNIT}};',
             ],
+            'description' => 'Set your icon size .',
                 ]
         );
 
@@ -203,7 +204,8 @@ class Effects25 extends Modules {
             'selector' => [
                 '{{WRAPPER}}  .oxi-image-hover-button a.oxi-image-btn' => 'color: {{VALUE}};',
                 '{{WRAPPER}}  .oxi-image-hover-button a.oxi-image-btn:hover' => 'color: {{VALUE}};',
-            ]
+            ],
+            'description' => 'Color property is used to set the color of the Button.',
                 ]
         );
 
@@ -213,7 +215,8 @@ class Effects25 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-button  a.oxi-image-btn' => '',
                 '{{WRAPPER}} .oxi-image-hover-button  a.oxi-image-btn:hover' => '',
-            ]
+            ],
+            'description' => 'Text Shadow property adds shadow to Icon.',
                 ]
         );
 
@@ -226,7 +229,8 @@ class Effects25 extends Modules {
             'default' => '#ffffff',
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure .oxi-image-hover-button a.oxi-image-btn:hover' => 'color: {{VALUE}};',
-            ]
+            ],
+            'description' => 'Color property is used to set the Hover color of the Button.',
                 ]
         );
 
@@ -235,7 +239,8 @@ class Effects25 extends Modules {
             'type' => Controls::TEXTSHADOW,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure .oxi-image-hover-button a.oxi-image-btn:hover' => '',
-            ]
+            ],
+            'description' => 'Text Shadow property adds shadow to Icon.',
                 ]
         );
 
@@ -243,37 +248,7 @@ class Effects25 extends Modules {
         $this->end_controls_tab();
         $this->end_controls_tabs();
 
-        $this->add_responsive_control(
-                'oxi-image-flip-back-button-padding', $this->style, [
-            'label' => __('Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::DIMENSIONS,
-            'separator' => TRUE,
-            'default' => [
-                'unit' => 'px',
-                'size' => '',
-            ],
-            'range' => [
-                'px' => [
-                    'min' => 1,
-                    'max' => 500,
-                    'step' => 1,
-                ],
-                '%' => [
-                    'min' => 0,
-                    'max' => 100,
-                    'step' => 1,
-                ],
-                'em' => [
-                    'min' => 0,
-                    'max' => 100,
-                    'step' => .1,
-                ],
-            ],
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-hover-button a.oxi-image-btn' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
-                ]
-        );
+
         $this->add_responsive_control(
                 'oxi-image-flip-back-button-margin', $this->style, [
             'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
@@ -284,24 +259,25 @@ class Effects25 extends Modules {
             ],
             'range' => [
                 'px' => [
-                    'min' => 1,
+                    'min' => -100,
                     'max' => 500,
                     'step' => 1,
                 ],
                 '%' => [
-                    'min' => 0,
+                    'min' => -50,
                     'max' => 100,
                     'step' => 1,
                 ],
                 'em' => [
-                    'min' => 0,
+                    'min' => -50,
                     'max' => 100,
                     'step' => .1,
                 ],
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-button a.oxi-image-btn' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+            'description' => 'Generate space around a Button, Outside of Content.',
                 ]
         );
         $this->add_control(
@@ -326,7 +302,8 @@ class Effects25 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-button' => '',
-            ]
+            ],
+            'description' => 'Allows you to animated Button while viewing.',
                 ]
         );
         $this->add_control(
@@ -345,7 +322,8 @@ class Effects25 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-button' => '',
-            ]
+            ],
+            'description' => 'Allows you to animation delay at Button while viewing.',
                 ]
         );
 

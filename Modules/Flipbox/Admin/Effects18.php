@@ -60,7 +60,8 @@ class Effects18 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon' => 'text-align:{{VALUE}};',
-            ]
+            ],
+            'description' => 'Allows you to set Icon Position.',
                 ]
         );
         $this->add_responsive_control(
@@ -91,6 +92,7 @@ class Effects18 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon .oxi-icons' => 'width:{{SIZE}}{{UNIT}}; height:{{SIZE}}{{UNIT}};',
             ],
+            'description' => 'Allows you to Set Icon Width Height.',
                 ]
         );
         $this->add_responsive_control(
@@ -121,6 +123,7 @@ class Effects18 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon .oxi-icons' => 'font-size:{{SIZE}}{{UNIT}};',
             ],
+            'description' => 'Allows you to Set Icon Size.',
                 ]
         );
         $this->add_control(
@@ -130,7 +133,8 @@ class Effects18 extends Modules {
             'default' => '#b414c9',
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon .oxi-icons' => 'color: {{VALUE}};',
-            ]
+            ],
+            'description' => 'Color property is used to set the color of the Icon.',
                 ]
         );
         $this->add_group_control(
@@ -138,7 +142,8 @@ class Effects18 extends Modules {
             'type' => Controls::BACKGROUND,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon .oxi-icons' => '',
-            ]
+            ],
+            'description' => 'Customize Icon Background with Color or Gradient or Image properties.',
                 ]
         );
 
@@ -147,7 +152,8 @@ class Effects18 extends Modules {
             'type' => Controls::BORDER,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon' => '',
-            ]
+            ],
+            'description' => 'Border property is used to set the Border of the Icon.',
                 ]
         );
 
@@ -177,10 +183,11 @@ class Effects18 extends Modules {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon .oxi-icons,'.
+                '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon .oxi-icons,' .
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section  .oxi-image-hover-icon'
                 => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+            'description' => 'Allows you to add rounded corners to Icon with 4 values.',
                 ]
         );
         $this->add_responsive_control(
@@ -210,7 +217,8 @@ class Effects18 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon ' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+            'description' => 'Padding properties are used to create space around Icon.',
                 ]
         );
         $this->add_responsive_control(
@@ -240,7 +248,9 @@ class Effects18 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon-section ' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+                     'description' => 'Margin properties are used to create space outside Icon.',
+            
                 ]
         );
         $this->end_controls_section();

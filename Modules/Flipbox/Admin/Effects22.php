@@ -57,7 +57,8 @@ class Effects22 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section' => '',
-            ]
+            ],
+            'description' => 'Customize Content Aginment as Top, Bottom, Left or Center.',
                 ]
         );
         $this->add_group_control(
@@ -65,7 +66,8 @@ class Effects22 extends Modules {
             'type' => Controls::BACKGROUND,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section-body' => '',
-            ]
+            ],
+            'description' => 'Customize Hover Background with Color or Gradient or Image properties.',
                 ]
         );
 
@@ -74,7 +76,8 @@ class Effects22 extends Modules {
             'type' => Controls::BORDER,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section' => '',
-            ]
+            ],
+            'description' => 'Border property is used to set the Hover Border of the Flipbox.',
                 ]
         );
 
@@ -115,6 +118,7 @@ class Effects22 extends Modules {
                 . '{{WRAPPER}} .oxi-image-hover-figure-backend:after, '
                 . '{{WRAPPER}} .oxi-image-hover-figure-back-section ' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
+            'description' => 'Allows you to add rounded corners to Flipbox with options.',
                 ]
         );
         $this->add_group_control(
@@ -124,6 +128,7 @@ class Effects22 extends Modules {
                 '{{WRAPPER}} .oxi-image-hover-figure-frontend:before' => '',
                 '{{WRAPPER}} .oxi-image-hover-figure-backend:before' => '',
             ],
+            'description' => 'Allows you at hover to attaches one or more shadows into Button.',
                 ]
         );
         $this->add_responsive_control(
@@ -154,7 +159,8 @@ class Effects22 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+            'description' => 'Generate space around a Flipbox, inside of any defined borders or Background.',
                 ]
         );
         $this->add_responsive_control(
@@ -185,7 +191,8 @@ class Effects22 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+            'description' => 'Generate space outside a Flipbox.',
                 ]
         );
         $this->end_controls_section();
@@ -210,187 +217,6 @@ class Effects22 extends Modules {
 
 
         $this->end_section_tabs();
-    }
-
-    public function register_back_icon_settings() {
-        $this->start_controls_section(
-                'oxi-image-hover', [
-            'label' => esc_html__('Icon Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'showing' => FALSE,
-                ]
-        );
-        $this->add_responsive_control(
-                'oxi-image-flip-back-icon-size', $this->style, [
-            'label' => __('Icon Size', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::SLIDER,
-            'default' => [
-                'unit' => 'px',
-                'size' => 20,
-            ],
-            'range' => [
-                'px' => [
-                    'min' => 1,
-                    'max' => 500,
-                    'step' => 1,
-                ],
-                '%' => [
-                    'min' => 0,
-                    'max' => 100,
-                    'step' => 1,
-                ],
-                'em' => [
-                    'min' => 0,
-                    'max' => 100,
-                    'step' => .1,
-                ],
-            ],
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon .oxi-icons' => 'font-size:{{SIZE}}{{UNIT}};',
-            ],
-                ]
-        );
-        $this->add_control(
-                'oxi-image-flip-back-icon-color', $this->style, [
-            'label' => __('Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::COLOR,
-            'default' => '#b414c9',
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon .oxi-icons' => 'color: {{VALUE}};',
-            ]
-                ]
-        );
-
-        $this->add_group_control(
-                'oxi-image-flip-back-icon-background', $this->style, [
-            'type' => Controls::BACKGROUND,
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon .oxi-icons' => '',
-            ]
-                ]
-        );
-        $this->add_group_control(
-                'oxi-image-flip-back-icon-border', $this->style, [
-            'type' => Controls::BORDER,
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon .oxi-icons' => '',
-            ]
-                ]
-        );
-
-        $this->add_responsive_control(
-                'oxi-image-flip-back-icon-border-radius', $this->style, [
-            'label' => __('Border Radius', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::DIMENSIONS,
-            'default' => [
-                'unit' => 'px',
-                'size' => 100,
-            ],
-            'range' => [
-                '%' => [
-                    'min' => 0,
-                    'max' => 50,
-                    'step' => .1,
-                ],
-                'px' => [
-                    'min' => -200,
-                    'max' => 200,
-                    'step' => 1,
-                ],
-                'em' => [
-                    'min' => 0,
-                    'max' => 10,
-                    'step' => .1,
-                ],
-            ],
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon .oxi-icons' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
-                ]
-        );
-        $this->add_responsive_control(
-                'oxi-image-flip-back-icon-padding', $this->style, [
-            'label' => __('Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::DIMENSIONS,
-            'default' => [
-                'unit' => 'px',
-                'size' => '',
-            ],
-            'range' => [
-                'px' => [
-                    'min' => 1,
-                    'max' => 500,
-                    'step' => 1,
-                ],
-                '%' => [
-                    'min' => 0,
-                    'max' => 100,
-                    'step' => 1,
-                ],
-                'em' => [
-                    'min' => 0,
-                    'max' => 100,
-                    'step' => .1,
-                ],
-            ],
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon .oxi-icons' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
-                ]
-        );
-        $this->add_group_control(
-                'oxi-image-flip-back-icon-boxshadow', $this->style, [
-            'type' => Controls::BOXSHADOW,
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon .oxi-icons' => '',
-            ],
-                ]
-        );
-        $this->add_control(
-                'oxi-image-flip-back-icon-animation', $this->style, [
-            'label' => __('Animation', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::SELECT,
-            'default' => 'solid',
-            'options' => [
-                '' => __('None', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'iheu-fade-up' => __('Fade Up', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'iheu-fade-down' => __('Fade Down', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'iheu-fade-left' => __('Fade Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'iheu-fade-right' => __('Fade Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'iheu-fade-up-big' => __('Fade up Big', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'iheu-fade-down-big' => __('Fade down Big', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'iheu-fade-left-big' => __('Fade left Big', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'iheu-fade-right-big' => __('Fade Right Big', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'iheu-zoom-in' => __('Zoom In', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'iheu-zoom-out' => __('Zoom Out', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'iheu-flip-x' => __('Flip X', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'iheu-flip-y' => __('Flip Y', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            ],
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon' => '',
-            ]
-                ]
-        );
-        $this->add_control(
-                'oxi-image-flip-back-icon-animation-delay', $this->style, [
-            'label' => __('Animation Delay', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::SELECT,
-            'default' => '',
-            'options' => [
-                '' => __('None', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-image-hover-delay-xs' => __('Delay XS', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-image-hover-delay-sm' => __('Delay SM', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-image-hover-delay-md' => __('Delay MD', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-image-hover-delay-lg' => __('Delay LG', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-image-hover-delay-xl' => __('Delay XL', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-image-hover-delay-xxl' => __('Delay XXL', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            ],
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon' => '',
-            ]
-                ]
-        );
-
-        $this->end_controls_section();
     }
 
     public function register_back_content_settings() {
@@ -418,7 +244,8 @@ class Effects22 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-back-section' => '',
-            ]
+            ],
+            'description' => 'Customize Content Aginment as Top, Bottom, Left or Center.',
                 ]
         );
         $this->add_group_control(
@@ -426,7 +253,8 @@ class Effects22 extends Modules {
             'type' => Controls::BACKGROUND,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend-section-body' => '',
-            ]
+            ],
+            'description' => 'Customize Hover Background with Color or Gradient or Image properties.',
                 ]
         );
 
@@ -435,7 +263,8 @@ class Effects22 extends Modules {
             'type' => Controls::BORDER,
             'selector' => [
                 ' {{WRAPPER}} .oxi-image-hover-figure-back-section' => '',
-            ]
+            ],
+            'description' => 'Border property is used to set the Hover Border of the Flipbox.',
                 ]
         );
 
@@ -487,7 +316,7 @@ class Effects22 extends Modules {
                 . '{{WRAPPER}} .oxi-image-hover.oxi-touch .oxi-image-hover-figure .oxi-image-hover-figure-backend:after, '
                 . '{{WRAPPER}} .oxi-image-hover:hover .oxi-image-hover-figure .oxi-image-hover-figure-back-section, '
                 . '{{WRAPPER}} .oxi-image-hover.oxi-touch .oxi-image-hover-figure .oxi-image-hover-figure-back-section ' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ],
+            ], 'description' => 'Allows you to add rounded corners to Flipbox with options.',
                 ]
         );
         $this->add_group_control(
@@ -495,7 +324,7 @@ class Effects22 extends Modules {
             'type' => Controls::BOXSHADOW,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend:before' => '',
-            ],
+            ], 'description' => 'Allows you at hover to attaches one or more shadows into Button.',
                 ]
         );
         $this->add_responsive_control(
@@ -526,7 +355,8 @@ class Effects22 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-back-section' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+            'description' => 'Generate space around a Flipbox, inside of any defined borders or Background.',
                 ]
         );
         $this->add_responsive_control(
@@ -557,7 +387,8 @@ class Effects22 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-back-section' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+            'description' => 'Generate space outside a Flipbox.',
                 ]
         );
         $this->end_controls_section();
