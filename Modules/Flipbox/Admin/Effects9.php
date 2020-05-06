@@ -65,6 +65,7 @@ class Effects9 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon .oxi-icons' => 'font-size:{{SIZE}}{{UNIT}};',
             ],
+            'description' => 'Allows you to Set Icon Size.',
                 ]
         );
         $this->add_control(
@@ -74,7 +75,8 @@ class Effects9 extends Modules {
             'default' => '#b414c9',
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon .oxi-icons' => 'color: {{VALUE}};',
-            ]
+            ],
+            'description' => 'Color property is used to set the color of the Icon.',
                 ]
         );
 
@@ -105,7 +107,7 @@ class Effects9 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon ' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ], 'description' => 'Margin properties are used to create space around Icon.',
                 ]
         );
         $this->end_controls_section();
@@ -124,7 +126,7 @@ class Effects9 extends Modules {
             'type' => Controls::BACKGROUND,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section' => '',
-            ]
+            ], 'description' => 'Customize Hover Background with Color or Gradient or Image properties.',
                 ]
         );
 
@@ -133,7 +135,7 @@ class Effects9 extends Modules {
             'type' => Controls::BORDER,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section' => '',
-            ]
+            ], 'description' => 'Border property is used to set the Hover Border of the Flipbox.',
                 ]
         );
 
@@ -171,7 +173,7 @@ class Effects9 extends Modules {
                 . '{{WRAPPER}} .oxi-image-hover-figure-backend:before, '
                 . '{{WRAPPER}} .oxi-image-hover-figure-backend:after, '
                 . '{{WRAPPER}} .oxi-image-hover-figure-back-section ' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ],
+            ], 'description' => 'Allows you to add rounded corners to Flipbox with options.',
                 ]
         );
         $this->add_group_control(
@@ -180,7 +182,7 @@ class Effects9 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-frontend:before' => '',
                 '{{WRAPPER}} .oxi-image-hover-figure-backend:before' => '',
-            ],
+            ], 'description' => 'Allows you at hover to attaches one or more shadows into Button.',
                 ]
         );
         $this->add_responsive_control(
@@ -211,7 +213,7 @@ class Effects9 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ], 'description' => 'Generate space around a Flipbox, inside of any defined borders or Background.',
                 ]
         );
         $this->end_controls_section();
@@ -271,7 +273,7 @@ class Effects9 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon .oxi-icons' => 'font-size:{{SIZE}}{{UNIT}};',
-            ],
+            ], 'description' => 'Allows you to Set Icon Size.',
                 ]
         );
 
@@ -283,7 +285,7 @@ class Effects9 extends Modules {
             'default' => '#b414c9',
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon .oxi-icons' => 'color: {{VALUE}};',
-            ]
+            ], 'description' => 'Color property is used to set the color of the Icon.',
                 ]
         );
         $this->add_responsive_control(
@@ -313,7 +315,7 @@ class Effects9 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],  'description' => 'Margin properties are used to create space around Icon.',
                 ]
         );
         $this->add_control(
@@ -338,7 +340,7 @@ class Effects9 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon' => '',
-            ]
+            ], 'description' => 'Allows you to animated Icon while viewing.',
                 ]
         );
         $this->add_control(
@@ -357,7 +359,7 @@ class Effects9 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon' => '',
-            ]
+            ], 'description' => 'Allows you to animation delay of Icon while viewing.',
                 ]
         );
 
@@ -377,7 +379,8 @@ class Effects9 extends Modules {
             'type' => Controls::BACKGROUND,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-back-section' => '',
-            ]
+            ], 'description' => 'Customize Hover Background with Color or Gradient or Image properties.',
+             
                 ]
         );
 
@@ -386,7 +389,8 @@ class Effects9 extends Modules {
             'type' => Controls::BORDER,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-back-section' => '',
-            ]
+            ], 'description' => 'Border property is used to set the Hover Border of the Flipbox.',
+            
                 ]
         );
 
@@ -434,15 +438,17 @@ class Effects9 extends Modules {
                 . '{{WRAPPER}} .oxi-image-hover.oxi-touch .oxi-image-hover-figure .oxi-image-hover-figure-backend:after, '
                 . '{{WRAPPER}} .oxi-image-hover:hover .oxi-image-hover-figure .oxi-image-hover-figure-back-section, '
                 . '{{WRAPPER}} .oxi-image-hover.oxi-touch .oxi-image-hover-figure .oxi-image-hover-figure-back-section ' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ],
+            ],'description' => 'Allows you to add rounded corners to Flipbox with options.',
+            
                 ]
         );
-         $this->add_group_control(
+        $this->add_group_control(
                 'oxi-image-flip-back-boxshadow', $this->style, [
             'type' => Controls::BOXSHADOW,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend:before' => '',
-            ],
+            ],'description' => 'Allows you at hover to attaches one or more shadows into Button.',
+            
                 ]
         );
         $this->add_responsive_control(
@@ -473,7 +479,8 @@ class Effects9 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-back-section' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],'description' => 'Generate space around a Flipbox, inside of any defined borders or Background.',
+            
                 ]
         );
         $this->end_controls_section();

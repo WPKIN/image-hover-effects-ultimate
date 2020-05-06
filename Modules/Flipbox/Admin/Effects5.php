@@ -40,7 +40,8 @@ class Effects5 extends Modules {
             'type' => Controls::BACKGROUND,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section' => '',
-            ]
+            ], 'description' => 'Customize Hover Background with Color or Gradient or Image properties.',
+           
                 ]
         );
 
@@ -49,7 +50,8 @@ class Effects5 extends Modules {
             'type' => Controls::BORDER,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section' => '',
-            ]
+            ],'description' => 'Border property is used to set the Hover Border of the Flipbox.',
+            
                 ]
         );
 
@@ -88,7 +90,8 @@ class Effects5 extends Modules {
                 . '{{WRAPPER}} .oxi-image-hover-figure-backend:before, '
                 . '{{WRAPPER}} .oxi-image-hover-figure-backend:after, '
                 . '{{WRAPPER}} .oxi-image-hover-figure-back-section ' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ],
+            ],'description' => 'Allows you to add rounded corners to Flipbox with options.',
+           
                 ]
         );
         $this->add_group_control(
@@ -97,7 +100,8 @@ class Effects5 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-frontend:before' => '',
                 '{{WRAPPER}} .oxi-image-hover-figure-backend:before' => '',
-            ],
+            ], 'description' => 'Allows you at hover to attaches one or more shadows into Button.',
+           
                 ]
         );
         $this->end_controls_section();

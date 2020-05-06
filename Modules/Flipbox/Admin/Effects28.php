@@ -59,7 +59,7 @@ class Effects28 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon' => 'text-align:{{VALUE}};',
-            ]
+            ],'description' => 'Allows you to set Icon Position.',
                 ]
         );
 
@@ -90,7 +90,7 @@ class Effects28 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon .oxi-icons' => 'font-size:{{SIZE}}{{UNIT}};',
-            ],
+            ],  'description' => 'Allows you to Set Icon Size.',
                 ]
         );
         $this->add_control(
@@ -100,7 +100,7 @@ class Effects28 extends Modules {
             'default' => '#b414c9',
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon .oxi-icons' => 'color: {{VALUE}};',
-            ]
+            ],'description' => 'Color property is used to set the color of the Icon.',
                 ]
         );
         $this->add_responsive_control(
@@ -130,7 +130,7 @@ class Effects28 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon ' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ], 'description' => 'Margin properties are used to create space around Icon.',
                 ]
         );
         $this->end_controls_section();

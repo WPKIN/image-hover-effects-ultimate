@@ -81,7 +81,7 @@ class Effects7 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}}  .oxi-image-hover-button' => 'text-align:{{VALUE}}',
-            ]
+            ], 'description' => 'Allows you set Button Align as Left, Center or Right.',
                 ]
         );
 
@@ -110,22 +110,22 @@ class Effects7 extends Modules {
             'selector' => [
                 '{{WRAPPER}}  .oxi-image-hover-button a.oxi-image-btn' => 'color: {{VALUE}};',
                 '{{WRAPPER}}  .oxi-image-hover-button a.oxi-image-btn:hover' => 'color: {{VALUE}};',
-            ]
+            ], 'description' => 'Color property is used to set the color of the Button.',
                 ]
         );
-   
-        
+
+
         $this->add_group_control(
                 'oxi-image-flip-back-button-tx-shadow', $this->style, [
             'type' => Controls::TEXTSHADOW,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-button  a.oxi-image-btn' => '',
                 '{{WRAPPER}} .oxi-image-hover-button  a.oxi-image-btn:hover' => '',
-            ]
+            ], 'description' => 'Text Shadow property adds shadow to Button.',
                 ]
         );
 
-        
+
         $this->end_controls_tab();
         $this->start_controls_tab();
         $this->add_control(
@@ -135,25 +135,25 @@ class Effects7 extends Modules {
             'default' => '#ffffff',
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure .oxi-image-hover-button a.oxi-image-btn:hover' => 'color: {{VALUE}};',
-            ]
+            ], 'description' => 'Color property is used to set the Hover color of the Button.',
                 ]
         );
-    
-       
+
+
         $this->add_group_control(
                 'oxi-image-flip-back-button-hover-tx-shadow', $this->style, [
             'type' => Controls::TEXTSHADOW,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure .oxi-image-hover-button a.oxi-image-btn:hover' => '',
-            ]
+            ], 'description' => 'Text Shadow property adds shadow to Hover Button.',
                 ]
         );
 
-     
+
         $this->end_controls_tab();
         $this->end_controls_tabs();
 
-        
+
         $this->add_responsive_control(
                 'oxi-image-flip-back-button-margin', $this->style, [
             'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
@@ -181,7 +181,7 @@ class Effects7 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-button a.oxi-image-btn' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ], 'description' => 'Generate space around a Button, Outside of Content.',
                 ]
         );
         $this->add_control(
@@ -206,7 +206,7 @@ class Effects7 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-button' => '',
-            ]
+            ], 'description' => 'Allows you to animated Button while viewing.',
                 ]
         );
         $this->add_control(
@@ -225,7 +225,7 @@ class Effects7 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-button' => '',
-            ]
+            ], 'description' => 'Allows you to animation delay at Button while viewing.',
                 ]
         );
 
@@ -248,7 +248,7 @@ class Effects7 extends Modules {
             'description' => 'Add Your Flipbox Front Title.'
                 ]
         );
-       
+
         $this->add_control(
                 'image_hover_front_icon', $this->style, [
             'label' => __('Front Icon', OXI_IMAGE_HOVER_TEXTDOMAIN),

@@ -166,7 +166,6 @@ class ImageApi {
             $c = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid), ARRAY_A);
             $style = [
                 'id' => $st['id'],
-                'type' => ucfirst($st['type']),
                 'name' => $st['name'],
                 'style_name' => $st['style_name'],
                 'rawdata' => json_encode($this->array_replace(json_decode(stripslashes($st['rawdata']), true), '"', '&quot;')),

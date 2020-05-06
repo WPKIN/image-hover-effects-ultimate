@@ -2442,7 +2442,7 @@ trait Sanitization {
                                         <label for="exampleFormControlSelect1">Current Template</label>
                                         <select class="form-control" name="shortcode-current-style-name" id="shortcode-current-style-name">';
             foreach ($this->StyleChanger as $val) {
-                echo '                      <option value="' . $val . '" ' . (ucfirst($this->dbdata['style_name']) == $val ? 'selected' : '') . '>' . $val . '</option>';
+                echo '                      <option value="' . strtolower($val) . '" ' . (ucfirst($this->dbdata['style_name']) == $val ? 'selected' : '') . '>' . ucfirst($val) . '</option>';
             }
             echo '                      </select>
                                     </div>
