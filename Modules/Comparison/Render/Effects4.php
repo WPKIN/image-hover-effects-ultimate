@@ -8,18 +8,19 @@ if (!defined('ABSPATH')) {
 
 use OXI_IMAGE_HOVER_PLUGINS\Page\Public_Render;
 
-class Effects4 extends Public_Render
-{
-    public function public_css()
-    {
+class Effects4 extends Public_Render {
+
+    public function public_css() {
         wp_enqueue_style('oxi-image-hover-comparison-box', OXI_IMAGE_HOVER_URL . '/Modules/Comparison/Files/Comparison.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         wp_enqueue_style('oxi-image-hover-comparison-style-4', OXI_IMAGE_HOVER_URL . '/Modules/Comparison/Files/style-4.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-       }
-      /*
+    }
+
+    /*
      * Shortcode Addons Media Render.
      * image
      * @since 2.1.0
      */
+
     public function custom_media_render($id, $style) {
         $url = '';
         if (array_key_exists($id . '-select', $style)):
@@ -30,25 +31,33 @@ class Effects4 extends Public_Render
             endif;
         endif;
     }
-   
-    public function default_render($style, $child, $admin)
-    {   
+
+    public function default_render($style, $child, $admin) {
         foreach ($child as $key => $val) {
-            $data = json_decode(stripslashes($val['rawdata']), true); 
-            
+            $data = json_decode(stripslashes($val['rawdata']), true);
+
             echo '<div class="oxi_addons_image_style_4_box oxi-addons-main-wrapper-image-comparison ' . $this->column_render('oxi-image-hover-col', $style) . ' ' . ($admin == "admin" ? 'oxi-addons-admin-edit-list' : '') . '">
-                    <div class="oxi_addons_image_style_4_box_body oxi-addons-main '.$style['oxi_image_magnifier_image_switcher'].'">
-                            <div class="oxi_addons_hover_view_img" style="background: url(\'' . $this->custom_media_render('oxi_image_comparison_image_one', $data) . '\') no-repeat fixed;">';
-                                $width = 100;
-                                $loop = $style['oxi_image_comparison_hover_width-size'];
-                                $pwidth = $width / $loop;
-                                for ($i = 0; $i < $loop; $i++) {
-                                    echo'<div class="oxi_addons_font_view_img" style="background: url(\'' . $this->custom_media_render('oxi_image_comparison_image_two', $data) . '\') no-repeat fixed;"></div>';
-                                }
-                        echo'</div>
+                    <div class="oxi_addons_image_style_4_box_body oxi-addons-main ' . $style['oxi_image_magnifier_image_switcher'] . '">
+                            <div class="oxi_addons_hover_view_img" style="background: url(\'' . $this->custom_media_render('oxi_image_comparison_image_one', $data) . '\') no-repeat;">';
+            $loop = $style['oxi_image_comparison_hover_width-size'];
+
+            for ($i = 0; $i < $loop; $i++) {
+                echo'<div class="oxi_addons_font_view_img oxi_addons_font_view_img_' . $i . '" style=""></div>';
+                $this->inline_css .= '.' . $this->WRAPPER . ' .oxi_addons_image_style_4_box .oxi_addons_font_view_img.oxi_addons_font_view_img_' . $i . '{
+                                                                background: url(\'' . $this->custom_media_render('oxi_image_comparison_image_two', $data) . '\') no-repeat;
+                                                                    background-repeat: no-repeat;
+                                                                    background-size: ' . ($loop * 100) . '% 100%;
+                                                                    background-position: ' . ((100 / $loop) + $loop) * $i . '%;
+                                                                    background-attachment: inherit;
+                                                                    margin-left:' . (100 / $loop) * $i . '%;
+                                                                    width: ' . (100 / $loop) . '%;
+                                                            }';
+            }
+
+            echo'</div>
                 </div>';
-                if ($admin == 'admin'):
-                    echo '<div class="oxi-addons-admin-absulote">
+            if ($admin == 'admin'):
+                echo '<div class="oxi-addons-admin-absulote">
                                 <div class="oxi-addons-admin-absulate-edit">
                                     <button class="btn btn-primary shortcode-addons-template-item-edit" type="button" value="' . $val['id'] . '">Edit</button>
                                 </div>
@@ -56,12 +65,9 @@ class Effects4 extends Public_Render
                                         <button class="btn btn-danger shortcode-addons-template-item-delete" type="submit" value="' . $val['id'] . '">Delete</button>
                                 </div>
                             </div>';
-                endif;
+            endif;
             echo '</div>';
-        } 
+        }
     }
-
-
- 
 
 }

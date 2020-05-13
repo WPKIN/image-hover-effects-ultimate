@@ -96,7 +96,6 @@ class Modules extends Admin_Render {
         $this->add_group_control(
                 'oxi-image-hover-col', $this->style, [
             'type' => Controls::COLUMN,
-            'simpledescription' => 'How much column want to show into a single rows ',
             'description' => 'Define how much column you want to show into single rows. Customize possible with desktop or tab or mobile Settings.',
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-style' => '',

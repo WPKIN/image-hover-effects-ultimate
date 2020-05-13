@@ -47,9 +47,11 @@ class Effects1 extends Public_Render {
                 $image = '<img class="oxi_addons__image   oxi__image_' . $this->oxiid . '_'.$key.' ' . $style['oxi_image_magnifier_image_switcher'] . '  ' . $style['oxi_image_magnifier_grayscale_switter'] . '  " src="' . $this->custom_media_render('oxi_image_magnifier_img', $data) . '" alt="slider image"/>';
             }
             echo ' <div class="oxi_addons__image_magnifier_column ' . $this->column_render('oxi-image-hover-col', $style) . ' ' . ($admin == "admin" ? 'oxi-addons-admin-edit-list' : '') . '" > 
-                 <div class="oxi_addons__image_magnifier_style_1 oxi_addons__image_magnifier  ' . $style['oxi_image_magnifier_image_switcher'] . ' " >
-                    ' . $image . '
-                </div>';
+                        <div class="oxi_addons__image_magnifier_style_body ' . $style['oxi_image_magnifier_image_switcher'] . ' " >
+                            <div class="oxi_addons__image_magnifier_style_1 oxi_addons__image_magnifier  " >
+                               ' . $image . '
+                           </div>
+                       </div>';
                 if ($admin == 'admin') :
                     echo '<div class="oxi-addons-admin-absulote">
                             <div class="oxi-addons-admin-absulate-edit">

@@ -371,14 +371,14 @@ trait Sanitization {
 
     public function add_responsive_control($id, array $data = [], array $arg = []) {
         $lap = $id . '-lap';
-            $tab = $id . '-tab';
-            $mob = $id . '-mob';
-            $laparg = ['responsive' => 'laptop'];
-            $tabarg = ['responsive' => 'tab'];
-            $mobarg = ['responsive' => 'mobile'];
-            $this->add_control($lap, $data, array_merge($arg, $laparg));
-            $this->add_control($tab, $data, array_merge($arg, $tabarg));
-            $this->add_control($mob, $data, array_merge($arg, $mobarg));
+        $tab = $id . '-tab';
+        $mob = $id . '-mob';
+        $laparg = ['responsive' => 'laptop'];
+        $tabarg = ['responsive' => 'tab'];
+        $mobarg = ['responsive' => 'mobile'];
+        $this->add_control($lap, $data, array_merge($arg, $laparg));
+        $this->add_control($tab, $data, array_merge($arg, $tabarg));
+        $this->add_control($mob, $data, array_merge($arg, $mobarg));
     }
 
     /*
@@ -2316,6 +2316,7 @@ trait Sanitization {
                 'oxi-bt-col-lg-8' => __('Col 8', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 'oxi-bt-col-lg-1' => __('Col 12', OXI_IMAGE_HOVER_TEXTDOMAIN),
             ],
+            'description' => 'Define how much column you want to show into single rows. Customize possible with desktop or tab or mobile Settings.',
             $select => $selector,
             'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
             $cond => $condition
@@ -2337,6 +2338,7 @@ trait Sanitization {
                 'oxi-bt-col-md-2' => __('Col 6', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 'oxi-bt-col-md-1' => __('Col 12', OXI_IMAGE_HOVER_TEXTDOMAIN),
             ],
+            'description' => 'Define how much column you want to show into single rows. Customize possible with desktop or tab or mobile Settings.',
             $select => $selector,
             'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
             $cond => $condition
@@ -2359,6 +2361,7 @@ trait Sanitization {
                 'oxi-bt-col-sm-2' => __('Col 6', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 'oxi-bt-col-sm-1' => __('Col 12', OXI_IMAGE_HOVER_TEXTDOMAIN),
             ],
+            'description' => 'Define how much column you want to show into single rows. Customize possible with desktop or tab or mobile Settings.',
             $select => $selector,
             'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
             $cond => $condition

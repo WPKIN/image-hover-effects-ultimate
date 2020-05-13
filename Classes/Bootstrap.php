@@ -161,7 +161,6 @@ class Bootstrap {
         //register our settings
         register_setting('oxi-image-hover-settings-group', 'oxi_addons_user_permission');
         register_setting('oxi-image-hover-settings-group', 'image_hover_ultimate_mobile_device_key');
-        register_setting('oxi-image-hover-settings-group', 'image_hover_ultimate_interface');
         register_setting('oxi-image-hover-settings-group', 'image_hover_ultimate_info');
         register_setting('oxi-image-hover-settings-group', 'oxi_addons_font_awesome');
         register_setting('oxi-image-hover-settings-group', 'oxi_addons_way_points');

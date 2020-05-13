@@ -1,20 +1,25 @@
-.oxi_addons_image_style_4_box {
+.oxi-addons-container .oxi-addons-row .oxi_addons_image_style_4_box,
+.oxi-addons-container .oxi-addons-row .oxi_addons_image_style_4_box *{
+    transition: none;
+}
+
+.oxi-addons-container .oxi_addons_image_style_4_box {
     width: 100%;
     padding: 0px 0px 0px 0px
 }
 
-.oxi_addons_image_style_4_box_body { 
+.oxi-addons-container .oxi_addons_image_style_4_box_body { 
     width: 100%;
     position: relative
 }
 
-.oxi_addons_image_style_4_box_body:after {
+.oxi-addons-container .oxi_addons_image_style_4_box_body:after {
     display: block;
     content: "";
     padding-bottom: 62.5%
 }
 
-.oxi_addons_image_style_4_box .oxi_addons_hover_view_img {
+.oxi-addons-container .oxi_addons_image_style_4_box .oxi_addons_hover_view_img {
     white-space: nowrap;
     position: absolute;
     top: 0;
@@ -27,21 +32,21 @@
     z-index: 5;
 }
 
-.oxi_addons_image_style_4_box .oxi_addons_font_view_img {
+.oxi-addons-container .oxi_addons_image_style_4_box .oxi_addons_font_view_img {
     width: 10%;
     height: 100%;
-    display: inline-block;
-    position: relative;
+    display: block;
+    position: absolute;
     z-index: 6;
-    padding: 2px;
+    padding: 0px;
+    left: 0;
+    top: 0;
     transition: all 3.5s ease-in-out;
-    background-size: cover !important;
-    background-position: center center !important;
     border-radius: 0%;
     cursor: pointer;
 }
 
-.oxi_addons_image_style_4_box .oxi_addons_font_view_img:hover {
+.oxi-addons-container .oxi_addons_image_style_4_box .oxi_addons_font_view_img:hover {
     transition: all 0s linear;
     opacity: 0
 }

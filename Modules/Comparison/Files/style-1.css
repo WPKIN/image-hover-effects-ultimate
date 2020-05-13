@@ -1,3 +1,9 @@
+.oxi-addons-container .oxi-addons-row .oxi-addons-main-wrapper-image-comparison-style-1,
+.oxi-addons-container .oxi-addons-row .oxi-addons-main-wrapper-image-comparison-style-1 *{
+    transition: none;
+}
+
+
 .oxi-addons-main-wrapper-image-comparison-style-1 .twentytwenty-up-arrow,
 .twentytwenty-down-arrow {
     left: 50% ;

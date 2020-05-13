@@ -79,16 +79,6 @@ class Settings {
                                 </td>
                             </tr>
                             <tr valign="top">
-                                <td scope="row">Admin Interface</td>
-                                <td>
-                                    <input type="radio" name="image_hover_ultimate_interface" value="" <?php checked('', get_option('image_hover_ultimate_interface'), true); ?>>Simple
-                                    <input type="radio" name="image_hover_ultimate_interface" value="advance" <?php checked('advance', get_option('image_hover_ultimate_interface'), true); ?>>Advanced
-                                </td>
-                                <td>
-                                    <label class="description" for="image_hover_ultimate_interface"><?php _e('Select Your Customization Interface at Editing Page. As a beginners we Recommend Simple Interface else You can Customize all into Advanced Interface'); ?></label>
-                                </td>
-                            </tr>
-                            <tr valign="top">
                                 <td scope="row">Short Information</td>
                                 <td>
                                     <input type="radio" name="image_hover_ultimate_info" value="" <?php checked('', get_option('image_hover_ultimate_info'), true); ?>>Yes, Sure

@@ -1,3 +1,7 @@
+.oxi-addons-container .oxi-addons-row .oxi-addons-main-wrapper-image-comparison-style-2,
+.oxi-addons-container .oxi-addons-row .oxi-addons-main-wrapper-image-comparison-style-2 *{
+    transition: none;
+}
  
 .oxi-addons-main-wrapper-image-comparison-style-2 .oxi-addons-main { 
     max-width: 100%; 
