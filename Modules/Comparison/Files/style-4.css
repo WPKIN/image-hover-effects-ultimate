@@ -10,7 +10,9 @@
 
 .oxi-addons-container .oxi_addons_image_style_4_box_body { 
     width: 100%;
-    position: relative
+    position: relative;
+    overflow: hidden;
+        
 }
 
 .oxi-addons-container .oxi_addons_image_style_4_box_body:after {

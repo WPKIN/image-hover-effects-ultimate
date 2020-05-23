@@ -350,7 +350,7 @@ trait Sanitization {
                 <div class="shortcode-form-control-content">
                     <div class="shortcode-form-control-field">';
         echo '<label for="" class="shortcode-form-control-title">' . $arg['label'] . '</label>';
-
+        echo $responsive;
 
         $fun = $arg['type'] . '_admin_control';
         echo $this->$fun($id, $data, $arg);

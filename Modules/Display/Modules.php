@@ -48,7 +48,7 @@ class Modules extends Admin_Render {
             'label' => __('', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::TEXTAREA,
             'default' => '',
-            'description' => 'Add Your Description Unless make it blank.'
+            'description' => 'Custom CSS Section. You can add custom css into textarea.'
                 ]
         );
         $this->end_controls_section();
@@ -96,6 +96,7 @@ class Modules extends Admin_Render {
                     'type' => Controls::SELECT,
                     'default' => 'post',
                     'options' => $this->post_type(),
+                    'description' => 'Select Post Type for Query.'
                 ]
         );
         $this->add_control(
@@ -107,6 +108,7 @@ class Modules extends Admin_Render {
                     'type' => Controls::SELECT,
                     'multiple' => true,
                     'options' => $this->post_author(),
+                    'description' => 'Confirm Author list if you wanna those author post only.'
                 ]
         );
         foreach ($this->post_type() as $key => $value) {
@@ -122,7 +124,8 @@ class Modules extends Admin_Render {
                             'options' => $this->post_category($key),
                             'condition' => [
                                 'display_post_post_type' => $key
-                            ]
+                            ],
+                            'description' => 'Confirm Category list if you wanna those Category post only.',
                         ]
                 );
                 $this->add_control(
@@ -136,7 +139,8 @@ class Modules extends Admin_Render {
                             'options' => $this->post_tags($key),
                             'condition' => [
                                 'display_post_post_type' => $key
-                            ]
+                            ],
+                            'description' => 'Confirm Post Tags if you wanna show those tags post only.',
                         ]
                 );
             endif;
@@ -152,7 +156,8 @@ class Modules extends Admin_Render {
                         'options' => $this->post_include($key),
                         'condition' => [
                             'display_post_post_type' => $key
-                        ]
+                        ],
+                        'description' => 'Only those post will viewing in Post list.',
                     ]
             );
             $this->add_control(
@@ -166,7 +171,8 @@ class Modules extends Admin_Render {
                         'options' => $this->post_exclude($key),
                         'condition' => [
                             'display_post_post_type' => $key
-                        ]
+                        ],
+                        'description' => 'Those Post can\'t viewing.',
                     ]
             );
         }
@@ -205,6 +211,7 @@ class Modules extends Admin_Render {
                     'type' => Controls::NUMBER,
                     'loader' => TRUE,
                     'min' => 1,
+                    'description' => 'How many Post You want to Viewing into page.',
                 ]
         );
         $this->add_control(
@@ -215,6 +222,7 @@ class Modules extends Admin_Render {
                     'type' => Controls::NUMBER,
                     'loader' => TRUE,
                     'min' => 1,
+                    'description' => 'Confirm Excerpt Word Limit.',
                 ]
         );
         $this->add_control(
@@ -223,7 +231,8 @@ class Modules extends Admin_Render {
                 [
                     'label' => __('Offset', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'type' => Controls::NUMBER,
-                    'loader' => TRUE,
+                    'loader' => TRUE,,
+                    'description' => 'Confirm Excerpt Word Limit.',
                 ]
         );
         $this->add_control(
@@ -245,6 +254,7 @@ class Modules extends Admin_Render {
                         'comment_count' => 'Comment Count',
                         'menu_order' => 'Menu Order',
                     ],
+                    'description' => 'Set Post Query Order by Condition.',
                 ]
         );
 
@@ -259,6 +269,7 @@ class Modules extends Admin_Render {
                         'asc' => 'Ascending',
                         'desc' => 'Descending',
                     ],
+                    'description' => 'Set Post Query Order by Condition.',
                 ]
         );
         $this->add_control(
@@ -269,6 +280,7 @@ class Modules extends Admin_Render {
                     'type' => Controls::SELECT,
                     'loader' => TRUE,
                     'options' => $this->thumbnail_sizes(),
+                     'description' => 'Set Image Thumbnail Size.',
                 ]
         );
         $this->add_control(
@@ -280,6 +292,7 @@ class Modules extends Admin_Render {
                     'yes' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'no' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'return_value' => 'yes',
+                    'description' => 'Wanna load More Options?.',
                 ]
         );
         $this->add_control(
@@ -300,7 +313,8 @@ class Modules extends Admin_Render {
                     ],
                     'condition' => [
                         'display_post_load_more' => 'yes'
-                    ]
+                    ],
+                     'description' => 'Select Load More Type, As we offer Infinite loop or Button.',
                 ]
         );
         $this->end_controls_section();

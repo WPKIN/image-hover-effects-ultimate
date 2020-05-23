@@ -25,9 +25,9 @@ class Effects2 extends Modules
         $this->register_general_style();
         $this->register_image_settings();
         $this->register_icon_settings();
+        $this->register_button_settings();
         $this->end_section_devider();
         $this->start_section_devider();
-        $this->register_button_settings();
         $this->start_controls_section(
             'shortcode-addons',
             [
@@ -44,6 +44,7 @@ class Effects2 extends Modules
                 'type' => Controls::NUMBER,
                 'default' => 9999,
                 'loader' => true,
+                'description' => 'Lightbox Z-index Value, Used for Overlapping Contant.',
 
             ]
         );
@@ -59,6 +60,7 @@ class Effects2 extends Modules
                 'selector' => [
                     '.Oximfp-bg{{WRAPPER}}' => 'background:{{VALUE}};',
                 ],
+                'description' => 'Customize Lightbox Background Color.',
             ]
         );
         $this->add_control(
@@ -68,7 +70,7 @@ class Effects2 extends Modules
                 'label' => __('Closing Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 'type' => Controls::COLOR,
                 'default' => '#ffffff',
-                'description' => 'Effect Will be show after Save!',
+                'description' => 'Lightbox Closing Icon Color, Effect Will be show after Save!',
             ]
         );
         $this->add_control(
@@ -78,7 +80,7 @@ class Effects2 extends Modules
                 'label' => __('Preloader Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 'type' => Controls::COLOR,
                 'default' => '#ffffff',
-                'description' => 'Effect Will be show after Save!',
+               'description' => 'Lightbox Preloader Color, Effect Will be show after Save!',
             ]
         );
 

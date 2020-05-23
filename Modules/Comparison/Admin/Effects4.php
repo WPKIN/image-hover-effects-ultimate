@@ -148,21 +148,21 @@ class Effects4 extends Modules {
         );
         $this->add_control(
                 'oxi_image_comparison_hover_width', $this->style, [
-            'label' => __('Hover Width', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => __('Hover Devider', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'separator' => true,
             'default' => [
                 'unit' => '%',
-                'size' => 25,
+                'size' => 5,
             ],
             'range' => [
                 '%' => [
-                    'min' => 10,
+                    'min' => 2,
                     'max' => 100,
                     'step' => 1,
                 ],
             ],
-            'description' => 'Set Image Hover Width as How many deviwant to show into sinlge image .',
+            'description' => 'Set Image Hover Width as How many Devider to show into sinlge image .',
                 ]
         );
         $this->add_control(
