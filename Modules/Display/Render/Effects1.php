@@ -29,7 +29,7 @@ class Effects1 extends Public_Render {
                  <div class="oxi-addons-row">';
         $this->default_render($this->style, $this->child, $this->admin);
         echo '   </div>
-              </div>';
+             </div>';
     }
 
     public function default_render($style, $child, $admin) {

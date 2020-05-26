@@ -231,7 +231,7 @@ class Modules extends Admin_Render {
                 [
                     'label' => __('Offset', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'type' => Controls::NUMBER,
-                    'loader' => TRUE,,
+                    'loader' => TRUE,
                     'description' => 'Confirm Excerpt Word Limit.',
                 ]
         );
@@ -280,7 +280,7 @@ class Modules extends Admin_Render {
                     'type' => Controls::SELECT,
                     'loader' => TRUE,
                     'options' => $this->thumbnail_sizes(),
-                     'description' => 'Set Image Thumbnail Size.',
+                    'description' => 'Set Image Thumbnail Size.',
                 ]
         );
         $this->add_control(
@@ -314,7 +314,7 @@ class Modules extends Admin_Render {
                     'condition' => [
                         'display_post_load_more' => 'yes'
                     ],
-                     'description' => 'Select Load More Type, As we offer Infinite loop or Button.',
+                    'description' => 'Select Load More Type, As we offer Infinite loop or Button.',
                 ]
         );
         $this->end_controls_section();
@@ -329,7 +329,7 @@ class Modules extends Admin_Render {
                     'condition' => [
                         'display_post_load_more' => 'yes',
                         'display_post_load_more_type' => 'button'
-                    ]
+                    ],
                 ]
         );
 
@@ -341,7 +341,8 @@ class Modules extends Admin_Render {
             'placeholder' => 'Load More Button',
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button span' => '',
-            ]
+            ],
+            'description' => 'Add Button text as Unicode also supported.',
                 ]
         );
 
@@ -369,7 +370,8 @@ class Modules extends Admin_Render {
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap' => 'text-align:{{VALUE}};',
-                    ]
+                    ],
+                    'description' => 'Add Button text as Unicode also supported.',
                 ]
         );
 
@@ -405,7 +407,8 @@ class Modules extends Admin_Render {
                 '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover' => 'color: {{VALUE}};',
                 '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover .oxi-image-hover-loader button__loader' => 'color: {{VALUE}};',
                 '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover span' => 'color: {{VALUE}};',
-            ]
+            ],
+            'description' => 'Customize your button color.',
                 ]
         );
         $this->add_control(
@@ -416,7 +419,8 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button' => 'background: {{VALUE}};',
                 '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover' => 'background: {{VALUE}};',
-            ]
+            ],
+            'description' => 'Customize your button Background Color.',
                 ]
         );
         $this->add_group_control(
@@ -427,6 +431,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button' => ''
                     ],
+                    'description' => 'Customize your button border color.',
                 ]
         );
         $this->add_group_control(
@@ -434,7 +439,8 @@ class Modules extends Admin_Render {
             'type' => Controls::TEXTSHADOW,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button span' => '',
-            ]
+            ],
+            'description' => 'Customize your button Shadow.',
                 ]
         );
 
@@ -467,6 +473,7 @@ class Modules extends Admin_Render {
                 '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
+            'description' => 'Allows you to add rounded corners to Button with options.',
                 ]
         );
         $this->add_group_control(
@@ -475,7 +482,8 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button' => '',
                 '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover' => '',
-            ]
+            ],
+            'description' => 'Allows you to attaches one or more shadows into Button.',
                 ]
         );
         $this->end_controls_tab();
@@ -489,7 +497,7 @@ class Modules extends Admin_Render {
                 '{{WRAPPER}} .oxi-addons-row .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover' => 'color: {{VALUE}};',
                 '{{WRAPPER}} .oxi-addons-row .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover .oxi-image-hover-loader button__loader' => 'color: {{VALUE}};',
                 '{{WRAPPER}} .oxi-addons-row .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover span' => 'color: {{VALUE}};',
-            ]
+            ], 'description' => 'Color property is used to set the Hover color of the Button.',
                 ]
         );
         $this->add_control(
@@ -499,7 +507,8 @@ class Modules extends Admin_Render {
             'default' => '#ffffff',
             'selector' => [
                 '{{WRAPPER}} .oxi-addons-row .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover' => 'background: {{VALUE}};',
-            ]
+            ],
+            'description' => 'Background property is used to set the Hover Background of the Button.',
                 ]
         );
         $this->add_group_control(
@@ -510,6 +519,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .oxi-addons-row .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover' => ''
                     ],
+                    'description' => 'Border property is used to set the Hover Border of the Button.',
                 ]
         );
         $this->add_group_control(
@@ -517,7 +527,8 @@ class Modules extends Admin_Render {
             'type' => Controls::TEXTSHADOW,
             'selector' => [
                 '{{WRAPPER}} .oxi-addons-row .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover span' => '',
-            ]
+            ],
+            'description' => 'Text Shadow property adds shadow to Hover Button.',
                 ]
         );
 
@@ -549,6 +560,7 @@ class Modules extends Admin_Render {
             'selector' => [
                 '{{WRAPPER}} .oxi-addons-row .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
+            'description' => 'Allows you to add rounded corners at hover to Button with options.',
                 ]
         );
         $this->add_group_control(
@@ -556,7 +568,8 @@ class Modules extends Admin_Render {
             'type' => Controls::BOXSHADOW,
             'selector' => [
                 '{{WRAPPER}} .oxi-addons-row .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover' => '',
-            ]
+            ],
+            'description' => 'Allows you at hover to attaches one or more shadows into Button.',
                 ]
         );
 
@@ -591,7 +604,8 @@ class Modules extends Admin_Render {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+            'description' => 'Generate space around a Button, inside of any defined borders or Background.',
                 ]
         );
         $this->add_responsive_control(
@@ -621,7 +635,8 @@ class Modules extends Admin_Render {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
+            ],
+            'description' => 'Generate space around a Button, Outside of Content.',
                 ]
         );
         $this->end_controls_section();

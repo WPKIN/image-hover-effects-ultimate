@@ -48,7 +48,7 @@ class Modules extends Admin_Render {
             'label' => __('', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::TEXTAREA,
             'default' => '',
-            'description' => 'Add Your Description Unless make it blank.'
+            'description' => 'Custom CSS Section. You can add custom css into textarea.'
                 ]
         );
         $this->end_controls_section();
@@ -95,7 +95,7 @@ class Modules extends Admin_Render {
                 [
                     'label' => __('Parent Category', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'type' => Controls::SELECT,
-                    'description' => __('New Category show after save and reload', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'description' => __('Select Parent Category show after Save and Reload', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'loader' => TRUE,
                     'options' => $this->allcategory,
                 ]
