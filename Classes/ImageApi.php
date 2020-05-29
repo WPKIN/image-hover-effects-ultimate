@@ -66,7 +66,7 @@ class ImageApi {
 
     public function api_action($request) {
         $this->request = $request;
-        $this->rawdata = $request['rawdata'];
+        $this->rawdata = addslashes($request['rawdata']);
         $this->styleid = $request['styleid'];
         $this->childid = $request['childid'];
         $class = $request['class'];
@@ -126,7 +126,7 @@ class ImageApi {
                 return admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$s[0]&styleid=$redirect_id");
             endif;
         else:
-            $params = json_decode($this->rawdata, true);
+            $params = json_decode(stripslashes($this->rawdata), true);
             $newname = $params['name'];
             $rawdata = $params['style'];
             $style = $rawdata['style'];

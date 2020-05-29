@@ -155,6 +155,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .image-hover-filter-style .image-hover-category-menu' => 'justify-content: {{VALUE}};',
                     ],
+                     'description' => __('Set menu align as left, right or center ', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 ]
         );
         $this->add_group_control(
@@ -188,6 +189,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .image-hover-filter-style .image-hover-category-menu-item' => '',
                     ],
+                    'description' => __('menu width condition as Static or Dynamic', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 ]
         );
         $this->add_responsive_control(

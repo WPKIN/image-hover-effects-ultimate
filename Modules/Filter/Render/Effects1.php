@@ -62,8 +62,7 @@ class Effects1 extends Public_Render {
         if (array_key_exists('category_parent_cat', $styledata) && $styledata['category_parent_cat'] != '') :
             $active_default = $styledata['category_parent_cat'];
         endif;
-
-
+        
         echo '  <div class="image-hover-filter-style image-hover-filter-style-1">
                     <div class="image-hover-category-menu image-hover-category-menu-' . $oxiid . ' ">';
         foreach ($all_cat_data as $value) :
