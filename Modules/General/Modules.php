@@ -942,7 +942,7 @@ class Modules extends Admin_Render {
                     ],
                     'simpledescription' => 'Button',
                     'description' => 'Border property is used to set the Border of the Button.',
-                ],
+                ]
         );
         $this->add_group_control(
                 'oxi-image-hover-button-tx-shadow', $this->style, [
@@ -1301,7 +1301,6 @@ class Modules extends Admin_Render {
             'label' => __('Title', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::TEXT,
             'default' => '',
-            'ShowShortInfo' => true,
             'placeholder' => 'Heading',
             'description' => 'Add Your Image Hover Title.'
                 ]
@@ -1309,7 +1308,6 @@ class Modules extends Admin_Render {
         $this->add_control(
                 'image_hover_description', $this->style, [
             'label' => __('Short Description', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'ShowShortInfo' => true,
             'type' => Controls::TEXTAREA,
             'default' => '',
             'description' => 'Add Your Description Unless make it blank.'
@@ -1331,7 +1329,6 @@ class Modules extends Admin_Render {
                 [
                     'label' => __('Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'type' => Controls::MEDIA,
-                    'ShowShortInfo' => true,
                     'description' => 'Add or Modify Your Image. You can use Media Library or Custom URL'
                 ]
         );
@@ -1344,7 +1341,6 @@ class Modules extends Admin_Render {
                 [
                     'label' => __('Feature Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'type' => Controls::MEDIA,
-                    'ShowShortInfo' => true,
                     'description' => 'Add or Modify Your Feature Image. Adjust background to get better design.'
                 ]
         );
@@ -1355,7 +1351,6 @@ class Modules extends Admin_Render {
             'label' => __('URL', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::URL,
             'separator' => TRUE,
-            'ShowShortInfo' => true,
             'default' => '',
             'placeholder' => 'https://www.yoururl.com',
             'description' => 'Add Your Desire Link or Url Unless make it blank'
@@ -1365,7 +1360,6 @@ class Modules extends Admin_Render {
                 'image_hover_button_text', $this->style, [
             'label' => __('Button Text', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::TEXT,
-            'ShowShortInfo' => true,
             'default' => '',
             'description' => 'Customize your button text. Button will only view while Url given'
                 ]

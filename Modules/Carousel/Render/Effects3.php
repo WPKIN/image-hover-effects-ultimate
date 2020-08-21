@@ -100,9 +100,6 @@ class Effects3 extends Public_Render {
         $lap = $style['carousel_item-lap-size'];
         $tab = $style['carousel_item-tab-size'];
         $mobile = $style['carousel_item-mob-size'];
-        $lap_grap = $style['carousel_grap-lap-size'];
-        $tab_grap = $style['carousel_grap-tab-size'];
-        $mobile_grap = $style['carousel_grap-mob-size'];
 
         $effects = $style['carousel_effect'];
         $autoplay = ($style['carousel_autoplay'] == 'yes') ? $style['carousel_autoplay_speed'] : '99999';
@@ -164,15 +161,12 @@ class Effects3 extends Public_Render {
                     breakpoints: {
                         960: {
                             slidesPerView: "' . $lap . '",
-                            spaceBetween:  ' . $lap_grap . '
                         },
                         600 : {
                             slidesPerView: "' . $tab . '",
-                            spaceBetween:  ' . $tab_grap . '
                         },
                         480: {
                             slidesPerView: "' . $mobile . '",
-                            spaceBetween:  ' . $mobile_grap . '
                         }
                     }
                 });

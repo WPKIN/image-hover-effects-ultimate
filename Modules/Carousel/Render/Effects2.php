@@ -62,7 +62,7 @@ class Effects2 extends Public_Render {
         endif;
         $styledata = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $style['carousel_register_style']), ARRAY_A);
 
-       if (!is_array($styledata)) :
+        if (!is_array($styledata)) :
             echo '<p> Style Data not found. Kindly Check Carousel & Slider <a href="https://www.image-hover.oxilab.org/docs/hover-extension/carousel-slider/">Documentation</a>.</p>';
             return;
         endif;
@@ -116,7 +116,7 @@ class Effects2 extends Public_Render {
                 loop: ' . $infinite . ',
                 autoplay: ' . $autoplay . ',
                 pauseOnHover: ' . $pause_on_hover . ',
-                spacing: 0,
+                spacing: ' . (isset($style['carousel_flipster_spacing']) ? $style['carousel_flipster_spacing'] : 0) . ',
                 click: ' . $click . ',
                 scrollwheel: false,
                 tocuh: ' . $touch . ',

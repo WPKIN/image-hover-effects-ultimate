@@ -140,9 +140,7 @@ abstract class Admin_Render {
      */
     public $StyleName;
     public $repeater;
-    public $SimpleInterface = true;
     public $ShowOnAdvanceOnly = true;
-    public $ShowShortInfo = true;
 
     public function __construct($type = '') {
         global $wpdb;
@@ -153,9 +151,6 @@ abstract class Admin_Render {
         $this->oxiid = (!empty($_GET['styleid']) ? sanitize_text_field($_GET['styleid']) : '');
         $this->WRAPPER = '.oxi-image-hover-wrapper-' . $this->oxiid;
         $this->CSSWRAPPER = '.oxi-image-hover-wrapper-' . $this->oxiid . ' .oxi-addons-row';
-
-        $this->SimpleInterface = (get_option('image_hover_ultimate_interface') == 'advance' ? false : true);
-        $this->ShowShortInfo = (get_option('image_hover_ultimate_info') == 'no' ? false : true);
         if ($type != 'admin') {
             $this->hooks();
             $this->render();
@@ -466,7 +461,7 @@ abstract class Admin_Render {
                                             <input type="text" data-format="rgb" data-opacity="TRUE" class="oxi-addons-minicolor" id="oxi-addons-2-0-color" name="oxi-addons-2-0-color" value="<?php echo(is_array($this->style) ? array_key_exists('image-hover-preview-color', $this->style) ? $this->style['image-hover-preview-color'] : '#FFF' : '#FFF'); ?>">
                                         </div>
                                     </div>
-                                    <div class="oxi-addons-preview-data" id="oxi-addons-preview-data" template-wrapper="<?php echo $this->WRAPPER; ?>" style="background:<?php echo(is_array($this->style) ? array_key_exists('image-hover-preview-color', $this->style) ? $this->style['image-hover-preview-color'] : '#FFF' : '#FFF'); ?>">
+                                    <div class="oxi-addons-preview-data" id="oxi-addons-preview-data" template-wrapper="<?php echo $this->WRAPPER; ?> .oxi-addons-row" style="background:<?php echo(is_array($this->style) ? array_key_exists('image-hover-preview-color', $this->style) ? $this->style['image-hover-preview-color'] : '#FFF' : '#FFF'); ?>">
                                         <?php
                                         $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($this->StyleName[0]) . '\Render\Effects' . $this->StyleName[1];
                                         new $cls($this->dbdata, $this->child, 'admin');

@@ -51,7 +51,7 @@ class Modules extends Admin_Render {
                     'label' => __('', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'type' => Controls::TEXTAREA,
                     'default' => '',
-                    'description' => 'Add Your Custom CSS Unless make it blank.'
+                    'description' => 'Custom CSS Section. You can add custom css into textarea.'
                 ]
         );
         $this->end_controls_section();
@@ -92,7 +92,7 @@ class Modules extends Admin_Render {
                 [
                     'label' => __('Note', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'type' => Controls::HEADING,
-                    'description' => 'Works after saving and reloading all the fields '
+                    'description' => 'Works after saving and reloading all the fields.'
                 ]
         );
         $this->add_control(
@@ -110,7 +110,7 @@ class Modules extends Admin_Render {
                 'carousel_item_slide',
                 $this->style,
                 [
-                    'label' => __('Item To Slide', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => __('Multiple Items', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'type' => Controls::SLIDER,
                     'separator' => TRUE,
                     'default' => [
@@ -124,6 +124,7 @@ class Modules extends Admin_Render {
                             'step' => 1,
                         ],
                     ],
+                    'description' => 'How many Item You want to Slide per click.'
                 ]
         );
         $this->add_control(
@@ -137,6 +138,7 @@ class Modules extends Admin_Render {
                     'yes' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'no' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'return_value' => 'yes',
+                    'description' => 'Do you want slider autoplay?.'
                 ]
         );
         $this->add_control(
@@ -149,6 +151,7 @@ class Modules extends Admin_Render {
                     'condition' => [
                         'carousel_autoplay' => 'yes',
                     ],
+                    'description' => 'Set Autoplay Speed, Set with millisecond.'
                 ]
         );
         $this->add_control(
@@ -158,6 +161,7 @@ class Modules extends Admin_Render {
                     'label' => __('Animation Speed', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'type' => Controls::NUMBER,
                     'default' => 500,
+                    'description' => 'Set Animation Speed, Set with millisecond.'
                 ]
         );
         $this->add_control(
@@ -171,6 +175,7 @@ class Modules extends Admin_Render {
                     'yes' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'no' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'return_value' => 'yes',
+                    'description' => 'Do you want Pause on Hover.'
                 ]
         );
         $this->add_control(
@@ -184,6 +189,7 @@ class Modules extends Admin_Render {
                     'yes' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'no' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'return_value' => 'yes',
+                     'description' => 'Do you want Infinite Loop.'
                 ]
         );
         $this->add_control(
@@ -197,6 +203,7 @@ class Modules extends Admin_Render {
                     'yes' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'no' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'return_value' => 'yes',
+                    'description' => 'Do you want auto height.'
                 ]
         );
         $this->add_control(
@@ -210,6 +217,7 @@ class Modules extends Admin_Render {
                     'yes' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'no' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'return_value' => 'yes',
+                    'description' => 'Do you want center mode Options?'
                 ]
         );
         $this->add_control(
@@ -223,6 +231,7 @@ class Modules extends Admin_Render {
                     'yes' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'no' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'return_value' => 'yes',
+                    'description' => 'Do you want Arrows for navigation.'
                 ]
         );
         $this->add_control(
@@ -236,6 +245,7 @@ class Modules extends Admin_Render {
                     'yes' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'no' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'return_value' => 'yes',
+                     'description' => 'Do you want Dots for pagination.'
                 ]
         );
 
@@ -285,6 +295,8 @@ class Modules extends Admin_Render {
                     'label' => __('Left Arrow', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'type' => Controls::ICON,
                     'default' => 'fas fa-chevron-left',
+                    'description' => 'Select Left Arrow Icon From Icon List.'
+                    
                 ]
         );
         $this->end_controls_tab();
@@ -296,6 +308,7 @@ class Modules extends Admin_Render {
                     'label' => __('Right Arrow', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'type' => Controls::ICON,
                     'default' => 'fas fa-chevron-right',
+                    'description' => 'Select Right Arrow Icon From Icon List.'
                 ]
         );
         $this->end_controls_tab();
@@ -330,7 +343,8 @@ class Modules extends Admin_Render {
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi_carousel_arrows .oxi-icons' => 'font-size:{{SIZE}}{{UNIT}}; line-height:{{SIZE}}{{UNIT}};',
-                    ]
+                    ],
+                    'description' => 'Set Arrow icon size.'
                 ]
         );
         $this->add_responsive_control(
@@ -363,7 +377,8 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .oxi_carousel_arrows.oxi_carousel_prev' => 'left:{{SIZE}}{{UNIT}}; right:auto;',
                         '{{WRAPPER}} .oxi_carousel_arrows.oxi_carousel_next' => 'right:{{SIZE}}{{UNIT}}; left:auto',
-                    ]
+                    ],
+                    'description' => 'Set Arrow icon Posiztion X.'
                 ]
         );
         $this->add_responsive_control(
@@ -395,7 +410,8 @@ class Modules extends Admin_Render {
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi_carousel_arrows' => 'top:{{SIZE}}{{UNIT}}; transform: translateY(-{{SIZE}}{{UNIT}});',
-                    ]
+                    ],
+                     'description' => 'Set Arrow icon Posiztion Y.'
                 ]
         );
         $this->start_controls_tabs(
@@ -417,7 +433,8 @@ class Modules extends Admin_Render {
                     'default' => '#ffffff',
                     'selector' => [
                         '{{WRAPPER}} .oxi_carousel_arrows .oxi-icons' => 'color: {{VALUE}};',
-                    ]
+                    ],
+                     'description' => 'Select Arrow icon Color.'
                 ]
         );
         $this->add_control(
@@ -429,7 +446,8 @@ class Modules extends Admin_Render {
                     'default' => 'rgba(171, 0, 201, 1)',
                     'selector' => [
                         '{{WRAPPER}} .oxi_carousel_arrows .oxi-icons' => 'background: {{VALUE}};',
-                    ]
+                    ],
+                    'description' => 'Confirm Arrow Background Color.'
                 ]
         );
         $this->add_group_control(
@@ -440,6 +458,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .oxi_carousel_arrows .oxi-icons' => ''
                     ],
+                    'description' => 'Confirm Arrow Border with Customization.'
                 ]
         );
         $this->add_group_control(
@@ -449,7 +468,8 @@ class Modules extends Admin_Render {
                     'type' => Controls::BOXSHADOW,
                     'selector' => [
                         '{{WRAPPER}} .oxi_carousel_arrows .oxi-icons' => '',
-                    ]
+                    ],
+                    'description' => 'Confirm Arrow Background Shadow.'
                 ]
         );
         $this->end_controls_tab();
@@ -463,7 +483,8 @@ class Modules extends Admin_Render {
                     'default' => '#ffffff',
                     'selector' => [
                         '{{WRAPPER}} .oxi_carousel_arrows .oxi-icons:hover' => 'color: {{VALUE}};',
-                    ]
+                    ],
+                    'description' => 'Confirm Arrow hover icon Color.'
                 ]
         );
         $this->add_control(
@@ -475,7 +496,8 @@ class Modules extends Admin_Render {
                     'default' => 'rgba(171, 0, 201, 1)',
                     'selector' => [
                         '{{WRAPPER}} .oxi_carousel_arrows .oxi-icons:hover' => 'background: {{VALUE}};',
-                    ]
+                    ],
+                    'description' => 'Confirm Arrow hover icon Background Color.'
                 ]
         );
         $this->add_group_control(
@@ -486,6 +508,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .oxi_carousel_arrows .oxi-icons:hover' => ''
                     ],
+                    'description' => 'Confirm Arrow hover Border with Customization.'
                 ]
         );
         $this->add_group_control(
@@ -495,7 +518,8 @@ class Modules extends Admin_Render {
                     'type' => Controls::BOXSHADOW,
                     'selector' => [
                         '{{WRAPPER}} .oxi_carousel_arrows .oxi-icons:hover' => '',
-                    ]
+                    ],
+                    'description' => 'Confirm Arrow hover Background Shadow.'
                 ]
         );
         $this->end_controls_tab();
@@ -531,6 +555,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .oxi_carousel_arrows .oxi-icons' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
+                    'description' => 'Allows you to add rounded corners at hover to Arrow with options.',
                 ]
         );
         $this->add_responsive_control(
@@ -563,6 +588,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .oxi_carousel_arrows .oxi-icons' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
+                    'description' => 'Generate space around a Arrow, inside of any defined borders or Background.',
                 ]
         );
         $this->end_controls_section();
@@ -580,10 +606,10 @@ class Modules extends Admin_Render {
                 ]
         );
         $this->add_responsive_control(
-                'carousel_dots_position_size',
+                'carousel_dots_position_width',
                 $this->style,
                 [
-                    'label' => __('Size', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => __('Width', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'type' => Controls::SLIDER,
                     'default' => [
                         'unit' => 'px',
@@ -607,15 +633,16 @@ class Modules extends Admin_Render {
                         ],
                     ],
                     'selector' => [
-                        '{{WRAPPER}} .oxi_carousel_dots li button:before' => 'font-size: {{SIZE}}{{UNIT}};',
+                       '{{WRAPPER}} .oxi_carousel_dots li' => 'width: {{SIZE}}{{UNIT}};',
                     ],
+                    'description' => 'Confirm Dots Width with multiple options.',
                 ]
         );
         $this->add_responsive_control(
-                'carousel_dots_width_height',
+                'carousel_dots_position_height',
                 $this->style,
                 [
-                    'label' => __('Width & Height', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => __('Height', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'type' => Controls::SLIDER,
                     'default' => [
                         'unit' => 'px',
@@ -639,9 +666,9 @@ class Modules extends Admin_Render {
                         ],
                     ],
                     'selector' => [
-                        '{{WRAPPER}} .oxi_carousel_dots li' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
-                        '{{WRAPPER}} .oxi_carousel_dots li button:before' => 'line-height: {{SIZE}}{{UNIT}};',
+                        '{{WRAPPER}} .oxi_carousel_dots li' => 'height: {{SIZE}}{{UNIT}};',
                     ],
+                    'description' => 'Confirm Dots Height with multiple options.',
                 ]
         );
         $this->add_responsive_control(
@@ -674,6 +701,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .oxi_carousel_dots' => 'bottom: {{SIZE}}{{UNIT}};',
                     ],
+                    'description' => 'Confirm Dots position with Position Y.',
                 ]
         );
         $this->add_responsive_control(
@@ -704,8 +732,9 @@ class Modules extends Admin_Render {
                         ],
                     ],
                     'selector' => [
-                        '{{WRAPPER}} .oxi_carousel_dots li' => 'margin: {{SIZE}}{{UNIT}};',
+                        '{{WRAPPER}} .oxi_carousel_dots li' => 'margin: 0px {{SIZE}}{{UNIT}};',
                     ],
+                    'description' => 'Confirm Dots Spacing with multiple options.',
                 ]
         );
         $this->start_controls_tabs(
@@ -720,19 +749,6 @@ class Modules extends Admin_Render {
         );
         $this->start_controls_tab();
         $this->add_control(
-                'carousel_dots_color',
-                $this->style,
-                [
-                    'label' => __('Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'type' => Controls::COLOR,
-                    'default' => '#fff',
-                    'oparetor' => 'RGB',
-                    'selector' => [
-                        '{{WRAPPER}} .oxi_carousel_dots li button:before' => 'color: {{VALUE}};',
-                    ],
-                ]
-        );
-        $this->add_control(
                 'carousel_dots_bg_color',
                 $this->style,
                 [
@@ -743,6 +759,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .oxi_carousel_dots li button:before' => 'background: {{VALUE}};',
                     ],
+                    'description' => 'Confirm Dots Background Color.',
                 ]
         );
         $this->add_group_control(
@@ -752,25 +769,14 @@ class Modules extends Admin_Render {
                     'type' => Controls::BORDER,
                     'selector' => [
                         '{{WRAPPER}} .oxi_carousel_dots li button:before' => '',
-                    ]
+                    ],
+                    'description' => 'customize Dots border with multiple options.',
                 ]
         );
         $this->end_controls_tab();
 
         $this->start_controls_tab();
-        $this->add_control(
-                'carousel_dots_color_hover',
-                $this->style,
-                [
-                    'label' => __('Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'type' => Controls::COLOR,
-                    'default' => 'rgb(119, 119, 119)',
-                    'oparetor' => 'RGB',
-                    'selector' => [
-                        '{{WRAPPER}} .oxi_carousel_dots li:hover button:before' => 'color: {{VALUE}};',
-                    ],
-                ]
-        );
+       
         $this->add_control(
                 'carousel_dots_bg_color_hover',
                 $this->style,
@@ -782,6 +788,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .oxi_carousel_dots li:hover button:before' => 'background: {{VALUE}};',
                     ],
+                     'description' => 'Confirm Dots hover Background Color.',
                 ]
         );
         $this->add_group_control(
@@ -791,24 +798,13 @@ class Modules extends Admin_Render {
                     'type' => Controls::BORDER,
                     'selector' => [
                         '{{WRAPPER}} .oxi_carousel_dots li:hover button:before' => '',
-                    ]
+                    ],
+                    'description' => 'Customize Dots hover border with multiple options.',
                 ]
         );
         $this->end_controls_tab();
         $this->start_controls_tab();
-        $this->add_control(
-                'carousel_dots_color_active',
-                $this->style,
-                [
-                    'label' => __('Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'type' => Controls::COLOR,
-                    'default' => '#fff',
-                    'oparetor' => 'RGB',
-                    'selector' => [
-                        '{{WRAPPER}} .oxi_carousel_dots li.slick-active button:before' => 'color: {{VALUE}};',
-                    ],
-                ]
-        );
+        
         $this->add_control(
                 'carousel_dots_bg_color_active',
                 $this->style,
@@ -820,6 +816,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .oxi_carousel_dots li.slick-active button:before' => 'background: {{VALUE}};',
                     ],
+                     'description' => 'Confirm Dots hover Background Color.',
                 ]
         );
         $this->add_group_control(
@@ -829,7 +826,8 @@ class Modules extends Admin_Render {
                     'type' => Controls::BORDER,
                     'selector' => [
                         '{{WRAPPER}} .oxi_carousel_dots li.slick-active button:before' => '',
-                    ]
+                    ],
+                    'description' => 'Customize Dots Active border with multiple options.',
                 ]
         );
         $this->end_controls_tab();
@@ -865,6 +863,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .oxi_carousel_dots li button:before' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
+                    'description' => 'Allows you to add rounded  to Dots with options.',
                 ]
         );
         $this->end_controls_section();

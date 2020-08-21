@@ -19,9 +19,39 @@ class Effects2 extends Public_Render {
     public function public_css() {
         wp_enqueue_style('oxi-image-hover-filter-style-2', OXI_IMAGE_HOVER_URL . '/Modules/Filter/Files/style-2.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
-    
-      public function inline_public_css() {
+
+    public function custom_column_render($id) {
+        if (!array_key_exists($id . '-tab', $this->style) || $this->style[$id . '-tab'] == ''):
+            if ($this->style[$id . '-lap'] == 'oxi-bt-col-lg-8'):
+                $this->style[$id . '-tab'] = 'oxi-bt-col-md-3';
+            elseif ($this->style[$id . '-lap'] == 'oxi-bt-col-lg-5'):
+                $this->style[$id . '-tab'] = 'oxi-bt-col-md-6';
+            elseif ($this->style[$id . '-lap'] == 'oxi-bt-col-lg-4'):
+                $this->style[$id . '-tab'] = 'oxi-bt-col-md-6';
+            elseif ($this->style[$id . '-lap'] == 'oxi-bt-col-lg-3'):
+                $this->style[$id . '-tab'] = 'oxi-bt-col-md-6';
+            else:
+                $this->style[$id . '-tab'] = 'oxi-bt-col-md-12';
+            endif;
+        endif;
+        if (!array_key_exists($id . '-mob', $this->style) || $this->style[$id . '-mob'] == ''):
+            if ($this->style[$id . '-lap'] == 'oxi-bt-col-lg-2'):
+                $this->style[$id . '-mob'] = 'oxi-bt-col-sm-6';
+            elseif ($this->style[$id . '-lap'] == 'oxi-bt-col-lg-8'):
+                $this->style[$id . '-mob'] = 'oxi-bt-col-sm-6';
+            elseif ($this->style[$id . '-lap'] == 'oxi-bt-col-lg-1'):
+                $this->style[$id . '-mob'] = 'oxi-bt-col-sm-6';
+            else:
+                $this->style[$id . '-mob'] = 'oxi-bt-col-sm-12';
+            endif;
+        endif;
+    }
+
+    public function inline_public_css() {
+        $this->custom_column_render('category_col');
         $styledata = $this->style;
+
+
         $item_width = '.' . $this->WRAPPER . ' .image-hover-category-item-show {
                         width: ' . (100 / explode('-', $styledata['category_col-lap'])[4]) . '%;
                     }
@@ -68,7 +98,6 @@ class Effects2 extends Public_Render {
                 ';
         return $item_width;
     }
-    
 
     public function inline_public_jquery() {
         $jquery = '';

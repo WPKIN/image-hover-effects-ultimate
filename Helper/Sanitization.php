@@ -250,7 +250,7 @@ trait Sanitization {
                                 <span class="dashicons popover-set"></span>
                             </div>
                         </div>
-                        ' . (array_key_exists('description', $arg) && $this->ShowShortInfo ? '<div class="shortcode-form-control-description">' . $arg['description'] . '</div>' : '') . '
+                        ' . (array_key_exists('description', $arg) ? '<div class="shortcode-form-control-description">' . $arg['description'] . '</div>' : '') . '
                         
                     </div>
                     <div class="shortcode-form-control-content shortcode-form-control-content-popover-body">
@@ -312,7 +312,6 @@ trait Sanitization {
             'selector-data' => TRUE,
             'render' => TRUE,
             'responsive' => 'laptop',
-            'ShowShortInfo' => false,
         ];
 
         /*
@@ -355,9 +354,8 @@ trait Sanitization {
         $fun = $arg['type'] . '_admin_control';
         echo $this->$fun($id, $data, $arg);
         echo '      </div>';
-        if ($this->ShowShortInfo):
-            echo (array_key_exists('description', $arg) ? '<div class="shortcode-form-control-description">' . $arg['description'] . '</div>' : '');
-        endif;
+        echo (array_key_exists('description', $arg) ? '<div class="shortcode-form-control-description">' . $arg['description'] . '</div>' : '');
+
         echo ' </div>
         </div>';
     }
@@ -882,6 +880,15 @@ trait Sanitization {
                     return false;
                 endif;
                 if ($data[$key] != $value):
+                    if (is_array($value)):
+                        $t = false;
+                        foreach ($value as $val) {
+                            if ($data[$key] == $val):
+                                $t = true;
+                            endif;
+                        }
+                        echo $t;
+                    endif;
                     if ($value == 'EMPTY' && $data[$key] != '0'):
                         return true;
                     endif;

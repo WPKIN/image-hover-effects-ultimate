@@ -79,16 +79,6 @@ class Settings {
                                 </td>
                             </tr>
                             <tr valign="top">
-                                <td scope="row">Short Information</td>
-                                <td>
-                                    <input type="radio" name="image_hover_ultimate_info" value="" <?php checked('', get_option('image_hover_ultimate_info'), true); ?>>Yes, Sure
-                                    <input type="radio" name="image_hover_ultimate_info" value="no" <?php checked('no', get_option('image_hover_ultimate_info'), true); ?>>No, Thanks
-                                </td>
-                                <td>
-                                    <label class="description" for="image_hover_ultimate_info"><?php _e('Wanna Short Information with each Tools at Customization page? Kindly set as like as you want'); ?></label>
-                                </td>
-                            </tr>
-                            <tr valign="top">
                                 <td scope="row">Font Awesome Support</td>
                                 <td>
                                     <input type="radio" name="oxi_addons_font_awesome" value="yes" <?php checked('yes', get_option('oxi_addons_font_awesome'), true); ?>>YES
