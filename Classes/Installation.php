@@ -12,7 +12,6 @@ if (!defined('ABSPATH'))
  */
 class Installation {
 
-
     protected static $lfe_instance = NULL;
 
     const ADMINMENU = 'get_oxilab_addons_menu';
@@ -67,8 +66,6 @@ class Installation {
         delete_transient(self::ADMINMENU);
     }
 
-    
-
     public function Image_Hover_Database() {
         global $wpdb;
         $table_name = $wpdb->prefix . 'image_hover_ultimate_style';
@@ -106,6 +103,16 @@ class Installation {
     }
 
     /**
+     * Plugin upgrade hook
+     *
+     * @since 9.3.0
+     */
+    public function plugin_upgrade_hook() {
+        $this->Image_Hover_Menu();
+        $this->Image_Hover_Database();
+    }
+
+    /**
      * Plugin activation hook
      *
      * @since 9.3.0
@@ -126,14 +133,4 @@ class Installation {
         $this->Image_Hover_Menu_Deactive();
     }
 
-    /**
-     * Plugin upgrade hook
-     *
-     * @since 9.3.0
-     */
-    public function plugin_upgrade_hook() {
-        $this->Image_Hover_Menu();
-        $this->Image_Hover_Database();
-    }
-    
 }

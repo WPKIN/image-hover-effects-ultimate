@@ -33,6 +33,32 @@ trait Admin_helper {
 
     }
 
+    public function Image_Parent() {
+        $effects = (!empty($_GET['effects']) ? ucfirst($_GET['effects']) : '');
+        $styleid = (!empty($_GET['styleid']) ? (int) $_GET['styleid'] : '');
+        if (!empty($effects) && !empty($styleid)):
+            $style = $this->wpdb->get_row($this->wpdb->prepare('SELECT style_name FROM ' . $this->parent_table . ' WHERE id = %d ', $styleid), ARRAY_A);
+            $name = explode('-', $style['style_name']);
+            if ($effects != ucfirst($name[0])):
+                $url = admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$name[0]&styleid=$styleid");
+                echo $url;
+                echo '<script type="text/javascript"> document.location.href="' . $url . '"; </script>';
+                exit;
+            endif;
+            $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $effects . '\Admin\\Effects' . $name[1];
+            if (class_exists($cls)):
+                new $cls();
+            endif;
+        elseif (!empty($effects)):
+            $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $effects . '\\' . $effects . '';
+            if (class_exists($cls)):
+                new $cls();
+            endif;
+        else:
+            new \OXI_IMAGE_HOVER_PLUGINS\Page\Admin();
+        endif;
+    }
+
     /**
      * Plugin check Current Tabs
      *
@@ -191,32 +217,6 @@ trait Admin_helper {
 
     public function custom_redirect() {
         
-    }
-
-    public function Image_Parent() {
-        $effects = (!empty($_GET['effects']) ? ucfirst($_GET['effects']) : '');
-        $styleid = (!empty($_GET['styleid']) ? (int) $_GET['styleid'] : '');
-        if (!empty($effects) && !empty($styleid)):
-            $style = $this->wpdb->get_row($this->wpdb->prepare('SELECT style_name FROM ' . $this->parent_table . ' WHERE id = %d ', $styleid), ARRAY_A);
-            $name = explode('-', $style['style_name']);
-            if ($effects != ucfirst($name[0])):
-                $url = admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$name[0]&styleid=$styleid");
-                echo $url;
-                echo '<script type="text/javascript"> document.location.href="' . $url . '"; </script>';
-                exit;
-            endif;
-            $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $effects . '\Admin\\Effects' . $name[1];
-            if (class_exists($cls)):
-                new $cls();
-            endif;
-        elseif (!empty($effects)):
-            $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $effects . '\\' . $effects . '';
-            if (class_exists($cls)):
-                new $cls();
-            endif;
-        else:
-            new \OXI_IMAGE_HOVER_PLUGINS\Page\Admin();
-        endif;
     }
 
     public function Image_Shortcode() {

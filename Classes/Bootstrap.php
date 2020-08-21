@@ -178,6 +178,45 @@ class Bootstrap {
         }
         return $new;
     }
+    
+
+    public function deactivate_license() {
+        if (isset($_POST['oxi_image_hover_license_deactivate'])) {
+            if (!check_admin_referer('oxi_image_hover_nonce', 'oxi_image_hover_nonce'))
+                return;
+            $license = trim(get_option('image_hover_ultimate_license_key'));
+            $api_params = array(
+                'edd_action' => 'deactivate_license',
+                'license' => $license,
+                'item_name' => urlencode('Image Hover Effects Ultimate'),
+                'url' => home_url()
+            );
+
+            $response = wp_remote_post('https://www.oxilab.org', array('timeout' => 15, 'sslverify' => false, 'body' => $api_params));
+
+            if (is_wp_error($response) || 200 !== wp_remote_retrieve_response_code($response)) {
+
+                if (is_wp_error($response)) {
+                    $message = $response->get_error_message();
+                } else {
+                    $message = __('An error occurred, please try again.');
+                }
+
+                $base_url = admin_url('admin.php?page=oxi-image-hover-ultimate-settings');
+                $redirect = add_query_arg(array('sl_activation' => 'false', 'message' => urlencode($message)), $base_url);
+
+                wp_redirect($redirect);
+                exit();
+            }
+            $license_data = json_decode(wp_remote_retrieve_body($response));
+            if ($license_data->license == 'deactivated') {
+                delete_option('image_hover_ultimate_license_status');
+            }
+
+            wp_redirect(admin_url('admin.php?page=oxi-image-hover-ultimate-settings'));
+            exit();
+        }
+    }
 
     public function activate_license() {
         if (isset($_POST['oxi_image_hover_license_activate'])) {
@@ -258,44 +297,6 @@ class Bootstrap {
                 exit();
             }
             update_option('image_hover_ultimate_license_status', $license_data->license);
-            wp_redirect(admin_url('admin.php?page=oxi-image-hover-ultimate-settings'));
-            exit();
-        }
-    }
-
-    public function deactivate_license() {
-        if (isset($_POST['oxi_image_hover_license_deactivate'])) {
-            if (!check_admin_referer('oxi_image_hover_nonce', 'oxi_image_hover_nonce'))
-                return;
-            $license = trim(get_option('image_hover_ultimate_license_key'));
-            $api_params = array(
-                'edd_action' => 'deactivate_license',
-                'license' => $license,
-                'item_name' => urlencode('Image Hover Effects Ultimate'),
-                'url' => home_url()
-            );
-
-            $response = wp_remote_post('https://www.oxilab.org', array('timeout' => 15, 'sslverify' => false, 'body' => $api_params));
-
-            if (is_wp_error($response) || 200 !== wp_remote_retrieve_response_code($response)) {
-
-                if (is_wp_error($response)) {
-                    $message = $response->get_error_message();
-                } else {
-                    $message = __('An error occurred, please try again.');
-                }
-
-                $base_url = admin_url('admin.php?page=oxi-image-hover-ultimate-settings');
-                $redirect = add_query_arg(array('sl_activation' => 'false', 'message' => urlencode($message)), $base_url);
-
-                wp_redirect($redirect);
-                exit();
-            }
-            $license_data = json_decode(wp_remote_retrieve_body($response));
-            if ($license_data->license == 'deactivated') {
-                delete_option('image_hover_ultimate_license_status');
-            }
-
             wp_redirect(admin_url('admin.php?page=oxi-image-hover-ultimate-settings'));
             exit();
         }

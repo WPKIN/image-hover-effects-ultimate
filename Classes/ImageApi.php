@@ -93,19 +93,6 @@ class ImageApi {
         return $arr;
     }
 
-    public function update_image_hover_plugin() {
-        $stylelist = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->parent_table ORDER by id ASC"), ARRAY_A);
-        foreach ($stylelist as $value) {
-            $raw = json_decode(stripslashes($value['rawdata']), true);
-            $raw['image-hover-style-id'] = $value['id'];
-            $s = explode('-', $value['style_name']);
-            $CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($s[0]) . '\Admin\Effects' . $s[1];
-            $C = new $CLASS('admin');
-            $f = $C->template_css_render($raw);
-        }
-        update_option('image_hover_ultimate_update_complete', 'done');
-    }
-
     public function post_create_new() {
         if (!empty($this->styleid)):
             $styleid = (int) $this->styleid;
@@ -157,6 +144,19 @@ class ImageApi {
         else:
             return 'Silence is Golden';
         endif;
+    }
+
+    public function update_image_hover_plugin() {
+        $stylelist = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->parent_table ORDER by id ASC"), ARRAY_A);
+        foreach ($stylelist as $value) {
+            $raw = json_decode(stripslashes($value['rawdata']), true);
+            $raw['image-hover-style-id'] = $value['id'];
+            $s = explode('-', $value['style_name']);
+            $CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($s[0]) . '\Admin\Effects' . $s[1];
+            $C = new $CLASS('admin');
+            $f = $C->template_css_render($raw);
+        }
+        update_option('image_hover_ultimate_update_complete', 'done');
     }
 
     public function post_shortcode_export() {
@@ -310,6 +310,22 @@ class ImageApi {
     }
 
     /**
+     * Template Rebuild Render
+     *
+     * @since 9.3.0
+     */
+    public function post_elements_template_rebuild_data() {
+        $style = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $this->styleid), ARRAY_A);
+        $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $this->styleid), ARRAY_A);
+        $style['rawdata'] = $style['stylesheet'] = $style['font_family'] = '';
+        $name = explode('-', $style['style_name']);
+        $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($name[0]) . '\Render\Effects' . $name[1];
+        $CLASS = new $cls;
+        $CLASS->__construct($style, $child, 'admin');
+        return 'success';
+    }
+
+    /**
      * Template Template Render
      *
      * @since 9.3.0
@@ -325,22 +341,6 @@ class ImageApi {
         $styledata = ['rawdata' => $this->rawdata, 'id' => $this->styleid, 'style_name' => $StyleName, 'stylesheet' => ''];
         $CLASS->__construct($styledata, $child, 'admin');
         return ob_get_clean();
-    }
-
-    /**
-     * Template Rebuild Render
-     *
-     * @since 9.3.0
-     */
-    public function post_elements_template_rebuild_data() {
-        $style = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $this->styleid), ARRAY_A);
-        $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $this->styleid), ARRAY_A);
-        $style['rawdata'] = $style['stylesheet'] = $style['font_family'] = '';
-        $name = explode('-', $style['style_name']);
-        $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($name[0]) . '\Render\Effects' . $name[1];
-        $CLASS = new $cls;
-        $CLASS->__construct($style, $child, 'admin');
-        return 'success';
     }
 
     /**

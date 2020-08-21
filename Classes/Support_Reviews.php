@@ -65,16 +65,6 @@ class Support_Reviews {
     }
 
     /**
-     * Admin Notice CSS file loader
-     * @return void
-     */
-    public function admin_enqueue_scripts() {
-        wp_enqueue_script("jquery");
-        wp_enqueue_style('oxi-image-admin-notice-css', OXI_IMAGE_HOVER_URL . '/assets/backend/css/notice.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        $this->dismiss_button_scripts();
-    }
-
-    /**
      * Admin Notice JS file loader
      * @return void
      */
@@ -84,6 +74,16 @@ class Support_Reviews {
             'root' => esc_url_raw(rest_url()),
             'nonce' => wp_create_nonce('wp_rest')
         ));
+    }
+
+    /**
+     * Admin Notice CSS file loader
+     * @return void
+     */
+    public function admin_enqueue_scripts() {
+        wp_enqueue_script("jquery");
+        wp_enqueue_style('oxi-image-admin-notice-css', OXI_IMAGE_HOVER_URL . '/assets/backend/css/notice.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        $this->dismiss_button_scripts();
     }
 
 }

@@ -80,14 +80,6 @@ class Create {
     }
 
     /**
-     * Admin Notice JS file loader
-     * @return void
-     */
-    public function admin_rest_api() {
-        wp_enqueue_script('oxi-image-hover-create', OXI_IMAGE_HOVER_URL . '/assets/backend/js/create.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-    }
-
-    /**
      * Image Hover Ultimate Pre Active Check.
      *
      * @since 9.3.0
@@ -107,36 +99,44 @@ class Create {
         endif;
     }
 
+    /**
+     * Admin Notice JS file loader
+     * @return void
+     */
+    public function admin_rest_api() {
+        wp_enqueue_script('oxi-image-hover-create', OXI_IMAGE_HOVER_URL . '/assets/backend/js/create.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+    }
+
     public function Render() {
         $import = (!empty($_GET['import']) ? $_GET['import'] : '');
         if ($import == 'templates'):
             ?>
             <div class="oxi-addons-row">
+            <?php
+            $this->Import_header();
+            $this->import_template();
+            ?>
+            </div>
                 <?php
-                $this->Import_header();
-                $this->import_template();
+            else:
                 ?>
+            <div class="oxi-addons-row">
+            <?php
+            $this->Admin_header();
+            $this->template();
+            $this->create_new();
+            ?>
             </div>
             <?php
-        else:
+            endif;
+        }
+
+        public function JSON_DATA() {
+            
+        }
+
+        public function Admin_header() {
             ?>
-            <div class="oxi-addons-row">
-                <?php
-                $this->Admin_header();
-                $this->template();
-                $this->create_new();
-                ?>
-            </div>
-        <?php
-        endif;
-    }
-
-    public function JSON_DATA() {
-        
-    }
-
-    public function Admin_header() {
-        ?>
         <div class="oxi-addons-wrapper">
             <div class="oxi-addons-import-layouts">
                 <h1><?php echo ucfirst($this->effects); ?> Effects › Create New</h1>
@@ -160,34 +160,34 @@ class Create {
     public function template() {
         ?>
         <div class="oxi-addons-row">
-            <?php
-            $importbutton = false;
-            foreach ($this->TEMPLATE as $key => $value) {
-                $id = explode('-', $key)[1];
-                if (array_key_exists($key, $this->activated_template)):
-                    ?>
+        <?php
+        $importbutton = false;
+        foreach ($this->TEMPLATE as $key => $value) {
+            $id = explode('-', $key)[1];
+            if (array_key_exists($key, $this->activated_template)):
+                ?>
                     <div class="oxi-addons-col-1" id="<?php echo $key; ?>">
                         <div class="oxi-addons-style-preview">
                             <div class="oxi-addons-style-preview-top oxi-addons-center">
-                                <?php
-                                $i = 1;
-                                foreach ($value['files'] as $v) {
-                                    $style = json_decode($v, true);
-                                    $s = explode('-', $style['style']['style_name']);
-                                    echo '<div class="oxi-bt-col-lg-4 oxi-bt-col-md-6 oxi-bt-col-sm-12">';
-                                    $CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($s[0]) . '\Render\Effects' . $s[1];
-                                    if (class_exists($CLASS)):
-                                        new $CLASS($style['style'], $style['child']);
-                                    endif;
-                                    echo '<textarea style="display:none" id="oxistyle' . $id . 'data-' . $i . '">' . htmlentities(json_encode($style)) . '</textarea>';
-                                    echo '</div>';
-                                    $i++;
-                                }
-                                ?>
+                <?php
+                $i = 1;
+                foreach ($value['files'] as $v) {
+                    $style = json_decode($v, true);
+                    $s = explode('-', $style['style']['style_name']);
+                    echo '<div class="oxi-bt-col-lg-4 oxi-bt-col-md-6 oxi-bt-col-sm-12">';
+                    $CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($s[0]) . '\Render\Effects' . $s[1];
+                    if (class_exists($CLASS)):
+                        new $CLASS($style['style'], $style['child']);
+                    endif;
+                    echo '<textarea style="display:none" id="oxistyle' . $id . 'data-' . $i . '">' . htmlentities(json_encode($style)) . '</textarea>';
+                    echo '</div>';
+                    $i++;
+                }
+                ?>
                             </div>
                             <div class="oxi-addons-style-preview-bottom">
                                 <div class="oxi-addons-style-preview-bottom-left">
-                                    <?php echo $value['name']; ?>
+                <?php echo $value['name']; ?>
                                 </div>
                                 <div class="oxi-addons-style-preview-bottom-right">
                                     <button class="btn btn-warning oxi-addons-addons-style-btn-warning" title="Delete" data-value="<?php echo $id; ?>" data-effects="<?php echo $this->effects; ?>" type="button" value="Deactive" name="styledelete<?php echo $id; ?>">Deactive</button>  
@@ -196,14 +196,14 @@ class Create {
                             </div>
                         </div>
                     </div>
-                    <?php
-                else:
-                    $importbutton = true;
-                endif;
-            }
+                <?php
+            else:
+                $importbutton = true;
+            endif;
+        }
 
-            if ($importbutton):
-                ?>
+        if ($importbutton):
+            ?>
                 <div class="oxi-addons-col-1 oxi-import">
                     <div class="oxi-addons-style-preview">
                         <div class="oxilab-admin-style-preview-top">
@@ -218,9 +218,9 @@ class Create {
                         </div>
                     </div>
                 </div>
-                <?php
-            endif;
-            ?>
+            <?php
+        endif;
+        ?>
 
 
         </div>
@@ -230,37 +230,37 @@ class Create {
     public function import_template() {
         ?>
         <div class="oxi-addons-row">
-            <?php
-            foreach ($this->TEMPLATE as $key => $value) {
-                $id = explode('-', $key)[1];
-                if (!array_key_exists($key, $this->activated_template)):
-                    ?>
+        <?php
+        foreach ($this->TEMPLATE as $key => $value) {
+            $id = explode('-', $key)[1];
+            if (!array_key_exists($key, $this->activated_template)):
+                ?>
                     <div class="oxi-addons-col-1" id="<?php echo $key; ?>">
                         <div class="oxi-addons-style-preview">
                             <div class="oxi-addons-style-preview-top oxi-addons-center">
-                                <?php
-                                $i = 1;
-                                foreach ($value['files'] as $v) {
-                                    $style = json_decode($v, true);
-                                    $s = explode('-', $style['style']['style_name']);
-                                    echo '<div class="oxi-bt-col-lg-4 oxi-bt-col-md-6 oxi-bt-col-sm-12">';
-                                    $CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($s[0]) . '\Render\Effects' . $s[1];
-                                    if (class_exists($CLASS)):
-                                        new $CLASS($style['style'], $style['child']);
-                                    endif;
-                                    echo '</div>';
-                                    $i++;
-                                }
-                                ?>
+                <?php
+                $i = 1;
+                foreach ($value['files'] as $v) {
+                    $style = json_decode($v, true);
+                    $s = explode('-', $style['style']['style_name']);
+                    echo '<div class="oxi-bt-col-lg-4 oxi-bt-col-md-6 oxi-bt-col-sm-12">';
+                    $CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($s[0]) . '\Render\Effects' . $s[1];
+                    if (class_exists($CLASS)):
+                        new $CLASS($style['style'], $style['child']);
+                    endif;
+                    echo '</div>';
+                    $i++;
+                }
+                ?>
                             </div>
                             <div class="oxi-addons-style-preview-bottom">
                                 <div class="oxi-addons-style-preview-bottom-left">
-                                    <?php echo $value['name']; ?>
+                <?php echo $value['name']; ?>
                                 </div>
                                 <div class="oxi-addons-style-preview-bottom-right">
-                                    <?php
-                                    if (apply_filters('oxi-image-hover-plugin-version', false) == true || array_key_exists($key, $this->pre_clecked)):
-                                        ?>
+                <?php
+                if (apply_filters('oxi-image-hover-plugin-version', false) == true || array_key_exists($key, $this->pre_clecked)):
+                    ?>
                                         <button class="btn btn-success oxi-addons-addons-style-btn-active" title="Active Templates" data-value="<?php echo $id; ?>" data-effects="<?php echo $this->effects; ?>" type="button" value="Active" name="styleactive<?php echo $id; ?>">Active Templates</button>  
                                         <?php
                                     else:
@@ -273,16 +273,16 @@ class Create {
                             </div>
                         </div>
                     </div>
-                    <?php
-                endif;
-            }
-            ?>
+                <?php
+            endif;
+        }
+        ?>
         </div>
-        <?php
-    }
+            <?php
+        }
 
-    public function create_new() {
-        echo __('<div class="modal fade" id="oxi-addons-style-create-modal" >
+        public function create_new() {
+            echo __('<div class="modal fade" id="oxi-addons-style-create-modal" >
                         <form method="post" id="oxi-addons-style-modal-form">
                             <div class="modal-dialog modal-sm">
                                 <div class="modal-content">
@@ -323,6 +323,7 @@ class Create {
                             </div>
                         </form>
                     </div>');
-    }
+        }
 
-}
+    }
+    

@@ -74,12 +74,6 @@ class Admin {
         return $files;
     }
 
-    public function name_converter($data) {
-        $data = str_replace('_', ' ', $data);
-        $data = str_replace('-', ' ', $data);
-        $data = str_replace('+', ' ', $data);
-        return ucwords($data);
-    }
 
     public function Render() {
         ?>
@@ -175,5 +169,11 @@ class Admin {
         </div>
         <?php
     }
-
+    
+    public function name_converter($data) {
+        $data = str_replace('_', ' ', $data);
+        $data = str_replace('-', ' ', $data);
+        $data = str_replace('+', ' ', $data);
+        return ucwords($data);
+    }
 }

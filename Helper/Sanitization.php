@@ -1095,6 +1095,92 @@ trait Sanitization {
     }
 
     /*
+     * Image Hover Style Admin Panel Column Size.
+     * 
+     * @since 9.3.0
+     * Complete Simple Interface
+     */
+
+    public function column_admin_group_control($id, array $data = [], array $arg = []) {
+
+        $selector = array_key_exists('selector', $arg) ? $arg['selector'] : '';
+        $select = array_key_exists('selector', $arg) ? 'selector' : '';
+        $cond = $condition = '';
+        if (array_key_exists('condition', $arg)) :
+            $cond = 'condition';
+            $condition = $arg['condition'];
+        endif;
+        $this->add_control(
+                $lap = $id . '-lap', $data, [
+            'label' => __('Column Size', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'type' => Controls::SELECT,
+            'responsive' => 'laptop',
+            'description' => $arg['description'],
+            'default' => 'oxi-bt-col-lg-12',
+            'options' => [
+                'oxi-bt-col-lg-12' => __('Col 1', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'oxi-bt-col-lg-6' => __('Col 2', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'oxi-bt-col-lg-4' => __('Col 3', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'oxi-bt-col-lg-3' => __('Col 4', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'oxi-bt-col-lg-5' => __('Col 5', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'oxi-bt-col-lg-2' => __('Col 6', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'oxi-bt-col-lg-8' => __('Col 8', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'oxi-bt-col-lg-1' => __('Col 12', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            ],
+            'description' => 'Define how much column you want to show into single rows. Customize possible with desktop or tab or mobile Settings.',
+            $select => $selector,
+            'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
+            $cond => $condition
+                ]
+        );
+        $this->add_control(
+                $tab = $id . '-tab', $data, [
+            'label' => __('Column Size', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'type' => Controls::SELECT,
+            'responsive' => 'tab',
+            'default' => 'oxi-bt-col-md-12',
+            'description' => $arg['description'],
+            'options' => [
+                '' => __('Default', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'oxi-bt-col-md-12' => __('Col 1', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'oxi-bt-col-md-6' => __('Col 2', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'oxi-bt-col-md-4' => __('Col 3', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'oxi-bt-col-md-3' => __('Col 4', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'oxi-bt-col-md-2' => __('Col 6', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'oxi-bt-col-md-1' => __('Col 12', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            ],
+            'description' => 'Define how much column you want to show into single rows. Customize possible with desktop or tab or mobile Settings.',
+            $select => $selector,
+            'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
+            $cond => $condition
+                ]
+        );
+        $this->add_control(
+                $mob = $id . '-mob', $data, [
+            'label' => __('Column Size', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'type' => Controls::SELECT,
+            'default' => 'oxi-bt-col-lg-12',
+            'responsive' => 'mobile',
+            'description' => $arg['description'],
+            'options' => [
+                '' => __('Default', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'oxi-bt-col-sm-12' => __('Col 1', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'oxi-bt-col-sm-6' => __('Col 2', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'oxi-bt-col-sm-4' => __('Col 3', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'oxi-bt-col-sm-3' => __('Col 4', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'oxi-bt-col-sm-5' => __('Col 5', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'oxi-bt-col-sm-2' => __('Col 6', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'oxi-bt-col-sm-1' => __('Col 12', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            ],
+            'description' => 'Define how much column you want to show into single rows. Customize possible with desktop or tab or mobile Settings.',
+            $select => $selector,
+            'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
+            $cond => $condition
+                ]
+        );
+    }
+
+    /*
      * Image Hover Style Admin Panel Typography.
      * 
      * @since 9.3.0
@@ -2288,92 +2374,6 @@ trait Sanitization {
                 ]
         );
         echo '</div>' . (array_key_exists('description', $arg) ? '<div class="shortcode-form-control-description">' . $arg['description'] . '</div>' : '') . '</div>';
-    }
-
-    /*
-     * Image Hover Style Admin Panel Column Size.
-     * 
-     * @since 9.3.0
-     * Complete Simple Interface
-     */
-
-    public function column_admin_group_control($id, array $data = [], array $arg = []) {
-
-        $selector = array_key_exists('selector', $arg) ? $arg['selector'] : '';
-        $select = array_key_exists('selector', $arg) ? 'selector' : '';
-        $cond = $condition = '';
-        if (array_key_exists('condition', $arg)) :
-            $cond = 'condition';
-            $condition = $arg['condition'];
-        endif;
-        $this->add_control(
-                $lap = $id . '-lap', $data, [
-            'label' => __('Column Size', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::SELECT,
-            'responsive' => 'laptop',
-            'description' => $arg['description'],
-            'default' => 'oxi-bt-col-lg-12',
-            'options' => [
-                'oxi-bt-col-lg-12' => __('Col 1', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-bt-col-lg-6' => __('Col 2', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-bt-col-lg-4' => __('Col 3', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-bt-col-lg-3' => __('Col 4', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-bt-col-lg-5' => __('Col 5', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-bt-col-lg-2' => __('Col 6', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-bt-col-lg-8' => __('Col 8', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-bt-col-lg-1' => __('Col 12', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            ],
-            'description' => 'Define how much column you want to show into single rows. Customize possible with desktop or tab or mobile Settings.',
-            $select => $selector,
-            'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
-            $cond => $condition
-                ]
-        );
-        $this->add_control(
-                $tab = $id . '-tab', $data, [
-            'label' => __('Column Size', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::SELECT,
-            'responsive' => 'tab',
-            'default' => 'oxi-bt-col-md-12',
-            'description' => $arg['description'],
-            'options' => [
-                '' => __('Default', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-bt-col-md-12' => __('Col 1', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-bt-col-md-6' => __('Col 2', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-bt-col-md-4' => __('Col 3', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-bt-col-md-3' => __('Col 4', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-bt-col-md-2' => __('Col 6', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-bt-col-md-1' => __('Col 12', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            ],
-            'description' => 'Define how much column you want to show into single rows. Customize possible with desktop or tab or mobile Settings.',
-            $select => $selector,
-            'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
-            $cond => $condition
-                ]
-        );
-        $this->add_control(
-                $mob = $id . '-mob', $data, [
-            'label' => __('Column Size', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::SELECT,
-            'default' => 'oxi-bt-col-lg-12',
-            'responsive' => 'mobile',
-            'description' => $arg['description'],
-            'options' => [
-                '' => __('Default', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-bt-col-sm-12' => __('Col 1', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-bt-col-sm-6' => __('Col 2', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-bt-col-sm-4' => __('Col 3', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-bt-col-sm-3' => __('Col 4', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-bt-col-sm-5' => __('Col 5', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-bt-col-sm-2' => __('Col 6', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-bt-col-sm-1' => __('Col 12', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            ],
-            'description' => 'Define how much column you want to show into single rows. Customize possible with desktop or tab or mobile Settings.',
-            $select => $selector,
-            'form_condition' => (array_key_exists('form_condition', $arg) ? $arg['form_condition'] : ''),
-            $cond => $condition
-                ]
-        );
     }
 
     /*

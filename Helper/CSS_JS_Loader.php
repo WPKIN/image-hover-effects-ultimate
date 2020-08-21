@@ -8,6 +8,11 @@ namespace OXI_IMAGE_HOVER_PLUGINS\Helper;
  */
 trait CSS_JS_Loader {
 
+    public function str_replace_first($from, $to, $content) {
+        $from = '/' . preg_quote($from, '/') . '/';
+        return preg_replace($from, $to, $content, 1);
+    }
+
     public function loader_font_familly_validation($data = []) {
         foreach ($data as $value) {
             wp_enqueue_style('' . $value . '', 'https://fonts.googleapis.com/css?family=' . $value . '');
@@ -88,11 +93,6 @@ trait CSS_JS_Loader {
         wp_enqueue_media();
         wp_register_script('oxi-image-hover_media_scripts', OXI_IMAGE_HOVER_URL . '/assets/backend/js/media-uploader.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         wp_enqueue_script('oxi-image-hover_media_scripts');
-    }
-
-    public function str_replace_first($from, $to, $content) {
-        $from = '/' . preg_quote($from, '/') . '/';
-        return preg_replace($from, $to, $content, 1);
     }
 
 }
