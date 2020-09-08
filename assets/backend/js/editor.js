@@ -39,7 +39,6 @@ jQuery.noConflict();
                     rawdata: rawdata
                 }
             }).done(function (response) {
-                console.log(response);
                 callback(response);
                 active = false;
             });
@@ -112,7 +111,7 @@ jQuery.noConflict();
         var styleid = $(this).data('value');
         var functionname = "elements_template_rebuild_data";
         OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, function (callback) {
-            console.log(callback);
+          
             if (callback === "success") {
                 setTimeout(function () {
                     location.reload();
@@ -130,7 +129,7 @@ jQuery.noConflict();
         }
         var functionname = "elements_template_rearrange_save_data";
         OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, function (callback) {
-            console.log(callback);
+          
             if (callback === "success") {
                 $("#OXIAADDONSCHANGEDPOPUP .icon-box").html('<span class="dashicons dashicons-yes"></span>');
                 $("#OXIAADDONSCHANGEDPOPUP .modal-body.text-center h4").html("Great!");
@@ -161,9 +160,9 @@ jQuery.noConflict();
         var functionname = "elements_template_style";
         $(this).html('<span class="dashicons dashicons-admin-generic"></span>');
         OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, function (callback) {
-            console.log(callback);
+           
             if (callback === "success") {
-                console.log(callback);
+              
                 $("#OXIAADDONSCHANGEDPOPUP .icon-box").html('<span class="dashicons dashicons-yes"></span>');
                 $("#OXIAADDONSCHANGEDPOPUP .modal-body.text-center h4").html("Great!");
                 $("#OXIAADDONSCHANGEDPOPUP .modal-body.text-center p").html("Layouts data has been saved successfully.");
@@ -180,6 +179,7 @@ jQuery.noConflict();
         var childid = $("#shortcodeitemid").val();
         $(this).html('<span class="dashicons dashicons-admin-generic"></span>');
         OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, function (callback) {
+              console.log(callback);
             $("#oxi-addons-list-data-modal").modal("hide");
             $("#OXIAADDONSCHANGEDPOPUP .icon-box").html('<span class="dashicons dashicons-yes"></span>');
             $("#OXIAADDONSCHANGEDPOPUP .modal-body.text-center h4").html("Great!");
@@ -249,7 +249,7 @@ jQuery.noConflict();
                                 $('input[name=' + key + ']').prop('checked', false).removeAttr('checked');
                             }
                         } else if (tp === 'hidden') {
-                            console.log('tp');
+                          
                             $('input[name=' + key + ']').val(value);
                             if ($('input[name=' + key + ']').hasClass('shortcode-addons-media-control-link')) {
                                 $('#' + key).siblings('.shortcode-addons-media-control').removeClass('shortcode-addons-media-control-hidden-button');

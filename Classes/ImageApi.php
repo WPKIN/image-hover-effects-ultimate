@@ -237,6 +237,7 @@ class ImageApi {
         if ((int) $this->styleid):
             $this->wpdb->query($this->wpdb->prepare("UPDATE {$this->parent_table} SET style_name = %s WHERE id = %d", $rawdata, $this->styleid));
         endif;
+        return 'success';
     }
 
     /**
@@ -307,6 +308,7 @@ class ImageApi {
                 $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d, %s )", array($this->styleid, $this->rawdata)));
             endif;
         endif;
+        return 'success';
     }
 
     /**
