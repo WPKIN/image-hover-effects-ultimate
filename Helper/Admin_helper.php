@@ -77,6 +77,95 @@ trait Admin_helper {
         return admin_url(strpos($agr, 'edit') !== false ? $agr : 'admin.php?page=' . $agr);
     }
 
+    public function custom_redirect() {
+        
+    }
+
+    public function Image_Shortcode() {
+        new \OXI_IMAGE_HOVER_PLUGINS\Page\Shortcode();
+    }
+
+    public function Image_Addons() {
+        new \OXI_IMAGE_HOVER_PLUGINS\Page\Addons();
+    }
+
+    public function Image_Settings() {
+        new \OXI_IMAGE_HOVER_PLUGINS\Page\Settings();
+    }
+
+    public function oxi_image_hover_support() {
+        new \OXI_IMAGE_HOVER_PLUGINS\Page\Welcome();
+    }
+
+    /**
+     * Admin Notice Check
+     *
+     * @since 9.3.0
+     */
+    public function admin_notice_status() {
+        $data = get_option('oxi_image_hover_nobug');
+        return $data;
+    }
+
+    /**
+     * Admin Install date Check
+     *
+     * @since 9.3.0
+     */
+    public function installation_date() {
+        $data = get_option('oxi_image_hover_activation_date');
+        if (empty($data)):
+            $data = strtotime("now");
+            update_option('oxi_image_hover_activation_date', $data);
+        endif;
+        return $data;
+    }
+
+    public function User_Reviews() {
+        $this->admin_recommended();
+        $this->admin_notice();
+    }
+
+    /**
+     * Admin Notice Check
+     *
+     * @since 9.3.0
+     */
+    public function admin_recommended_status() {
+        $data = get_option('oxi_image_hover_recommended');
+        return $data;
+    }
+
+    public function admin_recommended() {
+        if (!empty($this->admin_recommended_status())):
+            return;
+        endif;
+        if (strtotime('-1 days') < $this->installation_date()):
+            return;
+        endif;
+        new \OXI_IMAGE_HOVER_PLUGINS\Classes\Support_Recommended();
+    }
+
+    public function admin_notice() {
+        if (!empty($this->admin_notice_status())):
+            return;
+        endif;
+        if (strtotime('-7 days') < $this->installation_date()):
+            return;
+        endif;
+        new \OXI_IMAGE_HOVER_PLUGINS\Classes\Support_Reviews();
+    }
+
+    public function redirect_on_activation() {
+        if (get_transient('oxi_image_hover_activation_redirect')):
+            delete_transient('oxi_image_hover_activation_redirect');
+            if (is_network_admin() || isset($_GET['activate-multi'])):
+                return;
+            endif;
+            wp_safe_redirect(admin_url("admin.php?page=image-hover-ultimate-support"));
+        endif;
+    }
+
     public function SupportAndComments($agr) {
         echo '  <div class="oxi-addons-admin-notifications">
                     <h3>
@@ -213,95 +302,6 @@ trait Admin_helper {
         add_submenu_page('oxi-image-hover-ultimate', 'Oxilab Addons', 'Oxilab Addons', $first_key, 'oxi-image-hover-ultimate-addons', [$this, 'Image_Addons']);
         add_submenu_page('oxi-image-hover-ultimate', 'Settings', 'Settings', $first_key, 'oxi-image-hover-ultimate-settings', [$this, 'Image_Settings']);
         add_submenu_page('oxi-image-hover-ultimate', 'Support', 'Support', $first_key, 'image-hover-ultimate-support', [$this, 'oxi_image_hover_support']);
-    }
-
-    public function custom_redirect() {
-        
-    }
-
-    public function Image_Shortcode() {
-        new \OXI_IMAGE_HOVER_PLUGINS\Page\Shortcode();
-    }
-
-    public function Image_Addons() {
-        new \OXI_IMAGE_HOVER_PLUGINS\Page\Addons();
-    }
-
-    public function Image_Settings() {
-        new \OXI_IMAGE_HOVER_PLUGINS\Page\Settings();
-    }
-
-    public function oxi_image_hover_support() {
-        new \OXI_IMAGE_HOVER_PLUGINS\Page\Welcome();
-    }
-
-    /**
-     * Admin Notice Check
-     *
-     * @since 9.3.0
-     */
-    public function admin_notice_status() {
-        $data = get_option('oxi_image_hover_nobug');
-        return $data;
-    }
-
-    /**
-     * Admin Install date Check
-     *
-     * @since 9.3.0
-     */
-    public function installation_date() {
-        $data = get_option('oxi_image_hover_activation_date');
-        if (empty($data)):
-            $data = strtotime("now");
-            update_option('oxi_image_hover_activation_date', $data);
-        endif;
-        return $data;
-    }
-
-    public function User_Reviews() {
-        $this->admin_recommended();
-        $this->admin_notice();
-    }
-
-    /**
-     * Admin Notice Check
-     *
-     * @since 9.3.0
-     */
-    public function admin_recommended_status() {
-        $data = get_option('oxi_image_hover_recommended');
-        return $data;
-    }
-
-    public function admin_recommended() {
-        if (!empty($this->admin_recommended_status())):
-            return;
-        endif;
-        if (strtotime('-1 days') < $this->installation_date()):
-            return;
-        endif;
-        new \OXI_IMAGE_HOVER_PLUGINS\Classes\Support_Recommended();
-    }
-
-    public function admin_notice() {
-        if (!empty($this->admin_notice_status())):
-            return;
-        endif;
-        if (strtotime('-7 days') < $this->installation_date()):
-            return;
-        endif;
-        new \OXI_IMAGE_HOVER_PLUGINS\Classes\Support_Reviews();
-    }
-
-    public function redirect_on_activation() {
-        if (get_transient('oxi_image_hover_activation_redirect')):
-            delete_transient('oxi_image_hover_activation_redirect');
-            if (is_network_admin() || isset($_GET['activate-multi'])):
-                return;
-            endif;
-            wp_safe_redirect(admin_url("admin.php?page=image-hover-ultimate-support"));
-        endif;
     }
 
 }

@@ -19,6 +19,11 @@ trait CSS_JS_Loader {
         }
     }
 
+    public function admin_css_loader() {
+        $this->admin_css();
+        $this->admin_js();
+    }
+
     public function admin_css() {
         $this->loader_font_familly_validation(['Bree+Serif', 'Source+Sans+Pro']);
         wp_enqueue_style('oxilab-image-hover-bootstrap', OXI_IMAGE_HOVER_URL . 'assets/backend/css/bootstrap.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
@@ -47,11 +52,6 @@ trait CSS_JS_Loader {
         wp_enqueue_script('jquery-ui-draggable');
         wp_enqueue_script('jquery.dataTables.min', OXI_IMAGE_HOVER_URL . '/assets/backend/js/jquery.dataTables.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         wp_enqueue_script('dataTables.bootstrap.min', OXI_IMAGE_HOVER_URL . '/assets/backend/js/dataTables.bootstrap.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-    }
-
-    public function admin_css_loader() {
-        $this->admin_css();
-        $this->admin_js();
     }
 
     public function admin_elements_frontend_loader() {

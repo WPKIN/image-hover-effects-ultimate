@@ -179,6 +179,16 @@ class Modules extends Admin_Render {
         $this->end_controls_section();
     }
 
+    /**
+     * Template Modal opener
+     * Define Multiple Data With Single Data
+     *
+     * @since 9.3.0
+     */
+    public function modal_opener() {
+        
+    }
+
     /*
      * @return void
      * Start Post Condtion for Display Post
@@ -640,16 +650,6 @@ class Modules extends Admin_Render {
                 ]
         );
         $this->end_controls_section();
-    }
-
-    /**
-     * Template Modal opener
-     * Define Multiple Data With Single Data
-     *
-     * @since 9.3.0
-     */
-    public function modal_opener() {
-        
     }
 
 }
