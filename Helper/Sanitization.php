@@ -9,19 +9,6 @@ namespace OXI_IMAGE_HOVER_PLUGINS\Helper;
 use OXI_IMAGE_HOVER_PLUGINS\Classes\Controls as Controls;
 
 trait Sanitization {
-    /*
-     * Image Hover Style Admin Panel header
-     * 
-     * @since 9.3.0
-     */
-
-    public function start_section_header($id, array $arg = []) {
-        echo '<ul class="oxi-addons-tabs-ul">   ';
-        foreach ($arg['options'] as $key => $value) {
-            echo '<li ref="#shortcode-addons-section-' . $key . '">' . $value . '</li>';
-        }
-        echo '</ul>';
-    }
 
     /**
      * font settings sanitize 
@@ -50,6 +37,20 @@ trait Sanitization {
         $data = str_replace('>', '&gt;', $data);
         $data = sanitize_text_field($data);
         return $data;
+    }
+
+    /*
+     * Image Hover Style Admin Panel header
+     * 
+     * @since 9.3.0
+     */
+
+    public function start_section_header($id, array $arg = []) {
+        echo '<ul class="oxi-addons-tabs-ul">   ';
+        foreach ($arg['options'] as $key => $value) {
+            echo '<li ref="#shortcode-addons-section-' . $key . '">' . $value . '</li>';
+        }
+        echo '</ul>';
     }
 
     /*

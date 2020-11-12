@@ -445,6 +445,20 @@ class Modules extends Admin_Render {
         $this->end_section_tabs();
     }
 
+    /*
+     * @return void
+     * Start Module Method for Modal Opener and Modal  #Light-box
+     */
+
+    public function modal_opener() {
+        $this->add_substitute_control('', [], [
+            'type' => Controls::MODALOPENER,
+            'title' => __('Add New Magnifier', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'sub-title' => __('Open Magnifier Form', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'showing' => true,
+        ]);
+    }
+
     public function modal_form_data() {
         echo '<div class="modal-header">
                     <h4 class="modal-title">Image Hover Form</h4>
@@ -564,20 +578,6 @@ class Modules extends Admin_Render {
                 ]
         );
         echo '</div>';
-    }
-
-    /*
-     * @return void
-     * Start Module Method for Modal Opener and Modal  #Light-box
-     */
-
-    public function modal_opener() {
-        $this->add_substitute_control('', [], [
-            'type' => Controls::MODALOPENER,
-            'title' => __('Add New Magnifier', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'sub-title' => __('Open Magnifier Form', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'showing' => true,
-        ]);
     }
 
 }

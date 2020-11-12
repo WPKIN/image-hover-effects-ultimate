@@ -12,20 +12,6 @@ use OXI_IMAGE_HOVER_PLUGINS\Page\Admin_Render as Admin_Render;
 
 class Modules extends Admin_Render {
 
-    public function all_style() {
-        $a = 'button%';
-        $b = 'general%';
-        $c = 'square%';
-        $d = 'caption%';
-        $alldata = $this->wpdb->get_results($this->wpdb->prepare("SELECT id, name FROM $this->parent_table WHERE style_name LIKE %s OR style_name LIKE %s OR style_name LIKE %s OR style_name LIKE %s ORDER by id ASC", $a, $b, $c, $d), ARRAY_A);
-        $st = [];
-        foreach ($alldata as $k => $value) {
-            $st[$value['id']] = $value['name'] != '' ? $value['name'] : 'Shortcode ID ' . $value['id'];
-        }
-
-        return $st;
-    }
-
     public function register_controls() {
         $this->start_section_header(
                 'oxi-image-hover-start-tabs',
@@ -203,7 +189,7 @@ class Modules extends Admin_Render {
                     'yes' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'no' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'return_value' => 'yes',
-                    'description' => 'Do you want Infinite Loop.'
+                     'description' => 'Do you want Infinite Loop.'
                 ]
         );
         $this->add_control(
@@ -259,11 +245,25 @@ class Modules extends Admin_Render {
                     'yes' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'no' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'return_value' => 'yes',
-                    'description' => 'Do you want Dots for pagination.'
+                     'description' => 'Do you want Dots for pagination.'
                 ]
         );
 
         $this->end_controls_section();
+    }
+
+    public function all_style() {
+        $a = 'button%';
+        $b = 'general%';
+        $c = 'square%';
+        $d = 'caption%';
+        $alldata = $this->wpdb->get_results($this->wpdb->prepare("SELECT id, name FROM $this->parent_table WHERE style_name LIKE %s OR style_name LIKE %s OR style_name LIKE %s OR style_name LIKE %s ORDER by id ASC", $a, $b, $c, $d), ARRAY_A);
+        $st = [];
+        foreach ($alldata as $k => $value) {
+            $st[$value['id']] = $value['name'] != '' ? $value['name'] : 'Shortcode ID ' . $value['id'];
+        }
+
+        return $st;
     }
 
     public function register_carousel_arrows_settings() {
@@ -296,6 +296,7 @@ class Modules extends Admin_Render {
                     'type' => Controls::ICON,
                     'default' => 'fas fa-chevron-left',
                     'description' => 'Select Left Arrow Icon From Icon List.'
+                    
                 ]
         );
         $this->end_controls_tab();
@@ -410,7 +411,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .oxi_carousel_arrows' => 'top:{{SIZE}}{{UNIT}}; transform: translateY(-{{SIZE}}{{UNIT}});',
                     ],
-                    'description' => 'Set Arrow icon Posiztion Y.'
+                     'description' => 'Set Arrow icon Posiztion Y.'
                 ]
         );
         $this->start_controls_tabs(
@@ -433,7 +434,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .oxi_carousel_arrows .oxi-icons' => 'color: {{VALUE}};',
                     ],
-                    'description' => 'Select Arrow icon Color.'
+                     'description' => 'Select Arrow icon Color.'
                 ]
         );
         $this->add_control(
@@ -632,7 +633,7 @@ class Modules extends Admin_Render {
                         ],
                     ],
                     'selector' => [
-                        '{{WRAPPER}} .oxi_carousel_dots li' => 'width: {{SIZE}}{{UNIT}};',
+                       '{{WRAPPER}} .oxi_carousel_dots li' => 'width: {{SIZE}}{{UNIT}};',
                     ],
                     'description' => 'Confirm Dots Width with multiple options.',
                 ]
@@ -775,7 +776,7 @@ class Modules extends Admin_Render {
         $this->end_controls_tab();
 
         $this->start_controls_tab();
-
+       
         $this->add_control(
                 'carousel_dots_bg_color_hover',
                 $this->style,
@@ -787,7 +788,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .oxi_carousel_dots li:hover button:before' => 'background: {{VALUE}};',
                     ],
-                    'description' => 'Confirm Dots hover Background Color.',
+                     'description' => 'Confirm Dots hover Background Color.',
                 ]
         );
         $this->add_group_control(
@@ -803,7 +804,7 @@ class Modules extends Admin_Render {
         );
         $this->end_controls_tab();
         $this->start_controls_tab();
-
+        
         $this->add_control(
                 'carousel_dots_bg_color_active',
                 $this->style,
@@ -815,7 +816,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .oxi_carousel_dots li.slick-active button:before' => 'background: {{VALUE}};',
                     ],
-                    'description' => 'Confirm Dots hover Background Color.',
+                     'description' => 'Confirm Dots hover Background Color.',
                 ]
         );
         $this->add_group_control(

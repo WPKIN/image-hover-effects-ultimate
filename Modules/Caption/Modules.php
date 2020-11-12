@@ -1091,7 +1091,16 @@ class Modules extends Admin_Render {
         $this->end_controls_section();
         $this->end_section_tabs();
     }
-    
+
+    public function modal_opener() {
+        $this->add_substitute_control('', [], [
+            'type' => Controls::MODALOPENER,
+            'title' => __('Add New Image Hover', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'sub-title' => __('Open Image Hover Form', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'showing' => TRUE,
+        ]);
+    }
+
     public function modal_form_data() {
         echo '<div class="modal-header">                    
                     <h4 class="modal-title">Image Hover Form</h4>
@@ -1146,16 +1155,6 @@ class Modules extends Admin_Render {
         );
         echo '</div>';
     }
-
-    public function modal_opener() {
-        $this->add_substitute_control('', [], [
-            'type' => Controls::MODALOPENER,
-            'title' => __('Add New Image Hover', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'sub-title' => __('Open Image Hover Form', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'showing' => TRUE,
-        ]);
-    }
-
 
     /**
      * Template Parent Item Data Rearrange
