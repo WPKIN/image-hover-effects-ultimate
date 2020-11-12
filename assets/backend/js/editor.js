@@ -16,20 +16,23 @@ jQuery.noConflict();
         }
         return str;
     }
-
-
-    function OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, callback) {
-        var active = false;
-        if (functionname !== "" && active === false) {
-            active = true;
-            rawdata = rawdata.replace(/  /g, '&nbsp;');
-            rawdata = rawdata.replace(/\\r/g, '');
-            rawdata = rawdata.replace(/\r/g, '');
-            rawdata = rawdata.replace(/\n/g, '<br>');
-            rawdata = rawdata.replace(/\\n/g, '<br>');
-            $.ajax({
+    async function OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, callback) {
+        if (functionname === "") {
+            alert('Confirm Function Name');
+            return false;
+        }
+        rawdata = rawdata.replace(/  /g, '&nbsp;');
+        rawdata = rawdata.replace(/\\r/g, '');
+        rawdata = rawdata.replace(/\r/g, '');
+        rawdata = rawdata.replace(/\n/g, '<br>');
+        rawdata = rawdata.replace(/\\n/g, '<br>');
+      
+        let result;
+        try {
+            result = await $.ajax({
                 url: ImageHoverUltimate.root + 'ImageHoverUltimate/v1/' + functionname,
                 method: 'POST',
+                dataType: "json",
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader('X-WP-Nonce', ImageHoverUltimate.nonce);
                 },
@@ -38,13 +41,15 @@ jQuery.noConflict();
                     childid: childid,
                     rawdata: rawdata
                 }
-            }).done(function (response) {
-                console.log(response);
-                callback(response);
-                active = false;
             });
+            console.log(result);
+            return callback(result);
+
+        } catch (error) {
+            console.error(error);
         }
     }
+
 
     function OxiAddonsPreviewDataLoader() {
         OxiAddonsTemplateSettings('elements_template_render_data', JSON.stringify($("#oxi-addons-form-submit").serializeJSON({checkboxUncheckedValue: "0"})), styleid, childid, function (callback) {

@@ -400,4 +400,138 @@ class ImageApi {
         return $notice;
     }
 
+    /**
+     * Admin Settings
+     * @return void
+     */
+    public function post_oxi_settings() {
+        $rawdata = json_decode(stripslashes($this->rawdata), true);
+        update_option($rawdata['name'], $rawdata['value']);
+        return '<span class="oxi-confirmation-success"></span>';
+    }
+
+    /**
+     * Admin License
+     * @return void
+     */
+    public function post_oxi_license() {
+        $rawdata = json_decode(stripslashes($this->rawdata), true);
+        $new = $rawdata['license'];
+        $old = get_option('image_hover_ultimate_license_key');
+        $status = get_option('image_hover_ultimate_license_status');
+        if ($new == ''):
+            if ($old != '' && $status == 'valid'):
+                $this->deactivate_license($old);
+            endif;
+            delete_option('image_hover_ultimate_license_key');
+            $data = ['massage' => '<span class="oxi-confirmation-blank"></span>', 'text' => ''];
+        else:
+            update_option('image_hover_ultimate_license_key', $new);
+            delete_option('image_hover_ultimate_license_status');
+            $r = $this->activate_license($new);
+            if ($r == 'success'):
+                $data = ['massage' => '<span class="oxi-confirmation-success"></span>', 'text' => 'Active'];
+            else:
+                $data = ['massage' => '<span class="oxi-confirmation-failed"></span>', 'text' => $r];
+            endif;
+        endif;
+        return $data;
+    }
+
+    public function activate_license($key) {
+        $api_params = array(
+            'edd_action' => 'activate_license',
+            'license' => $key,
+            'item_name' => urlencode('Image Hover Effects Ultimate'),
+            'url' => home_url()
+        );
+
+        $response = wp_remote_post('https://www.oxilab.org', array('timeout' => 15, 'sslverify' => false, 'body' => $api_params));
+
+        if (is_wp_error($response) || 200 !== wp_remote_retrieve_response_code($response)) {
+            if (is_wp_error($response)) {
+                $message = $response->get_error_message();
+            } else {
+                $message = __('An error occurred, please try again.');
+            }
+        } else {
+            $license_data = json_decode(wp_remote_retrieve_body($response));
+
+            if (false === $license_data->success) {
+
+                switch ($license_data->error) {
+
+                    case 'expired' :
+
+                        $message = sprintf(
+                                __('Your license key expired on %s.'), date_i18n(get_option('date_format'), strtotime($license_data->expires, current_time('timestamp')))
+                        );
+                        break;
+
+                    case 'revoked' :
+
+                        $message = __('Your license key has been disabled.');
+                        break;
+
+                    case 'missing' :
+
+                        $message = __('Invalid license.');
+                        break;
+
+                    case 'invalid' :
+                    case 'site_inactive' :
+
+                        $message = __('Your license is not active for this URL.');
+                        break;
+
+                    case 'item_name_mismatch' :
+
+                        $message = sprintf(__('This appears to be an invalid license key for %s.'), OXI_IMAGE_HOVER_TEXTDOMAIN);
+                        break;
+
+                    case 'no_activations_left':
+
+                        $message = __('Your license key has reached its activation limit.');
+                        break;
+
+                    default :
+
+                        $message = __('An error occurred, please try again.');
+                        break;
+                }
+            }
+        }
+
+        if (!empty($message)) {
+            return $message;
+        }
+        update_option('image_hover_ultimate_license_status', $license_data->license);
+        return 'success';
+    }
+
+    public function deactivate_license($key) {
+        $api_params = array(
+            'edd_action' => 'deactivate_license',
+            'license' => $key,
+            'item_name' => urlencode('Image Hover Effects Ultimate'),
+            'url' => home_url()
+        );
+        $response = wp_remote_post('https://www.oxilab.org', array('timeout' => 15, 'sslverify' => false, 'body' => $api_params));
+        if (is_wp_error($response) || 200 !== wp_remote_retrieve_response_code($response)) {
+
+            if (is_wp_error($response)) {
+                $message = $response->get_error_message();
+            } else {
+                $message = __('An error occurred, please try again.');
+            }
+            return $message;
+        }
+        $license_data = json_decode(wp_remote_retrieve_body($response));
+        if ($license_data->license == 'deactivated') {
+            delete_option('image_hover_ultimate_license_status');
+            delete_option('image_hover_ultimate_license_key');
+        }
+        return 'success';
+    }
+
 }

@@ -2,9 +2,15 @@ jQuery.noConflict();
 (function ($) {
     var styleid = '';
     var childid = '';
-    function Oxi_Image_Admin_Shortcode(functionname, rawdata, styleid, childid, callback) {
-        if (functionname !== "") {
-            $.ajax({
+
+    async function Oxi_Image_Admin_Shortcode(functionname, rawdata, styleid, childid, callback) {
+        if (functionname === "") {
+            alert('Confirm Function Name');
+            return false;
+        }
+        let result;
+        try {
+            result = await $.ajax({
                 url: ImageHoverUltimate.root + 'ImageHoverUltimate/v1/' + functionname,
                 method: 'POST',
                 dataType: "json",
@@ -16,9 +22,12 @@ jQuery.noConflict();
                     childid: childid,
                     rawdata: rawdata
                 }
-            }).done(function (response) {
-                callback(response);
             });
+            console.log(result);
+            return callback(result);
+
+        } catch (error) {
+            console.error(error);
         }
     }
     jQuery(".oxi-addons-style-clone").on("click", function () {
