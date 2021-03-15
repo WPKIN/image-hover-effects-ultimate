@@ -17,7 +17,7 @@ jQuery.noConflict();
             }
         }).done(function (response) {
             console.log(response);
-            $('.shortcode-addons-review-notice').remove();
+            $('.oxilab-image-hover-review-notice').remove();
         });
     });
 })(jQuery);
