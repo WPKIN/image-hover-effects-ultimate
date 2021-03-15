@@ -24,10 +24,10 @@ class Effects22 extends Modules
                 'type' => Controls::SELECT,
                 'default' => 'bottom_to_left',
                 'options' => [
-                    'position_to_left' => __('Top', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'position_to_right' => __('Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'position_to_bottom' => __('Bottom', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'position_to_left' => __('Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'position_to_top_left' => __('Top Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'position_to_top_right' => __('Top Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'position_to_bottom_left' => __('Bottom Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'position_to_bottom_right' => __('Bottom Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 ],
                 'selector' => [
                     '{{WRAPPER}} .oxi-image-hover-figure' => '',
@@ -157,6 +157,41 @@ class Effects22 extends Modules
                 'showing' => TRUE,
             ]
         );
+        $this->add_responsive_control(
+            'oxi-image-hover-content-width',
+            $this->style,
+            [
+                'label' => __('Width', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::SLIDER,
+                'default' => [
+                    'unit' => 'px',
+                    'size' => '',
+                ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 1900,
+                        'step' => 1,
+                    ],
+                    '%' => [
+                        'min' => 1,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                    'em' => [
+                        'min' => 1,
+                        'max' => 200,
+                        'step' => 0.1,
+                    ],
+                ],
+                'selector' => [
+                    '{{WRAPPER}} .oxi-image-hover-figure-caption' => 'width:{{SIZE}}{{UNIT}};',
+                ],
+                'simpledescription' => 'Customize Image Width as like as you want, will be pixel Value.',
+                'description' => 'Customize Image Width with several options as Pixel, Percent or EM.',
+            ]
+        );
+
         $this->add_group_control(
             'oxi-image-hover-background',
             $this->style,
@@ -169,6 +204,41 @@ class Effects22 extends Modules
                 'description' => 'Customize Hover Background with Color or Gradient or Image properties.',
             ]
         );
+        $this->add_responsive_control(
+            'oxi-image-hover-border-radius',
+            $this->style,
+            [
+                'label' => __('Border Radius', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::DIMENSIONS,
+                'default' => [
+                    'unit' => 'px',
+                    'size' => '',
+                ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 500,
+                        'step' => 1,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 50,
+                        'step' => 1,
+                    ],
+                    'em' => [
+                        'min' => 0,
+                        'max' => 100,
+                        'step' => .1,
+                    ],
+                ],
+                'selector' => [
+                    '{{WRAPPER}} .oxi-image-hover .oxi-image-hover-caption-tab, {{WRAPPER}} .oxi-image-hover:hover .oxi-image-hover-caption-tab, {{WRAPPER}} .oxi-image-hover.oxi-touch .oxi-image-hover-caption-tab' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'simpledescription' => 'Allows you to add rounded corners at Hover to Image with options.',
+                'description' => 'Allows you to add rounded corners at Hover to Image with options.',
+            ]
+        );
+
         $this->add_responsive_control(
             'oxi-image-hover-content-margin',
             $this->style,
@@ -198,8 +268,7 @@ class Effects22 extends Modules
                     ],
                 ],
                 'selector' => [
-                    '{{WRAPPER}} .oxi-image-square-hover-style-21:hover .oxi-image-hover-figure .oxi-image-hover-figure-caption,'
-                        . ' {{WRAPPER}} .oxi-image-square-hover-style-21.oxi-touch .oxi-image-hover-figure .oxi-image-hover-figure-caption' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .oxi-image-hover-figure .oxi-image-hover-figure-caption' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
                 'simpledescription' => 'Margin properties are used to create space around Body.',
                 'description' => 'Margin properties are used to create space around Content Body. Negetive Value will replace extra place',

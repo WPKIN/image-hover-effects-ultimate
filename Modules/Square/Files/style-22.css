@@ -7,6 +7,7 @@
     opacity: 0;
     pointer-events: none;
     visibility: hidden;
+    max-width: 100%;
 }
 .oxi-image-square-hover-style-22.oxi-image-hover:hover .oxi-image-hover-figure .oxi-image-hover-figure-caption,
 .oxi-image-square-hover-style-22.oxi-image-hover.oxi-touch .oxi-image-hover-figure .oxi-image-hover-figure-caption{
@@ -15,7 +16,7 @@
     pointer-events: auto;
 }
 
-.oxi-image-hover-style-22-square .oxi-image-hover-style-square .oxi-image-hover-figure-caption {
+.oxi-image-square-hover-style-22 .oxi-image-hover-figure .oxi-image-hover-figure-caption{
     position: absolute;
     top: auto;
     left: auto;
@@ -23,11 +24,26 @@
     bottom: auto;
 }
 .oxi-image-square-hover-style-22.oxi-image-square-hover .oxi-image-hover-caption-tab {
-    position: absolute;
-    top: auto;
-    left: auto;
-    right: auto;
-    bottom: auto;
+    position: relative;
+    width: 100%;
+}
+
+
+.oxi-image-square-hover-style-22 .oxi-image-hover-figure.position_to_top_left .oxi-image-hover-figure-caption{
+    top: 0;
+    left: 0;
+}
+.oxi-image-square-hover-style-22 .oxi-image-hover-figure.position_to_top_right .oxi-image-hover-figure-caption{
+    right: 0;
+    top: 0;
+}
+.oxi-image-square-hover-style-22 .oxi-image-hover-figure.position_to_bottom_left .oxi-image-hover-figure-caption{
+    bottom: 0;
+    left: 0;
+}
+.oxi-image-square-hover-style-22 .oxi-image-hover-figure.position_to_bottom_right .oxi-image-hover-figure-caption{
+    bottom: 0;
+    right: 0;
 }
 
 
