@@ -45,11 +45,12 @@ class Style_1_Post_Query {
     public function __rest_api_post($style, $args, $optional) {
         $rawdata = '';
         if (!is_array($args)):
-            $args = json_decode($args, TRUE);
+            $args = json_decode(stripslashes($args), true);
         endif;
         $args ['offset'] = (int) $args['offset'] + (((int) $optional - 1) * (int) $args['posts_per_page']);
+
         if (!is_array($style)):
-            $style = json_decode($style, TRUE);
+            $style = json_decode(stripslashes($style), true);
         endif;
         return $this->post_query($rawdata, $args, $style);
     }

@@ -78,7 +78,6 @@ class ImageApi {
             $CLASS = new $class;
             $CLASS->__construct($request['action'], $this->rawdata, $args, $optional);
             return ob_get_clean();
-
         else:
             if (method_exists($this, $action_class)) {
                 return $this->{$action_class}();
@@ -346,7 +345,7 @@ class ImageApi {
     }
 
     /**
-     * Template Modal Data Edit Form 
+     * Template Modal Data Edit Form
      *
      * @since 9.3.0
      */

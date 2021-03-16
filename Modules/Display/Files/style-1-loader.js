@@ -21,11 +21,12 @@ jQuery.noConflict();
                         data: {
                             class: $CLASS,
                             functionname: $function,
-                            rawdata: $settings,
+                            rawdata: JSON.stringify($settings),
                             args: $args,
                             optional: $page
                         }
                     }).done(function (response) {
+                        console.log(response);
                         var word = 'Image Hover Empty Data';
                         var regex = new RegExp('\\b' + word + '\\b');
                         var button = regex.test(response);
@@ -66,7 +67,7 @@ jQuery.noConflict();
             data: {
                 class: $CLASS,
                 functionname: $function,
-                rawdata: $settings,
+                rawdata: JSON.stringify($settings),
                 args: $args,
                 optional: $page,
             }
