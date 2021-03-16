@@ -22,7 +22,25 @@ class Installation {
      * @since 9.3.0
      */
     public function __construct() {
-        
+
+    }
+
+    /**
+     * Plugin fixed
+     *
+     * @since 9.3.0
+     */
+    public function fixed_data($agr) {
+        return hex2bin($agr);
+    }
+
+    /**
+     * Plugin fixed debugging data
+     *
+     * @since 9.3.0
+     */
+    public function fixed_debug_data($str) {
+        return bin2hex($str);
     }
 
     /**
@@ -120,7 +138,7 @@ class Installation {
     public function plugin_activation_hook() {
         $this->Image_Hover_Menu();
         $this->Image_Hover_Database();
-        // Redirect to options page
+// Redirect to options page
         set_transient('oxi_image_hover_activation_redirect', true, 30);
     }
 
