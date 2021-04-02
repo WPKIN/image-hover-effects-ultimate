@@ -176,9 +176,9 @@ class Public_Render {
      * @since 9.3.0
      */
     public function hooks() {
+        $this->public_frontend_loader();
         $this->public_jquery();
         $this->public_css();
-        $this->public_frontend_loader();
         $this->render();
         $inlinecss = $this->inline_public_css() . $this->inline_css . $this->style['image-hover-custom-css'];
         $inlinejs = $this->inline_public_jquery();
