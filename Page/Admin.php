@@ -57,14 +57,6 @@ class Admin {
         apply_filters('oxi-image-hover-plugin/admin_menu', TRUE);
     }
 
-    /**
-     * Admin Notice JS file loader
-     * @return void
-     */
-    public function admin_rest_api() {
-        wp_enqueue_script('oxi-image-hover-shortcode', OXI_IMAGE_HOVER_URL . '/assets/backend/js/home.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-    }
-
     public function font_awesome_render($data) {
         $fadata = get_option('oxi_addons_font_awesome');
         if ($fadata == 'yes'):
@@ -74,6 +66,13 @@ class Admin {
         return $files;
     }
 
+    /**
+     * Admin Notice JS file loader
+     * @return void
+     */
+    public function admin_rest_api() {
+        wp_enqueue_script('oxi-image-hover-shortcode', OXI_IMAGE_HOVER_URL . '/assets/backend/js/home.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+    }
 
     public function Render() {
         ?>
@@ -169,11 +168,12 @@ class Admin {
         </div>
         <?php
     }
-    
+
     public function name_converter($data) {
         $data = str_replace('_', ' ', $data);
         $data = str_replace('-', ' ', $data);
         $data = str_replace('+', ' ', $data);
         return ucwords($data);
     }
+
 }

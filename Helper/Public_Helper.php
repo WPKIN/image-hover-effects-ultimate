@@ -8,6 +8,23 @@ namespace OXI_IMAGE_HOVER_PLUGINS\Helper;
  */
 trait Public_Helper {
 
+    /**
+     * Plugin Name Convert to View
+     *
+     * @since 9.3.0
+     */
+    public function name_converter($data) {
+        $data = str_replace('_', ' ', $data);
+        $data = str_replace('-', ' ', $data);
+        $data = str_replace('+', ' ', $data);
+        return ucwords($data);
+    }
+
+    public function effects_converter($data) {
+        $data = explode('-', $data);
+        return $data[0];
+    }
+
     public function html_special_charecter($data) {
         $data = html_entity_decode($data);
         $data = str_replace("\'", "'", $data);
@@ -42,23 +59,6 @@ trait Public_Helper {
         $data = $data[0];
         $data = '"' . $data . '"';
         return $data;
-    }
-
-    /**
-     * Plugin Name Convert to View
-     *
-     * @since 9.3.0
-     */
-    public function name_converter($data) {
-        $data = str_replace('_', ' ', $data);
-        $data = str_replace('-', ' ', $data);
-        $data = str_replace('+', ' ', $data);
-        return ucwords($data);
-    }
-
-    public function effects_converter($data) {
-        $data = explode('-', $data);
-        return $data[0];
     }
 
     public function shortcode_render($styleid, $user) {

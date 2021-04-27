@@ -6,14 +6,10 @@ class Widget extends \WP_Widget {
 
     function __construct() {
         parent::__construct(
-                'iheu_widget', 
+                'iheu_widget',
                 __('Image Hover Effects Ultimate', 'iheu_widget_widget'),
                 array('description' => __('Image Hover Effects Ultimate Widget', 'iheu_widget_widget'),)
         );
-    }
-
-    public function iheu_widget_widget() {
-        register_widget($this);
     }
 
     public function widget($args, $instance) {
@@ -21,6 +17,10 @@ class Widget extends \WP_Widget {
         echo $args['before_widget'];
         echo \OXI_IMAGE_HOVER_PLUGINS\Classes\Bootstrap::instance()->shortcode_render($title, 'user');
         echo $args['after_widget'];
+    }
+
+    public function iheu_widget_widget() {
+        register_widget($this);
     }
 
     public function form($instance) {

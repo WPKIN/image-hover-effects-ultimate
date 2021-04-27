@@ -220,15 +220,6 @@ class Public_Render {
     }
 
     /**
-     * old empty old render
-     *
-     * @since 9.3.0
-     */
-    public function old_render() {
-        echo '';
-    }
-
-    /**
      * load current element render since 9.3.0
      *
      * @since 9.3.0
@@ -243,6 +234,15 @@ class Public_Render {
             echo '   </div>
               </div>';
         endif;
+    }
+
+    /**
+     * old empty old render
+     *
+     * @since 9.3.0
+     */
+    public function old_render() {
+        echo '';
     }
 
     /**

@@ -2,16 +2,14 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Helper;
 
-trait Admin_helper
-{
+trait Admin_helper {
 
     /**
      * Plugin fixed
      *
      * @since 9.3.0
      */
-    public function fixed_data($agr)
-    {
+    public function fixed_data($agr) {
         return hex2bin($agr);
     }
 
@@ -20,25 +18,22 @@ trait Admin_helper
      *
      * @since 9.3.0
      */
-    public function fixed_debug_data($str)
-    {
+    public function fixed_debug_data($str) {
         return bin2hex($str);
     }
 
-    public function Admin_Icon()
-    {
-?>
+    public function Admin_Icon() {
+        ?>
         <style type='text/css' media='screen'>
             #adminmenu #toplevel_page_oxi-image-hover-ultimate div.wp-menu-image:before {
                 content: "\f169";
             }
         </style>
-<?php
+        <?php
 
     }
 
-    public function Image_Parent()
-    {
+    public function Image_Parent() {
         $effects = (!empty($_GET['effects']) ? ucfirst($_GET['effects']) : '');
         $styleid = (!empty($_GET['styleid']) ? (int) $_GET['styleid'] : '');
         if (!empty($effects) && !empty($styleid)) :
@@ -69,8 +64,7 @@ trait Admin_helper
      *
      * @since 9.3.0
      */
-    public function check_current_version($agr)
-    {
+    public function check_current_version($agr) {
         $vs = get_option($this->fixed_data('696d6167655f686f7665725f756c74696d6174655f6c6963656e73655f737461747573'));
         if ($vs == $this->fixed_data('76616c6964')) {
             return true;
@@ -79,13 +73,11 @@ trait Admin_helper
         }
     }
 
-    public function admin_url_convert($agr)
-    {
+    public function admin_url_convert($agr) {
         return admin_url(strpos($agr, 'edit') !== false ? $agr : 'admin.php?page=' . $agr);
     }
 
-    public function SupportAndComments($agr)
-    {
+    public function SupportAndComments($agr) {
         echo '  <div class="oxi-addons-admin-notifications">
                     <h3>
                         <span class="dashicons dashicons-flag"></span> 
@@ -109,11 +101,10 @@ trait Admin_helper
      *
      * @since 9.3.0
      */
-    public function oxilab_admin_menu($agr)
-    {
+    public function oxilab_admin_menu($agr) {
 
         $adminmenu = 'get_oxilab_addons_menu';
-        
+
         $response = !empty(get_transient($adminmenu)) ? get_transient($adminmenu) : [];
         if (!array_key_exists('Image Hover', $response)) :
             $response['Image Hover']['Image Hover'] = [
@@ -209,8 +200,7 @@ trait Admin_helper
         echo __($menu, OXI_IMAGE_HOVER_TEXTDOMAIN);
     }
 
-    public function Admin_Menu()
-    {
+    public function Admin_Menu() {
         $user_role = get_option('oxi_addons_user_permission');
         $role_object = get_role($user_role);
         $first_key = '';
@@ -228,27 +218,23 @@ trait Admin_helper
         add_submenu_page('oxi-image-hover-ultimate', 'Support', 'Support', $first_key, 'image-hover-ultimate-support', [$this, 'oxi_image_hover_support']);
     }
 
-    public function custom_redirect()
-    {
+    public function custom_redirect() {
+        
     }
 
-    public function Image_Shortcode()
-    {
+    public function Image_Shortcode() {
         new \OXI_IMAGE_HOVER_PLUGINS\Page\Shortcode();
     }
 
-    public function Image_Addons()
-    {
+    public function Image_Addons() {
         new \OXI_IMAGE_HOVER_PLUGINS\Page\Addons();
     }
 
-    public function Image_Settings()
-    {
+    public function Image_Settings() {
         new \OXI_IMAGE_HOVER_PLUGINS\Page\Settings();
     }
 
-    public function oxi_image_hover_support()
-    {
+    public function oxi_image_hover_support() {
         new \OXI_IMAGE_HOVER_PLUGINS\Page\Welcome();
     }
 
@@ -257,29 +243,12 @@ trait Admin_helper
      *
      * @since 9.3.0
      */
-    public function admin_notice_status()
-    {
+    public function admin_notice_status() {
         $data = get_option('oxi_image_hover_nobug');
         return $data;
     }
 
-    /**
-     * Admin Install date Check
-     *
-     * @since 9.3.0
-     */
-    public function installation_date()
-    {
-        $data = get_option('oxi_image_hover_activation_date');
-        if (empty($data)) :
-            $data = strtotime("now");
-            update_option('oxi_image_hover_activation_date', $data);
-        endif;
-        return $data;
-    }
-
-    public function User_Reviews()
-    {
+    public function User_Reviews() {
         $this->admin_recommended();
         $this->admin_notice();
     }
@@ -289,14 +258,12 @@ trait Admin_helper
      *
      * @since 9.3.0
      */
-    public function admin_recommended_status()
-    {
+    public function admin_recommended_status() {
         $data = get_option('oxi_image_hover_recommended');
         return $data;
     }
 
-    public function admin_recommended()
-    {
+    public function admin_recommended() {
         if (!empty($this->admin_recommended_status())) :
             return;
         endif;
@@ -306,8 +273,7 @@ trait Admin_helper
         new \OXI_IMAGE_HOVER_PLUGINS\Classes\Support_Recommended();
     }
 
-    public function admin_notice()
-    {
+    public function admin_notice() {
         if (!empty($this->admin_notice_status())) :
             return;
         endif;
@@ -317,8 +283,21 @@ trait Admin_helper
         new \OXI_IMAGE_HOVER_PLUGINS\Classes\Support_Reviews();
     }
 
-    public function redirect_on_activation()
-    {
+    /**
+     * Admin Install date Check
+     *
+     * @since 9.3.0
+     */
+    public function installation_date() {
+        $data = get_option('oxi_image_hover_activation_date');
+        if (empty($data)) :
+            $data = strtotime("now");
+            update_option('oxi_image_hover_activation_date', $data);
+        endif;
+        return $data;
+    }
+
+    public function redirect_on_activation() {
         if (get_transient('oxi_image_hover_activation_redirect')) :
             delete_transient('oxi_image_hover_activation_redirect');
             if (is_network_admin() || isset($_GET['activate-multi'])) :
@@ -327,4 +306,5 @@ trait Admin_helper
             wp_safe_redirect(admin_url("admin.php?page=image-hover-ultimate-support"));
         endif;
     }
+
 }

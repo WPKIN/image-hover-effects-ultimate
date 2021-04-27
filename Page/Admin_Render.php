@@ -7,11 +7,9 @@ namespace OXI_IMAGE_HOVER_PLUGINS\Page;
  *
  * @author $biplob018
  */
-
 use OXI_IMAGE_HOVER_PLUGINS\Classes\Controls as Controls;
 
-abstract class Admin_Render
-{
+abstract class Admin_Render {
 
     use \OXI_IMAGE_HOVER_PLUGINS\Helper\CSS_JS_Loader;
     use \OXI_IMAGE_HOVER_PLUGINS\Helper\Sanitization;
@@ -144,8 +142,7 @@ abstract class Admin_Render
     public $repeater;
     public $ShowOnAdvanceOnly = true;
 
-    public function __construct($type = '')
-    {
+    public function __construct($type = '') {
         global $wpdb;
         $this->wpdb = $wpdb;
         $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
@@ -165,8 +162,7 @@ abstract class Admin_Render
      *
      * @since 9.3.0
      */
-    public function hooks()
-    {
+    public function hooks() {
         $this->admin_elements_frontend_loader();
         $this->admin_editor_load();
         $this->dbdata = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $this->oxiid), ARRAY_A);
@@ -186,25 +182,8 @@ abstract class Admin_Render
      * Admin Notice JS file loader
      * @return void
      */
-    public function admin_editor_load()
-    {
+    public function admin_editor_load() {
         wp_enqueue_script('oxi-image-hover-editor', OXI_IMAGE_HOVER_URL . '/assets/backend/js/editor.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-    }
-
-    /**
-     * Template Modal opener
-     * Define Multiple Data With Single Data
-     *
-     * @since 9.3.0
-     */
-    public function modal_opener()
-    {
-        $this->add_substitute_control('', [], [
-            'type' => Controls::MODALOPENER,
-            'title' => __('Add New Data', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'sub-title' => __('Open Data Form', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'showing' => TRUE,
-        ]);
     }
 
     /**
@@ -213,12 +192,26 @@ abstract class Admin_Render
      *
      * @since 9.3.0
      */
-    public function shortcode_name()
-    {
+    public function shortcode_name() {
         $this->add_substitute_control('', $this->dbdata, [
             'type' => Controls::SHORTCODENAME,
             'title' => __('Shortcode Name', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'placeholder' => __('Set Your Shortcode Name', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'showing' => TRUE,
+        ]);
+    }
+
+    /**
+     * Template Modal opener
+     * Define Multiple Data With Single Data
+     *
+     * @since 9.3.0
+     */
+    public function modal_opener() {
+        $this->add_substitute_control('', [], [
+            'type' => Controls::MODALOPENER,
+            'title' => __('Add New Data', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'sub-title' => __('Open Data Form', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'showing' => TRUE,
         ]);
     }
@@ -229,8 +222,7 @@ abstract class Admin_Render
      *
      * @since 9.3.0
      */
-    public function shortcode_info()
-    {
+    public function shortcode_info() {
         $this->add_substitute_control($this->oxiid, $this->dbdata, [
             'type' => Controls::SHORTCODEINFO,
             'title' => __('Shortcode', OXI_IMAGE_HOVER_TEXTDOMAIN),
@@ -244,8 +236,7 @@ abstract class Admin_Render
      *
      * @since 9.3.0
      */
-    public function shortcode_style_changer()
-    {
+    public function shortcode_style_changer() {
         $this->add_substitute_control($this->oxiid, $this->dbdata, [
             'type' => Controls::SHORTCODESTYLE,
             'title' => __('Template Changer', OXI_IMAGE_HOVER_TEXTDOMAIN),
@@ -259,8 +250,7 @@ abstract class Admin_Render
      *
      * @since 9.3.0
      */
-    public function modal_form_data()
-    {
+    public function modal_form_data() {
         $this->form = 'single';
     }
 
@@ -270,8 +260,7 @@ abstract class Admin_Render
      *
      * @since 9.3.0
      */
-    public function register_controls()
-    {
+    public function register_controls() {
         return true;
     }
 
@@ -280,8 +269,7 @@ abstract class Admin_Render
      *
      * @since 9.3.0
      */
-    public function modal_form()
-    {
+    public function modal_form() {
 
         echo '<div class="modal fade" id="oxi-addons-list-data-modal" >
                 <div class="modal-dialog modal-md">
@@ -304,8 +292,7 @@ abstract class Admin_Render
      *
      * @since 9.3.0
      */
-    public function Rearrange()
-    {
+    public function Rearrange() {
         echo '';
     }
 
@@ -314,8 +301,7 @@ abstract class Admin_Render
      *
      * @since 9.3.0
      */
-    public function shortcode_rearrange()
-    {
+    public function shortcode_rearrange() {
         $rearrange = $this->Rearrange();
         if (!empty($rearrange)) :
             $this->add_substitute_control($rearrange, [], [
@@ -330,8 +316,7 @@ abstract class Admin_Render
      *
      * @since 9.3.0
      */
-    public function inline_template_css_render($style)
-    {
+    public function inline_template_css_render($style) {
         $styleid = $style['image-hover-style-id'];
         $this->style = $style;
         $this->oxiid = $styleid;
@@ -371,8 +356,7 @@ abstract class Admin_Render
      *
      * @since 9.3.0
      */
-    public function template_css_render($style)
-    {
+    public function template_css_render($style) {
         $styleid = $style['image-hover-style-id'];
         $this->oxiid = $styleid;
         $this->WRAPPER = '.oxi-image-hover-wrapper-' . $this->oxiid;
@@ -416,129 +400,127 @@ abstract class Admin_Render
      *
      * @since 9.3.0
      */
-    public function render()
-    {
-?>
-<div class="wrap">
-    <div class="oxi-addons-wrapper">
+    public function render() {
+        ?>
+        <div class="wrap">
+            <div class="oxi-addons-wrapper">
         <?php
-                apply_filters('oxi-image-hover-plugin/admin_menu', TRUE);
-                ?>
-        <div class="oxi-addons-style-20-spacer"></div>
-        <div class="oxi-addons-row">
-            <?php
-                    apply_filters('oxi-image-hover-support-and-comments', TRUE);
-                    ?>
-            <div class="oxi-addons-wrapper oxi-addons-image-tabs-mode">
-                <div class="oxi-addons-settings" id="oxisettingsreload">
-                    <div class="oxi-addons-style-left">
-                        <form method="post" id="oxi-addons-form-submit">
-                            <div class="oxi-addons-style-settings">
-                                <div class="oxi-addons-tabs-wrapper">
-                                    <?php
-                                            $this->register_controls();
-                                            ?>
-                                </div>
-                                <div class="oxi-addons-setting-save">
+        apply_filters('oxi-image-hover-plugin/admin_menu', TRUE);
+        ?>
+                <div class="oxi-addons-style-20-spacer"></div>
+                <div class="oxi-addons-row">
+        <?php
+        apply_filters('oxi-image-hover-support-and-comments', TRUE);
+        ?>
+                    <div class="oxi-addons-wrapper oxi-addons-image-tabs-mode">
+                        <div class="oxi-addons-settings" id="oxisettingsreload">
+                            <div class="oxi-addons-style-left">
+                                <form method="post" id="oxi-addons-form-submit">
+                                    <div class="oxi-addons-style-settings">
+                                        <div class="oxi-addons-tabs-wrapper">
+        <?php
+        $this->register_controls();
+        ?>
+                                        </div>
+                                        <div class="oxi-addons-setting-save">
 
-                                    <?php
-                                            if (array_key_exists('css', $this->dbdata)) :
-                                                if ($this->dbdata['css'] != '') :
-                                            ?>
-                                    <button type="button" class="btn btn-secondary"
-                                        data-value="<?php echo $this->dbdata['id']; ?>"
-                                        id="oxi-addons-setting-rebuild">Rebuild</button>
-                                    <?php
-                                                endif;
+                <?php
+                if (array_key_exists('css', $this->dbdata)) :
+                    if ($this->dbdata['css'] != '') :
+                        ?>
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-value="<?php echo $this->dbdata['id']; ?>"
+                                                            id="oxi-addons-setting-rebuild">Rebuild</button>
+                <?php
+            endif;
 
-                                            endif;
-                                            ?>
-                                    <button type="button" class="btn btn-danger"
-                                        id="oxi-addons-setting-reload">Reload</button>
-                                    <input type="hidden" id="image-hover-preview-color" name="image-hover-preview-color"
-                                        value="<?php echo (is_array($this->style) ? array_key_exists('image-hover-preview-color', $this->style) ? $this->style['image-hover-preview-color'] : '#FFF' : '#FFF'); ?>">
-                                    <input type="hidden" id="image-hover-style-id" name="image-hover-style-id"
-                                        value="<?php echo $this->dbdata['id']; ?>">
-                                    <input type="hidden" id="image-hover-template" name="image-hover-template"
-                                        value="<?php echo ucfirst($this->dbdata['style_name']); ?>">
-                                    <button type="button" class="btn btn-success" id="oxi-addons-templates-submit">
-                                        Save</button>
-                                </div>
+        endif;
+        ?>
+                                            <button type="button" class="btn btn-danger"
+                                                    id="oxi-addons-setting-reload">Reload</button>
+                                            <input type="hidden" id="image-hover-preview-color" name="image-hover-preview-color"
+                                                   value="<?php echo (is_array($this->style) ? array_key_exists('image-hover-preview-color', $this->style) ? $this->style['image-hover-preview-color'] : '#FFF' : '#FFF'); ?>">
+                                            <input type="hidden" id="image-hover-style-id" name="image-hover-style-id"
+                                                   value="<?php echo $this->dbdata['id']; ?>">
+                                            <input type="hidden" id="image-hover-template" name="image-hover-template"
+                                                   value="<?php echo ucfirst($this->dbdata['style_name']); ?>">
+                                            <button type="button" class="btn btn-success" id="oxi-addons-templates-submit">
+                                                Save</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                        </form>
-                    </div>
-                    <div class="oxi-addons-style-right">
-                        <?php
-                                if ($this->form == 'single') :
-                                    $this->shortcode_name();
-                                    $this->shortcode_info();
-                                    $this->shortcode_style_changer();
-                                else :
-                                    $this->modal_opener();
-                                    $this->shortcode_name();
-                                    $this->shortcode_info();
-                                    $this->shortcode_style_changer();
-                                    $this->shortcode_rearrange();
-                                endif;
-                                $this->modal_form();
-                                ?>
-                    </div>
-                </div>
-                <div class="oxi-addons-Preview" id="oxipreviewreload">
-                    <div class="oxi-addons-wrapper">
-                        <div class="oxi-addons-style-left-preview">
-                            <div class="oxi-addons-style-left-preview-heading">
-                                <div
-                                    class="oxi-addons-style-left-preview-heading-left oxi-addons-image-tabs-sortable-title">
-                                    Preview
-                                </div>
-                                <div class="oxi-addons-style-left-preview-heading-right">
-                                    <input type="text" data-format="rgb" data-opacity="TRUE"
-                                        class="oxi-addons-minicolor" id="oxi-addons-2-0-color"
-                                        name="oxi-addons-2-0-color"
-                                        value="<?php echo (is_array($this->style) ? array_key_exists('image-hover-preview-color', $this->style) ? $this->style['image-hover-preview-color'] : '#FFF' : '#FFF'); ?>">
-                                </div>
-                            </div>
-                            <div class="oxi-addons-preview-data" id="oxi-addons-preview-data"
-                                template-wrapper="<?php echo $this->WRAPPER; ?> .oxi-addons-row"
-                                style="background:<?php echo (is_array($this->style) ? array_key_exists('image-hover-preview-color', $this->style) ? $this->style['image-hover-preview-color'] : '#FFF' : '#FFF'); ?>">
-                                <?php
-                                        $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($this->StyleName[0]) . '\Render\Effects' . $this->StyleName[1];
-                                        new $cls($this->dbdata, $this->child, 'admin');
-                                        ?>
+                            <div class="oxi-addons-style-right">
+                                                    <?php
+                                                    if ($this->form == 'single') :
+                                                        $this->shortcode_name();
+                                                        $this->shortcode_info();
+                                                        $this->shortcode_style_changer();
+                                                    else :
+                                                        $this->modal_opener();
+                                                        $this->shortcode_name();
+                                                        $this->shortcode_info();
+                                                        $this->shortcode_style_changer();
+                                                        $this->shortcode_rearrange();
+                                                    endif;
+                                                    $this->modal_form();
+                                                    ?>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="shortcode-addons-form-repeater-store" style="display: none">
-                    <?php
-                            echo $this->repeater;
-                            ?>
-                </div>
-            </div>
-            <div id="OXIAADDONSCHANGEDPOPUP" class="modal fade">
-                <div class="modal-dialog modal-confirm  bounceIn ">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <div class="icon-box">
-
+                        <div class="oxi-addons-Preview" id="oxipreviewreload">
+                            <div class="oxi-addons-wrapper">
+                                <div class="oxi-addons-style-left-preview">
+                                    <div class="oxi-addons-style-left-preview-heading">
+                                        <div
+                                            class="oxi-addons-style-left-preview-heading-left oxi-addons-image-tabs-sortable-title">
+                                            Preview
+                                        </div>
+                                        <div class="oxi-addons-style-left-preview-heading-right">
+                                            <input type="text" data-format="rgb" data-opacity="TRUE"
+                                                   class="oxi-addons-minicolor" id="oxi-addons-2-0-color"
+                                                   name="oxi-addons-2-0-color"
+                                                   value="<?php echo (is_array($this->style) ? array_key_exists('image-hover-preview-color', $this->style) ? $this->style['image-hover-preview-color'] : '#FFF' : '#FFF'); ?>">
+                                        </div>
+                                    </div>
+                                    <div class="oxi-addons-preview-data" id="oxi-addons-preview-data"
+                                         template-wrapper="<?php echo $this->WRAPPER; ?> .oxi-addons-row"
+                                         style="background:<?php echo (is_array($this->style) ? array_key_exists('image-hover-preview-color', $this->style) ? $this->style['image-hover-preview-color'] : '#FFF' : '#FFF'); ?>">
+        <?php
+        $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($this->StyleName[0]) . '\Render\Effects' . $this->StyleName[1];
+        new $cls($this->dbdata, $this->child, 'admin');
+        ?>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="modal-body text-center">
-                            <h4></h4>
-                            <p></p>
+                        <div class="shortcode-addons-form-repeater-store" style="display: none">
+        <?php
+        echo $this->repeater;
+        ?>
+                        </div>
+                    </div>
+                    <div id="OXIAADDONSCHANGEDPOPUP" class="modal fade">
+                        <div class="modal-dialog modal-confirm  bounceIn ">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <div class="icon-box">
+
+                                    </div>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <h4></h4>
+                                    <p></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<?php
+        <?php
     }
 
-    public function import_font_family()
-    {
+    public function import_font_family() {
         $this->font_family = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->import_table WHERE type = %s ORDER by id ASC", 'shortcode-addons'), ARRAY_A);
         $google = $custom = '';
         foreach ($this->font_family as $key => $value) {
@@ -871,7 +853,6 @@ abstract class Admin_Render
                         })(jQuery);
                         jQuery(\'.shortcode-addons-family\').fontselect();';
 
-
         if (apply_filters('oxi-image-hover-plugin-version', false) == false) :
             $data .= 'jQuery(".oxi-addons-minicolor").each(function (index, value) {                             
                             jQuery(this).parent().parent().siblings(".shortcode-form-control-title").append(" <span class=\"oxi-pro-only\">Pro Only</span>");
@@ -886,4 +867,5 @@ abstract class Admin_Render
         endif;
         wp_add_inline_script('oxi-image-hover-editor', $data);
     }
+
 }

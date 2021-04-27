@@ -31,16 +31,6 @@ class Visual_Composer {
         add_shortcode('iheu_oxi_VC', [$this, 'iheu_oxi_VC_shortcode']);
     }
 
-    public function iheu_oxi_VC_shortcode($atts) {
-        extract(shortcode_atts(array(
-            'id' => ''
-                        ), $atts));
-        $styleid = $atts['id'];
-        ob_start();
-        echo \OXI_IMAGE_HOVER_PLUGINS\Classes\Bootstrap::instance()->shortcode_render($styleid, 'user');
-        return ob_get_clean();
-    }
-
     public function iheu_oxi_VC_extension() {
         global $wpdb;
         $data = $wpdb->get_results('SELECT * FROM ' . $this->parent_table . ' ORDER BY id DESC', ARRAY_A);
@@ -64,6 +54,16 @@ class Visual_Composer {
                 ),
             )
         ));
+    }
+
+    public function iheu_oxi_VC_shortcode($atts) {
+        extract(shortcode_atts(array(
+            'id' => ''
+                        ), $atts));
+        $styleid = $atts['id'];
+        ob_start();
+        echo \OXI_IMAGE_HOVER_PLUGINS\Classes\Bootstrap::instance()->shortcode_render($styleid, 'user');
+        return ob_get_clean();
     }
 
 }

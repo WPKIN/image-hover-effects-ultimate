@@ -22,7 +22,7 @@ class Installation {
      * @since 9.3.0
      */
     public function __construct() {
-
+        
     }
 
     /**
@@ -51,6 +51,37 @@ class Installation {
             self::$lfe_instance = new self;
 
         return self::$lfe_instance;
+    }
+
+    /**
+     * Plugin upgrade hook
+     *
+     * @since 9.3.0
+     */
+    public function plugin_upgrade_hook() {
+        $this->Image_Hover_Menu();
+        $this->Image_Hover_Database();
+    }
+
+    /**
+     * Plugin activation hook
+     *
+     * @since 9.3.0
+     */
+    public function plugin_activation_hook() {
+        $this->Image_Hover_Menu();
+        $this->Image_Hover_Database();
+        // Redirect to options page
+        set_transient('oxi_image_hover_activation_redirect', true, 30);
+    }
+
+    /**
+     * Plugin deactivation hook
+     *
+     * @since 9.3.0
+     */
+    public function plugin_deactivation_hook() {
+        $this->Image_Hover_Menu_Deactive();
     }
 
     /**
@@ -118,37 +149,6 @@ class Installation {
         dbDelta($sql2);
         dbDelta($sql3);
         add_option('oxi_image_hover_version', OXI_IMAGE_HOVER_PLUGIN_VERSION);
-    }
-
-    /**
-     * Plugin upgrade hook
-     *
-     * @since 9.3.0
-     */
-    public function plugin_upgrade_hook() {
-        $this->Image_Hover_Menu();
-        $this->Image_Hover_Database();
-    }
-
-    /**
-     * Plugin activation hook
-     *
-     * @since 9.3.0
-     */
-    public function plugin_activation_hook() {
-        $this->Image_Hover_Menu();
-        $this->Image_Hover_Database();
-// Redirect to options page
-        set_transient('oxi_image_hover_activation_redirect', true, 30);
-    }
-
-    /**
-     * Plugin deactivation hook
-     *
-     * @since 9.3.0
-     */
-    public function plugin_deactivation_hook() {
-        $this->Image_Hover_Menu_Deactive();
     }
 
 }
