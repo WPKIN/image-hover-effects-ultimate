@@ -36,6 +36,9 @@ jQuery.noConflict();
         jQuery('#oxistyleid').val(dataid);
         jQuery("#oxi-addons-style-create-modal").modal("show");
     });
+    jQuery("#oxi-import-style").on("click", function () {
+        jQuery("#oxi-addons-style-import-modal").modal("show");
+    });
     jQuery(".oxi-addons-style-export").submit(function (e) {
         e.preventDefault();
         var rawdata = 'export';
@@ -45,12 +48,24 @@ jQuery.noConflict();
         Oxi_Image_Admin_Shortcode(functionname, rawdata, styleid, childid, function (callback) {
             setTimeout(function () {
                 $('.sa-spinner-open').remove();
-                $("#oxi-addons-style-export-form")[0].reset();
-                jQuery("#OxiAddImportDatacontent").val(callback);
-                jQuery("#oxi-addons-style-export-modal").modal("show");
+                console.log(callback);
+//                window.location.href = callback;
+
+                var url = callback;
+                var a = document.createElement("a");
+                a.href = url;
+                fileName = url.split("/").pop();
+                alert(fileName);
+                a.download = fileName;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                a.remove();
             }, 1000);
         });
     });
+
+
     jQuery("#oxi-addons-style-modal-form").submit(function (e) {
         e.preventDefault();
         var rawdata = $('#addons-style-name').val();

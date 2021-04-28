@@ -51,6 +51,9 @@ class Shortcode {
     }
 
     public function CSSJS_load() {
+
+
+        $this->manual_import_style();
         $this->admin_css_loader();
         $this->admin_home();
         $this->admin_rest_api();
@@ -63,7 +66,41 @@ class Shortcode {
      */
     public function admin_rest_api() {
         wp_enqueue_script('oxi-image-hover-shortcode', OXI_IMAGE_HOVER_URL . '/assets/backend/js/shortcode.js', false, OXI_IMAGE_HOVER_TEXTDOMAIN);
-   }
+    }
+
+    /**
+     * Generate safe path
+     * @since v1.0.0
+     */
+    public function safe_path($path) {
+
+        $path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
+        return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
+    }
+
+    public function manual_import_style() {
+        if (!empty($_REQUEST['_wpnonce'])) {
+            $nonce = $_REQUEST['_wpnonce'];
+        }
+
+        if (!empty($_POST['importdatasubmit']) && $_POST['importdatasubmit'] == 'Save') {
+            if (!wp_verify_nonce($nonce, 'image-hover-effects-ultimate-import')) {
+                die('You do not have sufficient permissions to access this page.');
+            } else {
+                if (isset($_FILES['importimagehoverultimatefile'])) {
+                    $filename = $_FILES["importimagehoverultimatefile"]["name"];
+                    $folder = $this->safe_path(OXI_IMAGE_HOVER_PATH . 'assets/export/');
+
+                    if (is_file($folder . $filename)) {
+                        unlink($folder . $filename); // delete file
+                    }
+                    move_uploaded_file($_FILES['importimagehoverultimatefile']['tmp_name'], $folder . $filename);
+                    $ImageApi = new \OXI_IMAGE_HOVER_PLUGINS\Classes\ImageApi;
+                    $ImageApi->post_json_import($folder, $filename);
+                }
+            }
+        }
+    }
 
     public function Render() {
         ?>
@@ -82,7 +119,7 @@ class Shortcode {
         <div class="oxi-addons-wrapper">
             <div class="oxi-addons-import-layouts">
                 <h1>Image Hover › Shortcode</h1>
-                <p>Collect Image Hover Shortcode, Edit, Delect, Clone or Export it. </p>
+                <p>Collect Image Hover Shortcode, Edit, Delect, Clone or Export it. <button type="button" id="oxi-import-style" class="btn btn-info">Import</button> </p>
             </div>
         </div>
         <?php
@@ -123,10 +160,7 @@ class Shortcode {
                                <input type="hidden" name="oxideleteid" id="oxideleteid" value="' . $id . '">
                                <button class="btn btn-danger" style="float:left"  title="Delete"  type="submit" value="delete" name="addonsdatadelete">Delete</button>  
                        </form>
-                       <form method="post" class="oxi-addons-style-export">
-                               <input type="hidden" name="oxiexportid" id="oxiexportid" value="' . $id . '">
-                               <button class="btn btn-info" style="float:left; margin-left: 5px;"  title="Export"  type="submit" value="export" name="export">Export</button>  
-                       </form>
+                       <a href="' . esc_url_raw(rest_url()) . 'ImageHoverUltimate/v1/shortcode_export?styleid=' . $id . '"  title="Export"  class="btn btn-info" style="float:left; margin-left: 5px;">Export</a>
                 </td>');
             $return .= _(' </tr>');
         }
@@ -181,25 +215,28 @@ class Shortcode {
                             </div>
                         </form>
                     </div>
-                    <div class="modal fade" id="oxi-addons-style-export-modal" >
-                        <form method="post" id="oxi-addons-style-export-form">
-                            <div class="modal-dialog">
+                    <div class="modal fade" id="oxi-addons-style-import-modal" >
+                        <form method="post" id="oxi-addons-import-modal-form" enctype = "multipart/form-data">
+                            <div class="modal-dialog modal-sm">
                                 <div class="modal-content">
                                     <div class="modal-header">                    
-                                        <h4 class="modal-title">Export Data</h4>
+                                        <h4 class="modal-title">Import Form</h4>
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
                                     <div class="modal-body">
-                                        <textarea id="OxiAddImportDatacontent" class="oxi-addons-export-data-code"></textarea>
+                                             <input class="form-control" type="file" name="importimagehoverultimatefile" accept=".json,application/json,.zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-info OxiAddImportDatacontent">Copy</button>
+                                        <input type="submit" class="btn btn-success" name="importdatasubmit" id="importdatasubmit" value="Save">
                                     </div>
                                 </div>
                             </div>
+                               ' . wp_nonce_field("image-hover-effects-ultimate-import") . '
                         </form>
-                    </div>');
+                    </div>    
+                    
+                ');
     }
 
 }

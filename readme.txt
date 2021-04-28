@@ -324,6 +324,7 @@ Its too easy Chose your style from Effects List and click at Clone.
 
 == Changelog ==
 = 9.5.1 = 
+*Add JSON Import Export Options
 *Regular Update
 *Support for 5.7.1 version
 
@@ -477,6 +478,7 @@ Its too easy Chose your style from Effects List and click at Clone.
 
 == Upgrade Notice ==
 = 9.5.0 = 
+Add JSON Import Export Options
 Upgrade Responsive Style
 Add 2 new Layouts into General Effects
 

@@ -58,7 +58,7 @@ class ImageApi {
     public function build_api() {
         add_action('rest_api_init', function () {
             register_rest_route(untrailingslashit('ImageHoverUltimate/v1/'), '/(?P<action>\w+)/', array(
-                'methods' => 'POST',
+                'methods' => array('GET', 'POST'),
                 'callback' => [$this, 'api_action'],
             ));
         });
@@ -134,6 +134,29 @@ class ImageApi {
         endif;
     }
 
+    public function post_json_import($folder, $filename) {
+        if (is_file($folder . $filename)) {
+            $this->rawdata = file_get_contents($folder . $filename);
+            $params = json_decode($this->rawdata, true);
+            $style = $params['style'];
+            $child = $params['child'];
+            $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->parent_table} (name, style_name, rawdata) VALUES ( %s, %s, %s)", array( $style['name'], $style['style_name'], $style['rawdata'])));
+            $redirect_id = $this->wpdb->insert_id;
+            if ($redirect_id > 0):
+                $raw = json_decode(stripslashes($style['rawdata']), true);
+                $raw['image-hover-style-id'] = $redirect_id;
+                $s = explode('-', $style['style_name']);
+                $CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($s[0]) . '\Admin\Effects' . $s[1];
+                $C = new $CLASS('admin');
+                $f = $C->template_css_render($raw);
+                foreach ($child as $value) {
+                    $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d,  %s)", array($redirect_id, $value['rawdata'])));
+                }
+                return admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$s[0]&styleid=$redirect_id");
+            endif;
+        }
+    }
+
     public function post_shortcode_delete() {
         $styleid = (int) $this->styleid;
         if ($styleid):
@@ -158,32 +181,51 @@ class ImageApi {
         update_option('image_hover_ultimate_update_complete', 'done');
     }
 
-    public function post_shortcode_export() {
+    /**
+     * Generate safe path
+     * @since v1.0.0
+     */
+    public function safe_path($path) {
+
+        $path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
+        return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
+    }
+
+    public function get_shortcode_export() {
         $styleid = (int) $this->styleid;
         if ($styleid):
-            $st = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM $this->parent_table WHERE id = %d", $styleid), ARRAY_A);
-            $c = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid), ARRAY_A);
-            $style = [
-                'id' => $st['id'],
-                'name' => $st['name'],
-                'style_name' => $st['style_name'],
-                'rawdata' => json_encode($this->array_replace(json_decode(stripslashes($st['rawdata']), true), '"', '&quot;')),
-                'stylesheet' => htmlentities($st['stylesheet']),
-                'font_family' => $st['font_family'],
+            $style = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM $this->parent_table WHERE id = %d", $styleid), ARRAY_A);
+            $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid), ARRAY_A);
+            $filename = 'image-hover-effects-ultimateand' . $style['id'] . '.json';
+            $files = [
+                'style' => $style,
+                'child' => $child,
             ];
-            $child = [];
-            foreach ($c as $value) {
-                $child[] = [
-                    'id' => $value['id'],
-                    'styleid' => $value['styleid'],
-                    'rawdata' => json_encode($this->array_replace(json_decode(stripslashes($value['rawdata']), true), '"', '&quot;'))
-                ];
-            }
-            $newdata = ['plugin' => 'image-hover', 'style' => $style, 'child' => $child];
-            return json_encode($newdata);
+            $finalfiles = json_encode($files);
+            $this->send_file_headers($filename, strlen($finalfiles));
+            @ob_end_clean();
+            flush();
+            echo $finalfiles;
+            die;
         else:
             return 'Silence is Golden';
         endif;
+    }
+
+    /**
+     * Send file headers.
+     *
+     *
+     * @param string $file_name File name.
+     * @param int    $file_size File size.
+     */
+    private function send_file_headers($file_name, $file_size) {
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename=' . $file_name);
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length: ' . $file_size);
     }
 
     public function post_shortcode_deactive() {
@@ -531,6 +573,14 @@ class ImageApi {
             delete_option('image_hover_ultimate_license_key');
         }
         return 'success';
+    }
+
+    public static function instance() {
+        if (self::$instance == null) {
+            self::$instance = new self;
+        }
+
+        return self::$instance;
     }
 
 }
