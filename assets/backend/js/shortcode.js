@@ -39,33 +39,6 @@ jQuery.noConflict();
     jQuery("#oxi-import-style").on("click", function () {
         jQuery("#oxi-addons-style-import-modal").modal("show");
     });
-    jQuery(".oxi-addons-style-export").submit(function (e) {
-        e.preventDefault();
-        var rawdata = 'export';
-        var styleid = $(this).children('#oxiexportid').val();
-        var functionname = "shortcode_export";
-        $(this).prepend('<span class="spinner sa-spinner-open"></span>');
-        Oxi_Image_Admin_Shortcode(functionname, rawdata, styleid, childid, function (callback) {
-            setTimeout(function () {
-                $('.sa-spinner-open').remove();
-                console.log(callback);
-//                window.location.href = callback;
-
-                var url = callback;
-                var a = document.createElement("a");
-                a.href = url;
-                fileName = url.split("/").pop();
-                alert(fileName);
-                a.download = fileName;
-                document.body.appendChild(a);
-                a.click();
-                window.URL.revokeObjectURL(url);
-                a.remove();
-            }, 1000);
-        });
-    });
-
-
     jQuery("#oxi-addons-style-modal-form").submit(function (e) {
         e.preventDefault();
         var rawdata = $('#addons-style-name').val();

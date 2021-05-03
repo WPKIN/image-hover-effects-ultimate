@@ -87,17 +87,24 @@ class Shortcode {
             if (!wp_verify_nonce($nonce, 'image-hover-effects-ultimate-import')) {
                 die('You do not have sufficient permissions to access this page.');
             } else {
-                if (isset($_FILES['importimagehoverultimatefile'])) {
-                    $filename = $_FILES["importimagehoverultimatefile"]["name"];
-                    $folder = $this->safe_path(OXI_IMAGE_HOVER_PATH . 'assets/export/');
+                if (apply_filters('oxi-image-hover-plugin-version', false) == TRUE):
+                    if (isset($_FILES['importimagehoverultimatefile'])) :
+                        $filename = $_FILES["importimagehoverultimatefile"]["name"];
+                        $folder = $this->safe_path(OXI_IMAGE_HOVER_PATH . 'assets/export/');
 
-                    if (is_file($folder . $filename)) {
-                        unlink($folder . $filename); // delete file
-                    }
-                    move_uploaded_file($_FILES['importimagehoverultimatefile']['tmp_name'], $folder . $filename);
-                    $ImageApi = new \OXI_IMAGE_HOVER_PLUGINS\Classes\ImageApi;
-                    $ImageApi->post_json_import($folder, $filename);
-                }
+                        if (is_file($folder . $filename)):
+                            unlink($folder . $filename); // delete file
+                        endif;
+
+                        move_uploaded_file($_FILES['importimagehoverultimatefile']['tmp_name'], $folder . $filename);
+                        $ImageApi = new \OXI_IMAGE_HOVER_PLUGINS\Classes\ImageApi;
+                        $ImageApi->post_json_import($folder, $filename);
+
+                        if (is_file($folder . $filename)):
+                            unlink($folder . $filename); // delete file
+                        endif;
+                    endif;
+                endif;
             }
         }
     }
@@ -119,7 +126,7 @@ class Shortcode {
         <div class="oxi-addons-wrapper">
             <div class="oxi-addons-import-layouts">
                 <h1>Image Hover › Shortcode</h1>
-                <p>Collect Image Hover Shortcode, Edit, Delect, Clone or Export it. <button type="button" id="oxi-import-style" class="btn btn-info">Import</button> </p>
+                <p>Collect Image Hover Shortcode, Edit, Delect, Clone or Export it. <button type="button" id="oxi-import-style" class="btn btn-info">Import Shortcode</button> </p>
             </div>
         </div>
         <?php
@@ -224,6 +231,7 @@ class Shortcode {
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
                                     <div class="modal-body">
+                                             ' . (apply_filters('oxi-image-hover-plugin-version', false) == FALSE ? ' <a target="_blank" style"text-align:center" href="https://www.oxilab.org/downloads/image-hover-ultimate-pro/">**Works only with Pro Version</a><br> <br>' : '') . '
                                              <input class="form-control" type="file" name="importimagehoverultimatefile" accept=".json,application/json,.zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed">
                                     </div>
                                     <div class="modal-footer">
