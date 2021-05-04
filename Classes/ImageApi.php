@@ -60,6 +60,7 @@ class ImageApi {
             register_rest_route(untrailingslashit('ImageHoverUltimate/v1/'), '/(?P<action>\w+)/', array(
                 'methods' => array('GET', 'POST'),
                 'callback' => [$this, 'api_action'],
+                'permission_callback' => '__return_true'
             ));
         });
     }
