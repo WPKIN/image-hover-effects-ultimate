@@ -1128,6 +1128,7 @@ trait Sanitization {
                         'oxi-bt-col-lg-3' => __('Col 4', OXI_IMAGE_HOVER_TEXTDOMAIN),
                         'oxi-bt-col-lg-5' => __('Col 5', OXI_IMAGE_HOVER_TEXTDOMAIN),
                         'oxi-bt-col-lg-2' => __('Col 6', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'oxi-bt-col-lg-7' => __('Col 7', OXI_IMAGE_HOVER_TEXTDOMAIN),
                         'oxi-bt-col-lg-8' => __('Col 8', OXI_IMAGE_HOVER_TEXTDOMAIN),
                         'oxi-bt-col-lg-1' => __('Col 12', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     ],

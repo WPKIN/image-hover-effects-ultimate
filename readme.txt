@@ -4,7 +4,7 @@ Donate link: https://www.oxilab.org
 Tags: responsive image effects, awesome css3 effects, awesome image effects,  css3 effects, effects, top image effects for wordpress,  hover effect. 
 Requires at least: 3.0.1
 Stable tag: 9.5.1
-Tested up to: 5.7.1
+Tested up to: 5.7.2
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -326,7 +326,7 @@ Its too easy Chose your style from Effects List and click at Clone.
 = 9.5.1 = 
 *Add JSON Import Export Options
 *Regular Update
-*Support for 5.7.1 version
+*Support for 5.7.2 version
 
 = 9.5.0 = 
 *Upgrade Responsive Style
@@ -477,8 +477,12 @@ Its too easy Chose your style from Effects List and click at Clone.
 
 
 == Upgrade Notice ==
-= 9.5.0 = 
+= 9.5.1 = 
 Add JSON Import Export Options
+Regular Update
+Support for 5.7.2 version
+
+= 9.5.0 = 
 Upgrade Responsive Style
 Add 2 new Layouts into General Effects
 
