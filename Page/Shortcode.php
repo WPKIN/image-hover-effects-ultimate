@@ -126,7 +126,7 @@ class Shortcode {
         <div class="oxi-addons-wrapper">
             <div class="oxi-addons-import-layouts">
                 <h1>Image Hover › Shortcode</h1>
-                <p>Collect Image Hover Shortcode, Edit, Delect, Clone or Export it. <button type="button" id="oxi-import-style" class="btn btn-info">Import Shortcode</button> </p>
+                <p>Collect Image Hover Shortcode, Edit, Delect, Clone or Export it.</p>
             </div>
         </div>
         <?php
@@ -184,11 +184,11 @@ class Shortcode {
                         <div class="oxi-addons-col-1 oxi-import">
                             <div class="oxi-addons-style-preview">
                                 <div class="oxilab-admin-style-preview-top">
-                                    <a href="' . admin_url("admin.php?page=oxi-image-hover-ultimate") . '">
+                                    <a href="#" id="oxi-import-style">
                                         <div class="oxilab-admin-add-new-item">
                                             <span>
                                                 <i class="fas fa-plus-circle oxi-icons"></i>  
-                                                Create New Image Hover
+                                                Import Image Hover
                                             </span>
                                         </div>
                                     </a>
@@ -199,7 +199,7 @@ class Shortcode {
 
         echo _('<div class="modal fade" id="oxi-addons-style-create-modal" >
                         <form method="post" id="oxi-addons-style-modal-form">
-                            <div class="modal-dialog modal-sm">
+                            <div class="modal-dialog modal-sm modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">                    
                                         <h4 class="modal-title">Image Hover Clone</h4>
@@ -224,7 +224,7 @@ class Shortcode {
                     </div>
                     <div class="modal fade" id="oxi-addons-style-import-modal" >
                         <form method="post" id="oxi-addons-import-modal-form" enctype = "multipart/form-data">
-                            <div class="modal-dialog modal-sm">
+                            <div class="modal-dialog modal-sm modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">                    
                                         <h4 class="modal-title">Import Form</h4>
