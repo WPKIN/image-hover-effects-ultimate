@@ -35,6 +35,34 @@ jQuery.noConflict();
         $('#oxistyledata').val($(this).attr('effects-data'));
         $("#oxi-addons-style-create-modal").modal("show");
     });
+    $(".oxi-addons-addons-web-template").on("click", function (e) {
+        e.preventDefault();
+
+        var functionname = "web_template";
+        _This = $(this);
+        _This.html('<i class="fas fa-spinner fa-pulse"></i>');
+        Image_Hover_Admin_Create(functionname, _This.attr('data-effects'), _This.attr('data-value'), childid, function (callback) {
+            $('#oxi-addons-style-web-template .modal-body').html(callback);
+            $("#oxi-addons-style-web-template").modal("show");
+            _This.html('Demos');
+        });
+        return false;
+    });
+
+
+    $(document.body).on("click", ".oxi-addons-addons-web-template-import-button", function (e) {
+        e.preventDefault();
+        _This = $(this);
+        _This.html('<i class="fas fa-spinner fa-pulse"></i>');
+        var functionname = "web_import";
+        Image_Hover_Admin_Create(functionname, _This.attr('web-data'), _This.attr('web-template'), childid, function (callback) {
+            setTimeout(function () {
+                document.location.href = callback;
+            }, 1000);
+        });
+
+    });
+
 
     $("#oxi-addons-style-modal-form").submit(function (e) {
         e.preventDefault();

@@ -41,6 +41,8 @@ class ImageApi {
     public $styleid;
     public $childid;
 
+    const API = 'https://www.image-hover.oxilab.org/wp-json/imagehoverultimate/v2/';
+
     /**
      * Constructor of plugin class
      *
@@ -141,7 +143,7 @@ class ImageApi {
             $params = json_decode($this->rawdata, true);
             $style = $params['style'];
             $child = $params['child'];
-            $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->parent_table} (name, style_name, rawdata) VALUES ( %s, %s, %s)", array( $style['name'], $style['style_name'], $style['rawdata'])));
+            $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->parent_table} (name, style_name, rawdata) VALUES ( %s, %s, %s)", array($style['name'], $style['style_name'], $style['rawdata'])));
             $redirect_id = $this->wpdb->insert_id;
             if ($redirect_id > 0):
                 $raw = json_decode(stripslashes($style['rawdata']), true);
@@ -582,6 +584,97 @@ class ImageApi {
         }
 
         return self::$instance;
+    }
+
+    public function fixed_data($agr) {
+        return hex2bin($agr);
+    }
+
+    public function post_web_template() {
+
+        $folder = $this->safe_path(OXI_IMAGE_HOVER_PATH . 'template/');
+        if (!is_dir($folder)):
+            mkdir($folder, 0777);
+        endif;
+        $files = OXI_IMAGE_HOVER_PATH . 'template/' . $this->rawdata . '-' . $this->styleid . '.json';
+        if (!file_exists($files)):
+            $this->download_web_files($files);
+        endif;
+        $template_data = json_decode(file_get_contents($files), true);
+
+        $render = '';
+        $vs = get_option($this->fixed_data('696d6167655f686f7665725f756c74696d6174655f6c6963656e73655f737461747573'));
+        foreach ($template_data as $key => $value) {
+            if ($vs == $this->fixed_data('76616c6964')) {
+                $button = '<button type="button" class="btn btn-success oxi-addons-addons-web-template-import-button" web-data="' . $value['style']['style_name'] . '" web-template="' . $value['style']['id'] . '">Import</button>';
+            } else {
+                $button = '<button class="btn btn-warning oxi-addons-addons-style-btn-warning" title="Pro Only" type="submit" value="pro only" name="addonsstyleproonly">Pro Only</button>';
+            }
+            $render .= '<div class="oxi-addons-col-1">
+                                    <div class="oxi-addons-style-preview">
+                                        <div class="oxi-addons-style-preview-top oxi-addons-center">';
+            $C = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($this->rawdata) . '\Render\Effects' . $this->styleid;
+
+            ob_start();
+            if (class_exists($C)):
+                new $C($value['style'], $value['child'], 'web');
+            endif;
+            $render .= ob_get_contents();
+            ob_end_clean();
+
+            $render .= '                </div>
+                                        <div class="oxi-addons-style-preview-bottom">
+                                            <div class="oxi-addons-style-preview-bottom-left">
+                                                ' . $value['style']['name'] . '                      
+                                            </div>
+                                            <div class="oxi-addons-style-preview-bottom-right">
+                                                ' . $button . '
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>';
+        }
+        return $render;
+    }
+
+    public function download_web_files($files) {
+
+
+        $URL = self::API . $this->rawdata . '/' . $this->styleid;
+        $request = wp_remote_request($URL);
+        if (!is_wp_error($request)) {
+            $response = json_decode(wp_remote_retrieve_body($request), true);
+        } else {
+            return $request->get_error_message();
+        }
+
+        $data = json_decode($response, true);
+        if (file_put_contents($files, json_encode($data))) {
+            
+        }
+    }
+
+    public function post_web_import() {
+        $files = OXI_IMAGE_HOVER_PATH . 'template/' . $this->rawdata . '.json';
+        $params = json_decode(file_get_contents($files), true)[$this->styleid];
+
+        $style = $params['style'];
+        $child = $params['child'];
+        $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->parent_table} (name, style_name, rawdata) VALUES ( %s, %s, %s)", array($style['name'], $style['style_name'], $style['rawdata'])));
+        $redirect_id = $this->wpdb->insert_id;
+        if ($redirect_id > 0):
+            $raw = json_decode(stripslashes($style['rawdata']), true);
+            $raw['image-hover-style-id'] = $redirect_id;
+            $s = explode('-', $style['style_name']);
+            $CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($s[0]) . '\Admin\Effects' . $s[1];
+            $C = new $CLASS('admin');
+            $f = $C->template_css_render($raw);
+            foreach ($child as $value) {
+                $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d,  %s)", array($redirect_id, $value['rawdata'])));
+            }
+            return admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$s[0]&styleid=$redirect_id");
+        endif;
+        
     }
 
 }

@@ -108,13 +108,13 @@ class Settings {
                                 </th>
                                 <td>
                                     <fieldset>
-                                        <label for="oxi_addons_font_awesome[yes]">
+                                        <label for="oxi_addons_font_awesome[]">
                                             <input type="radio" class="radio" id="oxi_addons_font_awesome[yes]"
-                                                   name="oxi_addons_font_awesome" value="yes"
+                                                   name="oxi_addons_font_awesome" value=""
                                                    <?php checked('yes', get_option('oxi_addons_font_awesome'), true); ?>>Yes</label>
                                         <label for="oxi_addons_font_awesome[no]">
                                             <input type="radio" class="radio" id="oxi_addons_font_awesome[no]"
-                                                   name="oxi_addons_font_awesome" value=""
+                                                   name="oxi_addons_font_awesome" value="no"
                                                    <?php checked('', get_option('oxi_addons_font_awesome'), true); ?>>No
                                         </label>
                                         <span class="oxi-addons-settings-connfirmation oxi_addons_font_awesome"></span>

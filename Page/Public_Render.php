@@ -192,7 +192,7 @@ class Public_Render {
             $inlinecss .= $this->CSSDATA;
         }
         if ($inlinejs != ''):
-            if ($this->admin == 'admin'):
+            if ($this->admin == 'admin'|| $this->admin == 'web'):
                 //only load while Rest API called
                 echo _('<script>
                         (function ($) {
@@ -208,7 +208,7 @@ class Public_Render {
         endif;
         if ($inlinecss != ''):
             $inlinecss = html_entity_decode($inlinecss);
-            if ($this->admin == 'admin'):
+            if ($this->admin == 'admin' || $this->admin == 'web'):
                 //only load while ajax called
                 echo _('<style>');
                 echo $inlinecss;
@@ -374,7 +374,7 @@ class Public_Render {
 
     public function font_awesome_render($data) {
         $fadata = get_option('oxi_addons_font_awesome');
-        if ($fadata == 'yes'):
+        if ($fadata != 'no'):
             wp_enqueue_style('font-awsome.min', OXI_IMAGE_HOVER_URL . '/assets/frontend/css/font-awsome.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         endif;
         $files = '<i class="' . $data . ' oxi-icons"></i>';

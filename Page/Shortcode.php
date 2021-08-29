@@ -91,7 +91,9 @@ class Shortcode {
                     if (isset($_FILES['importimagehoverultimatefile'])) :
                         $filename = $_FILES["importimagehoverultimatefile"]["name"];
                         $folder = $this->safe_path(OXI_IMAGE_HOVER_PATH . 'assets/export/');
-
+                        if(!is_dir($folder)):
+                           mkdir($folder, 0777);
+                        endif;
                         if (is_file($folder . $filename)):
                             unlink($folder . $filename); // delete file
                         endif;
@@ -180,7 +182,10 @@ class Shortcode {
     }
 
     public function create_new() {
-        echo _('<div class="oxi-addons-row">
+        if (apply_filters('oxi-image-hover-plugin-version', false) == TRUE):
+
+
+            echo _('<div class="oxi-addons-row">
                         <div class="oxi-addons-col-1 oxi-import">
                             <div class="oxi-addons-style-preview">
                                 <div class="oxilab-admin-style-preview-top">
@@ -196,7 +201,7 @@ class Shortcode {
                             </div>
                         </div>
                     </div>');
-
+        endif;
         echo _('<div class="modal fade" id="oxi-addons-style-create-modal" >
                         <form method="post" id="oxi-addons-style-modal-form">
                             <div class="modal-dialog modal-sm modal-dialog-centered">
@@ -231,7 +236,6 @@ class Shortcode {
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
                                     <div class="modal-body">
-                                             ' . (apply_filters('oxi-image-hover-plugin-version', false) == FALSE ? ' <a target="_blank" style"text-align:center" href="https://www.oxilab.org/downloads/image-hover-ultimate-pro/">**Works only with Pro Version</a><br> <br>' : '') . '
                                              <input class="form-control" type="file" name="importimagehoverultimatefile" accept=".json,application/json,.zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed">
                                     </div>
                                     <div class="modal-footer">

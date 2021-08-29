@@ -113,7 +113,7 @@ class Effects2 extends Modules
                 'type' => Controls::MEDIA,
                 'default' => [
                     'type' => 'media-library',
-                    'link' => 'https://www.shortcode-addons.com/wp-content/uploads/2020/01/placeholder.png',
+                    'link' => 'https://www.image-hover.oxilab.org/wp-content/uploads/2020/01/placeholder.png',
                 ],
                 'condition' => [
                     'oxi_image_light_box_clickable' => 'image',
@@ -169,7 +169,7 @@ class Effects2 extends Modules
                 'type' => Controls::MEDIA,
                 'default' => [
                     'type' => 'media-library',
-                    'link' => 'https://www.shortcode-addons.com/wp-content/uploads/2020/01/placeholder.png',
+                    'link' => 'https://www.image-hover.oxilab.org/wp-content/uploads/2020/01/placeholder.png',
                 ],
                 'condition' => [
                     'oxi_image_light_box_select_type' => 'image',

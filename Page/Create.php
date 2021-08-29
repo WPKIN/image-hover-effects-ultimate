@@ -171,6 +171,7 @@ class Create {
                             <div class="oxi-addons-style-preview-top oxi-addons-center">
                                 <?php
                                 $i = 1;
+
                                 foreach ($value['files'] as $v) {
                                     $style = json_decode($v, true);
                                     $s = explode('-', $style['style']['style_name']);
@@ -191,6 +192,7 @@ class Create {
                                 </div>
                                 <div class="oxi-addons-style-preview-bottom-right">
                                     <button class="btn btn-warning oxi-addons-addons-style-btn-warning" title="Delete" data-value="<?php echo $id; ?>" data-effects="<?php echo $this->effects; ?>" type="button" value="Deactive" name="styledelete<?php echo $id; ?>">Deactive</button>  
+                                    <button type="button" class="btn btn-info oxi-addons-addons-web-template"  data-value="<?php echo $id; ?>" data-effects="<?php echo $this->effects; ?>">Demos</button>
                                     <button type="button" class="btn btn-success oxi-addons-addons-template-create" effects-data="oxistyle<?php echo $id; ?>data">Create Style</button>
                                 </div>
                             </div>
@@ -323,6 +325,23 @@ class Create {
                             </div>
                         </form>
                     </div>');
+        ?>
+        <div class="modal fade" tabindex="-1" role="dialog" id="oxi-addons-style-web-template" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Web Template</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php
     }
 
 }
