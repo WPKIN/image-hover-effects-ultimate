@@ -3914,6 +3914,7 @@ span.sa-spinner-open-left{
     display: inline-block;
     vertical-align: middle;
 }
+
 span.oxi-confirmation-blank:after {
     font-family: dashicons;
     content: "";

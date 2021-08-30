@@ -87,7 +87,6 @@
     right: 0;
     content: "";
     display: block;
-    background: transparent;
     pointer-events: none;
 
 }

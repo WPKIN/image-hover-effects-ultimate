@@ -97,7 +97,6 @@ class Shortcode {
                         if (is_file($folder . $filename)):
                             unlink($folder . $filename); // delete file
                         endif;
-
                         move_uploaded_file($_FILES['importimagehoverultimatefile']['tmp_name'], $folder . $filename);
                         $ImageApi = new \OXI_IMAGE_HOVER_PLUGINS\Classes\ImageApi;
                         $ImageApi->post_json_import($folder, $filename);
