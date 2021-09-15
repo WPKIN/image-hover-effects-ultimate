@@ -8,25 +8,28 @@ if (!defined('ABSPATH')) {
 
 use OXI_IMAGE_HOVER_PLUGINS\Page\Public_Render;
 
-class Effects1 extends Public_Render {
+class Effects1 extends Public_Render
+{
 
-    public function public_css() {
+    public function public_css()
+    {
         wp_enqueue_style('oxi-image-hover-button', OXI_IMAGE_HOVER_URL . '/Modules/Button/Files/button.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         wp_enqueue_style('oxi-image-hover-button-style-1', OXI_IMAGE_HOVER_URL . '/Modules/Button/Files/style-1.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
 
-    public function default_render($style, $child, $admin) {
+    public function default_render($style, $child, $admin)
+    {
 
         foreach ($child as $key => $val) {
             $value = json_decode(stripslashes($val['rawdata']), true);
             $first = $second = '';
 
-            if ($value['image_hover_first_icon'] != ''):
+            if ($value['image_hover_first_icon'] != '') :
                 $first = '<div class="oxi-image-hover-icon">
                             <a ' . $this->url_render('image_hover_first_icon_link', $value) . ' class="oxi-image-icon">' . $this->font_awesome_render($value['image_hover_first_icon']) . '</a>
                         </div>';
             endif;
-            if ($value['image_hover_second_icon'] != ''):
+            if ($value['image_hover_second_icon'] != '') :
                 $second = '<div class="oxi-image-hover-icon">
                             <a ' . $this->url_render('image_hover_second_icon_link', $value) . ' class="oxi-image-icon">' . $this->font_awesome_render($value['image_hover_second_icon']) . '</a>
                         </div>';
@@ -57,14 +60,15 @@ class Effects1 extends Public_Render {
                             </div>';
             endif;
             echo ' </div>';
-            if ($this->media_background_render('image_hover_feature_image', $value) != ''):
+            if ($this->media_background_render('image_hover_feature_image', $value) != '') :
                 $url = $this->media_background_render('image_hover_feature_image', $value);
-                $this->inline_css .= '.oxi-image-hover-style-button .oxi-image-button-hover-' . $this->oxiid . '-' . $val['id'] . ' .oxi-image-hover-figure-caption:after{background: url(' . $url . ');-moz-background-size: 100% 100%;-o-background-size: 100% 100%; background-size: 100% 100%;}';
+                $this->inline_css .= '.oxi-image-hover-style-button .oxi-image-button-hover-' . $this->oxiid . '-' . $val['id'] . ' .oxi-image-hover-figure-caption:after{background: url(' . $url . ') !important;-moz-background-size: 100% 100%;-o-background-size: 100% 100%; background-size: 100% 100%;}';
             endif;
         }
     }
 
-    public function old_render() {
+    public function old_render()
+    {
         $style = $this->dbdata['css'];
         $styledata = explode('|', $style);
 
@@ -104,7 +108,7 @@ class Effects1 extends Public_Render {
             'oxi-image-hover-width-lap-choices' => 'px',
             'oxi-image-hover-width-lap-size' => $styledata[5],
             'oxi-image-hover-height-lap-choices' => '%',
-            'oxi-image-hover-height-lap-size' => ($styledata[7]/ $styledata[5] *100),
+            'oxi-image-hover-height-lap-size' => ($styledata[7] / $styledata[5] * 100),
             'oxi-image-hover-margin-lap-top' => $styledata[9],
             'oxi-image-hover-margin-lap-right' => $styledata[9],
             'oxi-image-hover-margin-lap-bottom' => $styledata[9],
@@ -158,5 +162,4 @@ class Effects1 extends Public_Render {
         $CLASS = new $cls('admin');
         $CLASS->template_css_render($new);
     }
-
 }

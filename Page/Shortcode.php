@@ -2,7 +2,8 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Page;
 
-class Shortcode {
+class Shortcode
+{
 
     /**
      * Database Parent Table
@@ -40,7 +41,8 @@ class Shortcode {
      *
      * @since 9.3.0
      */
-    public function __construct() {
+    public function __construct()
+    {
         global $wpdb;
         $this->wpdb = $wpdb;
         $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
@@ -50,7 +52,8 @@ class Shortcode {
         $this->Render();
     }
 
-    public function CSSJS_load() {
+    public function CSSJS_load()
+    {
 
 
         $this->manual_import_style();
@@ -64,7 +67,8 @@ class Shortcode {
      * Admin Notice JS file loader
      * @return void
      */
-    public function admin_rest_api() {
+    public function admin_rest_api()
+    {
         wp_enqueue_script('oxi-image-hover-shortcode', OXI_IMAGE_HOVER_URL . '/assets/backend/js/shortcode.js', false, OXI_IMAGE_HOVER_TEXTDOMAIN);
     }
 
@@ -72,13 +76,15 @@ class Shortcode {
      * Generate safe path
      * @since v1.0.0
      */
-    public function safe_path($path) {
+    public function safe_path($path)
+    {
 
         $path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
         return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
     }
 
-    public function manual_import_style() {
+    public function manual_import_style()
+    {
         if (!empty($_REQUEST['_wpnonce'])) {
             $nonce = $_REQUEST['_wpnonce'];
         }
@@ -87,57 +93,59 @@ class Shortcode {
             if (!wp_verify_nonce($nonce, 'image-hover-effects-ultimate-import')) {
                 die('You do not have sufficient permissions to access this page.');
             } else {
-                if (apply_filters('oxi-image-hover-plugin-version', false) == TRUE):
-                    if (isset($_FILES['importimagehoverultimatefile'])) :
-                        $filename = $_FILES["importimagehoverultimatefile"]["name"];
-                        $folder = $this->safe_path(OXI_IMAGE_HOVER_PATH . 'assets/export/');
-                        if(!is_dir($folder)):
-                           mkdir($folder, 0777);
-                        endif;
-                        if (is_file($folder . $filename)):
-                            unlink($folder . $filename); // delete file
-                        endif;
-                        move_uploaded_file($_FILES['importimagehoverultimatefile']['tmp_name'], $folder . $filename);
-                        $ImageApi = new \OXI_IMAGE_HOVER_PLUGINS\Classes\ImageApi;
-                        $ImageApi->post_json_import($folder, $filename);
+                if (isset($_FILES['importimagehoverultimatefile'])) :
+                    $filename = $_FILES["importimagehoverultimatefile"]["name"];
+                    $folder = $this->safe_path(OXI_IMAGE_HOVER_PATH . 'assets/export/');
+                    if (!is_dir($folder)) :
+                        mkdir($folder, 0777);
+                    endif;
+                    if (is_file($folder . $filename)) :
+                        unlink($folder . $filename); // delete file
+                    endif;
+                    move_uploaded_file($_FILES['importimagehoverultimatefile']['tmp_name'], $folder . $filename);
+                    $ImageApi = new \OXI_IMAGE_HOVER_PLUGINS\Classes\ImageApi;
+                    $ImageApi->post_json_import($folder, $filename);
 
-                        if (is_file($folder . $filename)):
-                            unlink($folder . $filename); // delete file
-                        endif;
+                    if (is_file($folder . $filename)) :
+                        unlink($folder . $filename); // delete file
                     endif;
                 endif;
             }
         }
     }
 
-    public function Render() {
-        ?>
-        <div class="oxi-addons-row">
-            <?php
+    public function Render()
+    {
+?>
+<div class="oxi-addons-row">
+    <?php
             $this->Admin_header();
             $this->created_shortcode();
             $this->create_new();
             ?>
-        </div>
-        <?php
+</div>
+<?php
     }
 
-    public function Admin_header() {
-        ?>
-        <div class="oxi-addons-wrapper">
-            <div class="oxi-addons-import-layouts">
-                <h1>Image Hover › Shortcode</h1>
-                <p>Collect Image Hover Shortcode, Edit, Delect, Clone or Export it.</p>
-            </div>
-        </div>
-        <?php
+    public function Admin_header()
+    {
+    ?>
+<div class="oxi-addons-wrapper">
+    <div class="oxi-addons-import-layouts">
+        <h1>Image Hover › Shortcode</h1>
+        <p>Collect Image Hover Shortcode, Edit, Delect, Clone or Export it.</p>
+    </div>
+</div>
+<?php
     }
 
-    public function database_data() {
+    public function database_data()
+    {
         return $this->wpdb->get_results("SELECT * FROM  $this->parent_table ORDER BY id DESC", ARRAY_A);
     }
 
-    public function created_shortcode() {
+    public function created_shortcode()
+    {
         $return = _(' <div class="oxi-addons-row"> <div class="oxi-addons-row table-responsive abop" style="margin-bottom: 20px; opacity: 0; height: 0px">
                         <table class="table table-hover widefat oxi_addons_table_data" style="background-color: #fff; border: 1px solid #ccc">
                             <thead>
@@ -160,16 +168,15 @@ class Shortcode {
             $return .= _('<td>' . $this->name_converter($value['name']) . '</td>');
             $return .= _('<td>' . $this->name_converter($value['style_name']) . '</td>');
             $return .= _('<td><span>Shortcode &nbsp;&nbsp;<input type="text" onclick="this.setSelectionRange(0, this.value.length)" value="[iheu_ultimate_oxi id=&quot;' . $id . '&quot;]"></span> <br>'
-                    . '<span>Php Code &nbsp;&nbsp; <input type="text" onclick="this.setSelectionRange(0, this.value.length)" value="&lt;?php echo do_shortcode(&#039;[iheu_ultimate_oxi  id=&quot;' . $id . '&quot;]&#039;); ?&gt;"></span></td>');
+                . '<span>Php Code &nbsp;&nbsp; <input type="text" onclick="this.setSelectionRange(0, this.value.length)" value="&lt;?php echo do_shortcode(&#039;[iheu_ultimate_oxi  id=&quot;' . $id . '&quot;]&#039;); ?&gt;"></span></td>');
             $return .= _('<td> 
-                        <button type="button" class="btn btn-success oxi-addons-style-clone"  style="float:left" oxiaddonsdataid="' . $id . '">Clone</button>
-                        <a href="' . admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$effects&styleid=$id") . '"  title="Edit"  class="btn btn-info" style="float:left; margin-right: 5px; margin-left: 5px;">Edit</a>
-                       <form method="post" class="oxi-addons-style-delete">
+                        <a href="' . admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$effects&styleid=$id") . '"  title="Edit"  class="btn btn-primary" style="float:left; margin-right: 5px;">Edit</a>
+                        <a href="' . esc_url_raw(rest_url()) . 'ImageHoverUltimate/v1/shortcode_export?styleid=' . $id . '"  title="Export"  class="btn btn-info" style="float:left; margin-right: 5px;">Export</a>
+                      <form method="post" class="oxi-addons-style-delete">
                                <input type="hidden" name="oxideleteid" id="oxideleteid" value="' . $id . '">
                                <button class="btn btn-danger" style="float:left"  title="Delete"  type="submit" value="delete" name="addonsdatadelete">Delete</button>  
                        </form>
-                       <a href="' . esc_url_raw(rest_url()) . 'ImageHoverUltimate/v1/shortcode_export?styleid=' . $id . '"  title="Export"  class="btn btn-info" style="float:left; margin-left: 5px;">Export</a>
-                </td>');
+                      </td>');
             $return .= _(' </tr>');
         }
         $return .= _('      </tbody>
@@ -180,11 +187,12 @@ class Shortcode {
         echo $return;
     }
 
-    public function create_new() {
-        if (apply_filters('oxi-image-hover-plugin-version', false) == TRUE):
+    public function create_new()
+    {
 
 
-            echo _('<div class="oxi-addons-row">
+
+        echo _('<div class="oxi-addons-row">
                         <div class="oxi-addons-col-1 oxi-import">
                             <div class="oxi-addons-style-preview">
                                 <div class="oxilab-admin-style-preview-top">
@@ -200,7 +208,7 @@ class Shortcode {
                             </div>
                         </div>
                     </div>');
-        endif;
+
         echo _('<div class="modal fade" id="oxi-addons-style-create-modal" >
                         <form method="post" id="oxi-addons-style-modal-form">
                             <div class="modal-dialog modal-sm modal-dialog-centered">
@@ -249,5 +257,4 @@ class Shortcode {
                     
                 ');
     }
-
 }
