@@ -117,25 +117,25 @@ class Shortcode
     public function Render()
     {
 ?>
-<div class="oxi-addons-row">
-    <?php
+        <div class="oxi-addons-row">
+            <?php
             $this->Admin_header();
             $this->created_shortcode();
             $this->create_new();
             ?>
-</div>
-<?php
+        </div>
+    <?php
     }
 
     public function Admin_header()
     {
     ?>
-<div class="oxi-addons-wrapper">
-    <div class="oxi-addons-import-layouts">
-        <h1>Image Hover › Shortcode</h1>
-        <p>Collect Image Hover Shortcode, Edit, Delect, Clone or Export it.</p>
-    </div>
-</div>
+        <div class="oxi-addons-wrapper">
+            <div class="oxi-addons-import-layouts">
+                <h1>Image Hover › Shortcode</h1>
+                <p>Collect Image Hover Shortcode, Edit, Delect, Clone or Export it.</p>
+            </div>
+        </div>
 <?php
     }
 
@@ -200,7 +200,7 @@ class Shortcode
                                         <div class="oxilab-admin-add-new-item">
                                             <span>
                                                 <i class="fas fa-plus-circle oxi-icons"></i>  
-                                                Import Image Hover
+                                                Import Image Hover Files
                                             </span>
                                         </div>
                                     </a>
@@ -209,37 +209,12 @@ class Shortcode
                         </div>
                     </div>');
 
-        echo _('<div class="modal fade" id="oxi-addons-style-create-modal" >
-                        <form method="post" id="oxi-addons-style-modal-form">
-                            <div class="modal-dialog modal-sm modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">                    
-                                        <h4 class="modal-title">Image Hover Clone</h4>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class=" form-group row">
-                                            <label for="addons-style-name" class="col-sm-6 col-form-label" oxi-addons-tooltip="Give your Shortcode Name Here">Name</label>
-                                            <div class="col-sm-6 addons-dtm-laptop-lock">
-                                                <input class="form-control" type="text" value="" id="addons-style-name"  name="addons-style-name">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <input type="hidden" id="oxistyleid" name="oxistyleid" value="">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                        <input type="submit" class="btn btn-success" name="addonsdatasubmit" id="addonsdatasubmit" value="Save">
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal fade" id="oxi-addons-style-import-modal" >
+        echo _('<div class="modal fade" id="oxi-addons-style-import-modal" >
                         <form method="post" id="oxi-addons-import-modal-form" enctype = "multipart/form-data">
                             <div class="modal-dialog modal-sm modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">                    
-                                        <h4 class="modal-title">Import Form</h4>
+                                        <h4 class="modal-title">Import JSON Files</h4>
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
                                     <div class="modal-body">
