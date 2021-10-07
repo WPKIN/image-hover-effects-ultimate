@@ -1,8 +1,6 @@
-.oxi-image-hover-style{
-    padding: 15px; 
-}
+
 .oxi-image-hover-style-square{
-    max-width: 300px;
+   
     width: 100%;
     margin: 0 auto;
     position: relative;
@@ -86,7 +84,6 @@
     bottom: 0;
     content: "";
     display: block;
-    background: transparent;
     pointer-events: none;
 
 }

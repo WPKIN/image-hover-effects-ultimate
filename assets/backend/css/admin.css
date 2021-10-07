@@ -1846,7 +1846,8 @@ textarea.oxi-addons-export-data-code {
 .oxi-addons-admin-edit-list:hover .oxi-addons-admin-absulote {
   opacity: 1;
 }
-.oxi-addons-admin-absulate-edit {
+.oxi-addons-admin-absulate-edit,
+.oxi-addons-admin-absulate-clone {
   display: inline-block;
   margin-right: 5px;
 }

@@ -7,8 +7,7 @@ namespace OXI_IMAGE_HOVER_PLUGINS\Classes;
  *
  * @author $biplob018
  */
-class ImageApi
-{
+class ImageApi {
 
     /**
      * Define $wpdb
@@ -42,25 +41,25 @@ class ImageApi
     public $styleid;
     public $childid;
 
-    const API = 'https://www.image-hover.oxilab.org/wp-json/imagehoverultimate/v2/';
+    const API = 'https://oxilabdemos.com/image-hover/wp-json/imagehoverultimate/v2/';
+
     // instance container
     private static $instance = null;
 
-    public static function instance()
-    {
+    public static function instance() {
         if (self::$instance == null) {
             self::$instance = new self;
         }
 
         return self::$instance;
     }
+
     /**
      * Constructor of plugin class
      *
      * @since 9.3.0
      */
-    public function __construct()
-    {
+    public function __construct() {
         global $wpdb;
         $this->wpdb = $wpdb;
         $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
@@ -69,8 +68,7 @@ class ImageApi
         $this->build_api();
     }
 
-    public function build_api()
-    {
+    public function build_api() {
         add_action('rest_api_init', function () {
             register_rest_route(untrailingslashit('ImageHoverUltimate/v1/'), '/(?P<action>\w+)/', array(
                 'methods' => array('GET', 'POST'),
@@ -80,8 +78,7 @@ class ImageApi
         });
     }
 
-    public function api_action($request)
-    {
+    public function api_action($request) {
         $this->request = $request;
         $this->rawdata = addslashes($request['rawdata']);
         $this->styleid = $request['styleid'];
@@ -102,23 +99,54 @@ class ImageApi
         endif;
     }
 
-    public function array_replace($arr = [], $search = '', $replace = '')
-    {
+    public function array_replace($arr = [], $search = '', $replace = '') {
         array_walk($arr, function (&$v) use ($search, $replace) {
             $v = str_replace($search, $replace, $v);
         });
         return $arr;
     }
 
-    public function post_create_new()
-    {
+    public function post_create_new() {
 
         $params = json_decode(stripslashes($this->rawdata), true);
-        $newname = $params['name'];
-        $rawdata = $params['style'];
-        $style = $rawdata['style'];
-        $child = $rawdata['child'];
-        $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->parent_table} (name, style_name, rawdata) VALUES ( %s, %s, %s)", array($newname, $style['style_name'], $style['rawdata'])));
+
+        $files = OXI_IMAGE_HOVER_PATH . $params['style'];
+
+        if (is_file($files)) {
+            $this->rawdata = file_get_contents($files);
+            $params = json_decode($this->rawdata, true);
+            $style = $params['style'];
+            $child = $params['child'];
+            if (!empty($params['name'])):
+                $style['name'] = $params['name'];
+            endif;
+
+            $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->parent_table} (name, style_name, rawdata) VALUES ( %s, %s, %s)", array($style['name'], $style['style_name'], $style['rawdata'])));
+            $redirect_id = $this->wpdb->insert_id;
+            if ($redirect_id > 0) :
+                $raw = json_decode(stripslashes($style['rawdata']), true);
+                $raw['image-hover-style-id'] = $redirect_id;
+                $s = explode('-', $style['style_name']);
+                $CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($s[0]) . '\Admin\Effects' . $s[1];
+                $C = new $CLASS('admin');
+                $f = $C->template_css_render($raw);
+                foreach ($child as $value) {
+                    $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d,  %s)", array($redirect_id, $value['rawdata'])));
+                }
+                return admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$s[0]&styleid=$redirect_id");
+            endif;
+        }
+        return;
+    }
+
+    public function post_layouts_clone() {
+
+        $newName = $this->rawdata;
+        $styleid = $this->styleid;
+        $style = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM $this->parent_table WHERE id = %d", $styleid), ARRAY_A);
+        $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid), ARRAY_A);
+
+        $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->parent_table} (name, style_name, rawdata) VALUES ( %s, %s, %s)", array($newName, $style['style_name'], $style['rawdata'])));
         $redirect_id = $this->wpdb->insert_id;
         if ($redirect_id > 0) :
             $raw = json_decode(stripslashes($style['rawdata']), true);
@@ -134,8 +162,7 @@ class ImageApi
         endif;
     }
 
-    public function post_json_import($folder, $filename)
-    {
+    public function post_json_import($folder, $filename) {
         if (is_file($folder . $filename)) {
             $this->rawdata = file_get_contents($folder . $filename);
             $params = json_decode($this->rawdata, true);
@@ -158,8 +185,7 @@ class ImageApi
         }
     }
 
-    public function post_shortcode_delete()
-    {
+    public function post_shortcode_delete() {
         $styleid = (int) $this->styleid;
         if ($styleid) :
             $this->wpdb->query($this->wpdb->prepare("DELETE FROM {$this->parent_table} WHERE id = %d", $styleid));
@@ -170,8 +196,7 @@ class ImageApi
         endif;
     }
 
-    public function update_image_hover_plugin()
-    {
+    public function update_image_hover_plugin() {
         $stylelist = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->parent_table ORDER by id ASC"), ARRAY_A);
         foreach ($stylelist as $value) {
             $raw = json_decode(stripslashes($value['rawdata']), true);
@@ -188,15 +213,13 @@ class ImageApi
      * Generate safe path
      * @since v1.0.0
      */
-    public function safe_path($path)
-    {
+    public function safe_path($path) {
 
         $path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
         return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
     }
 
-    public function get_shortcode_export()
-    {
+    public function get_shortcode_export() {
         $styleid = (int) $this->styleid;
         if ($styleid) :
             $style = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM $this->parent_table WHERE id = %d", $styleid), ARRAY_A);
@@ -224,8 +247,7 @@ class ImageApi
      * @param string $file_name File name.
      * @param int    $file_size File size.
      */
-    private function send_file_headers($file_name, $file_size)
-    {
+    private function send_file_headers($file_name, $file_size) {
         header('Content-Type: application/octet-stream');
         header('Content-Disposition: attachment; filename=' . $file_name);
         header('Expires: 0');
@@ -234,8 +256,7 @@ class ImageApi
         header('Content-Length: ' . $file_size);
     }
 
-    public function post_shortcode_deactive()
-    {
+    public function post_shortcode_deactive() {
         $id = $this->rawdata . '-' . (int) $this->styleid;
         $effects = $this->rawdata . '-ultimate';
         if ($this->styleid > 0) :
@@ -246,8 +267,7 @@ class ImageApi
         endif;
     }
 
-    public function post_shortcode_active()
-    {
+    public function post_shortcode_active() {
         $id = $this->rawdata . '-' . (int) $this->styleid;
         $effects = $this->rawdata . '-ultimate';
         if ($this->styleid > 0) :
@@ -263,8 +283,7 @@ class ImageApi
      *
      * @since 9.3.0
      */
-    public function post_elements_template_style()
-    {
+    public function post_elements_template_style() {
         $settings = json_decode(stripslashes($this->rawdata), true);
         $StyleName = sanitize_text_field($settings['image-hover-template']);
         $stylesheet = '';
@@ -282,8 +301,7 @@ class ImageApi
      *
      * @since 9.3.0
      */
-    public function post_template_change()
-    {
+    public function post_template_change() {
         $rawdata = sanitize_text_field($this->rawdata);
         if ((int) $this->styleid) :
             $this->wpdb->query($this->wpdb->prepare("UPDATE {$this->parent_table} SET style_name = %s WHERE id = %d", $rawdata, $this->styleid));
@@ -296,8 +314,7 @@ class ImageApi
      *
      * @since 9.3.0
      */
-    public function post_template_name()
-    {
+    public function post_template_name() {
         $settings = json_decode(stripslashes($this->rawdata), true);
         $name = sanitize_text_field($settings['addonsstylename']);
         $id = $settings['addonsstylenameid'];
@@ -312,8 +329,7 @@ class ImageApi
      *
      * @since 9.3.0
      */
-    public function post_elements_rearrange_modal_data()
-    {
+    public function post_elements_rearrange_modal_data() {
         if ((int) $this->styleid) :
             $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $this->styleid), ARRAY_A);
             $render = [];
@@ -330,8 +346,7 @@ class ImageApi
      *
      * @since 9.3.0
      */
-    public function post_elements_template_rearrange_save_data()
-    {
+    public function post_elements_template_rearrange_save_data() {
         $params = explode(',', $this->rawdata);
         foreach ($params as $value) {
             if ((int) $value) :
@@ -354,8 +369,7 @@ class ImageApi
      *
      * @since 9.3.0
      */
-    public function post_elements_template_modal_data()
-    {
+    public function post_elements_template_modal_data() {
         if ((int) $this->styleid) :
             if ((int) $this->childid) :
                 $this->wpdb->query($this->wpdb->prepare("UPDATE {$this->child_table} SET rawdata = %s WHERE id = %d", $this->rawdata, $this->childid));
@@ -371,8 +385,7 @@ class ImageApi
      *
      * @since 9.3.0
      */
-    public function post_elements_template_rebuild_data()
-    {
+    public function post_elements_template_rebuild_data() {
         $style = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $this->styleid), ARRAY_A);
         $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $this->styleid), ARRAY_A);
         $style['rawdata'] = $style['stylesheet'] = $style['font_family'] = '';
@@ -388,8 +401,7 @@ class ImageApi
      *
      * @since 9.3.0
      */
-    public function post_elements_template_render_data()
-    {
+    public function post_elements_template_render_data() {
         $settings = json_decode(stripslashes($this->rawdata), true);
         $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $this->styleid), ARRAY_A);
         $StyleName = $settings['image-hover-template'];
@@ -407,8 +419,7 @@ class ImageApi
      *
      * @since 9.3.0
      */
-    public function post_elements_template_modal_data_edit()
-    {
+    public function post_elements_template_modal_data_edit() {
         if ((int) $this->childid) :
             $listdata = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM {$this->child_table} WHERE id = %d ", $this->childid), ARRAY_A);
             $returnfile = json_decode(stripslashes($listdata['rawdata']), true);
@@ -420,12 +431,30 @@ class ImageApi
     }
 
     /**
+     * Template Modal Data Edit Form
+     *
+     * @since 9.3.0
+     */
+    public function post_elements_template_modal_data_clone() {
+        if ((int) $this->childid) :
+            $listdata = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM {$this->child_table} WHERE id = %d ", $this->childid), ARRAY_A);
+            $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d,  %s)", array($listdata['styleid'], $listdata['rawdata'])));
+            $redirect_id = $this->wpdb->insert_id;
+            if ($redirect_id > 0) :
+                return 'done';
+            endif;
+            return 'Silence is Golden';
+        else :
+            return 'Silence is Golden';
+        endif;
+    }
+
+    /**
      * Template Child Delete Data
      *
      * @since 9.3.0
      */
-    public function post_elements_template_modal_data_delete()
-    {
+    public function post_elements_template_modal_data_delete() {
         if ((int) $this->childid) :
             $this->wpdb->query($this->wpdb->prepare("DELETE FROM {$this->child_table} WHERE id = %d ", $this->childid));
             return 'done';
@@ -438,8 +467,7 @@ class ImageApi
      * Admin Notice API  loader
      * @return void
      */
-    public function post_oxi_recommended()
-    {
+    public function post_oxi_recommended() {
         $data = 'done';
         update_option('oxi_image_hover_recommended', $data);
         return $data;
@@ -449,8 +477,7 @@ class ImageApi
      * Admin Notice Recommended  loader
      * @return void
      */
-    public function post_notice_dissmiss()
-    {
+    public function post_notice_dissmiss() {
         $notice = $this->request['notice'];
         if ($notice == 'maybe') :
             $data = strtotime("now");
@@ -465,8 +492,7 @@ class ImageApi
      * Admin Settings
      * @return void
      */
-    public function post_oxi_settings()
-    {
+    public function post_oxi_settings() {
         $rawdata = json_decode(stripslashes($this->rawdata), true);
         update_option($rawdata['name'], $rawdata['value']);
         return '<span class="oxi-confirmation-success"></span>';
@@ -476,8 +502,7 @@ class ImageApi
      * Admin License
      * @return void
      */
-    public function post_oxi_license()
-    {
+    public function post_oxi_license() {
         $rawdata = json_decode(stripslashes($this->rawdata), true);
         $new = $rawdata['license'];
         $old = get_option('image_hover_ultimate_license_key');
@@ -501,8 +526,7 @@ class ImageApi
         return $data;
     }
 
-    public function activate_license($key)
-    {
+    public function activate_license($key) {
         $api_params = array(
             'edd_action' => 'activate_license',
             'license' => $key,
@@ -528,8 +552,8 @@ class ImageApi
                     case 'expired':
 
                         $message = sprintf(
-                            __('Your license key expired on %s.'),
-                            date_i18n(get_option('date_format'), strtotime($license_data->expires, current_time('timestamp')))
+                                __('Your license key expired on %s.'),
+                                date_i18n(get_option('date_format'), strtotime($license_data->expires, current_time('timestamp')))
                         );
                         break;
 
@@ -574,8 +598,7 @@ class ImageApi
         return 'success';
     }
 
-    public function deactivate_license($key)
-    {
+    public function deactivate_license($key) {
         $api_params = array(
             'edd_action' => 'deactivate_license',
             'license' => $key,
@@ -600,15 +623,11 @@ class ImageApi
         return 'success';
     }
 
-
-
-    public function fixed_data($agr)
-    {
+    public function fixed_data($agr) {
         return hex2bin($agr);
     }
 
-    public function post_web_template()
-    {
+    public function post_web_template() {
 
         $folder = $this->safe_path(OXI_IMAGE_HOVER_PATH . 'template/');
         if (!is_dir($folder)) :
@@ -655,8 +674,7 @@ class ImageApi
         return $render;
     }
 
-    public function download_web_files($files)
-    {
+    public function download_web_files($files) {
 
 
         $URL = self::API . $this->rawdata . '/' . $this->styleid;
@@ -669,11 +687,11 @@ class ImageApi
 
         $data = json_decode($response, true);
         if (file_put_contents($files, json_encode($data))) {
+            
         }
     }
 
-    public function post_web_import()
-    {
+    public function post_web_import() {
         $files = OXI_IMAGE_HOVER_PATH . 'template/' . $this->rawdata . '.json';
         $params = json_decode(file_get_contents($files), true)[$this->styleid];
 
@@ -694,4 +712,5 @@ class ImageApi
             return admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$s[0]&styleid=$redirect_id");
         endif;
     }
+
 }

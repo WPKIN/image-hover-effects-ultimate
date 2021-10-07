@@ -11,7 +11,6 @@
 .oxi-addons-container .oxi-image-general-hover-style-30 .oxi-image-hover-figure-caption:before,
 .oxi-addons-container .oxi-image-general-hover-style-30 .oxi-image-hover-figure-caption:after{
     opacity: 0;
-    background: transparent;
 }
 .oxi-addons-container .oxi-image-general-hover-style-30.oxi-image-hover:hover .oxi-image-hover-figure .oxi-image-hover-figure-caption:after,
 .oxi-addons-container .oxi-image-general-hover-style-30.oxi-image-hover.oxi-touch .oxi-image-hover-figure .oxi-image-hover-figure-caption:after,

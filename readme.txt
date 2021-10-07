@@ -3,7 +3,7 @@ Contributors: biplob018
 Donate link: https://www.oxilab.org
 Tags: responsive image effects, awesome css3 effects, awesome image effects,  css3 effects, effects, top image effects for wordpress,  hover effect. 
 Requires at least: 3.0.1
-Stable tag: 9.5.3
+Stable tag: 9.6.0
 Tested up to: 5.8.1
 Requires PHP: 5.4
 License: GPLv2 or later
@@ -323,6 +323,11 @@ Its too easy Chose your style from Effects List and click at Clone.
 
 
 == Changelog ==
+= 9.6.0 = 
+*Return Clone Button
+*Add Ajax Load
+*Dynamic Content
+
 = 9.5.3 = 
 *Solved After Property
 *Modify Oxilab Template 
@@ -486,6 +491,12 @@ Its too easy Chose your style from Effects List and click at Clone.
 
 
 == Upgrade Notice ==
+
+= 9.6.0 = 
+Return Clone Button
+Add Ajax Load
+Dynamic Content
+
 = 9.5.3 = 
 Solved After Property
 Modify Oxilab Template 

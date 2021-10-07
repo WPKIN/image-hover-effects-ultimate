@@ -80,23 +80,16 @@ class Effects11 extends Public_Render {
                            ' . $ht . '
                         </div>';
             if ($admin == 'admin') :
-                echo '  <div class="oxi-addons-admin-absulote">
-                                <div class="oxi-addons-admin-absulate-edit">
-                                    <button class="btn btn-primary shortcode-addons-template-item-edit" type="button" value="' . $val['id'] . '">Edit</button>
-                                </div>
-                                <div class="oxi-addons-admin-absulate-delete">
-                                <button class="btn btn-danger shortcode-addons-template-item-delete" type="submit" value="' . $val['id'] . '">Delete</button>
-                                </div>
-                            </div>';
+               echo $this->oxi_addons_admin_edit_delete_clone($val['id']);
             endif;
 
             if ($this->media_background_render('image_hover_front_image', $value) != ''):
                 $url = $this->media_background_render('image_hover_front_image', $value);
-                $this->inline_css .= '.' . $this->WRAPPER . ' .oxi-image-flipbox-hover-' . $this->oxiid . '-' . $val['id'] . ' .oxi-image-hover-figure-frontend:after{background: url(' . $url . ');-moz-background-size: 100% 100%;-o-background-size: 100% 100%; background-size: 100% 100%;}';
+                $this->inline_css .= '.' . $this->WRAPPER . ' .oxi-image-flipbox-hover-' . $this->oxiid . '-' . $val['id'] . ' .oxi-image-hover-figure-frontend:after{background: url(' . $url . ');-moz-background-size: 100% 100% !important;-o-background-size: 100% 100% !important; background-size: 100% 100% !important;}';
             endif;
             if ($this->media_background_render('image_hover_back_image', $value) != ''):
                 $url = $this->media_background_render('image_hover_back_image', $value);
-                $this->inline_css .= '.' . $this->WRAPPER . ' .oxi-image-flipbox-hover-' . $this->oxiid . '-' . $val['id'] . ' .oxi-image-hover-figure-backend:after{background: url(' . $url . ');-moz-background-size: 100% 100%;-o-background-size: 100% 100%; background-size: 100% 100%;}';
+                $this->inline_css .= '.' . $this->WRAPPER . ' .oxi-image-flipbox-hover-' . $this->oxiid . '-' . $val['id'] . ' .oxi-image-hover-figure-backend:after{background: url(' . $url . ');-moz-background-size: 100% 100% !important;-o-background-size: 100% 100% !important; background-size: 100% 100% !important;}';
             endif;
             echo ' </div>';
         }

@@ -8,17 +8,14 @@ if (!defined('ABSPATH')) {
 
 use OXI_IMAGE_HOVER_PLUGINS\Page\Public_Render;
 
-class Effects10 extends Public_Render
-{
+class Effects10 extends Public_Render {
 
-    public function public_css()
-    {
+    public function public_css() {
         wp_enqueue_style('oxi-image-hover-button', OXI_IMAGE_HOVER_URL . '/Modules/Button/Files/button.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         wp_enqueue_style('oxi-image-hover-button-style-10', OXI_IMAGE_HOVER_URL . '/Modules/Button/Files/style-10.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
 
-    public function default_render($style, $child, $admin)
-    {
+    public function default_render($style, $child, $admin) {
 
         foreach ($child as $key => $val) {
             $value = json_decode(stripslashes($val['rawdata']), true);
@@ -52,25 +49,17 @@ class Effects10 extends Public_Render
                         </div>
                     </div>';
             if ($admin == 'admin') :
-                echo '  <div class="oxi-addons-admin-absulote">
-                                <div class="oxi-addons-admin-absulate-edit">
-                                    <button class="btn btn-primary shortcode-addons-template-item-edit" type="button" value="' . $val['id'] . '">Edit</button>
-                                </div>
-                                <div class="oxi-addons-admin-absulate-delete">
-                                <button class="btn btn-danger shortcode-addons-template-item-delete" type="submit" value="' . $val['id'] . '">Delete</button>
-                                </div>
-                            </div>';
+                echo $this->oxi_addons_admin_edit_delete_clone($val['id']);
             endif;
             echo ' </div>';
             if ($this->media_background_render('image_hover_feature_image', $value) != '') :
                 $url = $this->media_background_render('image_hover_feature_image', $value);
-                $this->inline_css .= '.oxi-image-hover-style-button .oxi-image-button-hover-' . $this->oxiid . '-' . $val['id'] . ' .oxi-image-hover-figure-caption:after{background: url(' . $url . ') !important;-moz-background-size: 100% 100%;-o-background-size: 100% 100%; background-size: 100% 100%;}';
+                $this->inline_css .= '.oxi-image-hover-style-button .oxi-image-button-hover-' . $this->oxiid . '-' . $val['id'] . ' .oxi-image-hover-figure-caption:after{background: url(' . $url . ') !important;-moz-background-size: 100% 100% !important;-o-background-size: 100% 100% !important; background-size: 100% 100% !important;}';
             endif;
         }
     }
 
-    public function old_render()
-    {
+    public function old_render() {
         $style = $this->dbdata['css'];
         $styledata = explode('|', $style);
         foreach ($this->child as $k => $value) {
@@ -164,4 +153,5 @@ class Effects10 extends Public_Render
         $CLASS = new $cls('admin');
         $CLASS->template_css_render($new);
     }
+
 }

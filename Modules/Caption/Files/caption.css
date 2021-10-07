@@ -1,16 +1,11 @@
-.oxi-addons-container .oxi-image-hover-style {
-    padding: 15px;
-}
-
 .oxi-addons-container .oxi-image-hover-style-caption {
-    max-width: 300px;
     width: 100%;
     margin: 0 auto;
     position: relative;
 }
 
 .oxi-addons-container .oxi-image-hover-style-caption:after {
-    padding-bottom: 80%;
+    padding-bottom: 100%;
     content: "";
     display: block;
 }

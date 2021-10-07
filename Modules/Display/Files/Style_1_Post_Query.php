@@ -59,13 +59,13 @@ class Style_1_Post_Query {
         $styleid = $style['display_post_style'];
         $styledata = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $styleid), ARRAY_A);
         if (!is_array($styledata)):
-            echo '<p> Style Data not found. Kindly Check Display Post <a href="https://www.image-hover.oxilab.org/docs/hover-extension/display-post/">Documentation</a>.</p>';
+            echo '<p> Style Data not found. Kindly Check Display Post <a href="https://www.oxilabdemos.com/image-hover/docs/hover-extension/display-post/">Documentation</a>.</p>';
             return;
         endif;
 
         $child = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d", $styleid), ARRAY_A);
         if (!is_array($child)):
-            echo '<p>Set Initial Data How to Decorate your Desplay Post. Kindly Check Display Post <a href="https://www.image-hover.oxilab.org/docs/hover-extension/display-post/">Documentation</a>.</p>';
+            echo '<p>Set Initial Data How to Decorate your Desplay Post. Kindly Check Display Post <a href="https://www.oxilabdemos.com/image-hover/docs/hover-extension/display-post/">Documentation</a>.</p>';
             return;
         endif;
         $demo = json_decode(stripslashes($child['rawdata']), true);

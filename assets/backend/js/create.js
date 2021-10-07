@@ -35,6 +35,9 @@ jQuery.noConflict();
         $('#oxistyledata').val($(this).attr('effects-data'));
         $("#oxi-addons-style-create-modal").modal("show");
     });
+
+
+
     $(".oxi-addons-addons-web-template").on("click", function (e) {
         e.preventDefault();
 
@@ -66,11 +69,13 @@ jQuery.noConflict();
 
     $("#oxi-addons-style-modal-form").submit(function (e) {
         e.preventDefault();
-        $a = $('#oxistyledata').val() + "-" + $("input[name='image-hover-box-layouts']:checked").val();
+        $a = $('#oxistyledata').val() + "-data-" + $("input[name='image-hover-box-layouts']:checked").val();
+
         var data = {
             name: $('#style-name').val(),
-            style: JSON.parse($('#' + $a).val())
+            style: $('#' + $a).val()
         };
+
         var rawdata = JSON.stringify(data);
         var functionname = "create_new";
         $('.modal-footer').prepend('<span class="spinner sa-spinner-open-left"></span>');

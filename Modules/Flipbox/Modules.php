@@ -12,6 +12,8 @@ use OXI_IMAGE_HOVER_PLUGINS\Classes\Controls as Controls;
 
 class Modules extends Admin_Render {
 
+    use \OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic;
+
     public function register_controls() {
         $this->start_section_header(
                 'oxi-image-hover-start-tabs', [
@@ -19,6 +21,7 @@ class Modules extends Admin_Render {
                 'general-settings' => esc_html__('General Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 'frontend' => esc_html__('Frontend', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 'backend' => esc_html__('Backend', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'dynamic' => esc_html__('Dynamic Content', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 'custom' => esc_html__('Custom CSS', OXI_IMAGE_HOVER_TEXTDOMAIN),
             ]
                 ]
@@ -26,7 +29,136 @@ class Modules extends Admin_Render {
         $this->register_general_tabs();
         $this->register_frontend_tabs();
         $this->register_backend_tabs();
+        $this->register_dynamic_data();
         $this->register_custom_tabs();
+    }
+
+    public function register_dynamic_data() {
+        $this->start_section_tabs(
+                'oxi-image-hover-start-tabs', [
+            'condition' => [
+                'oxi-image-hover-start-tabs' => 'dynamic'
+            ],
+                ]
+        );
+        $this->start_section_devider();
+
+        $this->register_dynamic_control();
+
+        $this->end_section_devider();
+
+        $this->start_section_devider();
+
+        $this->register_carousel_query_settings();
+        $this->register_carousel_arrows_settings();
+
+        $this->register_dynamic_load_more_button();
+
+        $this->end_section_devider();
+
+        $this->end_section_tabs();
+    }
+
+    public function register_dynamic_control() {
+        $this->start_controls_section(
+                'oxi-image-hover', [
+            'label' => esc_html__('Dynamic Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'showing' => true,
+                ]
+        );
+
+        if (apply_filters('oxi-image-hover-plugin-version', false) == FALSE):
+
+            $this->add_control(
+                    'image_hover_premium_note',
+                    $this->style,
+                    [
+                        'label' => __('Note', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'type' => Controls::HEADING,
+                        'description' => 'Dynamic Property only for Premium Version.'
+                    ]
+            );
+        else:
+            $this->add_control(
+                    'image_hover_dynamic_note',
+                    $this->style,
+                    [
+                        'label' => __('Note', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'type' => Controls::HEADING,
+                        'description' => 'Dynamic Property will works only at live Sites. Kindly use shortcode at page or post then check it.'
+                    ]
+            );
+        endif;
+
+        $this->add_control(
+                'image_hover_dynamic_load_per_page',
+                $this->style,
+                [
+                    'label' => __('Load Once', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'type' => Controls::NUMBER,
+                    'default' => '10',
+                    'min' => 1,
+                    'description' => 'How many Image or Content You want to Viewing per load.',
+                ]
+        );
+
+        $this->add_control(
+                'image_hover_dynamic_carousel', $this->style,
+                [
+                    'label' => __('Carousel', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'type' => Controls::SWITCHER,
+                    'default' => 'no',
+                    'yes' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'no' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'return_value' => 'yes',
+                    'description' => 'Wanna Add Carousel into Hover Effects?.',
+                    'notcondition' => TRUE,
+                    'condition' => [
+                        'image_hover_dynamic_load' => 'yes',
+                    ],
+                ]
+        );
+
+        $this->add_control(
+                'image_hover_dynamic_load', $this->style,
+                [
+                    'label' => __('Load More', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'type' => Controls::SWITCHER,
+                    'default' => 'no',
+                    'yes' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'no' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'return_value' => 'yes',
+                    'description' => 'Wanna load More Options?.',
+                    'notcondition' => TRUE,
+                    'condition' => [
+                        'image_hover_dynamic_carousel' => 'yes',
+                    ],
+                ]
+        );
+
+        $this->add_control(
+                'image_hover_dynamic_load_type', $this->style,
+                [
+                    'label' => __('Load More Type', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'type' => Controls::CHOOSE,
+                    'operator' => Controls::OPERATOR_TEXT,
+                    'default' => 'button',
+                    'options' => [
+                        'button' => [
+                            'title' => __('Button', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        ],
+                        'infinite' => [
+                            'title' => __('Infinite', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        ],
+                    ],
+                    'condition' => [
+                        'image_hover_dynamic_load' => 'yes'
+                    ],
+                    'description' => 'Select Load More Type, As we offer Infinite loop or Button.',
+                ]
+        );
+
+        $this->end_controls_section();
     }
 
     public function register_general_tabs() {
@@ -88,7 +220,6 @@ class Modules extends Admin_Render {
         $this->register_back_icon_settings();
         $this->register_back_button_settings();
         $this->end_section_devider();
-
 
         $this->end_section_tabs();
     }
@@ -1241,7 +1372,6 @@ class Modules extends Admin_Render {
 
         $this->end_controls_section();
 
-
         $this->start_controls_section(
                 'oxi-image-flip-back-head-underline', [
             'label' => esc_html__('Heading Underline', OXI_IMAGE_HOVER_TEXTDOMAIN),
@@ -2199,7 +2329,6 @@ class Modules extends Admin_Render {
         );
         $this->end_controls_tab();
         $this->end_controls_tabs();
-
 
         $this->add_group_control(
                 'image_hover_button_link', $this->style, [

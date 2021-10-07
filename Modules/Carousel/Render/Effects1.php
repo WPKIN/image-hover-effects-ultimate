@@ -64,7 +64,7 @@ class Effects1 extends Public_Render {
         $styledata = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $style['carousel_register_style']), ARRAY_A);
 
         if (!is_array($styledata)) :
-            echo '<p> Style Data not found. Kindly Check Carousel & Slider <a href="https://www.image-hover.oxilab.org/docs/hover-extension/carousel-slider/">Documentation</a>.</p>';
+            echo '<p> Style Data not found. Kindly Check Carousel & Slider <a href="https://www.oxilabdemos.com/image-hover/docs/hover-extension/carousel-slider/">Documentation</a>.</p>';
             return;
         endif;
         $files = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d", $style['carousel_register_style']), ARRAY_A);

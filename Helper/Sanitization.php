@@ -113,6 +113,8 @@ trait Sanitization {
             $data = '';
             $s = 1;
             $form_condition = array_key_exists('form_condition', $arg) ? $arg['form_condition'] : '';
+            $notcondition = array_key_exists('notcondition', $arg) ? $arg['notcondition'] : false;
+
             foreach ($arg['condition'] != '' ? $arg['condition'] : [] as $key => $value) {
                 if (is_array($value)) :
                     $c = count($value);
@@ -136,6 +138,8 @@ trait Sanitization {
                     $data .= $form_condition . $key . ' !== \'\'';
                 elseif (empty($value)) :
                     $data .= $form_condition . $key;
+                elseif ($notcondition) :
+                    $data .= $form_condition . $key . ' !== \'' . $value . '\'';
                 else :
                     $data .= $form_condition . $key . ' === \'' . $value . '\'';
                 endif;
@@ -1007,13 +1011,17 @@ trait Sanitization {
         $value = array_key_exists($id, $data) ? $data[$id] : $arg['default'];
         $retunvalue = array_key_exists('selector', $arg) ? htmlspecialchars(json_encode($arg['selector'])) : '';
         if (array_key_exists('selector-data', $arg) && $arg['selector-data'] == TRUE) {
+            
             if (array_key_exists('selector', $arg)) :
+                
                 foreach ($arg['selector'] as $key => $val) {
                     if ($arg['render'] == TRUE) :
+                       
                         $key = (strpos($key, '{{KEY}}') ? str_replace('{{KEY}}', explode('saarsa', $id)[1], $key) : $key);
                         $class = str_replace('{{WRAPPER}}', $this->CSSWRAPPER, $key);
                         $file = str_replace('{{VALUE}}', $value, $val);
                         if (!empty($value)) :
+                         
                             $this->CSSDATA[$arg['responsive']][$class][$file] = $file;
                         endif;
                     endif;
@@ -2519,7 +2527,8 @@ trait Sanitization {
          * $arg['sub-title'] = 'Add New Items 02';
          * 
          */
-        echo ' <div class="oxi-addons-item-form shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '">
+        $condition = $this->forms_condition($arg);
+        echo ' <div class="oxi-addons-item-form shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '"  ' . $condition . '>
                     <div class="oxi-addons-item-form-heading shortcode-addons-templates-right-panel-heading">
                         ' . $arg['title'] . '
                          <div class="oxi-head-toggle"></div>
@@ -2642,9 +2651,9 @@ trait Sanitization {
                     <p>Copy &amp;
                     paste this code into a template file to include the slideshow within your theme.</p>
                     <input type="text" class="form-control" onclick="this.setSelectionRange(0, this.value.length)" value="<?php echo do_shortcode(\'[iheu_ultimate_oxi  id=&quot;' . $id . '&quot;]\'); ?>">
-<span></span>
-</div>
-</div>';
+                    <span></span>
+                    </div>
+                    </div>';
     }
 
     public function rearrange_substitute_control($id, array $data = [], array $arg = []) {
@@ -2659,49 +2668,49 @@ trait Sanitization {
          * $arg['sub-title'] = 'Add New Items 02';
          *
          */
-        echo ' <div
-    class="oxi-addons-item-form shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '">
-    <div class="oxi-addons-item-form-heading shortcode-addons-templates-right-panel-heading">
-        ' . $arg['title'] . '
-        <div class="oxi-head-toggle"></div>
-    </div>
-    <div class="oxi-addons-item-form-item shortcode-addons-templates-right-panel-body"
-        id="oxi-addons-rearrange-data-modal-open">
-        <span>
-            <i class="dashicons dashicons-plus-alt oxi-icons"></i>
-            ' . $arg['sub-title'] . '
-        </span>
-    </div>
-</div>
-<div id="oxi-addons-list-rearrange-modal" class="modal fade bd-example-modal-sm" role="dialog">
-    <div class="modal-dialog modal-sm">
-        <form id="oxi-addons-form-rearrange-submit">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Image Rearrange</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="col-12 alert text-center" id="oxi-addons-list-rearrange-saving">
-                        <i class="fa fa-spinner fa-spin"></i>
+        $condition = $this->forms_condition($arg);
+        echo ' <div class="oxi-addons-item-form shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '" ' . $condition . '>
+                    <div class="oxi-addons-item-form-heading shortcode-addons-templates-right-panel-heading">
+                        ' . $arg['title'] . '
+                        <div class="oxi-head-toggle"></div>
                     </div>
-                    <ul class="col-12 list-group" id="oxi-addons-modal-rearrange">
-                    </ul>
+                    <div class="oxi-addons-item-form-item shortcode-addons-templates-right-panel-body"
+                        id="oxi-addons-rearrange-data-modal-open">
+                        <span>
+                            <i class="dashicons dashicons-plus-alt oxi-icons"></i>
+                            ' . $arg['sub-title'] . '
+                        </span>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <input type="hidden" id="oxi-addons-list-rearrange-data">
-                    <button type="button" id="oxi-addons-list-rearrange-close" class="btn btn-danger"
-                        data-dismiss="modal">Close</button>
-                    <input type="submit" id="oxi-addons-list-rearrange-submit" class="btn btn-primary" value="Save">
-                </div>
-            </div>
-        </form>
-        <div id="modal-rearrange-store-file">
-            ' . $id . '
-        </div>
-    </div>
-</div>';
+                <div id="oxi-addons-list-rearrange-modal" class="modal fade bd-example-modal-sm" role="dialog">
+                    <div class="modal-dialog modal-sm">
+                        <form id="oxi-addons-form-rearrange-submit">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Image Rearrange</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="col-12 alert text-center" id="oxi-addons-list-rearrange-saving">
+                                        <i class="fa fa-spinner fa-spin"></i>
+                                    </div>
+                                    <ul class="col-12 list-group" id="oxi-addons-modal-rearrange">
+                                    </ul>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="hidden" id="oxi-addons-list-rearrange-data">
+                                    <button type="button" id="oxi-addons-list-rearrange-close" class="btn btn-danger"
+                                        data-dismiss="modal">Close</button>
+                                    <input type="submit" id="oxi-addons-list-rearrange-submit" class="btn btn-primary" value="Save">
+                                </div>
+                            </div>
+                        </form>
+                        <div id="modal-rearrange-store-file">
+                            ' . $id . '
+                        </div>
+                    </div>
+                </div>';
     }
 
 }

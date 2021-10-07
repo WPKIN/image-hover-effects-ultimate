@@ -1,11 +1,7 @@
-.oxi-addons-container  .oxi-image-hover-style{
-    padding: 15px; 
-}
 .oxi-addons-container  .oxi-image-hover-style:hover{
     z-index: 11;
 }
 .oxi-addons-container  .oxi-image-hover-style-general{
-    max-width: 300px;
     width: 100%;
     margin: 0 auto;
     position: relative;
@@ -147,13 +143,10 @@
     display: inline-block;
     font-size: 12px;
     color: #00a88f;
-    background: #fafafa;
     font-weight: 300;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
     padding: 7px 10px;
     -webkit-transition: all 0.15s ease-in-out;
     -moz-transition: all 0.15s ease-in-out;
     transition: all 0.15s ease-in-out;
+    
 }

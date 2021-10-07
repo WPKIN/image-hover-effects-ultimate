@@ -38,14 +38,17 @@ class Effects33 extends Modules {
             'showing' => TRUE,
                 ]
         );
-        $this->add_group_control(
-                'oxi-image-hover-background', $this->style, [
-            'type' => Controls::BACKGROUND,
+        $this->add_control(
+                'oxi-image-hover-background-color', $this->style, [
+            'label' => esc_html__('Background', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'type' => Controls::GRADIENT,
+            'default' => 'rgba(255, 116, 3, 1)',
+            'oparetor' => true,
             'selector' => [
-                '{{WRAPPER}} .oxi-image-general-hover-style-33 .oxi-image-hover-caption-tab:before, {{WRAPPER}} .oxi-image-general-hover-style-33 .oxi-image-hover-caption-tab:after' => '',
+                '{{WRAPPER}} .oxi-image-general-hover-style-33 .oxi-image-hover-caption-tab:before, {{WRAPPER}} .oxi-image-general-hover-style-33 .oxi-image-hover-caption-tab:after' => 'background: {{VALUE}};',
             ],
             'simpledescription' => 'Customize Hover Background with transparent options.',
-            'description' => 'Customize Hover Background with Color or Gradient or Image properties.',
+            'description' => 'Customize Hover Background with Color or Gradient properties.',
                 ]
         );
         $this->add_control(

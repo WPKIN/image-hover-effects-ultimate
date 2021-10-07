@@ -7,8 +7,7 @@ namespace OXI_IMAGE_HOVER_PLUGINS\Page;
  *
  * @author $biplob018
  */
-class Public_Render
-{
+class Public_Render {
 
     /**
      * Current Elements id
@@ -106,9 +105,11 @@ class Public_Render
      * @since 9.3.0
      */
     public $child_table;
+    public $dynamicPost;
+    public $dynamicCarousel;
+    public $dynamicLoad;
 
-    public function __construct(array $dbdata = [], array $child = [], $admin = 'user')
-    {
+    public function __construct(array $dbdata = [], array $child = [], $admin = 'user') {
         if (count($dbdata) > 0) :
             global $wpdb;
             $this->dbdata = $dbdata;
@@ -137,8 +138,7 @@ class Public_Render
      *
      * @since 9.3.0
      */
-    public function loader()
-    {
+    public function loader() {
         $this->style = json_decode(stripslashes($this->dbdata['rawdata']), true);
         $this->CSSDATA = $this->dbdata['stylesheet'];
         $this->WRAPPER = 'oxi-image-hover-wrapper-' . $this->dbdata['id'];
@@ -150,8 +150,7 @@ class Public_Render
      *
      * @since 9.3.0
      */
-    public function old_loader()
-    {
+    public function old_loader() {
         $this->old_render();
     }
 
@@ -160,8 +159,7 @@ class Public_Render
      *
      * @since 9.3.0
      */
-    public function public_frontend_loader()
-    {
+    public function public_frontend_loader() {
         wp_enqueue_script("jquery");
         wp_enqueue_style('oxi-animation', OXI_IMAGE_HOVER_URL . '/assets/frontend/css/animation.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         wp_enqueue_style('oxi-image-hover', OXI_IMAGE_HOVER_URL . '/assets/frontend/css/style.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
@@ -180,8 +178,7 @@ class Public_Render
      *
      * @since 9.3.0
      */
-    public function hooks()
-    {
+    public function hooks() {
         $this->public_frontend_loader();
         $this->public_jquery();
         $this->public_css();
@@ -199,7 +196,7 @@ class Public_Render
         }
         if ($inlinejs != '') :
             if ($this->admin == 'admin' || $this->admin == 'web') :
-                //only load while Rest API called
+//only load while Rest API called
                 echo _('<script>
                         (function ($) {
                             setTimeout(function () {');
@@ -215,7 +212,7 @@ class Public_Render
         if ($inlinecss != '') :
             $inlinecss = html_entity_decode($inlinecss);
             if ($this->admin == 'admin' || $this->admin == 'web') :
-                //only load while ajax called
+//only load while ajax called
                 echo _('<style>');
                 echo $inlinecss;
                 echo _('</style>');
@@ -230,8 +227,7 @@ class Public_Render
      *
      * @since 9.3.0
      */
-    public function render()
-    {
+    public function render() {
         if ($this->admin == 'request') :
             $this->default_render($this->style, $this->child, $this->admin);
         else :
@@ -248,8 +244,7 @@ class Public_Render
      *
      * @since 9.3.0
      */
-    public function old_render()
-    {
+    public function old_render() {
         echo '';
     }
 
@@ -258,8 +253,7 @@ class Public_Render
      *
      * @since 9.3.0
      */
-    public function public_jquery()
-    {
+    public function public_jquery() {
         echo '';
     }
 
@@ -268,8 +262,7 @@ class Public_Render
      *
      * @since 9.3.0
      */
-    public function public_css()
-    {
+    public function public_css() {
         echo '';
     }
 
@@ -278,8 +271,7 @@ class Public_Render
      *
      * @since 9.3.0
      */
-    public function inline_public_jquery()
-    {
+    public function inline_public_jquery() {
         echo '';
     }
 
@@ -288,8 +280,7 @@ class Public_Render
      *
      * @since 9.3.0
      */
-    public function inline_public_css()
-    {
+    public function inline_public_css() {
         echo '';
     }
 
@@ -298,8 +289,7 @@ class Public_Render
      *
      * @since 9.3.0
      */
-    public function default_render($style, $child, $admin)
-    {
+    public function default_render($style, $child, $admin) {
         echo '';
     }
 
@@ -308,21 +298,18 @@ class Public_Render
      *
      * @since 9.3.0
      */
-    public function Json_Decode($rawdata)
-    {
+    public function Json_Decode($rawdata) {
         return $rawdata != '' ? json_decode(stripcslashes($rawdata), true) : [];
     }
 
-    public function name_converter($data)
-    {
+    public function name_converter($data) {
         $data = str_replace('_', ' ', $data);
         $data = str_replace('-', ' ', $data);
         $data = str_replace('+', ' ', $data);
         return ucwords($data);
     }
 
-    public function font_familly_validation($data = [])
-    {
+    public function font_familly_validation($data = []) {
         $api = get_option('oxi_addons_google_font');
         if ($api == 'no') :
             return;
@@ -332,8 +319,7 @@ class Public_Render
         }
     }
 
-    public function font_familly($data = '')
-    {
+    public function font_familly($data = '') {
         $api = get_option('oxi_addons_google_font');
         if ($api != 'no') :
             wp_enqueue_style('' . $data . '', 'https://fonts.googleapis.com/css?family=' . $data . '');
@@ -343,23 +329,20 @@ class Public_Render
         return '"' . $data[0] . '"';
     }
 
-    public function admin_name_validation($data)
-    {
+    public function admin_name_validation($data) {
         $data = str_replace('_', ' ', $data);
         $data = str_replace('-', ' ', $data);
         $data = str_replace('+', ' ', $data);
         return ucwords($data);
     }
 
-    public function array_render($id, $style)
-    {
+    public function array_render($id, $style) {
         if (array_key_exists($id, $style)) :
             return $style[$id];
         endif;
     }
 
-    public function media_render($id, $style)
-    {
+    public function media_render($id, $style) {
         $url = '';
         if (array_key_exists($id . '-select', $style)) :
             if ($style[$id . '-select'] == 'media-library') :
@@ -376,8 +359,7 @@ class Public_Render
         endif;
     }
 
-    public function media_background_render($id, $style)
-    {
+    public function media_background_render($id, $style) {
         $url = '';
         if (array_key_exists($id . '-select', $style)) :
             if ($style[$id . '-select'] == 'media-library') :
@@ -389,13 +371,11 @@ class Public_Render
         return $url;
     }
 
-    public function text_render($data)
-    {
+    public function text_render($data) {
         return do_shortcode(str_replace('spTac', '&nbsp;', str_replace('spBac', '<br>', html_entity_decode($data))), $ignore_html = false);
     }
 
-    public function font_awesome_render($data)
-    {
+    public function font_awesome_render($data) {
         $fadata = get_option('oxi_addons_font_awesome');
         if ($fadata != 'no') :
             wp_enqueue_style('font-awsome.min', OXI_IMAGE_HOVER_URL . '/assets/frontend/css/font-awsome.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
@@ -404,8 +384,7 @@ class Public_Render
         return $files;
     }
 
-    public function tab_column_render($id, $style)
-    {
+    public function tab_column_render($id, $style) {
         if ($style[$id . '-lap'] == 'oxi-bt-col-lg-8') :
             return 'oxi-bt-col-md-3';
         elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-5') :
@@ -419,8 +398,7 @@ class Public_Render
         endif;
     }
 
-    public function mob_column_render($id, $style)
-    {
+    public function mob_column_render($id, $style) {
 
         if ($style[$id . '-lap'] == 'oxi-bt-col-lg-2') :
             return 'oxi-bt-col-sm-6';
@@ -433,8 +411,7 @@ class Public_Render
         endif;
     }
 
-    public function column_render($id, $style)
-    {
+    public function column_render($id, $style) {
         $file = $style[$id . '-lap'] . ' ';
         if (!array_key_exists($id . '-tab', $style) || $style[$id . '-tab'] == '') :
             $file .= $this->tab_column_render($id, $style) . ' ';
@@ -449,8 +426,7 @@ class Public_Render
         return $file;
     }
 
-    public function url_render($id, $style)
-    {
+    public function url_render($id, $style) {
         $link = '';
         if (array_key_exists($id . '-url', $style) && $style[$id . '-url'] != '') :
             $link .= ' href="' . $style[$id . '-url'] . '"';
@@ -468,8 +444,7 @@ class Public_Render
         return $link;
     }
 
-    public function animation_render($id, $style)
-    {
+    public function animation_render($id, $style) {
         $return = (array_key_exists($id . '-type', $style) && $style[$id . '-type'] != '' ? ' sa-data-animation="' . $style[$id . '-type'] . ' ' . (array_key_exists($id . '-looping', $style) && $style[$id . '-looping'] != '0' ? 'infinite' : '') . '"' : '');
         if ($return != '') :
             $return .= (array_key_exists($id . '-offset-size', $style) ? ' sa-data-animation-offset="' . $style[$id . '-offset-size'] . '%"' : '');
@@ -479,8 +454,7 @@ class Public_Render
         endif;
     }
 
-    public function background_render($id, $style, $class)
-    {
+    public function background_render($id, $style, $class) {
         $backround = '';
         if (array_key_exists($id . '-color', $style)) :
             $color = $style[$id . '-color'];
@@ -516,15 +490,13 @@ class Public_Render
         return $backround;
     }
 
-    public function CatStringToClassReplacce($string, $number = '000')
-    {
+    public function CatStringToClassReplacce($string, $number = '000') {
         $entities = array('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', "t");
         $replacements = array('!', '*', "'", "(", ")", ";", ":", "@", "&", "=", "+", "$", ",", "/", "?", "%", "#", "[", "]", " ");
         return 'sa_STCR_' . str_replace($replacements, $entities, urlencode($string)) . $number;
     }
 
-    public function old_column_render($d, $type)
-    {
+    public function old_column_render($d, $type) {
         if ($d == 'image-ultimate-responsive-1') :
             if ($type == 'lap') :
                 return 'oxi-bt-col-lg-12';
@@ -576,8 +548,7 @@ class Public_Render
         endif;
     }
 
-    public function old_alignment_render($d)
-    {
+    public function old_alignment_render($d) {
         if ($d == 'vertical-align: top;text-align: left;') :
             return 'image-hover-align-top-top';
         elseif ($d == 'vertical-align: top;text-align: center;') :
@@ -599,8 +570,7 @@ class Public_Render
         endif;
     }
 
-    public function old_button_alignment_render($d)
-    {
+    public function old_button_alignment_render($d) {
         if ($d == 'float: left;') :
             return 'left';
         elseif ($d == 'margin: 0 auto;') :
@@ -609,4 +579,20 @@ class Public_Render
             return 'right';
         endif;
     }
+
+    public function oxi_addons_admin_edit_delete_clone($param) {
+
+        return '  <div class="oxi-addons-admin-absulote">
+                                <div class="oxi-addons-admin-absulate-edit">
+                                    <button class="btn btn-primary shortcode-addons-template-item-edit" type="button" value="' . $param . '" title="Edit"><i class="fas fa-edit"></i></button>
+                                </div>
+                                <div class="oxi-addons-admin-absulate-clone">
+                                    <button class="btn btn-secondary shortcode-addons-template-item-clone" type="button" value="' . $param . '" title="Clone"><i class="far fa-clone"></i></button>
+                                </div>
+                                <div class="oxi-addons-admin-absulate-delete">
+                                    <button class="btn btn-danger shortcode-addons-template-item-delete" type="submit" value="' . $param . '" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </div>';
+    }
+
 }

@@ -26,7 +26,7 @@ jQuery.noConflict();
         rawdata = rawdata.replace(/\r/g, '');
         rawdata = rawdata.replace(/\n/g, '<br>');
         rawdata = rawdata.replace(/\\n/g, '<br>');
-      
+
         let result;
         try {
             result = await $.ajax({
@@ -77,7 +77,7 @@ jQuery.noConflict();
                 $("#OXIAADDONSCHANGEDPOPUP .modal-body.text-center h4").html("Superb!");
                 $("#OXIAADDONSCHANGEDPOPUP .modal-body.text-center p").html("Shortcode name has been saved successfully.");
                 $("#OXIAADDONSCHANGEDPOPUP").modal("show");
-                OxiAddonsModalConfirm("#addonsstylenamechange", "Save")
+                OxiAddonsModalConfirm("#addonsstylenamechange", "Save");
             }
         });
     });
@@ -280,10 +280,26 @@ jQuery.noConflict();
             }
         });
     });
+
+
+    $("body").on("click", ".shortcode-addons-template-item-clone", function (e) {
+        e.preventDefault();
+        var rawdata = "delete";
+        var functionname = "elements_template_modal_data_clone";
+        var childid = $(this).attr("value");
+        OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, function (callback) {
+            if (callback === "done") {
+                OxiAddonsPreviewDataLoader();
+            } else {
+                alert("Data Error");
+            }
+        });
+
+    });
     $("body").on("click", ".shortcode-addons-template-item-delete", function (e) {
         e.preventDefault();
         var rawdata = "delete";
-        var functionname = "elements_template_modal_data_delete"
+        var functionname = "elements_template_modal_data_delete";
         var childid = $(this).attr("value");
         var status = confirm("Do you Want to Delete this?");
         if (status === false) {
@@ -303,6 +319,8 @@ jQuery.noConflict();
             });
         }
     });
+
+
     $(document.body).on("keyup", ".shortcode-control-type-text input", function (e) {
         $input = $(this);
         if ($input.attr("retundata") !== '') {

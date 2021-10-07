@@ -1,8 +1,4 @@
-.oxi-addons-container .oxi-image-hover-style{
-    padding: 15px; 
-}
 .oxi-addons-container .oxi-image-hover-style-button{
-    max-width: 300px;
     width: 100%;
     margin: 0 auto;
     position: relative;
@@ -84,7 +80,6 @@
     left: 0;
     content: "";
     display: block;
-    background: transparent;
     pointer-events: none;
 
 }

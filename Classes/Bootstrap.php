@@ -10,11 +10,9 @@ if (!defined('ABSPATH'))
  *
  * @author $biplob018
  */
-
 use OXI_IMAGE_HOVER_PLUGINS\Classes\ImageApi as IMAGEAPI;
 
-class Bootstrap
-{
+class Bootstrap {
 
     use \OXI_IMAGE_HOVER_PLUGINS\Helper\Public_Helper;
     use \OXI_IMAGE_HOVER_PLUGINS\Helper\Admin_helper;
@@ -50,9 +48,7 @@ class Bootstrap
      */
     public $child_table;
 
-
-    public static function instance()
-    {
+    public static function instance() {
         if (self::$instance == null) {
             self::$instance = new self;
         }
@@ -60,24 +56,23 @@ class Bootstrap
         return self::$instance;
     }
 
-    public function __construct()
-    {
+    public function __construct() {
         do_action('image-hover-effects-ultimate/before_init');
         // Load translation
         add_action('init', array($this, 'i18n'));
-        $this->Shortcode_loader();
-        $this->Public_loader();
+
         new IMAGEAPI();
         if (is_admin()) {
-            $this->Admin_Filters();
             $this->User_Admin();
             $this->User_Reviews();
         }
+         $this->Admin_Filters();
+        $this->Shortcode_loader();
+        $this->Public_loader();
         add_action('init', [$this, 'register_image_hover_ultimate_update']);
     }
 
-    public function register_image_hover_ultimate_update()
-    {
+    public function register_image_hover_ultimate_update() {
         $check = get_option('image_hover_ultimate_update_complete');
         if ($check != 'done') :
             add_action('image_hover_ultimate_update', [$this, 'plugin_update']);
@@ -85,8 +80,7 @@ class Bootstrap
         endif;
     }
 
-    public function plugin_update()
-    {
+    public function plugin_update() {
         $upgrade = new \OXI_IMAGE_HOVER_PLUGINS\Classes\ImageApi();
         $upgrade->update_image_hover_plugin();
     }
@@ -97,8 +91,7 @@ class Bootstrap
      * @since 9.3.0
      * @access public
      */
-    public function i18n()
-    {
+    public function i18n() {
         load_plugin_textdomain('image-hover-effects-ultimate');
     }
 
@@ -108,8 +101,7 @@ class Bootstrap
      * @since 9.3.0
      * @access public
      */
-    protected function Shortcode_loader()
-    {
+    protected function Shortcode_loader() {
         add_shortcode('iheu_ultimate_oxi', [$this, 'WP_Shortcode']);
         new \OXI_IMAGE_HOVER_PLUGINS\Modules\Visual_Composer();
         $ImageWidget = new \OXI_IMAGE_HOVER_PLUGINS\Modules\Widget();
@@ -123,8 +115,7 @@ class Bootstrap
      * @since 9.3.0
      * @access public
      */
-    public function WP_Shortcode($atts)
-    {
+    public function WP_Shortcode($atts) {
         extract(shortcode_atts(array('id' => ' ',), $atts));
         $styleid = $atts['id'];
         ob_start();
@@ -132,8 +123,7 @@ class Bootstrap
         return ob_get_clean();
     }
 
-    public function Public_loader()
-    {
+    public function Public_loader() {
         global $wpdb;
         $this->wpdb = $wpdb;
         $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
@@ -141,17 +131,16 @@ class Bootstrap
         $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
     }
 
-    public function Admin_Filters()
-    {
+    public function Admin_Filters() {
         add_filter($this->fixed_data('6f78692d696d6167652d686f7665722d737570706f72742d616e642d636f6d6d656e7473'), array($this, $this->fixed_data('537570706f7274416e64436f6d6d656e7473')));
         add_filter($this->fixed_data('6f78692d696d6167652d686f7665722d706c7567696e2d76657273696f6e'), array($this, $this->fixed_data('636865636b5f63757272656e745f76657273696f6e')));
         add_filter($this->fixed_data('6f78692d696d6167652d686f7665722d706c7567696e2f61646d696e5f6d656e75'), array($this, $this->fixed_data('6f78696c61625f61646d696e5f6d656e75')));
     }
 
-    public function User_Admin()
-    {
+    public function User_Admin() {
         add_action('admin_menu', [$this, 'Admin_Menu']);
         add_action('admin_head', [$this, 'Admin_Icon']);
         add_action('admin_init', array($this, 'redirect_on_activation'));
     }
+
 }

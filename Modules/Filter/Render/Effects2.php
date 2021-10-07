@@ -172,14 +172,7 @@ class Effects2 extends Public_Render {
             echo '<div class="image-hover-category-item-show  ' . $item_cat_list . ' ' . $childdata['category_item_col-lap'] . '-lap' . ' ' . $childdata['category_item_col-tab'] . '-tab' . ' ' . $childdata['category_item_col-mob'] . '-mob' . ' ' . ($admin == "admin" ? '  oxi-addons-admin-edit-list' : '') . '">
                             ' . $this->text_render($childdata['image_hover_info']);
             if ($admin == 'admin'):
-                echo '      <div class="oxi-addons-admin-absulote">
-                                <div class="oxi-addons-admin-absulate-edit">
-                                    <button class="btn btn-primary shortcode-addons-template-item-edit" type="button" value="' . $value['id'] . '">Edit</button>
-                                </div>
-                                <div class="oxi-addons-admin-absulate-delete">
-                                        <button class="btn btn-danger shortcode-addons-template-item-delete" type="submit" value="' . $value['id'] . '">Delete</button>
-                                </div>
-                            </div>';
+              echo $this->oxi_addons_admin_edit_delete_clone($value['id']);
             endif;
             echo '</div>';
         endforeach;

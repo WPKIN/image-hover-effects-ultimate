@@ -14,8 +14,6 @@ class Installation {
 
     protected static $lfe_instance = NULL;
 
-    const ADMINMENU = 'get_oxilab_addons_menu';
-
     /**
      * Constructor of Shortcode Addons
      *
@@ -59,7 +57,7 @@ class Installation {
      * @since 9.3.0
      */
     public function plugin_upgrade_hook() {
-        $this->Image_Hover_Menu();
+      
         $this->Image_Hover_Database();
     }
 
@@ -69,51 +67,16 @@ class Installation {
      * @since 9.3.0
      */
     public function plugin_activation_hook() {
-        $this->Image_Hover_Menu();
+       
         $this->Image_Hover_Database();
         // Redirect to options page
         set_transient('oxi_image_hover_activation_redirect', true, 30);
     }
 
-    /**
-     * Plugin deactivation hook
-     *
-     * @since 9.3.0
-     */
-    public function plugin_deactivation_hook() {
-        $this->Image_Hover_Menu_Deactive();
-    }
+   
+   
 
-    /**
-     * Get  Image Hover Menu.
-     * @return mixed
-     */
-    public function Image_Hover_Menu() {
-        $response = !empty(get_transient(self::ADMINMENU)) ? get_transient(self::ADMINMENU) : [];
-        if (!array_key_exists('Image Hover', $response)):
-            $response['Image Hover']['Image Hover'] = [
-                'name' => 'Image Hover',
-                'homepage' => 'oxi-image-hover-ultimate'
-            ];
-            $response['Image Hover']['Shortcode'] = [
-                'name' => 'Shortcode',
-                'homepage' => 'oxi-image-hover-shortcode'
-            ];
-            $response['Image Hover']['Addons'] = [
-                'name' => 'Addons',
-                'homepage' => 'oxi-image-hover-ultimate-addons'
-            ];
-            set_transient(self::ADMINMENU, $response, 10 * DAY_IN_SECONDS);
-        endif;
-    }
-
-    /**
-     * Image Hover Menu Deactive.
-     * @return mixed
-     */
-    public function Image_Hover_Menu_Deactive() {
-        delete_transient(self::ADMINMENU);
-    }
+    
 
     public function Image_Hover_Database() {
         global $wpdb;

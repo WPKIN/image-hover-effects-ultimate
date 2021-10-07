@@ -494,9 +494,9 @@ class Modules extends Admin_Render {
             'type' => Controls::COLOR,
             'default' => '#ffffff',
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-row .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover' => 'color: {{VALUE}};',
-                '{{WRAPPER}} .oxi-addons-row .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover .oxi-image-hover-loader button__loader' => 'color: {{VALUE}};',
-                '{{WRAPPER}} .oxi-addons-row .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover span' => 'color: {{VALUE}};',
+                '{{WRAPPER}}  > .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover' => 'color: {{VALUE}};',
+                '{{WRAPPER}}  > .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover .oxi-image-hover-loader button__loader' => 'color: {{VALUE}};',
+                '{{WRAPPER}}  > .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover span' => 'color: {{VALUE}};',
             ], 'description' => 'Color property is used to set the Hover color of the Button.',
                 ]
         );
@@ -506,7 +506,7 @@ class Modules extends Admin_Render {
             'type' => Controls::GRADIENT,
             'default' => '#ffffff',
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-row .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover' => 'background: {{VALUE}};',
+                '{{WRAPPER}}  > .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover' => 'background: {{VALUE}};',
             ],
             'description' => 'Background property is used to set the Hover Background of the Button.',
                 ]
@@ -517,7 +517,7 @@ class Modules extends Admin_Render {
                 [
                     'type' => Controls::BORDER,
                     'selector' => [
-                        '{{WRAPPER}} .oxi-addons-row .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover' => ''
+                        '{{WRAPPER}}  > .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover' => ''
                     ],
                     'description' => 'Border property is used to set the Hover Border of the Button.',
                 ]
@@ -526,7 +526,7 @@ class Modules extends Admin_Render {
                 'display_post_load_button_hover_tx_shadow', $this->style, [
             'type' => Controls::TEXTSHADOW,
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-row .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover span' => '',
+                '{{WRAPPER}}  > .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover span' => '',
             ],
             'description' => 'Text Shadow property adds shadow to Hover Button.',
                 ]
@@ -558,7 +558,7 @@ class Modules extends Admin_Render {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-row .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}}  > .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
             'description' => 'Allows you to add rounded corners at hover to Button with options.',
                 ]
@@ -567,7 +567,7 @@ class Modules extends Admin_Render {
                 'display_post_load_button_button_boxshadow', $this->style, [
             'type' => Controls::BOXSHADOW,
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-row .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover' => '',
+                '{{WRAPPER}}  > .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover' => '',
             ],
             'description' => 'Allows you at hover to attaches one or more shadows into Button.',
                 ]

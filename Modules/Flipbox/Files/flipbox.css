@@ -1,11 +1,10 @@
 .oxi-image-hover-style{
-    padding: 10px;
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
 }
 
 .oxi-image-hover-style-flipbox{
-    max-width: 300px;
+
     width: 100%;
     margin: 0 auto;
     position: relative;
@@ -123,7 +122,7 @@
     background: transparent;
     z-index: -1;
 }
- .oxi-image-hover-figure-front-section  {
+.oxi-image-hover-figure-front-section  {
     position: absolute;
     top: 0;
     left: 0;
@@ -137,7 +136,7 @@
     justify-content: center;
     text-align: center
 }
- .oxi-image-hover-figure-back-section {
+.oxi-image-hover-figure-back-section {
     position: absolute;
     top: 0;
     left: 0;

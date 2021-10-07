@@ -12,6 +12,8 @@ use OXI_IMAGE_HOVER_PLUGINS\Classes\Controls as Controls;
 
 class Modules extends Admin_Render {
 
+    use \OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic;
+
     public $StyleChanger = [
         'General-1',
         'General-2',
@@ -230,14 +232,17 @@ class Modules extends Admin_Render {
             'showing' => TRUE,
                 ]
         );
-        $this->add_group_control(
-                'oxi-image-hover-background', $this->style, [
-            'type' => Controls::BACKGROUND,
+        $this->add_control(
+                'oxi-image-hover-background-color', $this->style, [
+            'label' => esc_html__('Background', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'type' => Controls::GRADIENT,
+            'default' => 'rgba(255, 116, 3, 1)',
+            'oparetor' => true,
             'selector' => [
-                '{{WRAPPER}} .oxi-image-hover-caption-tab' => '',
+                '{{WRAPPER}} .oxi-image-hover-caption-tab' => 'background: {{VALUE}};',
             ],
             'simpledescription' => 'Customize Hover Background with transparent options.',
-            'description' => 'Customize Hover Background with Color or Gradient or Image properties.',
+            'description' => 'Customize Hover Background with Color or Gradient.',
                 ]
         );
         $this->add_control(
@@ -1217,10 +1222,18 @@ class Modules extends Admin_Render {
             'options' => [
                 'general-settings' => esc_html__('General Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 'typography' => esc_html__('Typography', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'dynamic' => esc_html__('Dynamic Content', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 'custom' => esc_html__('Custom CSS', OXI_IMAGE_HOVER_TEXTDOMAIN),
             ]
                 ]
         );
+        $this->register_general_data();
+        $this->register_typography_data();
+        $this->register_dynamic_data();
+        $this->register_custom_css_data();
+    }
+
+    public function register_general_data() {
         $this->start_section_tabs(
                 'oxi-image-hover-start-tabs', [
             'condition' => [
@@ -1236,6 +1249,9 @@ class Modules extends Admin_Render {
         $this->register_content_settings();
         $this->end_section_devider();
         $this->end_section_tabs();
+    }
+
+    public function register_typography_data() {
         $this->start_section_tabs(
                 'oxi-image-hover-start-tabs', [
             'condition' => [
@@ -1252,8 +1268,37 @@ class Modules extends Admin_Render {
         $this->register_button_settings();
         $this->end_section_devider();
         $this->end_section_tabs();
+    }
 
+    public function register_dynamic_data() {
+        $this->start_section_tabs(
+                'oxi-image-hover-start-tabs', [
+            'condition' => [
+                'oxi-image-hover-start-tabs' => 'dynamic'
+            ],
+                ]
+        );
+        $this->start_section_devider();
 
+        $this->register_dynamic_control();
+
+        $this->end_section_devider();
+
+        $this->start_section_devider();
+
+        $this->register_dynamic_query();
+        $this->register_carousel_query_settings();
+        $this->register_carousel_arrows_settings();
+        $this->register_carousel_dots_settings();
+
+        $this->register_dynamic_load_more_button();
+
+        $this->end_section_devider();
+
+        $this->end_section_tabs();
+    }
+
+    public function register_custom_css_data() {
         $this->start_section_tabs(
                 'oxi-image-hover-start-tabs', [
             'condition' => [
@@ -1287,7 +1332,39 @@ class Modules extends Admin_Render {
             'title' => __('Add New Image Hover', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'sub-title' => __('Open Image Hover Form', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'showing' => TRUE,
+            'notcondition' => TRUE,
+            'condition' => [
+                'image_hover_dynamic_content' => 'yes',
+            ],
         ]);
+    }
+
+    /**
+     * Template Parent Item Data Rearrange
+     *
+     * @since 2.0.0
+     */
+    public function Rearrange() {
+        return '<li class="list-group-item" id="{{id}}">{{image_hover_heading}}</li>';
+    }
+
+    /**
+     * Template Parent Item Data Rearrange
+     *
+     * @since 9.3.0
+     */
+    public function shortcode_rearrange() {
+        $rearrange = $this->Rearrange();
+        if (!empty($rearrange)) :
+            $this->add_substitute_control($rearrange, [], [
+                'type' => Controls::REARRANGE,
+                'showing' => TRUE,
+                'notcondition' => TRUE,
+                'condition' => [
+                    'image_hover_dynamic_content' => 'yes',
+                ],
+            ]);
+        endif;
     }
 
     public function modal_form_data() {
@@ -1366,15 +1443,6 @@ class Modules extends Admin_Render {
         );
 
         echo '</div>';
-    }
-
-    /**
-     * Template Parent Item Data Rearrange
-     *
-     * @since 2.0.0
-     */
-    public function Rearrange() {
-        return '<li class="list-group-item" id="{{id}}">{{image_hover_heading}}</li>';
     }
 
 }

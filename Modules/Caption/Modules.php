@@ -12,6 +12,8 @@ use OXI_IMAGE_HOVER_PLUGINS\Classes\Controls as Controls;
 
 class Modules extends Admin_Render {
 
+    use \OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic;
+
     public $StyleChanger = [
         'Caption-1',
         'Caption-2',
@@ -1018,6 +1020,7 @@ class Modules extends Admin_Render {
             'options' => [
                 'caption-settings' => esc_html__('General Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 'typography' => esc_html__('Typography', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'dynamic' => esc_html__('Dynamic Content', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 'custom' => esc_html__('Custom CSS', OXI_IMAGE_HOVER_TEXTDOMAIN),
             ]
                 ]
@@ -1063,8 +1066,7 @@ class Modules extends Admin_Render {
         $this->end_section_devider();
 
         $this->end_section_tabs();
-
-
+        $this->register_dynamic_data();
         $this->start_section_tabs(
                 'oxi-image-hover-start-tabs', [
             'condition' => [
@@ -1133,7 +1135,6 @@ class Modules extends Admin_Render {
                     'description' => 'Add or Modify Your Image. You can use Media Library or Custom URL'
                 ]
         );
-
 
         $this->add_group_control(
                 'image_hover_button_link', $this->style, [

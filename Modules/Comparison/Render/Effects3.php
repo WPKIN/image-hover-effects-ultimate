@@ -36,14 +36,7 @@ class Effects3 extends Public_Render
                                         <img ' . $this->media_render('oxi_image_accordion_image', $data) . ' class="oxi-img">
                                         ';
                                         if ($admin == 'admin'):
-                                            echo '<div class="oxi-addons-admin-absulote">
-                                                        <div class="oxi-addons-admin-absulate-edit">
-                                                            <button class="btn btn-primary shortcode-addons-template-item-edit" type="button" value="' . $val['id'] . '">Edit</button>
-                                                        </div>
-                                                        <div class="oxi-addons-admin-absulate-delete">
-                                                            <button class="btn btn-danger shortcode-addons-template-item-delete" type="submit" value="' . $val['id'] . '">Delete</button>
-                                                        </div>
-                                                    </div>';
+                                            echo $this->oxi_addons_admin_edit_delete_clone($val['id']);
                                         endif;
                                     echo '</li>';
                                 }

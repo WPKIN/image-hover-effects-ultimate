@@ -36,11 +36,13 @@ class Effects6 extends Modules {
             'showing' => TRUE,
                 ]
         );
-        $this->add_group_control(
-                'oxi-image-hover-background', $this->style, [
-            'type' => Controls::BACKGROUND,
+        $this->add_control(
+                'oxi-image-hover-background-color', $this->style, [
+            'label' => esc_html__('Background', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'type' => Controls::GRADIENT,
+            'default' => 'rgba(255, 116, 3, 1)',
             'selector' => [
-                '{{WRAPPER}} .oxi-image-square-hover-style-6 .oxi-image-hover-caption-tab' => '',
+                '{{WRAPPER}} .oxi-image-square-hover-style-6 .oxi-image-hover-caption-tab' => 'background:{{VALUE}};',
             ]
                 ]
         );
