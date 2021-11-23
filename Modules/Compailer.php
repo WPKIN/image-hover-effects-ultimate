@@ -73,7 +73,7 @@ class Compailer extends Public_Render {
 
     public function render() {
 
-        echo '<div class="oxi-addons-container ' . $this->WRAPPER . ' ' . $this->WRAPPER . '" id="' . $this->WRAPPER . '">
+        echo '<div class="oxi-addons-container noLightbox ' . $this->WRAPPER . ' ' . $this->WRAPPER . '" id="' . $this->WRAPPER . '">
                  <div class="oxi-addons-row">';
 
         $this->default_render($this->style, $this->child, $this->admin);
@@ -142,7 +142,7 @@ class Compailer extends Public_Render {
                             </button>
                         </div>';
                 else:
-                    echo '<div class="oxi-image-hover-dynamic-load-infinite" data-class="OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic\Post_Query" data-function="__rest_api_post" data-args=\'' . json_encode($args) . '\' data-settings=\'' . json_encode($settings) . '\' data-page="1">
+                    echo '<div class="oxi-image-hover-dynamic-load-infinite" id="oxi-image-hover-dynamic-load-infinite-' . $this->dbdata['id'] . '" data-class="OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic\Post_Query" data-function="__rest_api_post" data-args=\'' . json_encode($args) . '\' data-settings=\'' . json_encode($settings) . '\' data-page="1">
                           </div>';
                 endif;
             endif;
@@ -169,7 +169,7 @@ class Compailer extends Public_Render {
                             </button>
                         </div>';
                 else:
-                    echo '<div class="oxi-image-hover-dynamic-load-infinite" data-class="OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic\Layouts_Query" data-function="__rest_api_post" data-args=\'' . json_encode($args) . '\' data-settings=\'' . json_encode($settings) . '\' data-page="1">
+                    echo '<div class="oxi-image-hover-dynamic-load-infinite" id="oxi-image-hover-dynamic-load-infinite-' . $this->dbdata['id'] . '" data-class="OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic\Layouts_Query" data-function="__rest_api_post" data-args=\'' . json_encode($args) . '\' data-settings=\'' . json_encode($settings) . '\' data-page="1">
                       </div>';
                 endif;
             endif;
@@ -214,8 +214,8 @@ class Compailer extends Public_Render {
                 dotsClass: "oxi_carousel_dots",
                 slidesToShow: ' . $lap . ',
                 slidesToScroll:  ' . $lap_item . ',
-                centerMode: ' . $center_mode . ', 
-                rtl: false, 
+                centerMode: ' . $center_mode . ',
+                rtl: false,
                 responsive: [
                     {
                         breakpoint: 991,

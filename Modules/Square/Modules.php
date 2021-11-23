@@ -1309,17 +1309,32 @@ class Modules extends Admin_Render {
     }
 
     public function register_controls() {
-        $this->start_section_header(
-                'shortcode-addons-start-tabs',
-                [
-                    'options' => [
-                        'square-settings' => esc_html__('General Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'typography' => esc_html__('Typography', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'dynamic' => esc_html__('Dynamic Content', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'custom' => esc_html__('Custom CSS', OXI_IMAGE_HOVER_TEXTDOMAIN),
+
+        if (apply_filters('oxi-image-hover-plugin-version', false) == FALSE):
+            $this->start_section_header(
+                    'shortcode-addons-start-tabs',
+                    [
+                        'options' => [
+                            'square-settings' => esc_html__('General Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'typography' => esc_html__('Typography', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'custom' => esc_html__('Custom CSS', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        ]
                     ]
-                ]
-        );
+            );
+        else:
+            $this->start_section_header(
+                    'shortcode-addons-start-tabs',
+                    [
+                        'options' => [
+                            'square-settings' => esc_html__('General Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'typography' => esc_html__('Typography', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'dynamic' => esc_html__('Dynamic Content', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'custom' => esc_html__('Custom CSS', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        ]
+                    ]
+            );
+        endif;
+
         $this->start_section_tabs(
                 'oxi-image-hover-start-tabs',
                 [
@@ -1399,7 +1414,7 @@ class Modules extends Admin_Render {
     }
 
     public function modal_form_data() {
-        echo '<div class="modal-header">                    
+        echo '<div class="modal-header">
                     <h4 class="modal-title">Image Hover Form</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>

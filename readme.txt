@@ -3,7 +3,7 @@ Contributors: biplob018
 Donate link: https://www.oxilab.org
 Tags: responsive image effects, awesome css3 effects, awesome image effects,  css3 effects, effects, top image effects for wordpress,  hover effect. 
 Requires at least: 3.0.1
-Stable tag: 9.6.0
+Stable tag: 9.6.1
 Tested up to: 5.8.1
 Requires PHP: 5.4
 License: GPLv2 or later
@@ -25,10 +25,10 @@ Hover effect on the image is an important part of creating an attractive and pro
 
 =Quick Links=
 
-+ [Image Hover Features ](https://www.image-hover.oxilab.org/ "Image Hover Features")
-+ [Demo Effects ](https://www.image-hover.oxilab.org/elements-extension/ "Demo Effects")
++ [Image Hover Features ](https://www.oxilabdemos.com/image-hover/ "Image Hover Features")
++ [Demo Effects ](https://www.oxilabdemos.com/image-hover/elements-extension/ "Demo Effects")
 + [How to Use (Video) ](https://www.youtube.com/watch?v=SGHeoNPogbE "How to Use (Video)")
-+ [How to Use (Documentation) ](https://www.image-hover.oxilab.org/docs/ "How to Use (Documentation)")
++ [How to Use (Documentation) ](https://www.oxilabdemos.com/image-hover/docs/ "How to Use (Documentation)")
 + [Help and Support ](https://wordpress.org/support/plugin/image-hover-effects-ultimate#new-post "Help and Support")
 
 
@@ -323,6 +323,11 @@ Its too easy Chose your style from Effects List and click at Clone.
 
 
 == Changelog ==
+= 9.6.1 = 
+*Edit Clone Delete Button Modify
+*Solved Ajax Load
+
+
 = 9.6.0 = 
 *Return Clone Button
 *Add Ajax Load
@@ -491,6 +496,10 @@ Its too easy Chose your style from Effects List and click at Clone.
 
 
 == Upgrade Notice ==
+= 9.6.1 = 
+Edit Clone Delete Button Modify
+Solved Ajax Load
+
 
 = 9.6.0 = 
 Return Clone Button

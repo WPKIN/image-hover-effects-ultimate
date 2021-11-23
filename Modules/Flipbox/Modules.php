@@ -15,17 +15,33 @@ class Modules extends Admin_Render {
     use \OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic;
 
     public function register_controls() {
-        $this->start_section_header(
-                'oxi-image-hover-start-tabs', [
-            'options' => [
-                'general-settings' => esc_html__('General Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'frontend' => esc_html__('Frontend', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'backend' => esc_html__('Backend', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'dynamic' => esc_html__('Dynamic Content', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'custom' => esc_html__('Custom CSS', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            ]
+
+
+        if (apply_filters('oxi-image-hover-plugin-version', false) == FALSE):
+            $this->start_section_header(
+                    'oxi-image-hover-start-tabs', [
+                'options' => [
+                    'general-settings' => esc_html__('General Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'frontend' => esc_html__('Frontend', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'backend' => esc_html__('Backend', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'custom' => esc_html__('Custom CSS', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 ]
-        );
+                    ]
+            );
+        else:
+            $this->start_section_header(
+                    'oxi-image-hover-start-tabs', [
+                'options' => [
+                    'general-settings' => esc_html__('General Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'frontend' => esc_html__('Frontend', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'backend' => esc_html__('Backend', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'dynamic' => esc_html__('Dynamic Content', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'custom' => esc_html__('Custom CSS', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                ]
+                    ]
+            );
+        endif;
+
         $this->register_general_tabs();
         $this->register_frontend_tabs();
         $this->register_backend_tabs();
@@ -2245,7 +2261,7 @@ class Modules extends Admin_Render {
     }
 
     public function modal_form_data() {
-        echo '<div class="modal-header">                    
+        echo '<div class="modal-header">
                     <h4 class="modal-title">Image Hover Form</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>

@@ -586,3 +586,6 @@ a.PositionConflictUnset {
 .oxi-addons-container  .oxi-image-hover-style .image-hover-align-bottom-right{
     justify-content: flex-end !important;text-align: right;
 }
+.oxi-image-hover-dynamic-load-infinite{
+    clear: both;
+}

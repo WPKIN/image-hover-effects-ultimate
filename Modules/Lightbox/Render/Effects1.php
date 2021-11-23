@@ -8,18 +8,15 @@ if (!defined('ABSPATH')) {
 
 use OXI_IMAGE_HOVER_PLUGINS\Page\Public_Render;
 
-class Effects1 extends Public_Render
-{
+class Effects1 extends Public_Render {
 
-    public function public_css()
-    {
+    public function public_css() {
         wp_enqueue_style('oxi-image-hover-light-box', OXI_IMAGE_HOVER_URL . '/Modules/Lightbox/Files/Lightbox.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         wp_enqueue_style('oxi-image-hover-light-style-1', OXI_IMAGE_HOVER_URL . '/Modules/Lightbox/Files/style-1.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         wp_enqueue_style('oxi_addons__light_box_style_1', OXI_IMAGE_HOVER_URL . '/Modules/Lightbox/Files/lightgallery.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
 
-    public function public_jquery()
-    {
+    public function public_jquery() {
         wp_enqueue_script('oxi_addons__light_box_picturefill', OXI_IMAGE_HOVER_URL . '/Modules/Lightbox/Files/picturefill.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         $this->JSHANDLE = 'oxi_addons__light_box_picturefill';
         wp_enqueue_script('oxi_addons__light_box_lightgallery_all', OXI_IMAGE_HOVER_URL . '/Modules/Lightbox/Files/lightgallery_all.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
@@ -33,8 +30,8 @@ class Effects1 extends Public_Render
      * image
      * @since 2.1.0
      */
-    public function custom_media_render($id, $style)
-    {
+
+    public function custom_media_render($id, $style) {
         $url = '';
         if (array_key_exists($id . '-select', $style)):
             if ($style[$id . '-select'] == 'media-library'):
@@ -45,8 +42,7 @@ class Effects1 extends Public_Render
         endif;
     }
 
-    public function default_render($style, $child, $admin)
-    {
+    public function default_render($style, $child, $admin) {
 
         foreach ($child as $key => $val) {
             $value = json_decode(stripslashes($val['rawdata']), true);
@@ -93,7 +89,7 @@ class Effects1 extends Public_Render
                     </div>';
                 }
             } else {
-                $light_box = '<a class="oxi_addons__light_box_item"   href="' . $value['oxi_image_light_box_video'] . '" data-sub-html="' . $heading . ' <br> ' . $details . '">
+                $light_box = '<a class="oxi_addons__light_box_item" data-src="' . $value['oxi_image_light_box_video'] . '" data-sub-html="' . $heading . ' <br> ' . $details . '">
                     ' . $image_or_btn . '
                 </a>';
             }
@@ -109,8 +105,7 @@ class Effects1 extends Public_Render
         }
     }
 
-    public function inline_public_jquery()
-    {
+    public function inline_public_jquery() {
         $jquery = '';
         $child = $this->child;
         foreach ($child as $key => $val) {

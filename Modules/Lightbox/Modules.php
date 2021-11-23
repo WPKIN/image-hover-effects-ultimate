@@ -947,7 +947,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .oxi_addons__light_box .oxi_addons__button:hover' => 'background-color:{{VALUE}};',
                     ],
-                      'description' => 'Background property is used to set the Hover Background of the Button.',
+                    'description' => 'Background property is used to set the Hover Background of the Button.',
                 ]
         );
 
@@ -959,7 +959,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .oxi_addons__light_box .oxi_addons__button:hover' => '',
                     ],
-                     'description' => 'Border property is used to set the Hover Border of the Button.',
+                    'description' => 'Border property is used to set the Hover Border of the Button.',
                 ]
         );
 
@@ -994,7 +994,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .oxi_addons__light_box .oxi_addons__button:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
-                     'description' => 'Allows you to add rounded corners at hover to Button with options.',
+                    'description' => 'Allows you to add rounded corners at hover to Button with options.',
                 ]
         );
 
@@ -1099,7 +1099,6 @@ class Modules extends Admin_Render {
                     'condition' => [
                         'oxi_image_light_box_clickable' => 'icon',
                     ],
-                    
                 ]
         );
         $this->add_control(

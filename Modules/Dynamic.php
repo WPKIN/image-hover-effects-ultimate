@@ -47,28 +47,15 @@ trait Dynamic {
                 ]
         );
 
-        if (apply_filters('oxi-image-hover-plugin-version', false) == FALSE):
-
-            $this->add_control(
-                    'image_hover_premium_note',
-                    $this->style,
-                    [
-                        'label' => __('Note', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'type' => Controls::HEADING,
-                        'description' => 'Dynamic Property only for Premium Version.'
-                    ]
-            );
-        else:
-            $this->add_control(
-                    'image_hover_dynamic_note',
-                    $this->style,
-                    [
-                        'label' => __('Note', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'type' => Controls::HEADING,
-                        'description' => 'Dynamic Property will works only at live Sites. Kindly use shortcode at page or post then check it.'
-                    ]
-            );
-        endif;
+        $this->add_control(
+                'image_hover_dynamic_note',
+                $this->style,
+                [
+                    'label' => __('Note', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'type' => Controls::HEADING,
+                    'description' => 'Dynamic Property will works only at live Sites. Kindly use shortcode at page or post then check it.'
+                ]
+        );
 
         $this->add_control(
                 'image_hover_dynamic_load_per_page',

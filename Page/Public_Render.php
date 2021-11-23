@@ -195,8 +195,10 @@ class Public_Render {
             $inlinecss .= $this->CSSDATA;
         }
         if ($inlinejs != '') :
-            if ($this->admin == 'admin' || $this->admin == 'web') :
+
+            if ($this->admin == 'admin' || $this->admin == 'web' || $this->dynamicLoad == true) :
 //only load while Rest API called
+
                 echo _('<script>
                         (function ($) {
                             setTimeout(function () {');
@@ -473,7 +475,7 @@ class Public_Render {
                     $backround .= $class . '{background-size:  ' . $style[$id . '-size-mob'] . ';}';
                     $backround .= '}';
                 else :
-                    $backround .= $class . '{background: ' . $color . ', url(\'' . $style[$id . '-url'] . '\') ' . $style[$id . '-repeat'] . ' ' . $style[$id . '-position'] . '; 
+                    $backround .= $class . '{background: ' . $color . ', url(\'' . $style[$id . '-url'] . '\') ' . $style[$id . '-repeat'] . ' ' . $style[$id . '-position'] . ';
                                            background-attachment: ' . $style[$id . '-attachment'] . ';
                                            background-size:  ' . $style[$id . '-size-lap'] . ';}';
                     $backround .= '@media only screen and (min-width : 669px) and (max-width : 993px){';
@@ -584,13 +586,13 @@ class Public_Render {
 
         return '  <div class="oxi-addons-admin-absulote">
                                 <div class="oxi-addons-admin-absulate-edit">
-                                    <button class="btn btn-primary shortcode-addons-template-item-edit" type="button" value="' . $param . '" title="Edit"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-primary shortcode-addons-template-item-edit" type="button" value="' . $param . '" title="Edit">Edit</button>
                                 </div>
                                 <div class="oxi-addons-admin-absulate-clone">
-                                    <button class="btn btn-secondary shortcode-addons-template-item-clone" type="button" value="' . $param . '" title="Clone"><i class="far fa-clone"></i></button>
+                                    <button class="btn btn-secondary shortcode-addons-template-item-clone" type="button" value="' . $param . '" title="Clone">Clone</button>
                                 </div>
                                 <div class="oxi-addons-admin-absulate-delete">
-                                    <button class="btn btn-danger shortcode-addons-template-item-delete" type="submit" value="' . $param . '" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="btn btn-danger shortcode-addons-template-item-delete" type="submit" value="' . $param . '" title="Delete">Del</button>
                                 </div>
                             </div>';
     }
