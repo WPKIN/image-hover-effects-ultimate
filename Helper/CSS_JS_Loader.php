@@ -25,6 +25,11 @@ trait CSS_JS_Loader {
         ));
     }
 
+    public function admin_css_loader() {
+        $this->admin_css();
+        $this->admin_js();
+    }
+
     public function admin_home() {
         wp_enqueue_script("jquery");
         wp_enqueue_script('jquery-ui-core');
@@ -36,11 +41,6 @@ trait CSS_JS_Loader {
         wp_enqueue_script('jquery-ui-draggable');
         wp_enqueue_script('jquery.dataTables.min', OXI_IMAGE_HOVER_URL . '/assets/backend/js/jquery.dataTables.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         wp_enqueue_script('dataTables.bootstrap.min', OXI_IMAGE_HOVER_URL . '/assets/backend/js/dataTables.bootstrap.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-    }
-
-    public function admin_css_loader() {
-        $this->admin_css();
-        $this->admin_js();
     }
 
     public function admin_elements_frontend_loader() {
@@ -75,7 +75,7 @@ trait CSS_JS_Loader {
     /**
      * Admin Media Scripts.
      * Most of time using into Style Editing Page
-     * 
+     *
      * @since 9.3.0
      */
     public function admin_media_scripts() {

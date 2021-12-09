@@ -15,10 +15,9 @@ jQuery.noConflict();
                     $.ajax({
                         url: ImageHoverUltimate.root + 'ImageHoverUltimate/v1/' + $function,
                         method: 'POST',
-                        beforeSend: function (xhr) {
-                            xhr.setRequestHeader('X-WP-Nonce', ImageHoverUltimate.nonce);
-                        },
+
                         data: {
+                            _wpnonce: ImageHoverUltimate.nonce,
                             class: $CLASS,
                             functionname: $function,
                             rawdata: JSON.stringify($settings),
@@ -61,10 +60,8 @@ jQuery.noConflict();
         $.ajax({
             url: ImageHoverUltimate.root + 'ImageHoverUltimate/v1/' + $function,
             method: 'POST',
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader('X-WP-Nonce', ImageHoverUltimate.nonce);
-            },
             data: {
+                _wpnonce: ImageHoverUltimate.nonce,
                 class: $CLASS,
                 functionname: $function,
                 rawdata: JSON.stringify($settings),

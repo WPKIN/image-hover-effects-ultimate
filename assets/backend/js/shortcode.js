@@ -19,11 +19,9 @@ jQuery.noConflict();
             result = await $.ajax({
                 url: ImageHoverUltimate.root + 'ImageHoverUltimate/v1/' + functionname,
                 method: 'POST',
-                dataType: 'json',
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader('X-WP-Nonce', ImageHoverUltimate.nonce);
-                },
+
                 data: {
+                    _wpnonce: ImageHoverUltimate.nonce,
                     styleid: styleid,
                     childid: childid,
                     rawdata: rawdata,
@@ -45,8 +43,8 @@ jQuery.noConflict();
         $('#oxistyleid').val($(this).attr('datavalue'));
         $('#oxi-addons-style-clone-modal').modal('show');
     });
-    
-    
+
+
     $("#oxi-addons-style-clone-modal-form").submit(function (e) {
         e.preventDefault();
         var rawdata = $('#addons-style-name').val();
@@ -59,8 +57,8 @@ jQuery.noConflict();
             }, 1000);
         });
     });
-    
-    
+
+
 
 
     $('.oxi-addons-style-delete').on('click', function (e) {
@@ -90,9 +88,9 @@ jQuery.noConflict();
                 }
         );
     });
-    
-    
-    
+
+
+
 
     setTimeout(function () {
         if ($('.table').hasClass('oxi_addons_table_data')) {

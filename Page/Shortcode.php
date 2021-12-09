@@ -83,7 +83,7 @@ class Shortcode {
             $nonce = $_REQUEST['_wpnonce'];
         }
 
-        if (!empty($_POST['importdatasubmit']) && $_POST['importdatasubmit'] == 'Save') {
+        if (!empty($_POST['importdatasubmit']) && sanitize_text_field($_POST['importdatasubmit']) == 'Save') {
             if (!wp_verify_nonce($nonce, 'image-hover-effects-ultimate-import')) {
                 die('You do not have sufficient permissions to access this page.');
             } else {
@@ -159,11 +159,11 @@ class Shortcode {
             $return .= _('<td>' . $this->name_converter($value['style_name']) . '</td>');
             $return .= _('<td><span>Shortcode &nbsp;&nbsp;<input type="text" onclick="this.setSelectionRange(0, this.value.length)" value="[iheu_ultimate_oxi id=&quot;' . $id . '&quot;]"></span> <br>'
                     . '<span>Php Code &nbsp;&nbsp; <input type="text" onclick="this.setSelectionRange(0, this.value.length)" value="&lt;?php echo do_shortcode(&#039;[iheu_ultimate_oxi  id=&quot;' . $id . '&quot;]&#039;); ?&gt;"></span></td>');
-            $return .= _('<td> 
+            $return .= _('<td>
                             <a href="' . admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$effects&styleid=$id") . '"  title="Edit"  class="btn btn-primary" style="float:left; margin-right: 5px;">Edit</a>
                             <a href="#"  title="Clone"  class="btn btn-secondary oxi-addons-style-clone"  datavalue="' . $id . '" style="float:left; margin-right: 5px;">Clone</a>
-                            <a href="' . esc_url_raw(rest_url()) . 'ImageHoverUltimate/v1/shortcode_export?styleid=' . $id . '"  title="Export"  class="btn btn-info" style="float:left; margin-right: 5px;">Export</a>
-                            <button class="btn btn-danger oxi-addons-style-delete" style="float:left"  title="Delete" value="' . $id . '" type="button" value="delete">Delete</button>  
+                            <a href="' . esc_url_raw(rest_url()) . 'ImageHoverUltimate/v1/shortcode_export?styleid=' . $id . '& _wpnonce=' . wp_create_nonce('wp_rest') . '"  title="Export"  class="btn btn-info" style="float:left; margin-right: 5px;">Export</a>
+                            <button class="btn btn-danger oxi-addons-style-delete" style="float:left"  title="Delete" value="' . $id . '" type="button" value="delete">Delete</button>
                         </td>');
             $return .= _(' </tr>');
         }
@@ -186,7 +186,7 @@ class Shortcode {
                                     <a href="#" id="oxi-import-style">
                                         <div class="oxilab-admin-add-new-item">
                                             <span>
-                                                <i class="fas fa-plus-circle oxi-icons"></i>  
+                                                <i class="fas fa-plus-circle oxi-icons"></i>
                                                 Import Image Hover Files
                                             </span>
                                         </div>
@@ -200,7 +200,7 @@ class Shortcode {
                         <form method="post" id="oxi-addons-import-modal-form" enctype = "multipart/form-data">
                             <div class="modal-dialog modal-sm modal-dialog-centered">
                                 <div class="modal-content">
-                                    <div class="modal-header">                    
+                                    <div class="modal-header">
                                         <h4 class="modal-title">Import JSON Files</h4>
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
@@ -215,15 +215,15 @@ class Shortcode {
                             </div>
                                ' . wp_nonce_field("image-hover-effects-ultimate-import") . '
                         </form>
-                    </div>    
-                    
+                    </div>
+
                 ');
 
         echo _('<div class="modal fade" id="oxi-addons-style-clone-modal" >
                         <form method="post" id="oxi-addons-style-clone-modal-form">
                             <div class="modal-dialog modal-sm">
                                 <div class="modal-content">
-                                    <div class="modal-header">                    
+                                    <div class="modal-header">
                                         <h4 class="modal-title">Layouts Clone</h4>
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>

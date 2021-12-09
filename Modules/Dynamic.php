@@ -12,33 +12,6 @@ trait Dynamic {
 
     use \OXI_IMAGE_HOVER_PLUGINS\Modules\Display\Files\Admin_Query;
 
-    public function register_dynamic_data() {
-        $this->start_section_tabs(
-                'oxi-image-hover-start-tabs', [
-            'condition' => [
-                'oxi-image-hover-start-tabs' => 'dynamic'
-            ],
-                ]
-        );
-        $this->start_section_devider();
-
-        $this->register_dynamic_control();
-
-        $this->end_section_devider();
-
-        $this->start_section_devider();
-
-        $this->register_dynamic_query();
-        $this->register_carousel_query_settings();
-        $this->register_carousel_arrows_settings();
-
-        $this->register_dynamic_load_more_button();
-
-        $this->end_section_devider();
-
-        $this->end_section_tabs();
-    }
-
     public function register_dynamic_control() {
         $this->start_controls_section(
                 'oxi-image-hover', [
@@ -1305,6 +1278,33 @@ trait Dynamic {
                 ]
         );
         $this->end_controls_section();
+    }
+
+    public function register_dynamic_data() {
+        $this->start_section_tabs(
+                'oxi-image-hover-start-tabs', [
+            'condition' => [
+                'oxi-image-hover-start-tabs' => 'dynamic'
+            ],
+                ]
+        );
+        $this->start_section_devider();
+
+        $this->register_dynamic_control();
+
+        $this->end_section_devider();
+
+        $this->start_section_devider();
+
+        $this->register_dynamic_query();
+        $this->register_carousel_query_settings();
+        $this->register_carousel_arrows_settings();
+
+        $this->register_dynamic_load_more_button();
+
+        $this->end_section_devider();
+
+        $this->end_section_tabs();
     }
 
 }

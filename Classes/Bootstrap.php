@@ -23,7 +23,7 @@ class Bootstrap {
     /**
      * Define $wpdb
      *
-     * @since 9.3.0  
+     * @since 9.3.0
      */
     public $wpdb;
 
@@ -66,7 +66,7 @@ class Bootstrap {
             $this->User_Admin();
             $this->User_Reviews();
         }
-         $this->Admin_Filters();
+        $this->Admin_Filters();
         $this->Shortcode_loader();
         $this->Public_loader();
         add_action('init', [$this, 'register_image_hover_ultimate_update']);

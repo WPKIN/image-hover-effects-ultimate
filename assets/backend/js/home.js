@@ -12,11 +12,9 @@ jQuery.noConflict();
             result = await $.ajax({
                 url: ImageHoverUltimate.root + 'ImageHoverUltimate/v1/' + functionname,
                 method: 'POST',
-                dataType: "json",
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader('X-WP-Nonce', ImageHoverUltimate.nonce);
-                },
+
                 data: {
+                    _wpnonce: ImageHoverUltimate.nonce,
                     styleid: styleid,
                     childid: childid,
                     rawdata: rawdata

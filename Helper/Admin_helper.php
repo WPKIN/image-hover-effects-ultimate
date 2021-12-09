@@ -4,6 +4,14 @@ namespace OXI_IMAGE_HOVER_PLUGINS\Helper;
 
 trait Admin_helper {
 
+    public function Public_loader() {
+        global $wpdb;
+        $this->wpdb = $wpdb;
+        $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
+        $this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
+        $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
+    }
+
     /**
      * Plugin fixed
      *
@@ -34,8 +42,8 @@ trait Admin_helper {
     }
 
     public function Image_Parent() {
-        $effects = (!empty($_GET['effects']) ? ucfirst($_GET['effects']) : '');
-        $styleid = (!empty($_GET['styleid']) ? (int) $_GET['styleid'] : '');
+        $effects = (!empty($_GET['effects']) ? ucfirst(sanitize_text_field($_GET['effects'])) : '');
+        $styleid = (!empty($_GET['styleid']) ? sanitize_text_field($_GET['styleid']) : '');
         if (!empty($effects) && !empty($styleid)) :
             $style = $this->wpdb->get_row($this->wpdb->prepare('SELECT style_name FROM ' . $this->parent_table . ' WHERE id = %d ', $styleid), ARRAY_A);
             $name = explode('-', $style['style_name']);
@@ -80,7 +88,7 @@ trait Admin_helper {
     public function SupportAndComments($agr) {
         echo '  <div class="oxi-addons-admin-notifications">
                     <h3>
-                        <span class="dashicons dashicons-flag"></span> 
+                        <span class="dashicons dashicons-flag"></span>
                         Notifications
                     </h3>
                     <p></p>
@@ -90,7 +98,7 @@ trait Admin_helper {
                             ' . (apply_filters('oxi-image-hover-plugin-version', false) ? '' : '<p>By the way, did you know we also have a <a href="https://www.oxilabdemos.com/image-hover/pricing/">Premium Version</a>? It offers lots of options with automatic update. It also comes with 16/5 personal support.</p>') . '
                             <p>Thanks Again!</p>
                             <p></p>
-                        </div>                     
+                        </div>
                     </div>
                     <p></p>
                 </div>';
@@ -130,7 +138,7 @@ trait Admin_helper {
                             <ul class="oxilab-sa-admin-menu">';
 
         $GETPage = sanitize_text_field($_GET['page']);
-        $effects = (!empty($_GET['effects']) ? $_GET['effects'] : '');
+        $effects = (!empty($_GET['effects']) ? sanitize_text_field($_GET['effects']) : '');
         if ($effects != '') :
             $menu .= '<li class="active" >
                             <a href="' . $this->admin_url_convert('oxi-image-hover-ultimate') . '&effects=' . $effects . '">';
@@ -180,7 +188,7 @@ trait Admin_helper {
     }
 
     public function custom_redirect() {
-        
+
     }
 
     public function Image_Shortcode() {
