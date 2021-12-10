@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\General\Admin;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Effects1
  *
@@ -38,7 +42,7 @@ class Effects12 extends Modules {
                 'oxi-image-hover-effects-time', $this->style, [
             'label' => __('Effects Time (S)', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::SLIDER,
-                    'simpleenable' => false,
+            'simpleenable' => false,
             'default' => [
                 'unit' => 'ms',
                 'size' => '',

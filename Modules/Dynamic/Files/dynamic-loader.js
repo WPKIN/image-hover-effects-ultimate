@@ -10,6 +10,7 @@ jQuery.noConflict();
             }
 
 
+
             if ($(window).scrollTop() >= ($('#' + $WRAPPERID).offset().top - $(window).height() + 100)) {
                 if (!($WRAPPER.hasClass("post-loading"))) {
                     $WRAPPER.addClass("post-loading");
@@ -19,11 +20,13 @@ jQuery.noConflict();
                             $settings = $WRAPPER.data('settings'),
                             $page = parseInt($WRAPPER.data("page")) + 1;
 
+
                     $.ajax({
-                        url: ImageHoverUltimate.root + 'ImageHoverUltimate/v1/' + $function,
+                        url: oxi_image_dynamic_loader.ajaxurl,
                         method: 'POST',
                         data: {
-                             _wpnonce: ImageHoverUltimate.nonce,
+                            action: 'image_hover_ultimate',
+                            _wpnonce: oxi_image_dynamic_loader.nonce,
                             class: $CLASS,
                             functionname: $function,
                             rawdata: JSON.stringify($settings),
@@ -31,7 +34,6 @@ jQuery.noConflict();
                             optional: $page
                         }
                     }).done(function (response) {
-
                         var word = 'Image Hover Empty Data';
                         var regex = new RegExp('\\b' + word + '\\b');
                         var button = regex.test(response);
@@ -66,16 +68,16 @@ jQuery.noConflict();
                 $settings = $WRAPPER.data('settings'),
                 $page = parseInt($WRAPPER.data("page")) + 1;
         $.ajax({
-            url: ImageHoverUltimate.root + 'ImageHoverUltimate/v1/' + $function,
+            url: oxi_image_dynamic_loader.ajaxurl,
             method: 'POST',
-          
             data: {
-                  _wpnonce: ImageHoverUltimate.nonce,
+                action: 'image_hover_ultimate',
+                _wpnonce: oxi_image_dynamic_loader.nonce,
                 class: $CLASS,
                 functionname: $function,
                 rawdata: JSON.stringify($settings),
                 args: $args,
-                optional: $page,
+                optional: $page
             }
         }).done(function (response) {
             var word = 'Image Hover Empty Data';

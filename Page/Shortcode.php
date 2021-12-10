@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Page;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 class Shortcode {
 
     /**
@@ -231,7 +235,7 @@ class Shortcode {
                                         <div class=" form-group row">
                                             <label for="addons-style-name" class="col-sm-6 col-form-label" oxi-addons-tooltip="Give your Shortcode Name Here">Name</label>
                                             <div class="col-sm-6 addons-dtm-laptop-lock">
-                                                <input class="form-control" type="text" value="" id="addons-style-name"  name="addons-style-name">
+                                                <input class="form-control" type="text" value="" id="addons-style-name"  name="addons-style-name" required>
                                             </div>
                                         </div>
                                     </div>

@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Flipbox\Admin;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Effects1
  *
@@ -206,7 +210,6 @@ class Effects14 extends Modules {
                 ]
         );
 
-
         $this->add_responsive_control(
                 'oxi-image-flip-front-icon-size', $this->style, [
             'label' => __('Icon Size', OXI_IMAGE_HOVER_TEXTDOMAIN),
@@ -361,7 +364,6 @@ class Effects14 extends Modules {
         $this->register_back_heading_settings();
         $this->end_section_devider();
 
-
         $this->end_section_tabs();
     }
 
@@ -470,8 +472,7 @@ class Effects14 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend:before' => '',
             ],
-                    'description' => 'Allows you at hover to attaches one or more shadows into Button.',
-            
+            'description' => 'Allows you at hover to attaches one or more shadows into Button.',
                 ]
         );
         $this->add_responsive_control(
@@ -503,8 +504,7 @@ class Effects14 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-back-section' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-                     'description' => 'Generate space around a Flipbox, inside of any defined borders or Background.',
-           
+            'description' => 'Generate space around a Flipbox, inside of any defined borders or Background.',
                 ]
         );
         $this->add_responsive_control(
@@ -536,15 +536,14 @@ class Effects14 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-back-section' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-                     'description' => 'Generate space Outside a Flipbox.',
-           
+            'description' => 'Generate space Outside a Flipbox.',
                 ]
         );
         $this->end_controls_section();
     }
 
     public function modal_form_data() {
-        echo '<div class="modal-header">                    
+        echo '<div class="modal-header">
                     <h4 class="modal-title">Image Hover Form</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
@@ -585,7 +584,6 @@ class Effects14 extends Modules {
                 ]
         );
 
-
         $this->add_control(
                 'image_hover_back_description', $this->style, [
             'label' => __('Backend Description', OXI_IMAGE_HOVER_TEXTDOMAIN),
@@ -593,7 +591,6 @@ class Effects14 extends Modules {
             'description' => 'Add Your Backend Description Unless make it blank.'
                 ]
         );
-
 
         $this->start_controls_tabs(
                 'image_hover-start-tabs', [
@@ -627,7 +624,6 @@ class Effects14 extends Modules {
         $this->end_controls_tab();
         $this->end_controls_tabs();
 
-
         $this->add_group_control(
                 'image_hover_button_link', $this->style, [
             'label' => __('URL', OXI_IMAGE_HOVER_TEXTDOMAIN),
@@ -638,7 +634,6 @@ class Effects14 extends Modules {
             'description' => 'Add Your Desire Link or Url Unless make it blank'
                 ]
         );
-
 
         echo '</div>';
     }

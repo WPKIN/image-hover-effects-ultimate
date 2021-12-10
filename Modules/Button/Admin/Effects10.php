@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Button\Admin;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Effects10
  *
@@ -40,7 +44,7 @@ class Effects10 extends Modules {
             'showing' => TRUE,
                 ]
         );
-         $this->add_control(
+        $this->add_control(
                 'oxi-image-hover-background-color', $this->style, [
             'label' => esc_html__('Background', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::GRADIENT,

@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Helper;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 trait Admin_helper {
 
     public function Public_loader() {
@@ -218,6 +222,19 @@ trait Admin_helper {
     }
 
     public function User_Reviews() {
+
+        $user_role = get_option('oxi_addons_user_permission');
+        $role_object = get_role($user_role);
+        $first_key = '';
+        if (isset($role_object->capabilities) && is_array($role_object->capabilities)) {
+            reset($role_object->capabilities);
+            $first_key = key($role_object->capabilities);
+        } else {
+            $first_key = 'manage_options';
+        }
+        if (!current_user_can($first_key)):
+            return;
+        endif;
         $this->admin_recommended();
         $this->admin_notice();
     }

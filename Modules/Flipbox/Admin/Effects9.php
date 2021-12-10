@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Flipbox\Admin;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Effects1
  *
@@ -277,7 +281,6 @@ class Effects9 extends Modules {
                 ]
         );
 
-
         $this->add_control(
                 'oxi-image-flip-back-icon-color', $this->style, [
             'label' => __('Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
@@ -315,7 +318,7 @@ class Effects9 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ],  'description' => 'Margin properties are used to create space around Icon.',
+            ], 'description' => 'Margin properties are used to create space around Icon.',
                 ]
         );
         $this->add_control(
@@ -380,7 +383,6 @@ class Effects9 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-back-section' => '',
             ], 'description' => 'Customize Hover Background with Color or Gradient or Image properties.',
-             
                 ]
         );
 
@@ -390,7 +392,6 @@ class Effects9 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-back-section' => '',
             ], 'description' => 'Border property is used to set the Hover Border of the Flipbox.',
-            
                 ]
         );
 
@@ -438,8 +439,7 @@ class Effects9 extends Modules {
                 . '{{WRAPPER}} .oxi-image-hover.oxi-touch .oxi-image-hover-figure .oxi-image-hover-figure-backend:after, '
                 . '{{WRAPPER}} .oxi-image-hover:hover .oxi-image-hover-figure .oxi-image-hover-figure-back-section, '
                 . '{{WRAPPER}} .oxi-image-hover.oxi-touch .oxi-image-hover-figure .oxi-image-hover-figure-back-section ' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ],'description' => 'Allows you to add rounded corners to Flipbox with options.',
-            
+            ], 'description' => 'Allows you to add rounded corners to Flipbox with options.',
                 ]
         );
         $this->add_group_control(
@@ -447,8 +447,7 @@ class Effects9 extends Modules {
             'type' => Controls::BOXSHADOW,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend:before' => '',
-            ],'description' => 'Allows you at hover to attaches one or more shadows into Button.',
-            
+            ], 'description' => 'Allows you at hover to attaches one or more shadows into Button.',
                 ]
         );
         $this->add_responsive_control(
@@ -479,20 +478,18 @@ class Effects9 extends Modules {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-back-section' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ],'description' => 'Generate space around a Flipbox, inside of any defined borders or Background.',
-            
+            ], 'description' => 'Generate space around a Flipbox, inside of any defined borders or Background.',
                 ]
         );
         $this->end_controls_section();
     }
 
     public function modal_form_data() {
-        echo '<div class="modal-header">                    
+        echo '<div class="modal-header">
                     <h4 class="modal-title">Image Hover Form</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">';
-
 
         $this->add_control(
                 'image_hover_front_icon', $this->style, [
@@ -509,7 +506,6 @@ class Effects9 extends Modules {
             'description' => 'Add Your Flipbox Backend Icon.'
                 ]
         );
-
 
         $this->start_controls_tabs(
                 'image_hover-start-tabs', [
@@ -542,7 +538,6 @@ class Effects9 extends Modules {
         );
         $this->end_controls_tab();
         $this->end_controls_tabs();
-
 
         $this->add_group_control(
                 'image_hover_button_link', $this->style, [

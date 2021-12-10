@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Compailer
  *
@@ -27,10 +31,8 @@ class Compailer extends Public_Render {
         if ($this->dynamicLoad):
             wp_enqueue_script('oxi_image_dynamic_loader', OXI_IMAGE_HOVER_URL . '/Modules/Dynamic/Files/dynamic-loader.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
             $this->JSHANDLE = 'oxi_image_dynamic_loader';
-            wp_localize_script('oxi_image_dynamic_loader', 'ImageHoverUltimate', array(
-                'root' => esc_url_raw(rest_url()),
-                'nonce' => wp_create_nonce('wp_rest')
-            ));
+            wp_localize_script('oxi_image_dynamic_loader', 'oxi_image_dynamic_loader', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('image_hover_ultimate')));
+
         elseif ($this->dynamicCarousel):
             wp_enqueue_script('oxi-image-carousel-slick.min', OXI_IMAGE_HOVER_URL . '/Modules/Carousel/Files/slick.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
             $this->JSHANDLE = 'oxi-image-carousel-slick.min';

@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Carousel;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Modules
  *
@@ -189,7 +193,7 @@ class Modules extends Admin_Render {
                     'yes' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'no' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'return_value' => 'yes',
-                     'description' => 'Do you want Infinite Loop.'
+                    'description' => 'Do you want Infinite Loop.'
                 ]
         );
         $this->add_control(
@@ -245,7 +249,7 @@ class Modules extends Admin_Render {
                     'yes' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'no' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
                     'return_value' => 'yes',
-                     'description' => 'Do you want Dots for pagination.'
+                    'description' => 'Do you want Dots for pagination.'
                 ]
         );
 
@@ -296,7 +300,6 @@ class Modules extends Admin_Render {
                     'type' => Controls::ICON,
                     'default' => 'fas fa-chevron-left',
                     'description' => 'Select Left Arrow Icon From Icon List.'
-                    
                 ]
         );
         $this->end_controls_tab();
@@ -411,7 +414,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .oxi_carousel_arrows' => 'top:{{SIZE}}{{UNIT}}; transform: translateY(-{{SIZE}}{{UNIT}});',
                     ],
-                     'description' => 'Set Arrow icon Posiztion Y.'
+                    'description' => 'Set Arrow icon Posiztion Y.'
                 ]
         );
         $this->start_controls_tabs(
@@ -434,7 +437,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .oxi_carousel_arrows .oxi-icons' => 'color: {{VALUE}};',
                     ],
-                     'description' => 'Select Arrow icon Color.'
+                    'description' => 'Select Arrow icon Color.'
                 ]
         );
         $this->add_control(
@@ -633,7 +636,7 @@ class Modules extends Admin_Render {
                         ],
                     ],
                     'selector' => [
-                       '{{WRAPPER}} .oxi_carousel_dots li' => 'width: {{SIZE}}{{UNIT}};',
+                        '{{WRAPPER}} .oxi_carousel_dots li' => 'width: {{SIZE}}{{UNIT}};',
                     ],
                     'description' => 'Confirm Dots Width with multiple options.',
                 ]
@@ -776,7 +779,7 @@ class Modules extends Admin_Render {
         $this->end_controls_tab();
 
         $this->start_controls_tab();
-       
+
         $this->add_control(
                 'carousel_dots_bg_color_hover',
                 $this->style,
@@ -788,7 +791,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .oxi_carousel_dots li:hover button:before' => 'background: {{VALUE}};',
                     ],
-                     'description' => 'Confirm Dots hover Background Color.',
+                    'description' => 'Confirm Dots hover Background Color.',
                 ]
         );
         $this->add_group_control(
@@ -804,7 +807,7 @@ class Modules extends Admin_Render {
         );
         $this->end_controls_tab();
         $this->start_controls_tab();
-        
+
         $this->add_control(
                 'carousel_dots_bg_color_active',
                 $this->style,
@@ -816,7 +819,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .oxi_carousel_dots li.slick-active button:before' => 'background: {{VALUE}};',
                     ],
-                     'description' => 'Confirm Dots hover Background Color.',
+                    'description' => 'Confirm Dots hover Background Color.',
                 ]
         );
         $this->add_group_control(
@@ -876,7 +879,7 @@ class Modules extends Admin_Render {
      * @since 9.3.0
      */
     public function modal_opener() {
-        
+
     }
 
 }

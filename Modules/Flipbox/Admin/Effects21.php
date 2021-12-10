@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Flipbox\Admin;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Effects21
  *
@@ -205,8 +209,6 @@ class Effects21 extends Modules {
                 ]
         );
 
-
-
         $this->add_responsive_control(
                 'oxi-image-flip-front-number-width', $this->style, [
             'label' => __('Height & Width', OXI_IMAGE_HOVER_TEXTDOMAIN),
@@ -371,10 +373,9 @@ class Effects21 extends Modules {
         $this->register_back_button_settings();
         $this->end_section_devider();
 
-
         $this->end_section_tabs();
     }
-   
+
     public function register_back_content_settings() {
         $this->start_controls_section(
                 'oxi-image-hover', [
@@ -401,8 +402,7 @@ class Effects21 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-back-section' => '',
             ],
-                     'description' => 'Customize Content Aginment as Top, Bottom, Left or Center.',
-           
+            'description' => 'Customize Content Aginment as Top, Bottom, Left or Center.',
                 ]
         );
         $this->add_group_control(
@@ -411,8 +411,7 @@ class Effects21 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend-section-body' => '',
             ],
-                     'description' => 'Customize Hover Background with Color or Gradient or Image properties.',
-           
+            'description' => 'Customize Hover Background with Color or Gradient or Image properties.',
                 ]
         );
 
@@ -422,8 +421,7 @@ class Effects21 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-back-section' => '',
             ],
-                    'description' => 'Border property is used to set the Hover Border of the Flipbox.',
-           
+            'description' => 'Border property is used to set the Hover Border of the Flipbox.',
                 ]
         );
 
@@ -474,8 +472,7 @@ class Effects21 extends Modules {
                 . '{{WRAPPER}} .oxi-image-hover:hover .oxi-image-hover-figure .oxi-image-hover-figure-back-section, '
                 . '{{WRAPPER}} .oxi-image-hover.oxi-touch .oxi-image-hover-figure .oxi-image-hover-figure-back-section ' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-                     'description' => 'Allows you to add rounded corners to Flipbox with options.',
-           
+            'description' => 'Allows you to add rounded corners to Flipbox with options.',
                 ]
         );
         $this->add_group_control(
@@ -483,8 +480,7 @@ class Effects21 extends Modules {
             'type' => Controls::BOXSHADOW,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend:before' => '',
-            ],'description' => 'Allows you at hover to attaches one or more shadows into Button.',
-            
+            ], 'description' => 'Allows you at hover to attaches one or more shadows into Button.',
                 ]
         );
         $this->add_responsive_control(
@@ -516,8 +512,7 @@ class Effects21 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-back-section' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-                     'description' => 'Generate space around a Flipbox, inside of any defined borders or Background.',
-           
+            'description' => 'Generate space around a Flipbox, inside of any defined borders or Background.',
                 ]
         );
         $this->add_responsive_control(
@@ -549,15 +544,14 @@ class Effects21 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-back-section' => 'margin:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-                     'description' => 'Generate space outside a Flipbox.',
-           
+            'description' => 'Generate space outside a Flipbox.',
                 ]
         );
         $this->end_controls_section();
     }
 
     public function modal_form_data() {
-        echo '<div class="modal-header">                    
+        echo '<div class="modal-header">
                     <h4 class="modal-title">Image Hover Form</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
@@ -590,8 +584,6 @@ class Effects21 extends Modules {
             'description' => 'Add your Serial Number, Use Any number for knowing the serial'
                 ]
         );
-
-
 
         $this->add_control(
                 'image_hover_back_description', $this->style, [
@@ -632,7 +624,6 @@ class Effects21 extends Modules {
         );
         $this->end_controls_tab();
         $this->end_controls_tabs();
-
 
         $this->add_group_control(
                 'image_hover_button_link', $this->style, [

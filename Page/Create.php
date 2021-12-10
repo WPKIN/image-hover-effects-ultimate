@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Page;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Create
  *
@@ -132,7 +136,7 @@ class Create {
     }
 
     public function JSON_DATA() {
-        
+
     }
 
     public function Import_header() {
@@ -204,7 +208,7 @@ class Create {
                             </div>
                             <div class="oxi-addons-style-preview-bottom">
                                 <div class="oxi-addons-style-preview-bottom-left">
-                <?php echo ucfirst($this->effects); ?>
+                                    <?php echo ucfirst($this->effects); ?>
                                     <?php echo $key; ?>
                                 </div>
                                 <div class="oxi-addons-style-preview-bottom-right">
@@ -214,14 +218,14 @@ class Create {
                             </div>
                         </div>
                     </div>
-                <?php
-            else :
-                $importbutton = true;
-            endif;
-        }
+                    <?php
+                else :
+                    $importbutton = true;
+                endif;
+            }
 
-        if ($importbutton) :
-            ?>
+            if ($importbutton) :
+                ?>
                 <div class="oxi-addons-col-1 oxi-import">
                     <div class="oxi-addons-style-preview">
                         <div class="oxilab-admin-style-preview-top">
@@ -236,9 +240,9 @@ class Create {
                         </div>
                     </div>
                 </div>
-            <?php
-        endif;
-        ?>
+                <?php
+            endif;
+            ?>
 
 
         </div>
@@ -248,51 +252,51 @@ class Create {
     public function import_template() {
         ?>
         <div class="oxi-addons-row">
-        <?php
-        foreach ($this->TEMPLATE as $key => $value) {
+            <?php
+            foreach ($this->TEMPLATE as $key => $value) {
 
-            if (!array_key_exists($this->effects . '-' . $key, $this->activated_template)) :
-                ?>
+                if (!array_key_exists($this->effects . '-' . $key, $this->activated_template)) :
+                    ?>
                     <div class="oxi-addons-col-1" id="<?php echo $key; ?>">
                         <div class="oxi-addons-style-preview">
                             <div class="oxi-addons-style-preview-top oxi-addons-center">
-                <?php
-                $i = 1;
-                $lays = count($value);
-                foreach ($value as $filename) {
-                    $folder = OXI_IMAGE_HOVER_PATH . 'Modules/' . ucfirst($this->effects) . '/Layouts/' . $key . '/';
-                    if (is_file($folder . $filename)) {
-                        $template = file_get_contents($folder . $filename);
-                        $params = json_decode($template, true);
-                        $s = explode('-', $params['style']['style_name']);
+                                <?php
+                                $i = 1;
+                                $lays = count($value);
+                                foreach ($value as $filename) {
+                                    $folder = OXI_IMAGE_HOVER_PATH . 'Modules/' . ucfirst($this->effects) . '/Layouts/' . $key . '/';
+                                    if (is_file($folder . $filename)) {
+                                        $template = file_get_contents($folder . $filename);
+                                        $params = json_decode($template, true);
+                                        $s = explode('-', $params['style']['style_name']);
 
-                        if ($lays == 3):
-                            echo '<div class="oxi-bt-col-lg-4 oxi-bt-col-md-6 oxi-bt-col-sm-12">';
-                        elseif ($lays == 2):
-                            echo '<div class="oxi-bt-col-lg-6 oxi-bt-col-md-12 oxi-bt-col-sm-12">';
-                        else:
-                            echo '<div class="oxi-bt-col-lg-12 oxi-bt-col-md-12 oxi-bt-col-sm-12">';
-                        endif;
+                                        if ($lays == 3):
+                                            echo '<div class="oxi-bt-col-lg-4 oxi-bt-col-md-6 oxi-bt-col-sm-12">';
+                                        elseif ($lays == 2):
+                                            echo '<div class="oxi-bt-col-lg-6 oxi-bt-col-md-12 oxi-bt-col-sm-12">';
+                                        else:
+                                            echo '<div class="oxi-bt-col-lg-12 oxi-bt-col-md-12 oxi-bt-col-sm-12">';
+                                        endif;
 
-                        $CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($s[0]) . '\Render\Effects' . $s[1];
-                        if (class_exists($CLASS)) :
-                            new $CLASS($params['style'], $params['child']);
-                        endif;
-                        echo '</div>';
-                        $i++;
-                    }
-                }
-                ?>
+                                        $CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($s[0]) . '\Render\Effects' . $s[1];
+                                        if (class_exists($CLASS)) :
+                                            new $CLASS($params['style'], $params['child']);
+                                        endif;
+                                        echo '</div>';
+                                        $i++;
+                                    }
+                                }
+                                ?>
                             </div>
                             <div class="oxi-addons-style-preview-bottom">
                                 <div class="oxi-addons-style-preview-bottom-left">
-                <?php echo ucfirst($this->effects); ?>
+                                    <?php echo ucfirst($this->effects); ?>
                                     <?php echo $key; ?>
                                 </div>
                                 <div class="oxi-addons-style-preview-bottom-right">
-                <?php
-                if (apply_filters('oxi-image-hover-plugin-version', false) == true || array_key_exists($this->effects . '-' . $key, $this->pre_clecked)) :
-                    ?>
+                                    <?php
+                                    if (apply_filters('oxi-image-hover-plugin-version', false) == true || array_key_exists($this->effects . '-' . $key, $this->pre_clecked)) :
+                                        ?>
                                         <button class="btn btn-success oxi-addons-addons-style-btn-active" title="Active Templates" data-value="<?php echo $key; ?>" data-effects="<?php echo $this->effects; ?>" type="button" value="Active" name="styleactive<?php echo $key; ?>">Active Templates</button>
                                         <?php
                                     else :
@@ -305,20 +309,20 @@ class Create {
                             </div>
                         </div>
                     </div>
-                <?php
-            endif;
-        }
-        ?>
+                    <?php
+                endif;
+            }
+            ?>
         </div>
-            <?php
-        }
+        <?php
+    }
 
-        public function create_new() {
-            echo __('<div class="modal fade" id="oxi-addons-style-create-modal" >
+    public function create_new() {
+        echo __('<div class="modal fade" id="oxi-addons-style-create-modal" >
                         <form method="post" id="oxi-addons-style-modal-form">
                             <div class="modal-dialog modal-sm">
                                 <div class="modal-content">
-                                    <div class="modal-header">                    
+                                    <div class="modal-header">
                                         <h4 class="modal-title">New Image Hover</h4>
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
@@ -326,7 +330,7 @@ class Create {
                                         <div class=" form-group row">
                                             <label for="addons-style-name" class="col-sm-6 col-form-label" oxi-addons-tooltip="Give your Shortcode Name Here">Name</label>
                                             <div class="col-sm-6 addons-dtm-laptop-lock">
-                                                <input class="form-control" type="text" value="" id="style-name"  name="style-name">
+                                                <input class="form-control" type="text" value="" id="style-name"  name="style-name" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -355,7 +359,7 @@ class Create {
                             </div>
                         </form>
                     </div>');
-            ?>
+        ?>
         <div class="modal fade" tabindex="-1" role="dialog" id="oxi-addons-style-web-template" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">

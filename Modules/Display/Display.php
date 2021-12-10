@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Display;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of General
  *
@@ -38,7 +42,7 @@ class Display extends Create {
                         <form method="post" id="oxi-addons-style-modal-form">
                             <div class="modal-dialog modal-sm">
                                 <div class="modal-content">
-                                    <div class="modal-header">                    
+                                    <div class="modal-header">
                                         <h4 class="modal-title">New Display Post</h4>
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
@@ -46,7 +50,7 @@ class Display extends Create {
                                         <div class=" form-group row">
                                             <label for="addons-style-name" class="col-sm-6 col-form-label" oxi-addons-tooltip="Give your Shortcode Name Here">Name</label>
                                             <div class="col-sm-6 addons-dtm-laptop-lock">
-                                                <input class="form-control" type="text" value="" id="style-name"  name="style-name">
+                                                <input class="form-control" type="text" value="" id="style-name"  name="style-name" required>
                                             </div>
                                         </div>
                                         <div class="form-group row d-none">
@@ -70,10 +74,6 @@ class Display extends Create {
                         </form>
                     </div>');
     }
-
-   
-
-  
 
     public function JSON_DATA() {
         $basename = array_map('basename', glob(OXI_IMAGE_HOVER_PATH . 'Modules/' . ucfirst($this->effects) . '/Layouts/*', GLOB_ONLYDIR));

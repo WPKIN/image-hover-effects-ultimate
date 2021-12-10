@@ -23,8 +23,7 @@ jQuery.noConflict();
                         rawdata: rawdata
                     }
                 });
-                console.log(functionname);
-                console.log(result);
+               
                 setTimeout(function () {
                     return callback(result);
                 }, 2000);

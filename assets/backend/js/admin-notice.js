@@ -15,7 +15,6 @@ jQuery.noConflict();
                 notice: notice,
             }
         }).done(function (response) {
-            console.log(response);
             $('.oxilab-image-hover-review-notice').remove();
         });
     });

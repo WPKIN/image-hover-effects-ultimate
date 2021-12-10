@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Classes;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Image Hover Rest API
  *
@@ -73,9 +77,52 @@ class ImageApi {
             register_rest_route(untrailingslashit('ImageHoverUltimate/v1/'), '/(?P<action>\w+)/', array(
                 'methods' => array('GET', 'POST'),
                 'callback' => [$this, 'api_action'],
-                'permission_callback' => '__return_true'
+                'permission_callback' => array($this, 'get_permissions_check'),
             ));
         });
+
+        add_action('wp_ajax_nopriv_image_hover_ultimate', array($this, 'ajax_action'));
+        add_action('wp_ajax_image_hover_ultimate', array($this, 'ajax_action'));
+    }
+
+    public function get_permissions_check($request) {
+        $user_role = get_option('oxi_addons_user_permission');
+        $role_object = get_role($user_role);
+        $first_key = '';
+        if (isset($role_object->capabilities) && is_array($role_object->capabilities)) {
+            reset($role_object->capabilities);
+            $first_key = key($role_object->capabilities);
+        } else {
+            $first_key = 'manage_options';
+        }
+        return current_user_can($first_key);
+    }
+
+    public function ajax_action() {
+
+        $wpnonce = sanitize_key(wp_unslash($_POST['_wpnonce']));
+        if (!wp_verify_nonce($wpnonce, 'image_hover_ultimate')):
+            return new \WP_REST_Request('Invalid URL', 422);
+            die();
+        endif;
+        $classname = isset($_POST['class']) ? '\\' . str_replace('\\\\', '\\', sanitize_text_field($_POST['class'])) : '';
+        if (strpos($classname, 'OXI_IMAGE_HOVER_PLUGINS') === false):
+            return new \WP_REST_Request('Invalid URL', 422);
+        endif;
+        $functionname = isset($_POST['functionname']) ? sanitize_text_field($_POST['functionname']) : '';
+        if ($functionname != '__rest_api_post'):
+            return new \WP_REST_Request('Invalid URL', 422);
+        endif;
+        $rawdata = isset($_POST['rawdata']) ? sanitize_post($_POST['rawdata']) : '';
+        $args = isset($_POST['args']) ? sanitize_post($_POST['args']) : '';
+        $optional = isset($_POST['optional']) ? sanitize_post($_POST['optional']) : '';
+        if (!empty($classname) && !empty($functionname)):
+            ob_start();
+            $CLASS = new $classname;
+            $CLASS->__construct($functionname, $rawdata, $args, $optional);
+            echo ob_get_clean();
+        endif;
+        die();
     }
 
     public function api_action($request) {
@@ -89,23 +136,10 @@ class ImageApi {
         $this->rawdata = addslashes($request['rawdata']);
         $this->styleid = $request['styleid'];
         $this->childid = $request['childid'];
-        $class = $request['class'];
         $action_class = strtolower($request->get_method()) . '_' . sanitize_key($request['action']);
-        if ($class != '') :
-            if (strpos($class, 'OXI_IMAGE_HOVER_PLUGINS') === false):
-                return new \WP_REST_Request('Invalid URL', 422);
-            endif;
-            $args = $request['args'];
-            $optional = $request['optional'];
-            ob_start();
-            $CLASS = new $class;
-            $CLASS->__construct($request['action'], $this->rawdata, $args, $optional);
-            return ob_get_clean();
-        else :
-            if (method_exists($this, $action_class)) {
-                return $this->{$action_class}();
-            }
-        endif;
+        if (method_exists($this, $action_class)) {
+            return $this->{$action_class}();
+        }
     }
 
     public function array_replace($arr = [], $search = '', $replace = '') {

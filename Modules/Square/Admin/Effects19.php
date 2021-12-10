@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Square\Admin;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Effects19
  *
@@ -227,12 +231,12 @@ class Effects19 extends Modules {
             'description' => 'Text Shadow property adds shadow to Heading.',
                 ]
         );
-        
+
         $this->add_responsive_control(
                 'oxi-image-hover-heading-margin', $this->style, [
             'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
-             'simpledimensions' => 'heading',
+            'simpledimensions' => 'heading',
             'default' => [
                 'unit' => 'px',
                 'size' => '',
@@ -314,7 +318,7 @@ class Effects19 extends Modules {
     }
 
     public function register_heading_underline() {
-        
+
     }
 
 }

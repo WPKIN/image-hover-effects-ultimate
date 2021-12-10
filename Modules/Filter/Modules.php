@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Filter;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Modules
  *
@@ -82,7 +86,6 @@ class Modules extends Admin_Render {
                 ]
         );
 
-
         $all_category_data = (array_key_exists('category_menu_settings', $this->style) && is_array($this->style['category_menu_settings'])) ? $this->style['category_menu_settings'] : [];
 
         foreach ($all_category_data as $value) :
@@ -155,7 +158,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .image-hover-filter-style .image-hover-category-menu' => 'justify-content: {{VALUE}};',
                     ],
-                     'description' => __('Set menu align as left, right or center ', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'description' => __('Set menu align as left, right or center ', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 ]
         );
         $this->add_group_control(
@@ -225,10 +228,9 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .image-hover-filter-style .image-hover-category-menu-item.category_fix_width' => 'width: {{SIZE}}{{UNIT}};',
                     ],
-                      'description' => 'Adjust Filter Menu Width with multiple Options',
+                    'description' => 'Adjust Filter Menu Width with multiple Options',
                 ]
         );
-
 
         $this->start_controls_tabs(
                 'image-hover-start-tabs',
@@ -265,7 +267,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .image-hover-filter-style .image-hover-category-menu-item' => 'background: {{VALUE}};',
                     ],
-                     'description' => 'Adjust Filter Menu Background with Multiple Options',
+                    'description' => 'Adjust Filter Menu Background with Multiple Options',
                 ]
         );
         $this->add_group_control(
@@ -276,7 +278,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .image-hover-filter-style .image-hover-category-menu-item' => '',
                     ],
-                     'description' => 'Adjust Filter Menu Border with Multiple Options',
+                    'description' => 'Adjust Filter Menu Border with Multiple Options',
                 ]
         );
         $this->add_group_control(
@@ -287,7 +289,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .image-hover-filter-style .image-hover-category-menu-item' => '',
                     ],
-                     'description' => 'Adjust Filter Menu Boxshadow with Multiple Options',
+                    'description' => 'Adjust Filter Menu Boxshadow with Multiple Options',
                 ]
         );
         $this->add_responsive_control(
@@ -320,7 +322,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .image-hover-filter-style .image-hover-category-menu-item' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
-                     'description' => 'Adjust Filter Menu Border Radius with Multiple Options',
+                    'description' => 'Adjust Filter Menu Border Radius with Multiple Options',
                 ]
         );
         $this->end_controls_tab();
@@ -336,7 +338,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .image-hover-filter-style .image-hover-category-menu-item:hover' => 'color: {{VALUE}};',
                     ],
-                     'description' => 'Adjust Filter Menu Color',
+                    'description' => 'Adjust Filter Menu Color',
                 ]
         );
         $this->add_control(
@@ -350,7 +352,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .image-hover-filter-style .image-hover-category-menu-item:hover' => 'background: {{VALUE}};',
                     ],
-                     'description' => 'Adjust Filter Menu Background with Multiple Options',
+                    'description' => 'Adjust Filter Menu Background with Multiple Options',
                 ]
         );
         $this->add_group_control(
@@ -361,7 +363,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .image-hover-filter-style .image-hover-category-menu-item:hover' => '',
                     ],
-                     'description' => 'Adjust Filter Menu Border with Multiple Options',
+                    'description' => 'Adjust Filter Menu Border with Multiple Options',
                 ]
         );
         $this->add_group_control(
@@ -372,7 +374,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .image-hover-filter-style .image-hover-category-menu-item:hover' => '',
                     ],
-                     'description' => 'Adjust Filter Menu Boxshadow with Multiple Options',
+                    'description' => 'Adjust Filter Menu Boxshadow with Multiple Options',
                 ]
         );
         $this->add_responsive_control(
@@ -405,7 +407,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .image-hover-filter-style .image-hover-category-menu-item:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
-                     'description' => 'Adjust Filter Menu Border Radius with Multiple Options',
+                    'description' => 'Adjust Filter Menu Border Radius with Multiple Options',
                 ]
         );
         $this->end_controls_tab();
@@ -421,7 +423,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .image-hover-filter-style .image-hover-category-menu-item.oxi_active' => 'color: {{VALUE}};',
                     ],
-                     'description' => 'Adjust Filter Menu Color',
+                    'description' => 'Adjust Filter Menu Color',
                 ]
         );
         $this->add_control(
@@ -435,7 +437,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .image-hover-filter-style .image-hover-category-menu-item.oxi_active' => 'background: {{VALUE}};',
                     ],
-                     'description' => 'Adjust Filter Menu Background with Multiple Options',
+                    'description' => 'Adjust Filter Menu Background with Multiple Options',
                 ]
         );
         $this->add_group_control(
@@ -446,7 +448,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .image-hover-filter-style .image-hover-category-menu-item.oxi_active' => '',
                     ],
-                     'description' => 'Adjust Filter Menu Border with Multiple Options',
+                    'description' => 'Adjust Filter Menu Border with Multiple Options',
                 ]
         );
         $this->add_group_control(
@@ -457,7 +459,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .image-hover-filter-style .image-hover-category-menu-item.oxi_active' => '',
                     ],
-                     'description' => 'Adjust Filter Menu Boxshadow with Multiple Options',
+                    'description' => 'Adjust Filter Menu Boxshadow with Multiple Options',
                 ]
         );
         $this->add_responsive_control(
@@ -490,7 +492,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .image-hover-filter-style .image-hover-category-menu-item.oxi_active' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
-                     'description' => 'Adjust Filter Menu Border Radius with Multiple Options',
+                    'description' => 'Adjust Filter Menu Border Radius with Multiple Options',
                 ]
         );
         $this->end_controls_tab();
@@ -527,7 +529,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .image-hover-filter-style .image-hover-category-menu-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
-                     'description' => 'Adjust Filter Menu Padding with Multiple Options',
+                    'description' => 'Adjust Filter Menu Padding with Multiple Options',
                 ]
         );
         $this->add_responsive_control(
@@ -560,7 +562,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .image-hover-filter-style .image-hover-category-menu-item' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
-                     'description' => 'Adjust Filter Menu Margin with Multiple Options',
+                    'description' => 'Adjust Filter Menu Margin with Multiple Options',
                 ]
         );
         $this->end_controls_section();
@@ -616,7 +618,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .image-hover-filter-style .image-hover-category-item-show' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
-                     'description' => 'Adjust Filter Item Padding with Multiple Options',
+                    'description' => 'Adjust Filter Item Padding with Multiple Options',
                 ]
         );
         $this->add_responsive_control(
@@ -649,7 +651,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .image-hover-filter-style .image-hover-category' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
-                     'description' => 'Adjust Filter Item Margin with Multiple Options',
+                    'description' => 'Adjust Filter Item Margin with Multiple Options',
                 ]
         );
         $this->end_controls_section();

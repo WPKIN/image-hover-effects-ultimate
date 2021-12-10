@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Button\Admin;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Effects4
  *
@@ -25,7 +29,7 @@ class Effects4 extends Modules {
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-hover-figure' => '',
                     ],
-                             'simpledescription' => 'Allows you to Set Effects Direction.',
+                    'simpledescription' => 'Allows you to Set Effects Direction.',
                     'description' => 'Allows you to Set Effects Direction.',
                         ]
         );

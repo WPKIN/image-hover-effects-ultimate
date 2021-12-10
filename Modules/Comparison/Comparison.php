@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Comparison;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of General
  *
@@ -21,7 +25,7 @@ class Comparison extends Create {
         }
         ksort($template_data);
         $this->TEMPLATE = $template_data;
-        
+
         $this->pre_active = [
             'comparison-1',
             'comparison-2',

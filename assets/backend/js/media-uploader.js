@@ -23,7 +23,6 @@ jQuery.noConflict();
             attachment = custom_uploader.state().get('selection').first().toJSON();
             var url = attachment.url;
             var alt = attachment.alt;
-            console.log(attachment);
             if ((jQuery("#oxi-addons-list-data-modal").data('bs.modal') || {})._isShown) {
                 jQuery("#oxi-addons-list-data-modal").css({
                     "overflow-x": "hidden",

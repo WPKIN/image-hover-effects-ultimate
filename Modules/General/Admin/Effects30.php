@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\General\Admin;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Effects1
  *
@@ -13,7 +17,7 @@ use OXI_IMAGE_HOVER_PLUGINS\Classes\Controls as Controls;
 class Effects30 extends Modules {
 
     public function register_effects() {
-        
+
     }
 
     public function register_content_settings() {

@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Square;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Square
  *

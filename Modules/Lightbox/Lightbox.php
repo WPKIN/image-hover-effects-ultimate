@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Lightbox;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of General
  *
@@ -20,7 +24,7 @@ class Lightbox extends Create {
         }
         ksort($template_data);
         $this->TEMPLATE = $template_data;
-        
+
         $this->pre_active = [
             'lightbox-1',
         ];

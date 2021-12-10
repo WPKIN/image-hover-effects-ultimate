@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Carousel\Admin;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Effects1
  *
@@ -211,7 +215,7 @@ class Effects2 extends Modules {
     }
 
     public function register_carousel_dots_settings() {
-        
+
     }
 
 }

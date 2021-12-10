@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Flipbox\Admin;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Effects1
  *
@@ -11,9 +15,8 @@ use OXI_IMAGE_HOVER_PLUGINS\Modules\Flipbox\Modules as Modules;
 use OXI_IMAGE_HOVER_PLUGINS\Classes\Controls as Controls;
 
 class Effects2 extends Modules {
-    
-    
-     public function register_frontend_tabs() {
+
+    public function register_frontend_tabs() {
         $this->start_section_tabs(
                 'oxi-image-hover-start-tabs', [
             'condition' => [
@@ -32,8 +35,7 @@ class Effects2 extends Modules {
         $this->end_section_tabs();
     }
 
-
-  public function register_backend_tabs() {
+    public function register_backend_tabs() {
         $this->start_section_tabs(
                 'oxi-image-hover-start-tabs', [
             'condition' => [
@@ -43,25 +45,24 @@ class Effects2 extends Modules {
         );
         $this->start_section_devider();
         $this->register_back_content_settings();
-   
+
         $this->end_section_devider();
 
         $this->start_section_devider();
-            $this->register_back_description_settings();
+        $this->register_back_description_settings();
         $this->end_section_devider();
-
 
         $this->end_section_tabs();
     }
-    
-      public function modal_form_data() {
-        echo '<div class="modal-header">                    
+
+    public function modal_form_data() {
+        echo '<div class="modal-header">
                     <h4 class="modal-title">Image Hover Form</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">';
-       
-       $this->add_control(
+
+        $this->add_control(
                 'image_hover_front_heading', $this->style, [
             'label' => __('Front Title', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::TEXT,
@@ -79,7 +80,6 @@ class Effects2 extends Modules {
                 ]
         );
 
-       
         $this->add_control(
                 'image_hover_front_description', $this->style, [
             'label' => __('Front Description', OXI_IMAGE_HOVER_TEXTDOMAIN),
@@ -94,7 +94,7 @@ class Effects2 extends Modules {
             'description' => 'Add Your Backend Description Unless make it blank.'
                 ]
         );
-      
+
         $this->start_controls_tabs(
                 'image_hover-start-tabs', [
             'separator' => TRUE,
@@ -129,7 +129,6 @@ class Effects2 extends Modules {
         $this->end_controls_tab();
         $this->end_controls_tabs();
 
-
         $this->add_group_control(
                 'image_hover_button_link', $this->style, [
             'label' => __('URL', OXI_IMAGE_HOVER_TEXTDOMAIN),
@@ -140,10 +139,10 @@ class Effects2 extends Modules {
             'description' => 'Add Your Desire Link or Url Unless make it blank'
                 ]
         );
-      
+
         echo '</div>';
     }
-    
+
     /**
      * Template Parent Item Data Rearrange
      *

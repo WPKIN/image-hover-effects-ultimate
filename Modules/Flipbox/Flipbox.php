@@ -2,6 +2,13 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Flipbox;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of General
  *

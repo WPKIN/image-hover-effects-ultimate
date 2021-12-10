@@ -9,13 +9,12 @@ jQuery.noConflict();
         $.ajax({
             url: ImageHoverUltimate.root + 'ImageHoverUltimate/v1/' + $function,
             method: 'POST',
-           
+
             data: {
-                 _wpnonce: ImageHoverUltimate.nonce,
+                _wpnonce: ImageHoverUltimate.nonce,
                 notice: notice,
             }
         }).done(function (response) {
-            console.log(response);
             $('.oxi-addons-admin-notifications').remove();
         });
         return false;

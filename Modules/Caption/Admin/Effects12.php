@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Caption\Admin;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Effects12
  *
@@ -27,7 +31,7 @@ class Effects12 extends Modules {
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-caption-hover' => '',
                     ],
-                              'simpledescription' => 'Allows you to Set Effects Direction.',
+                    'simpledescription' => 'Allows you to Set Effects Direction.',
                     'description' => 'Allows you to Set Effects Direction.',
                         ]
         );

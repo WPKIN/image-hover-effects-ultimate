@@ -20,7 +20,7 @@ jQuery.noConflict();
                     rawdata: rawdata
                 }
             });
-            console.log(result);
+          
             return callback(result);
 
         } catch (error) {

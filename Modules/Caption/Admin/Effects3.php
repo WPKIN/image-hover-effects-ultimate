@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Caption\Admin;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Effects3
  *
@@ -49,12 +53,12 @@ class Effects3 extends Modules {
             'oparetor' => true,
             'default' => 'rgba(9, 124, 219, 1)',
             'selector' => [
-                '{{WRAPPER}} .oxi-image-caption-hover, 
+                '{{WRAPPER}} .oxi-image-caption-hover,
                 {{WRAPPER}} .oxi-image-caption-hover:before,
-                {{WRAPPER}} .oxi-image-caption-hover:after, 
-                {{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-figure, 
+                {{WRAPPER}} .oxi-image-caption-hover:after,
+                {{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-figure,
                 {{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-figure:before,
-                {{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-figure:after, 
+                {{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-figure:after,
                 {{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-figure-caption,
                 {{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-figure-caption:before,
                 {{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-figure-caption:after' => 'background-color: {{VALUE}};',

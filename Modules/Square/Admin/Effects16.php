@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Square\Admin;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Effects16
  *
@@ -344,7 +348,7 @@ class Effects16 extends Modules {
     }
 
     public function register_heading_underline() {
-        
+
     }
 
 }

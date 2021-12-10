@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Square\Admin;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Effects21
  *
@@ -497,7 +501,7 @@ class Effects21 extends Modules {
     }
 
     public function register_heading_underline() {
-        
+
     }
 
 }

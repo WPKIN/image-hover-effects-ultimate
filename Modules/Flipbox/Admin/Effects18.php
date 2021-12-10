@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Flipbox\Admin;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Effects18
  *
@@ -249,8 +253,7 @@ class Effects18 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-icon-section ' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-                     'description' => 'Margin properties are used to create space outside Icon.',
-            
+            'description' => 'Margin properties are used to create space outside Icon.',
                 ]
         );
         $this->end_controls_section();
@@ -274,12 +277,11 @@ class Effects18 extends Modules {
         $this->register_back_button_settings();
         $this->end_section_devider();
 
-
         $this->end_section_tabs();
     }
 
     public function modal_form_data() {
-        echo '<div class="modal-header">                    
+        echo '<div class="modal-header">
                     <h4 class="modal-title">Image Hover Form</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
@@ -310,7 +312,6 @@ class Effects18 extends Modules {
             'description' => 'Add Your Flipbox Front Icon.'
                 ]
         );
-
 
         $this->add_control(
                 'image_hover_front_description', $this->style, [
@@ -358,7 +359,6 @@ class Effects18 extends Modules {
         );
         $this->end_controls_tab();
         $this->end_controls_tabs();
-
 
         $this->add_group_control(
                 'image_hover_button_link', $this->style, [

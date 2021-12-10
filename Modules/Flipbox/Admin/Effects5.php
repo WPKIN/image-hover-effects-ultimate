@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Flipbox\Admin;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Effects1
  *
@@ -41,7 +45,6 @@ class Effects5 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section' => '',
             ], 'description' => 'Customize Hover Background with Color or Gradient or Image properties.',
-           
                 ]
         );
 
@@ -50,8 +53,7 @@ class Effects5 extends Modules {
             'type' => Controls::BORDER,
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section' => '',
-            ],'description' => 'Border property is used to set the Hover Border of the Flipbox.',
-            
+            ], 'description' => 'Border property is used to set the Hover Border of the Flipbox.',
                 ]
         );
 
@@ -90,8 +92,7 @@ class Effects5 extends Modules {
                 . '{{WRAPPER}} .oxi-image-hover-figure-backend:before, '
                 . '{{WRAPPER}} .oxi-image-hover-figure-backend:after, '
                 . '{{WRAPPER}} .oxi-image-hover-figure-back-section ' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ],'description' => 'Allows you to add rounded corners to Flipbox with options.',
-           
+            ], 'description' => 'Allows you to add rounded corners to Flipbox with options.',
                 ]
         );
         $this->add_group_control(
@@ -101,7 +102,6 @@ class Effects5 extends Modules {
                 '{{WRAPPER}} .oxi-image-hover-figure-frontend:before' => '',
                 '{{WRAPPER}} .oxi-image-hover-figure-backend:before' => '',
             ], 'description' => 'Allows you at hover to attaches one or more shadows into Button.',
-           
                 ]
         );
         $this->end_controls_section();
@@ -124,12 +124,11 @@ class Effects5 extends Modules {
         $this->register_back_heading_settings();
         $this->end_section_devider();
 
-
         $this->end_section_tabs();
     }
 
     public function modal_form_data() {
-        echo '<div class="modal-header">                    
+        echo '<div class="modal-header">
                     <h4 class="modal-title">Image Hover Form</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
@@ -184,7 +183,6 @@ class Effects5 extends Modules {
         );
         $this->end_controls_tab();
         $this->end_controls_tabs();
-
 
         $this->add_group_control(
                 'image_hover_button_link', $this->style, [

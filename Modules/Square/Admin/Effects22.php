@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Square\Admin;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Effects21
  *
@@ -410,19 +414,19 @@ class Effects22 extends Modules {
     }
 
     public function register_heading_underline() {
-        
+
     }
 
     public function register_description_settings() {
-        
+
     }
 
     public function register_button_settings() {
-        
+
     }
 
     public function modal_form_data() {
-        echo '<div class="modal-header">                    
+        echo '<div class="modal-header">
                     <h4 class="modal-title">Image Hover Form</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>

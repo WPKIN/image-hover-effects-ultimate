@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Comparison;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Modules
  *
@@ -585,7 +589,7 @@ class Modules extends Admin_Render {
                             'step' => 0.1,
                         ],
                     ],
-                      'description' => 'Update Your Before Image Offset of Comparison Box.',
+                    'description' => 'Update Your Before Image Offset of Comparison Box.',
                 ]
         );
         $this->add_control(
@@ -607,7 +611,7 @@ class Modules extends Admin_Render {
                     'selector' => [
                         '{{WRAPPER}} .oxi-addons-align-btn1' => 'text-align:{{VALUE}};',
                     ],
-                     'description' => 'Update Your Comparison Clicking Option.',
+                    'description' => 'Update Your Comparison Clicking Option.',
                 ]
         );
         $this->add_control(
@@ -627,7 +631,7 @@ class Modules extends Admin_Render {
                             'title' => __('Vertical ', OXI_IMAGE_HOVER_TEXTDOMAIN),
                         ],
                     ],
-                     'description' => 'Update Your Comparison Box Positios as Horizontal or Vertical.',
+                    'description' => 'Update Your Comparison Box Positios as Horizontal or Vertical.',
                 ]
         );
         $this->add_control(

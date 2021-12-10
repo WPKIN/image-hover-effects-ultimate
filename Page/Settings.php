@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Page;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Settings
  *
@@ -63,10 +67,10 @@ class Settings {
                                 <td>
                                     <fieldset>
                                         <select name="oxi_addons_user_permission">
-                                            <?php foreach ($this->roles as $key => $role) { ?>
+                                                <?php foreach ($this->roles as $key => $role) { ?>
                                                 <option value="<?php echo $key; ?>" <?php selected($this->saved_role, $key); ?>>
-                                                    <?php echo $role; ?></option>
-                                            <?php } ?>
+            <?php echo $role; ?></option>
+        <?php } ?>
                                         </select>
                                         <span class="oxi-addons-settings-connfirmation oxi_addons_user_permission"></span>
                                         <br>
@@ -86,12 +90,12 @@ class Settings {
                                         <label for="image_hover_ultimate_mobile_device_key[yes]">
                                             <input type="radio" class="radio" id="image_hover_ultimate_mobile_device_key[yes]"
                                                    name="image_hover_ultimate_mobile_device_key" value=""
-                                                   <?php checked('', get_option('image_hover_ultimate_mobile_device_key'), true); ?>>Yes</label>
+        <?php checked('', get_option('image_hover_ultimate_mobile_device_key'), true); ?>>Yes</label>
                                         <label for="image_hover_ultimate_mobile_device_key[normal]">
                                             <input type="radio" class="radio"
                                                    id="image_hover_ultimate_mobile_device_key[normal]"
                                                    name="image_hover_ultimate_mobile_device_key" value="normal"
-                                                   <?php checked('normal', get_option('image_hover_ultimate_mobile_device_key'), true); ?>>No
+        <?php checked('normal', get_option('image_hover_ultimate_mobile_device_key'), true); ?>>No
                                         </label>
                                         <span
                                             class="oxi-addons-settings-connfirmation image_hover_ultimate_mobile_device_key"></span>
@@ -111,11 +115,11 @@ class Settings {
                                         <label for="oxi_addons_font_awesome[]">
                                             <input type="radio" class="radio" id="oxi_addons_font_awesome[yes]"
                                                    name="oxi_addons_font_awesome" value=""
-                                                   <?php checked('yes', get_option('oxi_addons_font_awesome'), true); ?>>Yes</label>
+        <?php checked('yes', get_option('oxi_addons_font_awesome'), true); ?>>Yes</label>
                                         <label for="oxi_addons_font_awesome[no]">
                                             <input type="radio" class="radio" id="oxi_addons_font_awesome[no]"
                                                    name="oxi_addons_font_awesome" value="no"
-                                                   <?php checked('', get_option('oxi_addons_font_awesome'), true); ?>>No
+        <?php checked('', get_option('oxi_addons_font_awesome'), true); ?>>No
                                         </label>
                                         <span class="oxi-addons-settings-connfirmation oxi_addons_font_awesome"></span>
                                         <br>
@@ -133,11 +137,11 @@ class Settings {
                                         <label for="oxi_addons_way_points[yes]">
                                             <input type="radio" class="radio" id="oxi_addons_way_points[yes]"
                                                    name="oxi_addons_way_points" value=""
-                                                   <?php checked('', get_option('oxi_addons_way_points'), true); ?>>Yes</label>
+        <?php checked('', get_option('oxi_addons_way_points'), true); ?>>Yes</label>
                                         <label for="oxi_addons_way_points[no]">
                                             <input type="radio" class="radio" id="oxi_addons_way_points[no]"
                                                    name="oxi_addons_way_points" value="no"
-                                                   <?php checked('no', get_option('oxi_addons_way_points'), true); ?>>No
+        <?php checked('no', get_option('oxi_addons_way_points'), true); ?>>No
                                         </label>
                                         <span class="oxi-addons-settings-connfirmation oxi_addons_way_points"></span>
                                         <br>
@@ -155,11 +159,11 @@ class Settings {
                                         <label for="oxi_addons_google_font[yes]">
                                             <input type="radio" class="radio" id="oxi_addons_google_font[yes]"
                                                    name="oxi_addons_google_font" value=""
-                                                   <?php checked('', get_option('oxi_addons_google_font'), true); ?>>Yes</label>
+        <?php checked('', get_option('oxi_addons_google_font'), true); ?>>Yes</label>
                                         <label for="oxi_addons_google_font[no]">
                                             <input type="radio" class="radio" id="oxi_addons_google_font[no]"
                                                    name="oxi_addons_google_font" value="no"
-                                                   <?php checked('no', get_option('oxi_addons_google_font'), true); ?>>No
+        <?php checked('no', get_option('oxi_addons_google_font'), true); ?>>No
                                         </label>
                                         <span class="oxi-addons-settings-connfirmation oxi_addons_google_font"></span>
                                         <br>

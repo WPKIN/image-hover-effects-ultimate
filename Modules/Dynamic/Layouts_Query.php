@@ -8,6 +8,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Layouts_Query
  *

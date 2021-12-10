@@ -2,11 +2,20 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Helper;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  *
  * @author $biplob018
  */
 trait CSS_JS_Loader {
+
+    public function admin_css_loader() {
+        $this->admin_css();
+        $this->admin_js();
+    }
 
     public function admin_css() {
         $this->loader_font_familly_validation(['Bree+Serif', 'Source+Sans+Pro']);
@@ -23,11 +32,6 @@ trait CSS_JS_Loader {
             'root' => esc_url_raw(rest_url()),
             'nonce' => wp_create_nonce('wp_rest')
         ));
-    }
-
-    public function admin_css_loader() {
-        $this->admin_css();
-        $this->admin_js();
     }
 
     public function admin_home() {

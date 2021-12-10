@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Carousel\Admin;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Effects1
  *
@@ -116,8 +120,6 @@ class Effects3 extends Modules {
                     'description' => 'How many Image you want to View While carousel',
                 ]
         );
-
-
 
         $this->add_control(
                 'carousel_autoplay',
@@ -495,7 +497,7 @@ class Effects3 extends Modules {
                     'selector' => [
                         '{{WRAPPER}} .oxi_carousel_dots .swiper-pagination-bullet' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
-                      'description' => 'Carousel Dots Border Radius with multiple Options',
+                    'description' => 'Carousel Dots Border Radius with multiple Options',
                 ]
         );
         $this->end_controls_section();

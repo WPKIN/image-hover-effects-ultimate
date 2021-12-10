@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Display;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Modules
  *
@@ -318,8 +322,6 @@ class Modules extends Admin_Render {
                 ]
         );
         $this->end_controls_section();
-
-
 
         $this->start_controls_section(
                 'display-post',
@@ -649,7 +651,7 @@ class Modules extends Admin_Render {
      * @since 9.3.0
      */
     public function modal_opener() {
-        
+
     }
 
 }

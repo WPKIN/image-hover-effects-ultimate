@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Square\Admin;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Effects17
  *
@@ -364,7 +368,7 @@ class Effects17 extends Modules {
                 'oxi-image-hover-heading-padding', $this->style, [
             'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
-             'simpledimensions' => 'heading',
+            'simpledimensions' => 'heading',
             'default' => [
                 'unit' => 'px',
                 'size' => 0,
@@ -446,7 +450,7 @@ class Effects17 extends Modules {
     }
 
     public function register_heading_underline() {
-        
+
     }
 
 }

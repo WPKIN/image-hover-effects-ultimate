@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Flipbox\Admin;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Effects1
  *
@@ -208,7 +212,6 @@ class Effects13 extends Modules {
                 ]
         );
 
-
         $this->add_group_control(
                 'oxi-image-flip-front-number-typho', $this->style, [
             'type' => Controls::TYPOGRAPHY,
@@ -310,7 +313,7 @@ class Effects13 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section .oxi-image-hover-number ' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
-             'description' => 'padding properties are used to create space around Number.',
+            'description' => 'padding properties are used to create space around Number.',
                 ]
         );
         $this->add_group_control(
@@ -343,7 +346,6 @@ class Effects13 extends Modules {
         $this->register_back_icon_settings();
         $this->register_back_button_settings();
         $this->end_section_devider();
-
 
         $this->end_section_tabs();
     }
@@ -698,7 +700,7 @@ class Effects13 extends Modules {
     }
 
     public function modal_form_data() {
-        echo '<div class="modal-header">                    
+        echo '<div class="modal-header">
                     <h4 class="modal-title">Image Hover Form</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
@@ -746,7 +748,6 @@ class Effects13 extends Modules {
                 ]
         );
 
-
         $this->add_control(
                 'image_hover_back_description', $this->style, [
             'label' => __('Backend Description', OXI_IMAGE_HOVER_TEXTDOMAIN),
@@ -786,7 +787,6 @@ class Effects13 extends Modules {
         );
         $this->end_controls_tab();
         $this->end_controls_tabs();
-
 
         $this->add_group_control(
                 'image_hover_button_link', $this->style, [

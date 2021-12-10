@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Flipbox\Admin;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Effects1
  *
@@ -123,12 +127,11 @@ class Effects15 extends Modules {
         $this->register_back_button_settings();
         $this->end_section_devider();
 
-
         $this->end_section_tabs();
     }
 
     public function modal_form_data() {
-        echo '<div class="modal-header">                    
+        echo '<div class="modal-header">
                     <h4 class="modal-title">Image Hover Form</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
@@ -143,8 +146,6 @@ class Effects15 extends Modules {
             'description' => 'Add Your Flipbox Backend Title.'
                 ]
         );
-
-
 
         $this->add_control(
                 'image_hover_back_description', $this->style, [
@@ -187,7 +188,6 @@ class Effects15 extends Modules {
         );
         $this->end_controls_tab();
         $this->end_controls_tabs();
-
 
         $this->add_group_control(
                 'image_hover_button_link', $this->style, [

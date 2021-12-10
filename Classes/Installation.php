@@ -15,15 +15,6 @@ class Installation {
     protected static $lfe_instance = NULL;
 
     /**
-     * Constructor of Shortcode Addons
-     *
-     * @since 9.3.0
-     */
-    public function __construct() {
-        
-    }
-
-    /**
      * Plugin fixed
      *
      * @since 9.3.0
@@ -57,7 +48,7 @@ class Installation {
      * @since 9.3.0
      */
     public function plugin_upgrade_hook() {
-      
+
         $this->Image_Hover_Database();
     }
 
@@ -67,16 +58,11 @@ class Installation {
      * @since 9.3.0
      */
     public function plugin_activation_hook() {
-       
+
         $this->Image_Hover_Database();
         // Redirect to options page
         set_transient('oxi_image_hover_activation_redirect', true, 30);
     }
-
-   
-   
-
-    
 
     public function Image_Hover_Database() {
         global $wpdb;
@@ -112,6 +98,15 @@ class Installation {
         dbDelta($sql2);
         dbDelta($sql3);
         add_option('oxi_image_hover_version', OXI_IMAGE_HOVER_PLUGIN_VERSION);
+    }
+
+    /**
+     * Constructor of Shortcode Addons
+     *
+     * @since 9.3.0
+     */
+    public function __construct() {
+
     }
 
 }

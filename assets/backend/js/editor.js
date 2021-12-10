@@ -40,7 +40,7 @@ jQuery.noConflict();
                     rawdata: rawdata
                 }
             });
-            console.log(result);
+         
             return callback(result);
 
         } catch (error) {
@@ -115,7 +115,7 @@ jQuery.noConflict();
         var styleid = $(this).data('value');
         var functionname = "elements_template_rebuild_data";
         OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, function (callback) {
-            console.log(callback);
+        
             if (callback === "success") {
                 setTimeout(function () {
                     location.reload();
@@ -133,7 +133,7 @@ jQuery.noConflict();
         }
         var functionname = "elements_template_rearrange_save_data";
         OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, function (callback) {
-            console.log(callback);
+         
             if (callback === "success") {
                 $("#OXIAADDONSCHANGEDPOPUP .icon-box").html('<span class="dashicons dashicons-yes"></span>');
                 $("#OXIAADDONSCHANGEDPOPUP .modal-body.text-center h4").html("Great!");
@@ -164,9 +164,9 @@ jQuery.noConflict();
         var functionname = "elements_template_style";
         $(this).html('<span class="dashicons dashicons-admin-generic"></span>');
         OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, function (callback) {
-            console.log(callback);
+           
             if (callback === "success") {
-                console.log(callback);
+              
                 $("#OXIAADDONSCHANGEDPOPUP .icon-box").html('<span class="dashicons dashicons-yes"></span>');
                 $("#OXIAADDONSCHANGEDPOPUP .modal-body.text-center h4").html("Great!");
                 $("#OXIAADDONSCHANGEDPOPUP .modal-body.text-center p").html("Layouts data has been saved successfully.");
@@ -252,7 +252,7 @@ jQuery.noConflict();
                                 $('input[name=' + key + ']').prop('checked', false).removeAttr('checked');
                             }
                         } else if (tp === 'hidden') {
-                            console.log('tp');
+                           
                             $('input[name=' + key + ']').val(value);
                             if ($('input[name=' + key + ']').hasClass('shortcode-addons-media-control-link')) {
                                 $('#' + key).siblings('.shortcode-addons-media-control').removeClass('shortcode-addons-media-control-hidden-button');
@@ -568,7 +568,7 @@ jQuery.noConflict();
             });
         }
     });
-//console.log(offset);
+
 
     function ShortCodeFormSliderINT(ID = '') {
         $this = $('.shortcode-form-slider');
@@ -812,7 +812,6 @@ jQuery.noConflict();
         input.attr('min', $(id).attr('min'));
         input.attr('max', $(id).attr('max'));
         input.attr('step', $(id).attr('step'));
-        // console.log($(id).attr('step'));
 
     });
     $(".shortcode-control-type-dimensions input").on("input", function () {
@@ -839,7 +838,7 @@ jQuery.noConflict();
         BOTTOM = $InputID + '-bottom';
         LEFT = $InputID + '-left';
         if ($input.attr("retundata") !== '' && $input.attr('type') !== 'radio') {
-            //  console.log($this.val());
+         
             var $data = JSON.parse($input.attr("retundata"));
             $.each($data, function (el, obj) {
                 if (el.indexOf('{{KEY}}') != -1) {
@@ -878,7 +877,7 @@ jQuery.noConflict();
             change: function (val) {
                 $data = [];
                 var $This = $(this).children('input');
-                // console.log($(this).children('input'));
+              
                 var _VALUE = $This.val();
                 $id = $This.attr('background');
                 $imagecheck = $("#" + $id + "-img").is(":checked");
@@ -899,7 +898,7 @@ jQuery.noConflict();
                         $BACKGROUND = 'background:' + _VALUE + ', url(\'' + $Image + '\' ) ' + $("#" + $id + "-repeat").val() + ' ' + $("#" + $id + "-position-lap").val() + ';';
                     }
                 }
-                console.log($BACKGROUND);
+               
                 var $data = ($This.attr("retundata") !== '' ? JSON.parse($This.attr("retundata")) : []);
                 $.each($data, function (el, obj) {
                     if (el.indexOf('{{KEY}}') != -1) {

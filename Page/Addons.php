@@ -2,13 +2,16 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Page;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Addons
  *
  * @author $biplob018
  */
-class Addons
-{
+class Addons {
 
     use \OXI_IMAGE_HOVER_PLUGINS\Helper\Public_Helper;
     use \OXI_IMAGE_HOVER_PLUGINS\Helper\CSS_JS_Loader;
@@ -18,27 +21,24 @@ class Addons
 
     public $get_plugins = [];
     public $current_plugins = 'image-hover-effects-ultimate/index.php';
-
     // instance container
     private static $instance = null;
 
-    public static function instance()
-    {
+    public static function instance() {
         if (self::$instance == null) {
             self::$instance = new self;
         }
 
         return self::$instance;
     }
-    public function __construct()
-    {
+
+    public function __construct() {
         $this->CSSJS_load();
         $this->Header();
         $this->Render();
     }
 
-    public function CSSJS_load()
-    {
+    public function CSSJS_load() {
         if (!current_user_can('activate_plugins')) :
             die();
         endif;
@@ -46,14 +46,12 @@ class Addons
         $this->extension();
     }
 
-    public function Header()
-    {
+    public function Header() {
         apply_filters('oxi-image-hover-plugin/admin_menu', TRUE);
         $this->Admin_header();
     }
 
-    public function extension()
-    {
+    public function extension() {
         $response = get_transient(self::GET_LOCAL_PLUGINS);
         if (!$response || !is_array($response)) {
             $URL = self::PLUGINS;
@@ -68,9 +66,8 @@ class Addons
         $this->get_plugins = $response;
     }
 
-    public function Admin_header()
-    {
-?>
+    public function Admin_header() {
+        ?>
         <div class="oxi-addons-wrapper">
             <div class="oxi-addons-import-layouts">
                 <h1>Oxilab Addons
@@ -78,39 +75,38 @@ class Addons
                 <p> We Develop Couple of plugins which will help you to Create Your Modern and Dynamic Websites. Just click and Install </p>
             </div>
         </div>
-    <?php
+        <?php
     }
 
-    public function Render()
-    {
-    ?>
+    public function Render() {
+        ?>
         <div class="oxi-addons-wrapper">
             <div class="oxi-addons-row">
                 <div class="row">
-                    <?php
-                    $installed_plugins = get_plugins();
-                    $active_plugins = array_flip(get_option('active_plugins'));
+        <?php
+        $installed_plugins = get_plugins();
+        $active_plugins = array_flip(get_option('active_plugins'));
 
-                    foreach ($this->get_plugins as $key => $value) {
-                        $modulespath = $value['modules-path'];
-                        if ($modulespath != $this->current_plugins) :
-                            $file_path = $modulespath;
-                            $plugin = explode('/', $file_path)[0];
-                            $message = '';
-                            if (isset($installed_plugins[$file_path])) :
-                                if (array_key_exists($file_path, $active_plugins)) :
-                                    $message = '<a href="#" class="btn btn-light">Installed</a>';
-                                else :
-                                    $activation_url = wp_nonce_url(admin_url('plugins.php?action=activate&plugin=' . $file_path), 'activate-plugin_' . $file_path);
-                                    $message = sprintf('<a href="%s" class="btn btn-info">%s</a>', $activation_url, __('Activate', OXI_IMAGE_HOVER_TEXTDOMAIN));
-                                endif;
-                            else :
-                                if (current_user_can('install_plugins')) :
-                                    $install_url = wp_nonce_url(add_query_arg(array('action' => 'install-plugin', 'plugin' => $plugin), admin_url('update.php')), 'install-plugin' . '_' . $plugin);
-                                    $message = sprintf('<a href="%s" class="btn btn-success">%s</a>', $install_url, __('Install', OXI_IMAGE_HOVER_TEXTDOMAIN));
-                                endif;
-                            endif;
-                    ?>
+        foreach ($this->get_plugins as $key => $value) {
+            $modulespath = $value['modules-path'];
+            if ($modulespath != $this->current_plugins) :
+                $file_path = $modulespath;
+                $plugin = explode('/', $file_path)[0];
+                $message = '';
+                if (isset($installed_plugins[$file_path])) :
+                    if (array_key_exists($file_path, $active_plugins)) :
+                        $message = '<a href="#" class="btn btn-light">Installed</a>';
+                    else :
+                        $activation_url = wp_nonce_url(admin_url('plugins.php?action=activate&plugin=' . $file_path), 'activate-plugin_' . $file_path);
+                        $message = sprintf('<a href="%s" class="btn btn-info">%s</a>', $activation_url, __('Activate', OXI_IMAGE_HOVER_TEXTDOMAIN));
+                    endif;
+                else :
+                    if (current_user_can('install_plugins')) :
+                        $install_url = wp_nonce_url(add_query_arg(array('action' => 'install-plugin', 'plugin' => $plugin), admin_url('update.php')), 'install-plugin' . '_' . $plugin);
+                        $message = sprintf('<a href="%s" class="btn btn-success">%s</a>', $install_url, __('Install', OXI_IMAGE_HOVER_TEXTDOMAIN));
+                    endif;
+                endif;
+                ?>
                             <div class="col-lg-4 col-md-6 col-sm-12">
                                 <div class="oxi-addons-modules-elements">
                                     <img class="oxi-addons-modules-banner" src="<?php echo $value['modules-img']; ?>">
@@ -124,15 +120,15 @@ class Addons
                                     </div>
                                 </div>
                             </div>
-                    <?php
-                        endif;
-                    }
-                    ?>
+                <?php
+            endif;
+        }
+        ?>
                 </div>
             </div>
         </div>
-<?php
-        $data = 'function oxiequalHeight(group) {
+                    <?php
+                    $data = 'function oxiequalHeight(group) {
                     var tallest = 0;
                     group.each(function () {
                         thisHeight = jQuery(this).height();
@@ -146,6 +142,7 @@ class Addons
                     oxiequalHeight(jQuery(".oxi-addons-modules-action-wrapper"));
                 }, 1000);';
 
-        wp_add_inline_script('oxilab-bootstrap', $data);
-    }
-}
+                    wp_add_inline_script('oxilab-bootstrap', $data);
+                }
+
+            }

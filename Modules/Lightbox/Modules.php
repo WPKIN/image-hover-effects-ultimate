@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Lightbox;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Modules
  *

@@ -27,7 +27,7 @@ jQuery.noConflict();
                     rawdata: rawdata,
                 },
             });
-            console.log(result);
+           
             return callback(result);
         } catch (error) {
             console.error(error);
@@ -79,7 +79,7 @@ jQuery.noConflict();
                 styleid,
                 childid,
                 function (callback) {
-                    console.log(callback);
+                 
                     setTimeout(function () {
                         if (callback === 'done') {
                             $This.parents('tr').remove();

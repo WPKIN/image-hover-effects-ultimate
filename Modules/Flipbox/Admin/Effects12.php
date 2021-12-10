@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Flipbox\Admin;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Effects1
  *
@@ -49,7 +53,6 @@ class Effects12 extends Modules {
         $this->register_back_button_settings();
         $this->end_section_devider();
 
-
         $this->end_section_tabs();
     }
 
@@ -77,7 +80,7 @@ class Effects12 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon' => '',
             ],
-           'description' => 'Allows you to set Icon Underline.',
+            'description' => 'Allows you to set Icon Underline.',
                 ]
         );
         $this->add_control(
@@ -103,7 +106,7 @@ class Effects12 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-back-section .oxi-image-hover-icon' => 'text-align:{{VALUE}}',
             ],
-             'description' => 'Allows you to set Icon Position.',
+            'description' => 'Allows you to set Icon Position.',
                 ]
         );
         $this->add_responsive_control(
@@ -345,7 +348,7 @@ class Effects12 extends Modules {
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon.oxi-image-hover-icon-underline:before' => '{{VALUE}}',
                     ],
-                   'description' => 'Allows you to set Icon Underline Position.',
+                    'description' => 'Allows you to set Icon Underline Position.',
                 ]
         );
 
@@ -380,7 +383,7 @@ class Effects12 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon.oxi-image-hover-icon-underline:before' => 'border-bottom-style: {{VALUE}};',
             ],
-           'description' => 'Allows you to set Icon Underline Type.',
+            'description' => 'Allows you to set Icon Underline Type.',
                 ]
         );
         $this->add_responsive_control(
@@ -411,7 +414,7 @@ class Effects12 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon.oxi-image-hover-icon-underline:before' => 'width:{{SIZE}}{{UNIT}};',
             ],
-             'description' => 'Allows you to set Icon Underline Width.',
+            'description' => 'Allows you to set Icon Underline Width.',
                 ]
         );
         $this->add_responsive_control(
@@ -437,7 +440,7 @@ class Effects12 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon.oxi-image-hover-icon-underline:before' => 'border-bottom-width: {{SIZE}}{{UNIT}};',
             ],
-           'description' => 'Allows you to set Icon Underline Height.',
+            'description' => 'Allows you to set Icon Underline Height.',
                 ]
         );
 
@@ -464,14 +467,14 @@ class Effects12 extends Modules {
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-backend .oxi-image-hover-icon.oxi-image-hover-icon-underline' => 'margin-bottom:{{SIZE}}{{UNIT}};',
             ],
-           'description' => 'Allows you to set Icon Underline Distance.',
+            'description' => 'Allows you to set Icon Underline Distance.',
                 ]
         );
         $this->end_controls_section();
     }
 
     public function modal_form_data() {
-        echo '<div class="modal-header">                    
+        echo '<div class="modal-header">
                     <h4 class="modal-title">Image Hover Form</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
@@ -548,7 +551,6 @@ class Effects12 extends Modules {
         );
         $this->end_controls_tab();
         $this->end_controls_tabs();
-
 
         $this->add_group_control(
                 'image_hover_button_link', $this->style, [

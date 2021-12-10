@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Page;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Public
  *
@@ -213,7 +217,7 @@ class Public_Render {
         endif;
         if ($inlinecss != '') :
             $inlinecss = html_entity_decode($inlinecss);
-            if ($this->admin == 'admin' || $this->admin == 'web') :
+            if ($this->admin == 'admin' || $this->admin == 'web' || $this->admin == 'request') :
 //only load while ajax called
                 echo _('<style>');
                 echo $inlinecss;

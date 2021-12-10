@@ -129,7 +129,7 @@ jQuery.noConflict();
         var index = $(this).index();
         $(this).parent().parent('.shortcode-form-control-content-tabs').next().children('.shortcode-form-control-tabs-content').addClass('shortcode-control-tab-close');
         $(this).parent().parent('.shortcode-form-control-content-tabs').next().children('.shortcode-form-control-tabs-content:eq(' + index + ')').removeClass('shortcode-control-tab-close');
-        console.log(index);
+       
     });
 
     (function ($) {

@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  *
  * @author biplo

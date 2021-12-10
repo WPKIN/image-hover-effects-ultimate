@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Helper;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  *
  * @author $biplob018
@@ -11,7 +15,7 @@ use OXI_IMAGE_HOVER_PLUGINS\Classes\Controls as Controls;
 trait Sanitization {
 
     /**
-     * font settings sanitize 
+     * font settings sanitize
      * works at layouts page to adding font Settings sanitize
      */
     public function AdminTextSenitize($data) {
@@ -41,7 +45,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Body
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -57,7 +61,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel header
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -71,7 +75,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel end Body
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -81,7 +85,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Col 6 or Entry devider
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -91,7 +95,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel end Entry Divider
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -100,8 +104,8 @@ trait Sanitization {
     }
 
     /*
-     * Image Hover Style Admin Panel Form Dependency 
-     * 
+     * Image Hover Style Admin Panel Form Dependency
+     *
      * @since 9.3.0
      */
 
@@ -156,7 +160,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Each Tabs
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -174,7 +178,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel end Each Tabs
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -185,7 +189,7 @@ trait Sanitization {
     /*
      * Image Hover Style Admin Panel Section Inner Tabs
      * This Tabs like inner tabs as Normal view and Hover View
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -209,7 +213,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel end Section Inner Tabs
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -219,7 +223,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Section Inner Tabs Child
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -229,7 +233,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel End Section Inner Tabs Child
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -239,7 +243,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel  Section Popover
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -249,22 +253,22 @@ trait Sanitization {
         echo '  <div class="shortcode-form-control shortcode-control-type-popover ' . $separator . '" ' . $condition . '>
                     <div class="shortcode-form-control-content shortcode-form-control-content-popover">
                         <div class="shortcode-form-control-field">
-                            <label for="" class="shortcode-form-control-title">' . $arg['label'] . '</label>  
+                            <label for="" class="shortcode-form-control-title">' . $arg['label'] . '</label>
                             <div class="shortcode-form-control-input-wrapper">
                                 <span class="dashicons popover-set"></span>
                             </div>
                         </div>
                         ' . (array_key_exists('description', $arg) ? '<div class="shortcode-form-control-description">' . $arg['description'] . '</div>' : '') . '
-                        
+
                     </div>
                     <div class="shortcode-form-control-content shortcode-form-control-content-popover-body">
-                        
+
                ';
     }
 
     /*
      * Image Hover Style Admin Panel end Popover
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -274,8 +278,8 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Form Add Control.
-     * Call All Input Control from here Based on Control Name. 
-     * 
+     * Call All Input Control from here Based on Control Name.
+     *
      * @since 9.3.0
      */
 
@@ -319,7 +323,7 @@ trait Sanitization {
         ];
 
         /*
-         * Data Currection while Its comes from group Control 
+         * Data Currection while Its comes from group Control
          */
         if (array_key_exists('selector-value', $arg)) :
             foreach ($arg['selector'] as $key => $value) {
@@ -367,7 +371,7 @@ trait Sanitization {
     /*
      * Image Hover Style Admin Panel Responsive Control.
      * Can Possible to modify any Add control to Responsive Control
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -385,7 +389,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Group Control.
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -403,7 +407,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Repeater Control.
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -523,7 +527,7 @@ trait Sanitization {
         }
         echo '          <div class="shortcode-form-control-input-wrapper">
                             <input type="hidden" value="' . $value . '" name="' . $id . '" id="' . $id . '">
-                        </div>      
+                        </div>
                     </div>
                 </div>
             </div>';
@@ -531,7 +535,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Heading Input.
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -541,7 +545,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Switcher Input.
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -572,14 +576,14 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Switcher Input.
-     * 
+     *
      * @since 9.3.0
      */
 
     public function switcher_admin_control($id, array $data = [], array $arg = []) {
         $value = array_key_exists($id, $data) ? $data[$id] : $arg['default'];
         echo '  <div class="shortcode-form-control-input-wrapper">
-                    <label class="shortcode-switcher">  
+                    <label class="shortcode-switcher">
                         <input type="checkbox" ' . ($value == $arg['return_value'] ? 'checked ckdflt="true"' : '') . ' value="' . $arg['return_value'] . '"  name="' . $id . '" id="' . $id . '"/>
                         <span data-on="' . $arg['label_on'] . '" data-off="' . $arg['label_off'] . '"></span>
                     </label>
@@ -588,7 +592,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Text Input.
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -608,7 +612,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Hidden Input.
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -621,7 +625,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Textarea Input.
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -635,7 +639,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel WYSIWYG Input.
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -659,7 +663,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Image Input.
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -684,7 +688,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Number Input.
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -717,7 +721,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Slider Input.
-     * 
+     *
      * @since 9.3.0
      * Done With Number Information
      */
@@ -766,7 +770,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Select Input.
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -823,7 +827,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Choose Input.
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -866,7 +870,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Color Input.
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -932,7 +936,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Icon Selector.
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -947,7 +951,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Font Selector.
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -982,7 +986,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Date and Time Selector.
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -1002,7 +1006,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Gradient Selector.
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -1011,17 +1015,17 @@ trait Sanitization {
         $value = array_key_exists($id, $data) ? $data[$id] : $arg['default'];
         $retunvalue = array_key_exists('selector', $arg) ? htmlspecialchars(json_encode($arg['selector'])) : '';
         if (array_key_exists('selector-data', $arg) && $arg['selector-data'] == TRUE) {
-            
+
             if (array_key_exists('selector', $arg)) :
-                
+
                 foreach ($arg['selector'] as $key => $val) {
                     if ($arg['render'] == TRUE) :
-                       
+
                         $key = (strpos($key, '{{KEY}}') ? str_replace('{{KEY}}', explode('saarsa', $id)[1], $key) : $key);
                         $class = str_replace('{{WRAPPER}}', $this->CSSWRAPPER, $key);
                         $file = str_replace('{{VALUE}}', $value, $val);
                         if (!empty($value)) :
-                         
+
                             $this->CSSDATA[$arg['responsive']][$class][$file] = $file;
                         endif;
                     endif;
@@ -1036,7 +1040,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Dimensions Selector.
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -1106,7 +1110,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Column Size.
-     * 
+     *
      * @since 9.3.0
      * Complete Simple Interface
      */
@@ -1199,7 +1203,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Typography.
-     * 
+     *
      * @since 9.3.0
      * Simple Interface Enable
      */
@@ -1486,9 +1490,9 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Media Group Control.
-     * 
+     *
      * @since 9.3.0
-     * 
+     *
      * Works at any version
      */
 
@@ -1556,7 +1560,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Box Shadow Control.
-     * 
+     *
      * @since 9.3.0
      * Only Works At Customizable Version
      */
@@ -1762,7 +1766,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Text Shadow .
-     * 
+     *
      * @since 9.3.0
      * Only Works at Customizable Options
      */
@@ -1891,9 +1895,9 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Text Shadow .
-     * 
+     *
      * @since 9.3.0
-     * 
+     *
      * Simple Interface Enable
      */
 
@@ -2078,7 +2082,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Border .
-     * 
+     *
      * @since 9.3.0
      * Complete Simple Version
      */
@@ -2190,7 +2194,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Background .
-     * 
+     *
      * @since 9.3.0
      * Simple Interface Enable
      */
@@ -2423,7 +2427,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Background .
-     * 
+     *
      * @since 9.3.0
      * Simple Interfaece Enable
      */
@@ -2490,17 +2494,17 @@ trait Sanitization {
     }
 
     /*
-     * 
-     * 
+     *
+     *
      * Templates Substitute Data
-     * 
-     * 
-     * 
-     * 
+     *
+     *
+     *
+     *
      */
     /*
      * Image Hover Style Admin Panel Template Substitute Control.
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -2511,7 +2515,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Template Substitute Modal Opener.
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -2525,7 +2529,7 @@ trait Sanitization {
         /*
          * $arg['title'] = 'Add New Items';
          * $arg['sub-title'] = 'Add New Items 02';
-         * 
+         *
          */
         $condition = $this->forms_condition($arg);
         echo ' <div class="oxi-addons-item-form shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '"  ' . $condition . '>
@@ -2552,7 +2556,7 @@ trait Sanitization {
             /*
              * $arg['title'] = 'Add New Items';
              * $arg['sub-title'] = 'Add New Items 02';
-             * 
+             *
              */
             echo '  <div class="oxi-addons-shortcode  shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '">
                         <div class="oxi-addons-shortcode-heading  shortcode-addons-templates-right-panel-heading">
@@ -2584,7 +2588,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Template Shortcode name.
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -2598,7 +2602,7 @@ trait Sanitization {
         /*
          * $arg['title'] = 'Add New Items';
          * $arg['sub-title'] = 'Add New Items 02';
-         * 
+         *
          */
         echo ' <div class="oxi-addons-shortcode  shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '">
                 <div class="oxi-addons-shortcode-heading  shortcode-addons-templates-right-panel-heading">
@@ -2621,7 +2625,7 @@ trait Sanitization {
 
     /*
      * Image Hover Style Admin Panel Template Shortcode Info.
-     * 
+     *
      * @since 9.3.0
      */
 
@@ -2634,7 +2638,7 @@ trait Sanitization {
         /*
          * $arg['title'] = 'Add New Items';
          * $arg['sub-title'] = 'Add New Items 02';
-         * 
+         *
          */
         echo ' <div class="oxi-addons-shortcode shortcode-addons-templates-right-panel ' . (($arg['showing']) ? '' : 'oxi-admin-head-d-none') . '">
                 <div class="oxi-addons-shortcode-heading  shortcode-addons-templates-right-panel-heading">

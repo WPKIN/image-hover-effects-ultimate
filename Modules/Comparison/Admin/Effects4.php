@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Comparison\Admin;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Effects1
  *
@@ -98,7 +102,7 @@ class Effects4 extends Modules {
                         'size' => '',
                     ],
                     'range' => [
-                         'px' => [
+                        'px' => [
                             'min' => 0,
                             'max' => 1500,
                             'step' => 10,

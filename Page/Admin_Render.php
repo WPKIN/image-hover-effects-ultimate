@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Page;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Admin_Render
  *
@@ -854,7 +858,7 @@ abstract class Admin_Render {
                         jQuery(\'.shortcode-addons-family\').fontselect();';
 
         if (apply_filters('oxi-image-hover-plugin-version', false) == false) :
-            $data .= 'jQuery(".oxi-addons-minicolor").each(function (index, value) {                             
+            $data .= 'jQuery(".oxi-addons-minicolor").each(function (index, value) {
                             jQuery(this).parent().parent().siblings(".shortcode-form-control-title").append(" <span class=\"oxi-pro-only\">Pro Only</span>");
                             var datavalue = jQuery(this).val();
                             jQuery(this).attr("oxilabvalue", datavalue);

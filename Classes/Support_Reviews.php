@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Classes;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Description of Support_Reviews
  *

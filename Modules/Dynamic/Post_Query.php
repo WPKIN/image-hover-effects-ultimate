@@ -2,6 +2,10 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 class Post_Query {
 
     /**
