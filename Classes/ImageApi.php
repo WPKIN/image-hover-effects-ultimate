@@ -205,27 +205,24 @@ class ImageApi {
         endif;
     }
 
-    public function post_json_import($folder, $filename) {
-        if (is_file($folder . $filename)) {
-            $this->rawdata = file_get_contents($folder . $filename);
-            $params = json_decode($this->rawdata, true);
-            $style = $params['style'];
-            $child = $params['child'];
-            $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->parent_table} (name, style_name, rawdata) VALUES ( %s, %s, %s)", array($style['name'], $style['style_name'], $style['rawdata'])));
-            $redirect_id = $this->wpdb->insert_id;
-            if ($redirect_id > 0) :
-                $raw = json_decode(stripslashes($style['rawdata']), true);
-                $raw['image-hover-style-id'] = $redirect_id;
-                $s = explode('-', $style['style_name']);
-                $CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($s[0]) . '\Admin\Effects' . $s[1];
-                $C = new $CLASS('admin');
-                $f = $C->template_css_render($raw);
-                foreach ($child as $value) {
-                    $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d,  %s)", array($redirect_id, $value['rawdata'])));
-                }
-                return admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$s[0]&styleid=$redirect_id");
-            endif;
-        }
+    public function post_json_import($params) {
+
+        $style = $params['style'];
+        $child = $params['child'];
+        $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->parent_table} (name, style_name, rawdata) VALUES ( %s, %s, %s)", array($style['name'], $style['style_name'], $style['rawdata'])));
+        $redirect_id = $this->wpdb->insert_id;
+        if ($redirect_id > 0) :
+            $raw = json_decode(stripslashes($style['rawdata']), true);
+            $raw['image-hover-style-id'] = $redirect_id;
+            $s = explode('-', $style['style_name']);
+            $CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($s[0]) . '\Admin\Effects' . $s[1];
+            $C = new $CLASS('admin');
+            $f = $C->template_css_render($raw);
+            foreach ($child as $value) {
+                $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d,  %s)", array($redirect_id, $value['rawdata'])));
+            }
+            return admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$s[0]&styleid=$redirect_id");
+        endif;
     }
 
     public function post_shortcode_delete() {

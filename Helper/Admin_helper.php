@@ -53,18 +53,21 @@ trait Admin_helper {
             $name = explode('-', $style['style_name']);
             if ($effects != ucfirst($name[0])) :
                 $url = admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$name[0]&styleid=$styleid");
-                echo $url;
                 echo '<script type="text/javascript"> document.location.href="' . $url . '"; </script>';
                 exit;
             endif;
             $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $effects . '\Admin\\Effects' . $name[1];
             if (class_exists($cls)) :
                 new $cls();
+            else:
+                wp_die(__('Invalid URL.'));
             endif;
         elseif (!empty($effects)) :
             $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $effects . '\\' . $effects . '';
             if (class_exists($cls)) :
                 new $cls();
+            else:
+                wp_die(__('Invalid URL.'));
             endif;
         else :
             new \OXI_IMAGE_HOVER_PLUGINS\Page\Admin();
@@ -135,7 +138,7 @@ trait Admin_helper {
         $menu = '<div class="oxi-addons-wrapper">
                     <div class="oxilab-new-admin-menu">
                         <div class="oxi-site-logo">
-                            <a href="' . $this->admin_url_convert('oxi-image-hover-ultimate') . '" class="header-logo" style=" background-image: url(' . $bgimage . ');">
+                            <a href="' . esc_url($this->admin_url_convert('oxi-image-hover-ultimate')) . '" class="header-logo" style=" background-image: url(' . esc_url($bgimage) . ');">
                             </a>
                         </div>
                         <nav class="oxilab-sa-admin-nav">
@@ -143,13 +146,13 @@ trait Admin_helper {
 
         $GETPage = sanitize_text_field($_GET['page']);
         $effects = (!empty($_GET['effects']) ? sanitize_text_field($_GET['effects']) : '');
-        if ($effects != '') :
+        if ($effects != '' && $GETPage == 'oxi-image-hover-ultimate') :
             $menu .= '<li class="active" >
-                            <a href="' . $this->admin_url_convert('oxi-image-hover-ultimate') . '&effects=' . $effects . '">';
+                            <a href="' . esc_url($this->admin_url_convert('oxi-image-hover-ultimate')) . '&effects=' . esc_html($effects) . '">';
             if ($effects == 'display') :
                 $menu .= 'Display Post';
             else :
-                $menu .= $this->name_converter($effects) . ' Effects';
+                $menu .= $this->name_converter(esc_html($effects)) . ' Effects';
             endif;
             $menu . '   </a>
                         </li>';
@@ -157,7 +160,7 @@ trait Admin_helper {
         endif;
         foreach ($response as $key => $value) {
             $active = (($GETPage == $value['homepage'] && $effects == '') ? ' class="active" ' : '');
-            $menu .= '<li ' . $active . '><a href="' . $this->admin_url_convert($value['homepage']) . '">' . $this->name_converter($value['name']) . '</a></li>';
+            $menu .= '<li ' . $active . '><a href="' . esc_url($this->admin_url_convert($value['homepage'])) . '">' . esc_html($this->name_converter($value['name'])) . '</a></li>';
         }
         $menu .= '              </ul>
                             <ul class="oxilab-sa-admin-menu2">

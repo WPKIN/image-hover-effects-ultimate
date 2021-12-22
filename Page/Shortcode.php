@@ -93,20 +93,32 @@ class Shortcode {
             } else {
                 if (isset($_FILES['importimagehoverultimatefile'])) :
                     $filename = $_FILES["importimagehoverultimatefile"]["name"];
-                    $folder = $this->safe_path(OXI_IMAGE_HOVER_PATH . 'assets/export/');
-                    if (!is_dir($folder)) :
-                        mkdir($folder, 0777);
-                    endif;
-                    if (is_file($folder . $filename)) :
-                        unlink($folder . $filename); // delete file
-                    endif;
-                    move_uploaded_file($_FILES['importimagehoverultimatefile']['tmp_name'], $folder . $filename);
-                    $ImageApi = new \OXI_IMAGE_HOVER_PLUGINS\Classes\ImageApi;
-                    $ImageApi->post_json_import($folder, $filename);
 
-                    if (is_file($folder . $filename)) :
-                        unlink($folder . $filename); // delete file
+                    if (!current_user_can('upload_files')):
+                        wp_die(__('You do not have permission to upload files.'));
                     endif;
+
+                    $allowedMimes = array(
+                        'json' => 'text/plain'
+                    );
+
+                    $fileInfo = wp_check_filetype(basename($_FILES['importimagehoverultimatefile']['name']), $allowedMimes);
+                    if (empty($fileInfo['ext'])) {
+                        wp_die(__('You do not have permission to upload files.'));
+                    }
+
+                    $content = json_decode(file_get_contents($_FILES['importimagehoverultimatefile']['tmp_name']), true);
+
+                    if (empty($content)) {
+                        return new \WP_Error('file_error', 'Invalid File');
+                    }
+                    $style = $content['style'];
+                    if (!is_array($style)) {
+                        return new \WP_Error('file_error', 'Invalid Content In File');
+                    }
+                    $ImportApi = new \OXI_IMAGE_HOVER_PLUGINS\Classes\ImageApi;
+                    $new_slug = $ImportApi->post_json_import($content);
+                    wp_safe_redirect($new_slug);
                 endif;
             }
         }
