@@ -160,6 +160,7 @@ class ImageApi {
                 'title' => array(),
             ),
             'b' => array(),
+            'br' => array(),
             'blockquote' => array(
                 'cite' => array(),
             ),
