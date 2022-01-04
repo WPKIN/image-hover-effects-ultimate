@@ -217,7 +217,7 @@ class Public_Render {
         endif;
         if ($inlinecss != '') :
             $inlinecss = html_entity_decode($inlinecss);
-            if ($this->admin == 'admin' || $this->admin == 'web' || $this->admin == 'request') :
+            if ($this->admin == 'admin' || $this->admin == 'web') :
 //only load while ajax called
                 echo _('<style>');
                 echo $inlinecss;

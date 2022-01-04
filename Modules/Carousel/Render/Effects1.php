@@ -112,8 +112,8 @@ class Effects1 extends Public_Render {
                 dotsClass: "oxi_carousel_dots",
                 slidesToShow: ' . $lap . ',
                 slidesToScroll:  ' . $lap_item . ',
-                centerMode: ' . $center_mode . ', 
-                rtl: false, 
+                centerMode: ' . $center_mode . ',
+                rtl: false,
                 responsive: [
                     {
                         breakpoint: 991,
