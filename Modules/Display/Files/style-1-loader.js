@@ -2,8 +2,14 @@ jQuery.noConflict();
 (function ($) {
     $(".oxi-image-hover-load-more-infinite").each(function () {
         var $WRAPPER = $(this);
+        var $WRAPPERID = $(this).attr('id');
         $(window).scroll(function () {
-            if ($(window).scrollTop() > ($(document).height() - $(window).height() - 10)) {
+            
+             if ($("#" + $WRAPPERID).length == 0) {
+                return;
+            }
+           
+            if ($(window).scrollTop() >= ($('#' + $WRAPPERID).offset().top - $(window).height() + 100)) {
                 if (!($WRAPPER.hasClass("post-loading"))) {
                     $WRAPPER.addClass("post-loading");
                     var $CLASS = $WRAPPER.data('class'),
@@ -25,7 +31,8 @@ jQuery.noConflict();
                             optional: $page
                         }
                     }).done(function (response) {
-                      
+                       console.log($(window).height());
+                       console.log( $WRAPPERID);
                         var word = 'Image Hover Empty Data';
                         var regex = new RegExp('\\b' + word + '\\b');
                         var button = regex.test(response);

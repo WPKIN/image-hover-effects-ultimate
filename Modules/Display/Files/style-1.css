@@ -41,3 +41,8 @@
 }
 @-webkit-keyframes loaderSpin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
 @keyframes loaderSpin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+
+.oxi-image-hover-load-more-infinite{
+    width: 100%;
+    float: left;
+}

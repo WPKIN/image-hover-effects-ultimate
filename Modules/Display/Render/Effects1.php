@@ -12,7 +12,7 @@ use OXI_IMAGE_HOVER_PLUGINS\Modules\Display\Files\Style_1_Post_Query as Post_Que
 class Effects1 extends Public_Render {
 
     public function public_jquery() {
-        wp_enqueue_script('oxi_image_style-1-loader', OXI_IMAGE_HOVER_URL . '/Modules/Display/Files/style-1-loader.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_script('oxi_image_style_1_loader', OXI_IMAGE_HOVER_URL . '/Modules/Display/Files/style-1-loader.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         $this->JSHANDLE = 'oxi_image_style-1-loader';
         wp_localize_script('oxi_image_style_1_loader', 'oxi_image_style_1_loader', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('image_hover_ultimate')));
     }
@@ -87,13 +87,13 @@ class Effects1 extends Public_Render {
         if ('yes' == $style['display_post_load_more']) {
             if ($style['display_post_load_more_type'] == 'button'):
                 echo '  <div class="oxi-image-hover-load-more-button-wrap oxi-bt-col-sm-12">
-                            <button class="oxi-image-load-more-button" data-class="OXI_IMAGE_HOVER_PLUGINS\Modules\Display\Files\Style_1_Post_Query" data-function="__rest_api_post" data-args=\'' . json_encode($args) . '\' data-settings=\'' . json_encode($settings) . '\' data-page="1">
+                            <button class="oxi-image-load-more-button" id="oxi-image-load-more-button' . $this->oxiid . '" data-class="OXI_IMAGE_HOVER_PLUGINS\Modules\Display\Files\Style_1_Post_Query" data-function="__rest_api_post" data-args=\'' . json_encode($args) . '\' data-settings=\'' . json_encode($settings) . '\' data-page="1">
                                     <div class="oxi-image-hover-loader button__loader"></div>
                                     <span>' . $style['display_post_load_button_text'] . '</span>
                             </button>
                         </div>';
             else:
-                echo '<div class="oxi-image-hover-load-more-infinite" data-class="OXI_IMAGE_HOVER_PLUGINS\Modules\Display\Files\Style_1_Post_Query" data-function="__rest_api_post" data-args=\'' . json_encode($args) . '\' data-settings=\'' . json_encode($settings) . '\' data-page="1">
+                echo '<div class="oxi-image-hover-load-more-infinite" id="oxi-image-hover-load-more-infinite' . $this->oxiid . '" data-class="OXI_IMAGE_HOVER_PLUGINS\Modules\Display\Files\Style_1_Post_Query" data-function="__rest_api_post" data-args=\'' . json_encode($args) . '\' data-settings=\'' . json_encode($settings) . '\' data-page="1">
                       </div>';
             endif;
         }
