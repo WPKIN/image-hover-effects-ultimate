@@ -132,16 +132,9 @@ class ImageApi {
         if (!wp_verify_nonce($wpnonce, 'wp_rest')):
             return new \WP_REST_Request('Invalid URL', 422);
         endif;
-
-        $rawdata = json_decode($request['rawdata'], true);
-        if (is_array($rawdata)):
-            $this->validate_post($rawdata);
-        else:
-            $this->rawdata = sanitize_text_field($request['rawdata']);
-        endif;
-
-        $this->styleid = $request['styleid'];
-        $this->childid = $request['childid'];
+        $this->rawdata = addslashes($request['rawdata']);
+        $this->styleid = (int) $request['styleid'];
+        $this->childid = (int) $request['childid'];
         $action_class = strtolower($request->get_method()) . '_' . sanitize_key($request['action']);
         if (method_exists($this, $action_class)) {
             return $this->{$action_class}();
@@ -242,12 +235,19 @@ class ImageApi {
         endif;
     }
 
-    public function validate_post($rawdata) {
-        if (is_array($rawdata)):
-            $rawdata = array_map(array($this, 'allowed_html'), $rawdata);
-            $this->rawdata = addslashes(json_encode($rawdata));
+    public function validate_post($data = '') {
+        $rawdata = [];
+        if (!empty($data)):
+            $arrfiles = json_decode(stripslashes($data), true);
+        else:
+            $arrfiles = json_decode(stripslashes($this->rawdata), true);
         endif;
-        return;
+        if (is_array($arrfiles)):
+            $rawdata = array_map(array($this, 'allowed_html'), $arrfiles);
+        else:
+            $rawdata = $this->allowed_html($data);
+        endif;
+        return $rawdata;
     }
 
     public function array_replace($arr = [], $search = '', $replace = '') {
@@ -259,13 +259,13 @@ class ImageApi {
 
     public function post_create_new() {
 
-        $params = json_decode(stripslashes($this->rawdata), true);
+        $params = $this->validate_post();
 
         $files = OXI_IMAGE_HOVER_PATH . $params['style'];
 
         if (is_file($files)) {
-            $this->rawdata = file_get_contents($files);
-            $params = json_decode($this->rawdata, true);
+            $rawdata = file_get_contents($files);
+            $params = json_decode($rawdata, true);
             $style = $params['style'];
             $child = $params['child'];
             if (!empty($params['name'])):
@@ -292,7 +292,7 @@ class ImageApi {
 
     public function post_layouts_clone() {
 
-        $newName = $this->rawdata;
+        $newName = $this->validate_post();
         $styleid = $this->styleid;
         $style = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM $this->parent_table WHERE id = %d", $styleid), ARRAY_A);
         $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid), ARRAY_A);
@@ -369,7 +369,7 @@ class ImageApi {
 
     public function get_shortcode_export() {
         $styleid = (int) $this->styleid;
-        if ($styleid) :
+        if ($styleid > 0) :
             $style = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM $this->parent_table WHERE id = %d", $styleid), ARRAY_A);
             $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid), ARRAY_A);
             $filename = 'image-hover-effects-ultimateand' . $style['id'] . '.json';
@@ -405,8 +405,10 @@ class ImageApi {
     }
 
     public function post_shortcode_deactive() {
-        $id = $this->rawdata . '-' . (int) $this->styleid;
-        $effects = $this->rawdata . '-ultimate';
+        $rawdata = $this->validate_post();
+
+        $id = $rawdata . '-' . (int) $this->styleid;
+        $effects = $rawdata . '-ultimate';
         if ($this->styleid > 0) :
             $this->wpdb->query($this->wpdb->prepare("DELETE FROM {$this->import_table} WHERE name = %s and type = %s", $id, $effects));
             return 'done';
@@ -416,11 +418,12 @@ class ImageApi {
     }
 
     public function post_shortcode_active() {
-        $id = $this->rawdata . '-' . (int) $this->styleid;
-        $effects = $this->rawdata . '-ultimate';
+        $rawdata = $this->validate_post();
+        $id = $rawdata . '-' . (int) $this->styleid;
+        $effects = $rawdata . '-ultimate';
         if ($this->styleid > 0) :
             $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->import_table} (type, name) VALUES (%s, %s)", array($effects, $id)));
-            return admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$this->rawdata#" . $id);
+            return admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$rawdata#" . $id);
         else :
             return 'Silence is Golden';
         endif;
@@ -450,7 +453,8 @@ class ImageApi {
      * @since 9.3.0
      */
     public function post_template_change() {
-        $rawdata = sanitize_text_field($this->rawdata);
+        $rawdata = $this->validate_post();
+
         if ((int) $this->styleid) :
             $this->wpdb->query($this->wpdb->prepare("UPDATE {$this->parent_table} SET style_name = %s WHERE id = %d", $rawdata, $this->styleid));
         endif;
@@ -463,8 +467,8 @@ class ImageApi {
      * @since 9.3.0
      */
     public function post_template_name() {
-        $settings = json_decode(stripslashes($this->rawdata), true);
-        $name = sanitize_text_field($settings['addonsstylename']);
+        $settings = $this->validate_post();
+        $name = $settings['addonsstylename'];
         $id = $settings['addonsstylenameid'];
         if ((int) $id) :
             $this->wpdb->query($this->wpdb->prepare("UPDATE {$this->parent_table} SET name = %s WHERE id = %d", $name, $id));
@@ -495,7 +499,7 @@ class ImageApi {
      * @since 9.3.0
      */
     public function post_elements_template_rearrange_save_data() {
-        $params = explode(',', $this->rawdata);
+        $params = explode(',', $this->validate_post());
         foreach ($params as $value) {
             if ((int) $value) :
                 $data = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE id = %d ", $value), ARRAY_A);
@@ -518,9 +522,6 @@ class ImageApi {
      * @since 9.3.0
      */
     public function post_elements_template_modal_data() {
-
-
-
 
         if ((int) $this->styleid) :
             if ((int) $this->childid) :
@@ -644,18 +645,66 @@ class ImageApi {
      * Admin Settings
      * @return void
      */
-    public function post_oxi_settings() {
-        $rawdata = json_decode(stripslashes($this->rawdata), true);
-        update_option($rawdata['name'], $rawdata['value']);
+    public function post_oxi_addons_user_permission() {
+        $rawdata = $this->validate_post();
+        update_option('oxi_addons_user_permission', $rawdata['value']);
+        return '<span class="oxi-confirmation-success"></span>';
+    }
+    /**
+     * Admin Settings
+     * @return void
+     */
+    public function post_image_hover_ultimate_mobile_device_key() {
+        $rawdata = $this->validate_post();
+        update_option('image_hover_ultimate_mobile_device_key', $rawdata['value']);
+        return '<span class="oxi-confirmation-success"></span>';
+    }
+    /**
+     * Admin Settings
+     * @return void
+     */
+    public function post_oxi_addons_font_awesome() {
+        $rawdata = $this->validate_post();
+        update_option('oxi_addons_font_awesome', $rawdata['value']);
+        return '<span class="oxi-confirmation-success"></span>';
+    }
+    /**
+     * Admin Settings
+     * @return void
+     */
+    public function post_oxi_addons_way_points() {
+        $rawdata = $this->validate_post();
+        update_option('oxi_addons_way_points', $rawdata['value']);
+        return '<span class="oxi-confirmation-success"></span>';
+    }
+    /**
+     * Admin Settings
+     * @return void
+     */
+    public function post_oxi_addons_google_font() {
+        $rawdata = $this->validate_post();
+        update_option('oxi_addons_google_font', $rawdata['value']);
+        return '<span class="oxi-confirmation-success"></span>';
+    }
+    /**
+     * Admin Settings
+     * @return void
+     */
+    public function post_oxi_addons_custom_parent_class() {
+        $rawdata = $this->validate_post();
+        update_option('oxi_addons_custom_parent_class', $rawdata['value']);
         return '<span class="oxi-confirmation-success"></span>';
     }
 
+    
+    
+    
     /**
      * Admin License
      * @return void
      */
     public function post_oxi_license() {
-        $rawdata = json_decode(stripslashes($this->rawdata), true);
+        $rawdata = $this->validate_post();
         $new = $rawdata['license'];
         $old = get_option('image_hover_ultimate_license_key');
         $status = get_option('image_hover_ultimate_license_status');
@@ -785,7 +834,8 @@ class ImageApi {
         if (!is_dir($folder)) :
             mkdir($folder, 0777);
         endif;
-        $files = OXI_IMAGE_HOVER_PATH . 'template/' . $this->rawdata . '-' . $this->styleid . '.json';
+        $rawdata = $this->validate_post();
+        $files = OXI_IMAGE_HOVER_PATH . 'template/' . $rawdata . '-' . $this->styleid . '.json';
         if (!file_exists($files)) :
             $this->download_web_files($files);
         endif;
@@ -802,7 +852,7 @@ class ImageApi {
             $render .= '<div class="oxi-addons-col-1">
                                     <div class="oxi-addons-style-preview">
                                         <div class="oxi-addons-style-preview-top oxi-addons-center">';
-            $C = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($this->rawdata) . '\Render\Effects' . $this->styleid;
+            $C = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($rawdata) . '\Render\Effects' . $this->styleid;
 
             ob_start();
             if (class_exists($C)) :
@@ -828,8 +878,8 @@ class ImageApi {
 
     public function download_web_files($files) {
 
-
-        $URL = self::API . $this->rawdata . '/' . $this->styleid;
+        $rawdata = $this->validate_post();
+        $URL = self::API . $rawdata . '/' . $this->styleid;
         $request = wp_remote_request($URL);
         if (!is_wp_error($request)) {
             $response = json_decode(wp_remote_retrieve_body($request), true);
@@ -839,12 +889,13 @@ class ImageApi {
 
         $data = json_decode($response, true);
         if (file_put_contents($files, json_encode($data))) {
-
+            
         }
     }
 
     public function post_web_import() {
-        $files = OXI_IMAGE_HOVER_PATH . 'template/' . $this->rawdata . '.json';
+        $rawdata = $this->validate_post();
+        $files = OXI_IMAGE_HOVER_PATH . 'template/' . $rawdata . '.json';
         $params = json_decode(file_get_contents($files), true)[$this->styleid];
 
         $style = $params['style'];

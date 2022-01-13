@@ -66,7 +66,7 @@ class Bootstrap {
             $this->User_Admin();
             $this->User_Reviews();
         }
-         $this->Admin_Filters();
+        $this->Admin_Filters();
         $this->Shortcode_loader();
         $this->Public_loader();
         add_action('init', [$this, 'register_image_hover_ultimate_update']);
@@ -117,7 +117,7 @@ class Bootstrap {
      */
     public function WP_Shortcode($atts) {
         extract(shortcode_atts(array('id' => ' ',), $atts));
-        $styleid = $atts['id'];
+        $styleid = (int) $atts['id'];
         ob_start();
         $this->shortcode_render($styleid, 'user');
         return ob_get_clean();

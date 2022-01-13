@@ -152,7 +152,7 @@ abstract class Admin_Render {
         $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
         $this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
         $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
-        $this->oxiid = (!empty($_GET['styleid']) ? sanitize_text_field($_GET['styleid']) : '');
+        $this->oxiid = (!empty($_GET['styleid']) ? (int) $_GET['styleid'] : '');
         $this->WRAPPER = '.oxi-image-hover-wrapper-' . $this->oxiid;
         $this->CSSWRAPPER = '.oxi-image-hover-wrapper-' . $this->oxiid . ' .oxi-addons-row';
         if ($type != 'admin') {
@@ -323,7 +323,7 @@ abstract class Admin_Render {
     public function inline_template_css_render($style) {
         $styleid = $style['image-hover-style-id'];
         $this->style = $style;
-        $this->oxiid = $styleid;
+        $this->oxiid = (int) $styleid;
         $this->WRAPPER = '.oxi-image-hover-wrapper-' . $this->oxiid;
         $this->CSSWRAPPER = '.oxi-image-hover-wrapper-' . $this->oxiid . ' .oxi-addons-row';
 
@@ -362,7 +362,7 @@ abstract class Admin_Render {
      */
     public function template_css_render($style) {
         $styleid = $style['image-hover-style-id'];
-        $this->oxiid = $styleid;
+        $this->oxiid = (int) $styleid;
         $this->WRAPPER = '.oxi-image-hover-wrapper-' . $this->oxiid;
         $this->CSSWRAPPER = '.oxi-image-hover-wrapper-' . $this->oxiid . ' .oxi-addons-row';
         $this->style = $style;

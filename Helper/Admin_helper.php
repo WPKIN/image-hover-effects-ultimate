@@ -46,8 +46,8 @@ trait Admin_helper {
     }
 
     public function Image_Parent() {
-        $effects = (!empty($_GET['effects']) ? ucfirst(sanitize_text_field($_GET['effects'])) : '');
-        $styleid = (!empty($_GET['styleid']) ? sanitize_text_field($_GET['styleid']) : '');
+        $effects = (!empty($_GET['effects']) ? ucfirst($this->validate_post($_GET['effects'])) : '');
+        $styleid = (!empty($_GET['styleid']) ? (int) $_GET['styleid'] : '');
         if (!empty($effects) && !empty($styleid)) :
             $style = $this->wpdb->get_row($this->wpdb->prepare('SELECT style_name FROM ' . $this->parent_table . ' WHERE id = %d ', $styleid), ARRAY_A);
             $name = explode('-', $style['style_name']);
@@ -144,8 +144,8 @@ trait Admin_helper {
                         <nav class="oxilab-sa-admin-nav">
                             <ul class="oxilab-sa-admin-menu">';
 
-        $GETPage = sanitize_text_field($_GET['page']);
-        $effects = (!empty($_GET['effects']) ? sanitize_text_field($_GET['effects']) : '');
+        $GETPage = $this->validate_post($_GET['page']);
+        $effects = (!empty($_GET['effects']) ? $this->validate_post($_GET['effects']) : '');
         if ($effects != '' && $GETPage == 'oxi-image-hover-ultimate') :
             $menu .= '<li class="active" >
                             <a href="' . esc_url($this->admin_url_convert('oxi-image-hover-ultimate')) . '&effects=' . esc_html($effects) . '">';
@@ -195,7 +195,7 @@ trait Admin_helper {
     }
 
     public function custom_redirect() {
-
+        
     }
 
     public function Image_Shortcode() {

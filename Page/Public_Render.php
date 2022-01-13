@@ -124,7 +124,7 @@ class Public_Render {
             $this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
 
             if (array_key_exists('id', $this->dbdata)) :
-                $this->oxiid = $this->dbdata['id'];
+                $this->oxiid = (int)$this->dbdata['id'];
             else :
                 $this->oxiid = rand(100000, 200000);
             endif;

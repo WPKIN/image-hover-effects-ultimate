@@ -68,7 +68,7 @@ class Create {
         $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
         $this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
         $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
-        $this->effects = (!empty($_GET['effects']) ? sanitize_text_field($_GET['effects']) : '');
+        $this->effects = (!empty($_GET['effects']) ? $this->validate_post($_GET['effects']) : '');
         $this->oxitype = $this->effects . '-ultimate';
         $this->CSSJS_load();
         $this->Render();
