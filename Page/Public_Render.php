@@ -206,8 +206,8 @@ class Public_Render {
                         (function ($) {
                             setTimeout(function () {';
                 echo $inlinejs;
-                echo _('    }, 2000);
-                        })(jQuery)</script>');
+                echo '    }, 2000);
+                        })(jQuery)</script>';
             else :
                 $jquery = '(function ($) {' . $inlinejs . '})(jQuery);';
                 wp_add_inline_script($this->JSHANDLE, $jquery);

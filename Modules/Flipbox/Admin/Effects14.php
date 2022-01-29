@@ -39,25 +39,25 @@ class Effects14 extends Modules {
     public function register_front_content_settings() {
         $this->start_controls_section(
                 'oxi-image-hover', [
-            'label' => esc_html__('Content Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Content Settings', 'image-hover-effects-ultimate'),
             'showing' => TRUE,
                 ]
         );
         $this->add_control(
                 'oxi-image-flip-front-alignment', $this->style, [
-            'label' => __('Content Alignment', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Content Alignment', 'image-hover-effects-ultimate'),
             'type' => Controls::SELECT,
             'default' => 'image-hover-align-center-center',
             'options' => [
-                'image-hover-align-top-left' => __('Top Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'image-hover-align-top-center' => __('Top Center', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'image-hover-align-top-right' => __('Top Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'image-hover-align-center-left' => __('Center Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'image-hover-align-center-center' => __('Center Center', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'image-hover-align-center-right' => __('Center Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'image-hover-align-bottom-left' => __('Bottom Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'image-hover-align-bottom-center' => __('Bottom Center', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'image-hover-align-bottom-right' => __('Bottom Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'image-hover-align-top-left' => esc_html__('Top Left', 'image-hover-effects-ultimate'),
+                'image-hover-align-top-center' => esc_html__('Top Center', 'image-hover-effects-ultimate'),
+                'image-hover-align-top-right' => esc_html__('Top Right', 'image-hover-effects-ultimate'),
+                'image-hover-align-center-left' => esc_html__('Center Left', 'image-hover-effects-ultimate'),
+                'image-hover-align-center-center' => esc_html__('Center Center', 'image-hover-effects-ultimate'),
+                'image-hover-align-center-right' => esc_html__('Center Right', 'image-hover-effects-ultimate'),
+                'image-hover-align-bottom-left' => esc_html__('Bottom Left', 'image-hover-effects-ultimate'),
+                'image-hover-align-bottom-center' => esc_html__('Bottom Center', 'image-hover-effects-ultimate'),
+                'image-hover-align-bottom-right' => esc_html__('Bottom Right', 'image-hover-effects-ultimate'),
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-front-section' => '',
@@ -87,7 +87,7 @@ class Effects14 extends Modules {
 
         $this->add_responsive_control(
                 'oxi-image-flip-front-border-radius', $this->style, [
-            'label' => __('Border Radius', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -137,7 +137,7 @@ class Effects14 extends Modules {
         );
         $this->add_responsive_control(
                 'oxi-image-flip-front-padding', $this->style, [
-            'label' => __('Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Padding', 'image-hover-effects-ultimate'),
             'type' => Controls::DIMENSIONS,
             'separator' => TRUE,
             'default' => [
@@ -169,7 +169,7 @@ class Effects14 extends Modules {
         );
         $this->add_responsive_control(
                 'oxi-image-flip-front-margin', $this->style, [
-            'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Margin', 'image-hover-effects-ultimate'),
             'type' => Controls::DIMENSIONS,
             'separator' => TRUE,
             'default' => [
@@ -205,14 +205,14 @@ class Effects14 extends Modules {
     public function register_front_number_settings() {
         $this->start_controls_section(
                 'imahe-hover', [
-            'label' => esc_html__('Icon Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Icon Settings', 'image-hover-effects-ultimate'),
             'showing' => FALSE,
                 ]
         );
 
         $this->add_responsive_control(
                 'oxi-image-flip-front-icon-size', $this->style, [
-            'label' => __('Icon Size', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Icon Size', 'image-hover-effects-ultimate'),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -244,7 +244,7 @@ class Effects14 extends Modules {
 
         $this->add_control(
                 'oxi-image-flip-front-icon-color', $this->style, [
-            'label' => __('Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Color', 'image-hover-effects-ultimate'),
             'type' => Controls::COLOR,
             'default' => '#b414c9',
             'selector' => [
@@ -275,7 +275,7 @@ class Effects14 extends Modules {
 
         $this->add_responsive_control(
                 'oxi-image-flip-front-icon-border-radius', $this->style, [
-            'label' => __('Border Radius', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -306,7 +306,7 @@ class Effects14 extends Modules {
         );
         $this->add_responsive_control(
                 'oxi-image-flip-front-icon-padding', $this->style, [
-            'label' => __('Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Padding', 'image-hover-effects-ultimate'),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -370,25 +370,25 @@ class Effects14 extends Modules {
     public function register_back_content_settings() {
         $this->start_controls_section(
                 'oxi-image-hover', [
-            'label' => esc_html__('Content Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Content Settings', 'image-hover-effects-ultimate'),
             'showing' => TRUE,
                 ]
         );
         $this->add_control(
                 'oxi-image-flip-back-content-alignment', $this->style, [
-            'label' => __('Content Alignment', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Content Alignment', 'image-hover-effects-ultimate'),
             'type' => Controls::SELECT,
             'default' => 'image-hover-align-center-center',
             'options' => [
-                'image-hover-align-top-left' => __('Top Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'image-hover-align-top-center' => __('Top Center', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'image-hover-align-top-right' => __('Top Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'image-hover-align-center-left' => __('Center Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'image-hover-align-center-center' => __('Center Center', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'image-hover-align-center-right' => __('Center Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'image-hover-align-bottom-left' => __('Bottom Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'image-hover-align-bottom-center' => __('Bottom Center', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'image-hover-align-bottom-right' => __('Bottom Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'image-hover-align-top-left' => esc_html__('Top Left', 'image-hover-effects-ultimate'),
+                'image-hover-align-top-center' => esc_html__('Top Center', 'image-hover-effects-ultimate'),
+                'image-hover-align-top-right' => esc_html__('Top Right', 'image-hover-effects-ultimate'),
+                'image-hover-align-center-left' => esc_html__('Center Left', 'image-hover-effects-ultimate'),
+                'image-hover-align-center-center' => esc_html__('Center Center', 'image-hover-effects-ultimate'),
+                'image-hover-align-center-right' => esc_html__('Center Right', 'image-hover-effects-ultimate'),
+                'image-hover-align-bottom-left' => esc_html__('Bottom Left', 'image-hover-effects-ultimate'),
+                'image-hover-align-bottom-center' => esc_html__('Bottom Center', 'image-hover-effects-ultimate'),
+                'image-hover-align-bottom-right' => esc_html__('Bottom Right', 'image-hover-effects-ultimate'),
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-back-section' => '',
@@ -418,7 +418,7 @@ class Effects14 extends Modules {
 
         $this->add_responsive_control(
                 'oxi-image-flip-back-border-radius', $this->style, [
-            'label' => __('Border Radius', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -477,7 +477,7 @@ class Effects14 extends Modules {
         );
         $this->add_responsive_control(
                 'oxi-image-flip-back-padding', $this->style, [
-            'label' => __('Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Padding', 'image-hover-effects-ultimate'),
             'type' => Controls::DIMENSIONS,
             'separator' => TRUE,
             'default' => [
@@ -509,7 +509,7 @@ class Effects14 extends Modules {
         );
         $this->add_responsive_control(
                 'oxi-image-flip-back-margin', $this->style, [
-            'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Margin', 'image-hover-effects-ultimate'),
             'type' => Controls::DIMENSIONS,
             'separator' => TRUE,
             'default' => [
@@ -551,7 +551,7 @@ class Effects14 extends Modules {
             <?php
             $this->add_control(
                     'image_hover_front_heading', $this->style, [
-                'label' => __('Front Title', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Front Title', 'image-hover-effects-ultimate'),
                 'type' => Controls::TEXT,
                 'default' => '',
                 'placeholder' => 'Heading',
@@ -560,7 +560,7 @@ class Effects14 extends Modules {
             );
             $this->add_control(
                     'image_hover_back_heading', $this->style, [
-                'label' => __('Backend Title', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Backend Title', 'image-hover-effects-ultimate'),
                 'type' => Controls::TEXT,
                 'default' => 'Border Flipbox',
                 'placeholder' => 'Heading',
@@ -570,7 +570,7 @@ class Effects14 extends Modules {
 
             $this->add_control(
                     'image_hover_front_icon', $this->style, [
-                'label' => __('Front Icon', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Front Icon', 'image-hover-effects-ultimate'),
                 'type' => Controls::ICON,
                 'description' => 'Add Your Flipbox Front Icon.'
                     ]
@@ -578,7 +578,7 @@ class Effects14 extends Modules {
 
             $this->add_control(
                     'image_hover_front_description', $this->style, [
-                'label' => __('Front Description', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Front Description', 'image-hover-effects-ultimate'),
                 'type' => Controls::TEXTAREA,
                 'description' => 'Add Your Front Description Unless make it blank.'
                     ]
@@ -586,7 +586,7 @@ class Effects14 extends Modules {
 
             $this->add_control(
                     'image_hover_back_description', $this->style, [
-                'label' => __('Backend Description', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Backend Description', 'image-hover-effects-ultimate'),
                 'type' => Controls::TEXTAREA,
                 'description' => 'Add Your Backend Description Unless make it blank.'
                     ]
@@ -596,8 +596,8 @@ class Effects14 extends Modules {
                     'image_hover-start-tabs', [
                 'separator' => TRUE,
                 'options' => [
-                    'frontend' => esc_html__('Front Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'backend' => esc_html__('Backend Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'frontend' => esc_html__('Front Image', 'image-hover-effects-ultimate'),
+                    'backend' => esc_html__('Backend Image', 'image-hover-effects-ultimate'),
                 ]
                     ]
             );
@@ -605,7 +605,7 @@ class Effects14 extends Modules {
 
             $this->add_group_control(
                     'image_hover_front_image', $this->style, [
-                'label' => __('Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Image', 'image-hover-effects-ultimate'),
                 'type' => Controls::MEDIA,
                 'description' => 'Add or Modify Your Front Image. Adjust Front background to get better design.'
                     ]
@@ -616,7 +616,7 @@ class Effects14 extends Modules {
             $this->start_controls_tab();
             $this->add_group_control(
                     'image_hover_back_image', $this->style, [
-                'label' => __('Feature Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Feature Image', 'image-hover-effects-ultimate'),
                 'type' => Controls::MEDIA,
                 'description' => 'Add or Modify Your Backend Image. Adjust Backend background to get better design.'
                     ]
@@ -626,7 +626,7 @@ class Effects14 extends Modules {
 
             $this->add_group_control(
                     'image_hover_button_link', $this->style, [
-                'label' => __('URL', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('URL', 'image-hover-effects-ultimate'),
                 'type' => Controls::URL,
                 'separator' => TRUE,
                 'default' => '',

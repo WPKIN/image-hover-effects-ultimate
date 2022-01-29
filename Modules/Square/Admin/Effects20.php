@@ -19,12 +19,12 @@ class Effects20 extends Modules {
     public function register_effects() {
         return $this->add_control(
                         'image_hover_effects', $this->style, [
-                    'label' => __('Effects Direction', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Effects Direction', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
                     'default' => 'left_to_right',
                     'options' => [
-                        'top_to_bottom' => __('Top To Bottom', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'bottom_to_top' => __('Bottom To Top', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'top_to_bottom' => esc_html__('Top To Bottom', 'image-hover-effects-ultimate'),
+                        'bottom_to_top' => esc_html__('Bottom To Top', 'image-hover-effects-ultimate'),
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-hover-figure' => '',
@@ -38,13 +38,13 @@ class Effects20 extends Modules {
     public function register_content_settings() {
         $this->start_controls_section(
                 'oxi-image-hover', [
-            'label' => esc_html__('Content Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Content Settings', 'image-hover-effects-ultimate'),
             'showing' => TRUE,
                 ]
         );
         $this->add_control(
                 'oxi-image-hover-background-color', $this->style, [
-            'label' => esc_html__('Background', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Background', 'image-hover-effects-ultimate'),
             'type' => Controls::GRADIENT,
             'default' => 'rgba(255, 116, 3, 1)',
             'selector' => [
@@ -58,15 +58,15 @@ class Effects20 extends Modules {
                 'image-hover-content-start-tabs',
                 [
                     'options' => [
-                        'normal' => esc_html__('Normal ', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'hover' => esc_html__('Hover ', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'normal' => esc_html__('Normal ', 'image-hover-effects-ultimate'),
+                        'hover' => esc_html__('Hover ', 'image-hover-effects-ultimate'),
                     ]
                 ]
         );
         $this->start_controls_tab();
         $this->add_responsive_control(
                 'oxi-image-hover-border-radius', $this->style, [
-            'label' => __('Border Radius', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -117,7 +117,7 @@ class Effects20 extends Modules {
         $this->start_controls_tab();
         $this->add_responsive_control(
                 'oxi-image-hover-hover-border-radius', $this->style, [
-            'label' => __('Border Radius', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -177,7 +177,7 @@ class Effects20 extends Modules {
         $this->end_controls_tabs();
         $this->add_responsive_control(
                 'oxi-image-hover-padding', $this->style, [
-            'label' => __('Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Padding', 'image-hover-effects-ultimate'),
             'type' => Controls::DIMENSIONS,
             'separator' => TRUE,
             'simpledimensions' => 'double',
@@ -215,7 +215,7 @@ class Effects20 extends Modules {
     public function register_heading_settings() {
         $this->start_controls_section(
                 'oxi-image-hover', [
-            'label' => esc_html__('Heading Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Heading Settings', 'image-hover-effects-ultimate'),
             'showing' => TRUE,
                 ]
         );
@@ -230,7 +230,7 @@ class Effects20 extends Modules {
         );
         $this->add_control(
                 'oxi-image-hover-heading-color', $this->style, [
-            'label' => __('Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Color', 'image-hover-effects-ultimate'),
             'type' => Controls::COLOR,
             'default' => '#ffffff',
             'selector' => [
@@ -252,7 +252,7 @@ class Effects20 extends Modules {
         );
         $this->add_responsive_control(
                 'oxi-image-hover-heading-margin', $this->style, [
-            'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Margin', 'image-hover-effects-ultimate'),
             'type' => Controls::DIMENSIONS,
             'simpledimensions' => 'heading',
             'default' => [
@@ -285,23 +285,23 @@ class Effects20 extends Modules {
         );
         $this->add_control(
                 'oxi-image-hover-heading-animation', $this->style, [
-            'label' => __('Animation', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Animation', 'image-hover-effects-ultimate'),
             'type' => Controls::SELECT,
             'default' => '',
             'options' => [
-                '' => __('None', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'iheu-fade-up' => __('Fade Up', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'iheu-fade-down' => __('Fade Down', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'iheu-fade-left' => __('Fade Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'iheu-fade-right' => __('Fade Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'iheu-fade-up-big' => __('Fade up Big', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'iheu-fade-down-big' => __('Fade down Big', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'iheu-fade-left-big' => __('Fade left Big', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'iheu-fade-right-big' => __('Fade Right Big', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'iheu-zoom-in' => __('Zoom In', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'iheu-zoom-out' => __('Zoom Out', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'iheu-flip-x' => __('Flip X', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'iheu-flip-y' => __('Flip Y', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                '' => esc_html__('None', 'image-hover-effects-ultimate'),
+                'iheu-fade-up' => esc_html__('Fade Up', 'image-hover-effects-ultimate'),
+                'iheu-fade-down' => esc_html__('Fade Down', 'image-hover-effects-ultimate'),
+                'iheu-fade-left' => esc_html__('Fade Left', 'image-hover-effects-ultimate'),
+                'iheu-fade-right' => esc_html__('Fade Right', 'image-hover-effects-ultimate'),
+                'iheu-fade-up-big' => esc_html__('Fade up Big', 'image-hover-effects-ultimate'),
+                'iheu-fade-down-big' => esc_html__('Fade down Big', 'image-hover-effects-ultimate'),
+                'iheu-fade-left-big' => esc_html__('Fade left Big', 'image-hover-effects-ultimate'),
+                'iheu-fade-right-big' => esc_html__('Fade Right Big', 'image-hover-effects-ultimate'),
+                'iheu-zoom-in' => esc_html__('Zoom In', 'image-hover-effects-ultimate'),
+                'iheu-zoom-out' => esc_html__('Zoom Out', 'image-hover-effects-ultimate'),
+                'iheu-flip-x' => esc_html__('Flip X', 'image-hover-effects-ultimate'),
+                'iheu-flip-y' => esc_html__('Flip Y', 'image-hover-effects-ultimate'),
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-figure-heading' => '',
@@ -312,17 +312,17 @@ class Effects20 extends Modules {
         );
         $this->add_control(
                 'oxi-image-hover-heading-animation-delay', $this->style, [
-            'label' => __('Animation Delay', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Animation Delay', 'image-hover-effects-ultimate'),
             'type' => Controls::SELECT,
             'default' => '',
             'options' => [
-                '' => __('None', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-image-hover-delay-xs' => __('Delay XS', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-image-hover-delay-sm' => __('Delay SM', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-image-hover-delay-md' => __('Delay MD', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-image-hover-delay-lg' => __('Delay LG', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-image-hover-delay-xl' => __('Delay XL', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'oxi-image-hover-delay-xxl' => __('Delay XXL', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                '' => esc_html__('None', 'image-hover-effects-ultimate'),
+                'oxi-image-hover-delay-xs' => esc_html__('Delay XS', 'image-hover-effects-ultimate'),
+                'oxi-image-hover-delay-sm' => esc_html__('Delay SM', 'image-hover-effects-ultimate'),
+                'oxi-image-hover-delay-md' => esc_html__('Delay MD', 'image-hover-effects-ultimate'),
+                'oxi-image-hover-delay-lg' => esc_html__('Delay LG', 'image-hover-effects-ultimate'),
+                'oxi-image-hover-delay-xl' => esc_html__('Delay XL', 'image-hover-effects-ultimate'),
+                'oxi-image-hover-delay-xxl' => esc_html__('Delay XXL', 'image-hover-effects-ultimate'),
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-figure-heading' => '',

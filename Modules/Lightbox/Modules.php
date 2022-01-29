@@ -20,8 +20,8 @@ class Modules extends Admin_Render {
         $this->start_section_header(
                 'oxi-image-hover-start-tabs', [
             'options' => [
-                'general-settings' => esc_html__('General Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'custom' => esc_html__('Custom CSS', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'general-settings' => esc_html__('General Settings', 'image-hover-effects-ultimate'),
+                'custom' => esc_html__('Custom CSS', 'image-hover-effects-ultimate'),
             ],
                 ]
         );
@@ -41,13 +41,13 @@ class Modules extends Admin_Render {
 
         $this->start_controls_section(
                 'oxi-image-hover', [
-            'label' => esc_html__('Custom CSS', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Custom CSS', 'image-hover-effects-ultimate'),
             'showing' => TRUE,
                 ]
         );
         $this->add_control(
                 'image-hover-custom-css', $this->style, [
-            'label' => __('', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('', 'image-hover-effects-ultimate'),
             'type' => Controls::TEXTAREA,
             'default' => '',
             'description' => 'Custom CSS Section. You can add custom css into textarea.'
@@ -88,7 +88,7 @@ class Modules extends Admin_Render {
     public function register_general_style() {
         $this->start_controls_section(
                 'oxi-image-hover', [
-            'label' => esc_html__('General Style', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('General Style', 'image-hover-effects-ultimate'),
             'showing' => true,
                 ]
         );
@@ -96,14 +96,14 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_clickable',
                 $this->style,
                 [
-                    'label' => __('Show Clickable Box', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Show Clickable Box', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
                     'loader' => true,
                     'default' => 'image',
                     'options' => [
-                        'image' => __('Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'button' => __('Button', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'icon' => __('Icon', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'image' => esc_html__('Image', 'image-hover-effects-ultimate'),
+                        'button' => esc_html__('Button', 'image-hover-effects-ultimate'),
+                        'icon' => esc_html__('Icon', 'image-hover-effects-ultimate'),
                     ],
                     'description' => 'Select Body type for Lightbox.'
                 ]
@@ -124,7 +124,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_bg_color',
                 $this->style,
                 [
-                    'label' => __('Background Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Background Color', 'image-hover-effects-ultimate'),
                     'type' => Controls::BACKGROUND,
                     'selector' => [
                         '{{WRAPPER}} .oxi_addons__light_box  .oxi_addons__light_box_parent' => '',
@@ -136,7 +136,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_padding',
                 $this->style,
                 [
-                    'label' => __('Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Padding', 'image-hover-effects-ultimate'),
                     'type' => Controls::DIMENSIONS,
                     'default' => [
                         'unit' => 'px',
@@ -169,7 +169,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_margin',
                 $this->style,
                 [
-                    'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Margin', 'image-hover-effects-ultimate'),
                     'type' => Controls::DIMENSIONS,
                     'default' => [
                         'unit' => 'px',
@@ -209,7 +209,7 @@ class Modules extends Admin_Render {
     public function register_image_settings() {
         $this->start_controls_section(
                 'oxi-image-hover', [
-            'label' => esc_html__('Image Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Image Settings', 'image-hover-effects-ultimate'),
             'showing' => false,
             'condition' => [
                 'oxi_image_light_box_clickable' => 'image',
@@ -221,12 +221,12 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_custom_width_height_swither',
                 $this->style,
                 [
-                    'label' => __('Width Height', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Width Height', 'image-hover-effects-ultimate'),
                     'type' => Controls::SWITCHER,
                     'default' => 'no',
                     'loader' => true,
-                    'label_on' => __('Custom', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'label_off' => __('Auto', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label_on' => esc_html__('Custom', 'image-hover-effects-ultimate'),
+                    'label_off' => esc_html__('Auto', 'image-hover-effects-ultimate'),
                     'return_value' => 'oxi_addons__custom_width_height',
                     'description' => 'Wanna set Custom Width height?',
                 ]
@@ -235,7 +235,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_width',
                 $this->style,
                 [
-                    'label' => __('Width', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Width', 'image-hover-effects-ultimate'),
                     'type' => Controls::SLIDER,
                     'default' => [
                         'unit' => '%',
@@ -271,7 +271,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_height',
                 $this->style,
                 [
-                    'label' => __('Height', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Height', 'image-hover-effects-ultimate'),
                     'type' => Controls::SLIDER,
                     'default' => [
                         'unit' => '%',
@@ -319,7 +319,7 @@ class Modules extends Admin_Render {
                 'oxi_image_front_width_border_radius',
                 $this->style,
                 [
-                    'label' => __('Border radius', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Border radius', 'image-hover-effects-ultimate'),
                     'separator' => false,
                     'type' => Controls::DIMENSIONS,
                     'default' => [
@@ -354,7 +354,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_image_width_box_shadow',
                 $this->style,
                 [
-                    'label' => __('Box Shadow', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Box Shadow', 'image-hover-effects-ultimate'),
                     'type' => Controls::BOXSHADOW,
                     'selector' => [
                         '{{WRAPPER}} .oxi_addons__light_box .oxi_addons__image_main' => '',
@@ -374,7 +374,7 @@ class Modules extends Admin_Render {
     public function register_icon_settings() {
         $this->start_controls_section(
                 'oxi-image-hover', [
-            'label' => esc_html__('Icon Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Icon Settings', 'image-hover-effects-ultimate'),
             'showing' => false,
             'condition' => [
                 'oxi_image_light_box_clickable' => 'icon',
@@ -386,7 +386,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_icon_font_size',
                 $this->style,
                 [
-                    'label' => __('Size', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Size', 'image-hover-effects-ultimate'),
                     'type' => Controls::SLIDER,
                     'default' => [
                         'unit' => 'px',
@@ -419,7 +419,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_icon_width_height_custom',
                 $this->style,
                 [
-                    'label' => __('Height & Width', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Height & Width', 'image-hover-effects-ultimate'),
                     'type' => Controls::SLIDER,
                     'default' => [
                         'unit' => 'px',
@@ -452,7 +452,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_icon_color',
                 $this->style,
                 [
-                    'label' => __('Icon Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Icon Color', 'image-hover-effects-ultimate'),
                     'type' => Controls::COLOR,
                     'default' => '#ffffff',
                     'selector' => [
@@ -465,7 +465,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_icon_background',
                 $this->style,
                 [
-                    'label' => __('Background', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Background', 'image-hover-effects-ultimate'),
                     'type' => Controls::COLOR,
                     'oparetor' => 'RGB',
                     'default' => '#000',
@@ -479,21 +479,21 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_icon_alignment',
                 $this->style,
                 [
-                    'label' => __('Icon Alignment', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Icon Alignment', 'image-hover-effects-ultimate'),
                     'type' => Controls::CHOOSE,
                     'operator' => Controls::OPERATOR_ICON,
                     'default' => 'center',
                     'options' => [
                         'flex-start' => [
-                            'title' => __('Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('Left', 'image-hover-effects-ultimate'),
                             'icon' => 'fa fa-align-left',
                         ],
                         'center' => [
-                            'title' => __('Center', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('Center', 'image-hover-effects-ultimate'),
                             'icon' => 'fa fa-align-center',
                         ],
                         'flex-end' => [
-                            'title' => __('Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('Right', 'image-hover-effects-ultimate'),
                             'icon' => 'fa fa-align-right',
                         ],
                     ],
@@ -518,7 +518,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_icon_radius',
                 $this->style,
                 [
-                    'label' => __('Border Radius', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
                     'type' => Controls::DIMENSIONS,
                     'default' => [
                         'unit' => 'px',
@@ -571,7 +571,7 @@ class Modules extends Admin_Render {
     public function register_light_settings() {
         $this->start_controls_section(
                 'oxi-image-hover', [
-            'label' => esc_html__('Light Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Light Settings', 'image-hover-effects-ultimate'),
             'showing' => true,
                 ]
         );
@@ -580,7 +580,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_bg_light_box',
                 $this->style,
                 [
-                    'label' => __('Background', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Background', 'image-hover-effects-ultimate'),
                     'type' => Controls::COLOR,
                     'oparetor' => 'RGB',
                     'default' => '#000',
@@ -602,7 +602,7 @@ class Modules extends Admin_Render {
     public function register_heading_details_settings() {
         $this->start_controls_section(
                 'oxi-image-hover', [
-            'label' => esc_html__('Heading Details Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Heading Details Settings', 'image-hover-effects-ultimate'),
             'showing' => true,
                 ]
         );
@@ -611,7 +611,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_bg_heading_details',
                 $this->style,
                 [
-                    'label' => __('Background', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Background', 'image-hover-effects-ultimate'),
                     'type' => Controls::COLOR,
                     'oparetor' => 'RGB',
                     'default' => 'rgba(59, 59, 59, 0.64)',
@@ -625,8 +625,8 @@ class Modules extends Admin_Render {
                 'shortcode-addons-start-tabs',
                 [
                     'options' => [
-                        'heading' => esc_html__('Heading', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'description' => esc_html__('Description', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'heading' => esc_html__('Heading', 'image-hover-effects-ultimate'),
+                        'description' => esc_html__('Description', 'image-hover-effects-ultimate'),
                     ],
                 ]
         );
@@ -635,18 +635,18 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_tag',
                 $this->style,
                 [
-                    'label' => __('Tag', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Tag', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
                     'default' => 'h3',
                     'loader' => true,
                     'options' => [
-                        'h1' => __('H1', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'h2' => __('H2', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'h3' => __('H3', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'h4' => __('H4', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'h5' => __('H5', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'h6' => __('H6', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'div' => __('DIV', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'h1' => esc_html__('H1', 'image-hover-effects-ultimate'),
+                        'h2' => esc_html__('H2', 'image-hover-effects-ultimate'),
+                        'h3' => esc_html__('H3', 'image-hover-effects-ultimate'),
+                        'h4' => esc_html__('H4', 'image-hover-effects-ultimate'),
+                        'h5' => esc_html__('H5', 'image-hover-effects-ultimate'),
+                        'h6' => esc_html__('H6', 'image-hover-effects-ultimate'),
+                        'div' => esc_html__('DIV', 'image-hover-effects-ultimate'),
                     ],
                     'description' => 'Confirm Your Haading Tag.',
                 ]
@@ -655,7 +655,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_heading_typo',
                 $this->style,
                 [
-                    'label' => __('Typography', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Typography', 'image-hover-effects-ultimate'),
                     'type' => Controls::TYPOGRAPHY,
                     'include' => Controls::ALIGNNORMAL,
                     'selector' => [
@@ -667,7 +667,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_heading_color',
                 $this->style,
                 [
-                    'label' => __('Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Color', 'image-hover-effects-ultimate'),
                     'type' => Controls::COLOR,
                     'default' => '#fff',
                     'selector' => [
@@ -681,7 +681,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_heading_padding',
                 $this->style,
                 [
-                    'label' => __('Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Padding', 'image-hover-effects-ultimate'),
                     'type' => Controls::DIMENSIONS,
                     'default' => [
                         'unit' => 'px',
@@ -716,7 +716,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_desc_typo',
                 $this->style,
                 [
-                    'label' => __('Typography', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Typography', 'image-hover-effects-ultimate'),
                     'type' => Controls::TYPOGRAPHY,
                     'include' => Controls::ALIGNNORMAL,
                     'selector' => [
@@ -728,7 +728,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_desc_color',
                 $this->style,
                 [
-                    'label' => __('Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Color', 'image-hover-effects-ultimate'),
                     'type' => Controls::COLOR,
                     'default' => '#fff',
                     'selector' => [
@@ -742,7 +742,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_desc_padding',
                 $this->style,
                 [
-                    'label' => __('Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Padding', 'image-hover-effects-ultimate'),
                     'type' => Controls::DIMENSIONS,
                     'default' => [
                         'unit' => 'px',
@@ -786,7 +786,7 @@ class Modules extends Admin_Render {
         $this->start_controls_section(
                 'shortcode-addons',
                 [
-                    'label' => esc_html__('Button Setting', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Button Setting', 'image-hover-effects-ultimate'),
                     'showing' => false,
                     'condition' => [
                         'oxi_image_light_box_clickable' => 'button',
@@ -797,19 +797,19 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_btn_position',
                 $this->style,
                 [
-                    'label' => __('Button Position', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Button Position', 'image-hover-effects-ultimate'),
                     'type' => Controls::CHOOSE,
                     'default' => 'center',
                     'loader' => true,
                     'options' => [
                         'left' => [
-                            'title' => __('Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('Left', 'image-hover-effects-ultimate'),
                         ],
                         'center' => [
-                            'title' => __('Center', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('Center', 'image-hover-effects-ultimate'),
                         ],
                         'right' => [
-                            'title' => __('Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('Right', 'image-hover-effects-ultimate'),
                         ],
                     ],
                     'selector' => [
@@ -832,8 +832,8 @@ class Modules extends Admin_Render {
                 'shortcode-addons-start-tabs',
                 [
                     'options' => [
-                        'normal' => esc_html__('Normal View', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'hover' => esc_html__('Hover View', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'normal' => esc_html__('Normal View', 'image-hover-effects-ultimate'),
+                        'hover' => esc_html__('Hover View', 'image-hover-effects-ultimate'),
                     ],
                 ]
         );
@@ -842,7 +842,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_btn_color',
                 $this->style,
                 [
-                    'label' => __('Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Color', 'image-hover-effects-ultimate'),
                     'type' => Controls::COLOR,
                     'default' => '#fff',
                     'selector' => [
@@ -855,7 +855,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_btn_bg_color',
                 $this->style,
                 [
-                    'label' => __('Background Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Background Color', 'image-hover-effects-ultimate'),
                     'type' => Controls::COLOR,
                     'default' => 'rgba(17, 106, 177, 1.00)',
                     'oparetor' => 'RGB',
@@ -882,7 +882,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_btn_br_radius',
                 $this->style,
                 [
-                    'label' => __('Border radius', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Border radius', 'image-hover-effects-ultimate'),
                     'separator' => false,
                     'type' => Controls::DIMENSIONS,
                     'default' => [
@@ -931,7 +931,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_btn_hover_color',
                 $this->style,
                 [
-                    'label' => __('Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Color', 'image-hover-effects-ultimate'),
                     'type' => Controls::COLOR,
                     'default' => '#fff',
                     'selector' => [
@@ -944,7 +944,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_btn_hover_bg_color',
                 $this->style,
                 [
-                    'label' => __('Background Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Background Color', 'image-hover-effects-ultimate'),
                     'type' => Controls::COLOR,
                     'default' => 'rgba(17, 106, 177, 1.00)',
                     'oparetor' => 'RGB',
@@ -971,7 +971,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_btn_hover-br-radius',
                 $this->style,
                 [
-                    'label' => __('Border radius', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Border radius', 'image-hover-effects-ultimate'),
                     'separator' => false,
                     'type' => Controls::DIMENSIONS,
                     'default' => [
@@ -1021,7 +1021,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_btn_padding',
                 $this->style,
                 [
-                    'label' => __('Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Padding', 'image-hover-effects-ultimate'),
                     'type' => Controls::DIMENSIONS,
                     'separator' => true,
                     'default' => [
@@ -1055,7 +1055,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_btn_margin',
                 $this->style,
                 [
-                    'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Margin', 'image-hover-effects-ultimate'),
                     'type' => Controls::DIMENSIONS,
                     'default' => [
                         'unit' => 'px',
@@ -1098,7 +1098,7 @@ class Modules extends Admin_Render {
         $this->start_controls_section(
                 'shortcode-addons',
                 [
-                    'label' => esc_html__('Icon Overlay Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Icon Overlay Settings', 'image-hover-effects-ultimate'),
                     'showing' => true,
                     'condition' => [
                         'oxi_image_light_box_clickable' => 'icon',
@@ -1109,7 +1109,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_bg_overlay_icon_icon',
                 $this->style,
                 [
-                    'label' => __('Icon', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Icon', 'image-hover-effects-ultimate'),
                     'type' => Controls::ICON,
                     'default' => 'fas fa-search',
                     'placeholder' => 'example:- fas fa-search',
@@ -1121,7 +1121,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_icon_size_overlay_icon_icon',
                 $this->style,
                 [
-                    'label' => __('Size', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Size', 'image-hover-effects-ultimate'),
                     'type' => Controls::SLIDER,
                     'default' => [
                         'unit' => 'px',
@@ -1154,7 +1154,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_bg_overlay_bg_icon',
                 $this->style,
                 [
-                    'label' => __('Background', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Background', 'image-hover-effects-ultimate'),
                     'type' => Controls::COLOR,
                     'oparetor' => 'RGB',
                     'default' => 'rgba(59, 59, 59, 0.64)',
@@ -1176,7 +1176,7 @@ class Modules extends Admin_Render {
         $this->start_controls_section(
                 'shortcode-addons',
                 [
-                    'label' => esc_html__('Image Overlay Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Image Overlay Settings', 'image-hover-effects-ultimate'),
                     'showing' => false,
                     'condition' => [
                         'oxi_image_light_box_clickable' => 'image',
@@ -1187,7 +1187,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_bg_overlay_icon',
                 $this->style,
                 [
-                    'label' => __('Icon', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Icon', 'image-hover-effects-ultimate'),
                     'type' => Controls::ICON,
                     'default' => 'fas fa-search',
                     'placeholder' => 'example:- fas fa-search',
@@ -1199,7 +1199,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_icon_size_overlay_icon',
                 $this->style,
                 [
-                    'label' => __('Size', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Size', 'image-hover-effects-ultimate'),
                     'type' => Controls::SLIDER,
                     'default' => [
                         'unit' => 'px',
@@ -1232,7 +1232,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_bg_overlay_color',
                 $this->style,
                 [
-                    'label' => __('Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Color', 'image-hover-effects-ultimate'),
                     'type' => Controls::COLOR,
                     'default' => '#fff',
                     'selector' => [
@@ -1245,7 +1245,7 @@ class Modules extends Admin_Render {
                 'oxi_image_light_box_bg_overlay_bg',
                 $this->style,
                 [
-                    'label' => __('Background', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Background', 'image-hover-effects-ultimate'),
                     'type' => Controls::COLOR,
                     'oparetor' => 'RGB',
                     'default' => 'rgba(59, 59, 59, 0.64)',
@@ -1266,8 +1266,8 @@ class Modules extends Admin_Render {
     public function modal_opener() {
         $this->add_substitute_control('', [], [
             'type' => Controls::MODALOPENER,
-            'title' => __('Add New Light box', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'sub-title' => __('Open Light Box Form', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'title' => esc_html__('Add New Light box', 'image-hover-effects-ultimate'),
+            'sub-title' => esc_html__('Open Light Box Form', 'image-hover-effects-ultimate'),
             'showing' => true,
         ]);
     }
@@ -1282,14 +1282,14 @@ class Modules extends Admin_Render {
             <?php
             $this->start_controls_section(
                     'oxi-image-hover', [
-                'label' => esc_html__('General Style', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('General Style', 'image-hover-effects-ultimate'),
                 'showing' => true,
                     ]
             );
 
             $this->add_group_control(
                     'oxi_image_light_box_image_front', $this->style, [
-                'label' => esc_html__('Media Type', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Media Type', 'image-hover-effects-ultimate'),
                 'type' => Controls::MEDIA,
                 'default' => [
                     'type' => 'media-library',
@@ -1302,7 +1302,7 @@ class Modules extends Admin_Render {
             );
             $this->add_control(
                     'oxi_image_light_box_button_icon', $this->style, [
-                'label' => esc_html__('Icon', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Icon', 'image-hover-effects-ultimate'),
                 'type' => Controls::ICON,
                 'default' => 'fab fa-accusoft',
                 'condition' => [
@@ -1312,9 +1312,9 @@ class Modules extends Admin_Render {
             );
             $this->add_control(
                     'oxi_image_light_box_button_text', $this->style, [
-                'label' => esc_html__('Button Text', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Button Text', 'image-hover-effects-ultimate'),
                 'type' => Controls::TEXT,
-                'default' => esc_html__('Show Popup', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'default' => esc_html__('Show Popup', 'image-hover-effects-ultimate'),
                 'selector' => [
                     '{{WRAPPER}} .oxi_addons__light_box_{{KEY}} .oxi_addons__button' => '',
                 ],
@@ -1327,25 +1327,25 @@ class Modules extends Admin_Render {
             $this->end_controls_section();
             $this->start_controls_section(
                     'oxi-image-hover', [
-                'label' => esc_html__('Popup Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Popup Settings', 'image-hover-effects-ultimate'),
                 'showing' => true,
                     ]
             );
             $this->add_control(
                     'oxi_image_light_box_select_type', $this->style, [
-                'label' => esc_html__('Select Type', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Select Type', 'image-hover-effects-ultimate'),
                 'type' => Controls::SELECT,
                 'default' => 'image',
                 'loader' => true,
                 'options' => [
-                    'image' => __('Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'video' => __('Video', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'image' => esc_html__('Image', 'image-hover-effects-ultimate'),
+                    'video' => esc_html__('Video', 'image-hover-effects-ultimate'),
                 ],
                     ]
             );
             $this->add_group_control(
                     'oxi_image_light_box_image', $this->style, [
-                'label' => esc_html__('Media Type', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Media Type', 'image-hover-effects-ultimate'),
                 'type' => Controls::MEDIA,
                 'default' => [
                     'type' => 'media-library',
@@ -1358,7 +1358,7 @@ class Modules extends Admin_Render {
             );
             $this->add_control(
                     'oxi_image_light_box_video', $this->style, [
-                'label' => esc_html__('Youtube Link', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Youtube Link', 'image-hover-effects-ultimate'),
                 'type' => Controls::TEXT,
                 'placeholder' => 'https://www.youtube.com/watch?v=sEWx6H8gZH8',
                 'default' => 'https://www.youtube.com/watch?v=sEWx6H8gZH8',
@@ -1369,9 +1369,9 @@ class Modules extends Admin_Render {
             );
             $this->add_control(
                     'oxi_image_light_box_title', $this->style, [
-                'label' => esc_html__('Title', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Title', 'image-hover-effects-ultimate'),
                 'type' => Controls::TEXT,
-                'default' => esc_html__('What is Lorem Ipsum? ', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'default' => esc_html__('What is Lorem Ipsum? ', 'image-hover-effects-ultimate'),
                 'selector' => [
                     '{{WRAPPER}} .oxi_addons__light_box_{{KEY}} .oxi_addons__heading' => '',
                 ],
@@ -1379,9 +1379,9 @@ class Modules extends Admin_Render {
             );
             $this->add_control(
                     'oxi_image_light_box_desc', $this->style, [
-                'label' => esc_html__('Description', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Description', 'image-hover-effects-ultimate'),
                 'type' => Controls::TEXTAREA,
-                'default' => esc_html__('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrytandard ', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'default' => esc_html__('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrytandard ', 'image-hover-effects-ultimate'),
                 'selector' => [
                     '{{WRAPPER}} .oxi_addons__light_box_{{KEY}} .oxi_addons__details' => '',
                 ],

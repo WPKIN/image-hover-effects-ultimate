@@ -19,18 +19,18 @@ class Effects16 extends Modules {
     public function register_effects() {
         return $this->add_control(
                         'image_hover_effects', $this->style, [
-                    'label' => __('Effects Direction', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Effects Direction', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
                     'default' => '',
                     'options' => [
-                        'oxi-image-modal-slide-up' => __('Modal Slide Up', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-modal-slide-down' => __('Modal Slide Down', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-modal-slide-left' => __('Modal Slide Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-modal-slide-right' => __('Modal Slide Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-modal-hinge-up' => __('Modal Hinge Up', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-modal-hinge-down' => __('Modal Hinge Down', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-modal-hinge-left' => __('Modal Hinge Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-modal-hinge-right' => __('Modal Hinge Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'oxi-image-modal-slide-up' => esc_html__('Modal Slide Up', 'image-hover-effects-ultimate'),
+                        'oxi-image-modal-slide-down' => esc_html__('Modal Slide Down', 'image-hover-effects-ultimate'),
+                        'oxi-image-modal-slide-left' => esc_html__('Modal Slide Left', 'image-hover-effects-ultimate'),
+                        'oxi-image-modal-slide-right' => esc_html__('Modal Slide Right', 'image-hover-effects-ultimate'),
+                        'oxi-image-modal-hinge-up' => esc_html__('Modal Hinge Up', 'image-hover-effects-ultimate'),
+                        'oxi-image-modal-hinge-down' => esc_html__('Modal Hinge Down', 'image-hover-effects-ultimate'),
+                        'oxi-image-modal-hinge-left' => esc_html__('Modal Hinge Left', 'image-hover-effects-ultimate'),
+                        'oxi-image-modal-hinge-right' => esc_html__('Modal Hinge Right', 'image-hover-effects-ultimate'),
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-caption-hover' => '',

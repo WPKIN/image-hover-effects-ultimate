@@ -19,14 +19,14 @@ class Effects17 extends Modules {
     public function register_effects() {
         return $this->add_control(
                         'image_hover_effects', $this->style, [
-                    'label' => __('Effects Direction', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Effects Direction', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
                     'default' => '',
                     'options' => [
-                        'oxi-image-parallax-up' => __('Parallax Up', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-parallax-down' => __('Parallax Down', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-parallax-left' => __('Parallax Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-parallax-right' => __('Parallax Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'oxi-image-parallax-up' => esc_html__('Parallax Up', 'image-hover-effects-ultimate'),
+                        'oxi-image-parallax-down' => esc_html__('Parallax Down', 'image-hover-effects-ultimate'),
+                        'oxi-image-parallax-left' => esc_html__('Parallax Left', 'image-hover-effects-ultimate'),
+                        'oxi-image-parallax-right' => esc_html__('Parallax Right', 'image-hover-effects-ultimate'),
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-caption-hover' => '',

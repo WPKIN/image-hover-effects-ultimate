@@ -21,14 +21,14 @@ class Effects22 extends Modules {
                         'image_hover_effects',
                         $this->style,
                         [
-                            'label' => __('Effects Direction', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'label' => esc_html__('Effects Direction', 'image-hover-effects-ultimate'),
                             'type' => Controls::SELECT,
                             'default' => 'bottom_to_left',
                             'options' => [
-                                'position_to_top_left' => __('Top Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                                'position_to_top_right' => __('Top Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                                'position_to_bottom_left' => __('Bottom Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                                'position_to_bottom_right' => __('Bottom Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                                'position_to_top_left' => esc_html__('Top Left', 'image-hover-effects-ultimate'),
+                                'position_to_top_right' => esc_html__('Top Right', 'image-hover-effects-ultimate'),
+                                'position_to_bottom_left' => esc_html__('Bottom Left', 'image-hover-effects-ultimate'),
+                                'position_to_bottom_right' => esc_html__('Bottom Right', 'image-hover-effects-ultimate'),
                             ],
                             'selector' => [
                                 '{{WRAPPER}} .oxi-image-hover-figure' => '',
@@ -43,7 +43,7 @@ class Effects22 extends Modules {
         $this->start_controls_section(
                 'oxi-image-hover',
                 [
-                    'label' => esc_html__('Width & Height', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Width & Height', 'image-hover-effects-ultimate'),
                     'showing' => true,
                 ]
         );
@@ -51,7 +51,7 @@ class Effects22 extends Modules {
                 'oxi-image-hover-width',
                 $this->style,
                 [
-                    'label' => __('Width', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Width', 'image-hover-effects-ultimate'),
                     'type' => Controls::SLIDER,
                     'default' => [
                         'unit' => 'px',
@@ -85,7 +85,7 @@ class Effects22 extends Modules {
                 'oxi-image-hover-height',
                 $this->style,
                 [
-                    'label' => __('Height', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Height', 'image-hover-effects-ultimate'),
                     'type' => Controls::SLIDER,
                     'default' => [
                         'unit' => 'px',
@@ -114,7 +114,7 @@ class Effects22 extends Modules {
                 'oxi-image-hover-margin',
                 $this->style,
                 [
-                    'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Margin', 'image-hover-effects-ultimate'),
                     'type' => Controls::DIMENSIONS,
                     'simpledimensions' => 'double',
                     'default' => [
@@ -152,7 +152,7 @@ class Effects22 extends Modules {
         $this->start_controls_section(
                 'oxi-image-hover',
                 [
-                    'label' => esc_html__('Content Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Content Settings', 'image-hover-effects-ultimate'),
                     'showing' => TRUE,
                 ]
         );
@@ -160,7 +160,7 @@ class Effects22 extends Modules {
                 'oxi-image-hover-content-width',
                 $this->style,
                 [
-                    'label' => __('Width', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Width', 'image-hover-effects-ultimate'),
                     'type' => Controls::SLIDER,
                     'default' => [
                         'unit' => 'px',
@@ -193,7 +193,7 @@ class Effects22 extends Modules {
 
         $this->add_control(
                 'oxi-image-hover-background-color', $this->style, [
-            'label' => esc_html__('Background', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Background', 'image-hover-effects-ultimate'),
             'type' => Controls::GRADIENT,
             'default' => 'rgba(255, 116, 3, 1)',
             'selector' => [
@@ -207,7 +207,7 @@ class Effects22 extends Modules {
                 'oxi-image-hover-border-radius',
                 $this->style,
                 [
-                    'label' => __('Border Radius', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
                     'type' => Controls::DIMENSIONS,
                     'default' => [
                         'unit' => 'px',
@@ -242,7 +242,7 @@ class Effects22 extends Modules {
                 'oxi-image-hover-content-margin',
                 $this->style,
                 [
-                    'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Margin', 'image-hover-effects-ultimate'),
                     'type' => Controls::DIMENSIONS,
                     'simpledimensions' => 'Double',
                     'default' => [
@@ -280,7 +280,7 @@ class Effects22 extends Modules {
         $this->start_controls_section(
                 'oxi-image-hover',
                 [
-                    'label' => esc_html__('Heading Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Heading Settings', 'image-hover-effects-ultimate'),
                     'showing' => TRUE,
                 ]
         );
@@ -300,7 +300,7 @@ class Effects22 extends Modules {
                 'oxi-image-hover-heading-color',
                 $this->style,
                 [
-                    'label' => __('Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Color', 'image-hover-effects-ultimate'),
                     'type' => Controls::COLOR,
                     'default' => '#ffffff',
                     'selector' => [
@@ -326,7 +326,7 @@ class Effects22 extends Modules {
                 'oxi-image-hover-heading-margin',
                 $this->style,
                 [
-                    'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Margin', 'image-hover-effects-ultimate'),
                     'type' => Controls::DIMENSIONS,
                     'simpledimensions' => 'heading',
                     'default' => [
@@ -361,23 +361,23 @@ class Effects22 extends Modules {
                 'oxi-image-hover-heading-animation',
                 $this->style,
                 [
-                    'label' => __('Animation', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Animation', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
                     'default' => '',
                     'options' => [
-                        '' => __('None', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'iheu-fade-up' => __('Fade Up', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'iheu-fade-down' => __('Fade Down', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'iheu-fade-left' => __('Fade Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'iheu-fade-right' => __('Fade Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'iheu-fade-up-big' => __('Fade up Big', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'iheu-fade-down-big' => __('Fade down Big', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'iheu-fade-left-big' => __('Fade left Big', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'iheu-fade-right-big' => __('Fade Right Big', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'iheu-zoom-in' => __('Zoom In', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'iheu-zoom-out' => __('Zoom Out', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'iheu-flip-x' => __('Flip X', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'iheu-flip-y' => __('Flip Y', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        '' => esc_html__('None', 'image-hover-effects-ultimate'),
+                        'iheu-fade-up' => esc_html__('Fade Up', 'image-hover-effects-ultimate'),
+                        'iheu-fade-down' => esc_html__('Fade Down', 'image-hover-effects-ultimate'),
+                        'iheu-fade-left' => esc_html__('Fade Left', 'image-hover-effects-ultimate'),
+                        'iheu-fade-right' => esc_html__('Fade Right', 'image-hover-effects-ultimate'),
+                        'iheu-fade-up-big' => esc_html__('Fade up Big', 'image-hover-effects-ultimate'),
+                        'iheu-fade-down-big' => esc_html__('Fade down Big', 'image-hover-effects-ultimate'),
+                        'iheu-fade-left-big' => esc_html__('Fade left Big', 'image-hover-effects-ultimate'),
+                        'iheu-fade-right-big' => esc_html__('Fade Right Big', 'image-hover-effects-ultimate'),
+                        'iheu-zoom-in' => esc_html__('Zoom In', 'image-hover-effects-ultimate'),
+                        'iheu-zoom-out' => esc_html__('Zoom Out', 'image-hover-effects-ultimate'),
+                        'iheu-flip-x' => esc_html__('Flip X', 'image-hover-effects-ultimate'),
+                        'iheu-flip-y' => esc_html__('Flip Y', 'image-hover-effects-ultimate'),
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-figure-heading' => '',
@@ -390,17 +390,17 @@ class Effects22 extends Modules {
                 'oxi-image-hover-heading-animation-delay',
                 $this->style,
                 [
-                    'label' => __('Animation Delay', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Animation Delay', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
                     'default' => '',
                     'options' => [
-                        '' => __('None', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-hover-delay-xs' => __('Delay XS', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-hover-delay-sm' => __('Delay SM', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-hover-delay-md' => __('Delay MD', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-hover-delay-lg' => __('Delay LG', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-hover-delay-xl' => __('Delay XL', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-hover-delay-xxl' => __('Delay XXL', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        '' => esc_html__('None', 'image-hover-effects-ultimate'),
+                        'oxi-image-hover-delay-xs' => esc_html__('Delay XS', 'image-hover-effects-ultimate'),
+                        'oxi-image-hover-delay-sm' => esc_html__('Delay SM', 'image-hover-effects-ultimate'),
+                        'oxi-image-hover-delay-md' => esc_html__('Delay MD', 'image-hover-effects-ultimate'),
+                        'oxi-image-hover-delay-lg' => esc_html__('Delay LG', 'image-hover-effects-ultimate'),
+                        'oxi-image-hover-delay-xl' => esc_html__('Delay XL', 'image-hover-effects-ultimate'),
+                        'oxi-image-hover-delay-xxl' => esc_html__('Delay XXL', 'image-hover-effects-ultimate'),
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-hover-figure-caption .oxi-image-hover-figure-heading' => '',
@@ -437,7 +437,7 @@ class Effects22 extends Modules {
                     'image_hover_heading',
                     $this->style,
                     [
-                        'label' => __('Title', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'label' => esc_html__('Title', 'image-hover-effects-ultimate'),
                         'type' => Controls::TEXT,
                         'default' => '',
                         'placeholder' => 'Heading',
@@ -449,7 +449,7 @@ class Effects22 extends Modules {
                     'image_hover_image',
                     $this->style,
                     [
-                        'label' => __('Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'label' => esc_html__('Image', 'image-hover-effects-ultimate'),
                         'type' => Controls::MEDIA,
                         'description' => 'Add or Modify Your Image. You can use Media Library or Custom URL'
                     ]
@@ -458,7 +458,7 @@ class Effects22 extends Modules {
                     'image_hover_button_link',
                     $this->style,
                     [
-                        'label' => __('URL', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'label' => esc_html__('URL', 'image-hover-effects-ultimate'),
                         'type' => Controls::URL,
                         'separator' => TRUE,
                         'default' => '',

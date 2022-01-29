@@ -19,18 +19,18 @@ class Effects25 extends Modules {
     public function register_effects() {
         return $this->add_control(
                         'image_hover_effects', $this->style, [
-                    'label' => __('Effects Direction', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Effects Direction', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
                     'default' => '',
                     'options' => [
-                        'oxi-image-slide-up' => __('Slide Up', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-slide-down' => __('Slide Down', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-slide-left' => __('Slide Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-slide-right' => __('Slide Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-slide-top-left' => __('Slide Top Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-slide-top-right' => __('Slide Top Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-slide-bottom-left' => __('Slide Bottom Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-slide-bottom-right' => __('Slide Bottom Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'oxi-image-slide-up' => esc_html__('Slide Up', 'image-hover-effects-ultimate'),
+                        'oxi-image-slide-down' => esc_html__('Slide Down', 'image-hover-effects-ultimate'),
+                        'oxi-image-slide-left' => esc_html__('Slide Left', 'image-hover-effects-ultimate'),
+                        'oxi-image-slide-right' => esc_html__('Slide Right', 'image-hover-effects-ultimate'),
+                        'oxi-image-slide-top-left' => esc_html__('Slide Top Left', 'image-hover-effects-ultimate'),
+                        'oxi-image-slide-top-right' => esc_html__('Slide Top Right', 'image-hover-effects-ultimate'),
+                        'oxi-image-slide-bottom-left' => esc_html__('Slide Bottom Left', 'image-hover-effects-ultimate'),
+                        'oxi-image-slide-bottom-right' => esc_html__('Slide Bottom Right', 'image-hover-effects-ultimate'),
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-caption-hover' => '',

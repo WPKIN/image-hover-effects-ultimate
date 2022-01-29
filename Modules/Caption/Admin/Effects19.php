@@ -19,18 +19,18 @@ class Effects19 extends Modules {
     public function register_effects() {
         return $this->add_control(
                         'image_hover_effects', $this->style, [
-                    'label' => __('Effects Direction', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Effects Direction', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
                     'default' => '',
                     'options' => [
-                        'oxi-image-pixel-up' => __('Pixel Up', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-pixel-down' => __('Pixel Down', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-pixel-left' => __('Pixel Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-pixel-right' => __('Pixel Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-pixel-top-left' => __('Pixel Top Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-pixel-top-right' => __('Pixel Top Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-pixel-bottom-left' => __('Pixel Bottom Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-pixel-bottom-right' => __('Pixel Bottom Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'oxi-image-pixel-up' => esc_html__('Pixel Up', 'image-hover-effects-ultimate'),
+                        'oxi-image-pixel-down' => esc_html__('Pixel Down', 'image-hover-effects-ultimate'),
+                        'oxi-image-pixel-left' => esc_html__('Pixel Left', 'image-hover-effects-ultimate'),
+                        'oxi-image-pixel-right' => esc_html__('Pixel Right', 'image-hover-effects-ultimate'),
+                        'oxi-image-pixel-top-left' => esc_html__('Pixel Top Left', 'image-hover-effects-ultimate'),
+                        'oxi-image-pixel-top-right' => esc_html__('Pixel Top Right', 'image-hover-effects-ultimate'),
+                        'oxi-image-pixel-bottom-left' => esc_html__('Pixel Bottom Left', 'image-hover-effects-ultimate'),
+                        'oxi-image-pixel-bottom-right' => esc_html__('Pixel Bottom Right', 'image-hover-effects-ultimate'),
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-caption-hover' => '',

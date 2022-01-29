@@ -19,14 +19,14 @@ class Effects15 extends Modules {
     public function register_effects() {
         return $this->add_control(
                         'image_hover_effects', $this->style, [
-                    'label' => __('Effects Direction', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Effects Direction', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
                     'default' => '',
                     'options' => [
-                        'oxi-image-lightspeed-in-left' => __('Lightspeed In Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-lightspeed-in-right' => __('Lightspeed In Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-lightspeed-out-left' => __('Lightspeed Out Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-lightspeed-out-right' => __('Lightspeed Out Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'oxi-image-lightspeed-in-left' => esc_html__('Lightspeed In Left', 'image-hover-effects-ultimate'),
+                        'oxi-image-lightspeed-in-right' => esc_html__('Lightspeed In Right', 'image-hover-effects-ultimate'),
+                        'oxi-image-lightspeed-out-left' => esc_html__('Lightspeed Out Left', 'image-hover-effects-ultimate'),
+                        'oxi-image-lightspeed-out-right' => esc_html__('Lightspeed Out Right', 'image-hover-effects-ultimate'),
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-caption-hover' => '',

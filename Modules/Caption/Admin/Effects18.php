@@ -19,18 +19,18 @@ class Effects18 extends Modules {
     public function register_effects() {
         return $this->add_control(
                         'image_hover_effects', $this->style, [
-                    'label' => __('Effects Direction', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Effects Direction', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
                     'default' => '',
                     'options' => [
-                        'oxi-image-pivot-in-top-left' => __('Pivot In Top Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-pivot-in-top-right' => __('Pivot In Top Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-pivot-in-bottom-left' => __('Pivot In Bottom Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-pivot-in-bottom-right' => __('Pivot In Bottom Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-pivot-out-top-left' => __('Pivot Out Top Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-pivot-out-top-right' => __('Pivot Out Top Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-pivot-out-bottom-left' => __('Pivot Out Bottom Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-pivot-out-bottom-right' => __('Pivot Out Bottom Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'oxi-image-pivot-in-top-left' => esc_html__('Pivot In Top Left', 'image-hover-effects-ultimate'),
+                        'oxi-image-pivot-in-top-right' => esc_html__('Pivot In Top Right', 'image-hover-effects-ultimate'),
+                        'oxi-image-pivot-in-bottom-left' => esc_html__('Pivot In Bottom Left', 'image-hover-effects-ultimate'),
+                        'oxi-image-pivot-in-bottom-right' => esc_html__('Pivot In Bottom Right', 'image-hover-effects-ultimate'),
+                        'oxi-image-pivot-out-top-left' => esc_html__('Pivot Out Top Left', 'image-hover-effects-ultimate'),
+                        'oxi-image-pivot-out-top-right' => esc_html__('Pivot Out Top Right', 'image-hover-effects-ultimate'),
+                        'oxi-image-pivot-out-bottom-left' => esc_html__('Pivot Out Bottom Left', 'image-hover-effects-ultimate'),
+                        'oxi-image-pivot-out-bottom-right' => esc_html__('Pivot Out Bottom Right', 'image-hover-effects-ultimate'),
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-caption-hover' => '',

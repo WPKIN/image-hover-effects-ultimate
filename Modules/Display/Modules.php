@@ -22,8 +22,8 @@ class Modules extends Admin_Render {
         $this->start_section_header(
                 'oxi-image-hover-start-tabs', [
             'options' => [
-                'general-settings' => esc_html__('General Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'custom' => esc_html__('Custom CSS', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'general-settings' => esc_html__('General Settings', 'image-hover-effects-ultimate'),
+                'custom' => esc_html__('Custom CSS', 'image-hover-effects-ultimate'),
             ]
                 ]
         );
@@ -43,13 +43,13 @@ class Modules extends Admin_Render {
 
         $this->start_controls_section(
                 'oxi-image-hover', [
-            'label' => esc_html__('Custom CSS', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Custom CSS', 'image-hover-effects-ultimate'),
             'showing' => TRUE,
                 ]
         );
         $this->add_control(
                 'image-hover-custom-css', $this->style, [
-            'label' => __('', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('', 'image-hover-effects-ultimate'),
             'type' => Controls::TEXTAREA,
             'default' => '',
             'description' => 'Custom CSS Section. You can add custom css into textarea.'
@@ -87,7 +87,7 @@ class Modules extends Admin_Render {
         $this->start_controls_section(
                 'display-post',
                 [
-                    'label' => esc_html__('Post Query', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Post Query', 'image-hover-effects-ultimate'),
                     'showing' => TRUE,
                 ]
         );
@@ -95,7 +95,7 @@ class Modules extends Admin_Render {
                 'display_post_post_type',
                 $this->style,
                 [
-                    'label' => __('Post Type', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Post Type', 'image-hover-effects-ultimate'),
                     'loader' => TRUE,
                     'type' => Controls::SELECT,
                     'default' => 'post',
@@ -107,7 +107,7 @@ class Modules extends Admin_Render {
                 'display_post_author',
                 $this->style,
                 [
-                    'label' => __('Author', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Author', 'image-hover-effects-ultimate'),
                     'loader' => TRUE,
                     'type' => Controls::SELECT,
                     'multiple' => true,
@@ -121,7 +121,7 @@ class Modules extends Admin_Render {
                         $key . '_category',
                         $this->style,
                         [
-                            'label' => __(' Category', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'label' => esc_html__(' Category', 'image-hover-effects-ultimate'),
                             'type' => Controls::SELECT,
                             'multiple' => true,
                             'loader' => TRUE,
@@ -136,7 +136,7 @@ class Modules extends Admin_Render {
                         $key . '_tag',
                         $this->style,
                         [
-                            'label' => __(' Tags', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'label' => esc_html__(' Tags', 'image-hover-effects-ultimate'),
                             'type' => Controls::SELECT,
                             'multiple' => true,
                             'loader' => TRUE,
@@ -153,7 +153,7 @@ class Modules extends Admin_Render {
                     $key . '_include',
                     $this->style,
                     [
-                        'label' => __(' Include Post', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'label' => esc_html__(' Include Post', 'image-hover-effects-ultimate'),
                         'type' => Controls::SELECT,
                         'multiple' => true,
                         'loader' => TRUE,
@@ -168,7 +168,7 @@ class Modules extends Admin_Render {
                     $key . '_exclude',
                     $this->style,
                     [
-                        'label' => __(' Exclude Post', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'label' => esc_html__(' Exclude Post', 'image-hover-effects-ultimate'),
                         'type' => Controls::SELECT,
                         'multiple' => true,
                         'loader' => TRUE,
@@ -192,7 +192,7 @@ class Modules extends Admin_Render {
         $this->start_controls_section(
                 'display-post',
                 [
-                    'label' => esc_html__('Post Condition', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Post Condition', 'image-hover-effects-ultimate'),
                     'showing' => TRUE,
                 ]
         );
@@ -200,7 +200,7 @@ class Modules extends Admin_Render {
                 'display_post_style',
                 $this->style,
                 [
-                    'label' => __('Post Style', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Post Style', 'image-hover-effects-ultimate'),
                     'loader' => TRUE,
                     'type' => Controls::SELECT,
                     'options' => $this->post_style(),
@@ -211,7 +211,7 @@ class Modules extends Admin_Render {
                 'display_post_per_page',
                 $this->style,
                 [
-                    'label' => __('Post Per Page', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Post Per Page', 'image-hover-effects-ultimate'),
                     'type' => Controls::NUMBER,
                     'loader' => TRUE,
                     'min' => 1,
@@ -222,7 +222,7 @@ class Modules extends Admin_Render {
                 'display_post_excerpt',
                 $this->style,
                 [
-                    'label' => __('Excerpt Word Limit', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Excerpt Word Limit', 'image-hover-effects-ultimate'),
                     'type' => Controls::NUMBER,
                     'loader' => TRUE,
                     'min' => 1,
@@ -233,7 +233,7 @@ class Modules extends Admin_Render {
                 'display_post_offset',
                 $this->style,
                 [
-                    'label' => __('Offset', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Offset', 'image-hover-effects-ultimate'),
                     'type' => Controls::NUMBER,
                     'loader' => TRUE,
                     'description' => 'Confirm Excerpt Word Limit.',
@@ -243,7 +243,7 @@ class Modules extends Admin_Render {
                 'display_post_orderby',
                 $this->style,
                 [
-                    'label' => __(' Order By', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__(' Order By', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
                     'default' => 'ID',
                     'loader' => TRUE,
@@ -266,7 +266,7 @@ class Modules extends Admin_Render {
                 'display_post_ordertype',
                 $this->style,
                 [
-                    'label' => __(' Order Type', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__(' Order Type', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
                     'loader' => TRUE,
                     'options' => [
@@ -280,7 +280,7 @@ class Modules extends Admin_Render {
                 'display_post_thumb_sizes',
                 $this->style,
                 [
-                    'label' => __('Image Size', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Image Size', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
                     'loader' => TRUE,
                     'options' => $this->thumbnail_sizes(),
@@ -290,11 +290,11 @@ class Modules extends Admin_Render {
         $this->add_control(
                 'display_post_load_more', $this->style,
                 [
-                    'label' => __('Load More', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Load More', 'image-hover-effects-ultimate'),
                     'type' => Controls::SWITCHER,
                     'default' => 'no',
-                    'yes' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'no' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'yes' => esc_html__('Yes', 'image-hover-effects-ultimate'),
+                    'no' => esc_html__('No', 'image-hover-effects-ultimate'),
                     'return_value' => 'yes',
                     'description' => 'Wanna load More Options?.',
                 ]
@@ -302,17 +302,17 @@ class Modules extends Admin_Render {
         $this->add_control(
                 'display_post_load_more_type', $this->style,
                 [
-                    'label' => __('Load More Type', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Load More Type', 'image-hover-effects-ultimate'),
                     'type' => Controls::CHOOSE,
                     'loader' => TRUE,
                     'operator' => Controls::OPERATOR_TEXT,
                     'default' => 'button',
                     'options' => [
                         'button' => [
-                            'title' => __('Button', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('Button', 'image-hover-effects-ultimate'),
                         ],
                         'infinite' => [
-                            'title' => __('Infinite', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('Infinite', 'image-hover-effects-ultimate'),
                         ],
                     ],
                     'condition' => [
@@ -326,7 +326,7 @@ class Modules extends Admin_Render {
         $this->start_controls_section(
                 'display-post',
                 [
-                    'label' => esc_html__('Load More Button', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Load More Button', 'image-hover-effects-ultimate'),
                     'showing' => false,
                     'condition' => [
                         'display_post_load_more' => 'yes',
@@ -337,7 +337,7 @@ class Modules extends Admin_Render {
 
         $this->add_control(
                 'display_post_load_button_text', $this->style, [
-            'label' => __('Button Text', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Button Text', 'image-hover-effects-ultimate'),
             'type' => Controls::TEXT,
             'default' => 'Load More',
             'placeholder' => 'Load More Button',
@@ -352,21 +352,21 @@ class Modules extends Admin_Render {
                 'display_post_load_button_position',
                 $this->style,
                 [
-                    'label' => __('Position', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Position', 'image-hover-effects-ultimate'),
                     'type' => Controls::CHOOSE,
                     'operator' => Controls::OPERATOR_ICON,
                     'default' => 'left',
                     'options' => [
                         'left' => [
-                            'title' => __('Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('Left', 'image-hover-effects-ultimate'),
                             'icon' => 'fa fa-align-left',
                         ],
                         'center' => [
-                            'title' => __('Center', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('Center', 'image-hover-effects-ultimate'),
                             'icon' => 'fa fa-align-center',
                         ],
                         'right' => [
-                            'title' => __('Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('Right', 'image-hover-effects-ultimate'),
                             'icon' => 'fa fa-align-right',
                         ],
                     ],
@@ -391,15 +391,15 @@ class Modules extends Admin_Render {
                 'oxi-image-hover-start-tabs',
                 [
                     'options' => [
-                        'normal' => esc_html__('Normal ', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'hover' => esc_html__('Hover ', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'normal' => esc_html__('Normal ', 'image-hover-effects-ultimate'),
+                        'hover' => esc_html__('Hover ', 'image-hover-effects-ultimate'),
                     ]
                 ]
         );
         $this->start_controls_tab();
         $this->add_control(
                 'display_post_load_button_color', $this->style, [
-            'label' => __('Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Color', 'image-hover-effects-ultimate'),
             'type' => Controls::COLOR,
             'default' => '#ffffff',
             'selector' => [
@@ -415,7 +415,7 @@ class Modules extends Admin_Render {
         );
         $this->add_control(
                 'display_post_load_button_background', $this->style, [
-            'label' => __('Background', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Background', 'image-hover-effects-ultimate'),
             'type' => Controls::GRADIENT,
             'default' => 'rgba(171, 0, 201, 1)',
             'selector' => [
@@ -448,7 +448,7 @@ class Modules extends Admin_Render {
 
         $this->add_responsive_control(
                 'display_post_load_button_radius', $this->style, [
-            'label' => __('Border Radius', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -492,7 +492,7 @@ class Modules extends Admin_Render {
         $this->start_controls_tab();
         $this->add_control(
                 'display_post_load_button_hover_color', $this->style, [
-            'label' => __('Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Color', 'image-hover-effects-ultimate'),
             'type' => Controls::COLOR,
             'default' => '#ffffff',
             'selector' => [
@@ -504,7 +504,7 @@ class Modules extends Admin_Render {
         );
         $this->add_control(
                 'display_post_load_button_hover_background', $this->style, [
-            'label' => __('Background', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Background', 'image-hover-effects-ultimate'),
             'type' => Controls::GRADIENT,
             'default' => '#ffffff',
             'selector' => [
@@ -536,7 +536,7 @@ class Modules extends Admin_Render {
 
         $this->add_responsive_control(
                 'display_post_load_button_hover_radius', $this->style, [
-            'label' => __('Border Radius', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -580,7 +580,7 @@ class Modules extends Admin_Render {
 
         $this->add_responsive_control(
                 'display_post_load_button_button_padding', $this->style, [
-            'label' => __('Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Padding', 'image-hover-effects-ultimate'),
             'type' => Controls::DIMENSIONS,
             'separator' => TRUE,
             'default' => [
@@ -612,7 +612,7 @@ class Modules extends Admin_Render {
         );
         $this->add_responsive_control(
                 'display_post_load_button_button_margin', $this->style, [
-            'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Margin', 'image-hover-effects-ultimate'),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',

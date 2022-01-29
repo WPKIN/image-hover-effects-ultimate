@@ -19,13 +19,13 @@ class Effects6 extends Modules {
     public function register_effects() {
         return $this->add_control(
                         'image_hover_effects', $this->style, [
-                    'label' => __('Effects Direction', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Effects Direction', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
                     'default' => 'left_to_right',
                     'options' => [
-                        'scale_up' => __('Scale Up', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'scale_down' => __('Scale Down', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'scale_down_up' => __('Scale up Down', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'scale_up' => esc_html__('Scale Up', 'image-hover-effects-ultimate'),
+                        'scale_down' => esc_html__('Scale Down', 'image-hover-effects-ultimate'),
+                        'scale_down_up' => esc_html__('Scale up Down', 'image-hover-effects-ultimate'),
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-hover-figure' => '',
@@ -39,7 +39,7 @@ class Effects6 extends Modules {
     public function register_effects_time() {
         $this->add_control(
                 'oxi-image-hover-effects-time', $this->style, [
-            'label' => __('Effects Time (S)', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Effects Time (S)', 'image-hover-effects-ultimate'),
             'type' => Controls::SLIDER,
             'simpleenable' => false,
             'default' => [

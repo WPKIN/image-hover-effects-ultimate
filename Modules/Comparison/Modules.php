@@ -20,8 +20,8 @@ class Modules extends Admin_Render {
         $this->start_section_header(
                 'oxi-image-hover-start-tabs', [
             'options' => [
-                'general-settings' => esc_html__('General Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'custom' => esc_html__('Custom CSS', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'general-settings' => esc_html__('General Settings', 'image-hover-effects-ultimate'),
+                'custom' => esc_html__('Custom CSS', 'image-hover-effects-ultimate'),
             ],
                 ]
         );
@@ -41,13 +41,13 @@ class Modules extends Admin_Render {
 
         $this->start_controls_section(
                 'oxi-image-hover', [
-            'label' => esc_html__('Custom CSS', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Custom CSS', 'image-hover-effects-ultimate'),
             'showing' => true,
                 ]
         );
         $this->add_control(
                 'image-hover-custom-css', $this->style, [
-            'label' => __('', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('', 'image-hover-effects-ultimate'),
             'type' => Controls::TEXTAREA,
             'default' => '',
             'description' => 'Custom CSS Section. You can add custom css into textarea.'
@@ -84,7 +84,7 @@ class Modules extends Admin_Render {
     public function register_general_style() {
         $this->start_controls_section(
                 'oxi-image-hover', [
-            'label' => esc_html__('General Style', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('General Style', 'image-hover-effects-ultimate'),
             'showing' => true,
                 ]
         );
@@ -112,7 +112,7 @@ class Modules extends Admin_Render {
                 'oxi_image_magnifier_radius',
                 $this->style,
                 [
-                    'label' => __('Border Radius', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
                     'type' => Controls::DIMENSIONS,
                     'default' => [
                         'unit' => 'px',
@@ -145,7 +145,7 @@ class Modules extends Admin_Render {
                 'oxi_image_magnifier_shadow',
                 $this->style,
                 [
-                    'label' => __('Box Shadow', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Box Shadow', 'image-hover-effects-ultimate'),
                     'type' => Controls::BOXSHADOW,
                     'selector' => [
                         '{{WRAPPER}} .oxi-addons-main-wrapper-image-comparison .oxi-addons-main' => '',
@@ -157,7 +157,7 @@ class Modules extends Admin_Render {
                 'oxi_image_magnifier_margin',
                 $this->style,
                 [
-                    'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Margin', 'image-hover-effects-ultimate'),
                     'type' => Controls::DIMENSIONS,
                     'default' => [
                         'unit' => 'px',
@@ -197,7 +197,7 @@ class Modules extends Admin_Render {
     public function register_image_settings() {
         $this->start_controls_section(
                 'shortcode-addons', [
-            'label' => esc_html__('Image Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Image Settings', 'image-hover-effects-ultimate'),
             'showing' => true,
                 ]
         );
@@ -205,21 +205,21 @@ class Modules extends Admin_Render {
                 'oxi_image_magnifier_image_position',
                 $this->style,
                 [
-                    'label' => __('Image Postion', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Image Postion', 'image-hover-effects-ultimate'),
                     'type' => Controls::CHOOSE,
                     'default' => 'center',
                     'operator' => Controls::OPERATOR_ICON,
                     'options' => [
                         'flex-start' => [
-                            'title' => __('Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('Left', 'image-hover-effects-ultimate'),
                             'icon' => 'fa fa-align-left',
                         ],
                         'center' => [
-                            'title' => __('Center', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('Center', 'image-hover-effects-ultimate'),
                             'icon' => 'fa fa-align-center',
                         ],
                         'flex-end' => [
-                            'title' => __('Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('Right', 'image-hover-effects-ultimate'),
                             'icon' => 'fa fa-align-right',
                         ],
                     ],
@@ -234,12 +234,12 @@ class Modules extends Admin_Render {
                 'oxi_image_magnifier_image_switcher',
                 $this->style,
                 [
-                    'label' => __('Custom Width', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Custom Width', 'image-hover-effects-ultimate'),
                     'type' => Controls::SWITCHER,
                     'default' => 'no',
                     'loader' => true,
-                    'label_on' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'label_off' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label_on' => esc_html__('Yes', 'image-hover-effects-ultimate'),
+                    'label_off' => esc_html__('No', 'image-hover-effects-ultimate'),
                     'return_value' => 'oxi__image_width',
                     'description' => 'Wanna Set Image Custom  Width.',
                 ]
@@ -248,7 +248,7 @@ class Modules extends Admin_Render {
                 'oxi_image_magnifier_image_width',
                 $this->style,
                 [
-                    'label' => __('Width', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Width', 'image-hover-effects-ultimate'),
                     'type' => Controls::SLIDER,
                     'condition' => [
                         'oxi_image_magnifier_image_switcher' => 'oxi__image_width',
@@ -288,7 +288,7 @@ class Modules extends Admin_Render {
         $this->start_controls_section(
                 'shortcode-addons',
                 [
-                    'label' => esc_html__('Handle Setting', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Handle Setting', 'image-hover-effects-ultimate'),
                     'showing' => true,
                 ]
         );
@@ -296,7 +296,7 @@ class Modules extends Admin_Render {
                 'oxi_image_comparison_handle_color',
                 $this->style,
                 [
-                    'label' => __('Handle Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Handle Color', 'image-hover-effects-ultimate'),
                     'type' => Controls::COLOR,
                     'default' => '#787878',
                     'selector' => [
@@ -322,7 +322,7 @@ class Modules extends Admin_Render {
         $this->start_controls_section(
                 'shortcode-addons',
                 [
-                    'label' => esc_html__('Overlay Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Overlay Settings', 'image-hover-effects-ultimate'),
                     'showing' => false,
                 ]
         );
@@ -330,16 +330,16 @@ class Modules extends Admin_Render {
                 'oxi_image_compersion_overlay_controler',
                 $this->style,
                 [
-                    'label' => __('Overlay', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Overlay', 'image-hover-effects-ultimate'),
                     'type' => Controls::CHOOSE,
                     'default' => 'true',
                     'loader' => true,
                     'options' => [
                         'true' => [
-                            'title' => __('True', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('True', 'image-hover-effects-ultimate'),
                         ],
                         'false' => [
-                            'title' => __('False', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('False', 'image-hover-effects-ultimate'),
                         ],
                     ],
                     'description' => 'Wanna Set Overlay?',
@@ -349,7 +349,7 @@ class Modules extends Admin_Render {
                 'oxi_image_comparison_before_text',
                 $this->style,
                 [
-                    'label' => __('Before Button Text', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Before Button Text', 'image-hover-effects-ultimate'),
                     'type' => Controls::TEXT,
                     'default' => 'Before',
                     'placeholder' => 'Before',
@@ -363,7 +363,7 @@ class Modules extends Admin_Render {
                 'oxi_image_comparison_after_text',
                 $this->style,
                 [
-                    'label' => __('After Button Text', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('After Button Text', 'image-hover-effects-ultimate'),
                     'type' => Controls::TEXT,
                     'default' => 'after',
                     'placeholder' => 'after',
@@ -391,7 +391,7 @@ class Modules extends Admin_Render {
                 'oxi_image_comparison_text_color',
                 $this->style,
                 [
-                    'label' => __('Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Color', 'image-hover-effects-ultimate'),
                     'type' => Controls::COLOR,
                     'default' => '#787878',
                     'condition' => [
@@ -407,7 +407,7 @@ class Modules extends Admin_Render {
                 'oxi_image_comparison_overlay_bg_color',
                 $this->style,
                 [
-                    'label' => __('Background Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Background Color', 'image-hover-effects-ultimate'),
                     'type' => Controls::COLOR,
                     'oparetor' => 'RGB',
                     'default' => '#fff',
@@ -439,7 +439,7 @@ class Modules extends Admin_Render {
                 'oxi_image_comparison_overlay_button_border_radius',
                 $this->style,
                 [
-                    'label' => __('Border Radius', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
                     'type' => Controls::DIMENSIONS,
                     'default' => [
                         'unit' => 'px',
@@ -475,7 +475,7 @@ class Modules extends Admin_Render {
                 'oxi_image_comparison_overlay_button_padding',
                 $this->style,
                 [
-                    'label' => __('Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Padding', 'image-hover-effects-ultimate'),
                     'type' => Controls::DIMENSIONS,
                     'default' => [
                         'unit' => 'px',
@@ -519,8 +519,8 @@ class Modules extends Admin_Render {
     public function modal_opener() {
         $this->add_substitute_control('', [], [
             'type' => Controls::MODALOPENER,
-            'title' => __('Add New Comparison', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'sub-title' => __('Open Comparison Form', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'title' => esc_html__('Add New Comparison', 'image-hover-effects-ultimate'),
+            'sub-title' => esc_html__('Open Comparison Form', 'image-hover-effects-ultimate'),
             'showing' => true,
         ]);
     }
@@ -535,8 +535,8 @@ class Modules extends Admin_Render {
         $this->start_controls_tabs(
                 'shortcode-addons-start-tabs', [
             'options' => [
-                'before' => esc_html__('Before Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'after' => esc_html__('After Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'before' => esc_html__('Before Image', 'image-hover-effects-ultimate'),
+                'after' => esc_html__('After Image', 'image-hover-effects-ultimate'),
             ],
                 ]
         );
@@ -545,7 +545,7 @@ class Modules extends Admin_Render {
                 'oxi_image_comparison_image_one',
                 $this->style,
                 [
-                    'label' => __('URL', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('URL', 'image-hover-effects-ultimate'),
                     'type' => Controls::MEDIA,
                     'default' => [
                         'type' => 'media-library',
@@ -560,7 +560,7 @@ class Modules extends Admin_Render {
                 'oxi_image_comparison_image_two',
                 $this->style,
                 [
-                    'label' => __('URL', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('URL', 'image-hover-effects-ultimate'),
                     'type' => Controls::MEDIA,
                     'default' => [
                         'type' => 'media-library',
@@ -576,7 +576,7 @@ class Modules extends Admin_Render {
                 'oxi_image_comparison_body_offset',
                 $this->style,
                 [
-                    'label' => __('Coparison Offset', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Coparison Offset', 'image-hover-effects-ultimate'),
                     'type' => Controls::SLIDER,
                     'default' => [
                         'unit' => 'px',
@@ -596,16 +596,16 @@ class Modules extends Admin_Render {
                 'oxi_image_comparison_click',
                 $this->style,
                 [
-                    'label' => __('Click To Move', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Click To Move', 'image-hover-effects-ultimate'),
                     'type' => Controls::CHOOSE,
                     'default' => 'false',
                     'loader' => true,
                     'options' => [
                         'true' => [
-                            'title' => __('True', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('True', 'image-hover-effects-ultimate'),
                         ],
                         'false' => [
-                            'title' => __('False', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('False', 'image-hover-effects-ultimate'),
                         ],
                     ],
                     'selector' => [
@@ -618,17 +618,17 @@ class Modules extends Admin_Render {
                 'oxi_image_comparison_position',
                 $this->style,
                 [
-                    'label' => __('Position', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Position', 'image-hover-effects-ultimate'),
                     'type' => Controls::CHOOSE,
                     'default' => 'true',
                     'loader' => true,
                     'descrption' => 'After Save then Refresh page!',
                     'options' => [
                         'true' => [
-                            'title' => __('Horizontal', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('Horizontal', 'image-hover-effects-ultimate'),
                         ],
                         'false ' => [
-                            'title' => __('Vertical ', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('Vertical ', 'image-hover-effects-ultimate'),
                         ],
                     ],
                     'description' => 'Update Your Comparison Box Positios as Horizontal or Vertical.',
@@ -638,16 +638,16 @@ class Modules extends Admin_Render {
                 'oxi_image_comparison_hover',
                 $this->style,
                 [
-                    'label' => __('Hover To Move', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Hover To Move', 'image-hover-effects-ultimate'),
                     'type' => Controls::CHOOSE,
                     'default' => 'false',
                     'loader' => true,
                     'options' => [
                         'true' => [
-                            'title' => __('True', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('True', 'image-hover-effects-ultimate'),
                         ],
                         'false' => [
-                            'title' => __('False', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('False', 'image-hover-effects-ultimate'),
                         ],
                     ],
                     'selector' => [

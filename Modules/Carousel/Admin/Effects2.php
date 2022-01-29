@@ -20,7 +20,7 @@ class Effects2 extends Modules {
         $this->start_controls_section(
                 'display-post',
                 [
-                    'label' => esc_html__('Carousel Query', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Carousel Query', 'image-hover-effects-ultimate'),
                     'showing' => TRUE,
                 ]
         );
@@ -28,7 +28,7 @@ class Effects2 extends Modules {
                 'carousel_note',
                 $this->style,
                 [
-                    'label' => __('Note', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Note', 'image-hover-effects-ultimate'),
                     'type' => Controls::HEADING,
                     'description' => 'Works after saving and reloading all the fields '
                 ]
@@ -37,7 +37,7 @@ class Effects2 extends Modules {
                 'carousel_register_style',
                 $this->style,
                 [
-                    'label' => __('Carousel Style', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Carousel Style', 'image-hover-effects-ultimate'),
                     'loader' => TRUE,
                     'type' => Controls::SELECT,
                     'options' => $this->all_style(),
@@ -48,16 +48,16 @@ class Effects2 extends Modules {
                 'carousel_effect',
                 $this->style,
                 [
-                    'label' => __('Carousel Effect', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Carousel Effect', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
                     'separator' => TRUE,
                     'loader' => TRUE,
                     'default' => 'coverflow',
                     'options' => [
-                        'coverflow' => __('Coverflow', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'carousel' => __('Flipster', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'wheel' => __('Wheel', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'flat' => __('Flat', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'coverflow' => esc_html__('Coverflow', 'image-hover-effects-ultimate'),
+                        'carousel' => esc_html__('Flipster', 'image-hover-effects-ultimate'),
+                        'wheel' => esc_html__('Wheel', 'image-hover-effects-ultimate'),
+                        'flat' => esc_html__('Flat', 'image-hover-effects-ultimate'),
                     ],
                     'description' => 'Select Carousel Type as Coverflow or Flipster or Wheel or Flat Design.'
                 ]
@@ -66,7 +66,7 @@ class Effects2 extends Modules {
                 'carousel_flipster_spacing',
                 $this->style,
                 [
-                    'label' => __('Autoplay Speed', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Autoplay Speed', 'image-hover-effects-ultimate'),
                     'type' => Controls::NUMBER,
                     'default' => -0.25,
                     'step' => 0.01,
@@ -79,12 +79,12 @@ class Effects2 extends Modules {
                 'carousel_autoplay',
                 $this->style,
                 [
-                    'label' => __('Autoplay', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Autoplay', 'image-hover-effects-ultimate'),
                     'type' => Controls::SWITCHER,
                     'loader' => TRUE,
                     'default' => 'yes',
-                    'yes' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'no' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'yes' => esc_html__('Yes', 'image-hover-effects-ultimate'),
+                    'no' => esc_html__('No', 'image-hover-effects-ultimate'),
                     'return_value' => 'yes',
                     'description' => 'Confirm carousel Autoplay Mode True or False.'
                 ]
@@ -93,7 +93,7 @@ class Effects2 extends Modules {
                 'carousel_autoplay_speed',
                 $this->style,
                 [
-                    'label' => __('Autoplay Speed', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Autoplay Speed', 'image-hover-effects-ultimate'),
                     'type' => Controls::NUMBER,
                     'default' => 2000,
                     'condition' => [
@@ -106,7 +106,7 @@ class Effects2 extends Modules {
                 'carousel_fadeIn',
                 $this->style,
                 [
-                    'label' => __('Fade In (ms)', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Fade In (ms)', 'image-hover-effects-ultimate'),
                     'type' => Controls::NUMBER,
                     'default' => 500,
                     'description' => 'Select Carousel Auto Play Deration as MilliSecond.'
@@ -116,12 +116,12 @@ class Effects2 extends Modules {
                 'carousel_center_mode',
                 $this->style,
                 [
-                    'label' => __('Item Starts From Center?', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Item Starts From Center?', 'image-hover-effects-ultimate'),
                     'type' => Controls::SWITCHER,
                     'loader' => TRUE,
                     'default' => 'no',
-                    'yes' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'no' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'yes' => esc_html__('Yes', 'image-hover-effects-ultimate'),
+                    'no' => esc_html__('No', 'image-hover-effects-ultimate'),
                     'return_value' => 'yes',
                     'description' => 'Item Center Mode: True or False.'
                 ]
@@ -130,7 +130,7 @@ class Effects2 extends Modules {
                 'carousel_start_number',
                 $this->style,
                 [
-                    'label' => __('Enter Starts Number', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Enter Starts Number', 'image-hover-effects-ultimate'),
                     'type' => Controls::NUMBER,
                     'default' => 2,
                     'condition' => [
@@ -143,12 +143,12 @@ class Effects2 extends Modules {
                 'carousel_pause_on_hover',
                 $this->style,
                 [
-                    'label' => __('Pause on Hover', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Pause on Hover', 'image-hover-effects-ultimate'),
                     'type' => Controls::SWITCHER,
                     'loader' => TRUE,
                     'default' => 'yes',
-                    'yes' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'no' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'yes' => esc_html__('Yes', 'image-hover-effects-ultimate'),
+                    'no' => esc_html__('No', 'image-hover-effects-ultimate'),
                     'return_value' => 'yes',
                     'description' => 'Confirm Carousel Pause on Hover: True or False.'
                 ]
@@ -157,12 +157,12 @@ class Effects2 extends Modules {
                 'carousel_infinite',
                 $this->style,
                 [
-                    'label' => __('Infinite Loop', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Infinite Loop', 'image-hover-effects-ultimate'),
                     'type' => Controls::SWITCHER,
                     'loader' => TRUE,
                     'default' => 'yes',
-                    'yes' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'no' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'yes' => esc_html__('Yes', 'image-hover-effects-ultimate'),
+                    'no' => esc_html__('No', 'image-hover-effects-ultimate'),
                     'return_value' => 'yes',
                     'description' => 'Confirm Carousel Infinite Loop: True or False.'
                 ]
@@ -172,12 +172,12 @@ class Effects2 extends Modules {
                 'carousel_click',
                 $this->style,
                 [
-                    'label' => __('On Click Play?', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('On Click Play?', 'image-hover-effects-ultimate'),
                     'type' => Controls::SWITCHER,
                     'loader' => TRUE,
                     'default' => 'yes',
-                    'yes' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'no' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'yes' => esc_html__('Yes', 'image-hover-effects-ultimate'),
+                    'no' => esc_html__('No', 'image-hover-effects-ultimate'),
                     'return_value' => 'yes',
                     'description' => ' Carousel On Click Play: True or False.'
                 ]
@@ -186,12 +186,12 @@ class Effects2 extends Modules {
                 'carousel_touch',
                 $this->style,
                 [
-                    'label' => __('On Touch Play?', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('On Touch Play?', 'image-hover-effects-ultimate'),
                     'type' => Controls::SWITCHER,
                     'loader' => TRUE,
                     'default' => 'yes',
-                    'yes' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'no' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'yes' => esc_html__('Yes', 'image-hover-effects-ultimate'),
+                    'no' => esc_html__('No', 'image-hover-effects-ultimate'),
                     'return_value' => 'yes',
                     'description' => ' Carousel On Touch Play: True or False.'
                 ]
@@ -200,12 +200,12 @@ class Effects2 extends Modules {
                 'carousel_show_arrows',
                 $this->style,
                 [
-                    'label' => __('Arrows', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Arrows', 'image-hover-effects-ultimate'),
                     'type' => Controls::SWITCHER,
                     'loader' => TRUE,
                     'default' => 'yes',
-                    'yes' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'no' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'yes' => esc_html__('Yes', 'image-hover-effects-ultimate'),
+                    'no' => esc_html__('No', 'image-hover-effects-ultimate'),
                     'return_value' => 'yes',
                     'description' => ' Carousel Arrows: True or False.'
                 ]

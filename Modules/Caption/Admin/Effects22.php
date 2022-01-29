@@ -19,12 +19,12 @@ class Effects22 extends Modules {
     public function register_effects() {
         return $this->add_control(
                         'image_hover_effects', $this->style, [
-                    'label' => __('Effects Direction', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Effects Direction', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
                     'default' => '',
                     'options' => [
-                        'oxi-image-rotate-left' => __('Rotate Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-rotate-right' => __('Rotate Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'oxi-image-rotate-left' => esc_html__('Rotate Left', 'image-hover-effects-ultimate'),
+                        'oxi-image-rotate-right' => esc_html__('Rotate Right', 'image-hover-effects-ultimate'),
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-caption-hover' => '',

@@ -26,7 +26,7 @@ class Effects2 extends Modules {
             <?php
             $this->add_control(
                     'image_hover_heading', $this->style, [
-                'label' => __('Title', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Title', 'image-hover-effects-ultimate'),
                 'type' => Controls::TEXT,
                 'default' => 'Title 01',
                 'placeholder' => 'Title 01',
@@ -36,28 +36,28 @@ class Effects2 extends Modules {
 
             $this->add_control(
                     'image_hover_info', $this->style, [
-                'label' => __('Image Hover Shortcode', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Image Hover Shortcode', 'image-hover-effects-ultimate'),
                 'type' => Controls::TEXTAREA,
                 'description' => 'Add Image Hover Shortcode. After saved kindly reload to loading CSS or JS properly '
                     ]
             );
             $this->add_responsive_control(
                     'category_item_col', $this->style, [
-                'label' => __('Category Width', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Category Width', 'image-hover-effects-ultimate'),
                 'type' => Controls::SELECT,
                 'default' => '',
                 'options' => [
-                    '' => __('Same Width', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'grid_item_width_2' => __('Width 2', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'grid_item_width_3' => __('Width 3', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'grid_item_width_4' => __('Width 4', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    '' => esc_html__('Same Width', 'image-hover-effects-ultimate'),
+                    'grid_item_width_2' => esc_html__('Width 2', 'image-hover-effects-ultimate'),
+                    'grid_item_width_3' => esc_html__('Width 3', 'image-hover-effects-ultimate'),
+                    'grid_item_width_4' => esc_html__('Width 4', 'image-hover-effects-ultimate'),
                 ],
                 'description' => 'Select Width range for this Shortcode. '
                     ]
             );
             $this->add_control(
                     'image_hover_category_select', $this->style, [
-                'label' => __('Category Select', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Category Select', 'image-hover-effects-ultimate'),
                 'type' => Controls::SELECT,
                 'multiple' => TRUE,
                 'options' => $this->allcatrgory,

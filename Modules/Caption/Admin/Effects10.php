@@ -19,14 +19,14 @@ class Effects10 extends Modules {
     public function register_effects() {
         return $this->add_control(
                         'image_hover_effects', $this->style, [
-                    'label' => __('Effects Direction', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Effects Direction', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
                     'default' => '',
                     'options' => [
-                        'oxi-image-fall-away-horizontal' => __('Fall Away Horizontal', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-fall-away-vertical' => __('Fall Away Vertical', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-fall-away-cc' => __('Fall Away CC', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-fall-away-ccc' => __('Fall Away CCC', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'oxi-image-fall-away-horizontal' => esc_html__('Fall Away Horizontal', 'image-hover-effects-ultimate'),
+                        'oxi-image-fall-away-vertical' => esc_html__('Fall Away Vertical', 'image-hover-effects-ultimate'),
+                        'oxi-image-fall-away-cc' => esc_html__('Fall Away CC', 'image-hover-effects-ultimate'),
+                        'oxi-image-fall-away-ccc' => esc_html__('Fall Away CCC', 'image-hover-effects-ultimate'),
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-caption-hover' => '',

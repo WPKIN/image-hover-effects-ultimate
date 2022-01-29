@@ -38,13 +38,13 @@ class Effects19 extends Modules {
     public function register_front_image_settings() {
         $this->start_controls_section(
                 'oxi-image-hover', [
-            'label' => esc_html__('Image Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Image Settings', 'image-hover-effects-ultimate'),
             'showing' => TRUE,
                 ]
         );
         $this->add_responsive_control(
                 'oxi-image-flip-front-image-Height', $this->style, [
-            'label' => __('Height', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Height', 'image-hover-effects-ultimate'),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -81,7 +81,7 @@ class Effects19 extends Modules {
     public function register_front_content_settings() {
         $this->start_controls_section(
                 'oxi-image-hover', [
-            'label' => esc_html__('Content Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Content Settings', 'image-hover-effects-ultimate'),
             'showing' => TRUE,
                 ]
         );
@@ -107,7 +107,7 @@ class Effects19 extends Modules {
 
         $this->add_responsive_control(
                 'oxi-image-flip-front-border-radius', $this->style, [
-            'label' => __('Border Radius', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -156,7 +156,7 @@ class Effects19 extends Modules {
         );
         $this->add_responsive_control(
                 'oxi-image-flip-front-padding', $this->style, [
-            'label' => __('Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Padding', 'image-hover-effects-ultimate'),
             'type' => Controls::DIMENSIONS,
             'separator' => TRUE,
             'default' => [
@@ -188,7 +188,7 @@ class Effects19 extends Modules {
         );
         $this->add_responsive_control(
                 'oxi-image-flip-front-margin', $this->style, [
-            'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Margin', 'image-hover-effects-ultimate'),
             'type' => Controls::DIMENSIONS,
             'separator' => TRUE,
             'default' => [
@@ -252,7 +252,7 @@ class Effects19 extends Modules {
             <?php
             $this->add_control(
                     'image_hover_front_heading', $this->style, [
-                'label' => __('Front Title', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Front Title', 'image-hover-effects-ultimate'),
                 'type' => Controls::TEXT,
                 'default' => '',
                 'placeholder' => 'Heading',
@@ -261,7 +261,7 @@ class Effects19 extends Modules {
             );
             $this->add_control(
                     'image_hover_back_heading', $this->style, [
-                'label' => __('Backend Title', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Backend Title', 'image-hover-effects-ultimate'),
                 'type' => Controls::TEXT,
                 'default' => '',
                 'placeholder' => 'Heading',
@@ -271,7 +271,7 @@ class Effects19 extends Modules {
 
             $this->add_control(
                     'image_hover_back_description', $this->style, [
-                'label' => __('Short Description', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Short Description', 'image-hover-effects-ultimate'),
                 'type' => Controls::TEXTAREA,
                 'description' => 'Add Your Description Unless make it blank.'
                     ]
@@ -280,8 +280,8 @@ class Effects19 extends Modules {
                     'image_hover-start-tabs', [
                 'separator' => TRUE,
                 'options' => [
-                    'frontend' => esc_html__('Front Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'backend' => esc_html__('Backend Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'frontend' => esc_html__('Front Image', 'image-hover-effects-ultimate'),
+                    'backend' => esc_html__('Backend Image', 'image-hover-effects-ultimate'),
                 ]
                     ]
             );
@@ -289,7 +289,7 @@ class Effects19 extends Modules {
 
             $this->add_group_control(
                     'image_hover_front_image', $this->style, [
-                'label' => __('Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Image', 'image-hover-effects-ultimate'),
                 'type' => Controls::MEDIA,
                 'description' => 'Add or Modify Your Front Image.'
                     ]
@@ -300,7 +300,7 @@ class Effects19 extends Modules {
             $this->start_controls_tab();
             $this->add_group_control(
                     'image_hover_back_image', $this->style, [
-                'label' => __('Feature Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Feature Image', 'image-hover-effects-ultimate'),
                 'type' => Controls::MEDIA,
                 'description' => 'Add or Modify Your Backend Image. Adjust Backend background to get better design.'
                     ]
@@ -310,7 +310,7 @@ class Effects19 extends Modules {
 
             $this->add_group_control(
                     'image_hover_button_link', $this->style, [
-                'label' => __('URL', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('URL', 'image-hover-effects-ultimate'),
                 'type' => Controls::URL,
                 'separator' => TRUE,
                 'default' => '',
@@ -320,7 +320,7 @@ class Effects19 extends Modules {
             );
             $this->add_control(
                     'image_hover_button_text', $this->style, [
-                'label' => __('Button Text', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Button Text', 'image-hover-effects-ultimate'),
                 'type' => Controls::TEXT,
                 'default' => '',
                 'description' => 'Customize your button text. Button will only view while Url given'

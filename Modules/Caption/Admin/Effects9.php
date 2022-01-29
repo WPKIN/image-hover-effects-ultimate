@@ -19,14 +19,14 @@ class Effects9 extends Modules {
     public function register_effects() {
         return $this->add_control(
                         'image_hover_effects', $this->style, [
-                    'label' => __('Effects Direction', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Effects Direction', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
                     'default' => '',
                     'options' => [
-                        'oxi-image-fade-in-up' => __('Fade In Up', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-fade-in-down' => __('Fade In Down', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-fade-in-left' => __('Fade In Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-fade-in-right' => __('Fade In Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'oxi-image-fade-in-up' => esc_html__('Fade In Up', 'image-hover-effects-ultimate'),
+                        'oxi-image-fade-in-down' => esc_html__('Fade In Down', 'image-hover-effects-ultimate'),
+                        'oxi-image-fade-in-left' => esc_html__('Fade In Left', 'image-hover-effects-ultimate'),
+                        'oxi-image-fade-in-right' => esc_html__('Fade In Right', 'image-hover-effects-ultimate'),
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-caption-hover' => '',

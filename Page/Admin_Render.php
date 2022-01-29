@@ -199,8 +199,8 @@ abstract class Admin_Render {
     public function shortcode_name() {
         $this->add_substitute_control('', $this->dbdata, [
             'type' => Controls::SHORTCODENAME,
-            'title' => __('Shortcode Name', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'placeholder' => __('Set Your Shortcode Name', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'title' => esc_html__('Shortcode Name', 'image-hover-effects-ultimate'),
+            'placeholder' => esc_html__('Set Your Shortcode Name', 'image-hover-effects-ultimate'),
             'showing' => TRUE,
         ]);
     }
@@ -214,8 +214,8 @@ abstract class Admin_Render {
     public function modal_opener() {
         $this->add_substitute_control('', [], [
             'type' => Controls::MODALOPENER,
-            'title' => __('Add New Data', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'sub-title' => __('Open Data Form', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'title' => esc_html__('Add New Data', 'image-hover-effects-ultimate'),
+            'sub-title' => esc_html__('Open Data Form', 'image-hover-effects-ultimate'),
             'showing' => TRUE,
         ]);
     }
@@ -229,7 +229,7 @@ abstract class Admin_Render {
     public function shortcode_info() {
         $this->add_substitute_control($this->oxiid, $this->dbdata, [
             'type' => Controls::SHORTCODEINFO,
-            'title' => __('Shortcode', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'title' => esc_html__('Shortcode', 'image-hover-effects-ultimate'),
             'showing' => TRUE,
         ]);
     }
@@ -243,7 +243,7 @@ abstract class Admin_Render {
     public function shortcode_style_changer() {
         $this->add_substitute_control($this->oxiid, $this->dbdata, [
             'type' => Controls::SHORTCODESTYLE,
-            'title' => __('Template Changer', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'title' => esc_html__('Template Changer', 'image-hover-effects-ultimate'),
             'showing' => false,
         ]);
     }

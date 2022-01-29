@@ -22,8 +22,8 @@ class Modules extends Admin_Render {
         $this->start_section_header(
                 'oxi-image-hover-start-tabs', [
             'options' => [
-                'general-settings' => esc_html__('General Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'custom' => esc_html__('Custom CSS', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'general-settings' => esc_html__('General Settings', 'image-hover-effects-ultimate'),
+                'custom' => esc_html__('Custom CSS', 'image-hover-effects-ultimate'),
             ]
                 ]
         );
@@ -43,13 +43,13 @@ class Modules extends Admin_Render {
 
         $this->start_controls_section(
                 'oxi-image-hover', [
-            'label' => esc_html__('Custom CSS', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Custom CSS', 'image-hover-effects-ultimate'),
             'showing' => TRUE,
                 ]
         );
         $this->add_control(
                 'image-hover-custom-css', $this->style, [
-            'label' => __('', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('', 'image-hover-effects-ultimate'),
             'type' => Controls::TEXTAREA,
             'default' => '',
             'description' => 'Custom CSS Section. You can add custom css into textarea.'
@@ -81,7 +81,7 @@ class Modules extends Admin_Render {
         $this->start_controls_section(
                 'image-hover',
                 [
-                    'label' => esc_html__('Category Menu', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Category Menu', 'image-hover-effects-ultimate'),
                     'showing' => TRUE,
                 ]
         );
@@ -96,9 +96,9 @@ class Modules extends Admin_Render {
                 'category_parent_cat',
                 $this->style,
                 [
-                    'label' => __('Parent Category', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Parent Category', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
-                    'description' => __('Select Parent Category show after Save and Reload', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'description' => esc_html__('Select Parent Category show after Save and Reload', 'image-hover-effects-ultimate'),
                     'loader' => TRUE,
                     'options' => $this->allcategory,
                 ]
@@ -108,11 +108,11 @@ class Modules extends Admin_Render {
                 'category_menu_settings',
                 $this->style,
                 [
-                    'label' => __('', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('', 'image-hover-effects-ultimate'),
                     'type' => Controls::REPEATER,
                     'fields' => [
                         'category_item_text' => [
-                            'label' => esc_html__('Category Name', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'label' => esc_html__('Category Name', 'image-hover-effects-ultimate'),
                             'type' => Controls::TEXT,
                             'placeholder' => 'Add or Edit Category Name',
                         ],
@@ -128,7 +128,7 @@ class Modules extends Admin_Render {
         $this->start_controls_section(
                 'image-hover',
                 [
-                    'label' => esc_html__('Menu Style', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Menu Style', 'image-hover-effects-ultimate'),
                     'showing' => TRUE,
                 ]
         );
@@ -136,29 +136,29 @@ class Modules extends Admin_Render {
                 'category_menu_align',
                 $this->style,
                 [
-                    'label' => __('Menu Align', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Menu Align', 'image-hover-effects-ultimate'),
                     'type' => Controls::CHOOSE,
                     'operator' => Controls::OPERATOR_ICON,
                     'toggle' => TRUE,
                     'default' => 'flex-start',
                     'options' => [
                         'flex-start' => [
-                            'title' => __('Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('Left', 'image-hover-effects-ultimate'),
                             'icon' => 'fa fa-align-left',
                         ],
                         'center' => [
-                            'title' => __('Center', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('Center', 'image-hover-effects-ultimate'),
                             'icon' => 'fa fa-align-center',
                         ],
                         'flex-end' => [
-                            'title' => __('Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('Right', 'image-hover-effects-ultimate'),
                             'icon' => 'fa fa-align-right',
                         ],
                     ],
                     'selector' => [
                         '{{WRAPPER}} .image-hover-filter-style .image-hover-category-menu' => 'justify-content: {{VALUE}};',
                     ],
-                    'description' => __('Set menu align as left, right or center ', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'description' => esc_html__('Set menu align as left, right or center ', 'image-hover-effects-ultimate'),
                 ]
         );
         $this->add_group_control(
@@ -176,30 +176,30 @@ class Modules extends Admin_Render {
                 'category_menu_width_type',
                 $this->style,
                 [
-                    'label' => __('Width Mode', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Width Mode', 'image-hover-effects-ultimate'),
                     'type' => Controls::CHOOSE,
                     'toggle' => TRUE,
                     'loader' => TRUE,
                     'default' => 'dynamic',
                     'options' => [
                         'category_fix_width' => [
-                            'title' => __('Static', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('Static', 'image-hover-effects-ultimate'),
                         ],
                         'cat_dynamic' => [
-                            'title' => __('Dynamic', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('Dynamic', 'image-hover-effects-ultimate'),
                         ]
                     ],
                     'selector' => [
                         '{{WRAPPER}} .image-hover-filter-style .image-hover-category-menu-item' => '',
                     ],
-                    'description' => __('menu width condition as Static or Dynamic', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'description' => esc_html__('menu width condition as Static or Dynamic', 'image-hover-effects-ultimate'),
                 ]
         );
         $this->add_responsive_control(
                 'category_menu_width_size',
                 $this->style,
                 [
-                    'label' => __('Width', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Width', 'image-hover-effects-ultimate'),
                     'type' => Controls::SLIDER,
                     'default' => [
                         'unit' => 'px',
@@ -236,9 +236,9 @@ class Modules extends Admin_Render {
                 'image-hover-start-tabs',
                 [
                     'options' => [
-                        'normal' => esc_html__('Normal', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'hover' => esc_html__('Hover', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'active' => esc_html__('Active', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'normal' => esc_html__('Normal', 'image-hover-effects-ultimate'),
+                        'hover' => esc_html__('Hover', 'image-hover-effects-ultimate'),
+                        'active' => esc_html__('Active', 'image-hover-effects-ultimate'),
                     ]
                 ]
         );
@@ -247,7 +247,7 @@ class Modules extends Admin_Render {
                 'category_menu_color',
                 $this->style,
                 [
-                    'label' => __('Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Color', 'image-hover-effects-ultimate'),
                     'type' => Controls::COLOR,
                     'default' => '#8d8d8d',
                     'selector' => [
@@ -260,7 +260,7 @@ class Modules extends Admin_Render {
                 'category_menu_background',
                 $this->style,
                 [
-                    'label' => __('Background Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Background Color', 'image-hover-effects-ultimate'),
                     'type' => Controls::COLOR,
                     'default' => '',
                     'oparetor' => 'RGB',
@@ -296,7 +296,7 @@ class Modules extends Admin_Render {
                 'category_menu_border-radius',
                 $this->style,
                 [
-                    'label' => __('Border Radius', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
                     'type' => Controls::DIMENSIONS,
                     'default' => [
                         'unit' => 'px',
@@ -332,7 +332,7 @@ class Modules extends Admin_Render {
                 'category_menu_hover_color',
                 $this->style,
                 [
-                    'label' => __('Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Color', 'image-hover-effects-ultimate'),
                     'type' => Controls::COLOR,
                     'default' => '#ffffff',
                     'selector' => [
@@ -345,7 +345,7 @@ class Modules extends Admin_Render {
                 'category_menu_hover_background',
                 $this->style,
                 [
-                    'label' => __('Background Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Background Color', 'image-hover-effects-ultimate'),
                     'type' => Controls::COLOR,
                     'default' => 'rgba(71, 201, 229, 1)',
                     'oparetor' => 'RGB',
@@ -381,7 +381,7 @@ class Modules extends Admin_Render {
                 'category_menu_hover_border_radius',
                 $this->style,
                 [
-                    'label' => __('Border Radius', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
                     'type' => Controls::DIMENSIONS,
                     'default' => [
                         'unit' => 'px',
@@ -417,7 +417,7 @@ class Modules extends Admin_Render {
                 'category_menu_active_color',
                 $this->style,
                 [
-                    'label' => __('Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Color', 'image-hover-effects-ultimate'),
                     'type' => Controls::COLOR,
                     'default' => '#ffffff',
                     'selector' => [
@@ -430,7 +430,7 @@ class Modules extends Admin_Render {
                 'category_menu_active_background',
                 $this->style,
                 [
-                    'label' => __('Background Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Background Color', 'image-hover-effects-ultimate'),
                     'type' => Controls::COLOR,
                     'default' => 'rgba(71, 201, 229, 1)',
                     'oparetor' => 'RGB',
@@ -466,7 +466,7 @@ class Modules extends Admin_Render {
                 'category_menu_active_border_radius',
                 $this->style,
                 [
-                    'label' => __('Border Radius', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
                     'type' => Controls::DIMENSIONS,
                     'default' => [
                         'unit' => 'px',
@@ -502,7 +502,7 @@ class Modules extends Admin_Render {
                 'category_menu_padding',
                 $this->style,
                 [
-                    'label' => __('Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Padding', 'image-hover-effects-ultimate'),
                     'type' => Controls::DIMENSIONS,
                     'separator' => TRUE,
                     'default' => [
@@ -536,7 +536,7 @@ class Modules extends Admin_Render {
                 'category_menu_margin',
                 $this->style,
                 [
-                    'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Margin', 'image-hover-effects-ultimate'),
                     'type' => Controls::DIMENSIONS,
                     'default' => [
                         'unit' => 'px',
@@ -572,7 +572,7 @@ class Modules extends Admin_Render {
         $this->start_controls_section(
                 'image-hover',
                 [
-                    'label' => esc_html__('Item Data Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Item Data Settings', 'image-hover-effects-ultimate'),
                     'showing' => TRUE,
                 ]
         );
@@ -580,7 +580,7 @@ class Modules extends Admin_Render {
                 'category_col',
                 $this->style,
                 [
-                    'label' => __('Item Per Rows', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Item Per Rows', 'image-hover-effects-ultimate'),
                     'type' => Controls::COLUMN,
                     'loader' => TRUE,
                     'selector' => [
@@ -592,7 +592,7 @@ class Modules extends Admin_Render {
                 'category_data_item',
                 $this->style,
                 [
-                    'label' => __('Item Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Item Padding', 'image-hover-effects-ultimate'),
                     'type' => Controls::DIMENSIONS,
                     'default' => [
                         'unit' => 'px',
@@ -625,7 +625,7 @@ class Modules extends Admin_Render {
                 'category_data_body_padding',
                 $this->style,
                 [
-                    'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Margin', 'image-hover-effects-ultimate'),
                     'type' => Controls::DIMENSIONS,
                     'default' => [
                         'unit' => 'px',
@@ -665,8 +665,8 @@ class Modules extends Admin_Render {
     public function modal_opener() {
         $this->add_substitute_control('', [], [
             'type' => Controls::MODALOPENER,
-            'title' => __('Add New Data', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'sub-title' => __('Category Data Form', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'title' => esc_html__('Add New Data', 'image-hover-effects-ultimate'),
+            'sub-title' => esc_html__('Category Data Form', 'image-hover-effects-ultimate'),
             'showing' => true,
         ]);
     }
@@ -681,7 +681,7 @@ class Modules extends Admin_Render {
             <?php
             $this->add_control(
                     'image_hover_heading', $this->style, [
-                'label' => __('Title', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Title', 'image-hover-effects-ultimate'),
                 'type' => Controls::TEXT,
                 'default' => 'Title 01',
                 'placeholder' => 'Title 01',
@@ -691,14 +691,14 @@ class Modules extends Admin_Render {
 
             $this->add_control(
                     'image_hover_info', $this->style, [
-                'label' => __('Image Hover Shortcode', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Image Hover Shortcode', 'image-hover-effects-ultimate'),
                 'type' => Controls::TEXTAREA,
                 'description' => 'Add Image Hover Shortcode. After saved kindly reload to loading CSS or JS properly '
                     ]
             );
             $this->add_control(
                     'image_hover_category_select', $this->style, [
-                'label' => __('Category Select', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Category Select', 'image-hover-effects-ultimate'),
                 'type' => Controls::SELECT,
                 'multiple' => TRUE,
                 'options' => $this->allcategory,

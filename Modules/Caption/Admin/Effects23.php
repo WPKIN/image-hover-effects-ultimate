@@ -19,14 +19,14 @@ class Effects23 extends Modules {
     public function register_effects() {
         return $this->add_control(
                         'image_hover_effects', $this->style, [
-                    'label' => __('Effects Direction', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Effects Direction', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
                     'default' => '',
                     'options' => [
-                        'oxi-image-shift-top-left' => __('Shift Top Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-shift-top-right' => __('Shift Top Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-shift-bottom-left' => __('Shift Bottom Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-shift-bottom-right' => __('Shift Bottom Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'oxi-image-shift-top-left' => esc_html__('Shift Top Left', 'image-hover-effects-ultimate'),
+                        'oxi-image-shift-top-right' => esc_html__('Shift Top Right', 'image-hover-effects-ultimate'),
+                        'oxi-image-shift-bottom-left' => esc_html__('Shift Bottom Left', 'image-hover-effects-ultimate'),
+                        'oxi-image-shift-bottom-right' => esc_html__('Shift Bottom Right', 'image-hover-effects-ultimate'),
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-caption-hover' => '',

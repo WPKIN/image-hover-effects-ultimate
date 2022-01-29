@@ -35,7 +35,7 @@ class Effects5 extends Modules {
     public function register_front_content_settings() {
         $this->start_controls_section(
                 'oxi-image-hover', [
-            'label' => esc_html__('Content Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Content Settings', 'image-hover-effects-ultimate'),
             'showing' => TRUE,
                 ]
         );
@@ -59,7 +59,7 @@ class Effects5 extends Modules {
 
         $this->add_responsive_control(
                 'oxi-image-flip-front-border-radius', $this->style, [
-            'label' => __('Border Radius', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -137,7 +137,7 @@ class Effects5 extends Modules {
             <?php
             $this->add_control(
                     'image_hover_back_heading', $this->style, [
-                'label' => __('Title', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Title', 'image-hover-effects-ultimate'),
                 'type' => Controls::TEXT,
                 'default' => 'Google',
                 'placeholder' => 'Heading',
@@ -147,7 +147,7 @@ class Effects5 extends Modules {
 
             $this->add_control(
                     'image_hover_back_description', $this->style, [
-                'label' => __('Backend Description', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Backend Description', 'image-hover-effects-ultimate'),
                 'type' => Controls::TEXTAREA,
                 'description' => 'Add Your Backend Description Unless make it blank.'
                     ]
@@ -157,8 +157,8 @@ class Effects5 extends Modules {
                     'image_hover-start-tabs', [
                 'separator' => TRUE,
                 'options' => [
-                    'frontend' => esc_html__('Front Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'backend' => esc_html__('Backend Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'frontend' => esc_html__('Front Image', 'image-hover-effects-ultimate'),
+                    'backend' => esc_html__('Backend Image', 'image-hover-effects-ultimate'),
                 ]
                     ]
             );
@@ -166,7 +166,7 @@ class Effects5 extends Modules {
 
             $this->add_group_control(
                     'image_hover_front_image', $this->style, [
-                'label' => __('Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Image', 'image-hover-effects-ultimate'),
                 'type' => Controls::MEDIA,
                 'description' => 'Add or Modify Your Front Image. Adjust Front background to get better design.'
                     ]
@@ -177,7 +177,7 @@ class Effects5 extends Modules {
             $this->start_controls_tab();
             $this->add_group_control(
                     'image_hover_back_image', $this->style, [
-                'label' => __('Feature Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Feature Image', 'image-hover-effects-ultimate'),
                 'type' => Controls::MEDIA,
                 'description' => 'Add or Modify Your Backend Image. Adjust Backend background to get better design.'
                     ]
@@ -187,7 +187,7 @@ class Effects5 extends Modules {
 
             $this->add_group_control(
                     'image_hover_button_link', $this->style, [
-                'label' => __('URL', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('URL', 'image-hover-effects-ultimate'),
                 'type' => Controls::URL,
                 'separator' => TRUE,
                 'default' => '',

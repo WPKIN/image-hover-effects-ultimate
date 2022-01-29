@@ -41,7 +41,7 @@ class Effects3 extends Modules {
     public function register_general_style() {
         $this->start_controls_section(
                 'oxi-image-hover', [
-            'label' => esc_html__('General Style', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('General Style', 'image-hover-effects-ultimate'),
             'showing' => true,
                 ]
         );
@@ -60,7 +60,7 @@ class Effects3 extends Modules {
                 'oxi_image_magnifier_radius',
                 $this->style,
                 [
-                    'label' => __('Border Radius', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
                     'type' => Controls::DIMENSIONS,
                     'default' => [
                         'unit' => 'px',
@@ -92,7 +92,7 @@ class Effects3 extends Modules {
                 'oxi_image_magnifier_shadow',
                 $this->style,
                 [
-                    'label' => __('Box Shadow', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Box Shadow', 'image-hover-effects-ultimate'),
                     'type' => Controls::BOXSHADOW,
                     'selector' => [
                         '{{WRAPPER}} .oxi-addons-main-wrapper-image-comparison .oxi-addons-main' => '',
@@ -104,7 +104,7 @@ class Effects3 extends Modules {
                 'oxi_image_magnifier_margin',
                 $this->style,
                 [
-                    'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Margin', 'image-hover-effects-ultimate'),
                     'type' => Controls::DIMENSIONS,
                     'default' => [
                         'unit' => 'px',
@@ -144,7 +144,7 @@ class Effects3 extends Modules {
     public function register_image_settings() {
         $this->start_controls_section(
                 'shortcode-addons', [
-            'label' => esc_html__('Image Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Image Settings', 'image-hover-effects-ultimate'),
             'showing' => true,
                 ]
         );
@@ -152,21 +152,21 @@ class Effects3 extends Modules {
                 'oxi_image_magnifier_image_position',
                 $this->style,
                 [
-                    'label' => __('Image Postion', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Image Postion', 'image-hover-effects-ultimate'),
                     'type' => Controls::CHOOSE,
                     'default' => 'center',
                     'operator' => Controls::OPERATOR_ICON,
                     'options' => [
                         'flex-start' => [
-                            'title' => __('Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('Left', 'image-hover-effects-ultimate'),
                             'icon' => 'fa fa-align-left',
                         ],
                         'center' => [
-                            'title' => __('Center', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('Center', 'image-hover-effects-ultimate'),
                             'icon' => 'fa fa-align-center',
                         ],
                         'flex-end' => [
-                            'title' => __('Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('Right', 'image-hover-effects-ultimate'),
                             'icon' => 'fa fa-align-right',
                         ],
                     ],
@@ -181,12 +181,12 @@ class Effects3 extends Modules {
                 'oxi_image_magnifier_image_switcher',
                 $this->style,
                 [
-                    'label' => __('Custom Width', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Custom Width', 'image-hover-effects-ultimate'),
                     'type' => Controls::SWITCHER,
                     'default' => 'no',
                     'loader' => true,
-                    'label_on' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'label_off' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label_on' => esc_html__('Yes', 'image-hover-effects-ultimate'),
+                    'label_off' => esc_html__('No', 'image-hover-effects-ultimate'),
                     'return_value' => 'oxi__image_width',
                     'description' => 'Wanna Set Image Custom  Width.',
                 ]
@@ -195,7 +195,7 @@ class Effects3 extends Modules {
                 'oxi_image_magnifier_image_width',
                 $this->style,
                 [
-                    'label' => __('Width', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Width', 'image-hover-effects-ultimate'),
                     'type' => Controls::SLIDER,
                     'condition' => [
                         'oxi_image_magnifier_image_switcher' => 'oxi__image_width',
@@ -226,7 +226,7 @@ class Effects3 extends Modules {
                 'oxi_image_magnifier_image_height',
                 $this->style,
                 [
-                    'label' => __('Height', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Height', 'image-hover-effects-ultimate'),
                     'type' => Controls::SLIDER,
                     'condition' => [
                         'oxi_image_magnifier_image_switcher' => 'oxi__image_width',
@@ -270,7 +270,7 @@ class Effects3 extends Modules {
                     'oxi_image_accordion_image',
                     $this->style,
                     [
-                        'label' => __('URL', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'label' => esc_html__('URL', 'image-hover-effects-ultimate'),
                         'type' => Controls::MEDIA,
                         'default' => [
                             'type' => 'media-library',

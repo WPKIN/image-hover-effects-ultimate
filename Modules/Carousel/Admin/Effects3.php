@@ -20,7 +20,7 @@ class Effects3 extends Modules {
         $this->start_controls_section(
                 'display-post',
                 [
-                    'label' => esc_html__('Carousel Query', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Carousel Query', 'image-hover-effects-ultimate'),
                     'showing' => TRUE,
                 ]
         );
@@ -28,7 +28,7 @@ class Effects3 extends Modules {
                 'carousel_note',
                 $this->style,
                 [
-                    'label' => __('Note', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Note', 'image-hover-effects-ultimate'),
                     'type' => Controls::HEADING,
                     'description' => 'Works after saving and reloading all the fields '
                 ]
@@ -37,7 +37,7 @@ class Effects3 extends Modules {
                 'carousel_register_style',
                 $this->style,
                 [
-                    'label' => __('Carousel Style', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Carousel Style', 'image-hover-effects-ultimate'),
                     'loader' => TRUE,
                     'type' => Controls::SELECT,
                     'options' => $this->all_style(),
@@ -48,15 +48,15 @@ class Effects3 extends Modules {
                 'carousel_effect',
                 $this->style,
                 [
-                    'label' => __('Carousel Effect', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Carousel Effect', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
                     'default' => 'slide',
                     'options' => [
-                        'slide' => __('Slide', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'fade' => __('Fade', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'cube' => __('Cube', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'coverflow' => __('Coverflow', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'flip' => __('Flip', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'slide' => esc_html__('Slide', 'image-hover-effects-ultimate'),
+                        'fade' => esc_html__('Fade', 'image-hover-effects-ultimate'),
+                        'cube' => esc_html__('Cube', 'image-hover-effects-ultimate'),
+                        'coverflow' => esc_html__('Coverflow', 'image-hover-effects-ultimate'),
+                        'flip' => esc_html__('Flip', 'image-hover-effects-ultimate'),
                     ],
                     'description' => 'Select Carousel Type as Slide or Fade or Cube or Coverflow or Flip. Kindly save and reload page as Carousel works'
                 ]
@@ -65,7 +65,7 @@ class Effects3 extends Modules {
                 'carousel_width',
                 $this->style,
                 [
-                    'label' => __('Max Width', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Max Width', 'image-hover-effects-ultimate'),
                     'type' => Controls::SLIDER,
                     'default' => [
                         'unit' => 'px',
@@ -101,7 +101,7 @@ class Effects3 extends Modules {
                 'carousel_item',
                 $this->style,
                 [
-                    'label' => __('Item Show', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Item Show', 'image-hover-effects-ultimate'),
                     'type' => Controls::SLIDER,
                     'default' => [
                         'unit' => 'px',
@@ -125,13 +125,13 @@ class Effects3 extends Modules {
                 'carousel_autoplay',
                 $this->style,
                 [
-                    'label' => __('Autoplay', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Autoplay', 'image-hover-effects-ultimate'),
                     'type' => Controls::SWITCHER,
                     'separator' => TRUE,
                     'loader' => TRUE,
                     'default' => 'yes',
-                    'yes' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'no' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'yes' => esc_html__('Yes', 'image-hover-effects-ultimate'),
+                    'no' => esc_html__('No', 'image-hover-effects-ultimate'),
                     'return_value' => 'yes',
                     'description' => 'Carousel Autoplay Mode: True or False',
                 ]
@@ -140,7 +140,7 @@ class Effects3 extends Modules {
                 'carousel_autoplay_speed',
                 $this->style,
                 [
-                    'label' => __('Autoplay Speed', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Autoplay Speed', 'image-hover-effects-ultimate'),
                     'type' => Controls::NUMBER,
                     'default' => 2000,
                     'condition' => [
@@ -153,7 +153,7 @@ class Effects3 extends Modules {
                 'carousel_speed',
                 $this->style,
                 [
-                    'label' => __('Animation Speed', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Animation Speed', 'image-hover-effects-ultimate'),
                     'type' => Controls::NUMBER,
                     'default' => 500,
                     'description' => 'Carousel Animation Time, Based on Millisecond',
@@ -163,12 +163,12 @@ class Effects3 extends Modules {
                 'carousel_pause_on_hover',
                 $this->style,
                 [
-                    'label' => __('Pause on Hover', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Pause on Hover', 'image-hover-effects-ultimate'),
                     'type' => Controls::SWITCHER,
                     'loader' => TRUE,
                     'default' => 'yes',
-                    'yes' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'no' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'yes' => esc_html__('Yes', 'image-hover-effects-ultimate'),
+                    'no' => esc_html__('No', 'image-hover-effects-ultimate'),
                     'return_value' => 'yes',
                     'description' => 'Carousel Pause on Hover : True or False',
                 ]
@@ -177,12 +177,12 @@ class Effects3 extends Modules {
                 'carousel_infinite',
                 $this->style,
                 [
-                    'label' => __('Infinite Loop', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Infinite Loop', 'image-hover-effects-ultimate'),
                     'type' => Controls::SWITCHER,
                     'loader' => TRUE,
                     'default' => 'yes',
-                    'yes' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'no' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'yes' => esc_html__('Yes', 'image-hover-effects-ultimate'),
+                    'no' => esc_html__('No', 'image-hover-effects-ultimate'),
                     'return_value' => 'yes',
                     'description' => 'Carousel Infinite Loop : True or False',
                 ]
@@ -191,12 +191,12 @@ class Effects3 extends Modules {
                 'carousel_adaptive_height',
                 $this->style,
                 [
-                    'label' => __('Adaptive Height', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Adaptive Height', 'image-hover-effects-ultimate'),
                     'type' => Controls::SWITCHER,
                     'loader' => TRUE,
                     'default' => 'yes',
-                    'yes' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'no' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'yes' => esc_html__('Yes', 'image-hover-effects-ultimate'),
+                    'no' => esc_html__('No', 'image-hover-effects-ultimate'),
                     'return_value' => 'yes',
                     'description' => 'Carousel Adaptive Height : True or False',
                 ]
@@ -205,12 +205,12 @@ class Effects3 extends Modules {
                 'carousel_grab_cursor',
                 $this->style,
                 [
-                    'label' => __('Grab Cursor', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Grab Cursor', 'image-hover-effects-ultimate'),
                     'type' => Controls::SWITCHER,
                     'loader' => TRUE,
                     'default' => 'no',
-                    'yes' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'no' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'yes' => esc_html__('Yes', 'image-hover-effects-ultimate'),
+                    'no' => esc_html__('No', 'image-hover-effects-ultimate'),
                     'return_value' => 'yes',
                     'description' => 'Carousel Grab Cursor : True or False',
                 ]
@@ -219,12 +219,12 @@ class Effects3 extends Modules {
                 'carousel_direction',
                 $this->style,
                 [
-                    'label' => __('Direction', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Direction', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
                     'default' => 'ltr',
                     'options' => [
-                        'ltr' => __('Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'rtl' => __('Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'ltr' => esc_html__('Left', 'image-hover-effects-ultimate'),
+                        'rtl' => esc_html__('Right', 'image-hover-effects-ultimate'),
                     ],
                     'description' => 'Carousel Direction : Left or Right',
                 ]
@@ -233,12 +233,12 @@ class Effects3 extends Modules {
                 'carousel_show_arrows',
                 $this->style,
                 [
-                    'label' => __('Arrows', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Arrows', 'image-hover-effects-ultimate'),
                     'type' => Controls::SWITCHER,
                     'loader' => TRUE,
                     'default' => 'yes',
-                    'yes' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'no' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'yes' => esc_html__('Yes', 'image-hover-effects-ultimate'),
+                    'no' => esc_html__('No', 'image-hover-effects-ultimate'),
                     'return_value' => 'yes',
                     'description' => 'Carousel Arrows Options : True or False',
                 ]
@@ -247,12 +247,12 @@ class Effects3 extends Modules {
                 'carousel_show_dots',
                 $this->style,
                 [
-                    'label' => __('Dots', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Dots', 'image-hover-effects-ultimate'),
                     'type' => Controls::SWITCHER,
                     'loader' => TRUE,
                     'default' => 'no',
-                    'yes' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'no' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'yes' => esc_html__('Yes', 'image-hover-effects-ultimate'),
+                    'no' => esc_html__('No', 'image-hover-effects-ultimate'),
                     'return_value' => 'yes',
                     'description' => 'Carousel Dots Options : True or False',
                 ]
@@ -265,7 +265,7 @@ class Effects3 extends Modules {
         $this->start_controls_section(
                 'shortcode-addons',
                 [
-                    'label' => esc_html__('Carousel Dots', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Carousel Dots', 'image-hover-effects-ultimate'),
                     'showing' => FALSE,
                     'condition' => [
                         'carousel_show_dots' => 'yes',
@@ -277,7 +277,7 @@ class Effects3 extends Modules {
                 'carousel_dots_width_height',
                 $this->style,
                 [
-                    'label' => __('Width & Height', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Width & Height', 'image-hover-effects-ultimate'),
                     'type' => Controls::SLIDER,
                     'default' => [
                         'unit' => 'px',
@@ -310,7 +310,7 @@ class Effects3 extends Modules {
                 'carousel_dots_position_Y',
                 $this->style,
                 [
-                    'label' => __('Position Y', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Position Y', 'image-hover-effects-ultimate'),
                     'type' => Controls::SLIDER,
                     'default' => [
                         'unit' => '%',
@@ -343,7 +343,7 @@ class Effects3 extends Modules {
                 'carousel_dots_spacing',
                 $this->style,
                 [
-                    'label' => __('Spacing', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Spacing', 'image-hover-effects-ultimate'),
                     'type' => Controls::SLIDER,
                     'default' => [
                         'unit' => 'px',
@@ -376,9 +376,9 @@ class Effects3 extends Modules {
                 'shortcode-addons-start-tabs',
                 [
                     'options' => [
-                        'normal' => esc_html__('Normal', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'hover' => esc_html__('Hover', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'active' => esc_html__('Active', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'normal' => esc_html__('Normal', 'image-hover-effects-ultimate'),
+                        'hover' => esc_html__('Hover', 'image-hover-effects-ultimate'),
+                        'active' => esc_html__('Active', 'image-hover-effects-ultimate'),
                     ]
                 ]
         );
@@ -388,7 +388,7 @@ class Effects3 extends Modules {
                 'carousel_dots_bg_color',
                 $this->style,
                 [
-                    'label' => __('Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Color', 'image-hover-effects-ultimate'),
                     'type' => Controls::COLOR,
                     'default' => 'rgb(0, 0, 0)',
                     'oparetor' => 'RGB',
@@ -416,7 +416,7 @@ class Effects3 extends Modules {
                 'carousel_dots_bg_color_hover',
                 $this->style,
                 [
-                    'label' => __('Background', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Background', 'image-hover-effects-ultimate'),
                     'type' => Controls::COLOR,
                     'default' => 'rgb(119, 119, 119)',
                     'oparetor' => 'RGB',
@@ -443,7 +443,7 @@ class Effects3 extends Modules {
                 'carousel_dots_bg_color_active',
                 $this->style,
                 [
-                    'label' => __('Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Color', 'image-hover-effects-ultimate'),
                     'type' => Controls::COLOR,
                     'default' => '#AB00C9',
                     'oparetor' => 'RGB',
@@ -470,7 +470,7 @@ class Effects3 extends Modules {
                 'carousel_dots_border_radius_normal',
                 $this->style,
                 [
-                    'label' => __('Border Radius', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
                     'type' => Controls::DIMENSIONS,
                     'separator' => TRUE,
                     'default' => [

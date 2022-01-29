@@ -43,9 +43,9 @@ class Visual_Composer {
             $vcdata[] = $value['id'];
         }
         vc_map(array(
-            "name" => __("Image Hover Ultimate"),
+            "name" => esc_html__("Image Hover Ultimate"),
             "base" => "iheu_oxi_VC",
-            "category" => __("Content"),
+            "category" => esc_html__("Content"),
             "params" => array(
                 array(
                     "type" => "dropdown",

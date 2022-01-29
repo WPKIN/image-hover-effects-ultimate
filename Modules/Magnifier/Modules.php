@@ -20,8 +20,8 @@ class Modules extends Admin_Render {
         $this->start_section_header(
                 'oxi-image-hover-start-tabs', [
             'options' => [
-                'general-settings' => esc_html__('General Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'custom' => esc_html__('Custom CSS', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'general-settings' => esc_html__('General Settings', 'image-hover-effects-ultimate'),
+                'custom' => esc_html__('Custom CSS', 'image-hover-effects-ultimate'),
             ]
                 ]
         );
@@ -57,7 +57,7 @@ class Modules extends Admin_Render {
     public function register_general_style() {
         $this->start_controls_section(
                 'oxi-image-hover', [
-            'label' => esc_html__('General Style', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('General Style', 'image-hover-effects-ultimate'),
             'showing' => true,
                 ]
         );
@@ -85,7 +85,7 @@ class Modules extends Admin_Render {
                 'oxi_image_magnifier_radius',
                 $this->style,
                 [
-                    'label' => __('Border Radius', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
                     'type' => Controls::DIMENSIONS,
                     'default' => [
                         'unit' => 'px',
@@ -121,7 +121,7 @@ class Modules extends Admin_Render {
                 'oxi_image_magnifier_shadow',
                 $this->style,
                 [
-                    'label' => __('Box Shadow', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Box Shadow', 'image-hover-effects-ultimate'),
                     'type' => Controls::BOXSHADOW,
                     'selector' => [
                         '{{WRAPPER}} .oxi_addons__image_magnifier' => '',
@@ -133,7 +133,7 @@ class Modules extends Admin_Render {
                 'oxi_image_magnifier_margin',
                 $this->style,
                 [
-                    'label' => __('Margin', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Margin', 'image-hover-effects-ultimate'),
                     'type' => Controls::DIMENSIONS,
                     'default' => [
                         'unit' => 'px',
@@ -173,7 +173,7 @@ class Modules extends Admin_Render {
     public function register_image_settings() {
         $this->start_controls_section(
                 'shortcode-addons', [
-            'label' => esc_html__('Image Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Image Settings', 'image-hover-effects-ultimate'),
             'showing' => true,
                 ]
         );
@@ -181,21 +181,21 @@ class Modules extends Admin_Render {
                 'oxi_image_magnifier_image_position',
                 $this->style,
                 [
-                    'label' => __('Image Postion', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Image Postion', 'image-hover-effects-ultimate'),
                     'type' => Controls::CHOOSE,
                     'default' => '0 auto',
                     'operator' => Controls::OPERATOR_ICON,
                     'options' => [
                         '0 0 0 auto' => [
-                            'title' => __('Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('Left', 'image-hover-effects-ultimate'),
                             'icon' => 'fa fa-align-left',
                         ],
                         '0 auto' => [
-                            'title' => __('Center', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('Center', 'image-hover-effects-ultimate'),
                             'icon' => 'fa fa-align-center',
                         ],
                         '0 auto 0 0' => [
-                            'title' => __('Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'title' => esc_html__('Right', 'image-hover-effects-ultimate'),
                             'icon' => 'fa fa-align-right',
                         ],
                     ],
@@ -210,12 +210,12 @@ class Modules extends Admin_Render {
                 'oxi_image_magnifier_image_switcher',
                 $this->style,
                 [
-                    'label' => __('Custom Width Height', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Custom Width Height', 'image-hover-effects-ultimate'),
                     'type' => Controls::SWITCHER,
                     'default' => 'no',
                     'loader' => true,
-                    'label_on' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'label_off' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label_on' => esc_html__('Yes', 'image-hover-effects-ultimate'),
+                    'label_off' => esc_html__('No', 'image-hover-effects-ultimate'),
                     'return_value' => 'oxi__image_height_width',
                     'description' => 'Wanna Set Image Custom Height or Width.',
                 ]
@@ -224,7 +224,7 @@ class Modules extends Admin_Render {
                 'oxi_image_magnifier_image_width',
                 $this->style,
                 [
-                    'label' => __('Width', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Width', 'image-hover-effects-ultimate'),
                     'type' => Controls::SLIDER,
                     'condition' => [
                         'oxi_image_magnifier_image_switcher' => 'oxi__image_height_width',
@@ -255,7 +255,7 @@ class Modules extends Admin_Render {
                 'oxi_image_magnifier_height',
                 $this->style,
                 [
-                    'label' => __('Height', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Height', 'image-hover-effects-ultimate'),
                     'type' => Controls::SLIDER,
                     'default' => [
                         'unit' => 'px',
@@ -286,12 +286,12 @@ class Modules extends Admin_Render {
                 'oxi_image_magnifier_grayscale_switter',
                 $this->style,
                 [
-                    'label' => __('Grayscale', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Grayscale', 'image-hover-effects-ultimate'),
                     'type' => Controls::SWITCHER,
                     'default' => 'no',
                     'loader' => true,
-                    'label_on' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'label_off' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label_on' => esc_html__('Yes', 'image-hover-effects-ultimate'),
+                    'label_off' => esc_html__('No', 'image-hover-effects-ultimate'),
                     'return_value' => 'oxi_addons_grayscale',
                     'description' => 'Set Grayscale Property if you wanna Grayscale like black & white or Colorful.',
                 ]
@@ -300,7 +300,7 @@ class Modules extends Admin_Render {
                 'oxi_image_magnifier_opacity',
                 $this->style,
                 [
-                    'label' => __('Opacity', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Opacity', 'image-hover-effects-ultimate'),
                     'type' => Controls::SLIDER,
                     'default' => [
                         'unit' => 'px',
@@ -331,7 +331,7 @@ class Modules extends Admin_Render {
     public function register_magnifi_settings() {
         $this->start_controls_section(
                 'shortcode-addons', [
-            'label' => esc_html__('Magnifi Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Magnifi Settings', 'image-hover-effects-ultimate'),
             'showing' => false,
                 ]
         );
@@ -339,7 +339,7 @@ class Modules extends Admin_Render {
                 'oxi_image_magnifier_magnifi_zoom',
                 $this->style,
                 [
-                    'label' => __('Zoom', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Zoom', 'image-hover-effects-ultimate'),
                     'type' => Controls::SLIDER,
                     'default' => [
                         'unit' => 'px',
@@ -360,12 +360,12 @@ class Modules extends Admin_Render {
                 'oxi_image_magnifier_magnifi_switcher',
                 $this->style,
                 [
-                    'label' => __('Magnifi Width Height', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Magnifi Width Height', 'image-hover-effects-ultimate'),
                     'type' => Controls::SWITCHER,
                     'default' => 'no',
                     'loader' => true,
-                    'label_on' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'label_off' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label_on' => esc_html__('Yes', 'image-hover-effects-ultimate'),
+                    'label_off' => esc_html__('No', 'image-hover-effects-ultimate'),
                     'return_value' => 'yes',
                     'description' => 'Wanna Custom Height or Width Hover Magnifier?',
                 ]
@@ -375,7 +375,7 @@ class Modules extends Admin_Render {
                 'oxi_image_magnifier_magnifi_width',
                 $this->style,
                 [
-                    'label' => __('Width', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Width', 'image-hover-effects-ultimate'),
                     'type' => Controls::SLIDER,
                     'condition' => [
                         'oxi_image_magnifier_magnifi_switcher' => 'yes',
@@ -398,7 +398,7 @@ class Modules extends Admin_Render {
                 'oxi_image_magnifier_magnifi_height',
                 $this->style,
                 [
-                    'label' => __('Height', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Height', 'image-hover-effects-ultimate'),
                     'type' => Controls::SLIDER,
                     'default' => [
                         'unit' => 'px',
@@ -433,13 +433,13 @@ class Modules extends Admin_Render {
 
         $this->start_controls_section(
                 'oxi-image-hover', [
-            'label' => esc_html__('Custom CSS', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Custom CSS', 'image-hover-effects-ultimate'),
             'showing' => TRUE,
                 ]
         );
         $this->add_control(
                 'image-hover-custom-css', $this->style, [
-            'label' => __('', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('', 'image-hover-effects-ultimate'),
             'type' => Controls::TEXTAREA,
             'default' => '',
             'description' => 'Custom CSS Section. You can add custom css into textarea.'
@@ -457,8 +457,8 @@ class Modules extends Admin_Render {
     public function modal_opener() {
         $this->add_substitute_control('', [], [
             'type' => Controls::MODALOPENER,
-            'title' => __('Add New Magnifier', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'sub-title' => __('Open Magnifier Form', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'title' => esc_html__('Add New Magnifier', 'image-hover-effects-ultimate'),
+            'sub-title' => esc_html__('Open Magnifier Form', 'image-hover-effects-ultimate'),
             'showing' => true,
         ]);
     }
@@ -473,7 +473,7 @@ class Modules extends Admin_Render {
             <?php
             $this->add_group_control(
                     'oxi_image_magnifier_img', $this->style, [
-                'label' => esc_html__('Media Type', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Media Type', 'image-hover-effects-ultimate'),
                 'type' => Controls::MEDIA,
                 'default' => [
                     'type' => 'media-library',
@@ -484,22 +484,22 @@ class Modules extends Admin_Render {
 
             $this->add_control(
                     'oxi_image_magnifier_magnifi_position', $this->style, [
-                'label' => __('Magnifi Position', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Magnifi Position', 'image-hover-effects-ultimate'),
                 'type' => Controls::SELECT,
                 'default' => 'right',
                 'loader' => true,
                 'options' => [
-                    'none' => __('Default', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'top' => __('Top', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'right' => __('Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'bottom' => __('Bottom', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'left' => __('Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'none' => esc_html__('Default', 'image-hover-effects-ultimate'),
+                    'top' => esc_html__('Top', 'image-hover-effects-ultimate'),
+                    'right' => esc_html__('Right', 'image-hover-effects-ultimate'),
+                    'bottom' => esc_html__('Bottom', 'image-hover-effects-ultimate'),
+                    'left' => esc_html__('Left', 'image-hover-effects-ultimate'),
                 ],
                     ]
             );
             $this->add_control(
                     'oxi_image_magnifier_magnifi_position_top', $this->style, [
-                'label' => __('Top Position', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Top Position', 'image-hover-effects-ultimate'),
                 'description' => 'After save You will show the changes',
                 'type' => Controls::SLIDER,
                 'condition' => [
@@ -520,7 +520,7 @@ class Modules extends Admin_Render {
             );
             $this->add_control(
                     'oxi_image_magnifier_magnifi_position_right', $this->style, [
-                'label' => __('Right Position', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Right Position', 'image-hover-effects-ultimate'),
                 'type' => Controls::SLIDER,
                 'description' => 'After save You will show the changes',
                 'condition' => [
@@ -541,7 +541,7 @@ class Modules extends Admin_Render {
             );
             $this->add_control(
                     'oxi_image_magnifier_magnifi_position_bottom', $this->style, [
-                'label' => __('Bottom Position', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Bottom Position', 'image-hover-effects-ultimate'),
                 'type' => Controls::SLIDER,
                 'description' => '   save You will show the changes',
                 'condition' => [
@@ -562,7 +562,7 @@ class Modules extends Admin_Render {
             );
             $this->add_control(
                     'oxi_image_magnifier_magnifi_position_left', $this->style, [
-                'label' => __('Left Position', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Left Position', 'image-hover-effects-ultimate'),
                 'type' => Controls::SLIDER,
                 'condition' => [
                     'oxi_image_magnifier_magnifi_position' => 'left',

@@ -19,14 +19,14 @@ class Effects14 extends Modules {
     public function register_effects() {
         return $this->add_control(
                         'image_hover_effects', $this->style, [
-                    'label' => __('Effects Direction', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Effects Direction', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
                     'default' => '',
                     'options' => [
-                        'oxi-image-hinge-up' => __('Hinge Up', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-hinge-down' => __('Hinge Down', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-hinge-left' => __('Hinge Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-hinge-right' => __('Hinge Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'oxi-image-hinge-up' => esc_html__('Hinge Up', 'image-hover-effects-ultimate'),
+                        'oxi-image-hinge-down' => esc_html__('Hinge Down', 'image-hover-effects-ultimate'),
+                        'oxi-image-hinge-left' => esc_html__('Hinge Left', 'image-hover-effects-ultimate'),
+                        'oxi-image-hinge-right' => esc_html__('Hinge Right', 'image-hover-effects-ultimate'),
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-caption-hover' => '',

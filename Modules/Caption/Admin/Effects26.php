@@ -19,14 +19,14 @@ class Effects26 extends Modules {
     public function register_effects() {
         return $this->add_control(
                         'image_hover_effects', $this->style, [
-                    'label' => __('Effects Direction', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Effects Direction', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
                     'default' => '',
                     'options' => [
-                        'oxi-image-splash-up' => __('Splash Up', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-splash-down' => __('Splash Down', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-splash-left' => __('Splash Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-splash-right' => __('Splash Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'oxi-image-splash-up' => esc_html__('Splash Up', 'image-hover-effects-ultimate'),
+                        'oxi-image-splash-down' => esc_html__('Splash Down', 'image-hover-effects-ultimate'),
+                        'oxi-image-splash-left' => esc_html__('Splash Left', 'image-hover-effects-ultimate'),
+                        'oxi-image-splash-right' => esc_html__('Splash Right', 'image-hover-effects-ultimate'),
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-caption-hover' => '',

@@ -11,8 +11,8 @@ class Widget extends \WP_Widget {
     function __construct() {
         parent::__construct(
                 'iheu_widget',
-                __('Image Hover Effects Ultimate', 'image-hover-effects-ultimate'),
-                array('description' => __('Image Hover Effects Ultimate Widget', 'image-hover-effects-ultimate'),)
+                esc_html__('Image Hover Effects Ultimate', 'image-hover-effects-ultimate'),
+                array('description' => esc_html__('Image Hover Effects Ultimate Widget', 'image-hover-effects-ultimate'),)
         );
     }
 

@@ -19,15 +19,15 @@ jQuery.noConflict();
             result = await $.ajax({
                 url: ImageHoverUltimate.root + 'ImageHoverUltimate/v1/' + functionname,
                 method: 'POST',
-
+               
                 data: {
-                    _wpnonce: ImageHoverUltimate.nonce,
+                     _wpnonce: ImageHoverUltimate.nonce,
                     styleid: styleid,
                     childid: childid,
-                    rawdata: rawdata,
-                },
+                    rawdata: rawdata
+                }
             });
-           
+            console.log(result);
             return callback(result);
         } catch (error) {
             console.error(error);
@@ -53,7 +53,7 @@ jQuery.noConflict();
         $('.modal-footer').prepend('<span class="spinner sa-spinner-open-left"></span>');
         Oxi_Image_Admin_Shortcode(functionname, rawdata, styleid, childid, function (callback) {
             setTimeout(function () {
-                document.location.href = callback;
+               // document.location.href = callback;
             }, 1000);
         });
     });

@@ -43,13 +43,13 @@ class Effects2 extends Modules {
     public function register_handle_settings() {
         $this->start_controls_section(
                 'shortcode-addons', [
-            'label' => esc_html__('Handle Setting', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Handle Setting', 'image-hover-effects-ultimate'),
             'showing' => true,
                 ]
         );
         $this->add_control(
                 'oxi_image_comparison_handle_color', $this->style, [
-            'label' => __('Handle Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Handle Color', 'image-hover-effects-ultimate'),
             'type' => Controls::COLOR,
             'default' => '#0a0a0a',
             'selector' => [
@@ -60,7 +60,7 @@ class Effects2 extends Modules {
         );
         $this->add_control(
                 'oxi_image_comparison_handle_bg_color', $this->style, [
-            'label' => __('Background', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Background', 'image-hover-effects-ultimate'),
             'type' => Controls::COLOR,
             'oparetor' => 'RGB',
             'default' => '#fff',
@@ -74,7 +74,7 @@ class Effects2 extends Modules {
 
         $this->add_responsive_control(
                 'oxi_image_comparison_handle_width', $this->style, [
-            'label' => __('Width', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Width', 'image-hover-effects-ultimate'),
             'type' => Controls::SLIDER,
             'separator' => true,
             'default' => [
@@ -106,7 +106,7 @@ class Effects2 extends Modules {
         );
         $this->add_responsive_control(
                 'oxi_image_comparison_handle_height', $this->style, [
-            'label' => __('Height', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Height', 'image-hover-effects-ultimate'),
             'type' => Controls::SLIDER,
             'separator' => true,
             'default' => [
@@ -148,22 +148,22 @@ class Effects2 extends Modules {
     public function register_button_settings() {
         $this->start_controls_section(
                 'shortcode-addons', [
-            'label' => esc_html__('Button Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Button Settings', 'image-hover-effects-ultimate'),
             'showing' => false,
                 ]
         );
         $this->add_control(
                 'oxi_image_compersion_button_controler', $this->style, [
-            'label' => __('Button', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Button', 'image-hover-effects-ultimate'),
             'type' => Controls::CHOOSE,
             'default' => 'true',
             'loader' => true,
             'options' => [
                 'true' => [
-                    'title' => __('True', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'title' => esc_html__('True', 'image-hover-effects-ultimate'),
                 ],
                 'false' => [
-                    'title' => __('False', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'title' => esc_html__('False', 'image-hover-effects-ultimate'),
                 ],
             ],
             'description' => 'Wanna Set Overlay?',
@@ -171,7 +171,7 @@ class Effects2 extends Modules {
         );
         $this->add_control(
                 'oxi_image_comparison_before_text', $this->style, [
-            'label' => __('Before Button Text', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Before Button Text', 'image-hover-effects-ultimate'),
             'type' => Controls::TEXT,
             'default' => 'Before',
             'placeholder' => 'Before',
@@ -183,7 +183,7 @@ class Effects2 extends Modules {
         );
         $this->add_control(
                 'oxi_image_comparison_after_text', $this->style, [
-            'label' => __('After Button Text', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('After Button Text', 'image-hover-effects-ultimate'),
             'type' => Controls::TEXT,
             'default' => 'After',
             'placeholder' => 'After',
@@ -207,7 +207,7 @@ class Effects2 extends Modules {
         );
         $this->add_control(
                 'oxi_image_comparison_text_color', $this->style, [
-            'label' => __('Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Color', 'image-hover-effects-ultimate'),
             'type' => Controls::COLOR,
             'default' => '#787878',
             'condition' => [
@@ -220,7 +220,7 @@ class Effects2 extends Modules {
         );
         $this->add_control(
                 'oxi_image_comparison_button_bg_color', $this->style, [
-            'label' => __('Background Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Background Color', 'image-hover-effects-ultimate'),
             'type' => Controls::COLOR,
             'oparetor' => 'RGB',
             'default' => '#fff',
@@ -247,7 +247,7 @@ class Effects2 extends Modules {
 
         $this->add_responsive_control(
                 'oxi_image_comparison_button_border_radius', $this->style, [
-            'label' => __('Border Radius', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -281,7 +281,7 @@ class Effects2 extends Modules {
         );
         $this->add_responsive_control(
                 'oxi_image_comparison_button_button_padding', $this->style, [
-            'label' => __('Padding', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Padding', 'image-hover-effects-ultimate'),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -328,8 +328,8 @@ class Effects2 extends Modules {
             $this->start_controls_tabs(
                     'shortcode-addons-start-tabs', [
                 'options' => [
-                    'before' => esc_html__('Before Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'after' => esc_html__('After Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'before' => esc_html__('Before Image', 'image-hover-effects-ultimate'),
+                    'after' => esc_html__('After Image', 'image-hover-effects-ultimate'),
                 ],
                     ]
             );
@@ -338,7 +338,7 @@ class Effects2 extends Modules {
                     'oxi_image_comparison_image_one',
                     $this->style,
                     [
-                        'label' => __('URL', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'label' => esc_html__('URL', 'image-hover-effects-ultimate'),
                         'type' => Controls::MEDIA,
                         'default' => [
                             'type' => 'media-library',
@@ -353,7 +353,7 @@ class Effects2 extends Modules {
                     'oxi_image_comparison_image_two',
                     $this->style,
                     [
-                        'label' => __('URL', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'label' => esc_html__('URL', 'image-hover-effects-ultimate'),
                         'type' => Controls::MEDIA,
                         'default' => [
                             'type' => 'media-library',
@@ -369,7 +369,7 @@ class Effects2 extends Modules {
                     'oxi_image_comparison_body_offset',
                     $this->style,
                     [
-                        'label' => __('Coparison Offset', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'label' => esc_html__('Coparison Offset', 'image-hover-effects-ultimate'),
                         'type' => Controls::SLIDER,
                         'default' => [
                             'unit' => 'px',

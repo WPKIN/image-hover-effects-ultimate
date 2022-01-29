@@ -19,13 +19,13 @@ class Effects8 extends Modules {
     public function register_effects() {
         return $this->add_control(
                         'image_hover_effects', $this->style, [
-                    'label' => __('Effects Direction', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Effects Direction', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
                     'default' => '',
                     'options' => [
-                        'oxi-image-dive' => __('Drive', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-dive-cc' => __('Drive CC', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-dive-ccc' => __('Drive CCC', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'oxi-image-dive' => esc_html__('Drive', 'image-hover-effects-ultimate'),
+                        'oxi-image-dive-cc' => esc_html__('Drive CC', 'image-hover-effects-ultimate'),
+                        'oxi-image-dive-ccc' => esc_html__('Drive CCC', 'image-hover-effects-ultimate'),
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-caption-hover' => '',

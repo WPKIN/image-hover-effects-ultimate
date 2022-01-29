@@ -43,7 +43,7 @@ class Effects2 extends Modules {
     public function register_magnifi_settings() {
         $this->start_controls_section(
                 'shortcode-addons', [
-            'label' => esc_html__('Magnifier Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+            'label' => esc_html__('Magnifier Settings', 'image-hover-effects-ultimate'),
             'showing' => false,
                 ]
         );
@@ -52,12 +52,12 @@ class Effects2 extends Modules {
                 'oxi_image_magnifier_magnifi_offset_switcher',
                 $this->style,
                 [
-                    'label' => __('Offset', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Offset', 'image-hover-effects-ultimate'),
                     'type' => Controls::SWITCHER,
                     'default' => 'no',
                     'loader' => true,
-                    'label_on' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'label_off' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label_on' => esc_html__('Yes', 'image-hover-effects-ultimate'),
+                    'label_off' => esc_html__('No', 'image-hover-effects-ultimate'),
                     'return_value' => 'yes',
                     'description' => 'Allows you to Offset Issues for Offset X and Offset Y.',
                 ]
@@ -66,7 +66,7 @@ class Effects2 extends Modules {
                 'oxi_image_magnifier_offset_x',
                 $this->style,
                 [
-                    'label' => __('Offset X', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Offset X', 'image-hover-effects-ultimate'),
                     'type' => Controls::SLIDER,
                     'condition' => [
                         'oxi_image_magnifier_magnifi_offset_switcher' => 'yes',
@@ -89,7 +89,7 @@ class Effects2 extends Modules {
                 'oxi_image_magnifier_offset_y',
                 $this->style,
                 [
-                    'label' => __('Offset Y', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Offset Y', 'image-hover-effects-ultimate'),
                     'type' => Controls::SLIDER,
                     'default' => [
                         'unit' => 'px',
@@ -112,12 +112,12 @@ class Effects2 extends Modules {
                 'oxi_image_magnifier_magnifi_switcher',
                 $this->style,
                 [
-                    'label' => __('Magnifi Width Height', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Magnifi Width Height', 'image-hover-effects-ultimate'),
                     'type' => Controls::SWITCHER,
                     'default' => 'no',
                     'loader' => true,
-                    'label_on' => __('Yes', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'label_off' => __('No', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label_on' => esc_html__('Yes', 'image-hover-effects-ultimate'),
+                    'label_off' => esc_html__('No', 'image-hover-effects-ultimate'),
                     'return_value' => 'yes',
                     'description' => 'Wanna Set Magnifier Custom Height or Width.',
                 ]
@@ -127,7 +127,7 @@ class Effects2 extends Modules {
                 'oxi_image_magnifier_magnifi_width',
                 $this->style,
                 [
-                    'label' => __('Width', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Width', 'image-hover-effects-ultimate'),
                     'type' => Controls::SLIDER,
                     'condition' => [
                         'oxi_image_magnifier_magnifi_switcher' => 'yes',
@@ -150,7 +150,7 @@ class Effects2 extends Modules {
                 'oxi_image_magnifier_magnifi_height',
                 $this->style,
                 [
-                    'label' => __('Height', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Height', 'image-hover-effects-ultimate'),
                     'type' => Controls::SLIDER,
                     'default' => [
                         'unit' => 'px',
@@ -173,7 +173,7 @@ class Effects2 extends Modules {
                 'oxi_image_magnifier_magnifi_radius',
                 $this->style,
                 [
-                    'label' => __('Border Radius', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
                     'type' => Controls::DIMENSIONS,
                     'default' => [
                         'unit' => 'px',
@@ -208,7 +208,7 @@ class Effects2 extends Modules {
                 'oxi_image_magnifier_magnifi_box_shadow',
                 $this->style,
                 [
-                    'label' => __('Box Shadow', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Box Shadow', 'image-hover-effects-ultimate'),
                     'type' => Controls::BOXSHADOW,
                     'selector' => [
                         '.oxi_____disabled,  .oxi_addons_magnifier_' . $this->oxiid . ' .image_wrap' => '',
@@ -229,7 +229,7 @@ class Effects2 extends Modules {
             <?php
             $this->add_group_control(
                     'oxi_image_magnifier_img', $this->style, [
-                'label' => esc_html__('Media Type', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Media Type', 'image-hover-effects-ultimate'),
                 'type' => Controls::MEDIA,
                 'default' => [
                     'type' => 'media-library',

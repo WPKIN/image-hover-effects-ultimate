@@ -19,14 +19,14 @@ class Effects7 extends Modules {
     public function register_effects() {
         return $this->add_control(
                         'image_hover_effects', $this->style, [
-                    'label' => __('Effects Direction', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Effects Direction', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
                     'default' => '',
                     'options' => [
-                        'oxi-image-cube-up' => __('Cube Up', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-cube-down' => __('Cube Down', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-cube-left' => __('Cube Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-cube-right' => __('Cube Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'oxi-image-cube-up' => esc_html__('Cube Up', 'image-hover-effects-ultimate'),
+                        'oxi-image-cube-down' => esc_html__('Cube Down', 'image-hover-effects-ultimate'),
+                        'oxi-image-cube-left' => esc_html__('Cube Left', 'image-hover-effects-ultimate'),
+                        'oxi-image-cube-right' => esc_html__('Cube Right', 'image-hover-effects-ultimate'),
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-caption-hover' => '',

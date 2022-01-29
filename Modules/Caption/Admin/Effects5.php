@@ -19,20 +19,20 @@ class Effects5 extends Modules {
     public function register_effects() {
         return $this->add_control(
                         'image_hover_effects', $this->style, [
-                    'label' => __('Effects Direction', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Effects Direction', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
                     'default' => '',
                     'options' => [
-                        'oxi-image-bounce-in' => __('Bounce In', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-bounce-in-up' => __('Bounce In Up', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-bounce-in-down' => __('Bounce In Down', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-bounce-in-left' => __('Bounce In Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-bounce-in-right' => __('Bounce In Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-bounce-out' => __('Bounce Out', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-bounce-out-up' => __('Bounce Out Up', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-bounce-out-down' => __('Bounce Out Down', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-bounce-out-left' => __('Bounce Out Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-bounce-out-right' => __('Bounce Out Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'oxi-image-bounce-in' => esc_html__('Bounce In', 'image-hover-effects-ultimate'),
+                        'oxi-image-bounce-in-up' => esc_html__('Bounce In Up', 'image-hover-effects-ultimate'),
+                        'oxi-image-bounce-in-down' => esc_html__('Bounce In Down', 'image-hover-effects-ultimate'),
+                        'oxi-image-bounce-in-left' => esc_html__('Bounce In Left', 'image-hover-effects-ultimate'),
+                        'oxi-image-bounce-in-right' => esc_html__('Bounce In Right', 'image-hover-effects-ultimate'),
+                        'oxi-image-bounce-out' => esc_html__('Bounce Out', 'image-hover-effects-ultimate'),
+                        'oxi-image-bounce-out-up' => esc_html__('Bounce Out Up', 'image-hover-effects-ultimate'),
+                        'oxi-image-bounce-out-down' => esc_html__('Bounce Out Down', 'image-hover-effects-ultimate'),
+                        'oxi-image-bounce-out-left' => esc_html__('Bounce Out Left', 'image-hover-effects-ultimate'),
+                        'oxi-image-bounce-out-right' => esc_html__('Bounce Out Right', 'image-hover-effects-ultimate'),
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-caption-hover' => '',

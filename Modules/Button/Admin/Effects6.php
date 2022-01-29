@@ -19,14 +19,14 @@ class Effects6 extends Modules {
     public function register_effects() {
         return $this->add_control(
                         'image_hover_effects', $this->style, [
-                    'label' => __('Effects Direction', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Effects Direction', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
                     'default' => 'left_to_right',
                     'options' => [
-                        'left_to_right' => __('Left to Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'right_to_left' => __('Right to Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'top_to_bottom' => __('Top to Bottom', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'bottom_to_top' => __('Bottom to Top', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'left_to_right' => esc_html__('Left to Right', 'image-hover-effects-ultimate'),
+                        'right_to_left' => esc_html__('Right to Left', 'image-hover-effects-ultimate'),
+                        'top_to_bottom' => esc_html__('Top to Bottom', 'image-hover-effects-ultimate'),
+                        'bottom_to_top' => esc_html__('Bottom to Top', 'image-hover-effects-ultimate'),
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-hover-figure' => '',

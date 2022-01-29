@@ -19,14 +19,14 @@ class Effects13 extends Modules {
     public function register_effects() {
         return $this->add_control(
                         'image_hover_effects', $this->style, [
-                    'label' => __('Effects Direction', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Effects Direction', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
                     'default' => '',
                     'options' => [
-                        'oxi-image-fold-up' => __('Fold Up', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-fold-down' => __('Fold Down', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-fold-left' => __('Fold Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'oxi-image-fold-right' => __('Fold Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'oxi-image-fold-up' => esc_html__('Fold Up', 'image-hover-effects-ultimate'),
+                        'oxi-image-fold-down' => esc_html__('Fold Down', 'image-hover-effects-ultimate'),
+                        'oxi-image-fold-left' => esc_html__('Fold Left', 'image-hover-effects-ultimate'),
+                        'oxi-image-fold-right' => esc_html__('Fold Right', 'image-hover-effects-ultimate'),
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-caption-hover' => '',

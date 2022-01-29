@@ -293,9 +293,11 @@ class ImageApi {
     }
 
     public function post_layouts_clone() {
-
+         
         $newName = $this->validate_post();
+       
         $styleid = $this->styleid;
+         
         $style = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM $this->parent_table WHERE id = %d", $styleid), ARRAY_A);
         $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid), ARRAY_A);
 

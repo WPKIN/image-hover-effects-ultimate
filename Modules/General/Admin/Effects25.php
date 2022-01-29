@@ -19,12 +19,12 @@ class Effects25 extends Modules {
     public function register_effects() {
         return $this->add_control(
                         'image_hover_effects', $this->style, [
-                    'label' => __('Effects Direction', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Effects Direction', 'image-hover-effects-ultimate'),
                     'type' => Controls::SELECT,
                     'default' => 'left_to_right',
                     'options' => [
-                        'left_to_right' => __('Left To Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'right_to_left' => __('Right To Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'left_to_right' => esc_html__('Left To Right', 'image-hover-effects-ultimate'),
+                        'right_to_left' => esc_html__('Right To Left', 'image-hover-effects-ultimate'),
                     ],
                     'selector' => [
                         '{{WRAPPER}} .oxi-image-hover-figure' => '',

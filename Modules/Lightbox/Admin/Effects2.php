@@ -34,7 +34,7 @@ class Effects2 extends Modules {
         $this->start_controls_section(
                 'shortcode-addons',
                 [
-                    'label' => esc_html__('Lightbox Settings ', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Lightbox Settings ', 'image-hover-effects-ultimate'),
                     'showing' => true,
                 ]
         );
@@ -43,7 +43,7 @@ class Effects2 extends Modules {
                 'oxi_image_light_z_ind',
                 $this->style,
                 [
-                    'label' => __('Z-index', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Z-index', 'image-hover-effects-ultimate'),
                     'type' => Controls::NUMBER,
                     'default' => 9999,
                     'loader' => true,
@@ -54,7 +54,7 @@ class Effects2 extends Modules {
                 'oxi_image_light_bg_color',
                 $this->style,
                 [
-                    'label' => __('Background', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Background', 'image-hover-effects-ultimate'),
                     'type' => Controls::COLOR,
                     'oparetor' => 'RGB',
                     'default' => 'rgba(68, 161, 86,1.00)',
@@ -69,7 +69,7 @@ class Effects2 extends Modules {
                 'oxi_image_light_cls_clr',
                 $this->style,
                 [
-                    'label' => __('Closing Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Closing Color', 'image-hover-effects-ultimate'),
                     'type' => Controls::COLOR,
                     'default' => '#ffffff',
                     'description' => 'Lightbox Closing Icon Color, Effect Will be show after Save!',
@@ -79,7 +79,7 @@ class Effects2 extends Modules {
                 'oxi_image_light_pre_clr',
                 $this->style,
                 [
-                    'label' => __('Preloader Color', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'label' => esc_html__('Preloader Color', 'image-hover-effects-ultimate'),
                     'type' => Controls::COLOR,
                     'default' => '#ffffff',
                     'description' => 'Lightbox Preloader Color, Effect Will be show after Save!',
@@ -104,14 +104,14 @@ class Effects2 extends Modules {
             <?php
             $this->start_controls_section(
                     'oxi-image-hover', [
-                'label' => esc_html__('General Style', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('General Style', 'image-hover-effects-ultimate'),
                 'showing' => true,
                     ]
             );
 
             $this->add_group_control(
                     'oxi_image_light_box_image_front', $this->style, [
-                'label' => esc_html__('Media Type', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Media Type', 'image-hover-effects-ultimate'),
                 'type' => Controls::MEDIA,
                 'default' => [
                     'type' => 'media-library',
@@ -124,7 +124,7 @@ class Effects2 extends Modules {
             );
             $this->add_control(
                     'oxi_image_light_box_button_icon', $this->style, [
-                'label' => esc_html__('Icon', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Icon', 'image-hover-effects-ultimate'),
                 'type' => Controls::ICON,
                 'default' => 'fab fa-accusoft',
                 'condition' => [
@@ -134,9 +134,9 @@ class Effects2 extends Modules {
             );
             $this->add_control(
                     'oxi_image_light_box_button_text', $this->style, [
-                'label' => esc_html__('Button Text', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Button Text', 'image-hover-effects-ultimate'),
                 'type' => Controls::TEXT,
-                'default' => esc_html__('Show Popup', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'default' => esc_html__('Show Popup', 'image-hover-effects-ultimate'),
                 'selector' => [
                     '{{WRAPPER}} .oxi_addons__light_box_{{KEY}} .oxi_addons__button' => '',
                 ],
@@ -149,25 +149,25 @@ class Effects2 extends Modules {
             $this->end_controls_section();
             $this->start_controls_section(
                     'oxi-image-hover', [
-                'label' => esc_html__('Popup Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Popup Settings', 'image-hover-effects-ultimate'),
                 'showing' => true,
                     ]
             );
             $this->add_control(
                     'oxi_image_light_box_select_type', $this->style, [
-                'label' => esc_html__('Select Type', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Select Type', 'image-hover-effects-ultimate'),
                 'type' => Controls::SELECT,
                 'default' => 'image',
                 'loader' => true,
                 'options' => [
-                    'image' => __('Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'video' => __('Video', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'image' => esc_html__('Image', 'image-hover-effects-ultimate'),
+                    'video' => esc_html__('Video', 'image-hover-effects-ultimate'),
                 ],
                     ]
             );
             $this->add_group_control(
                     'oxi_image_light_box_image', $this->style, [
-                'label' => esc_html__('Media Type', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Media Type', 'image-hover-effects-ultimate'),
                 'type' => Controls::MEDIA,
                 'default' => [
                     'type' => 'media-library',
@@ -180,7 +180,7 @@ class Effects2 extends Modules {
             );
             $this->add_control(
                     'oxi_image_light_box_video', $this->style, [
-                'label' => esc_html__('Youtube Link', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'label' => esc_html__('Youtube Link', 'image-hover-effects-ultimate'),
                 'type' => Controls::TEXT,
                 'placeholder' => 'https://www.youtube.com/watch?v=sEWx6H8gZH8',
                 'default' => 'https://www.youtube.com/watch?v=sEWx6H8gZH8',
