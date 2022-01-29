@@ -259,27 +259,30 @@ class Effects3 extends Modules {
     }
 
     public function modal_form_data() {
-        echo '<div class="modal-header">
-                    <h4 class="modal-title">Image Hover Form</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">';
+        ?>
+        <div class="modal-header">
+            <h4 class="modal-title">Image Hover Form</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <?php
+            $this->add_group_control(
+                    'oxi_image_accordion_image',
+                    $this->style,
+                    [
+                        'label' => __('URL', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'type' => Controls::MEDIA,
+                        'default' => [
+                            'type' => 'media-library',
+                            'link' => '',
+                        ],
+                        'description' => 'Add or Update Your Comparison Image.',
+                    ]
+            );
+            ?>
+        </div>
+            <?php
+        }
 
-        $this->add_group_control(
-                'oxi_image_accordion_image',
-                $this->style,
-                [
-                    'label' => __('URL', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'type' => Controls::MEDIA,
-                    'default' => [
-                        'type' => 'media-library',
-                        'link' => '',
-                    ],
-                    'description' => 'Add or Update Your Comparison Image.',
-                ]
-        );
-
-        echo '</div>';
     }
-
-}
+    

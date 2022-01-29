@@ -21,38 +21,41 @@ class Effects3 extends Public_Render {
     }
 
     public function render() {
-        $arrow = '';
+
         $style = $this->style;
-        $prev = $this->font_awesome_render($style['carousel_left_arrow']);
-        $next = $this->font_awesome_render($style['carousel_right_arrow']);
-
-        if (array_key_exists('carousel_show_arrows', $style) && $style['carousel_show_arrows'] == 'yes') {
-            $arrow = '
-                <div class="swiper-button-next  oxi_carousel_arrows  oxi_carousel_next oxi_carousel_next_' . $this->oxiid . '">
-                    ' . $next . '
-                </div>
-                <div class="swiper-button-prev oxi_carousel_arrows oxi_carousel_prev oxi_carousel_prev_' . $this->oxiid . '">
-                    ' . $prev . '
-                </div>
-            ';
-        }
-
-        echo '<div class="oxi-addons-container ' . $this->WRAPPER . ' oxi-image-hover-wrapper-' . (array_key_exists('carousel_register_style', $this->style) ? $this->style['carousel_register_style'] : '') . '" id="' . $this->WRAPPER . '">
-                <div class="oxi-addons-row swiper-container oxi-addons-swiper-wrapper">
-                    <div class="swiper-wrapper">';
-        $this->default_render($this->style, $this->child, 'request');
-
-        echo '   
-                    </div>';
-        if ($style['carousel_show_dots'] == 'yes') :
-            echo '<div class="swiper-pagination oxi_carousel_dots oxi_carousel_dots_' . $this->oxiid . '"></div>';
+        ?>
+        <div class="oxi-addons-container <?php echo esc_attr($this->WRAPPER); ?> oxi-image-hover-wrapper-<?php
+        if (array_key_exists('carousel_register_style', $this->style)):
+            echo esc_attr($this->style['carousel_register_style']);
         endif;
-        if ($style['carousel_show_arrows'] == 'yes') {
-            echo $arrow;
-        }
-        echo '
+        ?>" id="<?php echo esc_attr($this->WRAPPER); ?>">
+            <div class="oxi-addons-row swiper-container oxi-addons-swiper-wrapper">
+                <div class="swiper-wrapper">
+                    <?php
+                    $this->default_render($this->style, $this->child, 'request');
+                    ?>
+
+                </div>
+                <?php
+                if ($style['carousel_show_dots'] == 'yes') :
+                    ?>
+                    <div class="swiper-pagination oxi_carousel_dots oxi_carousel_dots_<?php echo (int) $this->oxiid; ?>"></div>
+                    <?php
+                endif;
+                if (array_key_exists('carousel_show_arrows', $style) && $style['carousel_show_arrows'] == 'yes') {
+                    ?>
+                    <div class="swiper-button-next  oxi_carousel_arrows  oxi_carousel_next oxi_carousel_next_<?php echo (int) $this->oxiid; ?>">
+                        <?php $this->font_awesome_render($style['carousel_right_arrow']); ?>
                     </div>
-              </div>';
+                    <div class="swiper-button-prev oxi_carousel_arrows oxi_carousel_prev oxi_carousel_prev_<?php echo (int) $this->oxiid; ?>">
+                        <?php $this->font_awesome_render($style['carousel_left_arrow']) ?>
+                    </div>
+                    <?php
+                }
+                ?>
+            </div>
+        </div>  
+        <?php
     }
 
     public function public_column_render($col) {
@@ -81,13 +84,17 @@ class Effects3 extends Public_Render {
 
     public function default_render($style, $child, $admin) {
         if (!array_key_exists('carousel_register_style', $style) && $style['carousel_register_style'] < 1) :
-            echo '<p>Kindly Select Image Effects Frist to Extend Carousel.</p>';
+            ?>
+            <p>Kindly Select Image Effects First to Extend Carousel.</p>
+            <?php
             return;
         endif;
         $styledata = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $style['carousel_register_style']), ARRAY_A);
 
         if (!is_array($styledata)) :
-            echo '<p> Style Data not found. Kindly Check Carousel & Slider <a href="https://www.oxilabdemos.com/image-hover/docs/hover-extension/carousel-slider/">Documentation</a>.</p>';
+            ?>
+            <p> Style Data not found. Kindly Check Carousel & Slider <a href="https://www.oxilabdemos.com/image-hover/docs/hover-extension/carousel-slider/">Documentation</a>.</p>
+            <?php
             return;
         endif;
         $files = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d", $style['carousel_register_style']), ARRAY_A);

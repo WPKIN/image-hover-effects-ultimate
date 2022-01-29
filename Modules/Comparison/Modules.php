@@ -526,11 +526,11 @@ class Modules extends Admin_Render {
     }
 
     public function modal_form_data() {
-        echo '<div class="modal-header">
+        ?><div class="modal-header">
                     <h4 class="modal-title">Image Hover Form</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <div class="modal-body">';
+                <div class="modal-body"><?php
 
         $this->start_controls_tabs(
                 'shortcode-addons-start-tabs', [
@@ -656,7 +656,7 @@ class Modules extends Admin_Render {
                     'description' => 'Update Your Comparison Box Hover to Move Options.',
                 ]
         );
-        echo '</div>';
+        ?></div><?php
     }
 
 }

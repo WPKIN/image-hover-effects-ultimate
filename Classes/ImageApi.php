@@ -132,7 +132,7 @@ class ImageApi {
         if (!wp_verify_nonce($wpnonce, 'wp_rest')):
             return new \WP_REST_Request('Invalid URL', 422);
         endif;
-        $this->rawdata = addslashes($request['rawdata']);
+        $this->rawdata = sanitize_post(addslashes($request['rawdata']));
         $this->styleid = (int) $request['styleid'];
         $this->childid = (int) $request['childid'];
         $action_class = strtolower($request->get_method()) . '_' . sanitize_key($request['action']);
@@ -244,6 +244,8 @@ class ImageApi {
         endif;
         if (is_array($arrfiles)):
             $rawdata = array_map(array($this, 'allowed_html'), $arrfiles);
+        elseif(empty($data)):
+             $rawdata = $this->allowed_html($this->rawdata);
         else:
             $rawdata = $this->allowed_html($data);
         endif;
@@ -381,7 +383,7 @@ class ImageApi {
             $this->send_file_headers($filename, strlen($finalfiles));
             @ob_end_clean();
             flush();
-            echo $finalfiles;
+            $finalfiles;
             die;
         else :
             return 'Silence is Golden';
@@ -421,6 +423,8 @@ class ImageApi {
         $rawdata = $this->validate_post();
         $id = $rawdata . '-' . (int) $this->styleid;
         $effects = $rawdata . '-ultimate';
+       
+        
         if ($this->styleid > 0) :
             $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->import_table} (type, name) VALUES (%s, %s)", array($effects, $id)));
             return admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$rawdata#" . $id);
@@ -741,7 +745,7 @@ class ImageApi {
             if (is_wp_error($response)) {
                 $message = $response->get_error_message();
             } else {
-                $message = __('An error occurred, please try again.');
+                $message = esc_html('An error occurred, please try again.');
             }
         } else {
             $license_data = json_decode(wp_remote_retrieve_body($response));
@@ -750,43 +754,34 @@ class ImageApi {
 
                 switch ($license_data->error) {
 
-                    case 'expired':
-
-                        $message = sprintf(
-                                __('Your license key expired on %s.'),
-                                date_i18n(get_option('date_format'), strtotime($license_data->expires, current_time('timestamp')))
-                        );
-                        break;
+                   
 
                     case 'revoked':
 
-                        $message = __('Your license key has been disabled.');
+                        $message = esc_html('Your license key has been disabled.');
                         break;
 
                     case 'missing':
 
-                        $message = __('Invalid license.');
+                        $message = esc_html('Invalid license.');
                         break;
 
                     case 'invalid':
                     case 'site_inactive':
 
-                        $message = __('Your license is not active for this URL.');
+                        $message = esc_html('Your license is not active for this URL.');
                         break;
 
-                    case 'item_name_mismatch':
-
-                        $message = sprintf(__('This appears to be an invalid license key for %s.'), OXI_IMAGE_HOVER_TEXTDOMAIN);
-                        break;
+                  
 
                     case 'no_activations_left':
 
-                        $message = __('Your license key has reached its activation limit.');
+                        $message = esc_html('Your license key has reached its activation limit.');
                         break;
 
                     default:
 
-                        $message = __('An error occurred, please try again.');
+                        $message = esc_html('An error occurred, please try again.');
                         break;
                 }
             }
@@ -812,7 +807,7 @@ class ImageApi {
             if (is_wp_error($response)) {
                 $message = $response->get_error_message();
             } else {
-                $message = __('An error occurred, please try again.');
+                $message = esc_html('An error occurred, please try again.');
             }
             return $message;
         }

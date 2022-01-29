@@ -1,14 +1,3 @@
-/*
- * Multiple Before and After Comparer v.1
- *
- * Authored by Jan Duldulao
- *
- *
- * Copyright 2017, Jan Duldulao
- * License: GNU General Public License, version 3 (GPL-3.0)
- * http://www.opensource.org/licenses/gpl-3.0.html
- *
- */
 
 ;
 (function ($) {

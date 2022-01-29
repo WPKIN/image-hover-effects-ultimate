@@ -1,31 +1,18 @@
-/*! Magnific Popup - v1.1.0 - 2016-02-20
- * http://dimsemenov.com/plugins/magnific-popup/
- * Copyright (c) 2016 Dmitry Semenov; */
 ;
 (function (factory) {
     if (typeof define === 'function' && define.amd) {
-        // AMD. Register as an anonymous module. 
+
         define(['jquery'], factory);
     } else if (typeof exports === 'object') {
-        // Node/CommonJS 
+
         factory(require('jquery'));
     } else {
-        // Browser globals 
+
         factory(window.jQuery || window.Zepto);
     }
 }(function ($) {
 
-    /*>>core*/
-    /**
-     * 
-     * Magnific Popup Core JS file
-     * 
-     */
 
-
-    /**
-     * Private static constants
-     */
     var CLOSE_EVENT = 'Close',
             BEFORE_CLOSE_EVENT = 'BeforeClose',
             AFTER_CLOSE_EVENT = 'AfterClose',
@@ -40,11 +27,8 @@
             PREVENT_CLOSE_CLASS = 'Oximfp-prevent-close';
 
 
-    /**
-     * Private vars 
-     */
-    /*jshint -W079 */
-    var Oximfp, // As we have only one instance of OxiMagnificPopup object, we define it locally to not to use 'this'
+
+    var Oximfp,
             OxiMagnificPopup = function () {},
             _isJQ = !!(window.jQuery),
             _prevStatus,
@@ -55,9 +39,7 @@
             _currPopupType;
 
 
-    /**
-     * Private functions
-     */
+
     var _OximfpOn = function (name, f) {
         Oximfp.ev.on(NS + name + EVENT_NS, f);
     },
@@ -81,7 +63,7 @@
                 Oximfp.ev.triggerHandler(NS + e, data);
 
                 if (Oximfp.st.callbacks) {
-                    // converts "OximfpEventName" to "eventName" callback and triggers it if it's present
+
                     e = e.charAt(0).toLowerCase() + e.slice(1);
                     if (Oximfp.st.callbacks[e]) {
                         Oximfp.st.callbacks[e].apply(Oximfp, $.isArray(data) ? data : [data]);
@@ -95,19 +77,17 @@
                 }
                 return Oximfp.currTemplate.closeBtn;
             },
-            // Initialize Magnific Popup only when called at least once
             _checkInstance = function () {
                 if (!$.OximagnificPopup.instance) {
-                    /*jshint -W020 */
+
                     Oximfp = new OxiMagnificPopup();
                     Oximfp.init();
                     $.OximagnificPopup.instance = Oximfp;
                 }
             },
-            // CSS transition detection, http://stackoverflow.com/questions/7264899/detect-css-transitions-using-javascript-and-without-modernizr
             supportsTransitions = function () {
-                var s = document.createElement('p').style, // 's' for style. better to create an element if body yet to exist
-                        v = ['ms', 'O', 'Moz', 'Webkit']; // 'v' for vendor
+                var s = document.createElement('p').style,
+                        v = ['ms', 'O', 'Moz', 'Webkit'];
 
                 if (s['transition'] !== undefined) {
                     return true;
@@ -124,17 +104,11 @@
 
 
 
-    /**
-     * Public functions
-     */
+
     OxiMagnificPopup.prototype = {
 
         constructor: OxiMagnificPopup,
 
-        /**
-         * Initializes Magnific Popup plugin. 
-         * This function is triggered only once when $.fn.OximagnificPopup or $.OximagnificPopup is executed
-         */
         init: function () {
             var appVersion = navigator.appVersion;
             Oximfp.isLowIE = Oximfp.isIE8 = document.all && !document.addEventListener;
@@ -142,24 +116,17 @@
             Oximfp.isIOS = (/iphone|ipad|ipod/gi).test(appVersion);
             Oximfp.supportsTransition = supportsTransitions();
 
-            // We disable fixed positioned lightbox on devices that don't handle it nicely.
-            // If you know a better way of detecting this - let me know.
             Oximfp.probablyMobile = (Oximfp.isAndroid || Oximfp.isIOS || /(Opera Mini)|Kindle|webOS|BlackBerry|(Opera Mobi)|(Windows Phone)|IEMobile/i.test(navigator.userAgent));
             _document = $(document);
 
             Oximfp.popupsCache = {};
         },
 
-        /**
-         * Opens popup
-         * @param  data [description]
-         */
         open: function (data) {
 
             var i;
 
             if (data.isObj === false) {
-                // convert jQuery collection to array to avoid conflicts later
                 Oximfp.items = data.items.toArray();
 
                 Oximfp.index = 0;
@@ -180,7 +147,6 @@
                 Oximfp.index = data.index || 0;
             }
 
-            // if popup is already opened - we just update the content
             if (Oximfp.isOpen) {
                 Oximfp.updateItemHTML();
                 return;
@@ -216,11 +182,9 @@
             }
 
 
-            // Building markup
-            // main containers are created only once
             if (!Oximfp.bgOverlay) {
 
-                // Dark overlay
+
                 Oximfp.bgOverlay = _getEl('bg').on('click' + EVENT_NS, function () {
                     Oximfp.close();
                 });
@@ -240,7 +204,7 @@
             }
 
 
-            // Initializing modules
+
             var modules = $.OximagnificPopup.modules;
             for (i = 0; i < modules.length; i++) {
                 var n = modules[i];
@@ -251,7 +215,7 @@
 
 
             if (Oximfp.st.showCloseBtn) {
-                // Close button
+
                 if (!Oximfp.st.closeBtnInside) {
                     Oximfp.wrap.append(_getCloseBtn());
                 } else {
@@ -290,7 +254,6 @@
 
 
             if (Oximfp.st.enableEscapeKey) {
-                // Close on ESC key
                 _document.on('keyup' + EVENT_NS, function (e) {
                     if (e.keyCode === 27) {
                         Oximfp.close();
@@ -311,7 +274,6 @@
                 Oximfp.wrap.addClass(_wrapClasses);
 
 
-            // this triggers recalculation of layout, so we get it once to not to trigger twice
             var windowHeight = Oximfp.wH = _window.height();
 
 
@@ -330,7 +292,7 @@
                 if (!Oximfp.isIE7) {
                     windowStyles.overflow = 'hidden';
                 } else {
-                    // ie7 double-scroll bug
+
                     $('body, html').css('overflow', 'hidden');
                 }
             }
@@ -345,32 +307,32 @@
                 Oximfp._addClassToMFP(classesToadd);
             }
 
-            // add content
+
             Oximfp.updateItemHTML();
 
             _OximfpTrigger('BuildControls');
 
-            // remove scrollbar, add margin e.t.c
+
             $('html').css(windowStyles);
 
-            // add everything to DOM
+
             Oximfp.bgOverlay.add(Oximfp.wrap).prependTo(Oximfp.st.prependTo || $(document.body));
 
-            // Save last focused element
+
             Oximfp._lastFocusedEl = document.activeElement;
 
-            // Wait for next cycle to allow CSS transition
+
             setTimeout(function () {
 
                 if (Oximfp.content) {
                     Oximfp._addClassToMFP(READY_CLASS);
                     Oximfp._setFocus();
                 } else {
-                    // if content is not defined (not loaded e.t.c) we add class only for BG
+
                     Oximfp.bgOverlay.addClass(READY_CLASS);
                 }
 
-                // Trap the focus in popup
+
                 _document.on('focusin' + EVENT_NS, Oximfp._onFocusIn);
 
             }, 16);
@@ -382,16 +344,13 @@
             return data;
         },
 
-        /**
-         * Closes the popup
-         */
         close: function () {
             if (!Oximfp.isOpen)
                 return;
             _OximfpTrigger(BEFORE_CLOSE_EVENT);
 
             Oximfp.isOpen = false;
-            // for CSS3 animation
+
             if (Oximfp.st.removalDelay && !Oximfp.isLowIE && Oximfp.supportsTransition) {
                 Oximfp._addClassToMFP(REMOVING_CLASS);
                 setTimeout(function () {
@@ -402,9 +361,6 @@
             }
         },
 
-        /**
-         * Helper for close() function
-         */
         _close: function () {
             _OximfpTrigger(CLOSE_EVENT);
 
@@ -433,12 +389,12 @@
             _document.off('keyup' + EVENT_NS + ' focusin' + EVENT_NS);
             Oximfp.ev.off(EVENT_NS);
 
-            // clean up DOM elements that aren't removed
+
             Oximfp.wrap.attr('class', 'Oximfp-wrap').removeAttr('style');
             Oximfp.bgOverlay.attr('class', 'Oximfp-bg');
             Oximfp.container.attr('class', 'Oximfp-container');
 
-            // remove close button from target element
+
             if (Oximfp.st.showCloseBtn &&
                     (!Oximfp.st.closeBtnInside || Oximfp.currTemplate[Oximfp.currItem.type] === true)) {
                 if (Oximfp.currTemplate.closeBtn)
@@ -447,7 +403,7 @@
 
 
             if (Oximfp.st.autoFocusLast && Oximfp._lastFocusedEl) {
-                $(Oximfp._lastFocusedEl).focus(); // put tab focus back
+                $(Oximfp._lastFocusedEl).focus(); 
             }
             Oximfp.currItem = null;
             Oximfp.content = null;
@@ -460,7 +416,7 @@
         updateSize: function (winHeight) {
 
             if (Oximfp.isIOS) {
-                // fixes iOS nav bars https://github.com/dimsemenov/Magnific-Popup/issues/2
+
                 var zoomLevel = document.documentElement.clientWidth / window.innerWidth;
                 var height = window.innerHeight * zoomLevel;
                 Oximfp.wrap.css('height', height);
@@ -468,7 +424,7 @@
             } else {
                 Oximfp.wH = winHeight || _window.height();
             }
-            // Fixes #84: popup incorrectly positioned with position:relative on body
+
             if (!Oximfp.fixedContentPos) {
                 Oximfp.wrap.css('height', Oximfp.wH);
             }
@@ -477,13 +433,10 @@
 
         },
 
-        /**
-         * Set content of popup based on current index
-         */
         updateItemHTML: function () {
             var item = Oximfp.items[Oximfp.index];
 
-            // Detach and perform modifications
+
             Oximfp.contentContainer.detach();
 
             if (Oximfp.content)
@@ -496,21 +449,19 @@
             var type = item.type;
 
             _OximfpTrigger('BeforeChange', [Oximfp.currItem ? Oximfp.currItem.type : '', type]);
-            // BeforeChange event works like so:
-            // _OximfpOn('BeforeChange', function(e, prevType, newType) { });
 
             Oximfp.currItem = item;
 
             if (!Oximfp.currTemplate[type]) {
                 var markup = Oximfp.st[type] ? Oximfp.st[type].markup : false;
 
-                // allows to modify markup
+
                 _OximfpTrigger('FirstMarkupParse', markup);
 
                 if (markup) {
                     Oximfp.currTemplate[type] = $(markup);
                 } else {
-                    // if there is no markup found we just define that template is parsed
+
                     Oximfp.currTemplate[type] = true;
                 }
             }
@@ -527,22 +478,19 @@
             _OximfpTrigger(CHANGE_EVENT, item);
             _prevContentType = item.type;
 
-            // Append container back after its content changed
+
             Oximfp.container.prepend(Oximfp.contentContainer);
 
             _OximfpTrigger('AfterChange');
         },
 
-        /**
-         * Set HTML content of popup
-         */
         appendContent: function (newContent, type) {
             Oximfp.content = newContent;
 
             if (newContent) {
                 if (Oximfp.st.showCloseBtn && Oximfp.st.closeBtnInside &&
                         Oximfp.currTemplate[type] === true) {
-                    // if there is no markup, we just append close button element inside
+                   
                     if (!Oximfp.content.find('.Oximfp-close').length) {
                         Oximfp.content.append(_getCloseBtn());
                     }
@@ -559,10 +507,6 @@
             Oximfp.contentContainer.append(Oximfp.content);
         },
 
-        /**
-         * Creates Magnific Popup data object based on given data
-         * @param  {int} index Index of item to parse
-         */
         parseEl: function (index) {
             var item = Oximfp.items[index],
                     type;
@@ -577,7 +521,6 @@
             if (item.el) {
                 var types = Oximfp.types;
 
-                // check for 'Oximfp-TYPE' class
                 for (var i = 0; i < types.length; i++) {
                     if (item.el.hasClass('Oximfp-' + types[i])) {
                         type = types[i];
@@ -600,9 +543,6 @@
             return Oximfp.items[index];
         },
 
-        /**
-         * Initializes single popup or a group of popups
-         */
         addGroup: function (el, options) {
             var eHandler = function (e) {
                 e.OximfpEl = this;
@@ -644,7 +584,7 @@
                     if (!disableOn.call(Oximfp)) {
                         return true;
                     }
-                } else { // else it's number
+                } else {
                     if (_window.width() < disableOn) {
                         return true;
                     }
@@ -654,7 +594,6 @@
             if (e.type) {
                 e.preventDefault();
 
-                // This will prevent popup from closing if element is inside and popup is already opened
                 if (Oximfp.isOpen) {
                     e.stopPropagation();
                 }
@@ -667,9 +606,6 @@
             Oximfp.open(options);
         },
 
-        /**
-         * Updates text on preloader
-         */
         updateStatus: function (status, text) {
 
             if (Oximfp.preloader) {
@@ -685,7 +621,7 @@
                     status: status,
                     text: text
                 };
-                // allows to modify status
+
                 _OximfpTrigger('UpdateStatus', data);
 
                 status = data.status;
@@ -702,11 +638,6 @@
             }
         },
 
-        /*
-         "Private" helpers that aren't private at all
-         */
-        // Check to close popup or not
-        // "target" is an element that was clicked
         _checkIfClose: function (target) {
 
             if ($(target).hasClass(PREVENT_CLOSE_CLASS)) {
@@ -720,15 +651,14 @@
                 return true;
             } else {
 
-                // We close the popup if click is on close button or on preloader. Or if there is no content.
                 if (!Oximfp.content || $(target).hasClass('Oximfp-close') || (Oximfp.preloader && target === Oximfp.preloader[0])) {
                     return true;
                 }
 
-                // if click is outside the content
+
                 if ((target !== Oximfp.content[0] && !$.contains(Oximfp.content[0], target))) {
                     if (closeOnBg) {
-                        // last check, if the clicked element is in DOM, (in case it's removed onclick)
+                       
                         if ($.contains(document, target)) {
                             return true;
                         }
@@ -799,7 +729,7 @@
         },
 
         _getScrollbarSize: function () {
-            // thx David
+
             if (Oximfp.scrollbarSize === undefined) {
                 var scrollDiv = document.createElement("div");
                 scrollDiv.style.cssText = 'width: 99px; height: 99px; overflow: scroll; position: absolute; top: -9999px;';
@@ -810,14 +740,11 @@
             return Oximfp.scrollbarSize;
         }
 
-    }; /* OxiMagnificPopup core prototype end */
+    };
 
 
 
 
-    /**
-     * Public static functions
-     */
     $.OximagnificPopup = {
         instance: null,
         proto: OxiMagnificPopup.prototype,
@@ -851,9 +778,6 @@
 
         defaults: {
 
-            // Info about options is in docs:
-            // http://dimsemenov.com/plugins/magnific-popup/documentation.html#options
-
             disableOn: 0,
 
             key: null,
@@ -864,7 +788,7 @@
 
             preloader: true,
 
-            focus: '', // CSS selector of input to focus after popup is opened
+            focus: '',
 
             closeOnContentClick: false,
 
@@ -908,7 +832,6 @@
 
         var jqEl = $(this);
 
-        // We call some API method of first param is a string
         if (typeof options === "string") {
 
             if (options === 'open') {
@@ -932,14 +855,10 @@
             }
 
         } else {
-            // clone options obj
+
             options = $.extend(true, {}, options);
 
-            /*
-             * As Zepto doesn't support .data() method for objects
-             * and it works only in normal browsers
-             * we assign "options" object directly to the DOM element. FTW!
-             */
+
             if (_isJQ) {
                 jqEl.data('OximagnificPopup', options);
             } else {
@@ -952,9 +871,7 @@
         return jqEl;
     };
 
-    /*>>core*/
 
-    /*>>inline*/
 
     var INLINE_NS = 'inline',
             _hiddenClass,
@@ -969,7 +886,7 @@
 
     $.OximagnificPopup.registerModule(INLINE_NS, {
         options: {
-            hiddenClass: 'hide', // will be appended with `Oximfp-` prefix
+            hiddenClass: 'hide', 
             markup: '',
             tNotFound: 'Content not found'
         },
@@ -993,7 +910,6 @@
 
                     if (el.length) {
 
-                        // If target element has parent - we replace it with placeholder and put it back after popup is closed
                         var parent = el[0].parentNode;
                         if (parent && parent.tagName) {
                             if (!_inlinePlaceholder) {
@@ -1001,7 +917,7 @@
                                 _inlinePlaceholder = _getEl(_hiddenClass);
                                 _hiddenClass = 'Oximfp-' + _hiddenClass;
                             }
-                            // replace target inline element with placeholder
+
                             _lastInlineElement = el.after(_inlinePlaceholder).detach().removeClass(_hiddenClass);
                         }
 
@@ -1022,9 +938,7 @@
         }
     });
 
-    /*>>inline*/
 
-    /*>>ajax*/
     var AJAX_NS = 'ajax',
             _ajaxCur,
             _removeAjaxCursor = function () {
@@ -1103,9 +1017,7 @@
         }
     });
 
-    /*>>ajax*/
 
-    /*>>image*/
     var _imgInterval,
             _getTitle = function (item) {
                 if (item.data && item.data.title !== undefined)
@@ -1176,7 +1088,6 @@
 
                 if (Oximfp.st.image.verticalFit) {
                     var decr = 0;
-                    // fix box-sizing in ie7/8
                     if (Oximfp.isLowIE) {
                         decr = parseInt(item.img.css('padding-top'), 10) + parseInt(item.img.css('padding-bottom'), 10);
                     }
@@ -1206,9 +1117,6 @@
                 }
             },
 
-            /**
-             * Function that loops until the image has size to display elements that rely on it asap
-             */
             findImageSize: function (item) {
 
                 var counter = 0,
@@ -1218,7 +1126,6 @@
                             if (_imgInterval) {
                                 clearInterval(_imgInterval);
                             }
-                            // decelerating interval that checks for size of an image
                             _imgInterval = setInterval(function () {
                                 if (img.naturalWidth > 0) {
                                     Oximfp._onImageHasSize(item);
@@ -1246,7 +1153,6 @@
             getImage: function (item, template) {
 
                 var guard = 0,
-                        // image load complete handler
                         onLoadComplete = function () {
                             if (item) {
                                 if (item.img[0].complete) {
@@ -1264,7 +1170,6 @@
                                     _OximfpTrigger('ImageLoadComplete');
 
                                 } else {
-                                    // if image complete check fails 200 times (20 sec), we assume that there was an error.
                                     guard++;
                                     if (guard < 200) {
                                         setTimeout(onLoadComplete, 100);
@@ -1274,7 +1179,6 @@
                                 }
                             }
                         },
-                        // image error handler
                         onLoadError = function () {
                             if (item) {
                                 item.img.off('.Oximfploader');
@@ -1301,8 +1205,6 @@
                     item.img = $(img).on('load.Oximfploader', onLoadComplete).on('error.Oximfploader', onLoadError);
                     img.src = item.src;
 
-                    // without clone() "error" event is not firing when IMG is replaced by new IMG
-                    // TODO: find a way to avoid such cloning
                     if (el.is('img')) {
                         item.img = item.img.clone();
                     }
@@ -1350,9 +1252,7 @@
         }
     });
 
-    /*>>image*/
 
-    /*>>zoom*/
     var hasMozTransform,
             getHasMozTransform = function () {
                 if (hasMozTransform === undefined) {
@@ -1413,7 +1313,6 @@
                         clearTimeout(openTimeout);
                         Oximfp.content.css('visibility', 'hidden');
 
-                        // Basically, all code below does is clones existing image, puts in on top of the current one and animated it
 
                         image = Oximfp._getItemToZoom();
 
@@ -1438,14 +1337,14 @@
                                     animatedImg.remove();
                                     image = animatedImg = null;
                                     _OximfpTrigger('ZoomAnimationEnded');
-                                }, 16); // avoid blink when switching images
+                                }, 16);
 
-                            }, duration); // this timeout equals animation duration
+                            }, duration);
 
-                        }, 16); // by adding this timeout we avoid short glitch at the beginning of animation
+                        }, 16);
 
 
-                        // Lots of timeouts...
+
                     }
                 });
                 _OximfpOn(BEFORE_CLOSE_EVENT + ns, function () {
@@ -1497,7 +1396,6 @@
                 }
             },
 
-            // Get element postion relative to viewport
             _getOffset: function (isLarge) {
                 var el;
                 if (isLarge) {
@@ -1512,18 +1410,14 @@
                 offset.top -= ($(window).scrollTop() - paddingTop);
 
 
-                /*
-                 
-                 Animating left + top + width/height looks glitchy in Firefox, but perfect in Chrome. And vice-versa.
-                 
-                 */
+
                 var obj = {
                     width: el.width(),
-                    // fix Zepto height+padding issue
+                    
                     height: (_isJQ ? el.innerHeight() : el[0].offsetHeight) - paddingBottom - paddingTop
                 };
 
-                // I hate to do this, but there is no another option
+
                 if (getHasMozTransform()) {
                     obj['-moz-transform'] = obj['transform'] = 'translate(' + offset.left + 'px,' + offset.top + 'px)';
                 } else {
@@ -1538,9 +1432,7 @@
 
 
 
-    /*>>zoom*/
 
-    /*>>iframe*/
 
     var IFRAME_NS = 'iframe',
             _emptyPage = '//about:blank',
@@ -1548,12 +1440,12 @@
                 if (Oximfp.currTemplate[IFRAME_NS]) {
                     var el = Oximfp.currTemplate[IFRAME_NS].find('iframe');
                     if (el.length) {
-                        // reset src after the popup is closed to avoid "video keeps playing after popup is closed" bug
+
                         if (!isShowing) {
                             el[0].src = _emptyPage;
                         }
 
-                        // IE8 black screen bug fix
+
                         if (Oximfp.isIE8) {
                             el.css('display', isShowing ? 'block' : 'none');
                         }
@@ -1571,7 +1463,6 @@
 
             srcAction: 'iframe_src',
 
-            // we don't care and support only one default type of URL by default
             patterns: {
                 youtube: {
                     index: 'youtube.com',
@@ -1597,13 +1488,11 @@
                 _OximfpOn('BeforeChange', function (e, prevType, newType) {
                     if (prevType !== newType) {
                         if (prevType === IFRAME_NS) {
-                            _fixIframeBugs(); // iframe if removed
+                            _fixIframeBugs();
                         } else if (newType === IFRAME_NS) {
-                            _fixIframeBugs(true); // iframe is showing
+                            _fixIframeBugs(true);
                         }
-                    }// else {
-                    // iframe source is switched, don't do anything
-                    //}
+                    }
                 });
 
                 _OximfpOn(CLOSE_EVENT + '.' + IFRAME_NS, function () {
@@ -1625,7 +1514,7 @@
                             }
                         }
                         embedSrc = this.src.replace('%id%', embedSrc);
-                        return false; // break;
+                        return false;
                     }
                 });
 
@@ -1644,12 +1533,7 @@
 
 
 
-    /*>>iframe*/
 
-    /*>>gallery*/
-    /**
-     * Get looped index depending on number of slides
-     */
     var _getLoopedId = function (index) {
         var numSlides = Oximfp.items.length;
         if (index > numSlides - 1) {
@@ -1683,7 +1567,7 @@
                 var gSt = Oximfp.st.gallery,
                         ns = '.Oximfp-gallery';
 
-                Oximfp.direction = true; // true - next, false - prev
+                Oximfp.direction = true;
 
                 if (!gSt || !gSt.enabled)
                     return false;
@@ -1814,9 +1698,7 @@
         }
     });
 
-    /*>>gallery*/
 
-    /*>>retina*/
 
     var RETINA_NS = 'retina';
 
@@ -1827,7 +1709,7 @@
                     return '@2x' + m;
                 });
             },
-            ratio: 1 // Function or number.  Set to 1 to disable.
+            ratio: 1
         },
         proto: {
             initRetina: function () {
@@ -1855,6 +1737,6 @@
         }
     });
 
-    /*>>retina*/
+
     _checkInstance();
 }));

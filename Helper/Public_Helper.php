@@ -21,12 +21,12 @@ trait Public_Helper {
         $data = str_replace('_', ' ', $data);
         $data = str_replace('-', ' ', $data);
         $data = str_replace('+', ' ', $data);
-        return ucwords($data);
+        return esc_html(ucwords($data));
     }
 
     public function effects_converter($data) {
         $data = explode('-', $data);
-        return $data[0];
+        return esc_html($data[0]);
     }
 
     public function html_special_charecter($data) {
@@ -52,7 +52,7 @@ trait Public_Helper {
         if ($fadata != 'no') {
             wp_enqueue_style('font-awesome-' . $faversion[0], $faversion[1]);
         }
-        $files = '<i class="' . $data . ' oxi-icons"></i>';
+        $files = '<i class="' . esc_attr($data) . ' oxi-icons"></i>';
         return $files;
     }
 

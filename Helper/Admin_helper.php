@@ -42,32 +42,29 @@ trait Admin_helper {
             }
         </style>
         <?php
-
     }
 
     public function Image_Parent() {
-        $effects = (!empty($_GET['effects']) ? ucfirst($this->validate_post($_GET['effects'])) : '');
+        $effects = (!empty($_GET['effects']) ? ucfirst(sanitize_text_field($_GET['effects'])) : '');
         $styleid = (!empty($_GET['styleid']) ? (int) $_GET['styleid'] : '');
         if (!empty($effects) && !empty($styleid)) :
             $style = $this->wpdb->get_row($this->wpdb->prepare('SELECT style_name FROM ' . $this->parent_table . ' WHERE id = %d ', $styleid), ARRAY_A);
             $name = explode('-', $style['style_name']);
             if ($effects != ucfirst($name[0])) :
-                $url = admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$name[0]&styleid=$styleid");
-                echo '<script type="text/javascript"> document.location.href="' . $url . '"; </script>';
-                exit;
+                wp_die(esc_html('Invalid URL.'));
             endif;
             $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $effects . '\Admin\\Effects' . $name[1];
             if (class_exists($cls)) :
                 new $cls();
             else:
-                wp_die(__('Invalid URL.'));
+                wp_die(esc_html('Invalid URL.'));
             endif;
         elseif (!empty($effects)) :
             $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $effects . '\\' . $effects . '';
             if (class_exists($cls)) :
                 new $cls();
             else:
-                wp_die(__('Invalid URL.'));
+                wp_die(esc_html('Invalid URL.'));
             endif;
         else :
             new \OXI_IMAGE_HOVER_PLUGINS\Page\Admin();
@@ -93,22 +90,32 @@ trait Admin_helper {
     }
 
     public function SupportAndComments($agr) {
-        echo '  <div class="oxi-addons-admin-notifications">
-                    <h3>
-                        <span class="dashicons dashicons-flag"></span>
-                        Notifications
-                    </h3>
+        ?>
+
+        <div class="oxi-addons-admin-notifications">
+            <h3>
+                <span class="dashicons dashicons-flag"></span>
+                Notifications
+            </h3>
+            <p></p>
+            <div class="oxi-addons-admin-notifications-holder">
+                <div class="oxi-addons-admin-notifications-alert">
+                    <p>Got any Trouble to create layouts or Design? I Just wanted to see if you have any questions or concerns about my plugins. If you do, Please do not hesitate to <a href="https://wordpress.org/support/plugin/image-hover-effects-ultimate#new-post">file a bug report</a>. </p>
+                    <?php
+                    if (apply_filters('oxi-image-hover-plugin-version', false) != true):
+                        ?>
+                        <p>By the way, did you know we also have a <a href="https://www.oxilabdemos.com/image-hover/pricing/">Premium Version</a>? It offers lots of options with automatic update. It also comes with 16/5 personal support.</p>
+                        <?php
+                    endif;
+                    ?>
+                    <p>Thanks Again!</p>
                     <p></p>
-                    <div class="oxi-addons-admin-notifications-holder">
-                        <div class="oxi-addons-admin-notifications-alert">
-                            <p>Got any Trouble to create layouts or Design? I Just wanted to see if you have any questions or concerns about my plugins. If you do, Please do not hesitate to <a href="https://wordpress.org/support/plugin/image-hover-effects-ultimate#new-post">file a bug report</a>. </p>
-                            ' . (apply_filters('oxi-image-hover-plugin-version', false) ? '' : '<p>By the way, did you know we also have a <a href="https://www.oxilabdemos.com/image-hover/pricing/">Premium Version</a>? It offers lots of options with automatic update. It also comes with 16/5 personal support.</p>') . '
-                            <p>Thanks Again!</p>
-                            <p></p>
-                        </div>
-                    </div>
-                    <p></p>
-                </div>';
+                </div>
+            </div>
+            <p></p>
+        </div>
+
+        <?php
     }
 
     /**
@@ -133,47 +140,62 @@ trait Admin_helper {
         ];
 
         $bgimage = OXI_IMAGE_HOVER_URL . 'image/sm-logo.png';
-        $sub = '';
+        ?>
 
-        $menu = '<div class="oxi-addons-wrapper">
-                    <div class="oxilab-new-admin-menu">
-                        <div class="oxi-site-logo">
-                            <a href="' . esc_url($this->admin_url_convert('oxi-image-hover-ultimate')) . '" class="header-logo" style=" background-image: url(' . esc_url($bgimage) . ');">
-                            </a>
-                        </div>
-                        <nav class="oxilab-sa-admin-nav">
-                            <ul class="oxilab-sa-admin-menu">';
 
-        $GETPage = $this->validate_post($_GET['page']);
-        $effects = (!empty($_GET['effects']) ? $this->validate_post($_GET['effects']) : '');
-        if ($effects != '' && $GETPage == 'oxi-image-hover-ultimate') :
-            $menu .= '<li class="active" >
-                            <a href="' . esc_url($this->admin_url_convert('oxi-image-hover-ultimate')) . '&effects=' . esc_html($effects) . '">';
-            if ($effects == 'display') :
-                $menu .= 'Display Post';
-            else :
-                $menu .= $this->name_converter(esc_html($effects)) . ' Effects';
-            endif;
-            $menu . '   </a>
-                        </li>';
-
-        endif;
-        foreach ($response as $key => $value) {
-            $active = (($GETPage == $value['homepage'] && $effects == '') ? ' class="active" ' : '');
-            $menu .= '<li ' . $active . '><a href="' . esc_url($this->admin_url_convert($value['homepage'])) . '">' . esc_html($this->name_converter($value['name'])) . '</a></li>';
-        }
-        $menu .= '              </ul>
-                            <ul class="oxilab-sa-admin-menu2">
-                               ' . (apply_filters('oxi-image-hover-plugin-version', false) == FALSE ? ' <li class="fazil-class" ><a target="_blank" href="https://www.oxilabdemos.com/image-hover/pricing/">Upgrade</a></li>' : '') . '
-                               <li class="saadmin-doc"><a target="_black" href="https://www.oxilabdemos.com/image-hover/docs/">Docs</a></li>
-                               <li class="saadmin-doc"><a target="_black" href="https://wordpress.org/support/plugin/image-hover-effects-ultimate/">Support</a></li>
-                               <li class="saadmin-set"><a href="' . admin_url('admin.php?page=oxi-image-hover-ultimate-settings') . '"><span class="dashicons dashicons-admin-generic"></span></a></li>
-                            </ul>
-                        </nav>
-                    </div>
+        <div class="oxi-addons-wrapper">
+            <div class="oxilab-new-admin-menu">
+                <div class="oxi-site-logo">
+                    <a href="' <?php echo esc_url($this->admin_url_convert('oxi-image-hover-ultimate')); ?> '" class="header-logo" style=" background-image: url(<?php echo esc_url($bgimage); ?>);">
+                    </a>
                 </div>
-                ' . $sub;
-        echo __($menu, OXI_IMAGE_HOVER_TEXTDOMAIN);
+                <nav class="oxilab-sa-admin-nav">
+                    <ul class="oxilab-sa-admin-menu">
+                        <?php
+                        $GETPage = $this->validate_post(sanitize_text_field($_GET['page']));
+                        $effects = (!empty($_GET['effects']) ? $this->validate_post(sanitize_text_field($_GET['effects'])) : '');
+                        if ($effects != '' && $GETPage == 'oxi-image-hover-ultimate') :
+                            $url = $this->admin_url_convert('oxi-image-hover-ultimate') . '&effects=' . $effects;
+                            ?>
+
+                            <li class="active" >
+                                <a href="<?php echo esc_url($url); ?>">
+                                    <?php
+                                    if ($effects == 'display') :
+                                        echo 'Display Post';
+                                    else :
+                                        echo esc_html($this->name_converter($effects)) . ' Effects';
+                                    endif;
+                                    ?>
+                                </a>
+                            </li>
+                            <?php
+                        endif;
+                        foreach ($response as $key => $value) {
+                            $active = (($GETPage == $value['homepage'] && $effects == '') ? 'active ' : '');
+                            ?>
+                            <li  class="<?php echo esc_attr($active); ?>"><a href="<?php echo esc_url($this->admin_url_convert($value['homepage'])); ?>"><?php echo esc_html($this->name_converter($value['name'])); ?></a></li>
+                            <?php
+                        }
+                        ?>
+                    </ul>
+                    <ul class="oxilab-sa-admin-menu2">
+
+                        <?php
+                        if (apply_filters('oxi-image-hover-plugin-version', false) == FALSE):
+                            ?>
+                            <li class="fazil-class" ><a target="_blank" href="https://www.oxilabdemos.com/image-hover/pricing/">Upgrade</a></li>
+                            <?php
+                        endif;
+                        ?>
+                        <li class="saadmin-doc"><a target="_black" href="https://www.oxilabdemos.com/image-hover/docs/">Docs</a></li>
+                        <li class="saadmin-doc"><a target="_black" href="https://wordpress.org/support/plugin/image-hover-effects-ultimate/">Support</a></li>
+                        <li class="saadmin-set"><a href="<?php echo esc_url(admin_url('admin.php?page=oxi-image-hover-ultimate-settings')); ?>"><span class="dashicons dashicons-admin-generic"></span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <?php
     }
 
     public function Admin_Menu() {

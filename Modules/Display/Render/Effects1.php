@@ -22,16 +22,26 @@ class Effects1 extends Public_Render {
     }
 
     public function render() {
-        echo '<div class="oxi-addons-container ' . $this->WRAPPER . ' oxi-image-hover-wrapper-' . (array_key_exists('display_post_style', $this->style) ? $this->style['display_post_style'] : '') . '" id="' . $this->WRAPPER . '">
-                 <div class="oxi-addons-row">';
-        $this->default_render($this->style, $this->child, $this->admin);
-        echo '   </div>
-             </div>';
+        ?>
+
+
+        <div class="oxi-addons-container <?php echo esc_attr($this->WRAPPER); ?> oxi-image-hover-wrapper-<?php
+        if (array_key_exists('display_post_style', $this->style)):
+            echo esc_attr($this->style['display_post_style']);
+        endif;
+        ?>" id="<?php echo esc_attr($this->WRAPPER); ?>">
+            <div class="oxi-addons-row">
+                <?php
+                $this->default_render($this->style, $this->child, $this->admin);
+                ?>  
+            </div>
+        </div>
+        <?php
     }
 
     public function default_render($style, $child, $admin) {
         if (!array_key_exists('display_post_style', $style)):
-            echo '<p>Kindly Select Image Effects Frist to Extend Post.</p>';
+            ?><p>Kindly Select Image Effects First to Extend Post.</p><?php
             return;
         endif;
         $args = [
@@ -80,21 +90,23 @@ class Effects1 extends Public_Render {
             'display_post_thumb_sizes' => $style['display_post_thumb_sizes'],
             'display_post_excerpt' => $style['display_post_excerpt'],
         ];
-        ob_start();
+
         new Post_Query('post_query', 'nai', $args, $settings);
-        $oh = ob_get_clean();
-        echo str_replace('Image Hover Empty Data', '', $oh);
+
         if ('yes' == $style['display_post_load_more']) {
             if ($style['display_post_load_more_type'] == 'button'):
-                echo '  <div class="oxi-image-hover-load-more-button-wrap oxi-bt-col-sm-12">
-                            <button class="oxi-image-load-more-button" id="oxi-image-load-more-button' . $this->oxiid . '" data-class="OXI_IMAGE_HOVER_PLUGINS\Modules\Display\Files\Style_1_Post_Query" data-function="__rest_api_post" data-args=\'' . json_encode($args) . '\' data-settings=\'' . json_encode($settings) . '\' data-page="1">
-                                    <div class="oxi-image-hover-loader button__loader"></div>
-                                    <span>' . $style['display_post_load_button_text'] . '</span>
-                            </button>
-                        </div>';
+                ?>
+                <div class="oxi-image-hover-load-more-button-wrap oxi-bt-col-sm-12">
+                    <button class="oxi-image-load-more-button" id="oxi-image-load-more-button<?php echo (int) $this->oxiid; ?>" data-class="OXI_IMAGE_HOVER_PLUGINS\Modules\Display\Files\Style_1_Post_Query" data-function="__rest_api_post" data-args='<?php echo esc_attr(json_encode($args)); ?>' data-settings='<?php echo esc_attr(json_encode($settings)); ?>' data-page="1">
+                        <div class="oxi-image-hover-loader button__loader"></div>
+                        <span><?php echo esc_html($style['display_post_load_button_text']); ?></span>
+                    </button>
+                </div><?php
             else:
-                echo '<div class="oxi-image-hover-load-more-infinite" id="oxi-image-hover-load-more-infinite' . $this->oxiid . '" data-class="OXI_IMAGE_HOVER_PLUGINS\Modules\Display\Files\Style_1_Post_Query" data-function="__rest_api_post" data-args=\'' . json_encode($args) . '\' data-settings=\'' . json_encode($settings) . '\' data-page="1">
-                      </div>';
+                ?>
+                <div class="oxi-image-hover-load-more-infinite" id="oxi-image-hover-load-more-infinite<?php echo (int) $this->oxiid; ?>" data-class="OXI_IMAGE_HOVER_PLUGINS\Modules\Display\Files\Style_1_Post_Query" data-function="__rest_api_post" data-args='<?php echo esc_attr(json_encode($args)); ?>' data-settings='<?php echo esc_attr(json_encode($settings)); ?>' data-page="1">
+                </div>
+            <?php
             endif;
         }
     }

@@ -38,7 +38,8 @@ class Display extends Create {
     }
 
     public function create_new() {
-        echo __('<div class="modal fade" id="oxi-addons-style-create-modal" >
+        ?>
+<div class="modal fade" id="oxi-addons-style-create-modal" >
                         <form method="post" id="oxi-addons-style-modal-form">
                             <div class="modal-dialog modal-sm">
                                 <div class="modal-content">
@@ -72,7 +73,8 @@ class Display extends Create {
                                 </div>
                             </div>
                         </form>
-                    </div>');
+                    </div>
+                    <?php
     }
 
     public function JSON_DATA() {

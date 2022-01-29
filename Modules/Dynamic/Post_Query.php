@@ -64,7 +64,8 @@ class Post_Query {
 
         $child = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d", $dbdata['id']), ARRAY_A);
         if (!is_array($child)):
-            echo '<p>Set Initial Data How to Decorate your Desplay Post. Kindly Check Display Post <a href="https://www.oxilabdemos.com/image-hover/docs/hover-extension/display-post/">Documentation</a>.</p>';
+            ?> <p>Set Initial Data How to Decorate your Display Post. Kindly Check Display Post <a href="https://www.oxilabdemos.com/image-hover/docs/hover-extension/display-post/">Documentation</a>.</p> <?php
+
             return;
         endif;
         $demo = json_decode(stripslashes($child['rawdata']), true);

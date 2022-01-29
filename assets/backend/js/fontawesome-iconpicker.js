@@ -1,12 +1,3 @@
-/*!
- * Font Awesome Icon Picker
- * https://farbelous.github.io/fontawesome-iconpicker/
- *
- * @author Javi Aguilar, itsjavi.com
- * @license MIT License
- * @see https://github.com/farbelous/fontawesome-iconpicker/blob/master/LICENSE
- */
-
 
 (function(e) {
     if (typeof define === "function" && define.amd) {

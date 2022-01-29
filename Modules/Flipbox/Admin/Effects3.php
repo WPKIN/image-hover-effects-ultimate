@@ -404,11 +404,13 @@ class Effects3 extends Modules {
     }
 
     public function modal_form_data() {
-        echo '<div class="modal-header">
+        ?>
+<div class="modal-header">
                     <h4 class="modal-title">Image Hover Form</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <div class="modal-body">';
+                <div class="modal-body">
+        <?php
         $this->add_control(
                 'image_hover_front_heading', $this->style, [
             'label' => __('Front Heading', OXI_IMAGE_HOVER_TEXTDOMAIN),
@@ -484,7 +486,9 @@ class Effects3 extends Modules {
             'description' => 'Customize your button text. Button will only view while Url given'
                 ]
         );
-        echo '</div>';
+        ?>
+        </div>
+        <?php
     }
 
     /**

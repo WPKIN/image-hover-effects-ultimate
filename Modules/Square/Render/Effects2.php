@@ -20,44 +20,68 @@ class Effects2 extends Public_Render {
         foreach ($child as $key => $val) {
             $value = json_decode(stripslashes($val['rawdata']), true);
             $text = $content = $button = $hr = $ht = '';
-            if ($value['image_hover_heading'] != ''):
-                $text = '<div class="oxi-image-hover-figure-heading ' . $this->style['oxi-image-hover-heading-animation'] . ' ' . $this->style['oxi-image-hover-heading-animation-delay'] . '"><h3 class="oxi-image-hover-heading ' . (isset($this->style['oxi-image-hover-heading-underline']) ? $this->style['oxi-image-hover-heading-underline'] : '') . '">' . $this->text_render($value['image_hover_heading']) . '</h3></div>';
+            ?>
+            <div class="oxi-image-hover-style <?php $this->column_render('oxi-image-hover-col', $style); ?> <?php
+            if ($admin == "admin"):
+                echo 'oxi-addons-admin-edit-list';
             endif;
-            if ($value['image_hover_description'] != ''):
-                $content = '<div class="oxi-image-hover-content ' . $this->style['oxi-image-hover-desc-animation'] . ' ' . $this->style['oxi-image-hover-desc-animation-delay'] . '">' . $this->text_render($value['image_hover_description']) . '</div>';
-            endif;
-            if ($value['image_hover_button_text'] != '' && $this->url_render('image_hover_button_link', $value) != ''):
-                $button = '<div class="oxi-image-hover-button ' . $this->style['oxi-image-hover-button-animation'] . ' ' . $this->style['oxi-image-hover-button-animation-delay'] . '">
-                            <a ' . $this->url_render('image_hover_button_link', $value) . ' class="oxi-image-btn">' . $this->text_render($value['image_hover_button_text']) . '</a>
-                        </div>';
-            elseif ($this->url_render('image_hover_button_link', $value) != ''):
-                $hr = '<a ' . $this->url_render('image_hover_button_link', $value) . '>';
-                $ht = '</a>';
-            endif;
-
-            echo '<div class="oxi-image-hover-style ' . $this->column_render('oxi-image-hover-col', $style) . ' ' . ($admin == "admin" ? 'oxi-addons-admin-edit-list' : '') . '" ' . $this->animation_render('oxi-image-hover-animation', $style) . '>';
-            echo '  <div class="oxi-image-hover-style-square">
-                        <div class="oxi-image-hover oxi-image-square-hover oxi-image-square-hover-style-2 oxi-image-square-hover-' . $this->oxiid . '-' . $val['id'] . '">
-                            ' . $hr . '
-                            <div class="oxi-image-hover-figure ' . $this->style['image_hover_effects'] . '">
+            ?>" <?php $this->animation_render('oxi-image-hover-animation', $style); ?>>
+                <div class="oxi-image-hover-style-square">
+                    <div class="oxi-image-hover oxi-image-square-hover oxi-image-square-hover-style-2 oxi-image-square-hover-<?php echo esc_attr($this->oxiid); ?>-<?php echo esc_attr($val['id']); ?>">
+                        <?php
+                        if ($this->checkurl_render('image_hover_button_link', $value) === true && empty($value['image_hover_button_text'])):
+                            $ht = true;
+                            ?>
+                            <a <?php $this->url_render('image_hover_button_link', $value); ?>>
+                                <?php
+                            endif;
+                            ?>
+                            <div class="oxi-image-hover-figure <?php echo esc_attr($this->style['image_hover_effects']); ?>">
                                 <div class="oxi-image-hover-image">
-                                    <img ' . $this->media_render('image_hover_image', $value) . '>
+                                    <img <?php $this->media_render('image_hover_image', $value); ?>>
                                 </div>
                                 <div class="oxi-image-hover-figure-caption">
                                     <div class="oxi-image-hover-caption-tab">
-                                        ' . $text . ' 
-                                        ' . $content . ' 
-                                        ' . $button . '
+                                        <?php
+                                        if ($value['image_hover_heading'] != ''):
+                                            ?>
+                                            <div class="oxi-image-hover-figure-heading <?php echo esc_attr($this->style['oxi-image-hover-heading-animation']); ?> <?php echo esc_attr($this->style['oxi-image-hover-heading-animation-delay']); ?>"><h3 class="oxi-image-hover-heading <?php
+                                                if (isset($this->style['oxi-image-hover-heading-underline'])):
+                                                    echo esc_attr($this->style['oxi-image-hover-heading-underline']);
+                                                endif;
+                                                ?>"><?php $this->text_render($value['image_hover_heading']); ?></h3></div>
+                                                <?php
+                                            endif;
+                                            if ($value['image_hover_description'] != ''):
+                                                ?>
+                                            <div class="oxi-image-hover-content <?php echo esc_attr($this->style['oxi-image-hover-desc-animation']); ?> <?php echo esc_attr($this->style['oxi-image-hover-desc-animation-delay']); ?>"><?php $this->text_render($value['image_hover_description']); ?></div>
+                                            <?php
+                                        endif;
+                                        if ($value['image_hover_button_text'] != '' && $this->checkurl_render('image_hover_button_link', $value) == true):
+                                            ?>
+                                            <div class="oxi-image-hover-button <?php echo esc_attr($this->style['oxi-image-hover-button-animation']); ?> <?php echo esc_attr($this->style['oxi-image-hover-button-animation-delay']); ?>">
+                                                <a <?php $this->url_render('image_hover_button_link', $value); ?> class="oxi-image-btn"><?php $this->text_render($value['image_hover_button_text']); ?></a>
+                                            </div>
+                                            <?php
+                                        endif;
+                                        ?>
                                     </div>
                                 </div>
                             </div>
-                            ' . $ht . '
-                        </div>
-                    </div>';
-            if ($admin == 'admin') :
-                echo $this->oxi_addons_admin_edit_delete_clone($val['id']);
-            endif;
-            echo ' </div>';
+                            <?php
+                            if ($ht === true):
+                                ?>
+                            </a>
+                            <?php
+                        endif;
+                        ?>
+                    </div>
+                </div>
+                <?php
+                if ($admin == 'admin') :
+                    $this->oxi_addons_admin_edit_delete_clone($val['id']);
+                endif;
+                ?> </div><?php
             if ($this->media_background_render('image_hover_feature_image', $value) != ''):
                 $url = $this->media_background_render('image_hover_feature_image', $value);
                 $this->inline_css .= ' .oxi-image-hover-style-square .oxi-image-square-hover-' . $this->oxiid . '-' . $val['id'] . ' .oxi-image-hover-figure-caption:after{background: url(' . $url . ');-moz-background-size: 100% 100% !important;-o-background-size: 100% 100% !important; background-size: 100% 100% !important;}';
@@ -98,7 +122,7 @@ class Effects2 extends Public_Render {
             'oxi-image-hover-width-lap-choices' => 'px',
             'oxi-image-hover-width-lap-size' => $styledata[5],
             'oxi-image-hover-height-lap-choices' => '%',
-            'oxi-image-hover-height-lap-size' => ($styledata[7]/ $styledata[5] *100),
+            'oxi-image-hover-height-lap-size' => ($styledata[7] / $styledata[5] * 100),
             'oxi-image-hover-margin-lap-top' => $styledata[9],
             'oxi-image-hover-margin-lap-right' => $styledata[9],
             'oxi-image-hover-margin-lap-bottom' => $styledata[9],
@@ -187,12 +211,12 @@ class Effects2 extends Public_Render {
             'oxi-image-hover-button-padding-lap-choices' => 'px',
             'oxi-image-hover-button-position' => $this->old_button_alignment_render($styledata[77]),
             ///
-             'oxi-image-hover-button-margin-lap-top' => 0,
+            'oxi-image-hover-button-margin-lap-top' => 0,
             'oxi-image-hover-button-margin-lap-right' => 0,
             'oxi-image-hover-button-margin-lap-bottom' => 0,
             'oxi-image-hover-button-margin-lap-left' => 0,
             'oxi-image-hover-button-margin-lap-choices' => 'px',
-             ///
+            ///
             'image-hover-custom-css' => $styledata[83],
             'image_hover_effects' => $styledata[91],
         ];

@@ -318,74 +318,77 @@ class Effects2 extends Modules {
     }
 
     public function modal_form_data() {
-        echo '<div class="modal-header">
-                    <h4 class="modal-title">Image Hover Form</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">';
-
-        $this->start_controls_tabs(
-                'shortcode-addons-start-tabs', [
-            'options' => [
-                'before' => esc_html__('Before Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'after' => esc_html__('After Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            ],
-                ]
-        );
-        $this->start_controls_tab();
-        $this->add_group_control(
-                'oxi_image_comparison_image_one',
-                $this->style,
-                [
-                    'label' => __('URL', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'type' => Controls::MEDIA,
-                    'default' => [
-                        'type' => 'media-library',
-                        'link' => '',
-                    ],
-                    'description' => 'Update Your Before Image of Comparison Box.',
-                ]
-        );
-        $this->end_controls_tab();
-        $this->start_controls_tab();
-        $this->add_group_control(
-                'oxi_image_comparison_image_two',
-                $this->style,
-                [
-                    'label' => __('URL', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'type' => Controls::MEDIA,
-                    'default' => [
-                        'type' => 'media-library',
-                        'link' => '',
-                    ],
-                    'description' => 'Update Your After Image of Comparison Box.',
-                ]
-        );
-        $this->end_controls_tab();
-        $this->end_controls_tabs();
-
-        $this->add_control(
-                'oxi_image_comparison_body_offset',
-                $this->style,
-                [
-                    'label' => __('Coparison Offset', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'type' => Controls::SLIDER,
-                    'default' => [
-                        'unit' => 'px',
-                        'size' => '50',
-                    ],
-                    'range' => [
-                        'px' => [
-                            'min' => 1,
-                            'max' => 100,
-                            'step' => 1,
+        ?>
+        <div class="modal-header">
+            <h4 class="modal-title">Image Hover Form</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <?php
+            $this->start_controls_tabs(
+                    'shortcode-addons-start-tabs', [
+                'options' => [
+                    'before' => esc_html__('Before Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'after' => esc_html__('After Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                ],
+                    ]
+            );
+            $this->start_controls_tab();
+            $this->add_group_control(
+                    'oxi_image_comparison_image_one',
+                    $this->style,
+                    [
+                        'label' => __('URL', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'type' => Controls::MEDIA,
+                        'default' => [
+                            'type' => 'media-library',
+                            'link' => '',
                         ],
-                    ],
-                    'description' => 'Update Your Before Image Offset of Comparison Box.',
-                ]
-        );
+                        'description' => 'Update Your Before Image of Comparison Box.',
+                    ]
+            );
+            $this->end_controls_tab();
+            $this->start_controls_tab();
+            $this->add_group_control(
+                    'oxi_image_comparison_image_two',
+                    $this->style,
+                    [
+                        'label' => __('URL', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'type' => Controls::MEDIA,
+                        'default' => [
+                            'type' => 'media-library',
+                            'link' => '',
+                        ],
+                        'description' => 'Update Your After Image of Comparison Box.',
+                    ]
+            );
+            $this->end_controls_tab();
+            $this->end_controls_tabs();
 
-        echo '</div>';
+            $this->add_control(
+                    'oxi_image_comparison_body_offset',
+                    $this->style,
+                    [
+                        'label' => __('Coparison Offset', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'type' => Controls::SLIDER,
+                        'default' => [
+                            'unit' => 'px',
+                            'size' => '50',
+                        ],
+                        'range' => [
+                            'px' => [
+                                'min' => 1,
+                                'max' => 100,
+                                'step' => 1,
+                            ],
+                        ],
+                        'description' => 'Update Your Before Image Offset of Comparison Box.',
+                    ]
+            );
+            ?>
+        </div>
+            <?php
+        }
+
     }
-
-}
+    

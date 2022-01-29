@@ -24,6 +24,9 @@ class Support_Recommended {
     public $current_plugins = 'image-hover-effects-ultimate/index.php';
 
     public function __construct() {
+        if (!current_user_can('manage_options')) {
+            return;
+        }
         require_once(ABSPATH . 'wp-admin/includes/screen.php');
         $screen = get_current_screen();
         if (isset($screen->parent_file) && 'plugins.php' === $screen->parent_file && 'update' === $screen->id) {
@@ -90,23 +93,26 @@ class Support_Recommended {
 
         if (count($recommend) > 2 && $recommend['modules-path'] != '') :
             $plugin = explode('/', $recommend['modules-path'])[0];
-            $massage = '<p>Thank you for using our Image Hover Effects Ultimate. ' . $recommend['modules-massage'] . '</p>';
-
             $install_url = wp_nonce_url(add_query_arg(array('action' => 'install-plugin', 'plugin' => $plugin), admin_url('update.php')), 'install-plugin' . '_' . $plugin);
-            echo '<div class="oxi-addons-admin-notifications" style=" width: auto;">
-                        <h3>
-                            <span class="dashicons dashicons-flag"></span>
-                            Notifications
-                        </h3>
-                        <p></p>
-                        <div class="oxi-addons-admin-notifications-holder">
-                            <div class="oxi-addons-admin-notifications-alert">
-                                ' . $massage . '
-                                <p>' . sprintf('<a href="%s" class="button button-large button-primary">%s</a>', $install_url, __('Install Now', OXI_IMAGE_HOVER_TEXTDOMAIN)) . ' &nbsp;&nbsp;<a href="#" class="button button-large button-secondary oxi-image-admin-recommended-dismiss">No, Thanks</a></p>
-                            </div>
-                        </div>
-                        <p></p>
-                    </div>';
+            ?>
+
+
+            <div class="oxi-addons-admin-notifications" style=" width: auto;">
+                <h3>
+                    <span class="dashicons dashicons-flag"></span>
+                    Notifications
+                </h3>
+                <p></p>
+                <div class="oxi-addons-admin-notifications-holder">
+                    <div class="oxi-addons-admin-notifications-alert">
+                        <p>Thank you for using our Image Hover Effects Ultimate. <?php echo esc_html__($recommend['modules-massage'], 'image-hover-effects-ultimate'); ?></p>
+                        <p><a href="<?php echo esc_url($install_url); ?>" class="button button-large button-primary"><?php echo esc_html__('Install Now', 'image-hover-effects-ultimate'); ?></a> &nbsp;&nbsp;<a href="#" class="button button-large button-secondary oxi-image-admin-recommended-dismiss">No, Thanks</a></p>
+                    </div>
+                </div>
+                <p></p>
+            </div>
+
+            <?php
         endif;
     }
 

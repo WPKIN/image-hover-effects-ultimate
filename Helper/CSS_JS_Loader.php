@@ -26,7 +26,6 @@ trait CSS_JS_Loader {
 
     public function admin_js() {
         wp_enqueue_script("jquery");
-        wp_enqueue_script('oxilab-popper', OXI_IMAGE_HOVER_URL . '/assets/backend/js/popper.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         wp_enqueue_script('oxilab-bootstrap', OXI_IMAGE_HOVER_URL . '/assets/backend/js/bootstrap.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         wp_localize_script('oxilab-bootstrap', 'ImageHoverUltimate', array(
             'root' => esc_url_raw(rest_url()),
@@ -60,7 +59,7 @@ trait CSS_JS_Loader {
         wp_enqueue_style('jquery.coloring-pick.min.js', OXI_IMAGE_HOVER_URL . '/assets/backend/css/jquery.coloring-pick.min.js.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         wp_enqueue_script('jquery.coloring-pick.min', OXI_IMAGE_HOVER_URL . '/assets/backend/js/jquery.coloring-pick.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         wp_enqueue_style('jquery.minicolors', OXI_IMAGE_HOVER_URL . '/assets/backend/css/minicolors.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        wp_enqueue_script('jquery.minicolors', OXI_IMAGE_HOVER_URL . '/assets/backend/js/minicolors.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_script('jquery.minicolors', OXI_IMAGE_HOVER_URL . '/assets/backend/js/jquery.minicolors.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         wp_enqueue_style('nouislider', OXI_IMAGE_HOVER_URL . '/assets/backend/css/nouislider.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         wp_enqueue_script('nouislider', OXI_IMAGE_HOVER_URL . '/assets/backend/js/nouislider.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         wp_enqueue_style('fontawesome-iconpicker', OXI_IMAGE_HOVER_URL . '/assets/backend/css/fontawesome-iconpicker.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);

@@ -414,58 +414,61 @@ class Effects22 extends Modules {
     }
 
     public function register_heading_underline() {
-
+        
     }
 
     public function register_description_settings() {
-
+        
     }
 
     public function register_button_settings() {
-
+        
     }
 
     public function modal_form_data() {
-        echo '<div class="modal-header">
-                    <h4 class="modal-title">Image Hover Form</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">';
-        $this->add_control(
-                'image_hover_heading',
-                $this->style,
-                [
-                    'label' => __('Title', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'type' => Controls::TEXT,
-                    'default' => '',
-                    'placeholder' => 'Heading',
-                    'description' => 'Add Your Image Hover Title.'
-                ]
-        );
+        ?>
+        <div class="modal-header">
+            <h4 class="modal-title">Image Hover Form</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <?php
+            $this->add_control(
+                    'image_hover_heading',
+                    $this->style,
+                    [
+                        'label' => __('Title', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'type' => Controls::TEXT,
+                        'default' => '',
+                        'placeholder' => 'Heading',
+                        'description' => 'Add Your Image Hover Title.'
+                    ]
+            );
 
-        $this->add_group_control(
-                'image_hover_image',
-                $this->style,
-                [
-                    'label' => __('Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'type' => Controls::MEDIA,
-                    'description' => 'Add or Modify Your Image. You can use Media Library or Custom URL'
-                ]
-        );
-        $this->add_group_control(
-                'image_hover_button_link',
-                $this->style,
-                [
-                    'label' => __('URL', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'type' => Controls::URL,
-                    'separator' => TRUE,
-                    'default' => '',
-                    'placeholder' => 'https://www.yoururl.com',
-                    'description' => 'Add Your Desire Link or Url Unless make it blank'
-                ]
-        );
-
-        echo '</div>';
+            $this->add_group_control(
+                    'image_hover_image',
+                    $this->style,
+                    [
+                        'label' => __('Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'type' => Controls::MEDIA,
+                        'description' => 'Add or Modify Your Image. You can use Media Library or Custom URL'
+                    ]
+            );
+            $this->add_group_control(
+                    'image_hover_button_link',
+                    $this->style,
+                    [
+                        'label' => __('URL', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'type' => Controls::URL,
+                        'separator' => TRUE,
+                        'default' => '',
+                        'placeholder' => 'https://www.yoururl.com',
+                        'description' => 'Add Your Desire Link or Url Unless make it blank'
+                    ]
+            );
+            ?>
+        </div>
+        <?php
     }
 
 }

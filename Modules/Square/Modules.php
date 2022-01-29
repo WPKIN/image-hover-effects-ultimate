@@ -1418,92 +1418,95 @@ class Modules extends Admin_Render {
     }
 
     public function modal_form_data() {
-        echo '<div class="modal-header">
-                    <h4 class="modal-title">Image Hover Form</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">';
-        $this->add_control(
-                'image_hover_heading',
-                $this->style,
-                [
-                    'label' => __('Title', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'type' => Controls::TEXT,
-                    'default' => '',
-                    'placeholder' => 'Heading',
-                    'description' => 'Add Your Image Hover Title.'
-                ]
-        );
-        $this->add_control(
-                'image_hover_description',
-                $this->style,
-                [
-                    'label' => __('Short Description', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'type' => Controls::TEXTAREA,
-                    'default' => '',
-                    'description' => 'Add Your Description Unless make it blank.'
-                ]
-        );
-
-        $this->start_controls_tabs(
-                'image_hover-start-tabs',
-                [
-                    'options' => [
-                        'frontend' => esc_html__('Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                        'backend' => esc_html__('Feature Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
+        ?>
+        <div class="modal-header">
+            <h4 class="modal-title">Image Hover Form</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <?php
+            $this->add_control(
+                    'image_hover_heading',
+                    $this->style,
+                    [
+                        'label' => __('Title', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'type' => Controls::TEXT,
+                        'default' => '',
+                        'placeholder' => 'Heading',
+                        'description' => 'Add Your Image Hover Title.'
                     ]
-                ]
-        );
-        $this->start_controls_tab();
+            );
+            $this->add_control(
+                    'image_hover_description',
+                    $this->style,
+                    [
+                        'label' => __('Short Description', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'type' => Controls::TEXTAREA,
+                        'default' => '',
+                        'description' => 'Add Your Description Unless make it blank.'
+                    ]
+            );
 
-        $this->add_group_control(
-                'image_hover_image',
-                $this->style,
-                [
-                    'label' => __('Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'type' => Controls::MEDIA,
-                    'description' => 'Add or Modify Your Image. You can use Media Library or Custom URL'
-                ]
-        );
+            $this->start_controls_tabs(
+                    'image_hover-start-tabs',
+                    [
+                        'options' => [
+                            'frontend' => esc_html__('Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                            'backend' => esc_html__('Feature Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        ]
+                    ]
+            );
+            $this->start_controls_tab();
 
-        $this->end_controls_tab();
+            $this->add_group_control(
+                    'image_hover_image',
+                    $this->style,
+                    [
+                        'label' => __('Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'type' => Controls::MEDIA,
+                        'description' => 'Add or Modify Your Image. You can use Media Library or Custom URL'
+                    ]
+            );
 
-        $this->start_controls_tab();
-        $this->add_group_control(
-                'image_hover_feature_image',
-                $this->style,
-                [
-                    'label' => __('Feature Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'type' => Controls::MEDIA,
-                    'description' => 'Add or Modify Your Feature Image. Adjust background to get better design.'
-                ]
-        );
-        $this->end_controls_tab();
-        $this->end_controls_tabs();
-        $this->add_group_control(
-                'image_hover_button_link',
-                $this->style,
-                [
-                    'label' => __('URL', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'type' => Controls::URL,
-                    'separator' => TRUE,
-                    'default' => '',
-                    'placeholder' => 'https://www.yoururl.com',
-                    'description' => 'Add Your Desire Link or Url Unless make it blank'
-                ]
-        );
-        $this->add_control(
-                'image_hover_button_text',
-                $this->style,
-                [
-                    'label' => __('Button Text', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                    'type' => Controls::TEXT,
-                    'default' => '',
-                    'description' => 'Customize your button text. Button will only view while Url given'
-                ]
-        );
+            $this->end_controls_tab();
 
-        echo '</div>';
+            $this->start_controls_tab();
+            $this->add_group_control(
+                    'image_hover_feature_image',
+                    $this->style,
+                    [
+                        'label' => __('Feature Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'type' => Controls::MEDIA,
+                        'description' => 'Add or Modify Your Feature Image. Adjust background to get better design.'
+                    ]
+            );
+            $this->end_controls_tab();
+            $this->end_controls_tabs();
+            $this->add_group_control(
+                    'image_hover_button_link',
+                    $this->style,
+                    [
+                        'label' => __('URL', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'type' => Controls::URL,
+                        'separator' => TRUE,
+                        'default' => '',
+                        'placeholder' => 'https://www.yoururl.com',
+                        'description' => 'Add Your Desire Link or Url Unless make it blank'
+                    ]
+            );
+            $this->add_control(
+                    'image_hover_button_text',
+                    $this->style,
+                    [
+                        'label' => __('Button Text', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                        'type' => Controls::TEXT,
+                        'default' => '',
+                        'description' => 'Customize your button text. Button will only view while Url given'
+                    ]
+            );
+            ?>
+        </div>
+        <?php
     }
 
     /**

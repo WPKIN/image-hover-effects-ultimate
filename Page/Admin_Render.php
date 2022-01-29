@@ -274,21 +274,23 @@ abstract class Admin_Render {
      * @since 9.3.0
      */
     public function modal_form() {
-
-        echo '<div class="modal fade" id="oxi-addons-list-data-modal" >
-                <div class="modal-dialog modal-md">
-                    <form method="post" id="oxi-template-modal-form">
-                         <div class="modal-content">';
-        $this->modal_form_data();
-        echo '          <div class="modal-footer">
-                                <input type="hidden" id="shortcodeitemid" name="shortcodeitemid" value="">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-success" id="oxi-template-modal-submit">Submit</button>
-                            </div>
+        ?>
+        <div class="modal fade" id="oxi-addons-list-data-modal" >
+            <div class="modal-dialog modal-md">
+                <form method="post" id="oxi-template-modal-form">
+                    <div class="modal-content"><?php
+                        $this->modal_form_data();
+                        ?>
+                        <div class="modal-footer">
+                            <input type="hidden" id="shortcodeitemid" name="shortcodeitemid" value="">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-success" id="oxi-template-modal-submit">Submit</button>
                         </div>
-                    </form>
-                </div>
-              </div>';
+                    </div>
+                </form>
+            </div>
+        </div>
+        <?php
     }
 
     /**
@@ -433,7 +435,7 @@ abstract class Admin_Render {
                                                 if ($this->dbdata['css'] != '') :
                                                     ?>
                                                     <button type="button" class="btn btn-secondary"
-                                                            data-value="<?php echo $this->dbdata['id']; ?>"
+                                                            data-value="<?php echo (int) $this->dbdata['id']; ?>"
                                                             id="oxi-addons-setting-rebuild">Rebuild</button>
                                                             <?php
                                                         endif;
@@ -443,11 +445,20 @@ abstract class Admin_Render {
                                             <button type="button" class="btn btn-danger"
                                                     id="oxi-addons-setting-reload">Reload</button>
                                             <input type="hidden" id="image-hover-preview-color" name="image-hover-preview-color"
-                                                   value="<?php echo (is_array($this->style) ? array_key_exists('image-hover-preview-color', $this->style) ? $this->style['image-hover-preview-color'] : '#FFF' : '#FFF'); ?>">
+                                                   value="<?php
+                                                   if (is_array($this->style)):
+                                                       if (array_key_exists('image-hover-preview-color', $this->style)):
+                                                           echo esc_attr($this->style['image-hover-preview-color']);
+                                                       endif;
+                                                       echo '#FFF';
+                                                   else:
+                                                       echo '#FFF';
+                                                   endif;
+                                                   ?>">
                                             <input type="hidden" id="image-hover-style-id" name="image-hover-style-id"
-                                                   value="<?php echo $this->dbdata['id']; ?>">
+                                                   value="<?php echo (int) $this->dbdata['id']; ?>">
                                             <input type="hidden" id="image-hover-template" name="image-hover-template"
-                                                   value="<?php echo ucfirst($this->dbdata['style_name']); ?>">
+                                                   value="<?php echo esc_attr(ucfirst($this->dbdata['style_name'])); ?>">
                                             <button type="button" class="btn btn-success" id="oxi-addons-templates-submit">
                                                 Save</button>
                                         </div>
@@ -483,12 +494,30 @@ abstract class Admin_Render {
                                             <input type="text" data-format="rgb" data-opacity="TRUE"
                                                    class="oxi-addons-minicolor" id="oxi-addons-2-0-color"
                                                    name="oxi-addons-2-0-color"
-                                                   value="<?php echo (is_array($this->style) ? array_key_exists('image-hover-preview-color', $this->style) ? $this->style['image-hover-preview-color'] : '#FFF' : '#FFF'); ?>">
+                                                   value="<?php
+                                                   if (is_array($this->style)):
+                                                       if (array_key_exists('image-hover-preview-color', $this->style)):
+                                                           echo esc_attr($this->style['image-hover-preview-color']);
+                                                       endif;
+                                                       echo '#FFF';
+                                                   else:
+                                                       echo '#FFF';
+                                                   endif;
+                                                   ?>">
                                         </div>
                                     </div>
                                     <div class="oxi-addons-preview-data" id="oxi-addons-preview-data"
-                                         template-wrapper="<?php echo $this->WRAPPER; ?> .oxi-addons-row"
-                                         style="background:<?php echo (is_array($this->style) ? array_key_exists('image-hover-preview-color', $this->style) ? $this->style['image-hover-preview-color'] : '#FFF' : '#FFF'); ?>">
+                                         template-wrapper="<?php echo esc_attr($this->WRAPPER); ?> .oxi-addons-row"
+                                         style="background:<?php
+                                         if (is_array($this->style)):
+                                             if (array_key_exists('image-hover-preview-color', $this->style)):
+                                                 echo esc_attr($this->style['image-hover-preview-color']);
+                                             endif;
+                                             echo '#FFF';
+                                         else:
+                                             echo '#FFF';
+                                         endif;
+                                         ?>">
                                              <?php
                                              $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($this->StyleName[0]) . '\Render\Effects' . $this->StyleName[1];
                                              new $cls($this->dbdata, $this->child, 'admin');
@@ -498,9 +527,7 @@ abstract class Admin_Render {
                             </div>
                         </div>
                         <div class="shortcode-addons-form-repeater-store" style="display: none">
-                            <?php
-                            echo $this->repeater;
-                            ?>
+                             <?php $this->allowed_html_sanitize($this->repeater); ?>
                         </div>
                     </div>
                     <div id="OXIAADDONSCHANGEDPOPUP" class="modal fade">

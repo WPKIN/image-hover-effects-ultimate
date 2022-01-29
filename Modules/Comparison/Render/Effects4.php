@@ -35,22 +35,29 @@ class Effects4 extends Public_Render {
     public function default_render($style, $child, $admin) {
         foreach ($child as $key => $val) {
             $data = json_decode(stripslashes($val['rawdata']), true);
-
-            echo '<div class="oxi_addons_image_style_4_box oxi-addons-main-wrapper-image-comparison ' . $this->column_render('oxi-image-hover-col', $style) . ' ' . ($admin == "admin" ? 'oxi-addons-admin-edit-list' : '') . '">
-                    <div class="oxi_addons_image_style_4_box_body oxi-addons-main ' . $style['oxi_image_magnifier_image_switcher'] . '">
-                            <div class="oxi_addons_hover_view_img" style="background: url(\'' . $this->custom_media_render('oxi_image_comparison_image_one', $data) . '\') no-repeat;">';
-            $loop = $style['oxi_image_comparison_hover_width-size'];
-            $middleloop = $loop - 1;
-            for ($i = 0; $i < $loop; $i++) {
-                if ($i == 0):
-                    $position = 100;
-                elseif ($i == $loop - 1):
-                    $position = 0;
-                else:
-                    $position = 100 - (100 / $middleloop * $i);
-                endif;
-                echo'<div class="oxi_addons_font_view_img oxi_addons_font_view_img_' . $i . '" style=""></div>';
-                $this->inline_css .= '.' . $this->WRAPPER . ' .oxi_addons_image_style_4_box .oxi_addons_font_view_img.oxi_addons_font_view_img_' . $i . '{
+            ?>
+            <div class="oxi_addons_image_style_4_box oxi-addons-main-wrapper-image-comparison <?php $this->column_render('oxi-image-hover-col', $style) ?> <?php
+            if ($admin == "admin"):
+                echo 'oxi-addons-admin-edit-list';
+            endif;
+            ?>">
+                <div class="oxi_addons_image_style_4_box_body oxi-addons-main <?php echo esc_attr($style['oxi_image_magnifier_image_switcher']); ?>">
+                    <div class="oxi_addons_hover_view_img" style="background: url('<?php echo esc_url($this->custom_media_render('oxi_image_comparison_image_one', $data)); ?>') no-repeat;">
+                        <?php
+                        $loop = $style['oxi_image_comparison_hover_width-size'];
+                        $middleloop = $loop - 1;
+                        for ($i = 0; $i < $loop; $i++) {
+                            if ($i == 0):
+                                $position = 100;
+                            elseif ($i == $loop - 1):
+                                $position = 0;
+                            else:
+                                $position = 100 - (100 / $middleloop * $i);
+                            endif;
+                            ?>
+                            <div class="oxi_addons_font_view_img oxi_addons_font_view_img_<?php echo esc_attr($i); ?>" style=""></div>
+                            <?php
+                            $this->inline_css .= '.' . $this->WRAPPER . ' .oxi_addons_image_style_4_box .oxi_addons_font_view_img.oxi_addons_font_view_img_' . $i . '{
                                                                 background: url(\'' . $this->custom_media_render('oxi_image_comparison_image_two', $data) . '\') no-repeat;
                                                                     background-repeat: no-repeat;
                                                                     background-size: ' . ($loop * 100) . '% 100%;
@@ -59,14 +66,17 @@ class Effects4 extends Public_Render {
                                                                     margin-left:' . (100 / $loop) * $i . '%;
                                                                     width: ' . (100 / $loop) . '%;
                                                             }';
-            }
-
-            echo'</div>
-                </div>';
-            if ($admin == 'admin'):
-               echo $this->oxi_addons_admin_edit_delete_clone($val['id']);
-            endif;
-            echo '</div>';
+                        }
+                        ?>
+                    </div>
+                </div>
+                <?php
+                if ($admin == 'admin'):
+                    $this->oxi_addons_admin_edit_delete_clone($val['id']);
+                endif;
+                ?>
+            </div>
+            <?php
         }
     }
 

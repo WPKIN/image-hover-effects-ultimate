@@ -29,7 +29,7 @@
 }
 
 .image-hover-filter-style-2 .image-hover-category-menu-item:hover,
-.image-hover-filter-style-2 .image-hover-category-menu-item.oxi-active {
+.image-hover-filter-style-2 .image-hover-category-menu-item.oxi_active {
     color: #ffffff;
     background: rgba(71, 201, 229, 1.00);
     box-shadow: 0px 10px 25px 0px rgba(69, 200, 230, 0.55)

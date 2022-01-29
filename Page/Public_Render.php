@@ -124,7 +124,7 @@ class Public_Render {
             $this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
 
             if (array_key_exists('id', $this->dbdata)) :
-                $this->oxiid = (int)$this->dbdata['id'];
+                $this->oxiid = (int) $this->dbdata['id'];
             else :
                 $this->oxiid = rand(100000, 200000);
             endif;
@@ -195,17 +195,16 @@ class Public_Render {
             $CLASS = new $cls('admin');
             $inlinecss .= $CLASS->inline_template_css_render($this->style);
         } else {
-            echo $this->font_familly_validation(json_decode(($this->dbdata['font_family'] != '' ? $this->dbdata['font_family'] : "[]"), true));
+            $this->font_familly_validation(json_decode(($this->dbdata['font_family'] != '' ? $this->dbdata['font_family'] : "[]"), true));
             $inlinecss .= $this->CSSDATA;
         }
         if ($inlinejs != '') :
-
             if ($this->admin == 'admin' || $this->admin == 'web' || $this->dynamicLoad == true) :
-//only load while Rest API called
+                //only load while Rest API called
 
-                echo _('<script>
+                echo '<script>
                         (function ($) {
-                            setTimeout(function () {');
+                            setTimeout(function () {';
                 echo $inlinejs;
                 echo _('    }, 2000);
                         })(jQuery)</script>');
@@ -218,10 +217,10 @@ class Public_Render {
         if ($inlinecss != '') :
             $inlinecss = html_entity_decode($inlinecss);
             if ($this->admin == 'admin' || $this->admin == 'web') :
-//only load while ajax called
-                echo _('<style>');
+                //only load while ajax called
+                echo'<style>';
                 echo $inlinecss;
-                echo _('</style>');
+                echo '</style>';
             else :
                 wp_add_inline_style('oxi-image-hover', $inlinecss);
             endif;
@@ -237,11 +236,15 @@ class Public_Render {
         if ($this->admin == 'request') :
             $this->default_render($this->style, $this->child, $this->admin);
         else :
-            echo '<div class="oxi-addons-container noLightbox ' . $this->WRAPPER . ' ' . get_option('oxi_addons_custom_parent_class') . '" id="' . $this->WRAPPER . '">
-                 <div class="oxi-addons-row">';
-            $this->default_render($this->style, $this->child, $this->admin);
-            echo '   </div>
-              </div>';
+            ?>
+            <div class="oxi-addons-container noLightbox <?php echo esc_attr($this->WRAPPER); ?> <?php echo esc_attr(get_option('oxi_addons_custom_parent_class')); ?>" id="<?php echo esc_attr($this->WRAPPER); ?>">
+                <div class="oxi-addons-row">
+                    <?php
+                    $this->default_render($this->style, $this->child, $this->admin);
+                    ?>
+                </div>
+            </div>
+        <?php
         endif;
     }
 
@@ -347,6 +350,22 @@ class Public_Render {
             return $style[$id];
         endif;
     }
+    
+     public function check_media_render($id, $style) {
+
+        $url = '';
+        if (array_key_exists($id . '-select', $style)) :
+            if ($style[$id . '-select'] == 'media-library') :
+                $url = $style[$id . '-image'];
+            else :
+                $url = $style[$id . '-url'];
+            endif;
+            if(!empty($url)):
+                return true;
+            endif;
+        endif;
+        return false;
+    }
 
     public function media_render($id, $style) {
         $url = '';
@@ -357,11 +376,10 @@ class Public_Render {
                 $url = $style[$id . '-url'];
             endif;
             if (array_key_exists($id . '-image-alt', $style) && $style[$id . '-image-alt'] != '') :
-                $r = 'src="' . $url . '" alt="' . $style[$id . '-image-alt'] . '" ';
+                echo 'src="' . esc_url($url) . '" alt="' . esc_html($style[$id . '-image-alt']) . '" ';
             else :
-                $r = 'src="' . $url . '" ';
+                echo 'src="' . esc_url($url) . '" ';
             endif;
-            return $r;
         endif;
     }
 
@@ -378,6 +396,9 @@ class Public_Render {
     }
 
     public function text_render($data) {
+        echo do_shortcode(str_replace('spTac', '&nbsp;', str_replace('spBac', '<br>', html_entity_decode($data))), $ignore_html = false);
+    }
+    public function return_text($data) {
         return do_shortcode(str_replace('spTac', '&nbsp;', str_replace('spBac', '<br>', html_entity_decode($data))), $ignore_html = false);
     }
 
@@ -386,8 +407,7 @@ class Public_Render {
         if ($fadata != 'no') :
             wp_enqueue_style('font-awsome.min', OXI_IMAGE_HOVER_URL . '/assets/frontend/css/font-awsome.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         endif;
-        $files = '<i class="' . $data . ' oxi-icons"></i>';
-        return $files;
+        echo '<i class="' . esc_attr($data) . ' oxi-icons"></i>';
     }
 
     public function tab_column_render($id, $style) {
@@ -429,34 +449,45 @@ class Public_Render {
         else :
             $file .= $style[$id . '-mob'] . ' ';
         endif;
-        return $file;
+        echo esc_attr($file);
+    }
+
+    public function checkurl_render($id, $style) {
+
+        if (array_key_exists($id . '-url', $style) && $style[$id . '-url'] != '') :
+            return true;
+        endif;
+        return false;
     }
 
     public function url_render($id, $style) {
-        $link = '';
+      
         if (array_key_exists($id . '-url', $style) && $style[$id . '-url'] != '') :
-            $link .= ' href="' . $style[$id . '-url'] . '"';
+            echo ' href="' . esc_url($style[$id . '-url']) . '"';
             if (array_key_exists($id . '-target', $style) && $style[$id . '-target'] != '0') :
-                $link .= ' target="_blank"';
+                echo ' target="_blank"';
             endif;
             if (array_key_exists($id . '-follow', $style) && $style[$id . '-follow'] != '0') :
-                $link .= ' rel="nofollow"';
+                echo ' rel="nofollow"';
             endif;
             if (array_key_exists($id . '-id', $style) && $style[$id . '-id']) :
-                $link .= ($style[$id . '-id'] != '' ? ' id="' . $style[$id . '-id'] . '"' : '');
+                echo ($style[$id . '-id'] != '' ? ' id="' . esc_attr($style[$id . '-id']) . '"' : '');
             endif;
         endif;
-
-        return $link;
     }
 
     public function animation_render($id, $style) {
-        $return = (array_key_exists($id . '-type', $style) && $style[$id . '-type'] != '' ? ' sa-data-animation="' . $style[$id . '-type'] . ' ' . (array_key_exists($id . '-looping', $style) && $style[$id . '-looping'] != '0' ? 'infinite' : '') . '"' : '');
-        if ($return != '') :
-            $return .= (array_key_exists($id . '-offset-size', $style) ? ' sa-data-animation-offset="' . $style[$id . '-offset-size'] . '%"' : '');
-            $return .= (array_key_exists($id . '-delay-size', $style) ? ' sa-data-animation-delay="' . $style[$id . '-delay-size'] . 'ms"' : '');
-            $return .= (array_key_exists($id . '-duration-size', $style) ? ' sa-data-animation-duration="' . $style[$id . '-duration-size'] . 'ms"' : '');
-            return $return;
+
+        if (array_key_exists($id . '-type', $style) && $style[$id . '-type'] != ''):
+            echo 'sa-data-animation="' . esc_attr($style[$id . '-type']);
+            if (array_key_exists($id . '-looping', $style) && $style[$id . '-looping'] != '0'):
+                echo 'infinite';
+            endif;
+            echo '"';
+            echo (array_key_exists($id . '-offset-size', $style) ? ' sa-data-animation-offset="' . esc_attr($style[$id . '-offset-size']) . '%"' : '');
+            echo (array_key_exists($id . '-delay-size', $style) ? ' sa-data-animation-delay="' . esc_attr($style[$id . '-delay-size']) . 'ms"' : '');
+            echo (array_key_exists($id . '-duration-size', $style) ? ' sa-data-animation-duration="' . esc_attr($style[$id . '-duration-size']) . 'ms"' : '');
+
         endif;
     }
 
@@ -587,18 +618,19 @@ class Public_Render {
     }
 
     public function oxi_addons_admin_edit_delete_clone($param) {
-
-        return '  <div class="oxi-addons-admin-absulote">
-                                <div class="oxi-addons-admin-absulate-edit">
-                                    <button class="btn btn-primary shortcode-addons-template-item-edit" type="button" value="' . $param . '" title="Edit">Edit</button>
-                                </div>
-                                <div class="oxi-addons-admin-absulate-clone">
-                                    <button class="btn btn-secondary shortcode-addons-template-item-clone" type="button" value="' . $param . '" title="Clone">Clone</button>
-                                </div>
-                                <div class="oxi-addons-admin-absulate-delete">
-                                    <button class="btn btn-danger shortcode-addons-template-item-delete" type="submit" value="' . $param . '" title="Delete">Del</button>
-                                </div>
-                            </div>';
+        ?>
+        <div class="oxi-addons-admin-absulote">
+            <div class="oxi-addons-admin-absulate-edit">
+                <button class="btn btn-primary shortcode-addons-template-item-edit" type="button" value="<?php echo esc_attr($param); ?>" title="Edit">Edit</button>
+            </div>
+            <div class="oxi-addons-admin-absulate-clone">
+                <button class="btn btn-secondary shortcode-addons-template-item-clone" type="button" value="<?php echo esc_attr($param); ?>" title="Clone">Clone</button>
+            </div>
+            <div class="oxi-addons-admin-absulate-delete">
+                <button class="btn btn-danger shortcode-addons-template-item-delete" type="submit" value="<?php echo esc_attr($param); ?>" title="Delete">Del</button>
+            </div>
+        </div>
+        <?php
     }
 
 }

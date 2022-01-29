@@ -21,14 +21,22 @@ class Effects2 extends Public_Render {
     }
 
     public function render() {
-        echo '<div class="oxi-addons-container ' . $this->WRAPPER . ' oxi-image-hover-wrapper-' . (array_key_exists('carousel_register_style', $this->style) ? $this->style['carousel_register_style'] : '') . '" id="' . $this->WRAPPER . '">
-                 <div class="oxi-addons-row">
-                    <ul class="flip-items oxi-addons-col-edit">';
-        $this->default_render($this->style, $this->child, $this->admin);
-        echo '   
-                    </ul>
-                </div>
-              </div>';
+        ?>
+        <div class="oxi-addons-container <?php echo esc_attr($this->WRAPPER); ?> oxi-image-hover-wrapper-<?php
+        if (array_key_exists('carousel_register_style', $this->style)):
+            echo esc_attr($this->style['carousel_register_style']);
+        endif;
+        ?>" id="<?php echo esc_attr($this->WRAPPER); ?>">
+            <div class="oxi-addons-row">
+                <ul class="flip-items oxi-addons-col-edit">
+                    <?php
+                    $this->default_render($this->style, $this->child, $this->admin);
+                    ?>
+
+                </ul>
+            </div>
+        </div>
+        <?php
     }
 
     public function public_column_render($col) {
@@ -57,20 +65,23 @@ class Effects2 extends Public_Render {
 
     public function default_render($style, $child, $admin) {
         if (!array_key_exists('carousel_register_style', $style) && $style['carousel_register_style'] < 1) :
-            echo '<p>Kindly Select Image Effects Frist to Extend Carousel.</p>';
+            ?>
+            <p>Kindly Select Image Effects First to Extend Carousel.</p>
+            <?php
             return;
         endif;
         $styledata = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $style['carousel_register_style']), ARRAY_A);
 
         if (!is_array($styledata)) :
-            echo '<p> Style Data not found. Kindly Check Carousel & Slider <a href="https://www.oxilabdemos.com/image-hover/docs/hover-extension/carousel-slider/">Documentation</a>.</p>';
+            ?>
+            <p> Style Data not found. Kindly Check Carousel & Slider <a href="https://www.oxilabdemos.com/image-hover/docs/hover-extension/carousel-slider/">Documentation</a>.</p>
+            <?php
             return;
         endif;
         $files = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d", $style['carousel_register_style']), ARRAY_A);
         $StyleName = explode('-', ucfirst($styledata['style_name']));
         $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $StyleName[0] . '\Render\Effects' . $StyleName[1];
         new $cls($styledata, $files, 'request');
-
 
         $col = json_decode(stripslashes($styledata['rawdata']), true);
         $lap = $this->public_column_render($col['oxi-image-hover-col-lap']);

@@ -66,8 +66,9 @@ class Admin {
         if ($fadata != 'no') :
             wp_enqueue_style('font-awsome.min', OXI_IMAGE_HOVER_URL . '/assets/frontend/css/font-awsome.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         endif;
-        $files = '<i class="' . $data . ' oxi-icons"></i>';
-        return $files;
+        ?>
+        <i class="<?php echo esc_attr($data); ?> oxi-icons"></i>
+        <?php
     }
 
     /**
@@ -81,15 +82,15 @@ class Admin {
     public function Render() {
         ?>
         <div class="oxi-addons-row">
-        <?php
-        $this->Elements_Render();
-        ?>
-        </div>
             <?php
-        }
-
-        public function Admin_header() {
+            $this->Elements_Render();
             ?>
+        </div>
+        <?php
+    }
+
+    public function Admin_header() {
+        ?>
         <div class="oxi-addons-wrapper">
             <div class="oxi-addons-import-layouts">
                 <h1>Image Hover › Shortcode</h1>
@@ -129,53 +130,64 @@ class Admin {
         ?>
         <div class="oxi-addons-wrapper">
             <div class="oxi-addons-row">
-        <?php
-        foreach ($Elements as $key => $elements) {
+                <?php
+                foreach ($Elements as $key => $elements) {
+                    ?>
+                    <div class="oxi-addons-text-blocks-body-wrapper">
+                        <div class="oxi-addons-text-blocks-body">
+                            <div class="oxi-addons-text-blocks">
+                                <div class="oxi-addons-text-blocks-heading"><?php echo esc_html($key); ?></div>
+                                <div class="oxi-addons-text-blocks-border">
+                                    <div class="oxi-addons-text-block-border"></div>
+                                </div>
+                                <div class="oxi-addons-text-blocks-content">Available (<?php echo (int) count($elements); ?>)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                    $elementshtml = '';
 
-            $check = apply_filters('oxi-image-hover-plugin-version', false) == false && $key == 'Extension' ? '<b style="color: red;font-weight: 600;font-size: 12px;">Pro Only</b>' : '';
-            $pre = apply_filters('oxi-image-hover-plugin-version', false) == false && $key == 'Extension' ? 'premium' : '';
-            $elementshtml = '';
-            $elementsnumber = 0;
-            foreach ($elements as $k => $value) {
-                $oxilink = 'admin.php?page=oxi-image-hover-ultimate&effects=' . $k;
-                $elementsnumber++;
-                $elementshtml .= ' <div class="oxi-addons-shortcode-import" id="' . $value['name'] . '" oxi-addons-search="' . $value['name'] . '">
-                                                <a class="addons-pre-check" href="' . admin_url($oxilink) . '" sub-type="' . $pre . '">
-                                                    <div class="oxi-addons-shortcode-import-top">
-                                                       ' . $this->font_awesome_render((array_key_exists('icon', $value) ? $value['icon'] : 'fas fa-cloud-download-alt')) . '
-                                                    </div>
-                                                    <div class="oxi-addons-shortcode-import-bottom">
-                                                        <span>' . $this->name_converter($value['name']) . ' ' . $check . '</span>
-                                                    </div>
-                                                </a>
-                                           </div>';
-            }
-            if ($elementsnumber > 0) {
-                echo '  <div class="oxi-addons-text-blocks-body-wrapper">
-                                    <div class="oxi-addons-text-blocks-body">
-                                        <div class="oxi-addons-text-blocks">
-                                            <div class="oxi-addons-text-blocks-heading">' . $key . '</div>
-                                            <div class="oxi-addons-text-blocks-border">
-                                                <div class="oxi-addons-text-block-border"></div>
-                                            </div>
-                                            <div class="oxi-addons-text-blocks-content">Available (' . $elementsnumber . ')</div>
-                                        </div>
-                                    </div>
-                                </div>';
-                echo $elementshtml;
-            }
-        }
-        ?>
+                    foreach ($elements as $k => $value) {
+                        $oxilink = 'admin.php?page=oxi-image-hover-ultimate&effects=' . $k;
+                        ?>
+                        <div class="oxi-addons-shortcode-import" id="<?php echo esc_attr($value['name']); ?>" oxi-addons-search="<?php echo esc_html($value['name']); ?>">
+                            <a class="addons-pre-check" href="<?php echo esc_url(admin_url($oxilink)); ?>" sub-type="<?php
+                            if (apply_filters('oxi-image-hover-plugin-version', false) == false && $key == 'Extension'):
+                                echo 'premium';
+                            endif;
+                            ?>">
+                                <div class="oxi-addons-shortcode-import-top">
+                                    <?php
+                                    $ifco = array_key_exists('icon', $value) ? $value['icon'] : 'fas fa-cloud-download-alt';
+                                    $this->font_awesome_render($ifco);
+                                    ?>
+
+                                </div>
+                                <div class="oxi-addons-shortcode-import-bottom">
+                                    <span><?php $this->name_converter($value['name']) ?> <?php
+                                        if (apply_filters('oxi-image-hover-plugin-version', false) == false && $key == 'Extension'):
+                                            ?>
+                                            <b style="color: red;font-weight: 600;font-size: 12px;">Pro Only</b>
+                                            <?php
+                                        endif;
+                                        ?></span>
+                                </div>
+                            </a>
+                        </div>
+                        <?php
+                    }
+                }
+                ?>
             </div>
         </div>
-                <?php
-            }
+        <?php
+    }
 
-            public function name_converter($data) {
-                $data = str_replace('_', ' ', $data);
-                $data = str_replace('-', ' ', $data);
-                $data = str_replace('+', ' ', $data);
-                return ucwords($data);
-            }
+    public function name_converter($data) {
+        $data = str_replace('_', ' ', $data);
+        $data = str_replace('-', ' ', $data);
+        $data = str_replace('+', ' ', $data);
+        echo esc_html(ucwords($data));
+    }
 
-        }
+}

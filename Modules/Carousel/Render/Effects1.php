@@ -21,11 +21,19 @@ class Effects1 extends Public_Render {
     }
 
     public function render() {
-        echo '<div class="oxi-addons-container ' . $this->WRAPPER . ' oxi-image-hover-wrapper-' . (array_key_exists('carousel_register_style', $this->style) ? $this->style['carousel_register_style'] : '') . '" id="' . $this->WRAPPER . '">
-                 <div class="oxi-addons-row">';
-        $this->default_render($this->style, $this->child, $this->admin);
-        echo '   </div>
-              </div>';
+        ?>
+        <div class="oxi-addons-container <?php echo esc_attr($this->WRAPPER); ?> oxi-image-hover-wrapper-<?php
+        if (array_key_exists('carousel_register_style', $this->style)):
+            echo esc_attr($this->style['carousel_register_style']);
+        endif;
+        ?>" id="<?php echo esc_attr($this->WRAPPER); ?>">
+            <div class="oxi-addons-row">
+                <?php
+                $this->default_render($this->style, $this->child, $this->admin);
+                ?>
+            </div>
+        </div>
+        <?php
     }
 
     public function public_column_render($col) {
@@ -58,13 +66,17 @@ class Effects1 extends Public_Render {
 
     public function default_render($style, $child, $admin) {
         if (!array_key_exists('carousel_register_style', $style) && $style['carousel_register_style'] < 1) :
-            echo '<p>Kindly Select Image Effects Frist to Extend Carousel.</p>';
+            ?>
+            <p>Kindly Select Image Effects First to Extend Carousel.</p>
+            <?php
             return;
         endif;
         $styledata = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $style['carousel_register_style']), ARRAY_A);
 
         if (!is_array($styledata)) :
-            echo '<p> Style Data not found. Kindly Check Carousel & Slider <a href="https://www.oxilabdemos.com/image-hover/docs/hover-extension/carousel-slider/">Documentation</a>.</p>';
+            ?>
+            <p> Style Data not found. Kindly Check Carousel & Slider <a href="https://www.oxilabdemos.com/image-hover/docs/hover-extension/carousel-slider/">Documentation</a>.</p>
+            <?php
             return;
         endif;
         $files = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d", $style['carousel_register_style']), ARRAY_A);

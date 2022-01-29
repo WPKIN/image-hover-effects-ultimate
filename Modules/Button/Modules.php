@@ -870,11 +870,11 @@ class Modules extends Admin_Render {
     }
 
     public function modal_form_data() {
-        echo '<div class="modal-header">
+       ?><div class="modal-header">
                     <h4 class="modal-title">Image Hover Form</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <div class="modal-body">';
+                <div class="modal-body"><?php
         $this->add_control(
                 'image_hover_title', $this->style, [
             'label' => __('Rearrange Title', OXI_IMAGE_HOVER_TEXTDOMAIN),
@@ -956,7 +956,7 @@ class Modules extends Admin_Render {
         );
         $this->end_controls_tab();
         $this->end_controls_tabs();
-        echo '</div>';
+        ?></div><?php
     }
 
     /**

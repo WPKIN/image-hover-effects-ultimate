@@ -464,123 +464,126 @@ class Modules extends Admin_Render {
     }
 
     public function modal_form_data() {
-        echo '<div class="modal-header">
-                    <h4 class="modal-title">Image Hover Form</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">';
+        ?>
+        <div class="modal-header">
+            <h4 class="modal-title">Image Hover Form</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <?php
+            $this->add_group_control(
+                    'oxi_image_magnifier_img', $this->style, [
+                'label' => esc_html__('Media Type', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::MEDIA,
+                'default' => [
+                    'type' => 'media-library',
+                    'link' => 'https://www.shortcode-addons.com/wp-content/uploads/2020/01/placeholder.png',
+                ],
+                    ]
+            );
 
-        $this->add_group_control(
-                'oxi_image_magnifier_img', $this->style, [
-            'label' => esc_html__('Media Type', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::MEDIA,
-            'default' => [
-                'type' => 'media-library',
-                'link' => 'https://www.shortcode-addons.com/wp-content/uploads/2020/01/placeholder.png',
-            ],
-                ]
-        );
-
-        $this->add_control(
-                'oxi_image_magnifier_magnifi_position', $this->style, [
-            'label' => __('Magnifi Position', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::SELECT,
-            'default' => 'right',
-            'loader' => true,
-            'options' => [
-                'none' => __('Default', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'top' => __('Top', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'right' => __('Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'bottom' => __('Bottom', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'left' => __('Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            ],
-                ]
-        );
-        $this->add_control(
-                'oxi_image_magnifier_magnifi_position_top', $this->style, [
-            'label' => __('Top Position', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'description' => 'After save You will show the changes',
-            'type' => Controls::SLIDER,
-            'condition' => [
-                'oxi_image_magnifier_magnifi_position' => 'top',
-            ],
-            'default' => [
-                'unit' => 'px',
-                'size' => '',
-            ],
-            'range' => [
-                'px' => [
-                    'min' => -500,
-                    'max' => 500,
-                    'step' => 2,
+            $this->add_control(
+                    'oxi_image_magnifier_magnifi_position', $this->style, [
+                'label' => __('Magnifi Position', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::SELECT,
+                'default' => 'right',
+                'loader' => true,
+                'options' => [
+                    'none' => __('Default', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'top' => __('Top', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'right' => __('Right', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'bottom' => __('Bottom', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'left' => __('Left', OXI_IMAGE_HOVER_TEXTDOMAIN),
                 ],
-            ],
-                ]
-        );
-        $this->add_control(
-                'oxi_image_magnifier_magnifi_position_right', $this->style, [
-            'label' => __('Right Position', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::SLIDER,
-            'description' => 'After save You will show the changes',
-            'condition' => [
-                'oxi_image_magnifier_magnifi_position' => 'right',
-            ],
-            'default' => [
-                'unit' => 'px',
-                'size' => '',
-            ],
-            'range' => [
-                'px' => [
-                    'min' => -500,
-                    'max' => 500,
-                    'step' => 2,
+                    ]
+            );
+            $this->add_control(
+                    'oxi_image_magnifier_magnifi_position_top', $this->style, [
+                'label' => __('Top Position', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'description' => 'After save You will show the changes',
+                'type' => Controls::SLIDER,
+                'condition' => [
+                    'oxi_image_magnifier_magnifi_position' => 'top',
                 ],
-            ],
-                ]
-        );
-        $this->add_control(
-                'oxi_image_magnifier_magnifi_position_bottom', $this->style, [
-            'label' => __('Bottom Position', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::SLIDER,
-            'description' => '   save You will show the changes',
-            'condition' => [
-                'oxi_image_magnifier_magnifi_position' => 'bottom',
-            ],
-            'default' => [
-                'unit' => 'px',
-                'size' => '',
-            ],
-            'range' => [
-                'px' => [
-                    'min' => -500,
-                    'max' => 500,
-                    'step' => 2,
+                'default' => [
+                    'unit' => 'px',
+                    'size' => '',
                 ],
-            ],
-                ]
-        );
-        $this->add_control(
-                'oxi_image_magnifier_magnifi_position_left', $this->style, [
-            'label' => __('Left Position', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::SLIDER,
-            'condition' => [
-                'oxi_image_magnifier_magnifi_position' => 'left',
-            ],
-            'description' => 'After save You will show the changes',
-            'default' => [
-                'unit' => 'px',
-                'size' => '',
-            ],
-            'range' => [
-                'px' => [
-                    'min' => -500,
-                    'max' => 500,
-                    'step' => 2,
+                'range' => [
+                    'px' => [
+                        'min' => -500,
+                        'max' => 500,
+                        'step' => 2,
+                    ],
                 ],
-            ],
-                ]
-        );
-        echo '</div>';
+                    ]
+            );
+            $this->add_control(
+                    'oxi_image_magnifier_magnifi_position_right', $this->style, [
+                'label' => __('Right Position', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::SLIDER,
+                'description' => 'After save You will show the changes',
+                'condition' => [
+                    'oxi_image_magnifier_magnifi_position' => 'right',
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => '',
+                ],
+                'range' => [
+                    'px' => [
+                        'min' => -500,
+                        'max' => 500,
+                        'step' => 2,
+                    ],
+                ],
+                    ]
+            );
+            $this->add_control(
+                    'oxi_image_magnifier_magnifi_position_bottom', $this->style, [
+                'label' => __('Bottom Position', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::SLIDER,
+                'description' => '   save You will show the changes',
+                'condition' => [
+                    'oxi_image_magnifier_magnifi_position' => 'bottom',
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => '',
+                ],
+                'range' => [
+                    'px' => [
+                        'min' => -500,
+                        'max' => 500,
+                        'step' => 2,
+                    ],
+                ],
+                    ]
+            );
+            $this->add_control(
+                    'oxi_image_magnifier_magnifi_position_left', $this->style, [
+                'label' => __('Left Position', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::SLIDER,
+                'condition' => [
+                    'oxi_image_magnifier_magnifi_position' => 'left',
+                ],
+                'description' => 'After save You will show the changes',
+                'default' => [
+                    'unit' => 'px',
+                    'size' => '',
+                ],
+                'range' => [
+                    'px' => [
+                        'min' => -500,
+                        'max' => 500,
+                        'step' => 2,
+                    ],
+                ],
+                    ]
+            );
+            ?>
+        </div>
+        <?php
     }
 
 }

@@ -16,18 +16,17 @@ class Effects2 extends Public_Render {
         wp_enqueue_style('zoomple.css', OXI_IMAGE_HOVER_URL . '/Modules/Magnifier/Files/styles/zoomple.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
 
-
-    public function public_jquery()
-    {
+    public function public_jquery() {
         $this->JSHANDLE = 'zoomple.js';
         wp_enqueue_script('zoomple.js', OXI_IMAGE_HOVER_URL . '/Modules/Magnifier/Files/zoomple.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-      }
+    }
 
-  /*
+    /*
      * Shortcode Addons Media Render.
      * image
      * @since 2.1.0
      */
+
     public function custom_media_render($id, $style) {
         $url = '';
         if (array_key_exists($id . '-select', $style)):
@@ -39,31 +38,40 @@ class Effects2 extends Public_Render {
         endif;
     }
 
-    public function default_render($style, $child, $admin) {  
+    public function default_render($style, $child, $admin) {
         foreach ($child as $key => $val) {
-            $data = json_decode(stripslashes($val['rawdata']), true);   
-            $image = '';  
-            if ($this->custom_media_render('oxi_image_magnifier_img', $data) != '') {
-                $image = '<div class="oxi__image_body oxi__image_' . $this->oxiid . '_' . $key . ' " href="' . $this->custom_media_render('oxi_image_magnifier_img', $data ) . '">
-                            <img class="oxi_addons__image ' . $style['oxi_image_magnifier_image_switcher'] . '  ' . $style['oxi_image_magnifier_grayscale_switter'] . '  " src="' . $this->custom_media_render('oxi_image_magnifier_img', $data) . '" alt=""/>
-                        </div>';
-            }
+            $data = json_decode(stripslashes($val['rawdata']), true);
+            ?>
 
-            echo ' <div class="oxi_addons__image_magnifier_column ' . $this->column_render('oxi-image-hover-col', $style) . ' ' . ($admin == "admin" ? 'oxi-addons-admin-edit-list' : '') . '" > 
-                        <div class="oxi_addons__image_magnifier_style_body ' . $style['oxi_image_magnifier_image_switcher'] . ' " >
-                            <div class="oxi_addons__image_magnifier_style_2 oxi_addons__image_magnifier" >
-                               ' . $image . '
-                           </div>
-                        </div>';
+            <div class="oxi_addons__image_magnifier_column <?php $this->column_render('oxi-image-hover-col', $style); ?> <?php
+            if ($admin == "admin"):
+                echo 'oxi-addons-admin-edit-list';
+            endif;
+            ?>"> 
+                <div class="oxi_addons__image_magnifier_style_body <?php echo esc_attr($style['oxi_image_magnifier_image_switcher']); ?>" >
+                    <div class="oxi_addons__image_magnifier_style_2 oxi_addons__image_magnifier" >
+                        <?php
+                        if ($this->custom_media_render('oxi_image_magnifier_img', $data) != '') {
+                            ?>
+                            <div class="oxi__image_body oxi__image_<?php echo esc_attr($this->oxiid); ?>_<?php echo esc_attr($key); ?>" href="<?php echo esc_url($this->custom_media_render('oxi_image_magnifier_img', $data)); ?>">
+                                <img class="oxi_addons__image <?php echo esc_attr($style['oxi_image_magnifier_image_switcher']); ?>  <?php echo esc_attr($style['oxi_image_magnifier_grayscale_switter']); ?>  " src="<?php echo esc_url($this->custom_media_render('oxi_image_magnifier_img', $data)); ?>" alt=""/>
+                            </div>
+                            <?php
+                        }
+                        ?>
+                    </div>
+                </div>
+                <?php
                 if ($admin == 'admin') :
-                    echo $this->oxi_addons_admin_edit_delete_clone($val['id']);
+                    $this->oxi_addons_admin_edit_delete_clone($val['id']);
                 endif;
-            echo '</div>';
-        } 
+                ?>
+            </div>
+            <?php
+        }
     }
 
-    public function inline_public_jquery()
-    {
+    public function inline_public_jquery() {
         $style = $this->style;
         $child = $this->child;
         $width = 'zoomWidth:200,';
@@ -82,7 +90,7 @@ class Effects2 extends Public_Render {
             $rounded = 'roundedCorners :true,';
         }
         foreach ($child as $key => $val) {
-            $data = json_decode(stripslashes($val['rawdata']), true);   
+            $data = json_decode(stripslashes($val['rawdata']), true);
             $jquery .= ' $(".oxi__image_' . $this->oxiid . '_' . $key . '").zoomple({
                 blankURL : "' . OXI_IMAGE_HOVER_URL . '/Modules/Magnifier/Files/images/blank.gif' . '",
                 bgColor :"#fff",
@@ -93,12 +101,12 @@ class Effects2 extends Public_Render {
                 ' . $offset . '
                 ' . $rounded . '
               });  ';
-        } 
+        }
         $jquery .= '
         jQuery("#zoomple_previewholder").addClass("oxi_addons_magnifier_' . $this->oxiid . '");
         jQuery("#zoomple_previewholder").addClass("oxi_addons_magnifier_previewholder_style_2");
     ';
-    return $jquery;
+        return $jquery;
     }
 
 }

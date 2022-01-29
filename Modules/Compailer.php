@@ -74,13 +74,14 @@ class Compailer extends Public_Render {
     }
 
     public function render() {
-
-        echo '<div class="oxi-addons-container noLightbox ' . $this->WRAPPER . ' ' . $this->WRAPPER . '" id="' . $this->WRAPPER . '">
-                 <div class="oxi-addons-row">';
-
-        $this->default_render($this->style, $this->child, $this->admin);
-        echo '   </div>
-             </div>';
+        ?>
+        <div class="oxi-addons-container noLightbox <?php echo esc_attr($this->WRAPPER); ?>" id="<?php echo esc_attr($this->WRAPPER); ?>">
+            <div class="oxi-addons-row"><?php
+                $this->default_render($this->style, $this->child, $this->admin);
+                ?>  
+            </div>
+        </div>
+        <?php
     }
 
     public function default_render($style, $child, $admin) {
@@ -131,21 +132,24 @@ class Compailer extends Public_Render {
                 'display_post_thumb_sizes' => $style['image_hover_dynamic_content_thumb_sizes'],
                 'display_post_excerpt' => (int) $style['image_hover_dynamic_post_excerpt'] ? $style['image_hover_dynamic_post_excerpt'] : 15,
             ];
-            ob_start();
             new Post_Query('post_query', $this->dbdata, $args, $settings);
-            $oh = ob_get_clean();
-            echo str_replace('Image Hover Empty Data', '', $oh);
             if ($this->dynamicLoad):
                 if ($style['image_hover_dynamic_load_type'] == 'button'):
-                    echo '  <div class="oxi-image-hover-load-more-button-wrap oxi-bt-col-sm-12">
-                            <button class="oxi-image-load-more-button" data-class="OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic\Post_Query" data-function="__rest_api_post" data-args=\'' . json_encode($args) . '\' data-settings=\'' . json_encode($settings) . '\' data-page="1">
-                                    <div class="oxi-image-hover-loader button__loader"></div>
-                                    <span>' . $style['image_hover_dynamic_load_button_text'] . '</span>
-                            </button>
-                        </div>';
+                    ?>
+
+
+                    <div class="oxi-image-hover-load-more-button-wrap oxi-bt-col-sm-12">
+                        <button class="oxi-image-load-more-button" data-class="OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic\Post_Query" data-function="__rest_api_post" data-args='<?php echo esc_attr(json_encode($args)); ?>' data-settings='<?php echo esc_attr(json_encode($settings)); ?>' data-page="1">
+                            <div class="oxi-image-hover-loader button__loader"></div>
+                            <span><?php echo esc_html($style['image_hover_dynamic_load_button_text']); ?></span>
+                        </button>
+                    </div>
+                    <?php
                 else:
-                    echo '<div class="oxi-image-hover-dynamic-load-infinite" id="oxi-image-hover-dynamic-load-infinite-' . $this->dbdata['id'] . '" data-class="OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic\Post_Query" data-function="__rest_api_post" data-args=\'' . json_encode($args) . '\' data-settings=\'' . json_encode($settings) . '\' data-page="1">
-                          </div>';
+                    ?>
+                    <div class="oxi-image-hover-dynamic-load-infinite" id="oxi-image-hover-dynamic-load-infinite-<?php echo (int) $this->dbdata['id']; ?>" data-class="OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic\Post_Query" data-function="__rest_api_post" data-args='<?php echo esc_attr(json_encode($args)); ?>' data-settings='<?php echo esc_attr(json_encode($settings)); ?>' data-page="1">
+                    </div>
+                <?php
                 endif;
             endif;
         else:
@@ -157,22 +161,23 @@ class Compailer extends Public_Render {
                 'display_post_id' => $this->oxiid,
             ];
 
-            ob_start();
             new Layouts_Query('layouts_query', $this->dbdata, $args, $settings);
-            $oh = ob_get_clean();
-            echo str_replace('Image Hover Empty Data', '', $oh);
 
             if ($this->dynamicLoad):
                 if ($style['image_hover_dynamic_load_type'] == 'button'):
-                    echo '  <div class="oxi-image-hover-load-more-button-wrap oxi-bt-col-sm-12">
-                            <button class="oxi-image-load-more-button" data-class="OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic\Layouts_Query" data-function="__rest_api_post" data-args=\'' . json_encode($args) . '\' data-settings=\'' . json_encode($settings) . '\' data-page="1">
-                                    <div class="oxi-image-hover-loader button__loader"></div>
-                                    <span>' . $style['image_hover_dynamic_load_button_text'] . '</span>
-                            </button>
-                        </div>';
+                    ?>
+                    <div class="oxi-image-hover-load-more-button-wrap oxi-bt-col-sm-12">
+                        <button class="oxi-image-load-more-button" data-class="OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic\Layouts_Query" data-function="__rest_api_post" data-args='<?php echo esc_attr(json_encode($args)); ?>' data-settings='<?php echo esc_attr(json_encode($settings)); ?>' data-page="1">
+                            <div class="oxi-image-hover-loader button__loader"></div>
+                            <span><?php echo esc_html($style['image_hover_dynamic_load_button_text']); ?></span>
+                        </button>
+                    </div>
+                    <?php
                 else:
-                    echo '<div class="oxi-image-hover-dynamic-load-infinite" id="oxi-image-hover-dynamic-load-infinite-' . $this->dbdata['id'] . '" data-class="OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic\Layouts_Query" data-function="__rest_api_post" data-args=\'' . json_encode($args) . '\' data-settings=\'' . json_encode($settings) . '\' data-page="1">
-                      </div>';
+                    ?>
+                    <div class="oxi-image-hover-dynamic-load-infinite" id="oxi-image-hover-dynamic-load-infinite-<?php echo (int) $this->dbdata['id']; ?>" data-class="OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic\Layouts_Query" data-function="__rest_api_post" data-args='<?php echo esc_attr(json_encode($args)); ?>' data-settings='<?php echo esc_attr(json_encode($settings)); ?>' data-page="1">
+                    </div>
+                <?php
                 endif;
             endif;
         endif;

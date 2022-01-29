@@ -66,7 +66,7 @@ class Visual_Composer {
                         ), $atts));
         $styleid = $atts['id'];
         ob_start();
-        echo \OXI_IMAGE_HOVER_PLUGINS\Classes\Bootstrap::instance()->shortcode_render($styleid, 'user');
+        \OXI_IMAGE_HOVER_PLUGINS\Classes\Bootstrap::instance()->shortcode_render($styleid, 'user');
         return ob_get_clean();
     }
 

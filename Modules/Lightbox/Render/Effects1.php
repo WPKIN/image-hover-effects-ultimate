@@ -46,62 +46,133 @@ class Effects1 extends Public_Render {
 
         foreach ($child as $key => $val) {
             $value = json_decode(stripslashes($val['rawdata']), true);
-            $heading = $details = $button = $image = $light_box = $image_or_btn = $icon = '';
-            if (array_key_exists('oxi_image_light_box_title', $value) && $value['oxi_image_light_box_title'] != '') {
-                $heading = '<' . $style['oxi_image_light_box_tag'] . ' class=\'oxi_addons__heading\'>' . $this->text_render($value['oxi_image_light_box_title']) . '</' . $style['oxi_image_light_box_tag'] . '>';
-            }
-            if (array_key_exists('oxi_image_light_box_desc', $value) && $value['oxi_image_light_box_desc'] != '') {
-                $details = '<div class=\'oxi_addons__details\'>' . $this->text_render($value['oxi_image_light_box_desc']) . ' </div>';
-            }
-            if (array_key_exists('oxi_image_light_box_button_text', $value) && $value['oxi_image_light_box_button_text'] != '') {
-                $button = '<div class="oxi_addons__button_main">
-                    <button class="oxi_addons__button">
-                        ' . $this->text_render($value['oxi_image_light_box_button_text']) . '
-                    </button>
-                </div>';
-            }
-            if ($this->custom_media_render('oxi_image_light_box_image_front', $value) != '') {
-                $image = '<div  class="oxi_addons__image_main ' . $style['oxi_image_light_box_custom_width_height_swither'] . '" style="background-image: url(\'' . $this->custom_media_render('oxi_image_light_box_image_front', $value) . '\');" >
-                    <div class="oxi_addons__overlay">
-                    ' . $this->font_awesome_render($style['oxi_image_light_box_bg_overlay_icon']) . '
-                    </div>
-                </div>';
-            }
-            if ($value['oxi_image_light_box_button_icon'] != '') {
-                $icon = '<div  class="oxi_addons__icon" >
-                    <div class="oxi_addons__overlay">
-                        ' . $this->font_awesome_render($style['oxi_image_light_box_bg_overlay_icon_icon']) . '
-                    </div>
-                        ' . $this->font_awesome_render($value['oxi_image_light_box_button_icon']) . '
-                </div>';
-            }
-            if (array_key_exists('oxi_image_light_box_clickable', $style) && $style['oxi_image_light_box_clickable'] == 'button') {
-                $image_or_btn = $button;
-            } elseif (array_key_exists('oxi_image_light_box_clickable', $style) && $style['oxi_image_light_box_clickable'] == 'image') {
-                $image_or_btn = $image;
-            } else {
-                $image_or_btn = $icon;
-            }
-            if ($value['oxi_image_light_box_select_type'] == 'image') {
-                if ($this->custom_media_render('oxi_image_light_box_image', $value) != '') {
-                    $light_box = '<div class="oxi_addons__light_box_item" ' . ((array_key_exists('oxi_image_light_box_clickable', $style) && $style['oxi_image_light_box_clickable'] == 'image') ? 'style="width: 100%"' : '') . '  data-src="' . $this->custom_media_render('oxi_image_light_box_image', $value) . '"  data-sub-html="' . $heading . ' <br> ' . $details . '">
-                          ' . $image_or_btn . '
-                    </div>';
-                }
-            } else {
-                $light_box = '<a class="oxi_addons__light_box_item" data-src="' . $value['oxi_image_light_box_video'] . '" data-sub-html="' . $heading . ' <br> ' . $details . '">
-                    ' . $image_or_btn . '
-                </a>';
-            }
+            ?>
 
-            echo '<div class="oxi_addons__light_box_style_1 oxi_addons__light_box ' . $this->column_render('oxi-image-hover-col', $style) . '  ' . ($admin == "admin" ? 'oxi-addons-admin-edit-list' : '') . ' ">
-                    <div class="oxi_addons__light_box_parent oxi_addons__light_box_parent-' . $this->oxiid . '-' . $key . '">
-                        ' . $light_box . '
-                    </div>';
-            if ($admin == 'admin'):
-                echo $this->oxi_addons_admin_edit_delete_clone($val['id']);
+            <div class="oxi_addons__light_box_style_1 oxi_addons__light_box <?php $this->column_render('oxi-image-hover-col', $style) ?> <?php
+            if ($admin == "admin"):
+                echo 'oxi-addons-admin-edit-list';
             endif;
-            echo '</div>';
+            ?> ">
+
+                <div class="oxi_addons__light_box_parent oxi_addons__light_box_parent-<?php echo (int) $this->oxiid ?>-<?php echo (int) $key; ?>">
+                    <?php
+                    if ($value['oxi_image_light_box_select_type'] == 'image' && $this->custom_media_render('oxi_image_light_box_image', $value) != '') {
+                        ?>
+                        <div class="oxi_addons__light_box_item" <?php
+                        if (array_key_exists('oxi_image_light_box_clickable', $style) && $style['oxi_image_light_box_clickable'] == 'image'):
+                            echo ' style="width: 100%" ';
+                        endif;
+                        ?> data-src="<?php echo esc_url($this->custom_media_render('oxi_image_light_box_image', $value)); ?>"  data-sub-html="<?php
+                             if (array_key_exists('oxi_image_light_box_title', $value) && $value['oxi_image_light_box_title'] != '') {
+                                 ?>
+                                 <<?php echo esc_attr($style['oxi_image_light_box_tag']); ?> class='oxi_addons__heading'><?php $this->text_render($value['oxi_image_light_box_title']) ?></<?php echo esc_attr($style['oxi_image_light_box_tag']); ?>>
+                                 <?php
+                             }
+                             ?> <br> <?php
+                             if (array_key_exists('oxi_image_light_box_desc', $value) && $value['oxi_image_light_box_desc'] != '') {
+                                 ?>
+                                 <div class='oxi_addons__details'><?php $this->text_render($value['oxi_image_light_box_desc']) ?></div>
+                                 <?php
+                             }
+                             ?>">
+                                 <?php
+                                 if (array_key_exists('oxi_image_light_box_clickable', $style) && $style['oxi_image_light_box_clickable'] == 'button') {
+                                     if (array_key_exists('oxi_image_light_box_button_text', $value) && $value['oxi_image_light_box_button_text'] != '') {
+                                         ?>
+                                    <div class="oxi_addons__button_main">
+                                        <button class="oxi_addons__button">
+                                            <?php $this->text_render($value['oxi_image_light_box_button_text']) ?>
+                                        </button>
+                                    </div>
+                                    <?php
+                                }
+                            } elseif (array_key_exists('oxi_image_light_box_clickable', $style) && $style['oxi_image_light_box_clickable'] == 'image') {
+                                if ($this->custom_media_render('oxi_image_light_box_image_front', $value) != '') {
+                                    ?>
+                                    <div  class="oxi_addons__image_main  <?php echo esc_attr($style['oxi_image_light_box_custom_width_height_swither']); ?>" style="background-image: url('<?php echo esc_url($this->custom_media_render('oxi_image_light_box_image_front', $value)); ?>');" >
+                                        <div class="oxi_addons__overlay">
+                                            <?php $this->font_awesome_render($style['oxi_image_light_box_bg_overlay_icon']); ?>
+                                        </div>
+                                    </div>
+                                    <?php
+                                }
+                            } else {
+                                if ($value['oxi_image_light_box_button_icon'] != '') {
+                                    ?>
+                                    <div  class="oxi_addons__icon" >
+                                        <div class="oxi_addons__overlay">
+                                            <?php $this->font_awesome_render($style['oxi_image_light_box_bg_overlay_icon_icon']); ?>
+                                        </div>
+                                        <?php $this->font_awesome_render($value['oxi_image_light_box_button_icon']) ?>
+                                    </div>
+                                    <?php
+                                }
+                            }
+                            ?>
+                        </div>
+                        <?php
+                    } else {
+                        ?>
+
+                        <a class="oxi_addons__light_box_item" data-src="<?php echo esc_url($value['oxi_image_light_box_video']); ?>" data-sub-html="<?php
+                        if (array_key_exists('oxi_image_light_box_title', $value) && $value['oxi_image_light_box_title'] != '') {
+                            ?>
+                               <<?php echo esc_attr($style['oxi_image_light_box_tag']); ?> class='oxi_addons__heading'><?php $this->text_render($value['oxi_image_light_box_title']) ?></<?php echo esc_attr($style['oxi_image_light_box_tag']); ?>>
+                               <?php
+                           }
+                           ?> <br> <?php
+                           if (array_key_exists('oxi_image_light_box_desc', $value) && $value['oxi_image_light_box_desc'] != '') {
+                               ?>
+                               <div class='oxi_addons__details'><?php $this->text_render($value['oxi_image_light_box_desc']) ?></div>
+                               <?php
+                           }
+                           ?>">
+                               <?php
+                               if (array_key_exists('oxi_image_light_box_clickable', $style) && $style['oxi_image_light_box_clickable'] == 'button') {
+                                   if (array_key_exists('oxi_image_light_box_button_text', $value) && $value['oxi_image_light_box_button_text'] != '') {
+                                       ?>
+                                    <div class="oxi_addons__button_main">
+                                        <button class="oxi_addons__button">
+                                            <?php $this->text_render($value['oxi_image_light_box_button_text']); ?>
+                                        </button>
+                                    </div> 
+                                    <?php
+                                }
+                            } elseif (array_key_exists('oxi_image_light_box_clickable', $style) && $style['oxi_image_light_box_clickable'] == 'image') {
+                                if ($this->custom_media_render('oxi_image_light_box_image_front', $value) != '') {
+                                    ?>
+                                    <div  class="oxi_addons__image_main <?php echo esc_attr($style['oxi_image_light_box_custom_width_height_swither']); ?>" style="background-image: url('<?php echo esc_url($this->custom_media_render('oxi_image_light_box_image_front', $value)); ?>');" >
+                                        <div class="oxi_addons__overlay">
+                                            <?php $this->font_awesome_render($style['oxi_image_light_box_bg_overlay_icon']); ?>
+                                        </div>
+                                    </div>
+                                    <?php
+                                }
+                            } else {
+                                if ($value['oxi_image_light_box_button_icon'] != '') {
+                                    ?>
+                                    <div  class="oxi_addons__icon" >
+                                        <div class="oxi_addons__overlay">
+                                            <?php $this->font_awesome_render($style['oxi_image_light_box_bg_overlay_icon_icon']); ?>
+                                        </div>
+                                        <?php $this->font_awesome_render($value['oxi_image_light_box_button_icon']); ?>
+                                    </div>
+                                    <?php
+                                }
+                            }
+                            ?>
+                        </a>
+                        <?php
+                    }
+                    ?>
+                </div>
+                <?php
+                if ($admin == 'admin'):
+                    $this->oxi_addons_admin_edit_delete_clone($val['id']);
+                endif;
+                ?>
+            </div>
+            <?php
         }
     }
 

@@ -19,65 +19,78 @@ class Effects29 extends Public_Render {
 
         foreach ($child as $key => $val) {
             $value = json_decode(stripslashes($val['rawdata']), true);
-            $image = $frontheading = $backheading = $frontcontent = $backcontent = $fronticon = $backicon = $button = $hr = $ht = '';
-
-            if ($value['image_hover_front_heading'] != ''):
-                $frontheading = '<div class="oxi-image-hover-heading ' . $style['oxi-image-flip-front-heading-underline'] . '">' . $this->text_render($value['image_hover_front_heading']) . '</div>';
+            $ht = '';
+            ?>
+            <div class="oxi-image-hover-style <?php $this->column_render('oxi-image-hover-col', $style); ?> <?php
+            if ($admin == "admin"):
+                echo 'oxi-addons-admin-edit-list';
             endif;
+            ?>"  <?php $this->animation_render('oxi-image-hover-animation', $style); ?>>
+                <div class="oxi-image-hover-style-flipbox">
+                    <?php
+                    if ($this->checkurl_render('image_hover_button_link', $value) === true):
+                        $ht = true;
+                        ?>
+                        <a <?php $this->url_render('image_hover_button_link', $value); ?>>
+                            <?php
+                        endif;
+                        ?>
+                        <div class="oxi-image-hover oxi-image-flipbox-hover oxi-image-flipbox-hover-style-29 oxi-image-flipbox-hover-<?php echo esc_attr($this->oxiid); ?>-<?php echo esc_attr($val['id']); ?>">
+                            <div class="oxi-image-hover-figure <?php echo esc_attr($style['image_hover_effects']); ?> <?php echo esc_attr($style['image_hover_timing_type']); ?>">
+                                <div class="oxi-image-hover-figure-frontend">
+                                    <div class="oxi-image-hover-figure-front-section">
+                                        <div class="oxi-image-hover-figure-front-section-body">
+                                            <?php
+                                            if ($value['image_hover_front_icon'] != ''):
+                                                ?>
+                                                <div class="oxi-image-hover-icon"><?php $this->font_awesome_render($value['image_hover_front_icon']); ?></div>
+                                                <?php
+                                            endif;
+                                            if ($value['image_hover_front_heading'] != ''):
+                                                ?>
+                                                <div class="oxi-image-hover-heading  <?php echo esc_attr($style['oxi-image-flip-front-heading-underline']); ?>"><?php $this->text_render($value['image_hover_front_heading']); ?></div>
+                                                <?php
+                                            endif;
+                                            ?>
 
-
-
-
-            if ($value['image_hover_back_description'] != ''):
-                $backcontent = '<div class="oxi-image-hover-content ' . $this->style['oxi-image-flip-back-desc-animation'] . ' ' . $this->style['oxi-image-flip-back-desc-animation-delay'] . '">' . $this->text_render($value['image_hover_back_description']) . '</div>';
-            endif;
-
-
-            if ($value['image_hover_front_icon'] != ''):
-                $fronticon = '<div class="oxi-image-hover-icon">' . $this->font_awesome_render($value['image_hover_front_icon']) . '</div>';
-            endif;
-
-            if ($this->url_render('image_hover_button_link', $value) != ''):
-                $hr = '<a ' . $this->url_render('image_hover_button_link', $value) . '>';
-                $ht = '</a>';
-            endif;
-
-
-            echo '  <div class="oxi-image-hover-style ' . $this->column_render('oxi-image-hover-col', $style) . ' ' . ($admin == "admin" ? 'oxi-addons-admin-edit-list' : '') . '"  ' . $this->animation_render('oxi-image-hover-animation', $style) . '>
-                        <div class="oxi-image-hover-style-flipbox">
-                            ' . $hr . '
-                                <div class="oxi-image-hover oxi-image-flipbox-hover oxi-image-flipbox-hover-style-29 oxi-image-flipbox-hover-' . $this->oxiid . '-' . $val['id'] . '">
-                                    <div class="oxi-image-hover-figure ' . $style['image_hover_effects'] . ' ' . $style['image_hover_timing_type'] . '">
-                                        <div class="oxi-image-hover-figure-frontend">
-                                            <div class="oxi-image-hover-figure-front-section">
-                                                <div class="oxi-image-hover-figure-front-section-body">
-                                                        ' . $fronticon . ' 
-                                                    
-                                                    ' . $frontheading . '
-                                              
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="oxi-image-hover-figure-backend">
-                                            <div class="oxi-image-hover-figure-back-section ">
-                                                <div class="oxi-image-hover-figure-backend-section-body ">
-                                                    ' . $backcontent  . '
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                           ' . $ht . '
-                        </div>';
-            if ($admin == 'admin') :
-                echo $this->oxi_addons_admin_edit_delete_clone($val['id']);
-            endif;
+                                <div class="oxi-image-hover-figure-backend">
+                                    <div class="oxi-image-hover-figure-back-section ">
+                                        <div class="oxi-image-hover-figure-backend-section-body ">
+                                            <?php
+                                            if ($value['image_hover_back_description'] != ''):
+                                                ?>
+                                                <div class="oxi-image-hover-content  <?php echo esc_attr($this->style['oxi-image-flip-back-desc-animation']); ?>  <?php echo esc_attr($this->style['oxi-image-flip-back-desc-animation-delay']); ?>"> <?php $this->text_render($value['image_hover_back_description']); ?></div>
+                                                <?php
+                                            endif;
+                                            ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                        if ($ht === true):
+                            ?>
+                        </a>
+                        <?php
+                    endif;
+                    ?>
+                </div> 
+                <?php
+                if ($admin == 'admin') :
+                    $this->oxi_addons_admin_edit_delete_clone($val['id']);
+                endif;
 
-            if ($this->media_background_render('image_hover_back_image', $value) != ''):
-                $url = $this->media_background_render('image_hover_back_image', $value);
-                $this->inline_css .= '.' . $this->WRAPPER . ' .oxi-image-flipbox-hover-' . $this->oxiid . '-' . $val['id'] . ' .oxi-image-hover-figure-backend:after{background: url(' . $url . ');-moz-background-size: 100% 100% !important;-o-background-size: 100% 100% !important; background-size: 100% 100% !important;}';
-            endif;
-            echo ' </div>';
+                if ($this->media_background_render('image_hover_back_image', $value) != ''):
+                    $url = $this->media_background_render('image_hover_back_image', $value);
+                    $this->inline_css .= '.' . $this->WRAPPER . ' .oxi-image-flipbox-hover-' . $this->oxiid . '-' . $val['id'] . ' .oxi-image-hover-figure-backend:after{background: url(' . $url . ');-moz-background-size: 100% 100% !important;-o-background-size: 100% 100% !important; background-size: 100% 100% !important;}';
+                endif;
+                ?>
+            </div> 
+            <?php
         }
     }
 

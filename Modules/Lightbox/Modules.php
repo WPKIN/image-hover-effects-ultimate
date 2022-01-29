@@ -1273,123 +1273,125 @@ class Modules extends Admin_Render {
     }
 
     public function modal_form_data() {
-        echo '<div class="modal-header">
-                    <h4 class="modal-title">Image Hover Form</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">';
+        ?>
+        <div class="modal-header">
+            <h4 class="modal-title">Image Hover Form</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <?php
+            $this->start_controls_section(
+                    'oxi-image-hover', [
+                'label' => esc_html__('General Style', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'showing' => true,
+                    ]
+            );
 
-        $this->start_controls_section(
-                'oxi-image-hover', [
-            'label' => esc_html__('General Style', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'showing' => true,
-                ]
-        );
+            $this->add_group_control(
+                    'oxi_image_light_box_image_front', $this->style, [
+                'label' => esc_html__('Media Type', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::MEDIA,
+                'default' => [
+                    'type' => 'media-library',
+                    'link' => 'https://www.shortcode-addons.com/wp-content/uploads/2020/01/placeholder.png',
+                ],
+                'condition' => [
+                    'oxi_image_light_box_clickable' => 'image',
+                ],
+                    ]
+            );
+            $this->add_control(
+                    'oxi_image_light_box_button_icon', $this->style, [
+                'label' => esc_html__('Icon', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::ICON,
+                'default' => 'fab fa-accusoft',
+                'condition' => [
+                    'oxi_image_light_box_clickable' => 'icon',
+                ],
+                    ]
+            );
+            $this->add_control(
+                    'oxi_image_light_box_button_text', $this->style, [
+                'label' => esc_html__('Button Text', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::TEXT,
+                'default' => esc_html__('Show Popup', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'selector' => [
+                    '{{WRAPPER}} .oxi_addons__light_box_{{KEY}} .oxi_addons__button' => '',
+                ],
+                'condition' => [
+                    'oxi_image_light_box_clickable' => 'button',
+                ],
+                    ]
+            );
 
-        $this->add_group_control(
-                'oxi_image_light_box_image_front', $this->style, [
-            'label' => esc_html__('Media Type', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::MEDIA,
-            'default' => [
-                'type' => 'media-library',
-                'link' => 'https://www.shortcode-addons.com/wp-content/uploads/2020/01/placeholder.png',
-            ],
-            'condition' => [
-                'oxi_image_light_box_clickable' => 'image',
-            ],
-                ]
-        );
-        $this->add_control(
-                'oxi_image_light_box_button_icon', $this->style, [
-            'label' => esc_html__('Icon', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::ICON,
-            'default' => 'fab fa-accusoft',
-            'condition' => [
-                'oxi_image_light_box_clickable' => 'icon',
-            ],
-                ]
-        );
-        $this->add_control(
-                'oxi_image_light_box_button_text', $this->style, [
-            'label' => esc_html__('Button Text', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::TEXT,
-            'default' => esc_html__('Show Popup', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'selector' => [
-                '{{WRAPPER}} .oxi_addons__light_box_{{KEY}} .oxi_addons__button' => '',
-            ],
-            'condition' => [
-                'oxi_image_light_box_clickable' => 'button',
-            ],
-                ]
-        );
+            $this->end_controls_section();
+            $this->start_controls_section(
+                    'oxi-image-hover', [
+                'label' => esc_html__('Popup Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'showing' => true,
+                    ]
+            );
+            $this->add_control(
+                    'oxi_image_light_box_select_type', $this->style, [
+                'label' => esc_html__('Select Type', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::SELECT,
+                'default' => 'image',
+                'loader' => true,
+                'options' => [
+                    'image' => __('Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                    'video' => __('Video', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                ],
+                    ]
+            );
+            $this->add_group_control(
+                    'oxi_image_light_box_image', $this->style, [
+                'label' => esc_html__('Media Type', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::MEDIA,
+                'default' => [
+                    'type' => 'media-library',
+                    'link' => 'https://www.shortcode-addons.com/wp-content/uploads/2020/01/placeholder.png',
+                ],
+                'condition' => [
+                    'oxi_image_light_box_select_type' => 'image',
+                ],
+                    ]
+            );
+            $this->add_control(
+                    'oxi_image_light_box_video', $this->style, [
+                'label' => esc_html__('Youtube Link', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::TEXT,
+                'placeholder' => 'https://www.youtube.com/watch?v=sEWx6H8gZH8',
+                'default' => 'https://www.youtube.com/watch?v=sEWx6H8gZH8',
+                'condition' => [
+                    'oxi_image_light_box_select_type' => 'video',
+                ],
+                    ]
+            );
+            $this->add_control(
+                    'oxi_image_light_box_title', $this->style, [
+                'label' => esc_html__('Title', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::TEXT,
+                'default' => esc_html__('What is Lorem Ipsum? ', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'selector' => [
+                    '{{WRAPPER}} .oxi_addons__light_box_{{KEY}} .oxi_addons__heading' => '',
+                ],
+                    ]
+            );
+            $this->add_control(
+                    'oxi_image_light_box_desc', $this->style, [
+                'label' => esc_html__('Description', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'type' => Controls::TEXTAREA,
+                'default' => esc_html__('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrytandard ', OXI_IMAGE_HOVER_TEXTDOMAIN),
+                'selector' => [
+                    '{{WRAPPER}} .oxi_addons__light_box_{{KEY}} .oxi_addons__details' => '',
+                ],
+                    ]
+            );
 
-        $this->end_controls_section();
-        $this->start_controls_section(
-                'oxi-image-hover', [
-            'label' => esc_html__('Popup Settings', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'showing' => true,
-                ]
-        );
-        $this->add_control(
-                'oxi_image_light_box_select_type', $this->style, [
-            'label' => esc_html__('Select Type', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::SELECT,
-            'default' => 'image',
-            'loader' => true,
-            'options' => [
-                'image' => __('Image', OXI_IMAGE_HOVER_TEXTDOMAIN),
-                'video' => __('Video', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            ],
-                ]
-        );
-        $this->add_group_control(
-                'oxi_image_light_box_image', $this->style, [
-            'label' => esc_html__('Media Type', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::MEDIA,
-            'default' => [
-                'type' => 'media-library',
-                'link' => 'https://www.shortcode-addons.com/wp-content/uploads/2020/01/placeholder.png',
-            ],
-            'condition' => [
-                'oxi_image_light_box_select_type' => 'image',
-            ],
-                ]
-        );
-        $this->add_control(
-                'oxi_image_light_box_video', $this->style, [
-            'label' => esc_html__('Youtube Link', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::TEXT,
-            'placeholder' => 'https://www.youtube.com/watch?v=sEWx6H8gZH8',
-            'default' => 'https://www.youtube.com/watch?v=sEWx6H8gZH8',
-            'condition' => [
-                'oxi_image_light_box_select_type' => 'video',
-            ],
-                ]
-        );
-        $this->add_control(
-                'oxi_image_light_box_title', $this->style, [
-            'label' => esc_html__('Title', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::TEXT,
-            'default' => esc_html__('What is Lorem Ipsum? ', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'selector' => [
-                '{{WRAPPER}} .oxi_addons__light_box_{{KEY}} .oxi_addons__heading' => '',
-            ],
-                ]
-        );
-        $this->add_control(
-                'oxi_image_light_box_desc', $this->style, [
-            'label' => esc_html__('Description', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'type' => Controls::TEXTAREA,
-            'default' => esc_html__('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrytandard ', OXI_IMAGE_HOVER_TEXTDOMAIN),
-            'selector' => [
-                '{{WRAPPER}} .oxi_addons__light_box_{{KEY}} .oxi_addons__details' => '',
-            ],
-                ]
-        );
-
-        $this->end_controls_section();
-
-        echo '</div>';
+            $this->end_controls_section();
+            ?>
+        </div>
+        <?php
     }
 
 }

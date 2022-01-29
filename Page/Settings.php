@@ -51,7 +51,7 @@ class Settings {
         ?>
         <div class="wrap">
             <?php
-            echo apply_filters('oxi-image-hover-plugin/admin_menu', TRUE);
+             apply_filters('oxi-image-hover-plugin/admin_menu', TRUE);
             ?>
             <div class="oxi-addons-row oxi-addons-admin-settings">
                 <h2>General</h2>
@@ -68,8 +68,8 @@ class Settings {
                                     <fieldset>
                                         <select name="oxi_addons_user_permission" id="oxi_addons_user_permission">
                                             <?php foreach ($this->roles as $key => $role) { ?>
-                                                <option value="<?php echo $key; ?>" <?php selected($this->saved_role, $key); ?>>
-                                                    <?php echo $role; ?></option>
+                                            <option value="<?php echo esc_attr($key); ?>" <?php selected($this->saved_role, $key); ?>>
+                                                    <?php echo esc_html($role); ?></option>
                                             <?php } ?>
                                         </select>
                                         <span class="oxi-addons-settings-connfirmation oxi_addons_user_permission"></span>
@@ -180,7 +180,7 @@ class Settings {
                                 <td class="valid">
                                     <input type="text" class="regular-text" id="oxi_addons_custom_parent_class"
                                            name="oxi_addons_custom_parent_class"
-                                           value="<?php echo get_option('oxi_addons_custom_parent_class'); ?>">
+                                           value="<?php echo esc_attr(get_option('oxi_addons_custom_parent_class')); ?>">
                                     <span class="oxi-addons-settings-connfirmation oxi_addons_custom_parent_class "></span>
                                     <p class="description">Add custom panrent Class as Avoid Conflict with Theme or Plugins.</p>
                                 </td>
@@ -199,7 +199,7 @@ class Settings {
                                 </th>
                                 <td class="valid">
                                     <input type="text" class="regular-text" id="image_hover_ultimate_license_key"
-                                           name="image_hover_ultimate_license_key" value="<?php echo ($this->status == 'valid' && empty($this->license)) ? '****************************************' : $this->license; ?>">
+                                           name="image_hover_ultimate_license_key" value="<?php echo ($this->status == 'valid' && empty($this->license)) ? '****************************************' : esc_attr($this->license); ?>">
                                     <span class="oxi-addons-settings-connfirmation image_hover_ultimate_license_massage">
                                         <?php
                                         if ($this->status == 'valid' && empty($this->license)) :
@@ -220,7 +220,7 @@ class Settings {
                                         elseif ($this->status == 'valid' && !empty($this->license)) :
                                             echo '<span class="oxi-addons-settings-massage">Active</span>';
                                         elseif (!empty($this->license)) :
-                                            echo '<span class="oxi-addons-settings-massage">' . $this->status . '</span>';
+                                            echo '<span class="oxi-addons-settings-massage">' . esc_html($this->status) . '</span>';
                                         else :
                                             echo '<span class="oxi-addons-settings-massage"></span>';
                                         endif;
