@@ -98,7 +98,8 @@ class Effects1 extends Public_Render {
                         <div class="image-hover-category-item-show  <?php
                              $select_cat_data = (array_key_exists('image_hover_category_select', $childdata) && is_array($childdata['image_hover_category_select'])) ? $childdata['image_hover_category_select'] : [];
                              foreach ($select_cat_data as $item) :
-                                 $this->CatStringToClassReplacce($item, $oxiid) . ' ';
+                                 $this->CatStringToClassReplacce($item, $oxiid);
+                                 echo ' ';
                              endforeach;
                              ?>  <?php
                              $this->column_render('category_col', $styledata);

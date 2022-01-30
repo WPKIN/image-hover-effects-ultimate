@@ -173,10 +173,11 @@ class Effects2 extends Public_Render {
                                    $select_cat_data = (array_key_exists('image_hover_category_select', $childdata) && is_array($childdata['image_hover_category_select'])) ? $childdata['image_hover_category_select'] : [];
 
                                    foreach ($select_cat_data as $item) :
-                                       $this->CatStringToClassReplacce($item, $oxiid) . ' ';
+                                       $this->CatStringToClassReplacce($item, $oxiid) ;
+                                       echo ' ';
                                    endforeach;
                                    ?> <?php echo esc_attr($childdata['category_item_col-lap'] . '-lap'); ?> <?php echo esc_attr($childdata['category_item_col-tab'] . '-tab'); ?> <?php echo esc_attr($childdata['category_item_col-mob'] . '-mob'); ?> <?php
-                                   if (admin == "admin"):
+                                   if ($admin == "admin"):
                                        echo '  oxi-addons-admin-edit-list';
                                    endif;
                                    ?>">
