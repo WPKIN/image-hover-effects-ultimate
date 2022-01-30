@@ -55,9 +55,7 @@ class Shortcode {
     }
 
     public function CSSJS_load() {
-
-
-    
+        $this->manual_import_style();
         $this->admin_css_loader();
         $this->admin_home();
         $this->admin_rest_api();
@@ -82,7 +80,50 @@ class Shortcode {
         return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
     }
 
-     public function Render() {
+    public function manual_import_style() {
+        if (!empty($_REQUEST['_wpnonce'])) {
+            $nonce = $_REQUEST['_wpnonce'];
+        }
+
+        if (!empty($_POST['importdatasubmit']) && sanitize_text_field($_POST['importdatasubmit']) == 'Save') {
+            if (!wp_verify_nonce($nonce, 'image-hover-effects-ultimate-import')) {
+                die('You do not have sufficient permissions to access this page.');
+            } else {
+                if (isset($_FILES['importimagehoverultimatefile'])) :
+                    $filename = $_FILES["importimagehoverultimatefile"]["name"];
+
+                    if (!current_user_can('upload_files')):
+                        wp_die(__('You do not have permission to upload files.'));
+                    endif;
+
+                    $allowedMimes = array(
+                        'json' => 'text/plain'
+                    );
+
+                    $fileInfo = wp_check_filetype(basename($_FILES['importimagehoverultimatefile']['name']), $allowedMimes);
+                    if (empty($fileInfo['ext'])) {
+                        wp_die(__('You do not have permission to upload files.'));
+                    }
+
+                    $content = json_decode(file_get_contents($_FILES['importimagehoverultimatefile']['tmp_name']), true);
+
+                    if (empty($content)) {
+                        return new \WP_Error('file_error', 'Invalid File');
+                    }
+                    $style = $content['style'];
+                    if (!is_array($style)) {
+                        return new \WP_Error('file_error', 'Invalid Content In File');
+                    }
+                    $ImportApi = new \OXI_IMAGE_HOVER_PLUGINS\Classes\ImageApi;
+                    $new_slug = $ImportApi->post_json_import($content);
+                    echo '<script type="text/javascript"> document.location.href = "' . $new_slug . '"; </script>';
+                    exit;
+                endif;
+            }
+        }
+    }
+
+    public function Render() {
         ?>
         <div class="oxi-addons-row">
             <?php
@@ -104,7 +145,8 @@ class Shortcode {
         </div>
         <?php
     }
-      /**
+
+    /**
      * Plugin Name Convert to View
      *
      * @since 9.3.0
@@ -150,7 +192,9 @@ class Shortcode {
                                 <td>
                                     <a href="<?php echo esc_url(admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$effects&styleid=$id")) ?>"  title="Edit"  class="btn btn-primary" style="float:left; margin-right: 5px;">Edit</a>
                                     <a href="#"  title="Clone"  class="btn btn-secondary oxi-addons-style-clone"  datavalue="<?php echo (int) $id; ?>" style="float:left; margin-right: 5px;">Clone</a>
-                                     <button class="btn btn-danger oxi-addons-style-delete" style="float:left"  title="Delete" value="<?php echo (int) $id; ?>" type="button" value="delete">Delete</button>
+                                    <a href="<?php echo esc_url(rest_url() . 'ImageHoverUltimate/v1/shortcode_export?styleid=' . $id . '& _wpnonce=' . wp_create_nonce('wp_rest')); ?>"  title="Export"  class="btn btn-info" style="float:left; margin-right: 5px;">Export</a>
+
+                                    <button class="btn btn-danger oxi-addons-style-delete" style="float:left"  title="Delete" value="<?php echo (int) $id; ?>" type="button" value="delete">Delete</button>
                                 </td>
                             </tr>
                             <?php
@@ -166,8 +210,44 @@ class Shortcode {
 
     public function create_new() {
         ?>
-      
 
+        <div class="oxi-addons-row">
+            <div class="oxi-addons-col-1 oxi-import">
+                <div class="oxi-addons-style-preview">
+                    <div class="oxilab-admin-style-preview-top">
+                        <a href="#" id="oxi-import-style">
+                            <div class="oxilab-admin-add-new-item">
+                                <span>
+                                    <i class="fas fa-plus-circle oxi-icons"></i>
+                                    Import Image Hover Files
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="oxi-addons-style-import-modal" >
+            <form method="post" id="oxi-addons-import-modal-form" enctype = "multipart/form-data">
+                <div class="modal-dialog modal-sm modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Import JSON Files</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <input class="form-control" type="file" name="importimagehoverultimatefile" accept=".json,application/json,.zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-success" name="importdatasubmit" id="importdatasubmit" value="Save">
+                        </div>
+                    </div>
+                </div>
+                <?php echo wp_nonce_field("image-hover-effects-ultimate-import") ?>
+            </form>
+        </div>
 
         <div class="modal fade" id="oxi-addons-style-clone-modal" >
             <form method="post" id="oxi-addons-style-clone-modal-form">

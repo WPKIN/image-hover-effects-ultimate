@@ -383,7 +383,7 @@ class ImageApi {
             $this->send_file_headers($filename, strlen($finalfiles));
             @ob_end_clean();
             flush();
-            $finalfiles;
+            echo $finalfiles;
             die;
         else :
             return 'Silence is Golden';

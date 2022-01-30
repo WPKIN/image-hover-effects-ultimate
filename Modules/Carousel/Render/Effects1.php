@@ -63,7 +63,13 @@ class Effects1 extends Public_Render {
     public function inline_public_css() {
         $css = '';
     }
-
+   public function custom_font_awesome_render($data) {
+        $fadata = get_option('oxi_addons_font_awesome');
+        if ($fadata != 'no') :
+            wp_enqueue_style('font-awsome.min', OXI_IMAGE_HOVER_URL . '/assets/frontend/css/font-awsome.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        endif;
+        return '<i class="' . esc_attr($data) . ' oxi-icons"></i>';
+    }
     public function default_render($style, $child, $admin) {
         if (!array_key_exists('carousel_register_style', $style) && $style['carousel_register_style'] < 1) :
             ?>
@@ -94,8 +100,8 @@ class Effects1 extends Public_Render {
         $tab_item = $style['carousel_item_slide-tab-size'];
         $mobile_item = $style['carousel_item_slide-mob-size'];
 
-        $prev = $this->font_awesome_render($style['carousel_left_arrow']);
-        $next = $this->font_awesome_render($style['carousel_right_arrow']);
+        $prev = $this->custom_font_awesome_render($style['carousel_left_arrow']);
+        $next = $this->custom_font_awesome_render($style['carousel_right_arrow']);
 
         $autoplay = ($style['carousel_autoplay'] == 'yes') ? 'true' : 'false';
         $autoplayspeed = $style['carousel_autoplay_speed'];
