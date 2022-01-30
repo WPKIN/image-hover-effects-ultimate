@@ -55,12 +55,13 @@ class Effects2 extends Modules {
                 'description' => 'Select Width range for this Shortcode. '
                     ]
             );
+           
             $this->add_control(
                     'image_hover_category_select', $this->style, [
                 'label' => esc_html__('Category Select', 'image-hover-effects-ultimate'),
                 'type' => Controls::SELECT,
                 'multiple' => TRUE,
-                'options' => $this->allcatrgory,
+                'options' => $this->allcategory,
                 'description' => 'Select Category For your Shortcode. '
                     ]
             );

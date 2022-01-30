@@ -1,5 +1,7 @@
 <?php
 
+
+    
 namespace OXI_IMAGE_HOVER_PLUGINS\Page;
 
 if (!defined('ABSPATH')) {

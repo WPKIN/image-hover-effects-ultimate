@@ -152,8 +152,8 @@ trait Admin_helper {
                 <nav class="oxilab-sa-admin-nav">
                     <ul class="oxilab-sa-admin-menu">
                         <?php
-                        $GETPage = $this->validate_post(sanitize_text_field($_GET['page']));
-                        $effects = (!empty($_GET['effects']) ? $this->validate_post(sanitize_text_field($_GET['effects'])) : '');
+                        $GETPage = sanitize_text_field($_GET['page']);
+                        $effects = (!empty($_GET['effects']) ? sanitize_text_field($_GET['effects']) : '');
                         if ($effects != '' && $GETPage == 'oxi-image-hover-ultimate') :
                             $url = $this->admin_url_convert('oxi-image-hover-ultimate') . '&effects=' . $effects;
                             ?>

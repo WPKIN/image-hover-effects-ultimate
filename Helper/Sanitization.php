@@ -566,7 +566,7 @@ trait Sanitization {
             }
 
             public function add_rearrange_control($id, array $data = [], array $arg = []) {
-                $condition = $this->forms_condition($arg);
+            
                 $separator = (array_key_exists('separator', $arg) ? ($arg['separator'] === TRUE ? 'shortcode-form-control-separator-before' : '') : '');
                 $value = array_key_exists($id, $data) ? $data[$id] : $arg['default'];
                 ?>
@@ -2736,7 +2736,7 @@ trait Sanitization {
                  * $arg['sub-title'] = 'Add New Items 02';
                  *
                  */
-                $condition = $this->forms_condition($arg);
+                
                 ?>
                 <div class="oxi-addons-item-form shortcode-addons-templates-right-panel <?php
                 if ($arg['showing']):

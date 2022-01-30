@@ -13,12 +13,12 @@ class Effects2 extends Public_Render {
     public function public_css() {
         wp_enqueue_style('oxi-image-hover-light-box', OXI_IMAGE_HOVER_URL . '/Modules/Lightbox/Files/Lightbox.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         wp_enqueue_style('oxi-image-hover-light-style-2', OXI_IMAGE_HOVER_URL . '/Modules/Lightbox/Files/style-2.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        wp_enqueue_style('MagnificPopup', OXI_IMAGE_HOVER_URL . '/Modules/Lightbox/Files/MagnificPopup.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('OxiPopup', OXI_IMAGE_HOVER_URL . '/Modules/Lightbox/Files/Popup.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
 
     public function public_jquery() {
-        wp_enqueue_script('MagnificPopup', OXI_IMAGE_HOVER_URL . '/Modules/Lightbox/Files/MagnificPopup.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        $this->JSHANDLE = 'MagnificPopup';
+        wp_enqueue_script('OxiPopup', OXI_IMAGE_HOVER_URL . '/Modules/Lightbox/Files/Popup.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        $this->JSHANDLE = 'OxiPopup';
     }
 
     /*
@@ -129,7 +129,7 @@ class Effects2 extends Public_Render {
             }
 
 
-            $js .= 'jQuery(".' . $this->WRAPPER . ' .lightbox_key_' . $key . '").OximagnificPopup({
+            $js .= 'jQuery(".' . $this->WRAPPER . ' .lightbox_key_' . $key . '").OxizenPopup({
                         ' . $image_video . '
                         mainClass: "' . $this->WRAPPER . '",
                         callbacks: {
@@ -147,26 +147,26 @@ class Effects2 extends Public_Render {
 
     public function inline_public_css() {
         $style = $this->style;
-        return '.oxi-image-hover-wrapper-' . $this->oxiid . '.Oximfp-bg{
+        return '.oxi-image-hover-wrapper-' . $this->oxiid . '.Oxipopup-bg{
                         background: ' . $style['oxi_image_light_bg_color'] . ';
                         z-index: ' . ($style['oxi_image_light_z_ind'] - 1) . ';
                       }
-                  .oxi-image-hover-wrapper-' . $this->oxiid . '.Oximfp-wrap{
+                  .oxi-image-hover-wrapper-' . $this->oxiid . '.Oxipopup-wrap{
                    z-index: ' . $style['oxi_image_light_z_ind'] . ';
                   }
-                  .oxi-image-hover-wrapper-' . $this->oxiid . ' .Oximfp-content{
+                  .oxi-image-hover-wrapper-' . $this->oxiid . ' .Oxipopup-content{
                     z-index: ' . ($style['oxi_image_light_z_ind'] + 2) . ';
                     }
-                  .oxi-image-hover-wrapper-' . $this->oxiid . ' .Oximfp-close{
+                  .oxi-image-hover-wrapper-' . $this->oxiid . ' .Oxipopup-close{
                       z-index: ' . ($style['oxi_image_light_z_ind'] + 3) . ';
                   }
 
-                 .oxi-image-hover-wrapper-' . $this->oxiid . ' .Oximfp-image-holder .Oximfp-close, 
-                 .oxi-image-hover-wrapper-' . $this->oxiid . ' .Oximfp-iframe-holder .Oximfp-close{
+                 .oxi-image-hover-wrapper-' . $this->oxiid . ' .Oxipopup-image-holder .Oxipopup-close, 
+                 .oxi-image-hover-wrapper-' . $this->oxiid . ' .Oxipopup-iframe-holder .Oxipopup-close{
                      color: ' . $style['oxi_image_light_cls_clr'] . ';
                   }
                  
-                  .oxi-image-hover-wrapper-' . $this->oxiid . ' .Oximfp-preloader{
+                  .oxi-image-hover-wrapper-' . $this->oxiid . ' .Oxipopup-preloader{
                      background: ' . $style['oxi_image_light_pre_clr'] . ';
                   }';
     }

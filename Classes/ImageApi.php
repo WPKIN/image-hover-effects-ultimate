@@ -116,11 +116,9 @@ class ImageApi {
         $rawdata = isset($_POST['rawdata']) ? sanitize_post($_POST['rawdata']) : '';
         $args = isset($_POST['args']) ? sanitize_post($_POST['args']) : '';
         $optional = isset($_POST['optional']) ? sanitize_post($_POST['optional']) : '';
-        if (!empty($classname) && !empty($functionname)):
-            ob_start();
+        if (!empty($classname) && !empty($functionname) && class_exists($classname)):
             $CLASS = new $classname;
             $CLASS->__construct($functionname, $rawdata, $args, $optional);
-            echo ob_get_clean();
         endif;
         die();
     }
@@ -244,8 +242,8 @@ class ImageApi {
         endif;
         if (is_array($arrfiles)):
             $rawdata = array_map(array($this, 'allowed_html'), $arrfiles);
-        elseif(empty($data)):
-             $rawdata = $this->allowed_html($this->rawdata);
+        elseif (empty($data)):
+            $rawdata = $this->allowed_html($this->rawdata);
         else:
             $rawdata = $this->allowed_html($data);
         endif;
@@ -293,11 +291,11 @@ class ImageApi {
     }
 
     public function post_layouts_clone() {
-         
+
         $newName = $this->validate_post();
-       
+
         $styleid = $this->styleid;
-         
+
         $style = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM $this->parent_table WHERE id = %d", $styleid), ARRAY_A);
         $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid), ARRAY_A);
 
@@ -425,8 +423,7 @@ class ImageApi {
         $rawdata = $this->validate_post();
         $id = $rawdata . '-' . (int) $this->styleid;
         $effects = $rawdata . '-ultimate';
-       
-        
+
         if ($this->styleid > 0) :
             $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->import_table} (type, name) VALUES (%s, %s)", array($effects, $id)));
             return admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$rawdata#" . $id);
@@ -656,6 +653,7 @@ class ImageApi {
         update_option('oxi_addons_user_permission', $rawdata['value']);
         return '<span class="oxi-confirmation-success"></span>';
     }
+
     /**
      * Admin Settings
      * @return void
@@ -665,6 +663,7 @@ class ImageApi {
         update_option('image_hover_ultimate_mobile_device_key', $rawdata['value']);
         return '<span class="oxi-confirmation-success"></span>';
     }
+
     /**
      * Admin Settings
      * @return void
@@ -674,6 +673,7 @@ class ImageApi {
         update_option('oxi_addons_font_awesome', $rawdata['value']);
         return '<span class="oxi-confirmation-success"></span>';
     }
+
     /**
      * Admin Settings
      * @return void
@@ -683,6 +683,7 @@ class ImageApi {
         update_option('oxi_addons_way_points', $rawdata['value']);
         return '<span class="oxi-confirmation-success"></span>';
     }
+
     /**
      * Admin Settings
      * @return void
@@ -692,6 +693,7 @@ class ImageApi {
         update_option('oxi_addons_google_font', $rawdata['value']);
         return '<span class="oxi-confirmation-success"></span>';
     }
+
     /**
      * Admin Settings
      * @return void
@@ -702,9 +704,6 @@ class ImageApi {
         return '<span class="oxi-confirmation-success"></span>';
     }
 
-    
-    
-    
     /**
      * Admin License
      * @return void
@@ -756,7 +755,7 @@ class ImageApi {
 
                 switch ($license_data->error) {
 
-                   
+
 
                     case 'revoked':
 
@@ -773,8 +772,6 @@ class ImageApi {
 
                         $message = esc_html('Your license is not active for this URL.');
                         break;
-
-                  
 
                     case 'no_activations_left':
 

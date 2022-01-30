@@ -27,7 +27,7 @@ jQuery.noConflict();
                     rawdata: rawdata
                 }
             });
-            console.log(result);
+            
             return callback(result);
         } catch (error) {
             console.error(error);
@@ -53,7 +53,7 @@ jQuery.noConflict();
         $('.modal-footer').prepend('<span class="spinner sa-spinner-open-left"></span>');
         Oxi_Image_Admin_Shortcode(functionname, rawdata, styleid, childid, function (callback) {
             setTimeout(function () {
-               // document.location.href = callback;
+                document.location.href = callback;
             }, 1000);
         });
     });

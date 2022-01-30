@@ -87,7 +87,7 @@ class Modules extends Admin_Render {
         );
 
         $all_category_data = (array_key_exists('category_menu_settings', $this->style) && is_array($this->style['category_menu_settings'])) ? $this->style['category_menu_settings'] : [];
-
+        
         foreach ($all_category_data as $value) :
             $this->allcategory[$value['category_item_text']] = $value['category_item_text'];
         endforeach;

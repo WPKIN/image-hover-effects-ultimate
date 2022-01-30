@@ -60,7 +60,7 @@ class Effects2 extends Modules {
                     'default' => 'rgba(68, 161, 86,1.00)',
                     'description' => 'Effect Will be show after Save!',
                     'selector' => [
-                        '.Oximfp-bg{{WRAPPER}}' => 'background:{{VALUE}};',
+                        '.Oxipopup-bg{{WRAPPER}}' => 'background:{{VALUE}};',
                     ],
                     'description' => 'Customize Lightbox Background Color.',
                 ]
