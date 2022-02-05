@@ -146,7 +146,7 @@ trait Admin_helper {
         <div class="oxi-addons-wrapper">
             <div class="oxilab-new-admin-menu">
                 <div class="oxi-site-logo">
-                    <a href="' <?php echo esc_url($this->admin_url_convert('oxi-image-hover-ultimate')); ?> '" class="header-logo" style=" background-image: url(<?php echo esc_url($bgimage); ?>);">
+                    <a href="<?php echo esc_url($this->admin_url_convert('oxi-image-hover-ultimate')); ?>" class="header-logo" style=" background-image: url(<?php echo esc_url($bgimage); ?>);">
                     </a>
                 </div>
                 <nav class="oxilab-sa-admin-nav">
