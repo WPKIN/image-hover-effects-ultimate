@@ -125,7 +125,7 @@ trait Sanitization {
 
         if (array_key_exists('condition', $arg)) :
             $i = $arg['condition'] != '' ? count($arg['condition']) : 0;
-           
+
             $data = '';
             $s = 1;
             $form_condition = array_key_exists('form_condition', $arg) ? $arg['form_condition'] : '';
@@ -165,7 +165,7 @@ trait Sanitization {
                 endif;
             }
             if (!empty($data)) :
-                echo 'data-condition="' . esc_attr($data).  '"';
+                echo 'data-condition="' . esc_attr($data) . '"';
             endif;
         endif;
     }
@@ -342,7 +342,7 @@ trait Sanitization {
                     'type' => 'text',
                     'label' => 'Input Text',
                     'default' => '',
-                        'label_on' => esc_html__('Yes', 'image-hover-effects-ultimate'),
+                    'label_on' => esc_html__('Yes', 'image-hover-effects-ultimate'),
                     'label_off' => esc_html__('No', 'image-hover-effects-ultimate'),
                     'placeholder' => esc_html__('', 'image-hover-effects-ultimate'),
                     'selector-data' => TRUE,
@@ -566,7 +566,7 @@ trait Sanitization {
             }
 
             public function add_rearrange_control($id, array $data = [], array $arg = []) {
-            
+
                 $separator = (array_key_exists('separator', $arg) ? ($arg['separator'] === TRUE ? 'shortcode-form-control-separator-before' : '') : '');
                 $value = array_key_exists($id, $data) ? $data[$id] : $arg['default'];
                 ?>
@@ -2736,10 +2736,9 @@ trait Sanitization {
                  * $arg['sub-title'] = 'Add New Items 02';
                  *
                  */
-                
                 ?>
                 <div class="oxi-addons-item-form shortcode-addons-templates-right-panel <?php
-                if ($arg['showing']):
+                if ($arg['showing'] != true):
                     echo 'oxi-admin-head-d-none';
                 endif;
                 ?>"  <?php
