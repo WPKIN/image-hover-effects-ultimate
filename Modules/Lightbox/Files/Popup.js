@@ -29,7 +29,7 @@
 
 
     var Oxipopup,
-            OxiMagnificPopup = function () {},
+            OxiZenPopup = function () {},
             _isJQ = !!(window.jQuery),
             _prevStatus,
             _window = $(window),
@@ -80,7 +80,7 @@
             _checkInstance = function () {
                 if (!$.OxizenPopup.instance) {
 
-                    Oxipopup = new OxiMagnificPopup();
+                    Oxipopup = new OxiZenPopup();
                     Oxipopup.init();
                     $.OxizenPopup.instance = Oxipopup;
                 }
@@ -105,9 +105,9 @@
 
 
 
-    OxiMagnificPopup.prototype = {
+    OxiZenPopup.prototype = {
 
-        constructor: OxiMagnificPopup,
+        constructor: OxiZenPopup,
 
         init: function () {
             var appVersion = navigator.appVersion;
@@ -747,7 +747,7 @@
 
     $.OxizenPopup = {
         instance: null,
-        proto: OxiMagnificPopup.prototype,
+        proto: OxiZenPopup.prototype,
         modules: [],
 
         open: function (options, index) {
