@@ -42,16 +42,11 @@ class Settings {
         $this->status = get_option('image_hover_ultimate_license_status');
     }
 
-    public function css_loader() {
-        $this->admin_css_loader();
-        wp_enqueue_script('oxi-image-hover-settings', OXI_IMAGE_HOVER_URL . '/assets/backend/js/settings.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-    }
-
     public function Render() {
         ?>
         <div class="wrap">
             <?php
-             apply_filters('oxi-image-hover-plugin/admin_menu', TRUE);
+            apply_filters('oxi-image-hover-plugin/admin_menu', TRUE);
             ?>
             <div class="oxi-addons-row oxi-addons-admin-settings">
                 <h2>General</h2>
@@ -68,9 +63,9 @@ class Settings {
                                     <fieldset>
                                         <select name="oxi_addons_user_permission" id="oxi_addons_user_permission">
                                             <?php foreach ($this->roles as $key => $role) { ?>
-                                            <option value="<?php echo esc_attr($key); ?>" <?php selected($this->saved_role, $key); ?>>
+                                                <option value="<?php echo esc_attr($key); ?>" <?php selected($this->saved_role, $key); ?>>
                                                     <?php echo esc_html($role); ?></option>
-                                            <?php } ?>
+                                                <?php } ?>
                                         </select>
                                         <span class="oxi-addons-settings-connfirmation oxi_addons_user_permission"></span>
                                         <br>
@@ -235,6 +230,11 @@ class Settings {
             </div>
         </div>
         <?php
+    }
+
+    public function css_loader() {
+        $this->admin_css_loader();
+        wp_enqueue_script('oxi-image-hover-settings', OXI_IMAGE_HOVER_URL . '/assets/backend/js/settings.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
 
 }

@@ -2758,7 +2758,51 @@ trait Sanitization {
                 <?php
             }
 
-            public function shortcodestyle_substitute_control($id, array $data = [], array $arg = []) {
+         
+
+            /*
+             * Image Hover Style Admin Panel Template Shortcode name.
+             *
+             * @since 9.3.0
+             */
+
+            public function shortcodename_substitute_control($id, array $data = [], array $arg = []) {
+                $default = [
+                    'showing' => FALSE,
+                    'title' => 'Shortcode Name',
+                    'placeholder' => 'Set Your Shortcode Name'
+                ];
+                $arg = array_merge($default, $arg);
+                /*
+                 * $arg['title'] = 'Add New Items';
+                 * $arg['sub-title'] = 'Add New Items 02';
+                 *
+                 */
+                ?>
+                <div class="oxi-addons-shortcode  shortcode-addons-templates-right-panel <?php
+                if ($arg['showing'] != true):
+                    echo 'oxi-admin-head-d-none';
+                endif;
+                ?>">
+                    <div class="oxi-addons-shortcode-heading  shortcode-addons-templates-right-panel-heading">
+                        <?php echo esc_html($arg['title']); ?>
+                        <div class="oxi-head-toggle"></div>
+                    </div>
+                    <div class="oxi-addons-shortcode-body  shortcode-addons-templates-right-panel-body">
+                        <form method="post" id="shortcode-addons-name-change-submit">
+                            <div class="input-group my-2">
+                                <input type="hidden" class="form-control" name="addonsstylenameid" value="<?php echo (int) $data['id']; ?>">
+                                <input type="text" class="form-control" name="addonsstylename" placeholder="<?php echo esc_html($arg['placeholder']); ?>" value="<?php echo esc_attr($data['name']); ?>">
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-success" id="addonsstylenamechange">Save</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <?php
+            }
+               public function shortcodestyle_substitute_control($id, array $data = [], array $arg = []) {
                 if (count($this->StyleChanger) > 0) :
                     $default = [
                         'showing' => FALSE,
@@ -2824,49 +2868,6 @@ trait Sanitization {
                     </div>
                     <?php
                 endif;
-            }
-
-            /*
-             * Image Hover Style Admin Panel Template Shortcode name.
-             *
-             * @since 9.3.0
-             */
-
-            public function shortcodename_substitute_control($id, array $data = [], array $arg = []) {
-                $default = [
-                    'showing' => FALSE,
-                    'title' => 'Shortcode Name',
-                    'placeholder' => 'Set Your Shortcode Name'
-                ];
-                $arg = array_merge($default, $arg);
-                /*
-                 * $arg['title'] = 'Add New Items';
-                 * $arg['sub-title'] = 'Add New Items 02';
-                 *
-                 */
-                ?>
-                <div class="oxi-addons-shortcode  shortcode-addons-templates-right-panel <?php
-                if ($arg['showing'] != true):
-                    echo 'oxi-admin-head-d-none';
-                endif;
-                ?>">
-                    <div class="oxi-addons-shortcode-heading  shortcode-addons-templates-right-panel-heading">
-                        <?php echo esc_html($arg['title']); ?>
-                        <div class="oxi-head-toggle"></div>
-                    </div>
-                    <div class="oxi-addons-shortcode-body  shortcode-addons-templates-right-panel-body">
-                        <form method="post" id="shortcode-addons-name-change-submit">
-                            <div class="input-group my-2">
-                                <input type="hidden" class="form-control" name="addonsstylenameid" value="<?php echo (int) $data['id']; ?>">
-                                <input type="text" class="form-control" name="addonsstylename" placeholder="<?php echo esc_html($arg['placeholder']); ?>" value="<?php echo esc_attr($data['name']); ?>">
-                                <div class="input-group-append">
-                                    <button type="button" class="btn btn-success" id="addonsstylenamechange">Save</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <?php
             }
 
             /*

@@ -14,7 +14,6 @@ jQuery.noConflict();
                 result = await $.ajax({
                     url: ImageHoverUltimate.root + 'ImageHoverUltimate/v1/' + functionname,
                     method: 'POST',
-
                     data: {
                         _wpnonce: ImageHoverUltimate.nonce,
                         styleid: styleid,

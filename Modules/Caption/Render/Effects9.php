@@ -27,7 +27,7 @@ class Effects9 extends Public_Render {
             endif;
             ?>" <?php $this->animation_render('oxi-image-hover-animation', $style); ?>>
                 <div class="oxi-image-hover-style-caption">
-                    <div class="oxi-image-hover oxi-image-caption-hover oxi-image-caption-hover-style-5 <?php echo esc_attr($this->style['image_hover_effects']); ?>">
+                    <div class="oxi-image-hover oxi-image-caption-hover oxi-image-caption-hover-style-9 <?php echo esc_attr($this->style['image_hover_effects']); ?>">
                         <?php
                         if ($this->checkurl_render('image_hover_button_link', $value) === true && empty($value['image_hover_button_text'])):
                             $ht = true;

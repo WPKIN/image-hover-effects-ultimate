@@ -12,6 +12,39 @@ if (!defined('ABSPATH')) {
  */
 trait Public_Helper {
 
+    public function shortcode_render($styleid, $user) {
+        if (!empty($styleid) && !empty($user) && (int) $styleid):
+            $style = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $styleid), ARRAY_A);
+
+            if (!is_array($style)):
+                echo '<p> Shortcode Deleted, kindly add currect Shortcode</p>';
+                return;
+            endif;
+            if (!array_key_exists('rawdata', $style)):
+                $Installation = new \OXI_IMAGE_HOVER_PLUGINS\Classes\Installation();
+                $Installation->plugin_upgrade_hook();
+            endif;
+            $rawdata = json_decode(stripslashes($style['rawdata']), true);
+
+            if (((is_array($rawdata) && array_key_exists('image_hover_dynamic_content', $rawdata) && $rawdata['image_hover_dynamic_content'] == 'yes') ||
+                    (is_array($rawdata) && array_key_exists('image_hover_dynamic_load', $rawdata) && $rawdata['image_hover_dynamic_load'] == 'yes') ||
+                    (is_array($rawdata) && array_key_exists('image_hover_dynamic_carousel', $rawdata) && $rawdata['image_hover_dynamic_carousel'] == 'yes')) && apply_filters('oxi-image-hover-plugin-version', false)) :
+                $C = '\OXI_IMAGE_HOVER_PLUGINS\Modules\Compailer';
+                if (class_exists($C)):
+                    new $C($style, [], $user);
+                endif;
+            else:
+                $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid), ARRAY_A);
+                $name = explode('-', ucfirst($style['style_name']));
+                $C = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($name[0]) . '\Render\Effects' . $name[1];
+                if (class_exists($C)):
+                    new $C($style, $child, $user);
+                endif;
+            endif;
+
+        endif;
+    }
+
     /**
      * Plugin Name Convert to View
      *
@@ -63,39 +96,6 @@ trait Public_Helper {
         $data = $data[0];
         $data = '"' . $data . '"';
         return $data;
-    }
-
-    public function shortcode_render($styleid, $user) {
-        if (!empty($styleid) && !empty($user) && (int) $styleid):
-            $style = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $styleid), ARRAY_A);
-
-            if (!is_array($style)):
-                echo '<p> Shortcode Deleted, kindly add currect Shortcode</p>';
-                return;
-            endif;
-            if (!array_key_exists('rawdata', $style)):
-                $Installation = new \OXI_IMAGE_HOVER_PLUGINS\Classes\Installation();
-                $Installation->plugin_upgrade_hook();
-            endif;
-            $rawdata = json_decode(stripslashes($style['rawdata']), true);
-
-            if (((is_array($rawdata) && array_key_exists('image_hover_dynamic_content', $rawdata) && $rawdata['image_hover_dynamic_content'] == 'yes') ||
-                    (is_array($rawdata) && array_key_exists('image_hover_dynamic_load', $rawdata) && $rawdata['image_hover_dynamic_load'] == 'yes') ||
-                    (is_array($rawdata) && array_key_exists('image_hover_dynamic_carousel', $rawdata) && $rawdata['image_hover_dynamic_carousel'] == 'yes')) && apply_filters('oxi-image-hover-plugin-version', false)) :
-                $C = '\OXI_IMAGE_HOVER_PLUGINS\Modules\Compailer';
-                if (class_exists($C)):
-                    new $C($style, [], $user);
-                endif;
-            else:
-                $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid), ARRAY_A);
-                $name = explode('-', ucfirst($style['style_name']));
-                $C = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($name[0]) . '\Render\Effects' . $name[1];
-                if (class_exists($C)):
-                    new $C($style, $child, $user);
-                endif;
-            endif;
-
-        endif;
     }
 
     public function allowed_html($rawdata) {
@@ -193,7 +193,7 @@ trait Public_Helper {
     }
 
     public function validate_post($files = '') {
-        
+
         $rawdata = [];
         if (!empty($files)):
             $data = json_decode(stripslashes($files), true);
@@ -203,7 +203,7 @@ trait Public_Helper {
         else:
             $rawdata = $this->allowed_html($files);
         endif;
-       
+
         return $rawdata;
     }
 

@@ -12,27 +12,6 @@ if (!defined('ABSPATH')) {
  */
 trait CSS_JS_Loader {
 
-    public function admin_css_loader() {
-        $this->admin_css();
-        $this->admin_js();
-    }
-
-    public function admin_css() {
-        $this->loader_font_familly_validation(['Bree+Serif', 'Source+Sans+Pro']);
-        wp_enqueue_style('oxilab-image-hover-bootstrap', OXI_IMAGE_HOVER_URL . 'assets/backend/css/bootstrap.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        wp_enqueue_style('font-awsome.min', OXI_IMAGE_HOVER_URL . 'assets/frontend/css/font-awsome.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        wp_enqueue_style('oxilab-admin-css', OXI_IMAGE_HOVER_URL . '/assets/backend/css/admin.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-    }
-
-    public function admin_js() {
-        wp_enqueue_script("jquery");
-        wp_enqueue_script('oxilab-bootstrap', OXI_IMAGE_HOVER_URL . '/assets/backend/js/bootstrap.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        wp_localize_script('oxilab-bootstrap', 'ImageHoverUltimate', array(
-            'root' => esc_url_raw(rest_url()),
-            'nonce' => wp_create_nonce('wp_rest')
-        ));
-    }
-
     public function admin_home() {
         wp_enqueue_script("jquery");
         wp_enqueue_script('jquery-ui-core');
@@ -96,6 +75,27 @@ trait CSS_JS_Loader {
         foreach ($data as $value) {
             wp_enqueue_style('' . $value . '', 'https://fonts.googleapis.com/css?family=' . $value . '');
         }
+    }
+
+    public function admin_css_loader() {
+        $this->admin_css();
+        $this->admin_js();
+    }
+
+    public function admin_css() {
+        $this->loader_font_familly_validation(['Bree+Serif', 'Source+Sans+Pro']);
+        wp_enqueue_style('oxilab-image-hover-bootstrap', OXI_IMAGE_HOVER_URL . 'assets/backend/css/bootstrap.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('font-awsome.min', OXI_IMAGE_HOVER_URL . 'assets/frontend/css/font-awsome.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxilab-admin-css', OXI_IMAGE_HOVER_URL . '/assets/backend/css/admin.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+    }
+
+    public function admin_js() {
+        wp_enqueue_script("jquery");
+        wp_enqueue_script('oxilab-bootstrap', OXI_IMAGE_HOVER_URL . '/assets/backend/js/bootstrap.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_localize_script('oxilab-bootstrap', 'ImageHoverUltimate', array(
+            'root' => esc_url_raw(rest_url()),
+            'nonce' => wp_create_nonce('wp_rest')
+        ));
     }
 
 }

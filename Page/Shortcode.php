@@ -71,6 +71,22 @@ class Shortcode {
     }
 
     /**
+     * Plugin Name Convert to View
+     *
+     * @since 9.3.0
+     */
+    public function name_($data) {
+        $data = str_replace('_', ' ', $data);
+        $data = str_replace('-', ' ', $data);
+        $data = str_replace('+', ' ', $data);
+        echo esc_html(ucwords($data));
+    }
+
+    public function database_data() {
+        return $this->wpdb->get_results("SELECT * FROM  $this->parent_table ORDER BY id DESC", ARRAY_A);
+    }
+
+    /**
      * Generate safe path
      * @since v1.0.0
      */
@@ -144,22 +160,6 @@ class Shortcode {
             </div>
         </div>
         <?php
-    }
-
-    /**
-     * Plugin Name Convert to View
-     *
-     * @since 9.3.0
-     */
-    public function name_($data) {
-        $data = str_replace('_', ' ', $data);
-        $data = str_replace('-', ' ', $data);
-        $data = str_replace('+', ' ', $data);
-        echo esc_html(ucwords($data));
-    }
-
-    public function database_data() {
-        return $this->wpdb->get_results("SELECT * FROM  $this->parent_table ORDER BY id DESC", ARRAY_A);
     }
 
     public function created_shortcode() {

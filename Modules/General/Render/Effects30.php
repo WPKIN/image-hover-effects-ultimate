@@ -30,7 +30,7 @@ class Effects30 extends Public_Render {
             $value = json_decode(stripslashes($val['rawdata']), true);
             $ht = '';
             ?>
-            <div class="oxi-image-hover-style oxi-image-hover-style-30 oxi-image-general-hover-style-30-' . $this->oxiid . ' <?php $this->column_render('oxi-image-hover-col', $style); ?> <?php
+            <div class="oxi-image-hover-style oxi-image-hover-style-30 oxi-image-general-hover-style-30-<?php echo $this->oxiid ?> <?php $this->column_render('oxi-image-hover-col', $style); ?> <?php
             if ($admin == "admin"):
                 echo 'oxi-addons-admin-edit-list';
             endif;
