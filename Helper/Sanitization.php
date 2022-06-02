@@ -711,6 +711,10 @@ trait Sanitization {
 
                 public function textarea_admin_control($id, array $data = [], array $arg = []) {
                     $value = array_key_exists($id, $data) ? $data[$id] : $arg['default'];
+                    if ($id === 'image-hover-custom-css'):
+                        $value = str_replace("<br>", "", str_replace("&nbsp;", " ", $value));
+                    endif;
+
                     $retunvalue = array_key_exists('selector', $arg) ? htmlspecialchars(json_encode($arg['selector'])) : '';
                     ?>
                     <div class="shortcode-form-control-input-wrapper">
@@ -2758,8 +2762,6 @@ trait Sanitization {
                 <?php
             }
 
-         
-
             /*
              * Image Hover Style Admin Panel Template Shortcode name.
              *
@@ -2785,7 +2787,7 @@ trait Sanitization {
                 endif;
                 ?>">
                     <div class="oxi-addons-shortcode-heading  shortcode-addons-templates-right-panel-heading">
-                        <?php echo esc_html($arg['title']); ?>
+                     <?php echo esc_html($arg['title']); ?>
                         <div class="oxi-head-toggle"></div>
                     </div>
                     <div class="oxi-addons-shortcode-body  shortcode-addons-templates-right-panel-body">
@@ -2800,28 +2802,29 @@ trait Sanitization {
                         </form>
                     </div>
                 </div>
-                <?php
-            }
-               public function shortcodestyle_substitute_control($id, array $data = [], array $arg = []) {
-                if (count($this->StyleChanger) > 0) :
-                    $default = [
-                        'showing' => FALSE,
-                        'title' => 'Template Changer',
-                    ];
-                    $arg = array_merge($default, $arg);
-                    /*
-                     * $arg['title'] = 'Add New Items';
-                     * $arg['sub-title'] = 'Add New Items 02';
-                     *
-                     */
-                    ?>
+        <?php
+    }
+
+    public function shortcodestyle_substitute_control($id, array $data = [], array $arg = []) {
+        if (count($this->StyleChanger) > 0) :
+            $default = [
+                'showing' => FALSE,
+                'title' => 'Template Changer',
+            ];
+            $arg = array_merge($default, $arg);
+            /*
+             * $arg['title'] = 'Add New Items';
+             * $arg['sub-title'] = 'Add New Items 02';
+             *
+             */
+            ?>
 
 
                     <div class="oxi-addons-shortcode  shortcode-addons-templates-right-panel <?php
-                    if ($arg['showing'] != true):
-                        echo 'oxi-admin-head-d-none';
-                    endif;
-                    ?>">
+            if ($arg['showing'] != true):
+                echo 'oxi-admin-head-d-none';
+            endif;
+            ?>">
                         <div class="oxi-addons-shortcode-heading  shortcode-addons-templates-right-panel-heading">
 
                             <?php
@@ -2844,9 +2847,9 @@ trait Sanitization {
                                             foreach ($this->StyleChanger as $val) {
                                                 ?>
                                                 <option value="<?php echo esc_attr(strtolower($val)); ?>" <?php
-                                                if (strtolower($this->dbdata['style_name']) == strtolower($val)):
-                                                    echo 'selected';
-                                                endif;
+                                if (strtolower($this->dbdata['style_name']) == strtolower($val)):
+                                    echo 'selected';
+                                endif;
                                                 ?>><?php echo esc_html(ucfirst($val)); ?></option>
                                                         <?php
                                                     }
@@ -2859,7 +2862,7 @@ trait Sanitization {
                                         if (apply_filters('oxi-image-hover-plugin-version', false) == false):
                                             echo 'ache';
                                         endif;
-                                        ?>">Save</button>
+                                                    ?>">Save</button>
                                     </div>
                                 </div>
                                 <p style="color:red" >Template change is not recommended. We suggest it only for developer. Please change it if you have much knowledge in HTML or can create style from zero level</p>
@@ -2889,9 +2892,9 @@ trait Sanitization {
                  */
                 ?>
                 <div class="oxi-addons-shortcode shortcode-addons-templates-right-panel <?php
-                if ($arg['showing'] != true):
-                    echo esc_attr('oxi-admin-head-d-none');
-                endif;
+        if ($arg['showing'] != true):
+            echo esc_attr('oxi-admin-head-d-none');
+        endif;
                 ?>">
                     <div class="oxi-addons-shortcode-heading  shortcode-addons-templates-right-panel-heading">
                         <?php echo esc_html($arg['title']); ?>
@@ -2927,9 +2930,9 @@ trait Sanitization {
                  */
                 ?>
                 <div class="oxi-addons-item-form shortcode-addons-templates-right-panel <?php
-                if ($arg['showing'] != true):
-                    echo 'oxi-admin-head-d-none';
-                endif;
+        if ($arg['showing'] != true):
+            echo 'oxi-admin-head-d-none';
+        endif;
                 ?>" <?php $this->forms_condition($arg) ?>>
                     <div class="oxi-addons-item-form-heading shortcode-addons-templates-right-panel-heading">
                         <?php echo esc_html($arg['title']); ?>

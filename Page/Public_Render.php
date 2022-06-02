@@ -215,14 +215,17 @@ class Public_Render {
 
         endif;
         if ($inlinecss != '') :
-            $inlinecss = html_entity_decode($inlinecss);
+            
+          
+           
+            $css = html_entity_decode(str_replace('<br>', '', str_replace('&nbsp;', ' ', $inlinecss)));
             if ($this->admin == 'admin' || $this->admin == 'web') :
                 //only load while ajax called
                 echo'<style>';
-                echo $inlinecss;
+                echo $css;
                 echo '</style>';
             else :
-                wp_add_inline_style('oxi-image-hover', $inlinecss);
+                wp_add_inline_style('oxi-image-hover', $css);
             endif;
         endif;
     }
