@@ -97,7 +97,16 @@ trait Admin_helper
             <p></p>
             <div class="oxi-addons-admin-notifications-holder">
                 <div class="oxi-addons-admin-notifications-alert">
-                    <p>Got any Trouble to use our Image Hover Ultimate or Customization? You can <a href="https://wordpress.org/support/plugin/image-hover-effects-ultimate#new-post">Ask any question</a> and get reply from our expert members. We will be glad to answer any question you may have about our plugin. </p>
+                    <p>Unable to create your desire design or need any help? You can <a href="https://wordpress.org/support/plugin/image-hover-effects-ultimate#new-post">Ask any question</a> and get reply from our expert members. We will be glad to answer any question you may have about our plugin. </p>
+                    <?php
+                    if (apply_filters('oxi-image-hover-plugin-version', false) != true) :
+                    ?>
+                        <p>By the way, did you know we also have a <a href="https://www.oxilabdemos.com/image-hover/pricing/">Premium Version</a>? It offers lots of options with automatic update. It also comes with 16/5 personal support.</p>
+                        <p>Thanks Again!</p>
+                    <?php
+                    endif;
+                    ?>
+
                     <p></p>
                 </div>
             </div>
