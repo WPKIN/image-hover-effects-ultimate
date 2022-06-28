@@ -84,6 +84,9 @@ trait Admin_helper
 
     public function SupportAndComments($agr)
     {
+        if (get_option('oxi_image_support_massage') == 'no') {
+            return;
+        }
     ?>
 
         <div class="oxi-addons-admin-notifications">
@@ -94,15 +97,7 @@ trait Admin_helper
             <p></p>
             <div class="oxi-addons-admin-notifications-holder">
                 <div class="oxi-addons-admin-notifications-alert">
-                    <p>Got any Trouble to use pur Image Hover plugins? <a href="https://wordpress.org/support/plugin/image-hover-effects-ultimate#new-post">Ask any question</a> and get reply from our expert members. We will be glad to answer any question you may have about our plugin. </p>
-                    <?php
-                    if (apply_filters('oxi-image-hover-plugin-version', false) != true) :
-                    ?>
-                        <p>By the way, did you know we also have a <a href="https://www.oxilabdemos.com/image-hover/pricing/">Premium Version</a>? It offers lots of options with automatic update. It also comes with 16/5 personal support.</p>
-                    <?php
-                    endif;
-                    ?>
-                    <p>Thanks Again!</p>
+                    <p>Got any Trouble to use our Image Hover Ultimate or Customization? You can <a href="https://wordpress.org/support/plugin/image-hover-effects-ultimate#new-post">Ask any question</a> and get reply from our expert members. We will be glad to answer any question you may have about our plugin. </p>
                     <p></p>
                 </div>
             </div>

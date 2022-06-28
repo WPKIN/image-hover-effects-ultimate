@@ -6,7 +6,8 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class Admin {
+class Admin
+{
 
     /**
      * Database Parent Table
@@ -44,7 +45,8 @@ class Admin {
      *
      * @since 9.3.0
      */
-    public function __construct() {
+    public function __construct()
+    {
         global $wpdb;
         $this->wpdb = $wpdb;
         $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
@@ -54,59 +56,68 @@ class Admin {
         $this->Render();
     }
 
-    public function CSSJS_load() {
+    public function CSSJS_load()
+    {
         $this->admin_css_loader();
         $this->admin_home();
         $this->admin_rest_api();
         apply_filters('oxi-image-hover-plugin/admin_menu', TRUE);
     }
 
-    public function font_awesome_render($data) {
+    public function font_awesome_render($data)
+    {
         $fadata = get_option('oxi_addons_font_awesome');
         if ($fadata != 'no') :
             wp_enqueue_style('font-awsome.min', OXI_IMAGE_HOVER_URL . '/assets/frontend/css/font-awsome.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         endif;
-        ?>
+?>
         <i class="<?php echo esc_attr($data); ?> oxi-icons"></i>
-        <?php
+    <?php
     }
 
     /**
      * Admin Notice JS file loader
      * @return void
      */
-    public function admin_rest_api() {
+    public function admin_rest_api()
+    {
         wp_enqueue_script('oxi-image-hover-shortcode', OXI_IMAGE_HOVER_URL . '/assets/backend/js/home.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
-     public function name_converter($data) {
+    public function name_converter($data)
+    {
         $data = str_replace('_', ' ', $data);
         $data = str_replace('-', ' ', $data);
         $data = str_replace('+', ' ', $data);
         echo esc_html(ucwords($data));
     }
 
-    public function Render() {
-        ?>
+    public function Render()
+    {
+    ?>
         <div class="oxi-addons-row">
             <?php
             $this->Elements_Render();
             ?>
         </div>
-        <?php
+    <?php
     }
 
-    public function Admin_header() {
-        ?>
+    public function Admin_header()
+    {
+    ?>
         <div class="oxi-addons-wrapper">
             <div class="oxi-addons-import-layouts">
                 <h1>Image Hover › Shortcode</h1>
                 <p>Collect Image Hover Shortcode, Edit, Delect, Clone or Export it. </p>
             </div>
         </div>
-        <?php
+    <?php
+
+
     }
 
-    public function Elements_Render() {
+    public function Elements_Render()
+    {
         $Elements = [
             'Image-Effects' => [
                 'button' => ['name' => 'button-effects', 'version' => 1.0],
@@ -133,12 +144,17 @@ class Admin {
                 ],
             ]
         ];
-        ?>
+    ?>
         <div class="oxi-addons-wrapper">
             <div class="oxi-addons-row">
+
+                <?php
+                apply_filters('oxi-image-hover-support-and-comments', TRUE);
+                ?>
+
                 <?php
                 foreach ($Elements as $key => $elements) {
-                    ?>
+                ?>
                     <div class="oxi-addons-text-blocks-body-wrapper">
                         <div class="oxi-addons-text-blocks-body">
                             <div class="oxi-addons-text-blocks">
@@ -155,13 +171,13 @@ class Admin {
 
                     foreach ($elements as $k => $value) {
                         $oxilink = 'admin.php?page=oxi-image-hover-ultimate&effects=' . $k;
-                        ?>
+                    ?>
                         <div class="oxi-addons-shortcode-import" id="<?php echo esc_attr($value['name']); ?>" oxi-addons-search="<?php echo esc_html($value['name']); ?>">
                             <a class="addons-pre-check" href="<?php echo esc_url(admin_url($oxilink)); ?>" sub-type="<?php
-                            if (apply_filters('oxi-image-hover-plugin-version', false) == false && $key == 'Extension'):
-                                echo 'premium';
-                            endif;
-                            ?>">
+                                                                                                                        if (apply_filters('oxi-image-hover-plugin-version', false) == false && $key == 'Extension') :
+                                                                                                                            echo 'premium';
+                                                                                                                        endif;
+                                                                                                                        ?>">
                                 <div class="oxi-addons-shortcode-import-top">
                                     <?php
                                     $ifco = array_key_exists('icon', $value) ? $value['icon'] : 'fas fa-cloud-download-alt';
@@ -171,24 +187,21 @@ class Admin {
                                 </div>
                                 <div class="oxi-addons-shortcode-import-bottom">
                                     <span><?php $this->name_converter($value['name']) ?> <?php
-                                        if (apply_filters('oxi-image-hover-plugin-version', false) == false && $key == 'Extension'):
-                                            ?>
+                                                                                            if (apply_filters('oxi-image-hover-plugin-version', false) == false && $key == 'Extension') :
+                                                                                            ?>
                                             <b style="color: red;font-weight: 600;font-size: 12px;">Pro Only</b>
-                                            <?php
-                                        endif;
+                                        <?php
+                                                                                            endif;
                                         ?></span>
                                 </div>
                             </a>
                         </div>
-                        <?php
+                <?php
                     }
                 }
                 ?>
             </div>
         </div>
-        <?php
+<?php
     }
-
-   
-
 }

@@ -47,7 +47,7 @@ jQuery.noConflict();
                 $value = $.trim($value);
                 $This.val($.trim($value));
             }
-            var rawdata = JSON.stringify({license: $value});
+            var rawdata = JSON.stringify({ license: $value });
             var functionname = "oxi_license";
             $('.image_hover_ultimate_license_massage').html('<span class="spinner sa-spinner-open"></span>');
             Oxi_Image_Admin_Settings(functionname, rawdata, styleid, childid, function (callback) {
@@ -58,7 +58,7 @@ jQuery.noConflict();
 
         $("#oxi_addons_user_permission").on("change", function (e) {
             var $This = $(this), name = $This.attr('name'), $value = $This.val();
-            var rawdata = JSON.stringify({value: $value});
+            var rawdata = JSON.stringify({ value: $value });
             var functionname = "oxi_addons_user_permission";
             $('.' + name).html('<span class="spinner sa-spinner-open"></span>');
             Oxi_Image_Admin_Settings(functionname, rawdata, styleid, childid, function (callback) {
@@ -68,54 +68,66 @@ jQuery.noConflict();
                 }, 8000);
             });
         });
-       $("input[name=image_hover_ultimate_mobile_device_key] ").on("change", function (e) {
-        var $This = $(this), name = $This.attr('name'), $value = $This.val();
-        var rawdata = JSON.stringify({value: $value});
-        var functionname = "image_hover_ultimate_mobile_device_key";
-        $('.' + name).html('<span class="spinner sa-spinner-open"></span>');
-        Oxi_Image_Admin_Settings(functionname, rawdata, styleid, childid, function (callback) {
-            $('.' + name).html(callback);
-            setTimeout(function () {
-                $('.' + name).html('');
-            }, 8000);
+        $("input[name=image_hover_ultimate_mobile_device_key] ").on("change", function (e) {
+            var $This = $(this), name = $This.attr('name'), $value = $This.val();
+            var rawdata = JSON.stringify({ value: $value });
+            var functionname = "image_hover_ultimate_mobile_device_key";
+            $('.' + name).html('<span class="spinner sa-spinner-open"></span>');
+            Oxi_Image_Admin_Settings(functionname, rawdata, styleid, childid, function (callback) {
+                $('.' + name).html(callback);
+                setTimeout(function () {
+                    $('.' + name).html('');
+                }, 8000);
+            });
         });
-    });
-       $("input[name=oxi_addons_font_awesome] ").on("change", function (e) {
-        var $This = $(this), name = $This.attr('name'), $value = $This.val();
-        var rawdata = JSON.stringify({value: $value});
-        var functionname = "oxi_addons_font_awesome";
-        $('.' + name).html('<span class="spinner sa-spinner-open"></span>');
-        Oxi_Image_Admin_Settings(functionname, rawdata, styleid, childid, function (callback) {
-            $('.' + name).html(callback);
-            setTimeout(function () {
-                $('.' + name).html('');
-            }, 8000);
+        $("input[name=oxi_addons_font_awesome] ").on("change", function (e) {
+            var $This = $(this), name = $This.attr('name'), $value = $This.val();
+            var rawdata = JSON.stringify({ value: $value });
+            var functionname = "oxi_addons_font_awesome";
+            $('.' + name).html('<span class="spinner sa-spinner-open"></span>');
+            Oxi_Image_Admin_Settings(functionname, rawdata, styleid, childid, function (callback) {
+                $('.' + name).html(callback);
+                setTimeout(function () {
+                    $('.' + name).html('');
+                }, 8000);
+            });
         });
-    });
-       $("input[name=oxi_addons_way_points] ").on("change", function (e) {
-        var $This = $(this), name = $This.attr('name'), $value = $This.val();
-        var rawdata = JSON.stringify({value: $value});
-        var functionname = "oxi_addons_way_points";
-        $('.' + name).html('<span class="spinner sa-spinner-open"></span>');
-        Oxi_Image_Admin_Settings(functionname, rawdata, styleid, childid, function (callback) {
-            $('.' + name).html(callback);
-            setTimeout(function () {
-                $('.' + name).html('');
-            }, 8000);
+        $("input[name=oxi_addons_way_points] ").on("change", function (e) {
+            var $This = $(this), name = $This.attr('name'), $value = $This.val();
+            var rawdata = JSON.stringify({ value: $value });
+            var functionname = "oxi_addons_way_points";
+            $('.' + name).html('<span class="spinner sa-spinner-open"></span>');
+            Oxi_Image_Admin_Settings(functionname, rawdata, styleid, childid, function (callback) {
+                $('.' + name).html(callback);
+                setTimeout(function () {
+                    $('.' + name).html('');
+                }, 8000);
+            });
         });
-    });
-       $("input[name=oxi_addons_google_font] ").on("change", function (e) {
-        var $This = $(this), name = $This.attr('name'), $value = $This.val();
-        var rawdata = JSON.stringify({value: $value});
-        var functionname = "oxi_addons_google_font";
-        $('.' + name).html('<span class="spinner sa-spinner-open"></span>');
-        Oxi_Image_Admin_Settings(functionname, rawdata, styleid, childid, function (callback) {
-            $('.' + name).html(callback);
-            setTimeout(function () {
-                $('.' + name).html('');
-            }, 8000);
+        $("input[name=oxi_addons_google_font] ").on("change", function (e) {
+            var $This = $(this), name = $This.attr('name'), $value = $This.val();
+            var rawdata = JSON.stringify({ value: $value });
+            var functionname = "oxi_addons_google_font";
+            $('.' + name).html('<span class="spinner sa-spinner-open"></span>');
+            Oxi_Image_Admin_Settings(functionname, rawdata, styleid, childid, function (callback) {
+                $('.' + name).html(callback);
+                setTimeout(function () {
+                    $('.' + name).html('');
+                }, 8000);
+            });
         });
-    });
+        $("input[name=oxi_image_support_massage] ").on("change", function (e) {
+            var $This = $(this), name = $This.attr('name'), $value = $This.val();
+            var rawdata = JSON.stringify({ value: $value });
+            var functionname = "oxi_image_support_massage";
+            $('.' + name).html('<span class="spinner sa-spinner-open"></span>');
+            Oxi_Image_Admin_Settings(functionname, rawdata, styleid, childid, function (callback) {
+                $('.' + name).html(callback);
+                setTimeout(function () {
+                    $('.' + name).html('');
+                }, 8000);
+            });
+        });
 
 
 
@@ -127,11 +139,11 @@ jQuery.noConflict();
 
 
 
-      
+
 
         $("input[name=oxi_addons_custom_parent_class] ").on("keyup", delay(function (e) {
             var $This = $(this), name = $This.attr('name'), $value = $This.val();
-            var rawdata = JSON.stringify({name: name, value: $value});
+            var rawdata = JSON.stringify({ name: name, value: $value });
             var functionname = "oxi_addons_custom_parent_class";
             $('.' + name).html('<span class="spinner sa-spinner-open"></span>');
             Oxi_Image_Admin_Settings(functionname, rawdata, styleid, childid, function (callback) {
