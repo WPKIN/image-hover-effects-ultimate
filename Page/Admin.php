@@ -149,10 +149,6 @@ class Admin
             <div class="oxi-addons-row">
 
                 <?php
-                apply_filters('oxi-image-hover-support-and-comments', TRUE);
-                ?>
-
-                <?php
                 foreach ($Elements as $key => $elements) {
                 ?>
                     <div class="oxi-addons-text-blocks-body-wrapper">
@@ -186,12 +182,13 @@ class Admin
 
                                 </div>
                                 <div class="oxi-addons-shortcode-import-bottom">
-                                    <span><?php $this->name_converter($value['name']) ?> <?php
-                                                                                            if (apply_filters('oxi-image-hover-plugin-version', false) == false && $key == 'Extension') :
-                                                                                            ?>
+                                    <span><?php $this->name_converter($value['name']) ?>
+                                        <?php
+                                        if (apply_filters('oxi-image-hover-plugin-version', false) == false && $key == 'Extension') :
+                                        ?>
                                             <b style="color: red;font-weight: 600;font-size: 12px;">Pro Only</b>
                                         <?php
-                                                                                            endif;
+                                        endif;
                                         ?></span>
                                 </div>
                             </a>

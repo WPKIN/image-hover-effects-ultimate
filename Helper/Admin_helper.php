@@ -49,33 +49,7 @@ trait Admin_helper
     <?php
     }
 
-    public function Image_Parent()
-    {
-        $effects = (!empty($_GET['effects']) ? ucfirst(sanitize_text_field($_GET['effects'])) : '');
-        $styleid = (!empty($_GET['styleid']) ? (int) $_GET['styleid'] : '');
-        if (!empty($effects) && !empty($styleid)) :
-            $style = $this->wpdb->get_row($this->wpdb->prepare('SELECT style_name FROM ' . $this->parent_table . ' WHERE id = %d ', $styleid), ARRAY_A);
-            $name = explode('-', $style['style_name']);
-            if ($effects != ucfirst($name[0])) :
-                wp_die(esc_html('Invalid URL.'));
-            endif;
-            $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $effects . '\Admin\\Effects' . $name[1];
-            if (class_exists($cls)) :
-                new $cls();
-            else :
-                wp_die(esc_html('Invalid URL.'));
-            endif;
-        elseif (!empty($effects)) :
-            $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $effects . '\\' . $effects . '';
-            if (class_exists($cls)) :
-                new $cls();
-            else :
-                wp_die(esc_html('Invalid URL.'));
-            endif;
-        else :
-            new \OXI_IMAGE_HOVER_PLUGINS\Page\Admin();
-        endif;
-    }
+
 
     public function admin_url_convert($agr)
     {
@@ -218,6 +192,33 @@ trait Admin_helper
 
     public function custom_redirect()
     {
+    }
+    public function Image_Parent()
+    {
+        $effects = (!empty($_GET['effects']) ? ucfirst(sanitize_text_field($_GET['effects'])) : '');
+        $styleid = (!empty($_GET['styleid']) ? (int) $_GET['styleid'] : '');
+        if (!empty($effects) && !empty($styleid)) :
+            $style = $this->wpdb->get_row($this->wpdb->prepare('SELECT style_name FROM ' . $this->parent_table . ' WHERE id = %d ', $styleid), ARRAY_A);
+            $name = explode('-', $style['style_name']);
+            if ($effects != ucfirst($name[0])) :
+                wp_die(esc_html('Invalid URL.'));
+            endif;
+            $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $effects . '\Admin\\Effects' . $name[1];
+            if (class_exists($cls)) :
+                new $cls();
+            else :
+                wp_die(esc_html('Invalid URL.'));
+            endif;
+        elseif (!empty($effects)) :
+            $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $effects . '\\' . $effects . '';
+            if (class_exists($cls)) :
+                new $cls();
+            else :
+                wp_die(esc_html('Invalid URL.'));
+            endif;
+        else :
+            new \OXI_IMAGE_HOVER_PLUGINS\Page\Admin();
+        endif;
     }
 
     public function Image_Shortcode()

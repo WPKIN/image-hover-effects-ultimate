@@ -10,59 +10,29 @@ if (!defined('ABSPATH')) {
  *
  * @author $biplob018
  */
-trait Public_Helper {
-
-    public function shortcode_render($styleid, $user) {
-        if (!empty($styleid) && !empty($user) && (int) $styleid):
-            $style = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $styleid), ARRAY_A);
-
-            if (!is_array($style)):
-                echo '<p> Shortcode Deleted, kindly add currect Shortcode</p>';
-                return;
-            endif;
-            if (!array_key_exists('rawdata', $style)):
-                $Installation = new \OXI_IMAGE_HOVER_PLUGINS\Classes\Installation();
-                $Installation->plugin_upgrade_hook();
-            endif;
-            $rawdata = json_decode(stripslashes($style['rawdata']), true);
-
-            if (((is_array($rawdata) && array_key_exists('image_hover_dynamic_content', $rawdata) && $rawdata['image_hover_dynamic_content'] == 'yes') ||
-                    (is_array($rawdata) && array_key_exists('image_hover_dynamic_load', $rawdata) && $rawdata['image_hover_dynamic_load'] == 'yes') ||
-                    (is_array($rawdata) && array_key_exists('image_hover_dynamic_carousel', $rawdata) && $rawdata['image_hover_dynamic_carousel'] == 'yes')) && apply_filters('oxi-image-hover-plugin-version', false)) :
-                $C = '\OXI_IMAGE_HOVER_PLUGINS\Modules\Compailer';
-                if (class_exists($C)):
-                    new $C($style, [], $user);
-                endif;
-            else:
-                $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid), ARRAY_A);
-                $name = explode('-', ucfirst($style['style_name']));
-                $C = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($name[0]) . '\Render\Effects' . $name[1];
-                if (class_exists($C)):
-                    new $C($style, $child, $user);
-                endif;
-            endif;
-
-        endif;
-    }
-
+trait Public_Helper
+{
     /**
      * Plugin Name Convert to View
      *
      * @since 9.3.0
      */
-    public function name_converter($data) {
+    public function name_converter($data)
+    {
         $data = str_replace('_', ' ', $data);
         $data = str_replace('-', ' ', $data);
         $data = str_replace('+', ' ', $data);
         return esc_html(ucwords($data));
     }
 
-    public function effects_converter($data) {
+    public function effects_converter($data)
+    {
         $data = explode('-', $data);
         return esc_html($data[0]);
     }
 
-    public function html_special_charecter($data) {
+    public function html_special_charecter($data)
+    {
         $data = html_entity_decode($data);
         $data = str_replace("\'", "'", $data);
         $data = str_replace('\"', '"', $data);
@@ -70,14 +40,16 @@ trait Public_Helper {
         return $data;
     }
 
-    public function admin_special_charecter($data) {
+    public function admin_special_charecter($data)
+    {
         $data = html_entity_decode($data);
         $data = str_replace("\'", "'", $data);
         $data = str_replace('\"', '"', $data);
         return $data;
     }
 
-    public function icon_font_selector($data) {
+    public function icon_font_selector($data)
+    {
         $icon = explode(' ', $data);
         $fadata = get_option('oxi_addons_font_awesome');
         $faversion = get_option('oxi_addons_font_awesome_version');
@@ -89,7 +61,8 @@ trait Public_Helper {
         return $files;
     }
 
-    public function font_familly_charecter($data) {
+    public function font_familly_charecter($data)
+    {
         wp_enqueue_style('' . $data . '', 'https://fonts.googleapis.com/css?family=' . $data . '');
         $data = str_replace('+', ' ', $data);
         $data = explode(':', $data);
@@ -98,7 +71,44 @@ trait Public_Helper {
         return $data;
     }
 
-    public function allowed_html($rawdata) {
+    public function shortcode_render($styleid, $user)
+    {
+        if (!empty($styleid) && !empty($user) && (int) $styleid) :
+            $style = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $styleid), ARRAY_A);
+
+            if (!is_array($style)) :
+                echo '<p> Shortcode Deleted, kindly add currect Shortcode</p>';
+                return;
+            endif;
+            if (!array_key_exists('rawdata', $style)) :
+                $Installation = new \OXI_IMAGE_HOVER_PLUGINS\Classes\Installation();
+                $Installation->plugin_upgrade_hook();
+            endif;
+            $rawdata = json_decode(stripslashes($style['rawdata']), true);
+
+            if (((is_array($rawdata) && array_key_exists('image_hover_dynamic_content', $rawdata) && $rawdata['image_hover_dynamic_content'] == 'yes') ||
+                (is_array($rawdata) && array_key_exists('image_hover_dynamic_load', $rawdata) && $rawdata['image_hover_dynamic_load'] == 'yes') ||
+                (is_array($rawdata) && array_key_exists('image_hover_dynamic_carousel', $rawdata) && $rawdata['image_hover_dynamic_carousel'] == 'yes')) && apply_filters('oxi-image-hover-plugin-version', false)) :
+                $C = '\OXI_IMAGE_HOVER_PLUGINS\Modules\Compailer';
+                if (class_exists($C)) :
+                    new $C($style, [], $user);
+                endif;
+            else :
+                $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid), ARRAY_A);
+                $name = explode('-', ucfirst($style['style_name']));
+                $C = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($name[0]) . '\Render\Effects' . $name[1];
+                if (class_exists($C)) :
+                    new $C($style, $child, $user);
+                endif;
+            endif;
+
+        endif;
+    }
+
+
+
+    public function allowed_html($rawdata)
+    {
         $allowed_tags = array(
             'a' => array(
                 'class' => array(),
@@ -185,26 +195,26 @@ trait Public_Helper {
                 'class' => array(),
             ),
         );
-        if (is_array($rawdata)):
+        if (is_array($rawdata)) :
             return $rawdata = array_map(array($this, 'allowed_html'), $rawdata);
-        else:
+        else :
             return wp_kses($rawdata, $allowed_tags);
         endif;
     }
 
-    public function validate_post($files = '') {
+    public function validate_post($files = '')
+    {
 
         $rawdata = [];
-        if (!empty($files)):
+        if (!empty($files)) :
             $data = json_decode(stripslashes($files), true);
         endif;
-        if (is_array($data)):
+        if (is_array($data)) :
             $rawdata = array_map(array($this, 'allowed_html'), $data);
-        else:
+        else :
             $rawdata = $this->allowed_html($files);
         endif;
 
         return $rawdata;
     }
-
 }
