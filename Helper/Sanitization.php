@@ -712,7 +712,7 @@ trait Sanitization {
                 public function textarea_admin_control($id, array $data = [], array $arg = []) {
                     $value = array_key_exists($id, $data) ? $data[$id] : $arg['default'];
                     if ($id === 'image-hover-custom-css'):
-                        $value = str_replace("<br>", "", str_replace("&nbsp;", " ", $value));
+                        $value = str_replace("<br>", "\n", str_replace("&nbsp;", " ", $value));
                     endif;
 
                     $retunvalue = array_key_exists('selector', $arg) ? htmlspecialchars(json_encode($arg['selector'])) : '';

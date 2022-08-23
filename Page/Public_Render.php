@@ -224,7 +224,7 @@ class Public_Render
 
 
 
-            $css = html_entity_decode(str_replace('<br>', '', str_replace('&nbsp;', ' ', $inlinecss)));
+            $css = html_entity_decode(str_replace('<br>', ' ', str_replace('&nbsp;', ' ', $inlinecss)));
             if ($this->admin == 'admin' || $this->admin == 'web') :
                 //only load while ajax called
                 echo '<style>';
