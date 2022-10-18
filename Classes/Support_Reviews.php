@@ -27,11 +27,33 @@ class Support_Reviews {
     }
 
     /**
+     * Admin Notice JS file loader
+     * @return void
+     */
+    public function dismiss_button_scripts() {
+        wp_enqueue_script('oxi-image-admin-notice', OXI_IMAGE_HOVER_URL . '/assets/backend/js/admin-notice.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_localize_script('oxi-image-admin-notice', 'ImageHoverUltimate', array(
+            'root' => esc_url_raw(rest_url()),
+            'nonce' => wp_create_nonce('wp_rest')
+        ));
+    }
+
+    /**
+     * Admin Notice CSS file loader
+     * @return void
+     */
+    public function admin_enqueue_scripts() {
+        wp_enqueue_script("jquery");
+        wp_enqueue_style('oxi-image-admin-notice-css', OXI_IMAGE_HOVER_URL . '/assets/backend/css/notice.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        $this->dismiss_button_scripts();
+    }
+
+    /**
      * First Installation Track
      * @return void
      */
     public function first_install() {
-        
+
         $image = OXI_IMAGE_HOVER_URL . 'image/logo.png';
         ?>
         <div class="notice notice-info put-dismiss-noticenotice-has-thumbnail shortcode-addons-review-notice oxilab-image-hover-review-notice">
@@ -69,28 +91,6 @@ class Support_Reviews {
             </div>
         </div>
         <?php
-    }
-
-    /**
-     * Admin Notice JS file loader
-     * @return void
-     */
-    public function dismiss_button_scripts() {
-        wp_enqueue_script('oxi-image-admin-notice', OXI_IMAGE_HOVER_URL . '/assets/backend/js/admin-notice.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        wp_localize_script('oxi-image-admin-notice', 'ImageHoverUltimate', array(
-            'root' => esc_url_raw(rest_url()),
-            'nonce' => wp_create_nonce('wp_rest')
-        ));
-    }
-
-    /**
-     * Admin Notice CSS file loader
-     * @return void
-     */
-    public function admin_enqueue_scripts() {
-        wp_enqueue_script("jquery");
-        wp_enqueue_style('oxi-image-admin-notice-css', OXI_IMAGE_HOVER_URL . '/assets/backend/css/notice.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        $this->dismiss_button_scripts();
     }
 
 }

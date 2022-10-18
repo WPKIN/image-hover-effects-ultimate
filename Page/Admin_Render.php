@@ -416,148 +416,7 @@ abstract class Admin_Render
         $this->wpdb->query($this->wpdb->prepare("UPDATE {$this->parent_table} SET stylesheet = %s WHERE id = %d", $fullcssfile, $styleid));
         $this->wpdb->query($this->wpdb->prepare("UPDATE {$this->parent_table} SET font_family = %s WHERE id = %d", $font, $styleid));
         return 'success';
-    }
-
-    /**
-     * Template Parent Render
-     *
-     * @since 9.3.0
-     */
-    public function render()
-    {
-    ?>
-        <div class="wrap">
-            <div class="oxi-addons-wrapper">
-                <?php
-                apply_filters('oxi-image-hover-plugin/admin_menu', TRUE);
-                ?>
-                <div class="oxi-addons-style-20-spacer"></div>
-                <div class="oxi-addons-row">
-                    <?php
-                    apply_filters('oxi-image-hover-support-and-comments', TRUE);
-                    ?>
-                    <div class="oxi-addons-wrapper oxi-addons-image-tabs-mode">
-                        <div class="oxi-addons-settings" id="oxisettingsreload">
-                            <div class="oxi-addons-style-left">
-                                <form method="post" id="oxi-addons-form-submit">
-                                    <div class="oxi-addons-style-settings">
-                                        <div class="oxi-addons-tabs-wrapper">
-                                            <?php
-                                            $this->register_controls();
-                                            ?>
-                                        </div>
-                                        <div class="oxi-addons-setting-save">
-
-                                            <?php
-                                            if (array_key_exists('css', $this->dbdata)) :
-                                                if ($this->dbdata['css'] != '') :
-                                            ?>
-                                                    <button type="button" class="btn btn-secondary" data-value="<?php echo (int) $this->dbdata['id']; ?>" id="oxi-addons-setting-rebuild">Rebuild</button>
-                                            <?php
-                                                endif;
-
-                                            endif;
-                                            ?>
-                                            <button type="button" class="btn btn-danger" id="oxi-addons-setting-reload">Reload</button>
-                                            <input type="hidden" id="image-hover-preview-color" name="image-hover-preview-color" value="<?php
-                                                                                                                                        if (is_array($this->style)) :
-                                                                                                                                            if (array_key_exists('image-hover-preview-color', $this->style)) :
-                                                                                                                                                echo esc_attr($this->style['image-hover-preview-color']);
-                                                                                                                                            endif;
-                                                                                                                                            echo '#FFF';
-                                                                                                                                        else :
-                                                                                                                                            echo '#FFF';
-                                                                                                                                        endif;
-                                                                                                                                        ?>">
-                                            <input type="hidden" id="image-hover-style-id" name="image-hover-style-id" value="<?php echo (int) $this->dbdata['id']; ?>">
-                                            <input type="hidden" id="image-hover-template" name="image-hover-template" value="<?php echo esc_attr(ucfirst($this->dbdata['style_name'])); ?>">
-                                            <button type="button" class="btn btn-success" id="oxi-addons-templates-submit">
-                                                Save</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="oxi-addons-style-right">
-                                <?php
-                                if ($this->form == 'single') :
-                                    $this->shortcode_name();
-                                    $this->shortcode_info();
-                                    $this->shortcode_style_changer();
-                                else :
-                                    $this->modal_opener();
-                                    $this->shortcode_name();
-                                    $this->shortcode_info();
-                                    $this->shortcode_style_changer();
-                                    $this->shortcode_rearrange();
-                                endif;
-                                $this->modal_form();
-                                ?>
-                            </div>
-                        </div>
-                        <div class="oxi-addons-Preview" id="oxipreviewreload">
-                            <div class="oxi-addons-wrapper">
-                                <div class="oxi-addons-style-left-preview">
-                                    <div class="oxi-addons-style-left-preview-heading">
-                                        <div class="oxi-addons-style-left-preview-heading-left oxi-addons-image-tabs-sortable-title">
-                                            Preview
-                                        </div>
-                                        <div class="oxi-addons-style-left-preview-heading-right">
-                                            <input type="text" data-format="rgb" data-opacity="TRUE" class="oxi-addons-minicolor" id="oxi-addons-2-0-color" name="oxi-addons-2-0-color" value="<?php
-                                                                                                                                                                                                if (is_array($this->style)) :
-                                                                                                                                                                                                    if (array_key_exists('image-hover-preview-color', $this->style)) :
-                                                                                                                                                                                                        echo esc_attr($this->style['image-hover-preview-color']);
-                                                                                                                                                                                                    endif;
-                                                                                                                                                                                                    echo '#FFF';
-                                                                                                                                                                                                else :
-                                                                                                                                                                                                    echo '#FFF';
-                                                                                                                                                                                                endif;
-                                                                                                                                                                                                ?>">
-                                        </div>
-                                    </div>
-                                    <div class="oxi-addons-preview-data" id="oxi-addons-preview-data" template-wrapper="<?php echo esc_attr($this->WRAPPER); ?> .oxi-addons-row" style="background:<?php
-                                                                                                                                                                                                    if (is_array($this->style)) :
-                                                                                                                                                                                                        if (array_key_exists('image-hover-preview-color', $this->style)) :
-                                                                                                                                                                                                            echo esc_attr($this->style['image-hover-preview-color']);
-                                                                                                                                                                                                        endif;
-                                                                                                                                                                                                        echo '#FFF';
-                                                                                                                                                                                                    else :
-                                                                                                                                                                                                        echo '#FFF';
-                                                                                                                                                                                                    endif;
-                                                                                                                                                                                                    ?>">
-                                        <?php
-                                        $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($this->StyleName[0]) . '\Render\Effects' . $this->StyleName[1];
-                                        new $cls($this->dbdata, $this->child, 'admin');
-                                        ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="shortcode-addons-form-repeater-store" style="display: none">
-                            <?php $this->allowed_html_sanitize($this->repeater); ?>
-                        </div>
-                    </div>
-                    <div id="OXIAADDONSCHANGEDPOPUP" class="modal fade">
-                        <div class="modal-dialog modal-confirm  bounceIn ">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <div class="icon-box">
-
-                                    </div>
-                                </div>
-                                <div class="modal-body text-center">
-                                    <h4></h4>
-                                    <p></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-<?php
-    }
-
-    public function import_font_family()
+    } public function import_font_family()
     {
         $this->font_family = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->import_table WHERE type = %s ORDER by id ASC", 'shortcode-addons'), ARRAY_A);
         $google = $custom = '';
@@ -905,4 +764,145 @@ abstract class Admin_Render
         endif;
         wp_add_inline_script('oxi-image-hover-editor', $data);
     }
+
+    /**
+     * Template Parent Render
+     *
+     * @since 9.3.0
+     */
+    public function render()
+    {
+    ?>
+        <div class="wrap">
+            <div class="oxi-addons-wrapper">
+                <?php
+                apply_filters('oxi-image-hover-plugin/admin_menu', TRUE);
+                ?>
+                <div class="oxi-addons-style-20-spacer"></div>
+                <div class="oxi-addons-row">
+                    <?php
+                    apply_filters('oxi-image-hover-support-and-comments', TRUE);
+                    ?>
+                    <div class="oxi-addons-wrapper oxi-addons-image-tabs-mode">
+                        <div class="oxi-addons-settings" id="oxisettingsreload">
+                            <div class="oxi-addons-style-left">
+                                <form method="post" id="oxi-addons-form-submit">
+                                    <div class="oxi-addons-style-settings">
+                                        <div class="oxi-addons-tabs-wrapper">
+                                            <?php
+                                            $this->register_controls();
+                                            ?>
+                                        </div>
+                                        <div class="oxi-addons-setting-save">
+
+                                            <?php
+                                            if (array_key_exists('css', $this->dbdata)) :
+                                                if ($this->dbdata['css'] != '') :
+                                            ?>
+                                                    <button type="button" class="btn btn-secondary" data-value="<?php echo (int) $this->dbdata['id']; ?>" id="oxi-addons-setting-rebuild">Rebuild</button>
+                                            <?php
+                                                endif;
+
+                                            endif;
+                                            ?>
+                                            <button type="button" class="btn btn-danger" id="oxi-addons-setting-reload">Reload</button>
+                                            <input type="hidden" id="image-hover-preview-color" name="image-hover-preview-color" value="<?php
+                                                                                                                                        if (is_array($this->style)) :
+                                                                                                                                            if (array_key_exists('image-hover-preview-color', $this->style)) :
+                                                                                                                                                echo esc_attr($this->style['image-hover-preview-color']);
+                                                                                                                                            endif;
+                                                                                                                                            echo '#FFF';
+                                                                                                                                        else :
+                                                                                                                                            echo '#FFF';
+                                                                                                                                        endif;
+                                                                                                                                        ?>">
+                                            <input type="hidden" id="image-hover-style-id" name="image-hover-style-id" value="<?php echo (int) $this->dbdata['id']; ?>">
+                                            <input type="hidden" id="image-hover-template" name="image-hover-template" value="<?php echo esc_attr(ucfirst($this->dbdata['style_name'])); ?>">
+                                            <button type="button" class="btn btn-success" id="oxi-addons-templates-submit">
+                                                Save</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="oxi-addons-style-right">
+                                <?php
+                                if ($this->form == 'single') :
+                                    $this->shortcode_name();
+                                    $this->shortcode_info();
+                                    $this->shortcode_style_changer();
+                                else :
+                                    $this->modal_opener();
+                                    $this->shortcode_name();
+                                    $this->shortcode_info();
+                                    $this->shortcode_style_changer();
+                                    $this->shortcode_rearrange();
+                                endif;
+                                $this->modal_form();
+                                ?>
+                            </div>
+                        </div>
+                        <div class="oxi-addons-Preview" id="oxipreviewreload">
+                            <div class="oxi-addons-wrapper">
+                                <div class="oxi-addons-style-left-preview">
+                                    <div class="oxi-addons-style-left-preview-heading">
+                                        <div class="oxi-addons-style-left-preview-heading-left oxi-addons-image-tabs-sortable-title">
+                                            Preview
+                                        </div>
+                                        <div class="oxi-addons-style-left-preview-heading-right">
+                                            <input type="text" data-format="rgb" data-opacity="TRUE" class="oxi-addons-minicolor" id="oxi-addons-2-0-color" name="oxi-addons-2-0-color" value="<?php
+                                                                                                                                                                                                if (is_array($this->style)) :
+                                                                                                                                                                                                    if (array_key_exists('image-hover-preview-color', $this->style)) :
+                                                                                                                                                                                                        echo esc_attr($this->style['image-hover-preview-color']);
+                                                                                                                                                                                                    endif;
+                                                                                                                                                                                                    echo '#FFF';
+                                                                                                                                                                                                else :
+                                                                                                                                                                                                    echo '#FFF';
+                                                                                                                                                                                                endif;
+                                                                                                                                                                                                ?>">
+                                        </div>
+                                    </div>
+                                    <div class="oxi-addons-preview-data" id="oxi-addons-preview-data" template-wrapper="<?php echo esc_attr($this->WRAPPER); ?> .oxi-addons-row" style="background:<?php
+                                                                                                                                                                                                    if (is_array($this->style)) :
+                                                                                                                                                                                                        if (array_key_exists('image-hover-preview-color', $this->style)) :
+                                                                                                                                                                                                            echo esc_attr($this->style['image-hover-preview-color']);
+                                                                                                                                                                                                        endif;
+                                                                                                                                                                                                        echo '#FFF';
+                                                                                                                                                                                                    else :
+                                                                                                                                                                                                        echo '#FFF';
+                                                                                                                                                                                                    endif;
+                                                                                                                                                                                                    ?>">
+                                        <?php
+                                        $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($this->StyleName[0]) . '\Render\Effects' . $this->StyleName[1];
+                                        new $cls($this->dbdata, $this->child, 'admin');
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="shortcode-addons-form-repeater-store" style="display: none">
+                            <?php $this->allowed_html_sanitize($this->repeater); ?>
+                        </div>
+                    </div>
+                    <div id="OXIAADDONSCHANGEDPOPUP" class="modal fade">
+                        <div class="modal-dialog modal-confirm  bounceIn ">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <div class="icon-box">
+
+                                    </div>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <h4></h4>
+                                    <p></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<?php
+    }
+
+   
 }

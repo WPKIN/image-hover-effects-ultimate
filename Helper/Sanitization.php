@@ -2787,7 +2787,7 @@ trait Sanitization {
                 endif;
                 ?>">
                     <div class="oxi-addons-shortcode-heading  shortcode-addons-templates-right-panel-heading">
-                     <?php echo esc_html($arg['title']); ?>
+                        <?php echo esc_html($arg['title']); ?>
                         <div class="oxi-head-toggle"></div>
                     </div>
                     <div class="oxi-addons-shortcode-body  shortcode-addons-templates-right-panel-body">
@@ -2802,29 +2802,29 @@ trait Sanitization {
                         </form>
                     </div>
                 </div>
-        <?php
-    }
+                <?php
+            }
 
-    public function shortcodestyle_substitute_control($id, array $data = [], array $arg = []) {
-        if (count($this->StyleChanger) > 0) :
-            $default = [
-                'showing' => FALSE,
-                'title' => 'Template Changer',
-            ];
-            $arg = array_merge($default, $arg);
-            /*
-             * $arg['title'] = 'Add New Items';
-             * $arg['sub-title'] = 'Add New Items 02';
-             *
-             */
-            ?>
+            public function shortcodestyle_substitute_control($id, array $data = [], array $arg = []) {
+                if (count($this->StyleChanger) > 0) :
+                    $default = [
+                        'showing' => FALSE,
+                        'title' => 'Template Changer',
+                    ];
+                    $arg = array_merge($default, $arg);
+                    /*
+                     * $arg['title'] = 'Add New Items';
+                     * $arg['sub-title'] = 'Add New Items 02';
+                     *
+                     */
+                    ?>
 
 
                     <div class="oxi-addons-shortcode  shortcode-addons-templates-right-panel <?php
-            if ($arg['showing'] != true):
-                echo 'oxi-admin-head-d-none';
-            endif;
-            ?>">
+                    if ($arg['showing'] != true):
+                        echo 'oxi-admin-head-d-none';
+                    endif;
+                    ?>">
                         <div class="oxi-addons-shortcode-heading  shortcode-addons-templates-right-panel-heading">
 
                             <?php
@@ -2847,9 +2847,9 @@ trait Sanitization {
                                             foreach ($this->StyleChanger as $val) {
                                                 ?>
                                                 <option value="<?php echo esc_attr(strtolower($val)); ?>" <?php
-                                if (strtolower($this->dbdata['style_name']) == strtolower($val)):
-                                    echo 'selected';
-                                endif;
+                                                if (strtolower($this->dbdata['style_name']) == strtolower($val)):
+                                                    echo 'selected';
+                                                endif;
                                                 ?>><?php echo esc_html(ucfirst($val)); ?></option>
                                                         <?php
                                                     }
@@ -2862,7 +2862,7 @@ trait Sanitization {
                                         if (apply_filters('oxi-image-hover-plugin-version', false) == false):
                                             echo 'ache';
                                         endif;
-                                                    ?>">Save</button>
+                                        ?>">Save</button>
                                     </div>
                                 </div>
                                 <p style="color:red" >Template change is not recommended. We suggest it only for developer. Please change it if you have much knowledge in HTML or can create style from zero level</p>
@@ -2892,9 +2892,9 @@ trait Sanitization {
                  */
                 ?>
                 <div class="oxi-addons-shortcode shortcode-addons-templates-right-panel <?php
-        if ($arg['showing'] != true):
-            echo esc_attr('oxi-admin-head-d-none');
-        endif;
+                if ($arg['showing'] != true):
+                    echo esc_attr('oxi-admin-head-d-none');
+                endif;
                 ?>">
                     <div class="oxi-addons-shortcode-heading  shortcode-addons-templates-right-panel-heading">
                         <?php echo esc_html($arg['title']); ?>
@@ -2911,68 +2911,6 @@ trait Sanitization {
                             paste this code into a template file to include the slideshow within your theme.</p>
                         <input type="text" class="form-control" onclick="this.setSelectionRange(0, this.value.length)" value="&lt;?php echo do_shortcode('[iheu_ultimate_oxi  id=&quot;<?php echo esc_attr($id); ?>&quot;]'); ?&gt;">
                         <span></span>
-                    </div>
-                </div>
-                <?php
-            }
-
-            public function rearrange_substitute_control($id, array $data = [], array $arg = []) {
-                $default = [
-                    'showing' => FALSE,
-                    'title' => 'Image Hover Rearrange',
-                    'sub-title' => 'Image Hover Rearrange'
-                ];
-                $arg = array_merge($default, $arg);
-                /*
-                 * $arg['title'] = 'Add New Items';
-                 * $arg['sub-title'] = 'Add New Items 02';
-                 *
-                 */
-                ?>
-                <div class="oxi-addons-item-form shortcode-addons-templates-right-panel <?php
-        if ($arg['showing'] != true):
-            echo 'oxi-admin-head-d-none';
-        endif;
-                ?>" <?php $this->forms_condition($arg) ?>>
-                    <div class="oxi-addons-item-form-heading shortcode-addons-templates-right-panel-heading">
-                        <?php echo esc_html($arg['title']); ?>
-                        <div class="oxi-head-toggle"></div>
-                    </div>
-                    <div class="oxi-addons-item-form-item shortcode-addons-templates-right-panel-body"
-                         id="oxi-addons-rearrange-data-modal-open">
-                        <span>
-                            <i class="dashicons dashicons-plus-alt oxi-icons"></i>
-                            <?php echo esc_html($arg['sub-title']); ?>
-                        </span>
-                    </div>
-                </div>
-                <div id="oxi-addons-list-rearrange-modal" class="modal fade bd-example-modal-sm" role="dialog">
-                    <div class="modal-dialog modal-sm">
-                        <form id="oxi-addons-form-rearrange-submit">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Image Rearrange</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="col-12 alert text-center" id="oxi-addons-list-rearrange-saving">
-                                        <i class="fa fa-spinner fa-spin"></i>
-                                    </div>
-                                    <ul class="col-12 list-group" id="oxi-addons-modal-rearrange">
-                                    </ul>
-                                </div>
-                                <div class="modal-footer">
-                                    <input type="hidden" id="oxi-addons-list-rearrange-data">
-                                    <button type="button" id="oxi-addons-list-rearrange-close" class="btn btn-danger"
-                                            data-dismiss="modal">Close</button>
-                                    <input type="submit" id="oxi-addons-list-rearrange-submit" class="btn btn-primary" value="Save">
-                                </div>
-                            </div>
-                        </form>
-                        <div id="modal-rearrange-store-file">
-                            <?php $this->allowed_html_sanitize($id); ?>
-                        </div>
                     </div>
                 </div>
                 <?php
@@ -3068,6 +3006,68 @@ trait Sanitization {
                 );
 
                 echo wp_kses($rawdata, $allowed_tags);
+            }
+
+            public function rearrange_substitute_control($id, array $data = [], array $arg = []) {
+                $default = [
+                    'showing' => FALSE,
+                    'title' => 'Image Hover Rearrange',
+                    'sub-title' => 'Image Hover Rearrange'
+                ];
+                $arg = array_merge($default, $arg);
+                /*
+                 * $arg['title'] = 'Add New Items';
+                 * $arg['sub-title'] = 'Add New Items 02';
+                 *
+                 */
+                ?>
+                <div class="oxi-addons-item-form shortcode-addons-templates-right-panel <?php
+                if ($arg['showing'] != true):
+                    echo 'oxi-admin-head-d-none';
+                endif;
+                ?>" <?php $this->forms_condition($arg) ?>>
+                    <div class="oxi-addons-item-form-heading shortcode-addons-templates-right-panel-heading">
+        <?php echo esc_html($arg['title']); ?>
+                        <div class="oxi-head-toggle"></div>
+                    </div>
+                    <div class="oxi-addons-item-form-item shortcode-addons-templates-right-panel-body"
+                         id="oxi-addons-rearrange-data-modal-open">
+                        <span>
+                            <i class="dashicons dashicons-plus-alt oxi-icons"></i>
+        <?php echo esc_html($arg['sub-title']); ?>
+                        </span>
+                    </div>
+                </div>
+                <div id="oxi-addons-list-rearrange-modal" class="modal fade bd-example-modal-sm" role="dialog">
+                    <div class="modal-dialog modal-sm">
+                        <form id="oxi-addons-form-rearrange-submit">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Image Rearrange</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="col-12 alert text-center" id="oxi-addons-list-rearrange-saving">
+                                        <i class="fa fa-spinner fa-spin"></i>
+                                    </div>
+                                    <ul class="col-12 list-group" id="oxi-addons-modal-rearrange">
+                                    </ul>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="hidden" id="oxi-addons-list-rearrange-data">
+                                    <button type="button" id="oxi-addons-list-rearrange-close" class="btn btn-danger"
+                                            data-dismiss="modal">Close</button>
+                                    <input type="submit" id="oxi-addons-list-rearrange-submit" class="btn btn-primary" value="Save">
+                                </div>
+                            </div>
+                        </form>
+                        <div id="modal-rearrange-store-file">
+        <?php $this->allowed_html_sanitize($id); ?>
+                        </div>
+                    </div>
+                </div>
+                <?php
             }
 
         }

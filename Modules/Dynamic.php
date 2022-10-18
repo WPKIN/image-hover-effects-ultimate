@@ -117,146 +117,7 @@ trait Dynamic {
 
         $this->end_controls_section();
     }
-
-    /*
-     * @return void
-     * Start Post Query for Display Post
-     */
-
-    public function register_dynamic_query() {
-        $this->start_controls_section(
-                'image_hover_dynamic_content_tabs',
-                [
-                    'label' => esc_html__('Post Query', 'image-hover-effects-ultimate'),
-                    'showing' => TRUE,
-                    'condition' => [
-                        'image_hover_dynamic_content' => 'yes',
-                    ],
-                ]
-        );
-        $this->add_control(
-                'image_hover_dynamic_content_type',
-                $this->style,
-                [
-                    'label' => esc_html__('Post Type', 'image-hover-effects-ultimate'),
-                    'type' => Controls::SELECT,
-                    'default' => 'post',
-                    'options' => $this->post_type(),
-                    'description' => 'Select Post Type for Query.'
-                ]
-        );
-        $this->add_control(
-                'image_hover_dynamic_content_author',
-                $this->style,
-                [
-                    'label' => esc_html__('Author', 'image-hover-effects-ultimate'),
-                    'type' => Controls::SELECT,
-                    'multiple' => true,
-                    'options' => $this->post_author(),
-                    'description' => 'Confirm Author list if you wanna those author post only.'
-                ]
-        );
-        foreach ($this->post_type() as $key => $value) {
-            if ($key != 'page') :
-                $this->add_control(
-                        $key . '_category',
-                        $this->style,
-                        [
-                            'label' => esc_html__(' Category', 'image-hover-effects-ultimate'),
-                            'type' => Controls::SELECT,
-                            'multiple' => true,
-                            'options' => $this->post_category($key),
-                            'condition' => [
-                                'image_hover_dynamic_content_type' => $key
-                            ],
-                            'description' => 'Confirm Category list if you wanna those Category post only.',
-                        ]
-                );
-                $this->add_control(
-                        $key . '_tag',
-                        $this->style,
-                        [
-                            'label' => esc_html__(' Tags', 'image-hover-effects-ultimate'),
-                            'type' => Controls::SELECT,
-                            'multiple' => true,
-                            'options' => $this->post_tags($key),
-                            'condition' => [
-                                'image_hover_dynamic_content_type' => $key
-                            ],
-                            'description' => 'Confirm Post Tags if you wanna show those tags post only.',
-                        ]
-                );
-            endif;
-        }
-        $this->add_control(
-                'image_hover_dynamic_content_offset',
-                $this->style,
-                [
-                    'label' => esc_html__('Offset', 'image-hover-effects-ultimate'),
-                    'type' => Controls::NUMBER,
-                    'default' => 0,
-                    'description' => 'Confirm Post Offset.',
-                ]
-        );
-        $this->add_control(
-                'image_hover_dynamic_content_orderby',
-                $this->style,
-                [
-                    'label' => esc_html__(' Order By', 'image-hover-effects-ultimate'),
-                    'type' => Controls::SELECT,
-                    'default' => 'ID',
-                    'options' => [
-                        'ID' => 'Post ID',
-                        'author' => 'Post Author',
-                        'title' => 'Title',
-                        'date' => 'Date',
-                        'modified' => 'Last Modified Date',
-                        'parent' => 'Parent Id',
-                        'rand' => 'Random',
-                        'comment_count' => 'Comment Count',
-                        'menu_order' => 'Menu Order',
-                    ],
-                    'description' => 'Set Post Query Order by Condition.',
-                ]
-        );
-
-        $this->add_control(
-                'image_hover_dynamic_content_ordertype',
-                $this->style,
-                [
-                    'label' => esc_html__(' Order Type', 'image-hover-effects-ultimate'),
-                    'type' => Controls::SELECT,
-                    'options' => [
-                        'asc' => 'Ascending',
-                        'desc' => 'Descending',
-                    ],
-                    'description' => 'Set Post Query Order by Condition.',
-                ]
-        );
-        $this->add_control(
-                'image_hover_dynamic_post_excerpt',
-                $this->style,
-                [
-                    'label' => esc_html__('Excerpt Word Limit', 'image-hover-effects-ultimate'),
-                    'type' => Controls::NUMBER,
-                    'min' => 1,
-                    'description' => 'Confirm Excerpt Word Limit.',
-                ]
-        );
-        $this->add_control(
-                'image_hover_dynamic_content_thumb_sizes',
-                $this->style,
-                [
-                    'label' => esc_html__('Image Size', 'image-hover-effects-ultimate'),
-                    'type' => Controls::SELECT,
-                    'options' => $this->thumbnail_sizes(),
-                    'description' => 'Set Image Thumbnail Size.',
-                ]
-        );
-        $this->end_controls_section();
-    }
-
-    public function register_dynamic_load_more_button() {
+ public function register_dynamic_load_more_button() {
         $this->start_controls_section(
                 'image_hover_dynamic_load',
                 [
@@ -682,6 +543,145 @@ trait Dynamic {
         $this->end_controls_section();
     }
 
+    /*
+     * @return void
+     * Start Post Query for Display Post
+     */
+
+    public function register_dynamic_query() {
+        $this->start_controls_section(
+                'image_hover_dynamic_content_tabs',
+                [
+                    'label' => esc_html__('Post Query', 'image-hover-effects-ultimate'),
+                    'showing' => TRUE,
+                    'condition' => [
+                        'image_hover_dynamic_content' => 'yes',
+                    ],
+                ]
+        );
+        $this->add_control(
+                'image_hover_dynamic_content_type',
+                $this->style,
+                [
+                    'label' => esc_html__('Post Type', 'image-hover-effects-ultimate'),
+                    'type' => Controls::SELECT,
+                    'default' => 'post',
+                    'options' => $this->post_type(),
+                    'description' => 'Select Post Type for Query.'
+                ]
+        );
+        $this->add_control(
+                'image_hover_dynamic_content_author',
+                $this->style,
+                [
+                    'label' => esc_html__('Author', 'image-hover-effects-ultimate'),
+                    'type' => Controls::SELECT,
+                    'multiple' => true,
+                    'options' => $this->post_author(),
+                    'description' => 'Confirm Author list if you wanna those author post only.'
+                ]
+        );
+        foreach ($this->post_type() as $key => $value) {
+            if ($key != 'page') :
+                $this->add_control(
+                        $key . '_category',
+                        $this->style,
+                        [
+                            'label' => esc_html__(' Category', 'image-hover-effects-ultimate'),
+                            'type' => Controls::SELECT,
+                            'multiple' => true,
+                            'options' => $this->post_category($key),
+                            'condition' => [
+                                'image_hover_dynamic_content_type' => $key
+                            ],
+                            'description' => 'Confirm Category list if you wanna those Category post only.',
+                        ]
+                );
+                $this->add_control(
+                        $key . '_tag',
+                        $this->style,
+                        [
+                            'label' => esc_html__(' Tags', 'image-hover-effects-ultimate'),
+                            'type' => Controls::SELECT,
+                            'multiple' => true,
+                            'options' => $this->post_tags($key),
+                            'condition' => [
+                                'image_hover_dynamic_content_type' => $key
+                            ],
+                            'description' => 'Confirm Post Tags if you wanna show those tags post only.',
+                        ]
+                );
+            endif;
+        }
+        $this->add_control(
+                'image_hover_dynamic_content_offset',
+                $this->style,
+                [
+                    'label' => esc_html__('Offset', 'image-hover-effects-ultimate'),
+                    'type' => Controls::NUMBER,
+                    'default' => 0,
+                    'description' => 'Confirm Post Offset.',
+                ]
+        );
+        $this->add_control(
+                'image_hover_dynamic_content_orderby',
+                $this->style,
+                [
+                    'label' => esc_html__(' Order By', 'image-hover-effects-ultimate'),
+                    'type' => Controls::SELECT,
+                    'default' => 'ID',
+                    'options' => [
+                        'ID' => 'Post ID',
+                        'author' => 'Post Author',
+                        'title' => 'Title',
+                        'date' => 'Date',
+                        'modified' => 'Last Modified Date',
+                        'parent' => 'Parent Id',
+                        'rand' => 'Random',
+                        'comment_count' => 'Comment Count',
+                        'menu_order' => 'Menu Order',
+                    ],
+                    'description' => 'Set Post Query Order by Condition.',
+                ]
+        );
+
+        $this->add_control(
+                'image_hover_dynamic_content_ordertype',
+                $this->style,
+                [
+                    'label' => esc_html__(' Order Type', 'image-hover-effects-ultimate'),
+                    'type' => Controls::SELECT,
+                    'options' => [
+                        'asc' => 'Ascending',
+                        'desc' => 'Descending',
+                    ],
+                    'description' => 'Set Post Query Order by Condition.',
+                ]
+        );
+        $this->add_control(
+                'image_hover_dynamic_post_excerpt',
+                $this->style,
+                [
+                    'label' => esc_html__('Excerpt Word Limit', 'image-hover-effects-ultimate'),
+                    'type' => Controls::NUMBER,
+                    'min' => 1,
+                    'description' => 'Confirm Excerpt Word Limit.',
+                ]
+        );
+        $this->add_control(
+                'image_hover_dynamic_content_thumb_sizes',
+                $this->style,
+                [
+                    'label' => esc_html__('Image Size', 'image-hover-effects-ultimate'),
+                    'type' => Controls::SELECT,
+                    'options' => $this->thumbnail_sizes(),
+                    'description' => 'Set Image Thumbnail Size.',
+                ]
+        );
+        $this->end_controls_section();
+    }
+
+   
     public function register_carousel_arrows_settings() {
         $this->start_controls_section(
                 'carousel-arrow',

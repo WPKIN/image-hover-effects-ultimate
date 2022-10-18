@@ -101,22 +101,7 @@ class Admin
         </div>
     <?php
     }
-
-    public function Admin_header()
-    {
-    ?>
-        <div class="oxi-addons-wrapper">
-            <div class="oxi-addons-import-layouts">
-                <h1>Image Hover › Shortcode</h1>
-                <p>Collect Image Hover Shortcode, Edit, Delect, Clone or Export it. </p>
-            </div>
-        </div>
-    <?php
-
-
-    }
-
-    public function Elements_Render()
+      public function Elements_Render()
     {
         $Elements = [
             'Image-Effects' => [
@@ -201,4 +186,20 @@ class Admin
         </div>
 <?php
     }
+
+    public function Admin_header()
+    {
+    ?>
+        <div class="oxi-addons-wrapper">
+            <div class="oxi-addons-import-layouts">
+                <h1>Image Hover › Shortcode</h1>
+                <p>Collect Image Hover Shortcode, Edit, Delect, Clone or Export it. </p>
+            </div>
+        </div>
+    <?php
+
+
+    }
+
+  
 }

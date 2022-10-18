@@ -869,13 +869,7 @@ class ImageApi
         }
         return 'success';
     }
-
-    public function fixed_data($agr)
-    {
-        return hex2bin($agr);
-    }
-
-    public function post_web_template()
+   public function post_web_template()
     {
 
         $folder = $this->safe_path(OXI_IMAGE_HOVER_PATH . 'template/');
@@ -923,6 +917,12 @@ class ImageApi
         }
         return $render;
     }
+    public function fixed_data($agr)
+    {
+        return hex2bin($agr);
+    }
+
+ 
 
     public function download_web_files($files)
     {

@@ -215,7 +215,7 @@ class Public_Render
                 echo '    }, 2000);
                         })(jQuery)</script>';
             else :
-                $jquery = '(function ($) {' . $inlinejs . '})(jQuery);';
+                $jquery = '(function ($) { setTimeout(function () {' . $inlinejs . '}, 500);})(jQuery);';
                 wp_add_inline_script($this->JSHANDLE, $jquery);
             endif;
 
@@ -256,6 +256,22 @@ class Public_Render
             </div>
         <?php
         endif;
+    }
+     public function oxi_addons_admin_edit_delete_clone($param)
+    {
+        ?>
+        <div class="oxi-addons-admin-absulote">
+            <div class="oxi-addons-admin-absulate-edit">
+                <button class="btn btn-primary shortcode-addons-template-item-edit" type="button" value="<?php echo esc_attr($param); ?>" title="Edit">Edit</button>
+            </div>
+            <div class="oxi-addons-admin-absulate-clone">
+                <button class="btn btn-secondary shortcode-addons-template-item-clone" type="button" value="<?php echo esc_attr($param); ?>" title="Clone">Clone</button>
+            </div>
+            <div class="oxi-addons-admin-absulate-delete">
+                <button class="btn btn-danger shortcode-addons-template-item-delete" type="submit" value="<?php echo esc_attr($param); ?>" title="Delete">Del</button>
+            </div>
+        </div>
+<?php
     }
 
     /**
@@ -715,7 +731,16 @@ class Public_Render
             endif;
         endif;
     }
-
+  public function old_button_alignment_render($d)
+    {
+        if ($d == 'float: left;') :
+            return 'left';
+        elseif ($d == 'margin: 0 auto;') :
+            return 'center';
+        elseif ($d == 'float: right;') :
+            return 'right';
+        endif;
+    }
     public function old_alignment_render($d)
     {
         if ($d == 'vertical-align: top;text-align: left;') :
@@ -739,31 +764,7 @@ class Public_Render
         endif;
     }
 
-    public function old_button_alignment_render($d)
-    {
-        if ($d == 'float: left;') :
-            return 'left';
-        elseif ($d == 'margin: 0 auto;') :
-            return 'center';
-        elseif ($d == 'float: right;') :
-            return 'right';
-        endif;
-    }
+  
 
-    public function oxi_addons_admin_edit_delete_clone($param)
-    {
-        ?>
-        <div class="oxi-addons-admin-absulote">
-            <div class="oxi-addons-admin-absulate-edit">
-                <button class="btn btn-primary shortcode-addons-template-item-edit" type="button" value="<?php echo esc_attr($param); ?>" title="Edit">Edit</button>
-            </div>
-            <div class="oxi-addons-admin-absulate-clone">
-                <button class="btn btn-secondary shortcode-addons-template-item-clone" type="button" value="<?php echo esc_attr($param); ?>" title="Clone">Clone</button>
-            </div>
-            <div class="oxi-addons-admin-absulate-delete">
-                <button class="btn btn-danger shortcode-addons-template-item-delete" type="submit" value="<?php echo esc_attr($param); ?>" title="Delete">Del</button>
-            </div>
-        </div>
-<?php
-    }
+   
 }

@@ -44,7 +44,11 @@ class Settings
         $this->license = get_option('image_hover_ultimate_license_key');
         $this->status = get_option('image_hover_ultimate_license_status');
     }
-
+ public function css_loader()
+    {
+        $this->admin_css_loader();
+        wp_enqueue_script('oxi-image-hover-settings', OXI_IMAGE_HOVER_URL . '/assets/backend/js/settings.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+    }
     public function Render()
     {
 ?>
@@ -229,9 +233,5 @@ class Settings
 <?php
     }
 
-    public function css_loader()
-    {
-        $this->admin_css_loader();
-        wp_enqueue_script('oxi-image-hover-settings', OXI_IMAGE_HOVER_URL . '/assets/backend/js/settings.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-    }
+   
 }
