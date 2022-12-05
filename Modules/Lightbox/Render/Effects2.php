@@ -45,23 +45,23 @@ class Effects2 extends Public_Render {
             ?>
             <div class="oxi_addons__light_box_style_2 oxi_addons__light_box <?php $this->column_render('oxi-image-hover-col', $style) ?>  <?php
             echo ($admin == "admin" ? 'oxi-addons-admin-edit-list' : '');
-            ?>"> 
-                <div class="oxi_addons__light_box_parent"> 
+            ?>">
+                <div class="oxi_addons__light_box_parent">
                     <?php
                     if ($this->custom_media_render('oxi_image_light_box_image', $value) != '') {
                         ?>
-                    <div class="oxi_addons__light_box_item  lightbox_key_<?php echo (int) $key; ?>" <?php
+                        <div class="oxi_addons__light_box_item  lightbox_key_<?php echo (int) $key; ?>" <?php
                         if (array_key_exists('oxi_image_light_box_clickable', $style) && $style['oxi_image_light_box_clickable'] == 'image'):
                             echo ' style="width: 100%" ';
                         endif;
-                        ?>>  
-                             <?php
+                        ?>>
+                                 <?php
                                  if (array_key_exists('oxi_image_light_box_clickable', $style) && $style['oxi_image_light_box_clickable'] == 'button') {
                                      if (array_key_exists('oxi_image_light_box_button_text', $value) && $value['oxi_image_light_box_button_text'] != '') {
                                          ?>
                                     <div class="oxi_addons__button_main">
                                         <button class="oxi_addons__button">
-                                            <?php $this->text_render($value['oxi_image_light_box_button_text']) ?> 
+                                            <?php $this->text_render($value['oxi_image_light_box_button_text']) ?>
                                         </button>
                                     </div>
                                     <?php
@@ -92,14 +92,14 @@ class Effects2 extends Public_Render {
                         </div>
                         <?php
                     }
-                    ?>  
+                    ?>
                 </div>
                 <?php
                 if ($admin == 'admin') :
                     $this->oxi_addons_admin_edit_delete_clone($val['id']);
                 endif;
                 ?>
-            </div> 
+            </div>
             <?php
         }
     }
@@ -134,9 +134,9 @@ class Effects2 extends Public_Render {
                         mainClass: "' . $this->WRAPPER . '",
                         callbacks: {
                                     beforeChange: function() {
-                                     this.items[0].src = this.items[0].src + "?=" + Math.random(); 
+                                     this.items[0].src = this.items[0].src + "?=" + Math.random();
                                     }
-                        },  
+                        },
                         closeBtnInside: true,
                         closeOnContentClick: true,
                         tLoading: "",
@@ -161,11 +161,11 @@ class Effects2 extends Public_Render {
                       z-index: ' . ($style['oxi_image_light_z_ind'] + 3) . ';
                   }
 
-                 .oxi-image-hover-wrapper-' . $this->oxiid . ' .Oxipopup-image-holder .Oxipopup-close, 
+                 .oxi-image-hover-wrapper-' . $this->oxiid . ' .Oxipopup-image-holder .Oxipopup-close,
                  .oxi-image-hover-wrapper-' . $this->oxiid . ' .Oxipopup-iframe-holder .Oxipopup-close{
                      color: ' . $style['oxi_image_light_cls_clr'] . ';
                   }
-                 
+
                   .oxi-image-hover-wrapper-' . $this->oxiid . ' .Oxipopup-preloader{
                      background: ' . $style['oxi_image_light_pre_clr'] . ';
                   }';

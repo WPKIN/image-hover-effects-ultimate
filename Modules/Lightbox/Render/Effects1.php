@@ -135,7 +135,7 @@ class Effects1 extends Public_Render {
                                         <button class="oxi_addons__button">
                                             <?php $this->text_render($value['oxi_image_light_box_button_text']); ?>
                                         </button>
-                                    </div> 
+                                    </div>
                                     <?php
                                 }
                             } elseif (array_key_exists('oxi_image_light_box_clickable', $style) && $style['oxi_image_light_box_clickable'] == 'image') {
