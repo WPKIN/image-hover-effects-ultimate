@@ -11,8 +11,7 @@ if (!defined('ABSPATH')) {
  *
  * @author $biplob018
  */
-class ImageApi
-{
+class ImageApi {
 
     /**
      * Define $wpdb
@@ -51,8 +50,7 @@ class ImageApi
     // instance container
     private static $instance = null;
 
-    public static function instance()
-    {
+    public static function instance() {
         if (self::$instance == null) {
             self::$instance = new self;
         }
@@ -65,8 +63,7 @@ class ImageApi
      *
      * @since 9.3.0
      */
-    public function __construct()
-    {
+    public function __construct() {
         global $wpdb;
         $this->wpdb = $wpdb;
         $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
@@ -75,8 +72,7 @@ class ImageApi
         $this->build_api();
     }
 
-    public function build_api()
-    {
+    public function build_api() {
         add_action('rest_api_init', function () {
             register_rest_route(untrailingslashit('ImageHoverUltimate/v1/'), '/(?P<action>\w+)/', array(
                 'methods' => array('GET', 'POST'),
@@ -89,8 +85,7 @@ class ImageApi
         add_action('wp_ajax_image_hover_ultimate', array($this, 'ajax_action'));
     }
 
-    public function get_permissions_check($request)
-    {
+    public function get_permissions_check($request) {
         $user_role = get_option('oxi_addons_user_permission');
         $role_object = get_role($user_role);
         $first_key = '';
@@ -103,34 +98,7 @@ class ImageApi
         return current_user_can($first_key);
     }
 
-    public function ajax_action()
-    {
-
-        $wpnonce = sanitize_key(wp_unslash($_POST['_wpnonce']));
-        if (!wp_verify_nonce($wpnonce, 'image_hover_ultimate')) :
-            return new \WP_REST_Request('Invalid URL', 422);
-            die();
-        endif;
-        $classname = isset($_POST['class']) ? '\\' . str_replace('\\\\', '\\', sanitize_text_field($_POST['class'])) : '';
-        if (strpos($classname, 'OXI_IMAGE_HOVER_PLUGINS') === false) :
-            return new \WP_REST_Request('Invalid URL', 422);
-        endif;
-        $functionname = isset($_POST['functionname']) ? sanitize_text_field($_POST['functionname']) : '';
-        if ($functionname != '__rest_api_post') :
-            return new \WP_REST_Request('Invalid URL', 422);
-        endif;
-        $rawdata = isset($_POST['rawdata']) ? sanitize_post($_POST['rawdata']) : '';
-        $args = isset($_POST['args']) ? sanitize_post($_POST['args']) : '';
-        $optional = isset($_POST['optional']) ? sanitize_post($_POST['optional']) : '';
-        if (!empty($classname) && !empty($functionname) && class_exists($classname)) :
-            $CLASS = new $classname;
-            $CLASS->__construct($functionname, $rawdata, $args, $optional);
-        endif;
-        die();
-    }
-
-    public function api_action($request)
-    {
+    public function api_action($request) {
 
         $this->request = $request;
         $wpnonce = $request['_wpnonce'];
@@ -146,8 +114,7 @@ class ImageApi
         }
     }
 
-    public function allowed_html($rawdata)
-    {
+    public function allowed_html($rawdata) {
         $allowed_tags = array(
             'a' => array(
                 'class' => array(),
@@ -241,8 +208,7 @@ class ImageApi
         endif;
     }
 
-    public function validate_post($data = '')
-    {
+    public function validate_post($data = '') {
         $rawdata = [];
         if (!empty($data)) :
             $arrfiles = json_decode(stripslashes($data), true);
@@ -259,16 +225,14 @@ class ImageApi
         return $rawdata;
     }
 
-    public function array_replace($arr = [], $search = '', $replace = '')
-    {
+    public function array_replace($arr = [], $search = '', $replace = '') {
         array_walk($arr, function (&$v) use ($search, $replace) {
             $v = str_replace($search, $replace, $v);
         });
         return $arr;
     }
 
-    public function post_create_new()
-    {
+    public function post_create_new() {
 
         $params = $this->validate_post();
 
@@ -301,8 +265,7 @@ class ImageApi
         return;
     }
 
-    public function post_layouts_clone()
-    {
+    public function post_layouts_clone() {
 
         $newName = $this->validate_post();
 
@@ -327,8 +290,7 @@ class ImageApi
         endif;
     }
 
-    public function post_json_import($params)
-    {
+    public function post_json_import($params) {
 
         $style = $params['style'];
         $child = $params['child'];
@@ -348,8 +310,7 @@ class ImageApi
         endif;
     }
 
-    public function post_shortcode_delete()
-    {
+    public function post_shortcode_delete() {
         $styleid = (int) $this->styleid;
         if ($styleid) :
             $this->wpdb->query($this->wpdb->prepare("DELETE FROM {$this->parent_table} WHERE id = %d", $styleid));
@@ -360,8 +321,7 @@ class ImageApi
         endif;
     }
 
-    public function update_image_hover_plugin()
-    {
+    public function update_image_hover_plugin() {
         $stylelist = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->parent_table ORDER by id ASC"), ARRAY_A);
         foreach ($stylelist as $value) {
             $raw = json_decode(stripslashes($value['rawdata']), true);
@@ -378,15 +338,13 @@ class ImageApi
      * Generate safe path
      * @since v1.0.0
      */
-    public function safe_path($path)
-    {
+    public function safe_path($path) {
 
         $path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
         return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
     }
 
-    public function get_shortcode_export()
-    {
+    public function get_shortcode_export() {
         $styleid = (int) $this->styleid;
         if ($styleid > 0) :
             $style = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM $this->parent_table WHERE id = %d", $styleid), ARRAY_A);
@@ -414,8 +372,7 @@ class ImageApi
      * @param string $file_name File name.
      * @param int    $file_size File size.
      */
-    private function send_file_headers($file_name, $file_size)
-    {
+    private function send_file_headers($file_name, $file_size) {
         header('Content-Type: application/octet-stream');
         header('Content-Disposition: attachment; filename=' . $file_name);
         header('Expires: 0');
@@ -424,8 +381,7 @@ class ImageApi
         header('Content-Length: ' . $file_size);
     }
 
-    public function post_shortcode_deactive()
-    {
+    public function post_shortcode_deactive() {
         $rawdata = $this->validate_post();
 
         $id = $rawdata . '-' . (int) $this->styleid;
@@ -438,8 +394,7 @@ class ImageApi
         endif;
     }
 
-    public function post_shortcode_active()
-    {
+    public function post_shortcode_active() {
         $rawdata = $this->validate_post();
         $id = $rawdata . '-' . (int) $this->styleid;
         $effects = $rawdata . '-ultimate';
@@ -457,8 +412,7 @@ class ImageApi
      *
      * @since 9.3.0
      */
-    public function post_elements_template_style()
-    {
+    public function post_elements_template_style() {
         $settings = json_decode(stripslashes($this->rawdata), true);
         $StyleName = sanitize_text_field($settings['image-hover-template']);
         $stylesheet = '';
@@ -476,8 +430,7 @@ class ImageApi
      *
      * @since 9.3.0
      */
-    public function post_template_change()
-    {
+    public function post_template_change() {
         $rawdata = $this->validate_post();
 
         if ((int) $this->styleid) :
@@ -491,8 +444,7 @@ class ImageApi
      *
      * @since 9.3.0
      */
-    public function post_template_name()
-    {
+    public function post_template_name() {
         $settings = $this->validate_post();
         $name = $settings['addonsstylename'];
         $id = $settings['addonsstylenameid'];
@@ -507,8 +459,7 @@ class ImageApi
      *
      * @since 9.3.0
      */
-    public function post_elements_rearrange_modal_data()
-    {
+    public function post_elements_rearrange_modal_data() {
         if ((int) $this->styleid) :
             $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $this->styleid), ARRAY_A);
             $render = [];
@@ -525,8 +476,7 @@ class ImageApi
      *
      * @since 9.3.0
      */
-    public function post_elements_template_rearrange_save_data()
-    {
+    public function post_elements_template_rearrange_save_data() {
         $params = explode(',', $this->validate_post());
         foreach ($params as $value) {
             if ((int) $value) :
@@ -549,8 +499,7 @@ class ImageApi
      *
      * @since 9.3.0
      */
-    public function post_elements_template_modal_data()
-    {
+    public function post_elements_template_modal_data() {
 
         if ((int) $this->styleid) :
             if ((int) $this->childid) :
@@ -567,8 +516,7 @@ class ImageApi
      *
      * @since 9.3.0
      */
-    public function post_elements_template_rebuild_data()
-    {
+    public function post_elements_template_rebuild_data() {
         $style = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $this->styleid), ARRAY_A);
         $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $this->styleid), ARRAY_A);
         $style['rawdata'] = $style['stylesheet'] = $style['font_family'] = '';
@@ -584,8 +532,7 @@ class ImageApi
      *
      * @since 9.3.0
      */
-    public function post_elements_template_render_data()
-    {
+    public function post_elements_template_render_data() {
         $settings = json_decode(stripslashes($this->rawdata), true);
         $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $this->styleid), ARRAY_A);
         $StyleName = $settings['image-hover-template'];
@@ -603,8 +550,7 @@ class ImageApi
      *
      * @since 9.3.0
      */
-    public function post_elements_template_modal_data_edit()
-    {
+    public function post_elements_template_modal_data_edit() {
         if ((int) $this->childid) :
             $listdata = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM {$this->child_table} WHERE id = %d ", $this->childid), ARRAY_A);
             $returnfile = json_decode(stripslashes($listdata['rawdata']), true);
@@ -620,8 +566,7 @@ class ImageApi
      *
      * @since 9.3.0
      */
-    public function post_elements_template_modal_data_clone()
-    {
+    public function post_elements_template_modal_data_clone() {
         if ((int) $this->childid) :
             $listdata = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM {$this->child_table} WHERE id = %d ", $this->childid), ARRAY_A);
             $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d,  %s)", array($listdata['styleid'], $listdata['rawdata'])));
@@ -640,8 +585,7 @@ class ImageApi
      *
      * @since 9.3.0
      */
-    public function post_elements_template_modal_data_delete()
-    {
+    public function post_elements_template_modal_data_delete() {
         if ((int) $this->childid) :
             $this->wpdb->query($this->wpdb->prepare("DELETE FROM {$this->child_table} WHERE id = %d ", $this->childid));
             return 'done';
@@ -654,8 +598,7 @@ class ImageApi
      * Admin Notice API  loader
      * @return void
      */
-    public function post_oxi_recommended()
-    {
+    public function post_oxi_recommended() {
         $data = 'done';
         update_option('oxi_image_hover_recommended', $data);
         return $data;
@@ -665,8 +608,7 @@ class ImageApi
      * Admin Notice Recommended  loader
      * @return void
      */
-    public function post_notice_dissmiss()
-    {
+    public function post_notice_dissmiss() {
         $notice = $this->request['notice'];
         if ($notice == 'maybe') :
             $data = strtotime("now");
@@ -681,8 +623,7 @@ class ImageApi
      * Admin Settings
      * @return void
      */
-    public function post_oxi_addons_user_permission()
-    {
+    public function post_oxi_addons_user_permission() {
         $rawdata = $this->validate_post();
         update_option('oxi_addons_user_permission', $rawdata['value']);
         return '<span class="oxi-confirmation-success"></span>';
@@ -692,8 +633,7 @@ class ImageApi
      * Admin Settings
      * @return void
      */
-    public function post_image_hover_ultimate_mobile_device_key()
-    {
+    public function post_image_hover_ultimate_mobile_device_key() {
         $rawdata = $this->validate_post();
         update_option('image_hover_ultimate_mobile_device_key', $rawdata['value']);
         return '<span class="oxi-confirmation-success"></span>';
@@ -703,8 +643,7 @@ class ImageApi
      * Admin Settings
      * @return void
      */
-    public function post_oxi_addons_font_awesome()
-    {
+    public function post_oxi_addons_font_awesome() {
         $rawdata = $this->validate_post();
         update_option('oxi_addons_font_awesome', $rawdata['value']);
         return '<span class="oxi-confirmation-success"></span>';
@@ -714,8 +653,7 @@ class ImageApi
      * Admin Settings
      * @return void
      */
-    public function post_oxi_addons_way_points()
-    {
+    public function post_oxi_addons_way_points() {
         $rawdata = $this->validate_post();
         update_option('oxi_addons_way_points', $rawdata['value']);
         return '<span class="oxi-confirmation-success"></span>';
@@ -725,8 +663,7 @@ class ImageApi
      * Admin Settings
      * @return void
      */
-    public function post_oxi_addons_google_font()
-    {
+    public function post_oxi_addons_google_font() {
         $rawdata = $this->validate_post();
         update_option('oxi_addons_google_font', $rawdata['value']);
         return '<span class="oxi-confirmation-success"></span>';
@@ -736,18 +673,17 @@ class ImageApi
      * Admin Settings
      * @return void
      */
-    public function post_oxi_addons_custom_parent_class()
-    {
+    public function post_oxi_addons_custom_parent_class() {
         $rawdata = $this->validate_post();
         update_option('oxi_addons_custom_parent_class', $rawdata['value']);
         return '<span class="oxi-confirmation-success"></span>';
     }
+
     /**
      * Admin Settings
      * @return void
      */
-    public function post_oxi_image_support_massage()
-    {
+    public function post_oxi_image_support_massage() {
         $rawdata = $this->validate_post();
         update_option('oxi_image_support_massage', $rawdata['value']);
         return '<span class="oxi-confirmation-success"></span>';
@@ -757,8 +693,7 @@ class ImageApi
      * Admin License
      * @return void
      */
-    public function post_oxi_license()
-    {
+    public function post_oxi_license() {
         $rawdata = $this->validate_post();
         $new = $rawdata['license'];
         $old = get_option('image_hover_ultimate_license_key');
@@ -782,8 +717,7 @@ class ImageApi
         return $data;
     }
 
-    public function activate_license($key)
-    {
+    public function activate_license($key) {
         $api_params = array(
             'edd_action' => 'activate_license',
             'license' => $key,
@@ -844,8 +778,7 @@ class ImageApi
         return 'success';
     }
 
-    public function deactivate_license($key)
-    {
+    public function deactivate_license($key) {
         $api_params = array(
             'edd_action' => 'deactivate_license',
             'license' => $key,
@@ -869,8 +802,8 @@ class ImageApi
         }
         return 'success';
     }
-   public function post_web_template()
-    {
+
+    public function post_web_template() {
 
         $folder = $this->safe_path(OXI_IMAGE_HOVER_PATH . 'template/');
         if (!is_dir($folder)) :
@@ -917,15 +850,12 @@ class ImageApi
         }
         return $render;
     }
-    public function fixed_data($agr)
-    {
+
+    public function fixed_data($agr) {
         return hex2bin($agr);
     }
 
- 
-
-    public function download_web_files($files)
-    {
+    public function download_web_files($files) {
 
         $rawdata = $this->validate_post();
         $URL = self::API . $rawdata . '/' . $this->styleid;
@@ -938,11 +868,11 @@ class ImageApi
 
         $data = json_decode($response, true);
         if (file_put_contents($files, json_encode($data))) {
+
         }
     }
 
-    public function post_web_import()
-    {
+    public function post_web_import() {
         $rawdata = $this->validate_post();
         $files = OXI_IMAGE_HOVER_PATH . 'template/' . $rawdata . '.json';
         $params = json_decode(file_get_contents($files), true)[$this->styleid];
@@ -964,4 +894,30 @@ class ImageApi
             return admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$s[0]&styleid=$redirect_id");
         endif;
     }
+
+    public function ajax_action() {
+
+        $wpnonce = sanitize_key(wp_unslash($_POST['_wpnonce']));
+        if (!wp_verify_nonce($wpnonce, 'image_hover_ultimate')) :
+            return new \WP_REST_Request('Invalid URL', 422);
+            die();
+        endif;
+        $classname = isset($_POST['class']) ? '\\' . str_replace('\\\\', '\\', sanitize_text_field($_POST['class'])) : '';
+        if (strpos($classname, 'OXI_IMAGE_HOVER_PLUGINS') === false) :
+            return new \WP_REST_Request('Invalid URL', 422);
+        endif;
+        $functionname = isset($_POST['functionname']) ? sanitize_text_field($_POST['functionname']) : '';
+        if ($functionname != '__rest_api_post') :
+            return new \WP_REST_Request('Invalid URL', 422);
+        endif;
+        $rawdata = isset($_POST['rawdata']) ? sanitize_post($_POST['rawdata']) : '';
+        $args = isset($_POST['args']) ? sanitize_post($_POST['args']) : '';
+        $optional = isset($_POST['optional']) ? sanitize_post($_POST['optional']) : '';
+        if (!empty($classname) && !empty($functionname) && class_exists($classname)) :
+            $CLASS = new $classname;
+            $CLASS->__construct($functionname, $rawdata, $args, $optional);
+        endif;
+        die();
+    }
+
 }

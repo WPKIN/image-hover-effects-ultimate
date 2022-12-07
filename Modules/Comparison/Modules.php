@@ -16,184 +16,6 @@ use OXI_IMAGE_HOVER_PLUGINS\Page\Admin_Render as Admin_Render;
 
 class Modules extends Admin_Render {
 
-    public function register_controls() {
-        $this->start_section_header(
-                'oxi-image-hover-start-tabs', [
-            'options' => [
-                'general-settings' => esc_html__('General Settings', 'image-hover-effects-ultimate'),
-                'custom' => esc_html__('Custom CSS', 'image-hover-effects-ultimate'),
-            ],
-                ]
-        );
-        $this->register_general_tabs();
-        $this->register_custom_tabs();
-    }
-
-    public function register_custom_tabs() {
-        $this->start_section_tabs(
-                'oxi-image-hover-start-tabs', [
-            'condition' => [
-                'oxi-image-hover-start-tabs' => 'custom',
-            ],
-            'padding' => '10px',
-                ]
-        );
-
-        $this->start_controls_section(
-                'oxi-image-hover', [
-            'label' => esc_html__('Custom CSS', 'image-hover-effects-ultimate'),
-            'showing' => true,
-                ]
-        );
-        $this->add_control(
-                'image-hover-custom-css', $this->style, [
-            'label' => esc_html__('', 'image-hover-effects-ultimate'),
-            'type' => Controls::TEXTAREA,
-            'default' => '',
-            'description' => 'Custom CSS Section. You can add custom css into textarea.'
-                ]
-        );
-        $this->end_controls_section();
-        $this->end_section_tabs();
-    }
-
-    public function register_general_tabs() {
-        $this->start_section_tabs(
-                'oxi-image-hover-start-tabs', [
-            'condition' => [
-                'oxi-image-hover-start-tabs' => 'general-settings',
-            ],
-                ]
-        );
-        $this->start_section_devider();
-        $this->register_general_style();
-        $this->end_section_devider();
-        $this->start_section_devider();
-        $this->register_image_settings();
-        $this->register_handle_settings();
-        $this->register_button_settings();
-        $this->end_section_devider();
-        $this->end_section_tabs();
-    }
-
-    /*
-     * @return void
-     * Start Module Method for Genaral Style  #Light-box
-     */
-
-    public function register_general_style() {
-        $this->start_controls_section(
-                'oxi-image-hover', [
-            'label' => esc_html__('General Style', 'image-hover-effects-ultimate'),
-            'showing' => true,
-                ]
-        );
-        $this->add_group_control(
-                'oxi-image-hover-col', $this->style, [
-            'type' => Controls::COLUMN,
-            'selector' => [
-                '{{WRAPPER}} .oxi-addons-main-wrapper-image-comparison' => '',
-            ],
-                ]
-        );
-
-        $this->add_group_control(
-                'oxi_image_magnifier_button_border',
-                $this->style,
-                [
-                    'type' => Controls::BORDER,
-                    'selector' => [
-                        '{{WRAPPER}} .oxi-addons-main-wrapper-image-comparison .oxi-addons-main' => '',
-                    ],
-                    'description' => 'Border property is used to set the Border of the Comparison Body.',
-                ]
-        );
-        $this->add_responsive_control(
-                'oxi_image_magnifier_radius',
-                $this->style,
-                [
-                    'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
-                    'type' => Controls::DIMENSIONS,
-                    'default' => [
-                        'unit' => 'px',
-                        'size' => '',
-                    ],
-                    'range' => [
-                        '%' => [
-                            'min' => 0,
-                            'max' => 50,
-                            'step' => .1,
-                        ],
-                        'px' => [
-                            'min' => 0,
-                            'max' => 200,
-                            'step' => 1,
-                        ],
-                        'em' => [
-                            'min' => 0,
-                            'max' => 10,
-                            'step' => .1,
-                        ],
-                    ],
-                    'selector' => [
-                        '{{WRAPPER}} .oxi-addons-main-wrapper-image-comparison .oxi-addons-main' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    ],
-                    'description' => 'Allows you to add rounded corners to Comparison with options.',
-                ]
-        );
-        $this->add_group_control(
-                'oxi_image_magnifier_shadow',
-                $this->style,
-                [
-                    'label' => esc_html__('Box Shadow', 'image-hover-effects-ultimate'),
-                    'type' => Controls::BOXSHADOW,
-                    'selector' => [
-                        '{{WRAPPER}} .oxi-addons-main-wrapper-image-comparison .oxi-addons-main' => '',
-                    ],
-                    'description' => 'Allows you at hover to attaches one or more shadows into Comparison Body.',
-                ]
-        );
-        $this->add_responsive_control(
-                'oxi_image_magnifier_margin',
-                $this->style,
-                [
-                    'label' => esc_html__('Margin', 'image-hover-effects-ultimate'),
-                    'type' => Controls::DIMENSIONS,
-                    'default' => [
-                        'unit' => 'px',
-                        'size' => '',
-                    ],
-                    'range' => [
-                        '%' => [
-                            'min' => 0,
-                            'max' => 50,
-                            'step' => .1,
-                        ],
-                        'px' => [
-                            'min' => -200,
-                            'max' => 200,
-                            'step' => 1,
-                        ],
-                        'em' => [
-                            'min' => 0,
-                            'max' => 10,
-                            'step' => .1,
-                        ],
-                    ],
-                    'selector' => [
-                        '{{WRAPPER}} .oxi-addons-main-wrapper-image-comparison' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    ],
-                    'description' => 'Generate space outside of Comparison Body.',
-                ]
-        );
-        $this->end_controls_section();
-    }
-
-    /*
-     * @return void
-     * Start Module Method for Image Setting #Light-box
-     */
-
     public function register_image_settings() {
         $this->start_controls_section(
                 'shortcode-addons', [
@@ -527,11 +349,10 @@ class Modules extends Admin_Render {
 
     public function modal_form_data() {
         ?><div class="modal-header">
-                    <h4 class="modal-title">Image Hover Form</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body"><?php
-
+            <h4 class="modal-title">Image Hover Form</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body"><?php
         $this->start_controls_tabs(
                 'shortcode-addons-start-tabs', [
             'options' => [
@@ -657,6 +478,183 @@ class Modules extends Admin_Render {
                 ]
         );
         ?></div><?php
-    }
+        }
 
-}
+        public function register_controls() {
+            $this->start_section_header(
+                    'oxi-image-hover-start-tabs', [
+                'options' => [
+                    'general-settings' => esc_html__('General Settings', 'image-hover-effects-ultimate'),
+                    'custom' => esc_html__('Custom CSS', 'image-hover-effects-ultimate'),
+                ],
+                    ]
+            );
+            $this->register_general_tabs();
+            $this->register_custom_tabs();
+        }
+
+        public function register_custom_tabs() {
+            $this->start_section_tabs(
+                    'oxi-image-hover-start-tabs', [
+                'condition' => [
+                    'oxi-image-hover-start-tabs' => 'custom',
+                ],
+                'padding' => '10px',
+                    ]
+            );
+
+            $this->start_controls_section(
+                    'oxi-image-hover', [
+                'label' => esc_html__('Custom CSS', 'image-hover-effects-ultimate'),
+                'showing' => true,
+                    ]
+            );
+            $this->add_control(
+                    'image-hover-custom-css', $this->style, [
+                'label' => esc_html__('', 'image-hover-effects-ultimate'),
+                'type' => Controls::TEXTAREA,
+                'default' => '',
+                'description' => 'Custom CSS Section. You can add custom css into textarea.'
+                    ]
+            );
+            $this->end_controls_section();
+            $this->end_section_tabs();
+        }
+
+        public function register_general_tabs() {
+            $this->start_section_tabs(
+                    'oxi-image-hover-start-tabs', [
+                'condition' => [
+                    'oxi-image-hover-start-tabs' => 'general-settings',
+                ],
+                    ]
+            );
+            $this->start_section_devider();
+            $this->register_general_style();
+            $this->end_section_devider();
+            $this->start_section_devider();
+            $this->register_image_settings();
+            $this->register_handle_settings();
+            $this->register_button_settings();
+            $this->end_section_devider();
+            $this->end_section_tabs();
+        }
+
+        /*
+         * @return void
+         * Start Module Method for Genaral Style  #Light-box
+         */
+
+        public function register_general_style() {
+            $this->start_controls_section(
+                    'oxi-image-hover', [
+                'label' => esc_html__('General Style', 'image-hover-effects-ultimate'),
+                'showing' => true,
+                    ]
+            );
+            $this->add_group_control(
+                    'oxi-image-hover-col', $this->style, [
+                'type' => Controls::COLUMN,
+                'selector' => [
+                    '{{WRAPPER}} .oxi-addons-main-wrapper-image-comparison' => '',
+                ],
+                    ]
+            );
+
+            $this->add_group_control(
+                    'oxi_image_magnifier_button_border',
+                    $this->style,
+                    [
+                        'type' => Controls::BORDER,
+                        'selector' => [
+                            '{{WRAPPER}} .oxi-addons-main-wrapper-image-comparison .oxi-addons-main' => '',
+                        ],
+                        'description' => 'Border property is used to set the Border of the Comparison Body.',
+                    ]
+            );
+            $this->add_responsive_control(
+                    'oxi_image_magnifier_radius',
+                    $this->style,
+                    [
+                        'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
+                        'type' => Controls::DIMENSIONS,
+                        'default' => [
+                            'unit' => 'px',
+                            'size' => '',
+                        ],
+                        'range' => [
+                            '%' => [
+                                'min' => 0,
+                                'max' => 50,
+                                'step' => .1,
+                            ],
+                            'px' => [
+                                'min' => 0,
+                                'max' => 200,
+                                'step' => 1,
+                            ],
+                            'em' => [
+                                'min' => 0,
+                                'max' => 10,
+                                'step' => .1,
+                            ],
+                        ],
+                        'selector' => [
+                            '{{WRAPPER}} .oxi-addons-main-wrapper-image-comparison .oxi-addons-main' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        ],
+                        'description' => 'Allows you to add rounded corners to Comparison with options.',
+                    ]
+            );
+            $this->add_group_control(
+                    'oxi_image_magnifier_shadow',
+                    $this->style,
+                    [
+                        'label' => esc_html__('Box Shadow', 'image-hover-effects-ultimate'),
+                        'type' => Controls::BOXSHADOW,
+                        'selector' => [
+                            '{{WRAPPER}} .oxi-addons-main-wrapper-image-comparison .oxi-addons-main' => '',
+                        ],
+                        'description' => 'Allows you at hover to attaches one or more shadows into Comparison Body.',
+                    ]
+            );
+            $this->add_responsive_control(
+                    'oxi_image_magnifier_margin',
+                    $this->style,
+                    [
+                        'label' => esc_html__('Margin', 'image-hover-effects-ultimate'),
+                        'type' => Controls::DIMENSIONS,
+                        'default' => [
+                            'unit' => 'px',
+                            'size' => '',
+                        ],
+                        'range' => [
+                            '%' => [
+                                'min' => 0,
+                                'max' => 50,
+                                'step' => .1,
+                            ],
+                            'px' => [
+                                'min' => -200,
+                                'max' => 200,
+                                'step' => 1,
+                            ],
+                            'em' => [
+                                'min' => 0,
+                                'max' => 10,
+                                'step' => .1,
+                            ],
+                        ],
+                        'selector' => [
+                            '{{WRAPPER}} .oxi-addons-main-wrapper-image-comparison' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        ],
+                        'description' => 'Generate space outside of Comparison Body.',
+                    ]
+            );
+            $this->end_controls_section();
+        }
+
+        /*
+         * @return void
+         * Start Module Method for Image Setting #Light-box
+         */
+    }

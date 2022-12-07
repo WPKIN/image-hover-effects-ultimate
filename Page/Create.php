@@ -107,7 +107,7 @@ class Create {
      * @return void
      */
     public function admin_rest_api() {
-        wp_enqueue_script('oxi-image-hover-create', OXI_IMAGE_HOVER_URL . '/assets/backend/js/create.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_script('oxi-image-hover-create', OXI_IMAGE_HOVER_URL . 'assets/backend/js/create.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
 
     public function Render() {

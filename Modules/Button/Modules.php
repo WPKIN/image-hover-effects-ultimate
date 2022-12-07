@@ -36,165 +36,6 @@ class Modules extends Admin_Render {
         return '';
     }
 
-    public function register_column_effects() {
-        $this->start_controls_section(
-                'oxi-image-hover', [
-            'label' => esc_html__('Column & Effects', 'image-hover-effects-ultimate'),
-            'showing' => TRUE,
-                ]
-        );
-        $this->add_group_control(
-                'oxi-image-hover-col', $this->style, [
-            'type' => Controls::COLUMN,
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-hover-style' => '',
-            ],
-            'simpledescription' => 'How much column want to show into a single rows ',
-            'description' => 'Define how much column you want to show into single rows. Customize possible with desktop or tab or mobile Settings.',
-                ]
-        );
-        $this->register_effects();
-        $this->add_control(
-                'oxi-image-hover-effects-time', $this->style, [
-            'label' => esc_html__('Effects Time (S)', 'image-hover-effects-ultimate'),
-            'type' => Controls::SLIDER,
-            'simpleenable' => false,
-            'default' => [
-                'unit' => 'ms',
-                'size' => '',
-            ],
-            'range' => [
-                'ms' => [
-                    'min' => 0.0,
-                    'max' => 5000,
-                    'step' => 1,
-                ],
-                's' => [
-                    'min' => 0.0,
-                    'max' => 5,
-                    'step' => 0.01,
-                ],
-            ],
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-hover-style *,{{WRAPPER}} .oxi-image-hover-style *:before, .oxi-image-hover-style *:after' => '-webkit-transition: all {{SIZE}}{{UNIT}} ease-in-out; -moz-transition: all {{SIZE}}{{UNIT}} ease-in-out; transition: all {{SIZE}}{{UNIT}} ease-in-out;',
-            ],
-            'description' => 'Set Effects Durations as How long you want to run Effects. Options available with Second or Milisecond.',
-                ]
-        );
-        $this->add_group_control(
-                'oxi-image-hover-animation', $this->style, [
-            'type' => Controls::ANIMATION,
-            'separator' => TRUE,
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-hover-style' => '',
-            ]
-                ]
-        );
-        $this->end_controls_section();
-    }
-
-    public function register_general_style() {
-        $this->start_controls_section(
-                'oxi-image-hover', [
-            'label' => esc_html__('Width & Height', 'image-hover-effects-ultimate'),
-            'showing' => true,
-                ]
-        );
-        $this->add_responsive_control(
-                'oxi-image-hover-width', $this->style, [
-            'label' => esc_html__('Width', 'image-hover-effects-ultimate'),
-            'type' => Controls::SLIDER,
-            'default' => [
-                'unit' => 'px',
-                'size' => '',
-            ],
-            'range' => [
-                'px' => [
-                    'min' => 0,
-                    'max' => 1900,
-                    'step' => 1,
-                ],
-                '%' => [
-                    'min' => 1,
-                    'max' => 100,
-                    'step' => 1,
-                ],
-                'em' => [
-                    'min' => 1,
-                    'max' => 200,
-                    'step' => 0.1,
-                ],
-            ],
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-hover-style-button' => 'max-width:{{SIZE}}{{UNIT}};',
-            ],
-            'simpledescription' => 'Customize Image Width as like as you want, will be pixel Value.',
-            'description' => 'Customize Image Width with several options as Pixel, Percent or EM.',
-                ]
-        );
-        $this->add_responsive_control(
-                'oxi-image-hover-height', $this->style, [
-            'label' => esc_html__('Height', 'image-hover-effects-ultimate'),
-            'type' => Controls::SLIDER,
-            'default' => [
-                'unit' => 'px',
-                'size' => '',
-            ],
-            'range' => [
-                'px' => [
-                    'min' => 0,
-                    'max' => 1000,
-                    'step' => 1,
-                ],
-                '%' => [
-                    'min' => 1,
-                    'max' => 200,
-                    'step' => 1,
-                ],
-            ],
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-hover-style-button:after ' => 'padding-bottom:{{SIZE}}{{UNIT}};',
-            ],
-            'simpledescription' => 'Customize Image Height as like as you want, will be Percent Value.',
-            'description' => 'Customize Image Height with several options as Pixel, Percent or EM.',
-                ]
-        );
-        $this->add_responsive_control(
-                'oxi-image-hover-margin', $this->style, [
-            'label' => esc_html__('Margin', 'image-hover-effects-ultimate'),
-            'type' => Controls::DIMENSIONS,
-            'simpledimensions' => 'double',
-            'default' => [
-                'unit' => 'px',
-                'size' => '',
-            ],
-            'range' => [
-                'px' => [
-                    'min' => 0,
-                    'max' => 500,
-                    'step' => 1,
-                ],
-                '%' => [
-                    'min' => 0,
-                    'max' => 100,
-                    'step' => 1,
-                ],
-                'em' => [
-                    'min' => 0,
-                    'max' => 200,
-                    'step' => .1,
-                ],
-            ],
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-hover-style' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ],
-            'simpledescription' => 'Margin properties are used to create space around Image.',
-            'description' => 'Margin properties are used to create space around Image with several options as Pixel, or Percent or EM.',
-                ]
-        );
-        $this->end_controls_section();
-    }
-
     public function register_content_settings() {
         $this->start_controls_section(
                 'oxi-image-hover', [
@@ -870,11 +711,11 @@ class Modules extends Admin_Render {
     }
 
     public function modal_form_data() {
-       ?><div class="modal-header">
-                    <h4 class="modal-title">Image Hover Form</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body"><?php
+        ?><div class="modal-header">
+            <h4 class="modal-title">Image Hover Form</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body"><?php
         $this->add_control(
                 'image_hover_title', $this->style, [
             'label' => esc_html__('Rearrange Title', 'image-hover-effects-ultimate'),
@@ -957,15 +798,174 @@ class Modules extends Admin_Render {
         $this->end_controls_tab();
         $this->end_controls_tabs();
         ?></div><?php
-    }
+        }
 
-    /**
-     * Template Parent Item Data Rearrange
-     *
-     * @since 2.0.0
-     */
-    public function Rearrange() {
-        return '<li class="list-group-item" id="{{id}}">{{image_hover_title}}</li>';
-    }
+        /**
+         * Template Parent Item Data Rearrange
+         *
+         * @since 2.0.0
+         */
+        public function Rearrange() {
+            return '<li class="list-group-item" id="{{id}}">{{image_hover_title}}</li>';
+        }
 
-}
+        public function register_column_effects() {
+            $this->start_controls_section(
+                    'oxi-image-hover', [
+                'label' => esc_html__('Column & Effects', 'image-hover-effects-ultimate'),
+                'showing' => TRUE,
+                    ]
+            );
+            $this->add_group_control(
+                    'oxi-image-hover-col', $this->style, [
+                'type' => Controls::COLUMN,
+                'selector' => [
+                    '{{WRAPPER}} .oxi-image-hover-style' => '',
+                ],
+                'simpledescription' => 'How much column want to show into a single rows ',
+                'description' => 'Define how much column you want to show into single rows. Customize possible with desktop or tab or mobile Settings.',
+                    ]
+            );
+            $this->register_effects();
+            $this->add_control(
+                    'oxi-image-hover-effects-time', $this->style, [
+                'label' => esc_html__('Effects Time (S)', 'image-hover-effects-ultimate'),
+                'type' => Controls::SLIDER,
+                'simpleenable' => false,
+                'default' => [
+                    'unit' => 'ms',
+                    'size' => '',
+                ],
+                'range' => [
+                    'ms' => [
+                        'min' => 0.0,
+                        'max' => 5000,
+                        'step' => 1,
+                    ],
+                    's' => [
+                        'min' => 0.0,
+                        'max' => 5,
+                        'step' => 0.01,
+                    ],
+                ],
+                'selector' => [
+                    '{{WRAPPER}} .oxi-image-hover-style *,{{WRAPPER}} .oxi-image-hover-style *:before, .oxi-image-hover-style *:after' => '-webkit-transition: all {{SIZE}}{{UNIT}} ease-in-out; -moz-transition: all {{SIZE}}{{UNIT}} ease-in-out; transition: all {{SIZE}}{{UNIT}} ease-in-out;',
+                ],
+                'description' => 'Set Effects Durations as How long you want to run Effects. Options available with Second or Milisecond.',
+                    ]
+            );
+            $this->add_group_control(
+                    'oxi-image-hover-animation', $this->style, [
+                'type' => Controls::ANIMATION,
+                'separator' => TRUE,
+                'selector' => [
+                    '{{WRAPPER}} .oxi-image-hover-style' => '',
+                ]
+                    ]
+            );
+            $this->end_controls_section();
+        }
+
+        public function register_general_style() {
+            $this->start_controls_section(
+                    'oxi-image-hover', [
+                'label' => esc_html__('Width & Height', 'image-hover-effects-ultimate'),
+                'showing' => true,
+                    ]
+            );
+            $this->add_responsive_control(
+                    'oxi-image-hover-width', $this->style, [
+                'label' => esc_html__('Width', 'image-hover-effects-ultimate'),
+                'type' => Controls::SLIDER,
+                'default' => [
+                    'unit' => 'px',
+                    'size' => '',
+                ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 1900,
+                        'step' => 1,
+                    ],
+                    '%' => [
+                        'min' => 1,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                    'em' => [
+                        'min' => 1,
+                        'max' => 200,
+                        'step' => 0.1,
+                    ],
+                ],
+                'selector' => [
+                    '{{WRAPPER}} .oxi-image-hover-style-button' => 'max-width:{{SIZE}}{{UNIT}};',
+                ],
+                'simpledescription' => 'Customize Image Width as like as you want, will be pixel Value.',
+                'description' => 'Customize Image Width with several options as Pixel, Percent or EM.',
+                    ]
+            );
+            $this->add_responsive_control(
+                    'oxi-image-hover-height', $this->style, [
+                'label' => esc_html__('Height', 'image-hover-effects-ultimate'),
+                'type' => Controls::SLIDER,
+                'default' => [
+                    'unit' => 'px',
+                    'size' => '',
+                ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 1000,
+                        'step' => 1,
+                    ],
+                    '%' => [
+                        'min' => 1,
+                        'max' => 200,
+                        'step' => 1,
+                    ],
+                ],
+                'selector' => [
+                    '{{WRAPPER}} .oxi-image-hover-style-button:after ' => 'padding-bottom:{{SIZE}}{{UNIT}};',
+                ],
+                'simpledescription' => 'Customize Image Height as like as you want, will be Percent Value.',
+                'description' => 'Customize Image Height with several options as Pixel, Percent or EM.',
+                    ]
+            );
+            $this->add_responsive_control(
+                    'oxi-image-hover-margin', $this->style, [
+                'label' => esc_html__('Margin', 'image-hover-effects-ultimate'),
+                'type' => Controls::DIMENSIONS,
+                'simpledimensions' => 'double',
+                'default' => [
+                    'unit' => 'px',
+                    'size' => '',
+                ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 500,
+                        'step' => 1,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                    'em' => [
+                        'min' => 0,
+                        'max' => 200,
+                        'step' => .1,
+                    ],
+                ],
+                'selector' => [
+                    '{{WRAPPER}} .oxi-image-hover-style' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'simpledescription' => 'Margin properties are used to create space around Image.',
+                'description' => 'Margin properties are used to create space around Image with several options as Pixel, or Percent or EM.',
+                    ]
+            );
+            $this->end_controls_section();
+        }
+
+    }

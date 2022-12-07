@@ -11,14 +11,14 @@ use OXI_IMAGE_HOVER_PLUGINS\Page\Public_Render;
 class Effects2 extends Public_Render {
 
     public function public_css() {
-        wp_enqueue_style('oxi-image-hover-light-box', OXI_IMAGE_HOVER_URL . '/Modules/Magnifier/Files/Magnifier.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        wp_enqueue_style('oxi-image-hover-light-style-1', OXI_IMAGE_HOVER_URL . '/Modules/Magnifier/Files/style-2.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        wp_enqueue_style('zoomple.css', OXI_IMAGE_HOVER_URL . '/Modules/Magnifier/Files/styles/zoomple.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-image-hover-light-box', OXI_IMAGE_HOVER_URL . 'Modules/Magnifier/Files/Magnifier.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-image-hover-light-style-1', OXI_IMAGE_HOVER_URL . 'Modules/Magnifier/Files/style-2.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('zoomple.css', OXI_IMAGE_HOVER_URL . 'Modules/Magnifier/Files/styles/zoomple.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
 
     public function public_jquery() {
         $this->JSHANDLE = 'zoomple.js';
-        wp_enqueue_script('zoomple.js', OXI_IMAGE_HOVER_URL . '/Modules/Magnifier/Files/zoomple.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_script('zoomple.js', OXI_IMAGE_HOVER_URL . 'Modules/Magnifier/Files/zoomple.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
 
     /*
@@ -92,9 +92,9 @@ class Effects2 extends Public_Render {
         foreach ($child as $key => $val) {
             $data = json_decode(stripslashes($val['rawdata']), true);
             $jquery .= ' $(".oxi__image_' . $this->oxiid . '_' . $key . '").zoomple({
-                blankURL : "' . OXI_IMAGE_HOVER_URL . '/Modules/Magnifier/Files/images/blank.gif' . '",
+                blankURL : "' . OXI_IMAGE_HOVER_URL . 'Modules/Magnifier/Files/images/blank.gif' . '",
                 bgColor :"#fff",
-                loaderURL : "' . OXI_IMAGE_HOVER_URL . '/Modules/Magnifier/Files/images/loader.gif' . '",
+                loaderURL : "' . OXI_IMAGE_HOVER_URL . 'Modules/Magnifier/Files/images/loader.gif' . '",
                 showCursor:false,
                 ' . $width . '
                 ' . $height . '

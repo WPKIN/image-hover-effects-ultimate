@@ -11,13 +11,13 @@ use OXI_IMAGE_HOVER_PLUGINS\Page\Public_Render;
 class Effects2 extends Public_Render {
 
     public function public_jquery() {
-        wp_enqueue_script('oxi-image-carousel-flipster.min.js', OXI_IMAGE_HOVER_URL . '/Modules/Carousel/Files/jquery.flipster.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_script('oxi-image-carousel-flipster.min.js', OXI_IMAGE_HOVER_URL . 'Modules/Carousel/Files/jquery.flipster.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         $this->JSHANDLE = 'oxi-image-carousel-flipster.min.js';
     }
 
     public function public_css() {
-        wp_enqueue_style('oxi-image-hover-carousel-flipster.min.css', OXI_IMAGE_HOVER_URL . '/Modules/Carousel/Files/jquery.flipster.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        wp_enqueue_style('oxi-image-hover-style-2', OXI_IMAGE_HOVER_URL . '/Modules/Carousel/Files/style-2.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-image-hover-carousel-flipster.min.css', OXI_IMAGE_HOVER_URL . 'Modules/Carousel/Files/jquery.flipster.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-image-hover-style-2', OXI_IMAGE_HOVER_URL . 'Modules/Carousel/Files/style-2.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
 
     public function render() {
@@ -65,7 +65,7 @@ class Effects2 extends Public_Render {
      public function custom_font_awesome_render($data) {
         $fadata = get_option('oxi_addons_font_awesome');
         if ($fadata != 'no') :
-            wp_enqueue_style('font-awsome.min', OXI_IMAGE_HOVER_URL . '/assets/frontend/css/font-awsome.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+            wp_enqueue_style('font-awsome.min', OXI_IMAGE_HOVER_URL . 'assets/frontend/css/font-awsome.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         endif;
         return '<i class="' . esc_attr($data) . ' oxi-icons"></i>';
     }

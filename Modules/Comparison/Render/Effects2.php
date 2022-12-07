@@ -11,14 +11,14 @@ use OXI_IMAGE_HOVER_PLUGINS\Page\Public_Render;
 class Effects2 extends Public_Render {
 
     public function public_css() {
-        wp_enqueue_style('oxi-image-hover-comparison-box', OXI_IMAGE_HOVER_URL . '/Modules/Comparison/Files/Comparison.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        wp_enqueue_style('oxi-image-hover-comparison-style-2', OXI_IMAGE_HOVER_URL . '/Modules/Comparison/Files/style-2.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        wp_enqueue_style('oxi-addons-main-wrapper-image-comparison-style-2', OXI_IMAGE_HOVER_URL . '/Modules/Comparison/Files/BeerSlider.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-image-hover-comparison-box', OXI_IMAGE_HOVER_URL . 'Modules/Comparison/Files/Comparison.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-image-hover-comparison-style-2', OXI_IMAGE_HOVER_URL . 'Modules/Comparison/Files/style-2.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-addons-main-wrapper-image-comparison-style-2', OXI_IMAGE_HOVER_URL . 'Modules/Comparison/Files/BeerSlider.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
 
     public function public_jquery() {
         $this->JSHANDLE = 'jquery-BeerSlider';
-        wp_enqueue_script('jquery-BeerSlider', OXI_IMAGE_HOVER_URL . '/Modules/Comparison/Files/BeerSlider.js', true, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_script('jquery-BeerSlider', OXI_IMAGE_HOVER_URL . 'Modules/Comparison/Files/BeerSlider.js', true, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
 
     public function default_render($style, $child, $admin) {

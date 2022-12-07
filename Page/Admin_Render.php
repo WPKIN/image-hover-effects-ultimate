@@ -192,7 +192,7 @@ abstract class Admin_Render
      */
     public function admin_editor_load()
     {
-        wp_enqueue_script('oxi-image-hover-editor', OXI_IMAGE_HOVER_URL . '/assets/backend/js/editor.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_script('oxi-image-hover-editor', OXI_IMAGE_HOVER_URL . 'assets/backend/js/editor.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
 
 

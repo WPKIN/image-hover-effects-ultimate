@@ -14,41 +14,6 @@ if (!defined('ABSPATH')) {
 class Support_Reviews {
 
     /**
-     * Revoke this function when the object is created.
-     *
-     */
-    public function __construct() {
-        if (!current_user_can('manage_options')) {
-            return;
-        }
-        add_action('admin_notices', array($this, 'first_install'));
-        add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
-        add_action('admin_notices', array($this, 'dismiss_button_scripts'));
-    }
-
-    /**
-     * Admin Notice JS file loader
-     * @return void
-     */
-    public function dismiss_button_scripts() {
-        wp_enqueue_script('oxi-image-admin-notice', OXI_IMAGE_HOVER_URL . '/assets/backend/js/admin-notice.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        wp_localize_script('oxi-image-admin-notice', 'ImageHoverUltimate', array(
-            'root' => esc_url_raw(rest_url()),
-            'nonce' => wp_create_nonce('wp_rest')
-        ));
-    }
-
-    /**
-     * Admin Notice CSS file loader
-     * @return void
-     */
-    public function admin_enqueue_scripts() {
-        wp_enqueue_script("jquery");
-        wp_enqueue_style('oxi-image-admin-notice-css', OXI_IMAGE_HOVER_URL . '/assets/backend/css/notice.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        $this->dismiss_button_scripts();
-    }
-
-    /**
      * First Installation Track
      * @return void
      */
@@ -91,6 +56,41 @@ class Support_Reviews {
             </div>
         </div>
         <?php
+    }
+
+    /**
+     * Revoke this function when the object is created.
+     *
+     */
+    public function __construct() {
+        if (!current_user_can('manage_options')) {
+            return;
+        }
+        add_action('admin_notices', array($this, 'first_install'));
+        add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
+        add_action('admin_notices', array($this, 'dismiss_button_scripts'));
+    }
+
+    /**
+     * Admin Notice JS file loader
+     * @return void
+     */
+    public function dismiss_button_scripts() {
+        wp_enqueue_script('oxi-image-admin-notice', OXI_IMAGE_HOVER_URL . 'assets/backend/js/admin-notice.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_localize_script('oxi-image-admin-notice', 'ImageHoverUltimate', array(
+            'root' => esc_url_raw(rest_url()),
+            'nonce' => wp_create_nonce('wp_rest')
+        ));
+    }
+
+    /**
+     * Admin Notice CSS file loader
+     * @return void
+     */
+    public function admin_enqueue_scripts() {
+        wp_enqueue_script("jquery");
+        wp_enqueue_style('oxi-image-admin-notice-css', OXI_IMAGE_HOVER_URL . 'assets/backend/css/notice.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        $this->dismiss_button_scripts();
     }
 
 }

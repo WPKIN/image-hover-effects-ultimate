@@ -11,8 +11,8 @@ use OXI_IMAGE_HOVER_PLUGINS\Page\Public_Render;
 class Effects8 extends Public_Render {
 
     public function public_css() {
-        wp_enqueue_style('oxi-image-hover-button', OXI_IMAGE_HOVER_URL . '/Modules/Button/Files/button.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        wp_enqueue_style('oxi-image-hover-button-style-8', OXI_IMAGE_HOVER_URL . '/Modules/Button/Files/style-8.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-image-hover-button', OXI_IMAGE_HOVER_URL . 'Modules/Button/Files/button.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-image-hover-button-style-8', OXI_IMAGE_HOVER_URL . 'Modules/Button/Files/style-8.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
 
     public function default_render($style, $child, $admin) {

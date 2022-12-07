@@ -11,15 +11,15 @@ use OXI_IMAGE_HOVER_PLUGINS\Page\Public_Render;
 class Effects1 extends Public_Render {
 
     public function public_css() {
-        wp_enqueue_style('oxi-image-hover-comparison-box', OXI_IMAGE_HOVER_URL . '/Modules/Comparison/Files/Comparison.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        wp_enqueue_style('oxi-image-hover-comparison-style-1', OXI_IMAGE_HOVER_URL . '/Modules/Comparison/Files/style-1.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        wp_enqueue_style('oxi-addons-main-wrapper-image-comparison-style-1', OXI_IMAGE_HOVER_URL . '/Modules/Comparison/Files/twentytwenty.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-image-hover-comparison-box', OXI_IMAGE_HOVER_URL . 'Modules/Comparison/Files/Comparison.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-image-hover-comparison-style-1', OXI_IMAGE_HOVER_URL . 'Modules/Comparison/Files/style-1.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-addons-main-wrapper-image-comparison-style-1', OXI_IMAGE_HOVER_URL . 'Modules/Comparison/Files/twentytwenty.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
 
     public function public_jquery() {
         $this->JSHANDLE = 'jquery-twentytwenty';
-        wp_enqueue_script('jquery-event-move', OXI_IMAGE_HOVER_URL . '/Modules/Comparison/Files/jquery-event-move.js', true, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        wp_enqueue_script('jquery-twentytwenty', OXI_IMAGE_HOVER_URL . '/Modules/Comparison/Files/jquery-twentytwenty.js', true, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_script('jquery-event-move', OXI_IMAGE_HOVER_URL . 'Modules/Comparison/Files/jquery-event-move.js', true, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_script('jquery-twentytwenty', OXI_IMAGE_HOVER_URL . 'Modules/Comparison/Files/jquery-twentytwenty.js', true, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
 
     public function default_render($style, $child, $admin) {

@@ -47,7 +47,7 @@ class Settings
  public function css_loader()
     {
         $this->admin_css_loader();
-        wp_enqueue_script('oxi-image-hover-settings', OXI_IMAGE_HOVER_URL . '/assets/backend/js/settings.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_script('oxi-image-hover-settings', OXI_IMAGE_HOVER_URL . 'assets/backend/js/settings.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
     public function Render()
     {

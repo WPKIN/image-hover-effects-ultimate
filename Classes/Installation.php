@@ -64,6 +64,15 @@ class Installation {
         set_transient('oxi_image_hover_activation_redirect', true, 30);
     }
 
+    /**
+     * Constructor of Shortcode Addons
+     *
+     * @since 9.3.0
+     */
+    public function __construct() {
+
+    }
+
     public function Image_Hover_Database() {
         global $wpdb;
         $table_name = $wpdb->prefix . 'image_hover_ultimate_style';
@@ -98,15 +107,6 @@ class Installation {
         dbDelta($sql2);
         dbDelta($sql3);
         add_option('oxi_image_hover_version', OXI_IMAGE_HOVER_PLUGIN_VERSION);
-    }
-
-    /**
-     * Constructor of Shortcode Addons
-     *
-     * @since 9.3.0
-     */
-    public function __construct() {
-
     }
 
 }

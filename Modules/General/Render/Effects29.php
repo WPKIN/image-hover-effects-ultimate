@@ -11,8 +11,8 @@ use OXI_IMAGE_HOVER_PLUGINS\Page\Public_Render;
 class Effects29 extends Public_Render {
 
     public function public_css() {
-        wp_enqueue_style('oxi-image-hover-general', OXI_IMAGE_HOVER_URL . '/Modules/General/Files/general.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        wp_enqueue_style('oxi-image-hover-general-style-29', OXI_IMAGE_HOVER_URL . '/Modules/General/Files/style-29.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-image-hover-general', OXI_IMAGE_HOVER_URL . 'Modules/General/Files/general.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-image-hover-general-style-29', OXI_IMAGE_HOVER_URL . 'Modules/General/Files/style-29.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
 
     public function default_render($style, $child, $admin) {

@@ -23,7 +23,7 @@ class Bootstrap {
     /**
      * Define $wpdb
      *
-     * @since 9.3.0  
+     * @since 9.3.0
      */
     public $wpdb;
 
@@ -107,12 +107,6 @@ class Bootstrap {
         $ImageWidget = new \OXI_IMAGE_HOVER_PLUGINS\Modules\Widget();
         add_filter('widget_text', 'do_shortcode');
         add_action('widgets_init', array($ImageWidget, 'iheu_widget_widget'));
-    }
-
-    public function Admin_Filters() {
-        add_filter($this->fixed_data('6f78692d696d6167652d686f7665722d737570706f72742d616e642d636f6d6d656e7473'), array($this, $this->fixed_data('537570706f7274416e64436f6d6d656e7473')));
-        add_filter($this->fixed_data('6f78692d696d6167652d686f7665722d706c7567696e2d76657273696f6e'), array($this, $this->fixed_data('636865636b5f63757272656e745f76657273696f6e')));
-        add_filter($this->fixed_data('6f78692d696d6167652d686f7665722d706c7567696e2f61646d696e5f6d656e75'), array($this, $this->fixed_data('6f78696c61625f61646d696e5f6d656e75')));
     }
 
     public function User_Admin() {

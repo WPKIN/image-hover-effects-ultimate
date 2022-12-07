@@ -11,17 +11,17 @@ use OXI_IMAGE_HOVER_PLUGINS\Page\Public_Render;
 class Effects1 extends Public_Render {
 
     public function public_css() {
-        wp_enqueue_style('oxi-image-hover-light-box', OXI_IMAGE_HOVER_URL . '/Modules/Lightbox/Files/Lightbox.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        wp_enqueue_style('oxi-image-hover-light-style-1', OXI_IMAGE_HOVER_URL . '/Modules/Lightbox/Files/style-1.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        wp_enqueue_style('oxi_addons__light_box_style_1', OXI_IMAGE_HOVER_URL . '/Modules/Lightbox/Files/lightgallery.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-image-hover-light-box', OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/Lightbox.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-image-hover-light-style-1', OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/style-1.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi_addons__light_box_style_1', OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/lightgallery.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
 
     public function public_jquery() {
-        wp_enqueue_script('oxi_addons__light_box_picturefill', OXI_IMAGE_HOVER_URL . '/Modules/Lightbox/Files/picturefill.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_script('oxi_addons__light_box_picturefill', OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/picturefill.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         $this->JSHANDLE = 'oxi_addons__light_box_picturefill';
-        wp_enqueue_script('oxi_addons__light_box_lightgallery_all', OXI_IMAGE_HOVER_URL . '/Modules/Lightbox/Files/lightgallery_all.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_script('oxi_addons__light_box_lightgallery_all', OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/lightgallery_all.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         $this->JSHANDLE = 'oxi_addons__light_box_lightgallery_all';
-        wp_enqueue_script('oxi_addons__light_box_mousewheel', OXI_IMAGE_HOVER_URL . '/Modules/Lightbox/Files/jquery.mousewheel.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_script('oxi_addons__light_box_mousewheel', OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/jquery.mousewheel.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         $this->JSHANDLE = 'oxi_addons__light_box_mousewheel';
     }
 

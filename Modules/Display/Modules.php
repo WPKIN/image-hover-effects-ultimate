@@ -18,66 +18,6 @@ class Modules extends Admin_Render {
 
     use \OXI_IMAGE_HOVER_PLUGINS\Modules\Display\Files\Admin_Query;
 
-    public function register_controls() {
-        $this->start_section_header(
-                'oxi-image-hover-start-tabs', [
-            'options' => [
-                'general-settings' => esc_html__('General Settings', 'image-hover-effects-ultimate'),
-                'custom' => esc_html__('Custom CSS', 'image-hover-effects-ultimate'),
-            ]
-                ]
-        );
-        $this->register_general_tabs();
-        $this->register_custom_tabs();
-    }
-
-    public function register_custom_tabs() {
-        $this->start_section_tabs(
-                'oxi-image-hover-start-tabs', [
-            'condition' => [
-                'oxi-image-hover-start-tabs' => 'custom'
-            ],
-            'padding' => '10px'
-                ]
-        );
-
-        $this->start_controls_section(
-                'oxi-image-hover', [
-            'label' => esc_html__('Custom CSS', 'image-hover-effects-ultimate'),
-            'showing' => TRUE,
-                ]
-        );
-        $this->add_control(
-                'image-hover-custom-css', $this->style, [
-            'label' => esc_html__('', 'image-hover-effects-ultimate'),
-            'type' => Controls::TEXTAREA,
-            'default' => '',
-            'description' => 'Custom CSS Section. You can add custom css into textarea.'
-                ]
-        );
-        $this->end_controls_section();
-        $this->end_section_tabs();
-    }
-
-    public function register_general_tabs() {
-        $this->start_section_tabs(
-                'oxi-image-hover-start-tabs', [
-            'condition' => [
-                'oxi-image-hover-start-tabs' => 'general-settings',
-            ],
-                ]
-        );
-        $this->start_section_devider();
-        $this->register_post_query_settings();
-
-        $this->end_section_devider();
-        $this->start_section_devider();
-        $this->register_post_condition_settings();
-
-        $this->end_section_devider();
-        $this->end_section_tabs();
-    }
-
     /*
      * @return void
      * Start Post Query for Display Post
@@ -355,7 +295,7 @@ class Modules extends Admin_Render {
                     'label' => esc_html__('Position', 'image-hover-effects-ultimate'),
                     'type' => Controls::CHOOSE,
                     'operator' => Controls::OPERATOR_ICON,
-                    'default' => 'left',
+                    'default' => '',
                     'options' => [
                         'left' => [
                             'title' => esc_html__('Left', 'image-hover-effects-ultimate'),
@@ -371,7 +311,7 @@ class Modules extends Admin_Render {
                         ],
                     ],
                     'selector' => [
-                        '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap' => 'text-align:{{VALUE}};',
+                        '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap' => 'text-align:{{VALUE}} !important;',
                     ],
                     'description' => 'Add Button text as Unicode also supported.',
                 ]
@@ -403,12 +343,12 @@ class Modules extends Admin_Render {
             'type' => Controls::COLOR,
             'default' => '#ffffff',
             'selector' => [
-                '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button' => 'color: {{VALUE}};',
-                '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button .oxi-image-hover-loader button__loader' => 'color: {{VALUE}};',
-                '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button span' => 'color: {{VALUE}};',
-                '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover' => 'color: {{VALUE}};',
-                '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover .oxi-image-hover-loader button__loader' => 'color: {{VALUE}};',
-                '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover span' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button' => 'color: {{VALUE}} !important;',
+                '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button .oxi-image-hover-loader button__loader' => 'color: {{VALUE}} !important;',
+                '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button span' => 'color: {{VALUE}} !important;',
+                '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover' => 'color: {{VALUE}} !important;',
+                '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover .oxi-image-hover-loader button__loader' => 'color: {{VALUE}} !important;',
+                '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover span' => 'color: {{VALUE}} !important;',
             ],
             'description' => 'Customize your button color.',
                 ]
@@ -419,8 +359,8 @@ class Modules extends Admin_Render {
             'type' => Controls::GRADIENT,
             'default' => 'rgba(171, 0, 201, 1)',
             'selector' => [
-                '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button' => 'background: {{VALUE}};',
-                '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover' => 'background: {{VALUE}};',
+                '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button' => 'background: {{VALUE}} !important;',
+                '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button:hover' => 'background: {{VALUE}} !important;',
             ],
             'description' => 'Customize your button Background Color.',
                 ]
@@ -431,7 +371,7 @@ class Modules extends Admin_Render {
                 [
                     'type' => Controls::BORDER,
                     'selector' => [
-                        '{{WRAPPER}} .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button' => ''
+                        '{{WRAPPER}}  .oxi-image-hover-load-more-button-wrap .oxi-image-load-more-button' => ''
                     ],
                     'description' => 'Customize your button border color.',
                 ]
@@ -652,6 +592,66 @@ class Modules extends Admin_Render {
      */
     public function modal_opener() {
 
+    }
+
+    public function register_controls() {
+        $this->start_section_header(
+                'oxi-image-hover-start-tabs', [
+            'options' => [
+                'general-settings' => esc_html__('General Settings', 'image-hover-effects-ultimate'),
+                'custom' => esc_html__('Custom CSS', 'image-hover-effects-ultimate'),
+            ]
+                ]
+        );
+        $this->register_general_tabs();
+        $this->register_custom_tabs();
+    }
+
+    public function register_custom_tabs() {
+        $this->start_section_tabs(
+                'oxi-image-hover-start-tabs', [
+            'condition' => [
+                'oxi-image-hover-start-tabs' => 'custom'
+            ],
+            'padding' => '10px'
+                ]
+        );
+
+        $this->start_controls_section(
+                'oxi-image-hover', [
+            'label' => esc_html__('Custom CSS', 'image-hover-effects-ultimate'),
+            'showing' => TRUE,
+                ]
+        );
+        $this->add_control(
+                'image-hover-custom-css', $this->style, [
+            'label' => esc_html__('', 'image-hover-effects-ultimate'),
+            'type' => Controls::TEXTAREA,
+            'default' => '',
+            'description' => 'Custom CSS Section. You can add custom css into textarea.'
+                ]
+        );
+        $this->end_controls_section();
+        $this->end_section_tabs();
+    }
+
+    public function register_general_tabs() {
+        $this->start_section_tabs(
+                'oxi-image-hover-start-tabs', [
+            'condition' => [
+                'oxi-image-hover-start-tabs' => 'general-settings',
+            ],
+                ]
+        );
+        $this->start_section_devider();
+        $this->register_post_query_settings();
+
+        $this->end_section_devider();
+        $this->start_section_devider();
+        $this->register_post_condition_settings();
+
+        $this->end_section_devider();
+        $this->end_section_tabs();
     }
 
 }

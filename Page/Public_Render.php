@@ -165,16 +165,16 @@ class Public_Render {
      */
     public function public_frontend_loader() {
         wp_enqueue_script("jquery");
-        wp_enqueue_style('oxi-animation', OXI_IMAGE_HOVER_URL . '/assets/frontend/css/animation.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        wp_enqueue_style('oxi-image-hover', OXI_IMAGE_HOVER_URL . '/assets/frontend/css/style.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-animation', OXI_IMAGE_HOVER_URL . 'assets/frontend/css/animation.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-image-hover', OXI_IMAGE_HOVER_URL . 'assets/frontend/css/style.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         if (get_option('oxi_addons_way_points') != 'no') {
-            wp_enqueue_script('waypoints.min', OXI_IMAGE_HOVER_URL . '/assets/frontend/js/waypoints.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+            wp_enqueue_script('waypoints.min', OXI_IMAGE_HOVER_URL . 'assets/frontend/js/waypoints.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         }
         $touch = get_option('image_hover_ultimate_mobile_device_key');
         if ($touch != 'normal') {
-            wp_enqueue_script('oxi-image-hover-touch', OXI_IMAGE_HOVER_URL . '/assets/frontend/js/touch.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+            wp_enqueue_script('oxi-image-hover-touch', OXI_IMAGE_HOVER_URL . 'assets/frontend/js/touch.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         }
-        wp_enqueue_script('oxi-image-hover', OXI_IMAGE_HOVER_URL . '/assets/frontend/js/jquery.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_script('oxi-image-hover', OXI_IMAGE_HOVER_URL . 'assets/frontend/js/jquery.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
 
     /**
@@ -383,7 +383,7 @@ class Public_Render {
         return false;
     }
 
-    public function media_render($id, $style) {
+    public function media_render($id = '', $style = []) {
         $url = '';
         if (array_key_exists($id . '-select', $style)) :
             if ($style[$id . '-select'] == 'media-library') :
@@ -511,10 +511,18 @@ class Public_Render {
         return wp_kses_post(do_shortcode(str_replace('spTac', '&nbsp;', str_replace('spBac', '<br>', html_entity_decode($data))), $ignore_html = false));
     }
 
+    public function custom_font_awesome_render($data) {
+        $fadata = get_option('oxi_addons_font_awesome');
+        if ($fadata != 'no') :
+            wp_enqueue_style('font-awsome.min', OXI_IMAGE_HOVER_URL . 'assets/frontend/css/font-awsome.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        endif;
+        return '<i class="' . esc_attr($data) . ' oxi-icons"></i>';
+    }
+
     public function font_awesome_render($data) {
         $fadata = get_option('oxi_addons_font_awesome');
         if ($fadata != 'no') :
-            wp_enqueue_style('font-awsome.min', OXI_IMAGE_HOVER_URL . '/assets/frontend/css/font-awsome.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+            wp_enqueue_style('font-awsome.min', OXI_IMAGE_HOVER_URL . 'assets/frontend/css/font-awsome.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         endif;
         echo '<i class="' . esc_attr($data) . ' oxi-icons"></i>';
     }

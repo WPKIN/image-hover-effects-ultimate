@@ -13,36 +13,6 @@ if (!defined('ABSPATH')) {
 use OXI_IMAGE_HOVER_PLUGINS\Classes\Controls as Controls;
 
 trait Sanitization {
-
-    /**
-     * font settings sanitize
-     * works at layouts page to adding font Settings sanitize
-     */
-    public function AdminTextSenitize($data) {
-        $data = str_replace('\\\\"', '&quot;', $data);
-        $data = str_replace('\\\"', '&quot;', $data);
-        $data = str_replace('\\"', '&quot;', $data);
-        $data = str_replace('\"', '&quot;', $data);
-        $data = str_replace('"', '&quot;', $data);
-        $data = str_replace('\\\\&quot;', '&quot;', $data);
-        $data = str_replace('\\\&quot;', '&quot;', $data);
-        $data = str_replace('\\&quot;', '&quot;', $data);
-        $data = str_replace('\&quot;', '&quot;', $data);
-        $data = str_replace("\\\\'", '&apos;', $data);
-        $data = str_replace("\\\'", '&apos;', $data);
-        $data = str_replace("\\'", '&apos;', $data);
-        $data = str_replace("\'", '&apos;', $data);
-        $data = str_replace("\\\\&apos;", '&apos;', $data);
-        $data = str_replace("\\\&apos;", '&apos;', $data);
-        $data = str_replace("\\&apos;", '&apos;', $data);
-        $data = str_replace("\&apos;", '&apos;', $data);
-        $data = str_replace("'", '&apos;', $data);
-        $data = str_replace('<', '&lt;', $data);
-        $data = str_replace('>', '&gt;', $data);
-        $data = sanitize_text_field($data);
-        return $data;
-    }
-
     /*
      * Image Hover Style Admin Panel Body
      *
@@ -69,7 +39,7 @@ trait Sanitization {
 
     public function start_section_header($id, array $arg = []) {
         ?>
-             <ul class="oxi-addons-tabs-ul">  
+             <ul class="oxi-addons-tabs-ul">
              <?php
              foreach ($arg['options'] as $key => $value) {
                  echo '<li ref="#shortcode-addons-section-' . esc_attr($key) . '">' . esc_html($value) . '</li>';
@@ -113,61 +83,6 @@ trait Sanitization {
             ?>
         </div>
         <?php
-    }
-
-    /*
-     * Image Hover Style Admin Panel Form Dependency
-     *
-     * @since 9.3.0
-     */
-
-    public function forms_condition(array $arg = []) {
-
-        if (array_key_exists('condition', $arg)) :
-            $i = $arg['condition'] != '' ? count($arg['condition']) : 0;
-
-            $data = '';
-            $s = 1;
-            $form_condition = array_key_exists('form_condition', $arg) ? $arg['form_condition'] : '';
-            $notcondition = array_key_exists('notcondition', $arg) ? $arg['notcondition'] : false;
-
-            foreach ($arg['condition'] != '' ? $arg['condition'] : [] as $key => $value) {
-                if (is_array($value)) :
-                    $c = count($value);
-                    $crow = 1;
-                    if ($c > 1 && $i > 1) :
-                        $data .= '(';
-                    endif;
-                    foreach ($value as $item) {
-                        $data .= $form_condition . $key . ' === \'' . $item . '\'';
-                        if ($crow < $c) :
-                            $data .= ' || ';
-                            $crow++;
-                        endif;
-                    }
-                    if ($c > 1 && $i > 1) :
-                        $data .= ')';
-                    endif;
-                elseif ($value == 'COMPILED') :
-                    $data .= $form_condition . $key;
-                elseif ($value == 'EMPTY') :
-                    $data .= $form_condition . $key . ' !== \'\'';
-                elseif (empty($value)) :
-                    $data .= $form_condition . $key;
-                elseif ($notcondition) :
-                    $data .= $form_condition . $key . ' !== \'' . $value . '\'';
-                else :
-                    $data .= $form_condition . $key . ' === \'' . $value . '\'';
-                endif;
-                if ($s < $i) :
-                    $data .= ' && ';
-                    $s++;
-                endif;
-            }
-            if (!empty($data)) :
-                echo 'data-condition="' . esc_attr($data) . '"';
-            endif;
-        endif;
     }
 
     /*
@@ -513,13 +428,13 @@ trait Sanitization {
                                             }
                                             ?>
                                         </div>
-                                    </div>   
+                                    </div>
                                     <?php
                                 }
                             endif;
                             ?>
 
-                        </div>   
+                        </div>
                         <?php
                         $this->add_control(
                                 $id . 'nm',
@@ -529,7 +444,7 @@ trait Sanitization {
                         ?>
                         <div class="shortcode-form-repeater-button-wrapper"><a href="#" parent-id="<?php echo esc_attr($id); ?>" class="shortcode-form-repeater-button"><span class="dashicons dashicons-plus"></span> <?php esc_html($buttontext) ?></a></div>
                     </div>
-                </div>                                
+                </div>
                 <?php
                 $this->repeater .= '<div id="repeater-' . esc_attr($id) . '-initial-data">
                                 <div class="shortcode-form-repeater-fields" tab-title="' . esc_html($arg['title_field']) . '">
@@ -3027,14 +2942,14 @@ trait Sanitization {
                 endif;
                 ?>" <?php $this->forms_condition($arg) ?>>
                     <div class="oxi-addons-item-form-heading shortcode-addons-templates-right-panel-heading">
-        <?php echo esc_html($arg['title']); ?>
+                        <?php echo esc_html($arg['title']); ?>
                         <div class="oxi-head-toggle"></div>
                     </div>
                     <div class="oxi-addons-item-form-item shortcode-addons-templates-right-panel-body"
                          id="oxi-addons-rearrange-data-modal-open">
                         <span>
                             <i class="dashicons dashicons-plus-alt oxi-icons"></i>
-        <?php echo esc_html($arg['sub-title']); ?>
+                            <?php echo esc_html($arg['sub-title']); ?>
                         </span>
                     </div>
                 </div>
@@ -3063,12 +2978,95 @@ trait Sanitization {
                             </div>
                         </form>
                         <div id="modal-rearrange-store-file">
-        <?php $this->allowed_html_sanitize($id); ?>
+                            <?php $this->allowed_html_sanitize($id); ?>
                         </div>
                     </div>
                 </div>
                 <?php
             }
 
+            /**
+             * font settings sanitize
+             * works at layouts page to adding font Settings sanitize
+             */
+            public function AdminTextSenitize($data) {
+                $data = str_replace('\\\\"', '&quot;', $data);
+                $data = str_replace('\\\"', '&quot;', $data);
+                $data = str_replace('\\"', '&quot;', $data);
+                $data = str_replace('\"', '&quot;', $data);
+                $data = str_replace('"', '&quot;', $data);
+                $data = str_replace('\\\\&quot;', '&quot;', $data);
+                $data = str_replace('\\\&quot;', '&quot;', $data);
+                $data = str_replace('\\&quot;', '&quot;', $data);
+                $data = str_replace('\&quot;', '&quot;', $data);
+                $data = str_replace("\\\\'", '&apos;', $data);
+                $data = str_replace("\\\'", '&apos;', $data);
+                $data = str_replace("\\'", '&apos;', $data);
+                $data = str_replace("\'", '&apos;', $data);
+                $data = str_replace("\\\\&apos;", '&apos;', $data);
+                $data = str_replace("\\\&apos;", '&apos;', $data);
+                $data = str_replace("\\&apos;", '&apos;', $data);
+                $data = str_replace("\&apos;", '&apos;', $data);
+                $data = str_replace("'", '&apos;', $data);
+                $data = str_replace('<', '&lt;', $data);
+                $data = str_replace('>', '&gt;', $data);
+                $data = sanitize_text_field($data);
+                return $data;
+            }
+
+            /*
+             * Image Hover Style Admin Panel Form Dependency
+             *
+             * @since 9.3.0
+             */
+
+            public function forms_condition(array $arg = []) {
+
+                if (array_key_exists('condition', $arg)) :
+                    $i = $arg['condition'] != '' ? count($arg['condition']) : 0;
+
+                    $data = '';
+                    $s = 1;
+                    $form_condition = array_key_exists('form_condition', $arg) ? $arg['form_condition'] : '';
+                    $notcondition = array_key_exists('notcondition', $arg) ? $arg['notcondition'] : false;
+
+                    foreach ($arg['condition'] != '' ? $arg['condition'] : [] as $key => $value) {
+                        if (is_array($value)) :
+                            $c = count($value);
+                            $crow = 1;
+                            if ($c > 1 && $i > 1) :
+                                $data .= '(';
+                            endif;
+                            foreach ($value as $item) {
+                                $data .= $form_condition . $key . ' === \'' . $item . '\'';
+                                if ($crow < $c) :
+                                    $data .= ' || ';
+                                    $crow++;
+                                endif;
+                            }
+                            if ($c > 1 && $i > 1) :
+                                $data .= ')';
+                            endif;
+                        elseif ($value == 'COMPILED') :
+                            $data .= $form_condition . $key;
+                        elseif ($value == 'EMPTY') :
+                            $data .= $form_condition . $key . ' !== \'\'';
+                        elseif (empty($value)) :
+                            $data .= $form_condition . $key;
+                        elseif ($notcondition) :
+                            $data .= $form_condition . $key . ' !== \'' . $value . '\'';
+                        else :
+                            $data .= $form_condition . $key . ' === \'' . $value . '\'';
+                        endif;
+                        if ($s < $i) :
+                            $data .= ' && ';
+                            $s++;
+                        endif;
+                    }
+                    if (!empty($data)) :
+                        echo 'data-condition="' . esc_attr($data) . '"';
+                    endif;
+                endif;
+            }
+
         }
-        

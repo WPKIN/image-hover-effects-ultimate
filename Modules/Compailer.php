@@ -17,15 +17,13 @@ use OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic\Layouts_Query as Layouts_Query;
 
 class Compailer extends Public_Render {
 
-  
-
     public function public_css() {
 
         if ($this->dynamicLoad):
-            wp_enqueue_style('oxi-image-dynamic-loader', OXI_IMAGE_HOVER_URL . '/Modules/Dynamic/Files/dynamic-loader.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+            wp_enqueue_style('oxi-image-dynamic-loader', OXI_IMAGE_HOVER_URL . 'Modules/Dynamic/Files/dynamic-loader.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         elseif ($this->dynamicCarousel):
-            wp_enqueue_style('oxi-image-hover-carousel-slick', OXI_IMAGE_HOVER_URL . '/Modules/Carousel/Files/slick.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-            wp_enqueue_style('oxi-image-hover-style-1', OXI_IMAGE_HOVER_URL . '/Modules/Carousel/Files/style-1.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+            wp_enqueue_style('oxi-image-hover-carousel-slick', OXI_IMAGE_HOVER_URL . 'Modules/Carousel/Files/slick.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+            wp_enqueue_style('oxi-image-hover-carousel-style', OXI_IMAGE_HOVER_URL . 'Modules/Carousel/Files/style-1.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         endif;
     }
 
@@ -52,7 +50,8 @@ class Compailer extends Public_Render {
             return 12;
         endif;
     }
-      public function public_jquery() {
+
+    public function public_jquery() {
         if (is_array($this->style) && array_key_exists('image_hover_dynamic_content', $this->style) && $this->style['image_hover_dynamic_content'] == 'yes') :
             $this->dynamicPost = true;
         endif;
@@ -64,12 +63,12 @@ class Compailer extends Public_Render {
         endif;
 
         if ($this->dynamicLoad):
-            wp_enqueue_script('oxi_image_dynamic_loader', OXI_IMAGE_HOVER_URL . '/Modules/Dynamic/Files/dynamic-loader.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+            wp_enqueue_script('oxi_image_dynamic_loader', OXI_IMAGE_HOVER_URL . 'Modules/Dynamic/Files/dynamic-loader.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
             $this->JSHANDLE = 'oxi_image_dynamic_loader';
             wp_localize_script('oxi_image_dynamic_loader', 'oxi_image_dynamic_loader', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('image_hover_ultimate')));
 
         elseif ($this->dynamicCarousel):
-            wp_enqueue_script('oxi-image-carousel-slick.min', OXI_IMAGE_HOVER_URL . '/Modules/Carousel/Files/slick.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+            wp_enqueue_script('oxi-image-carousel-slick.min', OXI_IMAGE_HOVER_URL . 'Modules/Carousel/Files/slick.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
             $this->JSHANDLE = 'oxi-image-carousel-slick.min';
         endif;
     }
@@ -79,7 +78,7 @@ class Compailer extends Public_Render {
         <div class="oxi-addons-container noLightbox <?php echo esc_attr($this->WRAPPER); ?>" id="<?php echo esc_attr($this->WRAPPER); ?>">
             <div class="oxi-addons-row"><?php
                 $this->default_render($this->style, $this->child, $this->admin);
-                ?>  
+                ?>
             </div>
         </div>
         <?php
@@ -192,8 +191,8 @@ class Compailer extends Public_Render {
             $tab_item = $style['carousel_item_slide-tab-size'];
             $mobile_item = $style['carousel_item_slide-mob-size'];
 
-            $prev = $this->font_awesome_render($style['carousel_left_arrow']);
-            $next = $this->font_awesome_render($style['carousel_right_arrow']);
+            $prev = $this->custom_font_awesome_render($style['carousel_left_arrow']);
+            $next = $this->custom_font_awesome_render($style['carousel_right_arrow']);
 
             $autoplay = ($style['carousel_autoplay'] == 'yes') ? 'true' : 'false';
             $autoplayspeed = $style['carousel_autoplay_speed'];

@@ -67,7 +67,7 @@ class Shortcode {
      * @return void
      */
     public function admin_rest_api() {
-        wp_enqueue_script('oxi-image-hover-shortcode', OXI_IMAGE_HOVER_URL . '/assets/backend/js/shortcode.js', false, OXI_IMAGE_HOVER_TEXTDOMAIN);
+        wp_enqueue_script('oxi-image-hover-shortcode', OXI_IMAGE_HOVER_URL . 'assets/backend/js/shortcode.js', false, OXI_IMAGE_HOVER_TEXTDOMAIN);
     }
 
     /**

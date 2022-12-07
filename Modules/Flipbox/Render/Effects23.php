@@ -11,8 +11,8 @@ use OXI_IMAGE_HOVER_PLUGINS\Page\Public_Render;
 class Effects23 extends Public_Render {
 
     public function public_css() {
-        wp_enqueue_style('oxi-image-hover-flipbox', OXI_IMAGE_HOVER_URL . '/Modules/Flipbox/Files/flipbox.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        wp_enqueue_style('oxi-image-hover-flipbox-style-23', OXI_IMAGE_HOVER_URL . '/Modules/Flipbox/Files/style-23.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-image-hover-flipbox', OXI_IMAGE_HOVER_URL . 'Modules/Flipbox/Files/flipbox.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-image-hover-flipbox-style-23', OXI_IMAGE_HOVER_URL . 'Modules/Flipbox/Files/style-23.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
 
     public function default_render($style, $child, $admin) {

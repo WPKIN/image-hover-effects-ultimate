@@ -11,13 +11,13 @@ use OXI_IMAGE_HOVER_PLUGINS\Page\Public_Render;
 class Effects1 extends Public_Render {
 
     public function public_jquery() {
-        wp_enqueue_script('imagesloaded.pkgd.min', OXI_IMAGE_HOVER_URL . '/Modules/Filter/Files/imagesloaded.pkgd.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        wp_enqueue_script('jquery.isotope', OXI_IMAGE_HOVER_URL . '/Modules/Filter/Files/jquery.isotope.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_script('imagesloaded.pkgd.min', OXI_IMAGE_HOVER_URL . 'Modules/Filter/Files/imagesloaded.pkgd.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_script('jquery.isotope', OXI_IMAGE_HOVER_URL . 'Modules/Filter/Files/jquery.isotope.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         $this->JSHANDLE = 'jquery.isotope';
     }
 
     public function public_css() {
-        wp_enqueue_style('oxi-image-hover-filter-style-1', OXI_IMAGE_HOVER_URL . '/Modules/Filter/Files/style-1.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-image-hover-filter-style-1', OXI_IMAGE_HOVER_URL . 'Modules/Filter/Files/style-1.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
 
     public function inline_public_jquery() {

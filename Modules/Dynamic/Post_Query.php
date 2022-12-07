@@ -46,20 +46,6 @@ class Post_Query {
         endif;
     }
 
-    public function __rest_api_post($style, $args, $optional) {
-        if (!is_array($args)):
-            $args = json_decode(stripslashes($args), true);
-        endif;
-        $args ['offset'] = (int) $args['offset'] + (((int) $optional - 1) * (int) $args['posts_per_page']);
-
-        if (!is_array($style)):
-            $style = json_decode(stripslashes($style), true);
-        endif;
-        $rawdata = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $style['display_post_id']), ARRAY_A);
-
-        return $this->post_query($rawdata, $args, $style);
-    }
-
     public function post_query($dbdata, $args, $style) {
 
         $child = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d", $dbdata['id']), ARRAY_A);
@@ -99,6 +85,20 @@ class Post_Query {
 
         $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $StyleName[0] . '\Render\Effects' . $StyleName[1];
         new $cls($dbdata, $postdata, 'request');
+    }
+
+    public function __rest_api_post($style, $args, $optional) {
+        if (!is_array($args)):
+            $args = json_decode(stripslashes($args), true);
+        endif;
+        $args ['offset'] = (int) $args['offset'] + (((int) $optional - 1) * (int) $args['posts_per_page']);
+
+        if (!is_array($style)):
+            $style = json_decode(stripslashes($style), true);
+        endif;
+        $rawdata = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $style['display_post_id']), ARRAY_A);
+
+        return $this->post_query($rawdata, $args, $style);
     }
 
 }

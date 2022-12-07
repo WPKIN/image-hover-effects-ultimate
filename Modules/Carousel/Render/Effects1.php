@@ -11,13 +11,13 @@ use OXI_IMAGE_HOVER_PLUGINS\Page\Public_Render;
 class Effects1 extends Public_Render {
 
     public function public_jquery() {
-        wp_enqueue_script('oxi-image-carousel-slick.min', OXI_IMAGE_HOVER_URL . '/Modules/Carousel/Files/slick.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_script('oxi-image-carousel-slick.min', OXI_IMAGE_HOVER_URL . 'Modules/Carousel/Files/slick.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         $this->JSHANDLE = 'oxi-image-carousel-slick.min';
     }
 
     public function public_css() {
-        wp_enqueue_style('oxi-image-hover-carousel-slick', OXI_IMAGE_HOVER_URL . '/Modules/Carousel/Files/slick.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        wp_enqueue_style('oxi-image-hover-style-1', OXI_IMAGE_HOVER_URL . '/Modules/Carousel/Files/style-1.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-image-hover-carousel-slick', OXI_IMAGE_HOVER_URL . 'Modules/Carousel/Files/slick.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-image-hover-style-1', OXI_IMAGE_HOVER_URL . 'Modules/Carousel/Files/style-1.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
 
     public function render() {
@@ -63,13 +63,15 @@ class Effects1 extends Public_Render {
     public function inline_public_css() {
         $css = '';
     }
-   public function custom_font_awesome_render($data) {
+
+    public function custom_font_awesome_render($data) {
         $fadata = get_option('oxi_addons_font_awesome');
         if ($fadata != 'no') :
-            wp_enqueue_style('font-awsome.min', OXI_IMAGE_HOVER_URL . '/assets/frontend/css/font-awsome.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+            wp_enqueue_style('font-awsome.min', OXI_IMAGE_HOVER_URL . 'assets/frontend/css/font-awsome.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         endif;
         return '<i class="' . esc_attr($data) . ' oxi-icons"></i>';
     }
+
     public function default_render($style, $child, $admin) {
         if (!array_key_exists('carousel_register_style', $style) && $style['carousel_register_style'] < 1) :
             ?>

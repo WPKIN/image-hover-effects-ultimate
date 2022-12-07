@@ -11,7 +11,7 @@ use OXI_IMAGE_HOVER_PLUGINS\Page\Public_Render;
 class Effects6 extends Public_Render {
 
     public function public_css() {
-        wp_enqueue_style('oxi-image-hover-flipbox', OXI_IMAGE_HOVER_URL . '/Modules/Flipbox/Files/flipbox.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-image-hover-flipbox', OXI_IMAGE_HOVER_URL . 'Modules/Flipbox/Files/flipbox.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
 
     public function default_render($style, $child, $admin) {

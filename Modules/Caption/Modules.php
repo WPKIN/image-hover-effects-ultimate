@@ -56,359 +56,6 @@ class Modules extends Admin_Render {
         return '';
     }
 
-    public function register_column_effects() {
-        $this->start_controls_section(
-                'oxi-image-hover', [
-            'label' => esc_html__('Column & Effects', 'image-hover-effects-ultimate'),
-            'showing' => TRUE,
-                ]
-        );
-        $this->add_group_control(
-                'oxi-image-hover-col', $this->style, [
-            'type' => Controls::COLUMN,
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-hover-style' => '',
-            ]
-                ]
-        );
-        $this->register_effects();
-        $this->add_control(
-                'oxi-image-hover-effects-time', $this->style, [
-            'label' => esc_html__('Effects Time (S)', 'image-hover-effects-ultimate'),
-            'type' => Controls::SLIDER,
-            'simpleenable' => false,
-            'default' => [
-                'unit' => 'px',
-                'size' => '',
-            ],
-            'range' => [
-                'px' => [
-                    'min' => 0.0,
-                    'max' => 5,
-                    'step' => 0.01,
-                ],
-            ],
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-hover-style *' => '-webkit-transition: all {{SIZE}}s ease-in-out; -moz-transition: all {{SIZE}}s ease-in-out; transition: all {{SIZE}}s ease-in-out;',
-            ],
-            'description' => 'Set Effects Durations as How long you want to run Effects. Options available with Second or Milisecond.',
-                ]
-        );
-        $this->add_group_control(
-                'oxi-image-hover-animation', $this->style, [
-            'type' => Controls::ANIMATION,
-            'separator' => TRUE,
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-hover-style' => '',
-            ]
-                ]
-        );
-
-        $this->end_controls_section();
-    }
-
-    public function register_general_style() {
-        $this->start_controls_section(
-                'oxi-image-hover', [
-            'label' => esc_html__('Width & Height', 'image-hover-effects-ultimate'),
-            'showing' => true,
-                ]
-        );
-        $this->add_responsive_control(
-                'oxi-image-hover-width', $this->style, [
-            'label' => esc_html__('Width', 'image-hover-effects-ultimate'),
-            'type' => Controls::SLIDER,
-            'default' => [
-                'unit' => 'px',
-                'size' => '',
-            ],
-            'range' => [
-                'px' => [
-                    'min' => 0,
-                    'max' => 1900,
-                    'step' => 1,
-                ],
-                '%' => [
-                    'min' => 1,
-                    'max' => 100,
-                    'step' => 1,
-                ],
-                'em' => [
-                    'min' => 1,
-                    'max' => 200,
-                    'step' => 0.1,
-                ],
-            ],
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-hover-style-caption' => 'max-width:{{SIZE}}{{UNIT}};',
-            ],
-            'simpledescription' => 'Customize Image Width as like as you want, will be pixel Value.',
-            'description' => 'Customize Image Width with several options as Pixel, Percent or EM.',
-                ]
-        );
-        $this->add_responsive_control(
-                'oxi-image-hover-height', $this->style, [
-            'label' => esc_html__('Height', 'image-hover-effects-ultimate'),
-            'type' => Controls::SLIDER,
-            'default' => [
-                'unit' => 'px',
-                'size' => '',
-            ],
-            'range' => [
-                'px' => [
-                    'min' => 0,
-                    'max' => 1000,
-                    'step' => 1,
-                ],
-                '%' => [
-                    'min' => 1,
-                    'max' => 200,
-                    'step' => 1,
-                ],
-            ],
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-hover-style-caption:after ' => 'padding-bottom:{{SIZE}}{{UNIT}};',
-            ],
-            'simpledescription' => 'Customize Image Height as like as you want, will be Percent Value.',
-            'description' => 'Customize Image Height with several options as Pixel, Percent or EM.',
-                ]
-        );
-        $this->add_responsive_control(
-                'oxi-image-hover-margin', $this->style, [
-            'label' => esc_html__('Margin', 'image-hover-effects-ultimate'),
-            'type' => Controls::DIMENSIONS,
-            'default' => [
-                'unit' => 'px',
-                'size' => '',
-            ],
-            'range' => [
-                'px' => [
-                    'min' => 0,
-                    'max' => 500,
-                    'step' => 1,
-                ],
-                '%' => [
-                    'min' => 0,
-                    'max' => 100,
-                    'step' => 1,
-                ],
-                'em' => [
-                    'min' => 0,
-                    'max' => 200,
-                    'step' => .1,
-                ],
-            ],
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-hover-style' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ],
-            'simpledescription' => 'Margin properties are used to create space around Image.',
-            'description' => 'Margin properties are used to create space around Image with several options as Pixel, or Percent or EM.',
-                ]
-        );
-        $this->end_controls_section();
-    }
-
-    public function register_content_settings() {
-        $this->start_controls_section(
-                'oxi-image-hover', [
-            'label' => esc_html__('General Settings', 'image-hover-effects-ultimate'),
-            'showing' => TRUE,
-                ]
-        );
-        $this->add_control(
-                'oxi-image-hover-background', $this->style, [
-            'label' => esc_html__('Color', 'image-hover-effects-ultimate'),
-            'type' => Controls::COLOR,
-            'oparetor' => true,
-            'default' => 'rgba(9, 124, 219, 1)',
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-caption-hover,
-                    {{WRAPPER}} .oxi-image-caption-hover:before,
-                    {{WRAPPER}} .oxi-image-caption-hover:after,
-                    {{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-figure,
-                    {{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-figure:before,
-                    {{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-figure:after,
-                    {{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-figure-caption,
-                    {{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-figure-caption:before,
-                    {{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-figure-caption:after' => 'background-color: {{VALUE}};',
-            ],
-            'simpledescription' => 'Customize Hover Background with transparent options.',
-            'description' => 'Customize Hover Background with transparent options.',
-                ]
-        );
-        $this->add_control(
-                'oxi-image-hover-content-alignment', $this->style, [
-            'label' => esc_html__('Content Alignment', 'image-hover-effects-ultimate'),
-            'type' => Controls::SELECT,
-            'default' => 'image-hover-align-center-center',
-            'options' => [
-                'image-hover-align-top-left' => esc_html__('Top Left', 'image-hover-effects-ultimate'),
-                'image-hover-align-top-center' => esc_html__('Top Center', 'image-hover-effects-ultimate'),
-                'image-hover-align-top-right' => esc_html__('Top Right', 'image-hover-effects-ultimate'),
-                'image-hover-align-center-left' => esc_html__('Center Left', 'image-hover-effects-ultimate'),
-                'image-hover-align-center-center' => esc_html__('Center Center', 'image-hover-effects-ultimate'),
-                'image-hover-align-center-right' => esc_html__('Center Right', 'image-hover-effects-ultimate'),
-                'image-hover-align-bottom-left' => esc_html__('Bottom Left', 'image-hover-effects-ultimate'),
-                'image-hover-align-bottom-center' => esc_html__('Bottom Center', 'image-hover-effects-ultimate'),
-                'image-hover-align-bottom-right' => esc_html__('Bottom Right', 'image-hover-effects-ultimate'),
-            ],
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-hover-caption-tab' => '',
-            ],
-            'simpledescription' => 'Customize Content Aginment as Top, Bottom, Left or Center.',
-            'description' => 'Customize Content Aginment as Top, Bottom, Left or Center.',
-                ]
-        );
-        $this->start_controls_tabs(
-                'image-hover-content-start-tabs',
-                [
-                    'options' => [
-                        'normal' => esc_html__('Normal ', 'image-hover-effects-ultimate'),
-                        'hover' => esc_html__('Hover ', 'image-hover-effects-ultimate'),
-                    ]
-                ]
-        );
-        $this->start_controls_tab();
-        $this->add_responsive_control(
-                'oxi-image-hover-border-radius', $this->style, [
-            'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
-            'type' => Controls::DIMENSIONS,
-            'default' => [
-                'unit' => 'px',
-                'size' => '',
-            ],
-            'range' => [
-                'px' => [
-                    'min' => 0,
-                    'max' => 500,
-                    'step' => 1,
-                ],
-                '%' => [
-                    'min' => 0,
-                    'max' => 50,
-                    'step' => 1,
-                ],
-                'em' => [
-                    'min' => 0,
-                    'max' => 100,
-                    'step' => .1,
-                ],
-            ],
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-caption-hover, '
-                . '{{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-figure, '
-                . '{{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-image, '
-                . '{{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-image img, '
-                . '{{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-figure-caption, '
-                . '{{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-caption-tab' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ],
-            'simpledescription' => 'Allows you to add rounded corners to Image with options.',
-            'description' => 'Allows you to add rounded corners to Image with options.',
-                ]
-        );
-        $this->add_group_control(
-                'oxi-image-hover-boxshadow', $this->style, [
-            'type' => Controls::BOXSHADOW,
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-caption-hover' => '',
-            ],
-            'description' => 'Box Shadow property attaches one or more shadows into Image shape.',
-                ]
-        );
-        $this->end_controls_tab();
-        $this->start_controls_tab();
-        $this->add_responsive_control(
-                'oxi-image-hover-hover-border-radius', $this->style, [
-            'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
-            'type' => Controls::DIMENSIONS,
-            'default' => [
-                'unit' => 'px',
-                'size' => '',
-            ],
-            'range' => [
-                'px' => [
-                    'min' => 0,
-                    'max' => 500,
-                    'step' => 1,
-                ],
-                '%' => [
-                    'min' => 0,
-                    'max' => 50,
-                    'step' => 1,
-                ],
-                'em' => [
-                    'min' => 0,
-                    'max' => 100,
-                    'step' => .1,
-                ],
-            ],
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-caption-hover:hover,'
-                . '{{WRAPPER}} .oxi-image-caption-hover.oxi-touch,'
-                . '{{WRAPPER}} .oxi-image-caption-hover:hover .oxi-image-hover-figure,'
-                . '{{WRAPPER}} .oxi-image-caption-hover.oxi-touch .oxi-image-hover-figure, '
-                . '{{WRAPPER}} .oxi-image-caption-hover:hover .oxi-image-hover-image, '
-                . '{{WRAPPER}} .oxi-image-caption-hover.oxi-touch .oxi-image-hover-image, '
-                . '{{WRAPPER}} .oxi-image-caption-hover:hover .oxi-image-hover-image img, '
-                . '{{WRAPPER}} .oxi-image-caption-hover.oxi-touch .oxi-image-hover-image img, '
-                . '{{WRAPPER}} .oxi-image-caption-hover:hover .oxi-image-hover-figure-caption, '
-                . '{{WRAPPER}} .oxi-image-caption-hover.oxi-touch .oxi-image-hover-figure-caption,'
-                . '{{WRAPPER}} .oxi-image-caption-hover:hover .oxi-image-hover-caption-tab, '
-                . '{{WRAPPER}} .oxi-image-caption-hover.oxi-touch .oxi-image-hover-caption-tab' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ],
-            'simpledescription' => 'Allows you to add rounded corners at Hover to Image with options.',
-            'description' => 'Allows you to add rounded corners at Hover to Image with options.',
-                ]
-        );
-        $this->add_group_control(
-                'oxi-image-hover-hover-boxshadow', $this->style, [
-            'type' => Controls::BOXSHADOW,
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-caption-hover:hover,'
-                . '{{WRAPPER}} .oxi-image-caption-hover.oxi-touch' => '',
-            ],
-            'description' => 'Allows you at hover to attaches one or more shadows into Image shape.',
-                ]
-        );
-        $this->end_controls_tab();
-        $this->end_controls_tabs();
-        $this->add_responsive_control(
-                'oxi-image-hover-padding', $this->style, [
-            'label' => esc_html__('Padding', 'image-hover-effects-ultimate'),
-            'type' => Controls::DIMENSIONS,
-            'simpledimensions' => 'double',
-            'separator' => TRUE,
-            'default' => [
-                'unit' => 'px',
-                'size' => '',
-            ],
-            'range' => [
-                'px' => [
-                    'min' => 0,
-                    'max' => 500,
-                    'step' => 1,
-                ],
-                '%' => [
-                    'min' => 0,
-                    'max' => 100,
-                    'step' => 1,
-                ],
-                'em' => [
-                    'min' => 0,
-                    'max' => 100,
-                    'step' => .1,
-                ],
-            ],
-            'selector' => [
-                '{{WRAPPER}} .oxi-image-hover-caption-tab' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ],
-            'simpledescription' => 'Padding used to generate space around an Image Hover content.',
-            'description' => 'Padding used to generate space around an Image Hover content.',
-                ]
-        );
-        $this->end_controls_section();
-    }
-
     public function register_description_settings() {
         $this->start_controls_section(
                 'oxi-image-hover', [
@@ -1124,56 +771,56 @@ class Modules extends Admin_Render {
 
     public function modal_form_data() {
         ?><div class="modal-header">
-                    <h4 class="modal-title">Image Hover Form</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body"><?php
-        $this->add_control(
-                'image_hover_heading', $this->style, [
-            'label' => esc_html__('Title', 'image-hover-effects-ultimate'),
-            'type' => Controls::TEXT,
-            'default' => '',
-            'placeholder' => 'Heading',
-            'description' => 'Add Your Image Hover Title.'
-                ]
-        );
-        $this->add_control(
-                'image_hover_description', $this->style, [
-            'label' => esc_html__('Short Description', 'image-hover-effects-ultimate'),
-            'type' => Controls::TEXTAREA,
-            'default' => '',
-            'description' => 'Add Your Description Unless make it blank.'
-                ]
-        );
+            <h4 class="modal-title">Image Hover Form</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body"><?php
+            $this->add_control(
+                    'image_hover_heading', $this->style, [
+                'label' => esc_html__('Title', 'image-hover-effects-ultimate'),
+                'type' => Controls::TEXT,
+                'default' => '',
+                'placeholder' => 'Heading',
+                'description' => 'Add Your Image Hover Title.'
+                    ]
+            );
+            $this->add_control(
+                    'image_hover_description', $this->style, [
+                'label' => esc_html__('Short Description', 'image-hover-effects-ultimate'),
+                'type' => Controls::TEXTAREA,
+                'default' => '',
+                'description' => 'Add Your Description Unless make it blank.'
+                    ]
+            );
 
-        $this->add_group_control(
-                'image_hover_image', $this->style,
-                [
-                    'label' => esc_html__('Image', 'image-hover-effects-ultimate'),
-                    'type' => Controls::MEDIA,
-                    'description' => 'Add or Modify Your Image. You can use Media Library or Custom URL'
-                ]
-        );
+            $this->add_group_control(
+                    'image_hover_image', $this->style,
+                    [
+                        'label' => esc_html__('Image', 'image-hover-effects-ultimate'),
+                        'type' => Controls::MEDIA,
+                        'description' => 'Add or Modify Your Image. You can use Media Library or Custom URL'
+                    ]
+            );
 
-        $this->add_group_control(
-                'image_hover_button_link', $this->style, [
-            'label' => esc_html__('URL', 'image-hover-effects-ultimate'),
-            'type' => Controls::URL,
-            'separator' => TRUE,
-            'default' => '',
-            'placeholder' => 'https://www.yoururl.com',
-            'description' => 'Add Your Desire Link or Url Unless make it blank'
-                ]
-        );
-        $this->add_control(
-                'image_hover_button_text', $this->style, [
-            'label' => esc_html__('Button Text', 'image-hover-effects-ultimate'),
-            'type' => Controls::TEXT,
-            'default' => '',
-            'description' => 'Customize your button text. Button will only view while Url given'
-                ]
-        );
-        ?></div><?php
+            $this->add_group_control(
+                    'image_hover_button_link', $this->style, [
+                'label' => esc_html__('URL', 'image-hover-effects-ultimate'),
+                'type' => Controls::URL,
+                'separator' => TRUE,
+                'default' => '',
+                'placeholder' => 'https://www.yoururl.com',
+                'description' => 'Add Your Desire Link or Url Unless make it blank'
+                    ]
+            );
+            $this->add_control(
+                    'image_hover_button_text', $this->style, [
+                'label' => esc_html__('Button Text', 'image-hover-effects-ultimate'),
+                'type' => Controls::TEXT,
+                'default' => '',
+                'description' => 'Customize your button text. Button will only view while Url given'
+                    ]
+            );
+            ?></div><?php
     }
 
     /**
@@ -1183,6 +830,359 @@ class Modules extends Admin_Render {
      */
     public function Rearrange() {
         return '<li class="list-group-item" id="{{id}}">{{image_hover_heading}}</li>';
+    }
+
+    public function register_column_effects() {
+        $this->start_controls_section(
+                'oxi-image-hover', [
+            'label' => esc_html__('Column & Effects', 'image-hover-effects-ultimate'),
+            'showing' => TRUE,
+                ]
+        );
+        $this->add_group_control(
+                'oxi-image-hover-col', $this->style, [
+            'type' => Controls::COLUMN,
+            'selector' => [
+                '{{WRAPPER}} .oxi-image-hover-style' => '',
+            ]
+                ]
+        );
+        $this->register_effects();
+        $this->add_control(
+                'oxi-image-hover-effects-time', $this->style, [
+            'label' => esc_html__('Effects Time (S)', 'image-hover-effects-ultimate'),
+            'type' => Controls::SLIDER,
+            'simpleenable' => false,
+            'default' => [
+                'unit' => 'px',
+                'size' => '',
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 0.0,
+                    'max' => 5,
+                    'step' => 0.01,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} .oxi-image-hover-style *' => '-webkit-transition: all {{SIZE}}s ease-in-out; -moz-transition: all {{SIZE}}s ease-in-out; transition: all {{SIZE}}s ease-in-out;',
+            ],
+            'description' => 'Set Effects Durations as How long you want to run Effects. Options available with Second or Milisecond.',
+                ]
+        );
+        $this->add_group_control(
+                'oxi-image-hover-animation', $this->style, [
+            'type' => Controls::ANIMATION,
+            'separator' => TRUE,
+            'selector' => [
+                '{{WRAPPER}} .oxi-image-hover-style' => '',
+            ]
+                ]
+        );
+
+        $this->end_controls_section();
+    }
+
+    public function register_general_style() {
+        $this->start_controls_section(
+                'oxi-image-hover', [
+            'label' => esc_html__('Width & Height', 'image-hover-effects-ultimate'),
+            'showing' => true,
+                ]
+        );
+        $this->add_responsive_control(
+                'oxi-image-hover-width', $this->style, [
+            'label' => esc_html__('Width', 'image-hover-effects-ultimate'),
+            'type' => Controls::SLIDER,
+            'default' => [
+                'unit' => 'px',
+                'size' => '',
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 1900,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => 1,
+                    'max' => 100,
+                    'step' => 1,
+                ],
+                'em' => [
+                    'min' => 1,
+                    'max' => 200,
+                    'step' => 0.1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} .oxi-image-hover-style-caption' => 'max-width:{{SIZE}}{{UNIT}};',
+            ],
+            'simpledescription' => 'Customize Image Width as like as you want, will be pixel Value.',
+            'description' => 'Customize Image Width with several options as Pixel, Percent or EM.',
+                ]
+        );
+        $this->add_responsive_control(
+                'oxi-image-hover-height', $this->style, [
+            'label' => esc_html__('Height', 'image-hover-effects-ultimate'),
+            'type' => Controls::SLIDER,
+            'default' => [
+                'unit' => 'px',
+                'size' => '',
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 1000,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => 1,
+                    'max' => 200,
+                    'step' => 1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} .oxi-image-hover-style-caption:after ' => 'padding-bottom:{{SIZE}}{{UNIT}};',
+            ],
+            'simpledescription' => 'Customize Image Height as like as you want, will be Percent Value.',
+            'description' => 'Customize Image Height with several options as Pixel, Percent or EM.',
+                ]
+        );
+        $this->add_responsive_control(
+                'oxi-image-hover-margin', $this->style, [
+            'label' => esc_html__('Margin', 'image-hover-effects-ultimate'),
+            'type' => Controls::DIMENSIONS,
+            'default' => [
+                'unit' => 'px',
+                'size' => '',
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 500,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => 1,
+                ],
+                'em' => [
+                    'min' => 0,
+                    'max' => 200,
+                    'step' => .1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} .oxi-image-hover-style' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+            'simpledescription' => 'Margin properties are used to create space around Image.',
+            'description' => 'Margin properties are used to create space around Image with several options as Pixel, or Percent or EM.',
+                ]
+        );
+        $this->end_controls_section();
+    }
+
+    public function register_content_settings() {
+        $this->start_controls_section(
+                'oxi-image-hover', [
+            'label' => esc_html__('General Settings', 'image-hover-effects-ultimate'),
+            'showing' => TRUE,
+                ]
+        );
+        $this->add_control(
+                'oxi-image-hover-background', $this->style, [
+            'label' => esc_html__('Color', 'image-hover-effects-ultimate'),
+            'type' => Controls::COLOR,
+            'oparetor' => true,
+            'default' => 'rgba(9, 124, 219, 1)',
+            'selector' => [
+                '{{WRAPPER}} .oxi-image-caption-hover,
+                    {{WRAPPER}} .oxi-image-caption-hover:before,
+                    {{WRAPPER}} .oxi-image-caption-hover:after,
+                    {{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-figure,
+                    {{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-figure:before,
+                    {{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-figure:after,
+                    {{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-figure-caption,
+                    {{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-figure-caption:before,
+                    {{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-figure-caption:after' => 'background-color: {{VALUE}};',
+            ],
+            'simpledescription' => 'Customize Hover Background with transparent options.',
+            'description' => 'Customize Hover Background with transparent options.',
+                ]
+        );
+        $this->add_control(
+                'oxi-image-hover-content-alignment', $this->style, [
+            'label' => esc_html__('Content Alignment', 'image-hover-effects-ultimate'),
+            'type' => Controls::SELECT,
+            'default' => 'image-hover-align-center-center',
+            'options' => [
+                'image-hover-align-top-left' => esc_html__('Top Left', 'image-hover-effects-ultimate'),
+                'image-hover-align-top-center' => esc_html__('Top Center', 'image-hover-effects-ultimate'),
+                'image-hover-align-top-right' => esc_html__('Top Right', 'image-hover-effects-ultimate'),
+                'image-hover-align-center-left' => esc_html__('Center Left', 'image-hover-effects-ultimate'),
+                'image-hover-align-center-center' => esc_html__('Center Center', 'image-hover-effects-ultimate'),
+                'image-hover-align-center-right' => esc_html__('Center Right', 'image-hover-effects-ultimate'),
+                'image-hover-align-bottom-left' => esc_html__('Bottom Left', 'image-hover-effects-ultimate'),
+                'image-hover-align-bottom-center' => esc_html__('Bottom Center', 'image-hover-effects-ultimate'),
+                'image-hover-align-bottom-right' => esc_html__('Bottom Right', 'image-hover-effects-ultimate'),
+            ],
+            'selector' => [
+                '{{WRAPPER}} .oxi-image-hover-caption-tab' => '',
+            ],
+            'simpledescription' => 'Customize Content Aginment as Top, Bottom, Left or Center.',
+            'description' => 'Customize Content Aginment as Top, Bottom, Left or Center.',
+                ]
+        );
+        $this->start_controls_tabs(
+                'image-hover-content-start-tabs',
+                [
+                    'options' => [
+                        'normal' => esc_html__('Normal ', 'image-hover-effects-ultimate'),
+                        'hover' => esc_html__('Hover ', 'image-hover-effects-ultimate'),
+                    ]
+                ]
+        );
+        $this->start_controls_tab();
+        $this->add_responsive_control(
+                'oxi-image-hover-border-radius', $this->style, [
+            'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
+            'type' => Controls::DIMENSIONS,
+            'default' => [
+                'unit' => 'px',
+                'size' => '',
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 500,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => 0,
+                    'max' => 50,
+                    'step' => 1,
+                ],
+                'em' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => .1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} .oxi-image-caption-hover, '
+                . '{{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-figure, '
+                . '{{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-image, '
+                . '{{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-image img, '
+                . '{{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-figure-caption, '
+                . '{{WRAPPER}} .oxi-image-caption-hover .oxi-image-hover-caption-tab' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+            'simpledescription' => 'Allows you to add rounded corners to Image with options.',
+            'description' => 'Allows you to add rounded corners to Image with options.',
+                ]
+        );
+        $this->add_group_control(
+                'oxi-image-hover-boxshadow', $this->style, [
+            'type' => Controls::BOXSHADOW,
+            'selector' => [
+                '{{WRAPPER}} .oxi-image-caption-hover' => '',
+            ],
+            'description' => 'Box Shadow property attaches one or more shadows into Image shape.',
+                ]
+        );
+        $this->end_controls_tab();
+        $this->start_controls_tab();
+        $this->add_responsive_control(
+                'oxi-image-hover-hover-border-radius', $this->style, [
+            'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
+            'type' => Controls::DIMENSIONS,
+            'default' => [
+                'unit' => 'px',
+                'size' => '',
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 500,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => 0,
+                    'max' => 50,
+                    'step' => 1,
+                ],
+                'em' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => .1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} .oxi-image-caption-hover:hover,'
+                . '{{WRAPPER}} .oxi-image-caption-hover.oxi-touch,'
+                . '{{WRAPPER}} .oxi-image-caption-hover:hover .oxi-image-hover-figure,'
+                . '{{WRAPPER}} .oxi-image-caption-hover.oxi-touch .oxi-image-hover-figure, '
+                . '{{WRAPPER}} .oxi-image-caption-hover:hover .oxi-image-hover-image, '
+                . '{{WRAPPER}} .oxi-image-caption-hover.oxi-touch .oxi-image-hover-image, '
+                . '{{WRAPPER}} .oxi-image-caption-hover:hover .oxi-image-hover-image img, '
+                . '{{WRAPPER}} .oxi-image-caption-hover.oxi-touch .oxi-image-hover-image img, '
+                . '{{WRAPPER}} .oxi-image-caption-hover:hover .oxi-image-hover-figure-caption, '
+                . '{{WRAPPER}} .oxi-image-caption-hover.oxi-touch .oxi-image-hover-figure-caption,'
+                . '{{WRAPPER}} .oxi-image-caption-hover:hover .oxi-image-hover-caption-tab, '
+                . '{{WRAPPER}} .oxi-image-caption-hover.oxi-touch .oxi-image-hover-caption-tab' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+            'simpledescription' => 'Allows you to add rounded corners at Hover to Image with options.',
+            'description' => 'Allows you to add rounded corners at Hover to Image with options.',
+                ]
+        );
+        $this->add_group_control(
+                'oxi-image-hover-hover-boxshadow', $this->style, [
+            'type' => Controls::BOXSHADOW,
+            'selector' => [
+                '{{WRAPPER}} .oxi-image-caption-hover:hover,'
+                . '{{WRAPPER}} .oxi-image-caption-hover.oxi-touch' => '',
+            ],
+            'description' => 'Allows you at hover to attaches one or more shadows into Image shape.',
+                ]
+        );
+        $this->end_controls_tab();
+        $this->end_controls_tabs();
+        $this->add_responsive_control(
+                'oxi-image-hover-padding', $this->style, [
+            'label' => esc_html__('Padding', 'image-hover-effects-ultimate'),
+            'type' => Controls::DIMENSIONS,
+            'simpledimensions' => 'double',
+            'separator' => TRUE,
+            'default' => [
+                'unit' => 'px',
+                'size' => '',
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 500,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => 1,
+                ],
+                'em' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => .1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} .oxi-image-hover-caption-tab' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+            'simpledescription' => 'Padding used to generate space around an Image Hover content.',
+            'description' => 'Padding used to generate space around an Image Hover content.',
+                ]
+        );
+        $this->end_controls_section();
     }
 
 }

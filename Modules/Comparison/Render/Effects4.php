@@ -11,8 +11,8 @@ use OXI_IMAGE_HOVER_PLUGINS\Page\Public_Render;
 class Effects4 extends Public_Render {
 
     public function public_css() {
-        wp_enqueue_style('oxi-image-hover-comparison-box', OXI_IMAGE_HOVER_URL . '/Modules/Comparison/Files/Comparison.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        wp_enqueue_style('oxi-image-hover-comparison-style-4', OXI_IMAGE_HOVER_URL . '/Modules/Comparison/Files/style-4.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-image-hover-comparison-box', OXI_IMAGE_HOVER_URL . 'Modules/Comparison/Files/Comparison.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-image-hover-comparison-style-4', OXI_IMAGE_HOVER_URL . 'Modules/Comparison/Files/style-4.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
 
     /*

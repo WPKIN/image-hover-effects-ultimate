@@ -11,13 +11,13 @@ use OXI_IMAGE_HOVER_PLUGINS\Page\Public_Render;
 class Effects3 extends Public_Render {
 
     public function public_jquery() {
-        wp_enqueue_script('oxi-image-carousel-swiper.min.js', OXI_IMAGE_HOVER_URL . '/Modules/Carousel/Files/swiper.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_script('oxi-image-carousel-swiper.min.js', OXI_IMAGE_HOVER_URL . 'Modules/Carousel/Files/swiper.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         $this->JSHANDLE = 'oxi-image-carousel-swiper.min.js';
     }
 
     public function public_css() {
-        wp_enqueue_style('oxi-image-hover-carousel-swiper.min.css', OXI_IMAGE_HOVER_URL . '/Modules/Carousel/Files/swiper.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        wp_enqueue_style('oxi-image-hover-style-3', OXI_IMAGE_HOVER_URL . '/Modules/Carousel/Files/style-3.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-image-hover-carousel-swiper.min.css', OXI_IMAGE_HOVER_URL . 'Modules/Carousel/Files/swiper.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-image-hover-style-3', OXI_IMAGE_HOVER_URL . 'Modules/Carousel/Files/style-3.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
 
     public function render() {

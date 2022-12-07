@@ -68,7 +68,7 @@ class Admin
     {
         $fadata = get_option('oxi_addons_font_awesome');
         if ($fadata != 'no') :
-            wp_enqueue_style('font-awsome.min', OXI_IMAGE_HOVER_URL . '/assets/frontend/css/font-awsome.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+            wp_enqueue_style('font-awsome.min', OXI_IMAGE_HOVER_URL . 'assets/frontend/css/font-awsome.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         endif;
 ?>
         <i class="<?php echo esc_attr($data); ?> oxi-icons"></i>
@@ -81,7 +81,7 @@ class Admin
      */
     public function admin_rest_api()
     {
-        wp_enqueue_script('oxi-image-hover-shortcode', OXI_IMAGE_HOVER_URL . '/assets/backend/js/home.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_script('oxi-image-hover-shortcode', OXI_IMAGE_HOVER_URL . 'assets/backend/js/home.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
     public function name_converter($data)
     {
