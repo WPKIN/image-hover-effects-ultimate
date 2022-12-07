@@ -30,7 +30,7 @@ class Effects30 extends Public_Render {
             $value = json_decode(stripslashes($val['rawdata']), true);
             $ht = '';
             ?>
-            <div class="oxi-image-hover-style oxi-image-hover-style-30 oxi-image-general-hover-style-30-<?php echo $this->oxiid ?> <?php $this->column_render('oxi-image-hover-col', $style); ?> <?php
+            <div class="oxi-image-hover-style oxi-image-hover-style-30 oxi-image-general-hover-style-30-<?php echo esc_attr($this->oxiid) ?> <?php $this->column_render('oxi-image-hover-col', $style); ?> <?php
             if ($admin == "admin"):
                 echo 'oxi-addons-admin-edit-list';
             endif;
@@ -95,7 +95,7 @@ class Effects30 extends Public_Render {
                     $this->oxi_addons_admin_edit_delete_clone($val['id']);
                 endif;
                 ?>
-            </div> 
+            </div>
             <?php
             if ($this->media_background_render('image_hover_feature_image', $value) != ''):
                 $url = $this->media_background_render('image_hover_feature_image', $value);
