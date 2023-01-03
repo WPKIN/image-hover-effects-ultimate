@@ -112,7 +112,7 @@ class Support_Recommended {
                 <p></p>
                 <div class="oxi-addons-admin-notifications-holder">
                     <div class="oxi-addons-admin-notifications-alert">
-                        <p>Thank you for using our Image Hover Effects Ultimate. <?php echo esc_html__($recommend['modules-massage'], 'image-hover-effects-ultimate'); ?></p>
+                        <p>Thank you for using our Image Hover Effects Ultimate. <?php echo $recommend['modules-massage']; ?></p>
                         <p><a href="<?php echo esc_url($install_url); ?>" class="button button-large button-primary"><?php echo esc_html__('Install Now', 'image-hover-effects-ultimate'); ?></a> &nbsp;&nbsp;<a href="#" class="button button-large button-secondary oxi-image-admin-recommended-dismiss">No, Thanks</a></p>
                     </div>
                 </div>
