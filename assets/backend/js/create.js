@@ -2,6 +2,7 @@ jQuery.noConflict();
 (function ($) {
     var styleid = '';
     var childid = '';
+
     async function Image_Hover_Admin_Create(functionname, rawdata, styleid, childid, callback) {
         if (functionname === "") {
             alert('Confirm Function Name');
@@ -12,28 +13,29 @@ jQuery.noConflict();
             result = await $.ajax({
                 url: ImageHoverUltimate.root + 'ImageHoverUltimate/v1/' + functionname,
                 method: 'POST',
-               
+
                 data: {
-                     _wpnonce: ImageHoverUltimate.nonce,
+                    _wpnonce: ImageHoverUltimate.nonce,
                     styleid: styleid,
                     childid: childid,
                     rawdata: rawdata
                 }
             });
-          
+
             return callback(result);
 
         } catch (error) {
+            set_local_data(functionname, rawdata, styleid, childid);
             console.error(error);
         }
     }
+
     $(".oxi-addons-addons-template-create").on("click", function (e) {
         e.preventDefault();
         $('#style-name').val('');
         $('#oxistyledata').val($(this).attr('effects-data'));
         $("#oxi-addons-style-create-modal").modal("show");
     });
-
 
 
     $(".oxi-addons-addons-web-template").on("click", function (e) {
@@ -66,6 +68,7 @@ jQuery.noConflict();
 
 
     $("#oxi-addons-style-modal-form").submit(function (e) {
+
         e.preventDefault();
         $a = $('#oxistyledata').val() + "-data-" + $("input[name='image-hover-box-layouts']:checked").val();
 
@@ -77,12 +80,24 @@ jQuery.noConflict();
         var rawdata = JSON.stringify(data);
         var functionname = "create_new";
         $('.modal-footer').prepend('<span class="spinner sa-spinner-open-left"></span>');
+
         Image_Hover_Admin_Create(functionname, rawdata, styleid, childid, function (callback) {
             setTimeout(function () {
                 document.location.href = callback;
             }, 1000);
         });
     });
+
+    function set_local_data(functionname, rawdata, styleid, childid) {
+        console.log(rawdata);
+        $('#manual-style-functionname').val(functionname);
+        $('#manual-style-rawdata').html(rawdata);
+        $('#manual-style-styleid').val(styleid);
+        $('#manual-style-childid').val(childid);
+        $("#oxi-addons-manual-data-form").submit();
+
+    }
+
 
     $(".oxi-addons-addons-style-btn-warning").on("click", function (e) {
         e.preventDefault();
