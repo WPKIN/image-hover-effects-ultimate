@@ -44,6 +44,13 @@ jQuery.noConflict();
         }
     }
 
+    $(".oxi-addons-addons-template-create").on("click", function (e) {
+        e.preventDefault();
+        $('#style-name').val('');
+        $('#oxistyledata').val($(this).attr('effects-data'));
+        $("#oxi-addons-style-create-modal").modal("show");
+    });
+
 
     $(".oxi-addons-addons-web-template").on("click", function (e) {
         e.preventDefault();
