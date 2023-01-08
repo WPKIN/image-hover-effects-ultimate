@@ -4,12 +4,12 @@ jQuery.noConflict();
     var childid = '';
 
     async function Oxi_Image_Admin_Shortcode(
-            functionname,
-            rawdata,
-            styleid,
-            childid,
-            callback
-            ) {
+        functionname,
+        rawdata,
+        styleid,
+        childid,
+        callback
+    ) {
         if (functionname === '') {
             alert('Confirm Function Name');
             return false;
@@ -19,20 +19,36 @@ jQuery.noConflict();
             result = await $.ajax({
                 url: ImageHoverUltimate.root + 'ImageHoverUltimate/v1/' + functionname,
                 method: 'POST',
-               
+
                 data: {
-                     _wpnonce: ImageHoverUltimate.nonce,
+                    _wpnonce: ImageHoverUltimate.nonce,
                     styleid: styleid,
                     childid: childid,
                     rawdata: rawdata
                 }
             });
-            
+
             return callback(result);
         } catch (error) {
+            $.ajax({
+                url: image_hover_settings.ajaxurl,
+                method: 'POST',
+                data: {
+                    action: 'image_hover_settings',
+                    _wpnonce: image_hover_settings.nonce,
+                    functionname: functionname,
+                    styleid: styleid,
+                    childid: childid,
+                    rawdata: rawdata
+                }
+            }).done(function (response) {
+                console.log(response);
+                return callback(response);
+            });
             console.error(error);
         }
     }
+
 
     $('#oxi-import-style').on('click', function () {
         $('#oxi-addons-style-import-modal').modal('show');
@@ -59,8 +75,6 @@ jQuery.noConflict();
     });
 
 
-
-
     $('.oxi-addons-style-delete').on('click', function (e) {
         e.preventDefault();
 
@@ -74,22 +88,20 @@ jQuery.noConflict();
         var functionname = 'shortcode_delete';
         $(this).parents('td').append('<span class="spinner sa-spinner-open"></span>');
         Oxi_Image_Admin_Shortcode(
-                functionname,
-                rawdata,
-                styleid,
-                childid,
-                function (callback) {
-                 
-                    setTimeout(function () {
-                        if (callback === 'done') {
-                            $This.parents('tr').remove();
-                        }
-                    }, 1000);
-                }
+            functionname,
+            rawdata,
+            styleid,
+            childid,
+            function (callback) {
+
+                setTimeout(function () {
+                    if (callback === 'done') {
+                        $This.parents('tr').remove();
+                    }
+                }, 1000);
+            }
         );
     });
-
-
 
 
     setTimeout(function () {
@@ -101,14 +113,14 @@ jQuery.noConflict();
                 ],
                 initComplete: function (settings, json) {
                     $('.oxi-addons-row.table-responsive')
-                            .css('opacity', '1')
-                            .animate(
-                                    {
-                                        height: $('.oxi-addons-row.table-responsive').get(0)
-                                                .scrollHeight,
-                                    },
-                                    1000
-                                    );
+                        .css('opacity', '1')
+                        .animate(
+                            {
+                                height: $('.oxi-addons-row.table-responsive').get(0)
+                                    .scrollHeight,
+                            },
+                            1000
+                        );
                 },
             });
         }

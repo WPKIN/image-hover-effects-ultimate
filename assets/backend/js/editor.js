@@ -6,6 +6,7 @@ jQuery.noConflict();
     var styleid = urlParams.get("styleid");
     var childid = "";
     var WRAPPER = $('#oxi-addons-preview-data').attr('template-wrapper');
+
     function NEWRegExp(par = '') {
         return new RegExp(par, "g");
     }
@@ -16,6 +17,7 @@ jQuery.noConflict();
         }
         return str;
     }
+
     async function OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, callback) {
         if (functionname === "") {
             alert('Confirm Function Name');
@@ -40,12 +42,41 @@ jQuery.noConflict();
                     rawdata: rawdata
                 }
             });
-         
+
             return callback(result);
 
         } catch (error) {
-            console.error(error);
+            $.ajax({
+                url: image_hover_settings.ajaxurl,
+                method: 'POST',
+                data: {
+                    action: 'image_hover_settings',
+                    _wpnonce: image_hover_settings.nonce,
+                    functionname: functionname,
+                    styleid: styleid,
+                    childid: childid,
+                    rawdata: rawdata
+                }
+            }).done(function (response) {
+                console.log(response);
+                return callback(response);
+            });
         }
+    }
+
+    function set_local_data(functionname, rawdata, styleid, childid) {
+        if ('elements_template_render_data' === functionname) {
+            return
+        }
+
+
+        console.log(rawdata);
+        $('#manual-style-functionname').val(functionname);
+        $('#manual-style-rawdata').html(rawdata);
+        $('#manual-style-styleid').val(styleid);
+        $('#manual-style-childid').val(childid);
+        $("#oxi-addons-manual-data-form").submit();
+
     }
 
 
@@ -115,7 +146,7 @@ jQuery.noConflict();
         var styleid = $(this).data('value');
         var functionname = "elements_template_rebuild_data";
         OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, function (callback) {
-        
+
             if (callback === "success") {
                 setTimeout(function () {
                     location.reload();
@@ -133,7 +164,7 @@ jQuery.noConflict();
         }
         var functionname = "elements_template_rearrange_save_data";
         OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, function (callback) {
-         
+
             if (callback === "success") {
                 $("#OXIAADDONSCHANGEDPOPUP .icon-box").html('<span class="dashicons dashicons-yes"></span>');
                 $("#OXIAADDONSCHANGEDPOPUP .modal-body.text-center h4").html("Great!");
@@ -164,9 +195,9 @@ jQuery.noConflict();
         var functionname = "elements_template_style";
         $(this).html('<span class="dashicons dashicons-admin-generic"></span>');
         OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, function (callback) {
-           
+
             if (callback === "success") {
-              
+
                 $("#OXIAADDONSCHANGEDPOPUP .icon-box").html('<span class="dashicons dashicons-yes"></span>');
                 $("#OXIAADDONSCHANGEDPOPUP .modal-body.text-center h4").html("Great!");
                 $("#OXIAADDONSCHANGEDPOPUP .modal-body.text-center p").html("Layouts data has been saved successfully.");
@@ -212,6 +243,7 @@ jQuery.noConflict();
             });
         }
     });
+
     function ShortCodeMultipleSelector_Handler($value) {
         return $value.replace(/{{[0-9a-zA-Z.?:_-]+}}/g, function (match, contents, offset, input_string) {
             var m = match.replace(/{{/g, "").replace(/}}/g, "");
@@ -229,6 +261,7 @@ jQuery.noConflict();
             return m;
         });
     }
+
     $("body").on("click", ".shortcode-addons-template-item-edit", function (e) {
         e.preventDefault();
         $('#oxi-template-modal-form')[0].reset();
@@ -252,7 +285,7 @@ jQuery.noConflict();
                                 $('input[name=' + key + ']').prop('checked', false).removeAttr('checked');
                             }
                         } else if (tp === 'hidden') {
-                           
+
                             $('input[name=' + key + ']').val(value);
                             if ($('input[name=' + key + ']').hasClass('shortcode-addons-media-control-link')) {
                                 $('#' + key).siblings('.shortcode-addons-media-control').removeClass('shortcode-addons-media-control-hidden-button');
@@ -682,6 +715,7 @@ jQuery.noConflict();
             }
         });
     }
+
     ShortCodeFormSliderINT();
     $(".shortcode-form-slider-input input").on("keyup", function () {
         $input = $(this);
@@ -766,7 +800,6 @@ jQuery.noConflict();
         }
 
 
-
     });
     $(".shortcode-control-type-slider .shortcode-form-units-choices-label").click(function () {
         var id = "#" + $(this).attr('for');
@@ -838,7 +871,7 @@ jQuery.noConflict();
         BOTTOM = $InputID + '-bottom';
         LEFT = $InputID + '-left';
         if ($input.attr("retundata") !== '' && $input.attr('type') !== 'radio') {
-         
+
             var $data = JSON.parse($input.attr("retundata"));
             $.each($data, function (el, obj) {
                 if (el.indexOf('{{KEY}}') != -1) {
@@ -877,7 +910,7 @@ jQuery.noConflict();
             change: function (val) {
                 $data = [];
                 var $This = $(this).children('input');
-              
+
                 var _VALUE = $This.val();
                 $id = $This.attr('background');
                 $imagecheck = $("#" + $id + "-img").is(":checked");
@@ -898,7 +931,7 @@ jQuery.noConflict();
                         $BACKGROUND = 'background:' + _VALUE + ', url(\'' + $Image + '\' ) ' + $("#" + $id + "-repeat").val() + ' ' + $("#" + $id + "-position-lap").val() + ';';
                     }
                 }
-               
+
                 var $data = ($This.attr("retundata") !== '' ? JSON.parse($This.attr("retundata")) : []);
                 $.each($data, function (el, obj) {
                     if (el.indexOf('{{KEY}}') != -1) {
@@ -970,6 +1003,7 @@ jQuery.noConflict();
             $(this).html($value);
         });
     }
+
     $(document.body).on("click", ".shortcode-form-repeater-fields-wrapper .shortcode-form-repeater-controls-remove", function () {
         event.preventDefault();
         $(this).parents('.shortcode-form-repeater-fields').remove();
@@ -982,6 +1016,7 @@ jQuery.noConflict();
         $(this).parents('.shortcode-form-repeater-fields').toggleClass('shortcode-form-repeater-controls-open');
         OxiAddonsPreviewDataLoader();
     });
+
     function childRecursive(element, func) {
         func(element);
         var children = element.children();
@@ -991,9 +1026,11 @@ jQuery.noConflict();
             });
         }
     }
+
     function getNewAttr(str, newNum, REP) {
         return str.replace(REP, 'saarsarep' + newNum);
     }
+
     function setCloneAttr(element, value, REP) {
 
         if (element.attr('id') !== undefined) {
@@ -1009,6 +1046,7 @@ jQuery.noConflict();
             element.attr('data-condition', getNewAttr(element.attr('data-condition'), value, REP));
         }
     }
+
     $(document.body).on("click", ".shortcode-form-repeater-button", function () {
         event.preventDefault();
         $This = $(this);

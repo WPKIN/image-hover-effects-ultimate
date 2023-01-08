@@ -1,35 +1,31 @@
 <?php
 
-namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Comparison;
+	namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Comparison;
 
-if (!defined('ABSPATH')) {
-    exit;
-}
+	if (!defined('ABSPATH')) {
+		exit;
+	}
 
-/**
- * Description of General
- *
- * @author biplo
- */
-use OXI_IMAGE_HOVER_PLUGINS\Page\Create as Create;
+	/**
+	 * Description of General
+	 *
+	 * @author biplo
+	 */
 
-class Comparison extends Create {
+	use OXI_IMAGE_HOVER_PLUGINS\Page\Create as Create;
 
-    public function JSON_DATA() {
+	class Comparison extends Create
+	{
 
-        $basename = array_map('basename', glob(OXI_IMAGE_HOVER_PATH . 'Modules/' . ucfirst($this->effects) . '/Layouts/*', GLOB_ONLYDIR));
+		public function JSON_DATA ()
+		{
 
-        foreach ($basename as $key => $effects) {
-            $temp = array_map('basename', glob(OXI_IMAGE_HOVER_PATH . 'Modules/' . ucfirst($this->effects) . '/Layouts/' . $effects . '/*.json', GLOB_BRACE));
-            $template_data[(int) $effects] = $temp;
-        }
-        ksort($template_data);
-        $this->TEMPLATE = $template_data;
+			$this->TEMPLATE = $this->rec_listFiles(OXI_IMAGE_HOVER_PATH . 'Modules/' . ucfirst($this->effects) . '/Layouts');
 
-        $this->pre_active = [
-            'comparison-1',
-            'comparison-2',
-        ];
-    }
+			$this->pre_active = [
+			  'comparison-1',
+			  'comparison-2',
+			];
+		}
 
-}
+	}

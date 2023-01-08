@@ -78,7 +78,7 @@
 		}
 
 		public function CSSJS_load() {
-			$this->manual_data_style();
+
 			$this->JSON_DATA();
 			$this->pre_clecked = array_flip($this->pre_active);
 			$this->admin_css_loader();
@@ -87,75 +87,7 @@
 			apply_filters('oxi-image-hover-plugin/admin_menu', true);
 		}
 
-		public function manual_data_style() {
-			$url = '';
-			if (isset($_POST['oxi_addons_manual_data_form_nonce']) && wp_verify_nonce($_POST['oxi_addons_manual_data_form_nonce'], 'oxi_addons_manual_data_form_data') && $_POST['oxi-manual'] !== 'submit') {
-				$functionname = sanitize_text_field($_POST['manual-style-functionname']);
-				$rawdata = sanitize_post($_POST['manual-style-rawdata']);
-				$styleid = (int) $_POST['manual-style-styleid'];
-				$childid = (int) $_POST['manual-style-childid'];
-				if ($functionname == 'create_new') {
-					$rawdata = stripslashes($rawdata);
-					$params = json_decode($rawdata, true);
 
-					$files = OXI_IMAGE_HOVER_PATH . $params['style'];
-
-					if (is_file($files)) {
-
-
-						$rawdata = file_get_contents($files);
-
-						$params = json_decode($rawdata, true);
-						$style = $params['style'];
-						$child = $params['child'];
-						if (!empty($params['name'])) :
-							$style['name'] = $params['name'];
-						endif;
-
-						$this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->parent_table} (name, style_name, rawdata) VALUES ( %s, %s, %s)", [$style['name'], $style['style_name'], $style['rawdata']]));
-						$redirect_id = $this->wpdb->insert_id;
-						if ($redirect_id > 0) :
-							$raw = json_decode(stripslashes($style['rawdata']), true);
-							$raw['image-hover-style-id'] = $redirect_id;
-							$s = explode('-', $style['style_name']);
-							$CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($s[0]) . '\Admin\Effects' . $s[1];
-							$C = new $CLASS('admin');
-							$f = $C->template_css_render($raw);
-							foreach ($child as $value) {
-								$this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d,  %s)", [$redirect_id, $value['rawdata']]));
-							}
-
-							$url = admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$s[0]&styleid=$redirect_id");
-if (!empty($url)) {
-				?>
-				<script> setTimeout(function () {
-						window.location.href = "<?php echo $url ?>";
-					}, 0);</script>
-				<?php
-			}
-							return;
-						endif;
-					}
-				} elseif ($functionname == 'shortcode_deactive') {
-					$id = $rawdata . '-' . (int) $styleid;
-					$effects = $rawdata . '-ultimate';
-					if ($styleid > 0) :
-						$this->wpdb->query($this->wpdb->prepare("DELETE FROM {$this->import_table} WHERE name = %s and type = %s", $id, $effects));
-					endif;
-				}
-                elseif ($functionname == 'shortcode_active') {
-					$id = $rawdata . '-' . (int) $styleid;
-					$effects = $rawdata . '-ultimate';
-					if ($styleid > 0) :
-						 $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->import_table} (type, name) VALUES (%s, %s)", [$effects, $id]));
-					endif;
-				}
-			}
-
-
-
-
-		}
 
 		/**
 		 * Admin Notice JS file loader
@@ -206,17 +138,7 @@ if (!empty($url)) {
 				</div>
 			<?php
 			endif;
-			?>
-			<form method="post" id="oxi-addons-manual-data-form" style="display: none">
-				<?php wp_nonce_field('oxi_addons_manual_data_form_data', 'oxi_addons_manual_data_form_nonce')
-				?>
-				<input class="form-control" type="text" value="" id="manual-style-functionname" name="manual-style-functionname" >
-				<textarea name="manual-style-rawdata" id="manual-style-rawdata" ></textarea>
-				<input class="form-control" type="number" value="" id="manual-style-styleid" name="manual-style-styleid" >
-				<input class="form-control" type="number" value="" id="manual-style-childid" name="manual-style-childid" >
-				<input type="submit" name="oxi-manual" value="submit" />
-			</form>
-			<?php
+
 		}
 
 		public function Import_header() {
@@ -475,6 +397,35 @@ if (!empty($url)) {
 							</div>
 							<?php
 						}
+
+                        public function rec_listFiles ($from = '.')
+		{
+                            if (!is_dir($from))
+                                return false;
+
+                                   $files = [];
+                            if ($dh = opendir($from)) {
+                                while (false !== ($file = readdir($dh))) {
+                                    // Skip '.' and '..'
+                                    if ($file == '.' || $file == '..')
+                                        continue;
+                                    $path = $from . '/' . $file;
+                                    if (is_dir($path))
+                                        $files += $this->rec_listFiles($path);
+                                    else
+                                        $folder = explode("/Layouts/", $path);
+                                    $folder = explode("/", $folder[1]);
+
+                                    if (isset($folder[1])) {
+                                        $files[$folder[0]][] = $folder[1];
+                                    }
+
+                                }
+                                closedir($dh);
+                            }
+                            ksort($files);
+                            return $files;
+                        }
 
 					}
                 

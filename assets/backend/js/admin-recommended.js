@@ -1,20 +1,20 @@
-
 jQuery.noConflict();
 (function ($) {
     "use strict";
     $(document).on("click", ".oxi-image-admin-recommended-dismiss", function (e) {
         e.preventDefault();
-        var notice = $(this).attr('sup-data'),
-                $function = 'oxi_recommended';
+        var notice = $(this).attr('sup-data');
         $.ajax({
-            url: ImageHoverUltimate.root + 'ImageHoverUltimate/v1/' + $function,
+            url: oxi_image_admin_recommended.ajaxurl,
             method: 'POST',
-
             data: {
-                _wpnonce: ImageHoverUltimate.nonce,
-                notice: notice,
+                action: 'oxi_image_admin_recommended',
+                _wpnonce: oxi_image_admin_recommended.nonce,
+                notice: 'Done',
             }
         }).done(function (response) {
+
+            console.log(response);
             $('.oxi-addons-admin-notifications').remove();
         });
         return false;

@@ -25,17 +25,24 @@ jQuery.noConflict();
             return callback(result);
 
         } catch (error) {
-            set_local_data(functionname, rawdata, styleid, childid);
+            $.ajax({
+                url: image_hover_settings.ajaxurl,
+                method: 'POST',
+                data: {
+                    action: 'image_hover_settings',
+                    _wpnonce: image_hover_settings.nonce,
+                    functionname: functionname,
+                    styleid: styleid,
+                    childid: childid,
+                    rawdata: rawdata
+                }
+            }).done(function (response) {
+                console.log(response);
+                return callback(response);
+            });
             console.error(error);
         }
     }
-
-    $(".oxi-addons-addons-template-create").on("click", function (e) {
-        e.preventDefault();
-        $('#style-name').val('');
-        $('#oxistyledata').val($(this).attr('effects-data'));
-        $("#oxi-addons-style-create-modal").modal("show");
-    });
 
 
     $(".oxi-addons-addons-web-template").on("click", function (e) {

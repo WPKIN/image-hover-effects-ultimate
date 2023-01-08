@@ -1,17 +1,16 @@
-
 jQuery.noConflict();
 (function ($) {
     "use strict";
     $(document).on("click", ".oxi-image-support-reviews", function (e) {
         e.preventDefault();
         var notice = $(this).attr('sup-data'),
-                $function = 'notice_dissmiss';
+            $function = 'notice_dissmiss';
         $.ajax({
-            url: ImageHoverUltimate.root + 'ImageHoverUltimate/v1/' + $function,
+            url: oxi_image_admin_notice.ajaxurl,
             method: 'POST',
-
             data: {
-                _wpnonce: ImageHoverUltimate.nonce,
+                _wpnonce: oxi_image_admin_notice.nonce,
+                action: 'oxi_image_admin_notice',
                 notice: notice,
             }
         }).done(function (response) {

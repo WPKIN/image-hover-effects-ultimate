@@ -1,51 +1,44 @@
 <?php
 
-namespace OXI_IMAGE_HOVER_PLUGINS\Modules\General;
+	namespace OXI_IMAGE_HOVER_PLUGINS\Modules\General;
 
-if (!defined('ABSPATH')) {
-    exit;
-}
+	if (!defined('ABSPATH')) {
+		exit;
+	}
 
-/**
- * Description of General
- *
- * @author biplo
- */
-use OXI_IMAGE_HOVER_PLUGINS\Page\Create as Create;
+	/**
+	 * Description of General
+	 *
+	 * @author biplo
+	 */
 
-class General extends Create {
+	use OXI_IMAGE_HOVER_PLUGINS\Page\Create as Create;
 
-    public function JSON_DATA() {
+	class General extends Create
+	{
 
 
-        $template_data = [];
+		public function JSON_DATA ()
+		{
+			$this->TEMPLATE = $this->rec_listFiles(OXI_IMAGE_HOVER_PATH . 'Modules/' . ucfirst($this->effects) . '/Layouts');
 
-        $basename = array_map('basename', glob(OXI_IMAGE_HOVER_PATH . 'Modules/' . ucfirst($this->effects) . '/Layouts/*', GLOB_ONLYDIR));
+			$this->pre_active = [
+			  'general-1',
+			  'general-2',
+			  'general-3',
+			  'general-4',
+			  'general-5',
+			  'general-6',
+			  'general-7',
+			  'general-8',
+			  'general-9',
+			  'general-10',
+			  'general-11',
+			  'general-12',
+			  'general-13',
+			  'general-14',
+			  'general-15',
+			];
+		}
 
-        foreach ($basename as $key => $effects) {
-            $temp = array_map('basename', glob(OXI_IMAGE_HOVER_PATH . 'Modules/' . ucfirst($this->effects) . '/Layouts/' . $effects . '/*.json', GLOB_BRACE));
-            $template_data[(int) $effects] = $temp;
-        }
-        ksort($template_data);
-        $this->TEMPLATE = $template_data;
-
-        $this->pre_active = [
-            'general-1',
-            'general-2',
-            'general-3',
-            'general-4',
-            'general-5',
-            'general-6',
-            'general-7',
-            'general-8',
-            'general-9',
-            'general-10',
-            'general-11',
-            'general-12',
-            'general-13',
-            'general-14',
-            'general-15',
-        ];
-    }
-
-}
+	}

@@ -1,45 +1,39 @@
 <?php
 
-namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Caption;
+	namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Caption;
 
-if (!defined('ABSPATH')) {
-    exit;
-}
+	if (!defined('ABSPATH')) {
+		exit;
+	}
 
-/**
- * Description of General
- *
- * @author biplo
- */
-use OXI_IMAGE_HOVER_PLUGINS\Page\Create as Create;
+	/**
+	 * Description of General
+	 *
+	 * @author biplo
+	 */
 
-class Caption extends Create {
+	use OXI_IMAGE_HOVER_PLUGINS\Page\Create as Create;
 
-    public function JSON_DATA() {
+	class Caption extends Create
+	{
 
-        $template_data = [];
+		public function JSON_DATA ()
+		{
 
-        $basename = array_map('basename', glob(OXI_IMAGE_HOVER_PATH . 'Modules/' . ucfirst($this->effects) . '/Layouts/*', GLOB_ONLYDIR));
+			$this->TEMPLATE = $this->rec_listFiles(OXI_IMAGE_HOVER_PATH . 'Modules/' . ucfirst($this->effects) . '/Layouts');
 
-        foreach ($basename as $key => $effects) {
-            $temp = array_map('basename', glob(OXI_IMAGE_HOVER_PATH . 'Modules/' . ucfirst($this->effects) . '/Layouts/' . $effects . '/*.json', GLOB_BRACE));
-            $template_data[(int) $effects] = $temp;
-        }
-        ksort($template_data);
-        $this->TEMPLATE = $template_data;
+			$this->pre_active = [
+			  'caption-1',
+			  'caption-2',
+			  'caption-3',
+			  'caption-4',
+			  'caption-5',
+			  'caption-6',
+			  'caption-7',
+			  'caption-8',
+			  'caption-9',
+			  'caption-10',
+			];
+		}
 
-        $this->pre_active = [
-            'caption-1',
-            'caption-2',
-            'caption-3',
-            'caption-4',
-            'caption-5',
-            'caption-6',
-            'caption-7',
-            'caption-8',
-            'caption-9',
-            'caption-10',
-        ];
-    }
-
-}
+	}
