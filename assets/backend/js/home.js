@@ -2,6 +2,7 @@ jQuery.noConflict();
 (function ($) {
     var styleid = '';
     var childid = '';
+
     async function Oxi_Image_Admin_Home(functionname, rawdata, styleid, childid, callback) {
         if (functionname === "") {
             alert('Confirm Function Name');
@@ -10,24 +11,29 @@ jQuery.noConflict();
         let result;
         try {
             result = await $.ajax({
-                url: ImageHoverUltimate.root + 'ImageHoverUltimate/v1/' + functionname,
+                url: image_hover_settings.ajaxurl,
                 method: 'POST',
-
                 data: {
-                    _wpnonce: ImageHoverUltimate.nonce,
+                    action: 'image_hover_settings',
+                    _wpnonce: image_hover_settings.nonce,
+                    functionname: functionname,
                     styleid: styleid,
                     childid: childid,
                     rawdata: rawdata
                 }
             });
-           
-            return callback(result);
+            try {
+                console.log(JSON.parse(result));
+                return callback(JSON.parse(result));
+            } catch (e) {
+                console.log(result);
+                return callback(result)
+            }
 
         } catch (error) {
             console.error(error);
         }
     }
-
 
 
     $(".addons-pre-check").on("click", function (e) {

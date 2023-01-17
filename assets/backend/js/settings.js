@@ -12,21 +12,6 @@ jQuery.noConflict();
             let result;
             try {
                 result = await $.ajax({
-                    url: ImageHoverUltimate.root + 'ImageHoverUltimate/v1/' + functionname,
-                    method: 'POST',
-                    data: {
-                        _wpnonce: ImageHoverUltimate.nonce,
-                        styleid: styleid,
-                        childid: childid,
-                        rawdata: rawdata
-                    }
-                });
-
-                setTimeout(function () {
-                    return callback(result);
-                }, 2000);
-            } catch (error) {
-                $.ajax({
                     url: image_hover_settings.ajaxurl,
                     method: 'POST',
                     data: {
@@ -37,10 +22,15 @@ jQuery.noConflict();
                         childid: childid,
                         rawdata: rawdata
                     }
-                }).done(function (response) {
-                    console.log(response);
-                    return callback(response);
                 });
+                try {
+                    console.log(JSON.parse(result));
+                    return callback(JSON.parse(result));
+                } catch (e) {
+                    console.log(result);
+                    return callback(result)
+                }
+            } catch (error) {
                 console.error(error);
             }
         }
@@ -73,10 +63,10 @@ jQuery.noConflict();
             });
         }, 1000));
 
-        $("#oxi_addons_user_permission").on("change", function (e) {
+        $("#oxi_image_user_permission").on("change", function (e) {
             var $This = $(this), name = $This.attr('name'), $value = $This.val();
             var rawdata = JSON.stringify({value: $value});
-            var functionname = "oxi_addons_user_permission";
+            var functionname = "oxi_image_user_permission";
             $('.' + name).html('<span class="spinner sa-spinner-open"></span>');
             Oxi_Image_Admin_Settings(functionname, rawdata, styleid, childid, function (callback) {
                 $('.' + name).html(callback);

@@ -2,6 +2,8 @@
 
 	namespace OXI_IMAGE_HOVER_PLUGINS\Classes;
 
+	use WP_REST_Request;
+
 	if (!defined('ABSPATH')) {
 		exit;
 	}
@@ -14,27 +16,26 @@
 	class ImageApi
 	{
 
+		const API = 'https://oxilabdemos.com/image-hover/wp-json/imagehoverultimate/v2/';
+		private static $instance = null;
 		/**
 		 * Define $wpdb
 		 *
 		 * @since 9.3.0
 		 */
 		public $wpdb;
-
 		/**
 		 * Database Parent Table
 		 *
 		 * @since 9.3.0
 		 */
 		public $parent_table;
-
 		/**
 		 * Database Import Table
 		 *
 		 * @since 9.3.0
 		 */
 		public $import_table;
-
 		/**
 		 * Database Import Table
 		 *
@@ -44,12 +45,9 @@
 		public $request;
 		public $rawdata;
 		public $styleid;
-		public $childid;
-
-		const API = 'https://oxilabdemos.com/image-hover/wp-json/imagehoverultimate/v2/';
 
 		// instance container
-		private static $instance = null;
+		public $childid;
 
 		public static function instance ()
 		{
@@ -75,77 +73,123 @@
 			$this->rawdata = $rawdata;
 			$this->styleid = $styleid;
 			$this->childid = $childid;
-
 			$this->build_api();
 		}
 
 		public function build_api ()
 		{
-			add_action('rest_api_init', function () {
-				register_rest_route(untrailingslashit('ImageHoverUltimate/v1/'), '/(?P<action>\w+)/', [
-				  'methods' => ['GET', 'POST'],
-				  'callback' => [$this, 'api_action'],
-				  'permission_callback' => [$this, 'get_permissions_check'],
-				]);
-			});
-
 			add_action('wp_ajax_nopriv_image_hover_ultimate', [$this, 'ajax_action']);
 			add_action('wp_ajax_image_hover_ultimate', [$this, 'ajax_action']);
 			add_action('wp_ajax_image_hover_settings', [$this, 'save_action']);
 		}
 
-
-		public function get_permissions_check ($request)
+		public function get_permissions_check ()
 		{
-			$user_role = get_option('oxi_addons_user_permission');
-			$role_object = get_role($user_role);
-			$first_key = '';
-			if (isset($role_object->capabilities) && is_array($role_object->capabilities)) {
-				reset($role_object->capabilities);
-				$first_key = key($role_object->capabilities);
-			} else {
-				$first_key = 'manage_options';
+			$transient = get_transient('oxi_image_user_permission_role');
+			if (false === $transient) {
+				$user_role = get_option('oxi_image_user_permission');
+				$role_object = get_role($user_role);
+				$first_key = '';
+				if (isset($role_object->capabilities) && is_array($role_object->capabilities)) {
+					reset($role_object->capabilities);
+					$first_key = key($role_object->capabilities);
+				} else {
+					$first_key = 'manage_options';
+				}
+				$transient = 'oxi_image_user_permission_role';
+				set_transient($transient, $first_key, 3600 * HOUR_IN_SECONDS);
+				return current_user_can($first_key);
 			}
-			return current_user_can($first_key);
+			return current_user_can($transient);
+
 		}
 
-		public function api_action ($request)
-		{
-
-			$this->request = $request;
-			$wpnonce = $request['_wpnonce'];
-			if (!wp_verify_nonce($wpnonce, 'wp_rest')) :
-				return new \WP_REST_Request('Invalid URL', 422);
-			endif;
-			$this->rawdata = sanitize_post(addslashes($request['rawdata']));
-			$this->styleid = (int)$request['styleid'];
-			$this->childid = (int)$request['childid'];
-			$action_class = strtolower($request->get_method()) . '_' . sanitize_key($request['action']);
-			if (method_exists($this, $action_class)) {
-				return $this->{$action_class}();
-			}
-		}
 
 		public function save_action ()
 		{
-			$wpnonce = sanitize_key(wp_unslash($_POST['_wpnonce']));
+
+			if (!$this->get_permissions_check()) {
+				return new WP_REST_Request('Invalid URL', 422);
+				die();
+			}
+			$wpnonce = sanitize_key(wp_unslash($_REQUEST['_wpnonce']));
 
 			if (!wp_verify_nonce($wpnonce, 'image_hover_ultimate')) :
-				return new \WP_REST_Request('Invalid URL', 422);
+				return new WP_REST_Request('Invalid URL', 422);
 				die();
 			endif;
 
 
-			$functionname = isset($_POST['functionname']) ? sanitize_text_field($_POST['functionname']) : '';
-			$this->rawdata = isset($_POST['rawdata']) ? sanitize_post($_POST['rawdata']) : '';
-			$this->styleid = isset($_POST['styleid']) ? sanitize_post($_POST['styleid']) : '';
-			$this->childid = isset($_POST['childid']) ? sanitize_post($_POST['childid']) : '';
+			$functionname = isset($_REQUEST['functionname']) ? sanitize_text_field($_REQUEST['functionname']) : '';
+			$this->rawdata = isset($_REQUEST['rawdata']) ? sanitize_post($_REQUEST['rawdata']) : '';
+			$this->styleid = isset($_REQUEST['styleid']) ? (int)$_REQUEST['styleid'] : '';
+			$this->childid = isset($_REQUEST['childid']) ? (int)$_REQUEST['childid'] : '';
 			$action_class = 'post_' . sanitize_key($functionname);
 
 			if (method_exists($this, $action_class)) {
 				echo $this->{$action_class}();
 			}
 			die();
+		}
+
+		public function array_replace ($arr = [], $search = '', $replace = '')
+		{
+			array_walk($arr, function (&$v) use ($search, $replace) {
+				$v = str_replace($search, $replace, $v);
+			});
+			return $arr;
+		}
+
+		public function post_create_new ()
+		{
+
+			$params = $this->validate_post();
+
+			$files = OXI_IMAGE_HOVER_PATH . $params['style'];
+
+			if (is_file($files)) {
+				$rawdata = file_get_contents($files);
+				$params = json_decode($rawdata, true);
+				$style = $params['style'];
+				$child = $params['child'];
+				if (!empty($params['name'])) :
+					$style['name'] = $params['name'];
+				endif;
+
+				$this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->parent_table} (name, style_name, rawdata) VALUES ( %s, %s, %s)", [$style['name'], $style['style_name'], $style['rawdata']]));
+				$redirect_id = $this->wpdb->insert_id;
+				if ($redirect_id > 0) :
+					$raw = json_decode(stripslashes($style['rawdata']), true);
+					$raw['image-hover-style-id'] = $redirect_id;
+					$s = explode('-', $style['style_name']);
+					$CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($s[0]) . '\Admin\Effects' . $s[1];
+					$C = new $CLASS('admin');
+					$f = $C->template_css_render($raw);
+					foreach ($child as $value) {
+						$this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d,  %s)", [$redirect_id, $value['rawdata']]));
+					}
+					return admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$s[0]&styleid=$redirect_id");
+				endif;
+			}
+			return;
+		}
+
+		public function validate_post ($data = '')
+		{
+			$rawdata = [];
+			if (!empty($data)) :
+				$arrfiles = json_decode(stripslashes($data), true);
+			else :
+				$arrfiles = json_decode(stripslashes($this->rawdata), true);
+			endif;
+			if (is_array($arrfiles)) :
+				$rawdata = array_map([$this, 'allowed_html'], $arrfiles);
+			elseif (empty($data)) :
+				$rawdata = $this->allowed_html($this->rawdata);
+			else :
+				$rawdata = $this->allowed_html($data);
+			endif;
+			return $rawdata;
 		}
 
 		public function allowed_html ($rawdata)
@@ -243,66 +287,6 @@
 			endif;
 		}
 
-		public function validate_post ($data = '')
-		{
-			$rawdata = [];
-			if (!empty($data)) :
-				$arrfiles = json_decode(stripslashes($data), true);
-			else :
-				$arrfiles = json_decode(stripslashes($this->rawdata), true);
-			endif;
-			if (is_array($arrfiles)) :
-				$rawdata = array_map([$this, 'allowed_html'], $arrfiles);
-			elseif (empty($data)) :
-				$rawdata = $this->allowed_html($this->rawdata);
-			else :
-				$rawdata = $this->allowed_html($data);
-			endif;
-			return $rawdata;
-		}
-
-		public function array_replace ($arr = [], $search = '', $replace = '')
-		{
-			array_walk($arr, function (&$v) use ($search, $replace) {
-				$v = str_replace($search, $replace, $v);
-			});
-			return $arr;
-		}
-
-		public function post_create_new ()
-		{
-
-			$params = $this->validate_post();
-
-			$files = OXI_IMAGE_HOVER_PATH . $params['style'];
-
-			if (is_file($files)) {
-				$rawdata = file_get_contents($files);
-				$params = json_decode($rawdata, true);
-				$style = $params['style'];
-				$child = $params['child'];
-				if (!empty($params['name'])) :
-					$style['name'] = $params['name'];
-				endif;
-
-				$this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->parent_table} (name, style_name, rawdata) VALUES ( %s, %s, %s)", [$style['name'], $style['style_name'], $style['rawdata']]));
-				$redirect_id = $this->wpdb->insert_id;
-				if ($redirect_id > 0) :
-					$raw = json_decode(stripslashes($style['rawdata']), true);
-					$raw['image-hover-style-id'] = $redirect_id;
-					$s = explode('-', $style['style_name']);
-					$CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($s[0]) . '\Admin\Effects' . $s[1];
-					$C = new $CLASS('admin');
-					$f = $C->template_css_render($raw);
-					foreach ($child as $value) {
-						$this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d,  %s)", [$redirect_id, $value['rawdata']]));
-					}
-					return admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$s[0]&styleid=$redirect_id");
-				endif;
-			}
-			return;
-		}
-
 		public function post_layouts_clone ()
 		{
 
@@ -376,18 +360,7 @@
 			update_option('image_hover_ultimate_update_complete', 'done');
 		}
 
-		/**
-		 * Generate safe path
-		 * @since v1.0.0
-		 */
-		public function safe_path ($path)
-		{
-
-			$path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
-			return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
-		}
-
-		public function get_shortcode_export ()
+		public function post_shortcode_export ()
 		{
 			$styleid = (int)$this->styleid;
 			if ($styleid > 0) :
@@ -581,6 +554,7 @@
 			return 'success';
 		}
 
+
 		/**
 		 * Template Template Render
 		 *
@@ -683,10 +657,10 @@
 		 * Admin Settings
 		 * @return void
 		 */
-		public function post_oxi_addons_user_permission ()
+		public function post_oxi_image_user_permission ()
 		{
 			$rawdata = $this->validate_post();
-			update_option('oxi_addons_user_permission', $rawdata['value']);
+			update_option('oxi_image_user_permission', $rawdata['value']);
 			return '<span class="oxi-confirmation-success"></span>';
 		}
 
@@ -784,7 +758,33 @@
 					$data = ['massage' => '<span class="oxi-confirmation-failed"></span>', 'text' => $r];
 				endif;
 			endif;
-			return $data;
+			return json_encode($data);
+		}
+
+		public function deactivate_license ($key)
+		{
+			$api_params = [
+			  'edd_action' => 'deactivate_license',
+			  'license' => $key,
+			  'item_name' => urlencode('Image Hover Effects Ultimate'),
+			  'url' => home_url()
+			];
+			$response = wp_remote_post('https://www.oxilab.org', ['timeout' => 15, 'sslverify' => false, 'body' => $api_params]);
+			if (is_wp_error($response) || 200 !== wp_remote_retrieve_response_code($response)) {
+
+				if (is_wp_error($response)) {
+					$message = $response->get_error_message();
+				} else {
+					$message = esc_html('An error occurred, please try again.');
+				}
+				return $message;
+			}
+			$license_data = json_decode(wp_remote_retrieve_body($response));
+			if ($license_data->license == 'deactivated') {
+				delete_option('image_hover_ultimate_license_status');
+				delete_option('image_hover_ultimate_license_key');
+			}
+			return 'success';
 		}
 
 		public function activate_license ($key)
@@ -848,32 +848,6 @@
 			return 'success';
 		}
 
-		public function deactivate_license ($key)
-		{
-			$api_params = [
-			  'edd_action' => 'deactivate_license',
-			  'license' => $key,
-			  'item_name' => urlencode('Image Hover Effects Ultimate'),
-			  'url' => home_url()
-			];
-			$response = wp_remote_post('https://www.oxilab.org', ['timeout' => 15, 'sslverify' => false, 'body' => $api_params]);
-			if (is_wp_error($response) || 200 !== wp_remote_retrieve_response_code($response)) {
-
-				if (is_wp_error($response)) {
-					$message = $response->get_error_message();
-				} else {
-					$message = esc_html('An error occurred, please try again.');
-				}
-				return $message;
-			}
-			$license_data = json_decode(wp_remote_retrieve_body($response));
-			if ($license_data->license == 'deactivated') {
-				delete_option('image_hover_ultimate_license_status');
-				delete_option('image_hover_ultimate_license_key');
-			}
-			return 'success';
-		}
-
 		public function post_web_template ()
 		{
 
@@ -923,9 +897,15 @@
 			return $render;
 		}
 
-		public function fixed_data ($agr)
+		/**
+		 * Generate safe path
+		 * @since v1.0.0
+		 */
+		public function safe_path ($path)
 		{
-			return hex2bin($agr);
+
+			$path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
+			return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
 		}
 
 		public function download_web_files ($files)
@@ -944,6 +924,11 @@
 			if (file_put_contents($files, json_encode($data))) {
 
 			}
+		}
+
+		public function fixed_data ($agr)
+		{
+			return hex2bin($agr);
 		}
 
 		public function post_web_import ()
@@ -975,16 +960,16 @@
 
 			$wpnonce = sanitize_key(wp_unslash($_POST['_wpnonce']));
 			if (!wp_verify_nonce($wpnonce, 'image_hover_ultimate')) :
-				return new \WP_REST_Request('Invalid URL', 422);
+				return new WP_REST_Request('Invalid URL', 422);
 				die();
 			endif;
 			$classname = isset($_POST['class']) ? '\\' . str_replace('\\\\', '\\', sanitize_text_field($_POST['class'])) : '';
 			if (strpos($classname, 'OXI_IMAGE_HOVER_PLUGINS') === false) :
-				return new \WP_REST_Request('Invalid URL', 422);
+				return new WP_REST_Request('Invalid URL', 422);
 			endif;
 			$functionname = isset($_POST['functionname']) ? sanitize_text_field($_POST['functionname']) : '';
 			if ($functionname != '__rest_api_post') :
-				return new \WP_REST_Request('Invalid URL', 422);
+				return new WP_REST_Request('Invalid URL', 422);
 			endif;
 			$rawdata = isset($_POST['rawdata']) ? sanitize_post($_POST['rawdata']) : '';
 			$args = isset($_POST['args']) ? sanitize_post($_POST['args']) : '';

@@ -3,7 +3,7 @@ Contributors: biplob018
 Donate link: https://www.oxilab.org
 Tags: responsive image effects, awesome css3 effects, awesome image effects,  css3 effects, effects, top image effects for wordpress,  hover effect. 
 Requires at least: 3.0.1
-Stable tag: 9.8.5
+Stable tag: 9.8.6
 Tested up to: 6.1.1
 Requires PHP: 5.4
 License: GPLv2 or later
@@ -324,11 +324,14 @@ Its too easy Chose your style from Effects List and click at Clone.
 
 == Changelog ==
 == Upgrade Notice ==
+= 9.8.6 =
+*Update Admin Ajax
+*Solved json files
+
 = 9.8.5 = 
 *Compatible with 6.1.1
 *Solve XSS Issues
 
-== Upgrade Notice ==
 = 9.8.4 = 
 *Compatible with 6.0.4
 *Solve Magnifier issues
@@ -357,7 +360,6 @@ Fixed Escape Issues
 *HTML Supported
 *Fixed Admin Bugs
 
-
 = 9.7.1 = 
 *Modify Admin Request
 
@@ -372,7 +374,6 @@ Fixed Escape Issues
 = 9.6.1 = 
 *Edit Clone Delete Button Modify
 *Solved Ajax Load
-
 
 = 9.6.0 = 
 *Return Clone Button
@@ -505,10 +506,8 @@ Fixed Escape Issues
 = 6.7 = 
 * Update Admin Panel
 
-
 = 6.6 = 
 * Fixed some Bugs
-
 
 = 6.5 = 
 * Fixed some Bugs
@@ -540,9 +539,11 @@ Fixed Escape Issues
 * Initial Release
 * responsive layout
 
+== Upgrade Notice ==
+= 9.8.6 =
+Update Admin Ajax
+Solved json files
 
-== Upgrade Notice ==
-== Upgrade Notice ==
 = 9.8.5 = 
 Compatible with 6.1.1
 Solve XSS Issues
@@ -578,7 +579,6 @@ Fixed Admin Bugs
 = 9.7.1 = 
 Modify Admin Request
 
-
 = 9.7.0 = 
 Modify Admin Request
 Admin Query
@@ -590,7 +590,6 @@ Admin Query
 = 9.6.1 = 
 Edit Clone Delete Button Modify
 Solved Ajax Load
-
 
 = 9.6.0 = 
 Return Clone Button

@@ -17,20 +17,6 @@ jQuery.noConflict();
         let result;
         try {
             result = await $.ajax({
-                url: ImageHoverUltimate.root + 'ImageHoverUltimate/v1/' + functionname,
-                method: 'POST',
-
-                data: {
-                    _wpnonce: ImageHoverUltimate.nonce,
-                    styleid: styleid,
-                    childid: childid,
-                    rawdata: rawdata
-                }
-            });
-
-            return callback(result);
-        } catch (error) {
-            $.ajax({
                 url: image_hover_settings.ajaxurl,
                 method: 'POST',
                 data: {
@@ -41,10 +27,18 @@ jQuery.noConflict();
                     childid: childid,
                     rawdata: rawdata
                 }
-            }).done(function (response) {
-                console.log(response);
-                return callback(response);
             });
+
+            if (result) {
+                try {
+                    console.log(JSON.parse(result));
+                    return callback(JSON.parse(result));
+                } catch (e) {
+                    console.log(result);
+                    return callback(result)
+                }
+            }
+        } catch (error) {
             console.error(error);
         }
     }

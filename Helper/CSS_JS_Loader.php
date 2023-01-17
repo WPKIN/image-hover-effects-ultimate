@@ -13,30 +13,6 @@
 	trait CSS_JS_Loader
 	{
 
-		public function admin_css ()
-		{
-			$this->loader_font_familly_validation(['Bree+Serif', 'Source+Sans+Pro']);
-			wp_enqueue_style('oxilab-image-hover-bootstrap', OXI_IMAGE_HOVER_URL . 'assets/backend/css/bootstrap.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-			wp_enqueue_style('font-awsome.min', OXI_IMAGE_HOVER_URL . 'assets/frontend/css/font-awsome.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-			wp_enqueue_style('oxilab-admin-css', OXI_IMAGE_HOVER_URL . 'assets/backend/css/admin.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-		}
-
-		public function admin_js ()
-		{
-			wp_enqueue_script("jquery");
-			wp_enqueue_script('oxilab-bootstrap', OXI_IMAGE_HOVER_URL . 'assets/backend/js/bootstrap.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-			wp_localize_script('oxilab-bootstrap', 'ImageHoverUltimate', [
-			  'root' => esc_url_raw(rest_url()),
-			  'nonce' => wp_create_nonce('wp_rest')
-			]);
-			wp_localize_script('oxilab-bootstrap',
-			  'image_hover_settings',
-			  [
-				'ajaxurl' => admin_url('admin-ajax.php'),
-				'nonce' => wp_create_nonce('image_hover_ultimate')
-			  ]);
-		}
-
 		public function admin_home ()
 		{
 			wp_enqueue_script("jquery");
@@ -81,6 +57,43 @@
 			$this->admin_media_scripts();
 		}
 
+		public function admin_css_loader ()
+		{
+			$this->admin_css();
+			$this->admin_js();
+		}
+
+		public function admin_css ()
+		{
+			$this->loader_font_familly_validation(['Bree+Serif', 'Source+Sans+Pro']);
+			wp_enqueue_style('oxilab-image-hover-bootstrap', OXI_IMAGE_HOVER_URL . 'assets/backend/css/bootstrap.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+			wp_enqueue_style('font-awsome.min', OXI_IMAGE_HOVER_URL . 'assets/frontend/css/font-awsome.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+			wp_enqueue_style('oxilab-admin-css', OXI_IMAGE_HOVER_URL . 'assets/backend/css/admin.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+		}
+
+		public function loader_font_familly_validation ($data = [])
+		{
+			foreach ($data as $value) {
+				wp_enqueue_style('' . $value . '', 'https://fonts.googleapis.com/css?family=' . $value . '');
+			}
+		}
+
+		public function admin_js ()
+		{
+			wp_enqueue_script("jquery");
+			wp_enqueue_script('oxilab-bootstrap', OXI_IMAGE_HOVER_URL . 'assets/backend/js/bootstrap.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+			wp_localize_script('oxilab-bootstrap', 'ImageHoverUltimate', [
+			  'root' => esc_url_raw(rest_url()),
+			  'nonce' => wp_create_nonce('wp_rest')
+			]);
+			wp_localize_script('oxilab-bootstrap',
+			  'image_hover_settings',
+			  [
+				'ajaxurl' => admin_url('admin-ajax.php'),
+				'nonce' => wp_create_nonce('image_hover_ultimate')
+			  ]);
+		}
+
 		/**
 		 * Admin Media Scripts.
 		 * Most of time using into Style Editing Page
@@ -98,19 +111,6 @@
 		{
 			$from = '/' . preg_quote($from, '/') . '/';
 			return preg_replace($from, $to, $content, 1);
-		}
-
-		public function loader_font_familly_validation ($data = [])
-		{
-			foreach ($data as $value) {
-				wp_enqueue_style('' . $value . '', 'https://fonts.googleapis.com/css?family=' . $value . '');
-			}
-		}
-
-		public function admin_css_loader ()
-		{
-			$this->admin_css();
-			$this->admin_js();
 		}
 
 	}
