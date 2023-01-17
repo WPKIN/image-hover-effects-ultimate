@@ -71,7 +71,7 @@
 
 		public function SupportAndComments ($agr)
 		{
-			if (get_option('oxi_image_support_massage') == 'no') {
+			if (get_option('oxi_image_support_massage') === 'no') {
 				return;
 			}
 			?>
