@@ -97,7 +97,7 @@
 					$first_key = 'manage_options';
 				}
 				$transient = 'oxi_image_user_permission_role';
-				set_transient($transient, $first_key, 3600 * HOUR_IN_SECONDS);
+				set_transient($transient, $first_key, 1 * HOUR_IN_SECONDS);
 				return current_user_can($first_key);
 			}
 			return current_user_can($transient);
