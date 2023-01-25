@@ -2,8 +2,7 @@
 
 	namespace OXI_IMAGE_HOVER_PLUGINS\Page;
 
-	use OXI_IMAGE_HOVER_PLUGINS\Helper\CSS_JS_Loader;
-	use OXI_IMAGE_HOVER_PLUGINS\Helper\Public_Helper;
+	use OXI_IMAGE_HOVER_PLUGINS\Helper\CSS_JS_Loader;use OXI_IMAGE_HOVER_PLUGINS\Helper\Public_Helper;
 
 	if (!defined('ABSPATH')) {
 		exit;
@@ -400,26 +399,28 @@
 
                         public function rec_listFiles ($from = '.')
 		{
-                            if (!is_dir($from))
+                            if (!is_dir($from)){
                                 return false;
+                            }
 
-                                   $files = [];
+                            $files = [];
                             if ($dh = opendir($from)) {
                                 while (false !== ($file = readdir($dh))) {
                                     // Skip '.' and '..'
-                                    if ($file == '.' || $file == '..')
-                                        continue;
+                                   if ($file == '.' || $file == '..')
+                                       continue;
                                     $path = $from . '/' . $file;
-                                    if (is_dir($path))
+                                    if (is_dir($path)){
                                         $files += $this->rec_listFiles($path);
-                                    else
-                                        $folder = explode("/Layouts/", $path);
-                                    $folder = explode("/", $folder[1]);
-
-                                    if (isset($folder[1])) {
-                                        $files[$folder[0]][] = $folder[1];
-                                    }
-
+                                   } else{
+                                        if(strpos($path, 'json') !== false){
+                                            $folder = explode("/Layouts/", $path);
+                                            $folder = explode("/", $folder[1]);
+                                        }
+                                        if (isset($folder[1])) {
+                                            $files[$folder[0]][] = $folder[1];
+                                        }
+                                   }
                                 }
                                 closedir($dh);
                             }
