@@ -307,10 +307,17 @@ class ImageApi {
 
         $style = $params['style'];
         $child = $params['child'];
+        $raw = json_decode(stripslashes($style['rawdata']), true);
+        $custom = strtolower($raw['image-hover-custom-css']);
+        if(preg_match('/style/i', $custom) || preg_match('/script/i', $custom)){
+            return 'Don\'t be smart, Kindly add validate data.';
+        }
+        
+        
         $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->parent_table} (name, style_name, rawdata) VALUES ( %s, %s, %s)", [$style['name'], $style['style_name'], $style['rawdata']]));
         $redirect_id = $this->wpdb->insert_id;
         if ($redirect_id > 0) :
-            $raw = json_decode(stripslashes($style['rawdata']), true);
+         
             $raw['image-hover-style-id'] = $redirect_id;
             $s = explode('-', $style['style_name']);
             $CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($s[0]) . '\Admin\Effects' . $s[1];
@@ -417,6 +424,13 @@ class ImageApi {
      */
     public function post_elements_template_style() {
         $settings = json_decode(stripslashes($this->rawdata), true);
+        
+        $custom = strtolower($settings['image-hover-custom-css']);
+        if(preg_match('/style/i', $custom) || preg_match('/script/i', $custom)){
+            return 'Don\'t be smart, Kindly add validated data.';
+        }
+      
+        
         $StyleName = sanitize_text_field($settings['image-hover-template']);
         $stylesheet = '';
         if ((int) $this->styleid) :
