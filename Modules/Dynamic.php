@@ -16,108 +16,7 @@ trait Dynamic {
 
     use \OXI_IMAGE_HOVER_PLUGINS\Modules\Display\Files\Admin_Query;
 
-    public function register_dynamic_control() {
-        $this->start_controls_section(
-                'oxi-image-hover', [
-            'label' => esc_html__('Dynamic Settings', 'image-hover-effects-ultimate'),
-            'showing' => true,
-                ]
-        );
-
-        $this->add_control(
-                'image_hover_dynamic_note',
-                $this->style,
-                [
-                    'label' => esc_html__('Note', 'image-hover-effects-ultimate'),
-                    'type' => Controls::HEADING,
-                    'description' => 'Dynamic Property will works only at live Sites. Kindly use shortcode at page or post then check it.'
-                ]
-        );
-
-        $this->add_control(
-                'image_hover_dynamic_load_per_page',
-                $this->style,
-                [
-                    'label' => esc_html__('Load Once', 'image-hover-effects-ultimate'),
-                    'type' => Controls::NUMBER,
-                    'default' => '10',
-                    'min' => 1,
-                    'description' => 'How many Image or Content You want to Viewing per load.',
-                ]
-        );
-
-        $this->add_control(
-                'image_hover_dynamic_content', $this->style,
-                [
-                    'label' => esc_html__('Dynamic Content', 'image-hover-effects-ultimate'),
-                    'type' => Controls::SWITCHER,
-                    'default' => 'no',
-                    'yes' => esc_html__('Yes', 'image-hover-effects-ultimate'),
-                    'no' => esc_html__('No', 'image-hover-effects-ultimate'),
-                    'return_value' => 'yes',
-                    'description' => 'Wanna Dynamic Content?.',
-                ]
-        );
-
-        $this->add_control(
-                'image_hover_dynamic_carousel', $this->style,
-                [
-                    'label' => esc_html__('Carousel', 'image-hover-effects-ultimate'),
-                    'type' => Controls::SWITCHER,
-                    'default' => 'no',
-                    'yes' => esc_html__('Yes', 'image-hover-effects-ultimate'),
-                    'no' => esc_html__('No', 'image-hover-effects-ultimate'),
-                    'return_value' => 'yes',
-                    'description' => 'Wanna Add Carousel into Hover Effects?.',
-                    'notcondition' => TRUE,
-                    'condition' => [
-                        'image_hover_dynamic_load' => 'yes',
-                    ],
-                ]
-        );
-
-        $this->add_control(
-                'image_hover_dynamic_load', $this->style,
-                [
-                    'label' => esc_html__('Load More', 'image-hover-effects-ultimate'),
-                    'type' => Controls::SWITCHER,
-                    'default' => 'no',
-                    'yes' => esc_html__('Yes', 'image-hover-effects-ultimate'),
-                    'no' => esc_html__('No', 'image-hover-effects-ultimate'),
-                    'return_value' => 'yes',
-                    'description' => 'Wanna load More Options?.',
-                    'notcondition' => TRUE,
-                    'condition' => [
-                        'image_hover_dynamic_carousel' => 'yes',
-                    ],
-                ]
-        );
-
-        $this->add_control(
-                'image_hover_dynamic_load_type', $this->style,
-                [
-                    'label' => esc_html__('Load More Type', 'image-hover-effects-ultimate'),
-                    'type' => Controls::CHOOSE,
-                    'operator' => Controls::OPERATOR_TEXT,
-                    'default' => 'button',
-                    'options' => [
-                        'button' => [
-                            'title' => esc_html__('Button', 'image-hover-effects-ultimate'),
-                        ],
-                        'infinite' => [
-                            'title' => esc_html__('Infinite', 'image-hover-effects-ultimate'),
-                        ],
-                    ],
-                    'condition' => [
-                        'image_hover_dynamic_load' => 'yes'
-                    ],
-                    'description' => 'Select Load More Type, As we offer Infinite loop or Button.',
-                ]
-        );
-
-        $this->end_controls_section();
-    }
- public function register_dynamic_load_more_button() {
+    public function register_dynamic_load_more_button() {
         $this->start_controls_section(
                 'image_hover_dynamic_load',
                 [
@@ -681,7 +580,6 @@ trait Dynamic {
         $this->end_controls_section();
     }
 
-   
     public function register_carousel_arrows_settings() {
         $this->start_controls_section(
                 'carousel-arrow',
@@ -1311,4 +1209,105 @@ trait Dynamic {
         $this->end_section_tabs();
     }
 
+    public function register_dynamic_control() {
+        $this->start_controls_section(
+                'oxi-image-hover', [
+            'label' => esc_html__('Dynamic Settings', 'image-hover-effects-ultimate'),
+            'showing' => true,
+                ]
+        );
+
+        $this->add_control(
+                'image_hover_dynamic_note',
+                $this->style,
+                [
+                    'label' => esc_html__('Note', 'image-hover-effects-ultimate'),
+                    'type' => Controls::HEADING,
+                    'description' => 'Dynamic Property will works only at live Sites. Kindly use shortcode at page or post then check it.'
+                ]
+        );
+
+        $this->add_control(
+                'image_hover_dynamic_load_per_page',
+                $this->style,
+                [
+                    'label' => esc_html__('Load Once', 'image-hover-effects-ultimate'),
+                    'type' => Controls::NUMBER,
+                    'default' => '10',
+                    'min' => 1,
+                    'description' => 'How many Image or Content You want to Viewing per load.',
+                ]
+        );
+
+        $this->add_control(
+                'image_hover_dynamic_content', $this->style,
+                [
+                    'label' => esc_html__('Dynamic Content', 'image-hover-effects-ultimate'),
+                    'type' => Controls::SWITCHER,
+                    'default' => 'no',
+                    'yes' => esc_html__('Yes', 'image-hover-effects-ultimate'),
+                    'no' => esc_html__('No', 'image-hover-effects-ultimate'),
+                    'return_value' => 'yes',
+                    'description' => 'Wanna Dynamic Content?.',
+                ]
+        );
+
+        $this->add_control(
+                'image_hover_dynamic_carousel', $this->style,
+                [
+                    'label' => esc_html__('Carousel', 'image-hover-effects-ultimate'),
+                    'type' => Controls::SWITCHER,
+                    'default' => 'no',
+                    'yes' => esc_html__('Yes', 'image-hover-effects-ultimate'),
+                    'no' => esc_html__('No', 'image-hover-effects-ultimate'),
+                    'return_value' => 'yes',
+                    'description' => 'Wanna Add Carousel into Hover Effects?.',
+                    'notcondition' => TRUE,
+                    'condition' => [
+                        'image_hover_dynamic_load' => 'yes',
+                    ],
+                ]
+        );
+
+        $this->add_control(
+                'image_hover_dynamic_load', $this->style,
+                [
+                    'label' => esc_html__('Load More', 'image-hover-effects-ultimate'),
+                    'type' => Controls::SWITCHER,
+                    'default' => 'no',
+                    'yes' => esc_html__('Yes', 'image-hover-effects-ultimate'),
+                    'no' => esc_html__('No', 'image-hover-effects-ultimate'),
+                    'return_value' => 'yes',
+                    'description' => 'Wanna load More Options?.',
+                    'notcondition' => TRUE,
+                    'condition' => [
+                        'image_hover_dynamic_carousel' => 'yes',
+                    ],
+                ]
+        );
+
+        $this->add_control(
+                'image_hover_dynamic_load_type', $this->style,
+                [
+                    'label' => esc_html__('Load More Type', 'image-hover-effects-ultimate'),
+                    'type' => Controls::CHOOSE,
+                    'operator' => Controls::OPERATOR_TEXT,
+                    'default' => 'button',
+                    'options' => [
+                        'button' => [
+                            'title' => esc_html__('Button', 'image-hover-effects-ultimate'),
+                        ],
+                        'infinite' => [
+                            'title' => esc_html__('Infinite', 'image-hover-effects-ultimate'),
+                        ],
+                    ],
+                    'condition' => [
+                        'image_hover_dynamic_load' => 'yes'
+                    ],
+                    'description' => 'Select Load More Type, As we offer Infinite loop or Button.',
+                ]
+        );
+
+        $this->end_controls_section();
+    }
 }

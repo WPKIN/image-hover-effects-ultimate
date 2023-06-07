@@ -52,37 +52,6 @@ class ImageApi {
     // instance container
     public $childid;
 
-    public static function instance() {
-        if (self::$instance == null) {
-            self::$instance = new self;
-        }
-
-        return self::$instance;
-    }
-
-    /**
-     * Constructor of plugin class
-     *
-     * @since 9.3.0
-     */
-    public function __construct($rawdata = '', $styleid = '', $childid = '') {
-        global $wpdb;
-        $this->wpdb = $wpdb;
-        $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
-        $this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
-        $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
-        $this->rawdata = $rawdata;
-        $this->styleid = $styleid;
-        $this->childid = $childid;
-        $this->build_api();
-    }
-
-    public function build_api() {
-        add_action('wp_ajax_nopriv_image_hover_ultimate', [$this, 'ajax_action']);
-        add_action('wp_ajax_image_hover_ultimate', [$this, 'ajax_action']);
-        add_action('wp_ajax_image_hover_settings', [$this, 'save_action']);
-    }
-
     public function get_permissions_check() {
         $transient = get_transient('oxi_image_user_permission_role');
         if (false === $transient) {
@@ -309,15 +278,15 @@ class ImageApi {
         $child = $params['child'];
         $raw = json_decode(stripslashes($style['rawdata']), true);
         $custom = strtolower($raw['image-hover-custom-css']);
-        if(preg_match('/style/i', $custom) || preg_match('/script/i', $custom)){
+        if (preg_match('/style/i', $custom) || preg_match('/script/i', $custom)) {
             return 'Don\'t be smart, Kindly add validate data.';
         }
-        
-        
+
+
         $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->parent_table} (name, style_name, rawdata) VALUES ( %s, %s, %s)", [$style['name'], $style['style_name'], $style['rawdata']]));
         $redirect_id = $this->wpdb->insert_id;
         if ($redirect_id > 0) :
-         
+
             $raw['image-hover-style-id'] = $redirect_id;
             $s = explode('-', $style['style_name']);
             $CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($s[0]) . '\Admin\Effects' . $s[1];
@@ -424,13 +393,13 @@ class ImageApi {
      */
     public function post_elements_template_style() {
         $settings = json_decode(stripslashes($this->rawdata), true);
-        
+
         $custom = strtolower($settings['image-hover-custom-css']);
-        if(preg_match('/style/i', $custom) || preg_match('/script/i', $custom)){
+        if (preg_match('/style/i', $custom) || preg_match('/script/i', $custom)) {
             return 'Don\'t be smart, Kindly add validated data.';
         }
-      
-        
+
+
         $StyleName = sanitize_text_field($settings['image-hover-template']);
         $stylesheet = '';
         if ((int) $this->styleid) :
@@ -948,4 +917,34 @@ class ImageApi {
         die();
     }
 
+    public static function instance() {
+        if (self::$instance == null) {
+            self::$instance = new self;
+        }
+
+        return self::$instance;
+    }
+
+    /**
+     * Constructor of plugin class
+     *
+     * @since 9.3.0
+     */
+    public function __construct($rawdata = '', $styleid = '', $childid = '') {
+        global $wpdb;
+        $this->wpdb = $wpdb;
+        $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
+        $this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
+        $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
+        $this->rawdata = $rawdata;
+        $this->styleid = $styleid;
+        $this->childid = $childid;
+        $this->build_api();
+    }
+
+    public function build_api() {
+        add_action('wp_ajax_nopriv_image_hover_ultimate', [$this, 'ajax_action']);
+        add_action('wp_ajax_image_hover_ultimate', [$this, 'ajax_action']);
+        add_action('wp_ajax_image_hover_settings', [$this, 'save_action']);
+    }
 }

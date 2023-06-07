@@ -14,60 +14,6 @@ if (!defined('ABSPATH')) {
 class Support_Recommended {
 
     /**
-     * Revoke this function when the object is created.
-     *
-     */
-    const GET_LOCAL_PLUGINS = 'get_all_oxilab_plugins';
-    const PLUGINS = 'https://www.oxilab.org/wp-json/oxilabplugins/v2/all_plugins';
-
-    public $get_plugins = [];
-    public $current_plugins = 'image-hover-effects-ultimate/index.php';
-
-    public function __construct() {
-        if (!current_user_can('manage_options')) {
-            return;
-        }
-        require_once(ABSPATH . 'wp-admin/includes/screen.php');
-        $screen = get_current_screen();
-        if (isset($screen->parent_file) && 'plugins.php' === $screen->parent_file && 'update' === $screen->id) {
-            return;
-        }
-        $this->extension();
-        add_action('wp_ajax_oxi_image_admin_recommended', [$this, 'ajax_action']);
-        add_action('admin_notices', [$this, 'first_install']);
-        add_action('admin_enqueue_scripts', [$this, 'admin_enqueue_scripts']);
-        add_action('admin_notices', [$this, 'dismiss_button_scripts']);
-    }
-
-    public function ajax_action() {
-
-        $wpnonce = sanitize_key(wp_unslash($_POST['_wpnonce']));
-        if (!wp_verify_nonce($wpnonce, 'image_hover_ultimate')) :
-            return new \WP_REST_Request('Invalid URL', 422);
-            die();
-        endif;
-
-        $notice = $_POST['notice'];
-        update_option('oxi_image_hover_recommended', $notice);
-        echo $notice;
-        die();
-    }
-
-    /**
-     * Admin Notice JS file loader
-     * @return void
-     */
-    public function dismiss_button_scripts() {
-        wp_enqueue_script('oxi-image-admin-recommended', OXI_IMAGE_HOVER_URL . 'assets/backend/js/admin-recommended.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        wp_localize_script('oxi-image-admin-recommended',
-                'oxi_image_admin_recommended',
-                [
-                    'ajaxurl' => admin_url('admin-ajax.php'),
-                    'nonce' => wp_create_nonce('image_hover_ultimate')
-        ]);
-    }
-
-    /**
      * Admin Notice CSS file loader
      * @return void
      */
@@ -160,4 +106,57 @@ class Support_Recommended {
         $this->get_plugins = $response;
     }
 
+    /**
+     * Revoke this function when the object is created.
+     *
+     */
+    const GET_LOCAL_PLUGINS = 'get_all_oxilab_plugins';
+    const PLUGINS = 'https://www.oxilab.org/wp-json/oxilabplugins/v2/all_plugins';
+
+    public $get_plugins = [];
+    public $current_plugins = 'image-hover-effects-ultimate/index.php';
+
+    public function __construct() {
+        if (!current_user_can('manage_options')) {
+            return;
+        }
+        require_once(ABSPATH . 'wp-admin/includes/screen.php');
+        $screen = get_current_screen();
+        if (isset($screen->parent_file) && 'plugins.php' === $screen->parent_file && 'update' === $screen->id) {
+            return;
+        }
+        $this->extension();
+        add_action('wp_ajax_oxi_image_admin_recommended', [$this, 'ajax_action']);
+        add_action('admin_notices', [$this, 'first_install']);
+        add_action('admin_enqueue_scripts', [$this, 'admin_enqueue_scripts']);
+        add_action('admin_notices', [$this, 'dismiss_button_scripts']);
+    }
+
+    public function ajax_action() {
+
+        $wpnonce = sanitize_key(wp_unslash($_POST['_wpnonce']));
+        if (!wp_verify_nonce($wpnonce, 'image_hover_ultimate')) :
+            return new \WP_REST_Request('Invalid URL', 422);
+            die();
+        endif;
+
+        $notice = $_POST['notice'];
+        update_option('oxi_image_hover_recommended', $notice);
+        echo $notice;
+        die();
+    }
+
+    /**
+     * Admin Notice JS file loader
+     * @return void
+     */
+    public function dismiss_button_scripts() {
+        wp_enqueue_script('oxi-image-admin-recommended', OXI_IMAGE_HOVER_URL . 'assets/backend/js/admin-recommended.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_localize_script('oxi-image-admin-recommended',
+                'oxi_image_admin_recommended',
+                [
+                    'ajaxurl' => admin_url('admin-ajax.php'),
+                    'nonce' => wp_create_nonce('image_hover_ultimate')
+        ]);
+    }
 }

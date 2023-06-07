@@ -14,78 +14,6 @@ use OXI_IMAGE_HOVER_PLUGINS\Classes\Controls as Controls;
 
 trait Sanitization {
     /*
-     * Image Hover Style Admin Panel Body
-     *
-     * @since 9.3.0
-     */
-
-    public function start_section_tabs($id, array $arg = []) {
-        ?>
-        <div class="oxi-addons-tabs-content-tabs" id="shortcode-addons-section-<?php
-        if (array_key_exists('condition', $arg)) :
-            foreach ($arg['condition'] as $value) {
-                echo esc_attr($value);
-            }
-        endif;
-
-        echo '"  ' . (array_key_exists('padding', $arg) ? 'style="padding: ' . esc_attr($arg['padding']) . '"' : '') . '>';
-    }
-
-    /*
-     * Image Hover Style Admin Panel header
-     *
-     * @since 9.3.0
-     */
-
-    public function start_section_header($id, array $arg = []) {
-        ?>
-             <ul class="oxi-addons-tabs-ul">
-             <?php
-             foreach ($arg['options'] as $key => $value) {
-                 echo '<li ref="#shortcode-addons-section-' . esc_attr($key) . '">' . esc_html($value) . '</li>';
-             }
-             ?>
-        </ul>
-        <?php
-    }
-
-    /*
-     * Image Hover Style Admin Panel end Body
-     *
-     * @since 9.3.0
-     */
-
-    public function end_section_tabs() {
-        ?>
-        </div>
-        <?php
-    }
-
-    /*
-     * Image Hover Style Admin Panel Col 6 or Entry devider
-     *
-     * @since 9.3.0
-     */
-
-    public function start_section_devider() {
-        ?>
-        <div class="oxi-addons-col-6">
-            <?php
-        }
-
-        /*
-         * Image Hover Style Admin Panel end Entry Divider
-         *
-         * @since 9.3.0
-         */
-
-        public function end_section_devider() {
-            ?>
-        </div>
-        <?php
-    }
-
-    /*
      * Image Hover Style Admin Panel Each Tabs
      *
      * @since 9.3.0
@@ -2661,8 +2589,8 @@ trait Sanitization {
                     echo 'oxi-admin-head-d-none';
                 endif;
                 ?>"  <?php
-                $this->forms_condition($arg);
-                ?>>
+                     $this->forms_condition($arg);
+                     ?>>
                     <div class="oxi-addons-item-form-heading shortcode-addons-templates-right-panel-heading">
                         <?php echo esc_html($arg['title']); ?>
                         <div class="oxi-head-toggle"></div>
@@ -3069,4 +2997,76 @@ trait Sanitization {
                 endif;
             }
 
+            /*
+             * Image Hover Style Admin Panel Body
+             *
+             * @since 9.3.0
+             */
+
+            public function start_section_tabs($id, array $arg = []) {
+                ?>
+                <div class="oxi-addons-tabs-content-tabs" id="shortcode-addons-section-<?php
+                if (array_key_exists('condition', $arg)) :
+                    foreach ($arg['condition'] as $value) {
+                        echo esc_attr($value);
+                    }
+                endif;
+
+                echo '"  ' . (array_key_exists('padding', $arg) ? 'style="padding: ' . esc_attr($arg['padding']) . '"' : '') . '>';
+            }
+
+            /*
+             * Image Hover Style Admin Panel header
+             *
+             * @since 9.3.0
+             */
+
+            public function start_section_header($id, array $arg = []) {
+                ?>
+                     <ul class="oxi-addons-tabs-ul">
+                         <?php
+                         foreach ($arg['options'] as $key => $value) {
+                             echo '<li ref="#shortcode-addons-section-' . esc_attr($key) . '">' . esc_html($value) . '</li>';
+                         }
+                         ?>
+                    </ul>
+                    <?php
+                }
+
+                /*
+                 * Image Hover Style Admin Panel end Body
+                 *
+                 * @since 9.3.0
+                 */
+
+                public function end_section_tabs() {
+                    ?>
+                </div>
+                <?php
+            }
+
+            /*
+             * Image Hover Style Admin Panel Col 6 or Entry devider
+             *
+             * @since 9.3.0
+             */
+
+            public function start_section_devider() {
+                ?>
+                <div class="oxi-addons-col-6">
+                    <?php
+                }
+
+                /*
+                 * Image Hover Style Admin Panel end Entry Divider
+                 *
+                 * @since 9.3.0
+                 */
+
+                public function end_section_devider() {
+                    ?>
+                </div>
+                <?php
+            }
         }
+        

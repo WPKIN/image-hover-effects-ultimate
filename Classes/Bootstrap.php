@@ -128,13 +128,4 @@ class Bootstrap {
         $this->shortcode_render($styleid, 'user');
         return ob_get_clean();
     }
-
-    public function Public_loader() {
-        global $wpdb;
-        $this->wpdb = $wpdb;
-        $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
-        $this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
-        $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
-    }
-
 }

@@ -132,11 +132,10 @@ class Controls {
      */
     const HEADING = 'heading';
 
-
     /*
-     * 
+     *
      * Group Control
-     * 
+     *
      */
 
     /**
@@ -153,7 +152,7 @@ class Controls {
      * Typography control.
      */
     const TYPOGRAPHY = 'typography';
-    
+
     /**
      * Typography Font Size Control.
      */
@@ -189,11 +188,10 @@ class Controls {
      */
     const REARRANGE = 'rearrange';
 
-
     /*
-     * 
+     *
      * Typhography Include Turms
-     * 
+     *
      */
 
     /**
@@ -206,12 +204,10 @@ class Controls {
      */
     const ALIGNFLEX = 'align_flex';
 
-
-
     /*
-     * 
-     * Templates Substitute Data 
-     * 
+     *
+     * Templates Substitute Data
+     *
      */
 
     /**
@@ -228,6 +224,7 @@ class Controls {
      * Shortcode Name.
      */
     const SHORTCODEINFO = 'shortcodeinfo';
+
     /**
      * Shortcode Style.
      */
@@ -247,5 +244,4 @@ class Controls {
      *  OUTSIDE Control (Repeater Condition).
      */
     const OUTSIDE = 'outside';
-
 }

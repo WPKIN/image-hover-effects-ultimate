@@ -27,14 +27,7 @@ class Visual_Composer {
      */
     public $parent_table;
 
-    public function __construct() {
-        global $wpdb;
-        $this->wpdb = $wpdb;
-        $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
-        add_action('vc_before_init', [$this, 'iheu_oxi_VC_extension']);
-        add_shortcode('iheu_oxi_VC', [$this, 'iheu_oxi_VC_shortcode']);
-    }
- public function iheu_oxi_VC_shortcode($atts) {
+    public function iheu_oxi_VC_shortcode($atts) {
         extract(shortcode_atts(array(
             'id' => ''
                         ), $atts));
@@ -43,6 +36,7 @@ class Visual_Composer {
         \OXI_IMAGE_HOVER_PLUGINS\Classes\Bootstrap::instance()->shortcode_render($styleid, 'user');
         return ob_get_clean();
     }
+
     public function iheu_oxi_VC_extension() {
         global $wpdb;
         $data = $wpdb->get_results('SELECT * FROM ' . $this->parent_table . ' ORDER BY id DESC', ARRAY_A);
@@ -68,6 +62,11 @@ class Visual_Composer {
         ));
     }
 
-   
-
+    public function __construct() {
+        global $wpdb;
+        $this->wpdb = $wpdb;
+        $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
+        add_action('vc_before_init', [$this, 'iheu_oxi_VC_extension']);
+        add_shortcode('iheu_oxi_VC', [$this, 'iheu_oxi_VC_shortcode']);
+    }
 }

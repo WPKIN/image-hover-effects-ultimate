@@ -8,6 +8,49 @@ if (!defined('ABSPATH')) {
 
 trait Admin_helper {
 
+    public function admin_url_convert($agr) {
+        return admin_url(strpos($agr, 'edit') !== false ? $agr : 'admin.php?page=' . $agr);
+    }
+
+    public function SupportAndComments($agr) {
+        if (get_option('oxi_image_support_massage') === 'no') {
+            return;
+        }
+        ?>
+
+        <div class="oxi-addons-admin-notifications">
+            <h3>
+                <span class="dashicons dashicons-flag"></span>
+                Trouble or Need Support?
+            </h3>
+            <p></p>
+            <div class="oxi-addons-admin-notifications-holder">
+                <div class="oxi-addons-admin-notifications-alert">
+                    <p>Unable to create your desire design or need any help? You can
+                        <a href="https://wordpress.org/support/plugin/image-hover-effects-ultimate#new-post">Ask any question</a>
+                        and get reply from our expert members. We will be glad to answer any question you may have about our plugin.
+                    </p>
+        <?php
+        if (apply_filters('oxi-image-hover-plugin-version', false) != true) :
+            ?>
+                        <p>By the way, did you know we also have a
+                            <a href="https://www.oxilabdemos.com/image-hover/pricing/">Premium Version</a>
+                            ? It offers lots of options with automatic update. It also comes with 16/5 personal support.
+                        </p>
+                        <p>Thanks Again!</p>
+            <?php
+        endif;
+        ?>
+
+                    <p></p>
+                </div>
+            </div>
+            <p></p>
+        </div>
+
+        <?php
+    }
+
     /**
      * Plugin check Current Tabs
      *
@@ -55,49 +98,6 @@ trait Admin_helper {
                 content: "\f169";
             }
         </style>
-        <?php
-    }
-
-    public function admin_url_convert($agr) {
-        return admin_url(strpos($agr, 'edit') !== false ? $agr : 'admin.php?page=' . $agr);
-    }
-
-    public function SupportAndComments($agr) {
-        if (get_option('oxi_image_support_massage') === 'no') {
-            return;
-        }
-        ?>
-
-        <div class="oxi-addons-admin-notifications">
-            <h3>
-                <span class="dashicons dashicons-flag"></span>
-                Trouble or Need Support?
-            </h3>
-            <p></p>
-            <div class="oxi-addons-admin-notifications-holder">
-                <div class="oxi-addons-admin-notifications-alert">
-                    <p>Unable to create your desire design or need any help? You can
-                        <a href="https://wordpress.org/support/plugin/image-hover-effects-ultimate#new-post">Ask any question</a>
-                        and get reply from our expert members. We will be glad to answer any question you may have about our plugin.
-                    </p>
-                    <?php
-                    if (apply_filters('oxi-image-hover-plugin-version', false) != true) :
-                        ?>
-                        <p>By the way, did you know we also have a
-                            <a href="https://www.oxilabdemos.com/image-hover/pricing/">Premium Version</a>
-                            ? It offers lots of options with automatic update. It also comes with 16/5 personal support.
-                        </p>
-                        <p>Thanks Again!</p>
-                        <?php
-                    endif;
-                    ?>
-
-                    <p></p>
-                </div>
-            </div>
-            <p></p>
-        </div>
-
         <?php
     }
 
@@ -354,5 +354,4 @@ trait Admin_helper {
         add_filter($this->fixed_data('6f78692d696d6167652d686f7665722d706c7567696e2d76657273696f6e'), [$this, $this->fixed_data('636865636b5f63757272656e745f76657273696f6e')]);
         add_filter($this->fixed_data('6f78692d696d6167652d686f7665722d706c7567696e2f61646d696e5f6d656e75'), [$this, $this->fixed_data('6f78696c61625f61646d696e5f6d656e75')]);
     }
-
 }

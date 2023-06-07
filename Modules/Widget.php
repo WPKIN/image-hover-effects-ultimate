@@ -8,21 +8,6 @@ if (!defined('ABSPATH')) {
 
 class Widget extends \WP_Widget {
 
-    function __construct() {
-        parent::__construct(
-                'iheu_widget',
-                esc_html__('Image Hover Effects Ultimate', 'image-hover-effects-ultimate'),
-                array('description' => esc_html__('Image Hover Effects Ultimate Widget', 'image-hover-effects-ultimate'),)
-        );
-    }
-
-    public function widget($args, $instance) {
-        $title = apply_filters('widget_title', $instance['title']);
-        echo $args['before_widget'];
-        \OXI_IMAGE_HOVER_PLUGINS\Classes\Bootstrap::instance()->shortcode_render($title, 'user');
-        echo $args['after_widget'];
-    }
-
     public function iheu_widget_widget() {
         register_widget($this);
     }
@@ -47,4 +32,18 @@ class Widget extends \WP_Widget {
         return $instance;
     }
 
+    function __construct() {
+        parent::__construct(
+                'iheu_widget',
+                esc_html__('Image Hover Effects Ultimate', 'image-hover-effects-ultimate'),
+                array('description' => esc_html__('Image Hover Effects Ultimate Widget', 'image-hover-effects-ultimate'),)
+        );
+    }
+
+    public function widget($args, $instance) {
+        $title = apply_filters('widget_title', $instance['title']);
+        echo $args['before_widget'];
+        \OXI_IMAGE_HOVER_PLUGINS\Classes\Bootstrap::instance()->shortcode_render($title, 'user');
+        echo $args['after_widget'];
+    }
 }

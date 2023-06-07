@@ -17,40 +17,6 @@ use OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic\Layouts_Query as Layouts_Query;
 
 class Compailer extends Public_Render {
 
-    public function public_css() {
-
-        if ($this->dynamicLoad):
-            wp_enqueue_style('oxi-image-dynamic-loader', OXI_IMAGE_HOVER_URL . 'Modules/Dynamic/Files/dynamic-loader.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        elseif ($this->dynamicCarousel):
-            wp_enqueue_style('oxi-image-hover-carousel-slick', OXI_IMAGE_HOVER_URL . 'Modules/Carousel/Files/slick.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-            wp_enqueue_style('oxi-image-hover-carousel-style', OXI_IMAGE_HOVER_URL . 'Modules/Carousel/Files/style-1.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        endif;
-    }
-
-    public function public_column_render($col) {
-        $column = 1;
-        if (count(explode('-lg-', $col)) == 2) :
-            $column = explode('-lg-', $col)[1];
-        elseif (count(explode('-md-', $col)) == 2) :
-            $column = explode('-md-', $col)[1];
-        elseif (count(explode('-sm-', $col)) == 2) :
-            $column = explode('-sm-', $col)[1];
-        endif;
-        if ($column == 12) :
-            return 1;
-        elseif ($column == 6) :
-            return 2;
-        elseif ($column == 4) :
-            return 3;
-        elseif ($column == 3) :
-            return 4;
-        elseif ($column == 2) :
-            return 6;
-        else :
-            return 12;
-        endif;
-    }
-
     public function public_jquery() {
         if (is_array($this->style) && array_key_exists('image_hover_dynamic_content', $this->style) && $this->style['image_hover_dynamic_content'] == 'yes') :
             $this->dynamicPost = true;
@@ -77,8 +43,8 @@ class Compailer extends Public_Render {
         ?>
         <div class="oxi-addons-container noLightbox <?php echo esc_attr($this->WRAPPER); ?>" id="<?php echo esc_attr($this->WRAPPER); ?>">
             <div class="oxi-addons-row"><?php
-                $this->default_render($this->style, $this->child, $this->admin);
-                ?>
+        $this->default_render($this->style, $this->child, $this->admin);
+        ?>
             </div>
         </div>
         <?php
@@ -245,4 +211,37 @@ class Compailer extends Public_Render {
         endif;
     }
 
+    public function public_css() {
+
+        if ($this->dynamicLoad):
+            wp_enqueue_style('oxi-image-dynamic-loader', OXI_IMAGE_HOVER_URL . 'Modules/Dynamic/Files/dynamic-loader.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        elseif ($this->dynamicCarousel):
+            wp_enqueue_style('oxi-image-hover-carousel-slick', OXI_IMAGE_HOVER_URL . 'Modules/Carousel/Files/slick.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+            wp_enqueue_style('oxi-image-hover-carousel-style', OXI_IMAGE_HOVER_URL . 'Modules/Carousel/Files/style-1.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        endif;
+    }
+
+    public function public_column_render($col) {
+        $column = 1;
+        if (count(explode('-lg-', $col)) == 2) :
+            $column = explode('-lg-', $col)[1];
+        elseif (count(explode('-md-', $col)) == 2) :
+            $column = explode('-md-', $col)[1];
+        elseif (count(explode('-sm-', $col)) == 2) :
+            $column = explode('-sm-', $col)[1];
+        endif;
+        if ($column == 12) :
+            return 1;
+        elseif ($column == 6) :
+            return 2;
+        elseif ($column == 4) :
+            return 3;
+        elseif ($column == 3) :
+            return 4;
+        elseif ($column == 2) :
+            return 6;
+        else :
+            return 12;
+        endif;
+    }
 }

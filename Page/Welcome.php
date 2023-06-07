@@ -1,7 +1,5 @@
 <?php
 
-
-    
 namespace OXI_IMAGE_HOVER_PLUGINS\Page;
 
 if (!defined('ABSPATH')) {
@@ -16,15 +14,6 @@ if (!defined('ABSPATH')) {
 class Welcome {
 
     use \OXI_IMAGE_HOVER_PLUGINS\Helper\CSS_JS_Loader;
-
-    public function __construct() {
-        $this->header();
-        $this->Public_Render();
-    }
-
-    public function header() {
-        $this->admin_css();
-    }
 
     public function Public_Render() {
         apply_filters('oxi-image-hover-plugin/admin_menu', TRUE);
@@ -127,4 +116,12 @@ class Welcome {
         <?php
     }
 
+    public function __construct() {
+        $this->header();
+        $this->Public_Render();
+    }
+
+    public function header() {
+        $this->admin_css();
+    }
 }

@@ -113,51 +113,6 @@ class Public_Render {
     public $dynamicCarousel;
     public $dynamicLoad;
 
-    public function __construct(array $dbdata = [], array $child = [], $admin = 'user') {
-        if (count($dbdata) > 0) :
-            global $wpdb;
-            $this->dbdata = $dbdata;
-            $this->child = $child;
-            $this->admin = $admin;
-            $this->wpdb = $wpdb;
-            $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
-            $this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
-
-            if (array_key_exists('id', $this->dbdata)) :
-                $this->oxiid = (int) $this->dbdata['id'];
-            else :
-                $this->oxiid = rand(100000, 200000);
-            endif;
-            if (!empty($dbdata['rawdata'])) :
-                $this->loader();
-            else :
-                $this->old_loader();
-            endif;
-
-        endif;
-    }
-
-    /**
-     * Current element loader
-     *
-     * @since 9.3.0
-     */
-    public function loader() {
-        $this->style = json_decode(stripslashes($this->dbdata['rawdata']), true);
-        $this->CSSDATA = $this->dbdata['stylesheet'];
-        $this->WRAPPER = 'oxi-image-hover-wrapper-' . $this->dbdata['id'];
-        $this->hooks();
-    }
-
-    /**
-     * load old data since 1.7
-     *
-     * @since 9.3.0
-     */
-    public function old_loader() {
-        $this->old_render();
-    }
-
     /**
      * front end loader css and js
      *
@@ -239,9 +194,9 @@ class Public_Render {
             ?>
             <div class="oxi-addons-container noLightbox <?php echo esc_attr($this->WRAPPER); ?> <?php echo esc_attr(get_option('oxi_addons_custom_parent_class')); ?>" id="<?php echo esc_attr($this->WRAPPER); ?>">
                 <div class="oxi-addons-row">
-                    <?php
-                    $this->default_render($this->style, $this->child, $this->admin);
-                    ?>
+            <?php
+            $this->default_render($this->style, $this->child, $this->admin);
+            ?>
                 </div>
             </div>
         <?php
@@ -734,4 +689,48 @@ class Public_Render {
         endif;
     }
 
+    public function __construct(array $dbdata = [], array $child = [], $admin = 'user') {
+        if (count($dbdata) > 0) :
+            global $wpdb;
+            $this->dbdata = $dbdata;
+            $this->child = $child;
+            $this->admin = $admin;
+            $this->wpdb = $wpdb;
+            $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
+            $this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
+
+            if (array_key_exists('id', $this->dbdata)) :
+                $this->oxiid = (int) $this->dbdata['id'];
+            else :
+                $this->oxiid = rand(100000, 200000);
+            endif;
+            if (!empty($dbdata['rawdata'])) :
+                $this->loader();
+            else :
+                $this->old_loader();
+            endif;
+
+        endif;
+    }
+
+    /**
+     * Current element loader
+     *
+     * @since 9.3.0
+     */
+    public function loader() {
+        $this->style = json_decode(stripslashes($this->dbdata['rawdata']), true);
+        $this->CSSDATA = $this->dbdata['stylesheet'];
+        $this->WRAPPER = 'oxi-image-hover-wrapper-' . $this->dbdata['id'];
+        $this->hooks();
+    }
+
+    /**
+     * load old data since 1.7
+     *
+     * @since 9.3.0
+     */
+    public function old_loader() {
+        $this->old_render();
+    }
 }
