@@ -11,7 +11,8 @@ if (!defined('ABSPATH')) {
  *
  * @author $biplob018
  */
-class Settings {
+class Settings
+{
 
     use \OXI_IMAGE_HOVER_PLUGINS\Helper\CSS_JS_Loader;
 
@@ -23,12 +24,40 @@ class Settings {
     public $fontawesome;
     public $getfontawesome = [];
 
-    public function Render() {
-        ?>
+    /**
+     * Constructor of Oxilab tabs Home Page
+     *
+     * @since 9.3.0
+     */
+    public function __construct()
+    {
+        $this->admin();
+        $this->css_loader();
+        $this->Render();
+    }
+
+    public function admin()
+    {
+
+        global $wp_roles;
+        $this->roles = $wp_roles->get_names();
+        $this->saved_role = get_option('oxi_image_user_permission');
+        $this->license = get_option('image_hover_ultimate_license_key');
+        $this->status = get_option('image_hover_ultimate_license_status');
+    }
+
+    public function css_loader()
+    {
+        $this->admin_css_loader();
+        wp_enqueue_script('oxi-image-hover-settings', OXI_IMAGE_HOVER_URL . 'assets/backend/js/settings.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+    }
+    public function Render()
+    {
+?>
         <div class="wrap">
-        <?php
-        apply_filters('oxi-image-hover-plugin/admin_menu', true);
-        ?>
+            <?php
+            apply_filters('oxi-image-hover-plugin/admin_menu', true);
+            ?>
             <div class="oxi-addons-row oxi-addons-admin-settings">
                 <h2>General</h2>
                 <p>Settings for Image Hover Effects Ultimate.</p>
@@ -43,16 +72,15 @@ class Settings {
                                 <td>
                                     <fieldset>
                                         <select name="oxi_image_user_permission" id="oxi_image_user_permission">
-        <?php foreach ($this->roles as $key => $role) { ?>
+                                            <?php foreach ($this->roles as $key => $role) { ?>
                                                 <option value="<?php echo esc_attr($key); ?>" <?php selected($this->saved_role, $key); ?>>
-                                                <?php echo esc_html($role); ?></option>
+                                                    <?php echo esc_html($role); ?></option>
                                             <?php } ?>
                                         </select>
                                         <span class="oxi-addons-settings-connfirmation oxi_image_user_permission"></span>
                                         <br>
                                         <p class="description"><?php _e('Select the Role who can manage This Plugins.'); ?>
-                                            <a target="_blank"
-                                               href="https://codex.wordpress.org/Roles_and_Capabilities#Capability_vs._Role_Table">Help
+                                            <a target="_blank" href="https://codex.wordpress.org/Roles_and_Capabilities#Capability_vs._Role_Table">Help
                                             </a>
                                         </p>
                                     </fieldset>
@@ -66,16 +94,10 @@ class Settings {
                                 <td>
                                     <fieldset>
                                         <label for="image_hover_ultimate_mobile_device_key[yes]">
-                                            <input type="radio" class="radio"
-                                                   id="image_hover_ultimate_mobile_device_key[yes]"
-                                                   name="image_hover_ultimate_mobile_device_key"
-                                                   value="" <?php checked('', get_option('image_hover_ultimate_mobile_device_key'), true); ?>>
+                                            <input type="radio" class="radio" id="image_hover_ultimate_mobile_device_key[yes]" name="image_hover_ultimate_mobile_device_key" value="" <?php checked('', get_option('image_hover_ultimate_mobile_device_key'), true); ?>>
                                             Yes</label>
                                         <label for="image_hover_ultimate_mobile_device_key[normal]">
-                                            <input type="radio" class="radio"
-                                                   id="image_hover_ultimate_mobile_device_key[normal]"
-                                                   name="image_hover_ultimate_mobile_device_key"
-                                                   value="normal" <?php checked('normal', get_option('image_hover_ultimate_mobile_device_key'), true); ?>>
+                                            <input type="radio" class="radio" id="image_hover_ultimate_mobile_device_key[normal]" name="image_hover_ultimate_mobile_device_key" value="normal" <?php checked('normal', get_option('image_hover_ultimate_mobile_device_key'), true); ?>>
                                             No
                                         </label>
                                         <span class="oxi-addons-settings-connfirmation image_hover_ultimate_mobile_device_key"></span>
@@ -95,14 +117,10 @@ class Settings {
                                 <td>
                                     <fieldset>
                                         <label for="oxi_addons_font_awesome[]">
-                                            <input type="radio" class="radio" id="oxi_addons_font_awesome[yes]"
-                                                   name="oxi_addons_font_awesome"
-                                                   value="" <?php checked('yes', get_option('oxi_addons_font_awesome'), true); ?>>
+                                            <input type="radio" class="radio" id="oxi_addons_font_awesome[yes]" name="oxi_addons_font_awesome" value="" <?php checked('yes', get_option('oxi_addons_font_awesome'), true); ?>>
                                             Yes</label>
                                         <label for="oxi_addons_font_awesome[no]">
-                                            <input type="radio" class="radio" id="oxi_addons_font_awesome[no]"
-                                                   name="oxi_addons_font_awesome"
-                                                   value="no" <?php checked('', get_option('oxi_addons_font_awesome'), true); ?>>
+                                            <input type="radio" class="radio" id="oxi_addons_font_awesome[no]" name="oxi_addons_font_awesome" value="no" <?php checked('', get_option('oxi_addons_font_awesome'), true); ?>>
                                             No
                                         </label>
                                         <span class="oxi-addons-settings-connfirmation oxi_addons_font_awesome"></span>
@@ -121,14 +139,10 @@ class Settings {
                                 <td>
                                     <fieldset>
                                         <label for="oxi_addons_way_points[yes]">
-                                            <input type="radio" class="radio" id="oxi_addons_way_points[yes]"
-                                                   name="oxi_addons_way_points"
-                                                   value="" <?php checked('', get_option('oxi_addons_way_points'), true); ?>>
+                                            <input type="radio" class="radio" id="oxi_addons_way_points[yes]" name="oxi_addons_way_points" value="" <?php checked('', get_option('oxi_addons_way_points'), true); ?>>
                                             Yes</label>
                                         <label for="oxi_addons_way_points[no]">
-                                            <input type="radio" class="radio" id="oxi_addons_way_points[no]"
-                                                   name="oxi_addons_way_points"
-                                                   value="no" <?php checked('no', get_option('oxi_addons_way_points'), true); ?>>
+                                            <input type="radio" class="radio" id="oxi_addons_way_points[no]" name="oxi_addons_way_points" value="no" <?php checked('no', get_option('oxi_addons_way_points'), true); ?>>
                                             No
                                         </label>
                                         <span class="oxi-addons-settings-connfirmation oxi_addons_way_points"></span>
@@ -147,14 +161,10 @@ class Settings {
                                 <td>
                                     <fieldset>
                                         <label for="oxi_addons_google_font[yes]">
-                                            <input type="radio" class="radio" id="oxi_addons_google_font[yes]"
-                                                   name="oxi_addons_google_font"
-                                                   value="" <?php checked('', get_option('oxi_addons_google_font'), true); ?>>
+                                            <input type="radio" class="radio" id="oxi_addons_google_font[yes]" name="oxi_addons_google_font" value="" <?php checked('', get_option('oxi_addons_google_font'), true); ?>>
                                             Yes</label>
                                         <label for="oxi_addons_google_font[no]">
-                                            <input type="radio" class="radio" id="oxi_addons_google_font[no]"
-                                                   name="oxi_addons_google_font"
-                                                   value="no" <?php checked('no', get_option('oxi_addons_google_font'), true); ?>>
+                                            <input type="radio" class="radio" id="oxi_addons_google_font[no]" name="oxi_addons_google_font" value="no" <?php checked('no', get_option('oxi_addons_google_font'), true); ?>>
                                             No
                                         </label>
                                         <span class="oxi-addons-settings-connfirmation oxi_addons_google_font"></span>
@@ -171,9 +181,7 @@ class Settings {
                                     <label for="oxi_addons_custom_parent_class">Custom Parent Class</label>
                                 </th>
                                 <td class="valid">
-                                    <input type="text" class="regular-text" id="oxi_addons_custom_parent_class"
-                                           name="oxi_addons_custom_parent_class"
-                                           value="<?php echo esc_attr(get_option('oxi_addons_custom_parent_class')); ?>">
+                                    <input type="text" class="regular-text" id="oxi_addons_custom_parent_class" name="oxi_addons_custom_parent_class" value="<?php echo esc_attr(get_option('oxi_addons_custom_parent_class')); ?>">
                                     <span class="oxi-addons-settings-connfirmation oxi_addons_custom_parent_class "></span>
                                     <p class="description">Add custom panrent Class as Avoid Conflict with Theme or
                                         Plugins.
@@ -187,14 +195,10 @@ class Settings {
                                 <td>
                                     <fieldset>
                                         <label for="oxi_image_support_massage[yes]">
-                                            <input type="radio" class="radio" id="oxi_image_support_massage[yes]"
-                                                   name="oxi_image_support_massage"
-                                                   value="" <?php checked('', get_option('oxi_image_support_massage'), true); ?>>
+                                            <input type="radio" class="radio" id="oxi_image_support_massage[yes]" name="oxi_image_support_massage" value="" <?php checked('', get_option('oxi_image_support_massage'), true); ?>>
                                             Yes</label>
                                         <label for="oxi_image_support_massage[no]">
-                                            <input type="radio" class="radio" id="oxi_image_support_massage[no]"
-                                                   name="oxi_image_support_massage"
-                                                   value="no" <?php checked('no', get_option('oxi_image_support_massage'), true); ?>>
+                                            <input type="radio" class="radio" id="oxi_image_support_massage[no]" name="oxi_image_support_massage" value="no" <?php checked('no', get_option('oxi_image_support_massage'), true); ?>>
                                             No
                                         </label>
                                         <span class="oxi-addons-settings-connfirmation oxi_image_support_massage"></span>
@@ -218,21 +222,19 @@ class Settings {
                                     <label for="image_hover_ultimate_license_key">License Key</label>
                                 </th>
                                 <td class="valid">
-                                    <input type="text" class="regular-text" id="image_hover_ultimate_license_key"
-                                           name="image_hover_ultimate_license_key"
-                                           value="<?php echo ($this->status == 'valid' && empty($this->license)) ? '****************************************' : esc_attr($this->license); ?>">
+                                    <input type="text" class="regular-text" id="image_hover_ultimate_license_key" name="image_hover_ultimate_license_key" value="<?php echo ($this->status == 'valid' && empty($this->license)) ? '****************************************' : esc_attr($this->license); ?>">
                                     <span class="oxi-addons-settings-connfirmation image_hover_ultimate_license_massage">
-        <?php
-        if ($this->status == 'valid' && empty($this->license)) :
-            echo '<span class="oxi-confirmation-success"></span>';
-        elseif ($this->status == 'valid' && !empty($this->license)) :
-            echo '<span class="oxi-confirmation-success"></span>';
-        elseif (!empty($this->license)) :
-            echo '<span class="oxi-confirmation-failed"></span>';
-        else :
-            echo '<span class="oxi-confirmation-blank"></span>';
-        endif;
-        ?>
+                                        <?php
+                                        if ($this->status == 'valid' && empty($this->license)) :
+                                            echo '<span class="oxi-confirmation-success"></span>';
+                                        elseif ($this->status == 'valid' && !empty($this->license)) :
+                                            echo '<span class="oxi-confirmation-success"></span>';
+                                        elseif (!empty($this->license)) :
+                                            echo '<span class="oxi-confirmation-failed"></span>';
+                                        else :
+                                            echo '<span class="oxi-confirmation-blank"></span>';
+                                        endif;
+                                        ?>
                                     </span>
                                     <span class="oxi-addons-settings-connfirmation image_hover_ultimate_license_text">
                                         <?php
@@ -255,31 +257,6 @@ class Settings {
                 </form>
             </div>
         </div>
-        <?php
-    }
-
-    /**
-     * Constructor of Oxilab tabs Home Page
-     *
-     * @since 9.3.0
-     */
-    public function __construct() {
-        $this->admin();
-        $this->css_loader();
-        $this->Render();
-    }
-
-    public function admin() {
-
-        global $wp_roles;
-        $this->roles = $wp_roles->get_names();
-        $this->saved_role = get_option('oxi_image_user_permission');
-        $this->license = get_option('image_hover_ultimate_license_key');
-        $this->status = get_option('image_hover_ultimate_license_status');
-    }
-
-    public function css_loader() {
-        $this->admin_css_loader();
-        wp_enqueue_script('oxi-image-hover-settings', OXI_IMAGE_HOVER_URL . 'assets/backend/js/settings.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+<?php
     }
 }

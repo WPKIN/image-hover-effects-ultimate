@@ -11,13 +11,24 @@ if (!defined('ABSPATH')) {
  *
  * @author $biplob018
  */
-class Welcome {
+class Welcome
+{
 
     use \OXI_IMAGE_HOVER_PLUGINS\Helper\CSS_JS_Loader;
+    public function __construct()
+    {
+        $this->header();
+        $this->Public_Render();
+    }
 
-    public function Public_Render() {
+    public function header()
+    {
+        $this->admin_css();
+    }
+    public function Public_Render()
+    {
         apply_filters('oxi-image-hover-plugin/admin_menu', TRUE);
-        ?>
+?>
         <div class="oxi-addons-wrapper">
             <div class="oxi-addons-import-layouts">
                 <div class="about-wrap text-center">
@@ -93,7 +104,7 @@ class Welcome {
                                     <h4 class="oxi-docs-admin-header-title">Page Builder Integrations </h4>
                                 </div>
                                 <div class="oxi-docs-admin-block-content">
-                                    <p>Image Hover Ultimate fully compatible  with popular Page Builder like
+                                    <p>Image Hover Ultimate fully compatible with popular Page Builder like
                                         <a href="https://www.oxilabdemos.com/image-hover/docs/integrate-with-page-builder/elementor-page-builder/">Elementor</a>,
                                         <a href="https://www.oxilabdemos.com/image-hover/docs/integrate-with-page-builder/beaver-builder-integration/">Beaver Builder</a>,
                                         <a href="https://www.oxilabdemos.com/image-hover/docs/integrate-with-page-builder/wpbakery-page-builder/">WPBakery</a>,
@@ -102,7 +113,8 @@ class Welcome {
                                         <a href="https://www.oxilabdemos.com/image-hover/docs/integrate-with-page-builder/brizy/"> Brizy</a>,
                                         <a href="https://www.oxilabdemos.com/image-hover/docs/integrate-with-page-builder/siteorigin-page-builder/"> SiteOrigin</a>,
                                         <a href="https://www.oxilabdemos.com/image-hover/docs/integrate-with-page-builder/themify-builder/"> Themefy Builder</a>.
-                                        As shortcode based Plugins you can use any wedpress sites and works properly.</p>
+                                        As shortcode based Plugins you can use any wedpress sites and works properly.
+                                    </p>
                                     <a href="https://www.oxilabdemos.com/image-hover/docs/integrate-with-page-builder/" class="oxi-docs-button" target="_blank">Learn More</a>
                                 </div>
                             </div>
@@ -113,15 +125,6 @@ class Welcome {
         </div>
 
 
-        <?php
-    }
-
-    public function __construct() {
-        $this->header();
-        $this->Public_Render();
-    }
-
-    public function header() {
-        $this->admin_css();
+<?php
     }
 }

@@ -3,8 +3,8 @@ Contributors: biplob018
 Donate link: https://www.oxilab.org
 Tags: responsive image effects, awesome css3 effects, awesome image effects,  css3 effects, effects, top image effects for wordpress,  hover effect. 
 Requires at least: 3.0.1
-Stable tag: 9.9.0
-Tested up to: 6.2.2
+Stable tag: 9.9.1
+Tested up to: 6.3.0
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -324,6 +324,11 @@ Its too easy Chose your style from Effects List and click at Clone.
 
 == Changelog ==
 == Upgrade Notice ==
+
+= 9.9.1 =
+*Update Admin Ajax
+*Compatible with 6.3.0
+
 = 9.9.0 =
 *Custom CSS issues
 *Compatible with 6.2.2
@@ -545,6 +550,10 @@ Fixed Escape Issues
 * responsive layout
 
 == Upgrade Notice ==
+= 9.9.1 =
+Update Admin Ajax
+Compatible with 6.3.0
+
 = 9.9.0 =
 Custom CSS issues
 Compatible with 6.2.2

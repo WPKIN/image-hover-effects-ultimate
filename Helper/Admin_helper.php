@@ -6,66 +6,17 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-trait Admin_helper {
+trait Admin_helper
+{
 
-    public function admin_url_convert($agr) {
+    public function admin_url_convert($agr)
+    {
         return admin_url(strpos($agr, 'edit') !== false ? $agr : 'admin.php?page=' . $agr);
     }
 
-    public function SupportAndComments($agr) {
-        if (get_option('oxi_image_support_massage') === 'no') {
-            return;
-        }
-        ?>
 
-        <div class="oxi-addons-admin-notifications">
-            <h3>
-                <span class="dashicons dashicons-flag"></span>
-                Trouble or Need Support?
-            </h3>
-            <p></p>
-            <div class="oxi-addons-admin-notifications-holder">
-                <div class="oxi-addons-admin-notifications-alert">
-                    <p>Unable to create your desire design or need any help? You can
-                        <a href="https://wordpress.org/support/plugin/image-hover-effects-ultimate#new-post">Ask any question</a>
-                        and get reply from our expert members. We will be glad to answer any question you may have about our plugin.
-                    </p>
-        <?php
-        if (apply_filters('oxi-image-hover-plugin-version', false) != true) :
-            ?>
-                        <p>By the way, did you know we also have a
-                            <a href="https://www.oxilabdemos.com/image-hover/pricing/">Premium Version</a>
-                            ? It offers lots of options with automatic update. It also comes with 16/5 personal support.
-                        </p>
-                        <p>Thanks Again!</p>
-            <?php
-        endif;
-        ?>
-
-                    <p></p>
-                </div>
-            </div>
-            <p></p>
-        </div>
-
-        <?php
-    }
-
-    /**
-     * Plugin check Current Tabs
-     *
-     * @since 9.3.0
-     */
-    public function check_current_version($agr) {
-        $vs = get_option($this->fixed_data('696d6167655f686f7665725f756c74696d6174655f6c6963656e73655f737461747573'));
-        if ($vs == $this->fixed_data('76616c6964')) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function Public_loader() {
+    public function Public_loader()
+    {
         global $wpdb;
         $this->wpdb = $wpdb;
         $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
@@ -78,7 +29,8 @@ trait Admin_helper {
      *
      * @since 9.3.0
      */
-    public function fixed_data($agr) {
+    public function fixed_data($agr)
+    {
         return hex2bin($agr);
     }
 
@@ -87,18 +39,20 @@ trait Admin_helper {
      *
      * @since 9.3.0
      */
-    public function fixed_debug_data($str) {
+    public function fixed_debug_data($str)
+    {
         return bin2hex($str);
     }
 
-    public function Admin_Icon() {
-        ?>
+    public function Admin_Icon()
+    {
+?>
         <style type='text/css' media='screen'>
             #adminmenu #toplevel_page_oxi-image-hover-ultimate div.wp-menu-image:before {
                 content: "\f169";
             }
         </style>
-        <?php
+    <?php
     }
 
     /**
@@ -106,7 +60,8 @@ trait Admin_helper {
      *
      * @since 9.3.0
      */
-    public function oxilab_admin_menu($agr) {
+    public function oxilab_admin_menu($agr)
+    {
         $response = [
             'Image Hover' => [
                 'name' => 'Image Hover',
@@ -123,14 +78,13 @@ trait Admin_helper {
         ];
 
         $bgimage = OXI_IMAGE_HOVER_URL . 'image/sm-logo.png';
-        ?>
+    ?>
 
 
         <div class="oxi-addons-wrapper">
             <div class="oxilab-new-admin-menu">
                 <div class="oxi-site-logo">
-                    <a href="<?php echo esc_url($this->admin_url_convert('oxi-image-hover-ultimate')); ?>"
-                       class="header-logo" style=" background-image: url(<?php echo esc_url($bgimage); ?>);">
+                    <a href="<?php echo esc_url($this->admin_url_convert('oxi-image-hover-ultimate')); ?>" class="header-logo" style=" background-image: url(<?php echo esc_url($bgimage); ?>);">
                     </a>
                 </div>
                 <nav class="oxilab-sa-admin-nav">
@@ -140,7 +94,7 @@ trait Admin_helper {
                         $effects = (!empty($_GET['effects']) ? sanitize_text_field($_GET['effects']) : '');
                         if ($effects != '' && $GETPage == 'oxi-image-hover-ultimate') :
                             $url = $this->admin_url_convert('oxi-image-hover-ultimate') . '&effects=' . $effects;
-                            ?>
+                        ?>
 
                             <li class="active">
                                 <a href="<?php echo esc_url($url); ?>">
@@ -153,15 +107,15 @@ trait Admin_helper {
                                     ?>
                                 </a>
                             </li>
-                            <?php
+                        <?php
                         endif;
                         foreach ($response as $key => $value) {
                             $active = (($GETPage == $value['homepage'] && $effects == '') ? 'active ' : '');
-                            ?>
+                        ?>
                             <li class="<?php echo esc_attr($active); ?>">
                                 <a href="<?php echo esc_url($this->admin_url_convert($value['homepage'])); ?>"><?php echo esc_html($this->name_converter($value['name'])); ?></a>
                             </li>
-                            <?php
+                        <?php
                         }
                         ?>
                     </ul>
@@ -169,21 +123,19 @@ trait Admin_helper {
 
                         <?php
                         if (apply_filters('oxi-image-hover-plugin-version', false) == false) :
-                            ?>
+                        ?>
                             <li class="fazil-class">
-                                <a target="_blank"
-                                   href="https://www.oxilabdemos.com/image-hover/pricing/">Upgrade
+                                <a target="_blank" href="https://www.oxilabdemos.com/image-hover/pricing/">Upgrade
                                 </a>
                             </li>
-                            <?php
+                        <?php
                         endif;
                         ?>
                         <li class="saadmin-doc">
                             <a target="_black" href="https://www.oxilabdemos.com/image-hover/docs/">Docs</a>
                         </li>
                         <li class="saadmin-doc">
-                            <a target="_black"
-                               href="https://wordpress.org/support/plugin/image-hover-effects-ultimate/">Support
+                            <a target="_black" href="https://wordpress.org/support/plugin/image-hover-effects-ultimate/">Support
                             </a>
                         </li>
                         <li class="saadmin-set">
@@ -195,10 +147,11 @@ trait Admin_helper {
                 </nav>
             </div>
         </div>
-        <?php
+    <?php
     }
 
-    public function Admin_Menu() {
+    public function Admin_Menu()
+    {
         $user_role = get_option('oxi_image_user_permission');
         $role_object = get_role($user_role);
         $first_key = '';
@@ -216,11 +169,12 @@ trait Admin_helper {
         add_submenu_page('oxi-image-hover-ultimate', 'Oxilab Addons', 'Oxilab Addons', $first_key, 'oxi-image-hover-ultimate-addons', [$this, 'Image_Addons']);
     }
 
-    public function custom_redirect() {
-
+    public function custom_redirect()
+    {
     }
 
-    public function Image_Parent() {
+    public function Image_Parent()
+    {
         $effects = (!empty($_GET['effects']) ? ucfirst(sanitize_text_field($_GET['effects'])) : '');
         $styleid = (!empty($_GET['styleid']) ? (int) $_GET['styleid'] : '');
         if (!empty($effects) && !empty($styleid)) :
@@ -247,19 +201,23 @@ trait Admin_helper {
         endif;
     }
 
-    public function Image_Shortcode() {
+    public function Image_Shortcode()
+    {
         new \OXI_IMAGE_HOVER_PLUGINS\Page\Shortcode();
     }
 
-    public function Image_Addons() {
+    public function Image_Addons()
+    {
         new \OXI_IMAGE_HOVER_PLUGINS\Page\Addons();
     }
 
-    public function Image_Settings() {
+    public function Image_Settings()
+    {
         new \OXI_IMAGE_HOVER_PLUGINS\Page\Settings();
     }
 
-    public function oxi_image_hover_support() {
+    public function oxi_image_hover_support()
+    {
         new \OXI_IMAGE_HOVER_PLUGINS\Page\Welcome();
     }
 
@@ -268,12 +226,14 @@ trait Admin_helper {
      *
      * @since 9.3.0
      */
-    public function admin_notice_status() {
+    public function admin_notice_status()
+    {
         $data = get_option('oxi_image_hover_nobug');
         return $data;
     }
 
-    public function User_Reviews() {
+    public function User_Reviews()
+    {
 
         $user_role = get_option('oxi_image_user_permission');
         $role_object = get_role($user_role);
@@ -296,13 +256,69 @@ trait Admin_helper {
      *
      * @since 9.3.0
      */
-    public function admin_recommended_status() {
+    public function admin_recommended_status()
+    {
 
         $data = get_option('oxi_image_hover_recommended');
         return $data;
     }
+    public function SupportAndComments($agr)
+    {
+        if (get_option('oxi_image_support_massage') === 'no') {
+            return;
+        }
+    ?>
 
-    public function admin_recommended() {
+        <div class="oxi-addons-admin-notifications">
+            <h3>
+                <span class="dashicons dashicons-flag"></span>
+                Trouble or Need Support?
+            </h3>
+            <p></p>
+            <div class="oxi-addons-admin-notifications-holder">
+                <div class="oxi-addons-admin-notifications-alert">
+                    <p>Unable to create your desire design or need any help? You can
+                        <a href="https://wordpress.org/support/plugin/image-hover-effects-ultimate#new-post">Ask any question</a>
+                        and get reply from our expert members. We will be glad to answer any question you may have about our plugin.
+                    </p>
+                    <?php
+                    if (apply_filters('oxi-image-hover-plugin-version', false) != true) :
+                    ?>
+                        <p>By the way, did you know we also have a
+                            <a href="https://www.oxilabdemos.com/image-hover/pricing/">Premium Version</a>
+                            ? It offers lots of options with automatic update. It also comes with 16/5 personal support.
+                        </p>
+                        <p>Thanks Again!</p>
+                    <?php
+                    endif;
+                    ?>
+
+                    <p></p>
+                </div>
+            </div>
+            <p></p>
+        </div>
+
+<?php
+    }
+
+    /**
+     * Plugin check Current Tabs
+     *
+     * @since 9.3.0
+     */
+    public function check_current_version($agr)
+    {
+        $vs = get_option($this->fixed_data('696d6167655f686f7665725f756c74696d6174655f6c6963656e73655f737461747573'));
+        if ($vs == $this->fixed_data('76616c6964')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function admin_recommended()
+    {
 
         if (!empty($this->admin_recommended_status())) :
             return;
@@ -315,7 +331,8 @@ trait Admin_helper {
         new \OXI_IMAGE_HOVER_PLUGINS\Classes\Support_Recommended();
     }
 
-    public function admin_notice() {
+    public function admin_notice()
+    {
         if (!empty($this->admin_notice_status())) :
             return;
         endif;
@@ -330,7 +347,8 @@ trait Admin_helper {
      *
      * @since 9.3.0
      */
-    public function installation_date() {
+    public function installation_date()
+    {
         $data = get_option('oxi_image_hover_activation_date');
         if (empty($data)) :
             $data = strtotime("now");
@@ -339,7 +357,8 @@ trait Admin_helper {
         return $data;
     }
 
-    public function redirect_on_activation() {
+    public function redirect_on_activation()
+    {
         if (get_transient('oxi_image_hover_activation_redirect')) :
             delete_transient('oxi_image_hover_activation_redirect');
             if (is_network_admin() || isset($_GET['activate-multi'])) :
@@ -349,7 +368,8 @@ trait Admin_helper {
         endif;
     }
 
-    public function Admin_Filters() {
+    public function Admin_Filters()
+    {
         add_filter($this->fixed_data('6f78692d696d6167652d686f7665722d737570706f72742d616e642d636f6d6d656e7473'), [$this, $this->fixed_data('537570706f7274416e64436f6d6d656e7473')]);
         add_filter($this->fixed_data('6f78692d696d6167652d686f7665722d706c7567696e2d76657273696f6e'), [$this, $this->fixed_data('636865636b5f63757272656e745f76657273696f6e')]);
         add_filter($this->fixed_data('6f78692d696d6167652d686f7665722d706c7567696e2f61646d696e5f6d656e75'), [$this, $this->fixed_data('6f78696c61625f61646d696e5f6d656e75')]);

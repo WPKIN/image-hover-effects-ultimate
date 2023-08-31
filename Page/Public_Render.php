@@ -11,7 +11,8 @@ if (!defined('ABSPATH')) {
  *
  * @author $biplob018
  */
-class Public_Render {
+class Public_Render
+{
 
     /**
      * Current Elements id
@@ -118,7 +119,8 @@ class Public_Render {
      *
      * @since 9.3.0
      */
-    public function public_frontend_loader() {
+    public function public_frontend_loader()
+    {
         wp_enqueue_script("jquery");
         wp_enqueue_style('oxi-animation', OXI_IMAGE_HOVER_URL . 'assets/frontend/css/animation.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         wp_enqueue_style('oxi-image-hover', OXI_IMAGE_HOVER_URL . 'assets/frontend/css/style.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
@@ -137,7 +139,8 @@ class Public_Render {
      *
      * @since 9.3.0
      */
-    public function hooks() {
+    public function hooks()
+    {
         $this->public_frontend_loader();
         $this->public_jquery();
         $this->public_css();
@@ -187,23 +190,25 @@ class Public_Render {
      *
      * @since 9.3.0
      */
-    public function render() {
+    public function render()
+    {
         if ($this->admin == 'request') :
             $this->default_render($this->style, $this->child, $this->admin);
         else :
-            ?>
+?>
             <div class="oxi-addons-container noLightbox <?php echo esc_attr($this->WRAPPER); ?> <?php echo esc_attr(get_option('oxi_addons_custom_parent_class')); ?>" id="<?php echo esc_attr($this->WRAPPER); ?>">
                 <div class="oxi-addons-row">
-            <?php
-            $this->default_render($this->style, $this->child, $this->admin);
-            ?>
+                    <?php
+                    $this->default_render($this->style, $this->child, $this->admin);
+                    ?>
                 </div>
             </div>
         <?php
         endif;
     }
 
-    public function oxi_addons_admin_edit_delete_clone($param) {
+    public function oxi_addons_admin_edit_delete_clone($param)
+    {
         ?>
         <div class="oxi-addons-admin-absulote">
             <div class="oxi-addons-admin-absulate-edit">
@@ -216,7 +221,7 @@ class Public_Render {
                 <button class="btn btn-danger shortcode-addons-template-item-delete" type="submit" value="<?php echo esc_attr($param); ?>" title="Delete">Del</button>
             </div>
         </div>
-        <?php
+<?php
     }
 
     /**
@@ -224,7 +229,8 @@ class Public_Render {
      *
      * @since 9.3.0
      */
-    public function old_render() {
+    public function old_render()
+    {
         echo '';
     }
 
@@ -233,7 +239,8 @@ class Public_Render {
      *
      * @since 9.3.0
      */
-    public function public_jquery() {
+    public function public_jquery()
+    {
         echo '';
     }
 
@@ -242,7 +249,8 @@ class Public_Render {
      *
      * @since 9.3.0
      */
-    public function public_css() {
+    public function public_css()
+    {
         echo '';
     }
 
@@ -251,7 +259,8 @@ class Public_Render {
      *
      * @since 9.3.0
      */
-    public function inline_public_jquery() {
+    public function inline_public_jquery()
+    {
         echo '';
     }
 
@@ -260,7 +269,8 @@ class Public_Render {
      *
      * @since 9.3.0
      */
-    public function inline_public_css() {
+    public function inline_public_css()
+    {
         echo '';
     }
 
@@ -269,7 +279,8 @@ class Public_Render {
      *
      * @since 9.3.0
      */
-    public function default_render($style, $child, $admin) {
+    public function default_render($style, $child, $admin)
+    {
         echo '';
     }
 
@@ -278,18 +289,21 @@ class Public_Render {
      *
      * @since 9.3.0
      */
-    public function Json_Decode($rawdata) {
+    public function Json_Decode($rawdata)
+    {
         return $rawdata != '' ? json_decode(stripcslashes($rawdata), true) : [];
     }
 
-    public function name_converter($data) {
+    public function name_converter($data)
+    {
         $data = str_replace('_', ' ', $data);
         $data = str_replace('-', ' ', $data);
         $data = str_replace('+', ' ', $data);
         return esc_attr(ucwords($data));
     }
 
-    public function font_familly_validation($data = []) {
+    public function font_familly_validation($data = [])
+    {
         $api = get_option('oxi_addons_google_font');
         if ($api == 'no') :
             return;
@@ -299,7 +313,8 @@ class Public_Render {
         }
     }
 
-    public function font_familly($data = '') {
+    public function font_familly($data = '')
+    {
         $api = get_option('oxi_addons_google_font');
         if ($api != 'no') :
             wp_enqueue_style('' . $data . '', 'https://fonts.googleapis.com/css?family=' . $data . '');
@@ -309,20 +324,23 @@ class Public_Render {
         return '"' . esc_attr($data[0]) . '"';
     }
 
-    public function admin_name_validation($data) {
+    public function admin_name_validation($data)
+    {
         $data = str_replace('_', ' ', $data);
         $data = str_replace('-', ' ', $data);
         $data = str_replace('+', ' ', $data);
         return esc_attr(ucwords($data));
     }
 
-    public function array_render($id, $style) {
+    public function array_render($id, $style)
+    {
         if (array_key_exists($id, $style)) :
             return $style[$id];
         endif;
     }
 
-    public function check_media_render($id, $style) {
+    public function check_media_render($id, $style)
+    {
 
         $url = '';
         if (array_key_exists($id . '-select', $style)) :
@@ -338,7 +356,8 @@ class Public_Render {
         return false;
     }
 
-    public function media_render($id = '', $style = []) {
+    public function media_render($id = '', $style = [])
+    {
         $url = '';
         if (array_key_exists($id . '-select', $style)) :
             if ($style[$id . '-select'] == 'media-library') :
@@ -354,7 +373,8 @@ class Public_Render {
         endif;
     }
 
-    public function media_background_render($id, $style) {
+    public function media_background_render($id, $style)
+    {
         $url = '';
         if (array_key_exists($id . '-select', $style)) :
             if ($style[$id . '-select'] == 'media-library') :
@@ -366,7 +386,260 @@ class Public_Render {
         return esc_url($url);
     }
 
-    public function allowed_html_sanitize($rawdata) {
+
+    public function font_awesome_render($data)
+    {
+        $fadata = get_option('oxi_addons_font_awesome');
+        if ($fadata != 'no') :
+            wp_enqueue_style('font-awsome.min', OXI_IMAGE_HOVER_URL . 'assets/frontend/css/font-awsome.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        endif;
+        echo '<i class="' . esc_attr($data) . ' oxi-icons"></i>';
+    }
+
+    public function tab_column_render($id, $style)
+    {
+        if ($style[$id . '-lap'] == 'oxi-bt-col-lg-8') :
+            return 'oxi-bt-col-md-3';
+        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-5') :
+            return 'oxi-bt-col-md-6';
+        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-4') :
+            return 'oxi-bt-col-md-6';
+        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-3') :
+            return 'oxi-bt-col-md-6';
+        else :
+            return 'oxi-bt-col-md-12';
+        endif;
+    }
+
+    public function mob_column_render($id, $style)
+    {
+
+        if ($style[$id . '-lap'] == 'oxi-bt-col-lg-2') :
+            return 'oxi-bt-col-sm-6';
+        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-8') :
+            return 'oxi-bt-col-sm-6';
+        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-1') :
+            return 'oxi-bt-col-sm-6';
+        else :
+            return 'oxi-bt-col-sm-12';
+        endif;
+    }
+
+    public function column_render($id, $style)
+    {
+        $file = $style[$id . '-lap'] . ' ';
+        if (!array_key_exists($id . '-tab', $style) || $style[$id . '-tab'] == '') :
+            $file .= $this->tab_column_render($id, $style) . ' ';
+        else :
+            $file .= $style[$id . '-tab'] . ' ';
+        endif;
+        if (!array_key_exists($id . '-mob', $style) || $style[$id . '-mob'] == '') :
+            $file .= $this->mob_column_render($id, $style) . ' ';
+        else :
+            $file .= $style[$id . '-mob'] . ' ';
+        endif;
+        echo esc_attr($file);
+    }
+
+    public function checkurl_render($id, $style)
+    {
+
+        if (array_key_exists($id . '-url', $style) && $style[$id . '-url'] != '') :
+            return true;
+        endif;
+        return false;
+    }
+
+    public function url_render($id, $style)
+    {
+
+        if (array_key_exists($id . '-url', $style) && $style[$id . '-url'] != '') :
+            echo ' href="' . esc_url($style[$id . '-url']) . '"';
+            if (array_key_exists($id . '-target', $style) && $style[$id . '-target'] != '0') :
+                echo ' target="_blank"';
+            endif;
+            if (array_key_exists($id . '-follow', $style) && $style[$id . '-follow'] != '0') :
+                echo ' rel="nofollow"';
+            endif;
+            if (array_key_exists($id . '-id', $style) && $style[$id . '-id']) :
+                echo ($style[$id . '-id'] != '' ? ' id="' . esc_attr($style[$id . '-id']) . '"' : '');
+            endif;
+        endif;
+    }
+
+    public function animation_render($id, $style)
+    {
+
+        if (array_key_exists($id . '-type', $style) && $style[$id . '-type'] != '') :
+            echo 'sa-data-animation="' . esc_attr($style[$id . '-type']);
+            if (array_key_exists($id . '-looping', $style) && $style[$id . '-looping'] != '0') :
+                echo 'infinite';
+            endif;
+            echo '"';
+            echo (array_key_exists($id . '-offset-size', $style) ? ' sa-data-animation-offset="' . esc_attr($style[$id . '-offset-size']) . '%"' : '');
+            echo (array_key_exists($id . '-delay-size', $style) ? ' sa-data-animation-delay="' . esc_attr($style[$id . '-delay-size']) . 'ms"' : '');
+            echo (array_key_exists($id . '-duration-size', $style) ? ' sa-data-animation-duration="' . esc_attr($style[$id . '-duration-size']) . 'ms"' : '');
+
+        endif;
+    }
+
+    public function background_render($id, $style, $class)
+    {
+        $backround = '';
+        if (array_key_exists($id . '-color', $style)) :
+            $color = $style[$id . '-color'];
+            if (array_key_exists($id . '-img', $style) && $style[$id . '-img'] != '0') :
+                if (strpos(strtolower($color), 'gradient') === FALSE) :
+                    $color = 'linear-gradient(0deg, ' . $color . ' 0%, ' . $color . ' 100%)';
+                endif;
+                if ($style[$id . '-select'] == 'media-library') :
+                    $backround .= $class . '{background: ' . $color . ', url(\'' . $style[$id . '-image'] . '\') ' . $style[$id . '-repeat'] . ' ' . $style[$id . '-position'] . ';
+                                           background-attachment: ' . $style[$id . '-attachment'] . ';
+                                           background-size:  ' . $style[$id . '-size-lap'] . ';}';
+                    $backround .= '@media only screen and (min-width : 669px) and (max-width : 993px){';
+                    $backround .= $class . '{background-size:  ' . $style[$id . '-size-tab'] . ';}';
+                    $backround .= '}';
+                    $backround .= '@media only screen and (max-width : 668px){';
+                    $backround .= $class . '{background-size:  ' . $style[$id . '-size-mob'] . ';}';
+                    $backround .= '}';
+                else :
+                    $backround .= $class . '{background: ' . $color . ', url(\'' . $style[$id . '-url'] . '\') ' . $style[$id . '-repeat'] . ' ' . $style[$id . '-position'] . ';
+                                           background-attachment: ' . $style[$id . '-attachment'] . ';
+                                           background-size:  ' . $style[$id . '-size-lap'] . ';}';
+                    $backround .= '@media only screen and (min-width : 669px) and (max-width : 993px){';
+                    $backround .= $class . '{background-size:  ' . $style[$id . '-size-tab'] . ';}';
+                    $backround .= '}';
+                    $backround .= '@media only screen and (max-width : 668px){';
+                    $backround .= $class . '{background-size:  ' . $style[$id . '-size-mob'] . ';}';
+                    $backround .= '}';
+                endif;
+            else :
+                $backround .= $class . '{background: ' . $color . ';}';
+            endif;
+        endif;
+        return $backround;
+    }
+
+    public function CatStringToClassReplacce($string, $number = '000')
+    {
+        $entities = array('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', "t");
+        $replacements = array('!', '*', "'", "(", ")", ";", ":", "@", "&", "=", "+", "$", ",", "/", "?", "%", "#", "[", "]", " ");
+        return 'sa_STCR_' . str_replace($replacements, $entities, urlencode($string)) . $number;
+    }
+
+    public function old_column_render($d, $type)
+    {
+        if ($d == 'image-ultimate-responsive-1') :
+            if ($type == 'lap') :
+                return 'oxi-bt-col-lg-12';
+            elseif ($type == 'tab') :
+                return 'oxi-bt-col-md-12';
+            elseif ($type == 'mob') :
+                return 'oxi-bt-col-sm-12';
+            endif;
+        elseif ($d == 'image-ultimate-responsive-2') :
+            if ($type == 'lap') :
+                return 'oxi-bt-col-lg-6';
+            elseif ($type == 'tab') :
+                return 'oxi-bt-col-md-6';
+            elseif ($type == 'mob') :
+                return 'oxi-bt-col-sm-12';
+            endif;
+        elseif ($d == 'image-ultimate-responsive-3') :
+            if ($type == 'lap') :
+                return 'oxi-bt-col-lg-4';
+            elseif ($type == 'tab') :
+                return 'oxi-bt-col-md-6';
+            elseif ($type == 'mob') :
+                return 'oxi-bt-col-sm-12';
+            endif;
+        elseif ($d == 'image-ultimate-responsive-4') :
+            if ($type == 'lap') :
+                return 'oxi-bt-col-lg-3';
+            elseif ($type == 'tab') :
+                return 'oxi-bt-col-md-6';
+            elseif ($type == 'mob') :
+                return 'oxi-bt-col-sm-12';
+            endif;
+        elseif ($d == 'image-ultimate-responsive-5') :
+            if ($type == 'lap') :
+                return 'oxi-bt-col-lg-3';
+            elseif ($type == 'tab') :
+                return 'oxi-bt-col-md-6';
+            elseif ($type == 'mob') :
+                return 'oxi-bt-col-sm-12';
+            endif;
+        elseif ($d == 'image-ultimate-responsive-6') :
+            if ($type == 'lap') :
+                return 'oxi-bt-col-lg-2';
+            elseif ($type == 'tab') :
+                return 'oxi-bt-col-md-3';
+            elseif ($type == 'mob') :
+                return 'oxi-bt-col-sm-6';
+            endif;
+        endif;
+    }
+
+    public function old_button_alignment_render($d)
+    {
+        if ($d == 'float: left;') :
+            return 'left';
+        elseif ($d == 'margin: 0 auto;') :
+            return 'center';
+        elseif ($d == 'float: right;') :
+            return 'right';
+        endif;
+    }
+
+    public function old_alignment_render($d)
+    {
+        if ($d == 'vertical-align: top;text-align: left;') :
+            return 'image-hover-align-top-top';
+        elseif ($d == 'vertical-align: top;text-align: center;') :
+            return 'image-hover-align-top-center';
+        elseif ($d == 'vertical-align: top;text-align: right;') :
+            return 'image-hover-align-top-right';
+        elseif ($d == 'vertical-align: middle;text-align: left;') :
+            return 'image-hover-align-center-left';
+        elseif ($d == 'vertical-align: middle;text-align: center;') :
+            return 'image-hover-align-center-center';
+        elseif ($d == 'vertical-align: middle;text-align: right;') :
+            return 'image-hover-align-center-right';
+        elseif ($d == 'vertical-align: bottom;text-align: left;') :
+            return 'image-hover-align-bottom-left';
+        elseif ($d == 'vertical-align: bottom;text-align: center;') :
+            return 'image-hover-align-bottom-center';
+        elseif ($d == 'vertical-align: bottom;text-align: right;') :
+            return 'image-hover-align-bottom-right';
+        endif;
+    }
+
+    public function __construct(array $dbdata = [], array $child = [], $admin = 'user')
+    {
+        if (count($dbdata) > 0) :
+            global $wpdb;
+            $this->dbdata = $dbdata;
+            $this->child = $child;
+            $this->admin = $admin;
+            $this->wpdb = $wpdb;
+            $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
+            $this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
+
+            if (array_key_exists('id', $this->dbdata)) :
+                $this->oxiid = (int) $this->dbdata['id'];
+            else :
+                $this->oxiid = rand(100000, 200000);
+            endif;
+            if (!empty($dbdata['rawdata'])) :
+                $this->loader();
+            else :
+                $this->old_loader();
+            endif;
+
+        endif;
+    }
+    public function allowed_html_sanitize($rawdata)
+    {
         $allowed_tags = array(
             'a' => array(
                 'class' => array(),
@@ -458,15 +731,18 @@ class Public_Render {
         echo wp_kses($rawdata, $allowed_tags);
     }
 
-    public function text_render($data) {
+    public function text_render($data)
+    {
         echo wp_kses_post(do_shortcode(str_replace('spTac', '&nbsp;', str_replace('spBac', '<br>', html_entity_decode($data))), $ignore_html = false));
     }
 
-    public function return_text($data) {
+    public function return_text($data)
+    {
         return wp_kses_post(do_shortcode(str_replace('spTac', '&nbsp;', str_replace('spBac', '<br>', html_entity_decode($data))), $ignore_html = false));
     }
 
-    public function custom_font_awesome_render($data) {
+    public function custom_font_awesome_render($data)
+    {
         $fadata = get_option('oxi_addons_font_awesome');
         if ($fadata != 'no') :
             wp_enqueue_style('font-awsome.min', OXI_IMAGE_HOVER_URL . 'assets/frontend/css/font-awsome.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
@@ -474,251 +750,13 @@ class Public_Render {
         return '<i class="' . esc_attr($data) . ' oxi-icons"></i>';
     }
 
-    public function font_awesome_render($data) {
-        $fadata = get_option('oxi_addons_font_awesome');
-        if ($fadata != 'no') :
-            wp_enqueue_style('font-awsome.min', OXI_IMAGE_HOVER_URL . 'assets/frontend/css/font-awsome.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        endif;
-        echo '<i class="' . esc_attr($data) . ' oxi-icons"></i>';
-    }
-
-    public function tab_column_render($id, $style) {
-        if ($style[$id . '-lap'] == 'oxi-bt-col-lg-8') :
-            return 'oxi-bt-col-md-3';
-        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-5') :
-            return 'oxi-bt-col-md-6';
-        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-4') :
-            return 'oxi-bt-col-md-6';
-        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-3') :
-            return 'oxi-bt-col-md-6';
-        else :
-            return 'oxi-bt-col-md-12';
-        endif;
-    }
-
-    public function mob_column_render($id, $style) {
-
-        if ($style[$id . '-lap'] == 'oxi-bt-col-lg-2') :
-            return 'oxi-bt-col-sm-6';
-        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-8') :
-            return 'oxi-bt-col-sm-6';
-        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-1') :
-            return 'oxi-bt-col-sm-6';
-        else :
-            return 'oxi-bt-col-sm-12';
-        endif;
-    }
-
-    public function column_render($id, $style) {
-        $file = $style[$id . '-lap'] . ' ';
-        if (!array_key_exists($id . '-tab', $style) || $style[$id . '-tab'] == '') :
-            $file .= $this->tab_column_render($id, $style) . ' ';
-        else :
-            $file .= $style[$id . '-tab'] . ' ';
-        endif;
-        if (!array_key_exists($id . '-mob', $style) || $style[$id . '-mob'] == '') :
-            $file .= $this->mob_column_render($id, $style) . ' ';
-        else :
-            $file .= $style[$id . '-mob'] . ' ';
-        endif;
-        echo esc_attr($file);
-    }
-
-    public function checkurl_render($id, $style) {
-
-        if (array_key_exists($id . '-url', $style) && $style[$id . '-url'] != '') :
-            return true;
-        endif;
-        return false;
-    }
-
-    public function url_render($id, $style) {
-
-        if (array_key_exists($id . '-url', $style) && $style[$id . '-url'] != '') :
-            echo ' href="' . esc_url($style[$id . '-url']) . '"';
-            if (array_key_exists($id . '-target', $style) && $style[$id . '-target'] != '0') :
-                echo ' target="_blank"';
-            endif;
-            if (array_key_exists($id . '-follow', $style) && $style[$id . '-follow'] != '0') :
-                echo ' rel="nofollow"';
-            endif;
-            if (array_key_exists($id . '-id', $style) && $style[$id . '-id']) :
-                echo ($style[$id . '-id'] != '' ? ' id="' . esc_attr($style[$id . '-id']) . '"' : '');
-            endif;
-        endif;
-    }
-
-    public function animation_render($id, $style) {
-
-        if (array_key_exists($id . '-type', $style) && $style[$id . '-type'] != '') :
-            echo 'sa-data-animation="' . esc_attr($style[$id . '-type']);
-            if (array_key_exists($id . '-looping', $style) && $style[$id . '-looping'] != '0') :
-                echo 'infinite';
-            endif;
-            echo '"';
-            echo (array_key_exists($id . '-offset-size', $style) ? ' sa-data-animation-offset="' . esc_attr($style[$id . '-offset-size']) . '%"' : '');
-            echo (array_key_exists($id . '-delay-size', $style) ? ' sa-data-animation-delay="' . esc_attr($style[$id . '-delay-size']) . 'ms"' : '');
-            echo (array_key_exists($id . '-duration-size', $style) ? ' sa-data-animation-duration="' . esc_attr($style[$id . '-duration-size']) . 'ms"' : '');
-
-        endif;
-    }
-
-    public function background_render($id, $style, $class) {
-        $backround = '';
-        if (array_key_exists($id . '-color', $style)) :
-            $color = $style[$id . '-color'];
-            if (array_key_exists($id . '-img', $style) && $style[$id . '-img'] != '0') :
-                if (strpos(strtolower($color), 'gradient') === FALSE) :
-                    $color = 'linear-gradient(0deg, ' . $color . ' 0%, ' . $color . ' 100%)';
-                endif;
-                if ($style[$id . '-select'] == 'media-library') :
-                    $backround .= $class . '{background: ' . $color . ', url(\'' . $style[$id . '-image'] . '\') ' . $style[$id . '-repeat'] . ' ' . $style[$id . '-position'] . ';
-                                           background-attachment: ' . $style[$id . '-attachment'] . ';
-                                           background-size:  ' . $style[$id . '-size-lap'] . ';}';
-                    $backround .= '@media only screen and (min-width : 669px) and (max-width : 993px){';
-                    $backround .= $class . '{background-size:  ' . $style[$id . '-size-tab'] . ';}';
-                    $backround .= '}';
-                    $backround .= '@media only screen and (max-width : 668px){';
-                    $backround .= $class . '{background-size:  ' . $style[$id . '-size-mob'] . ';}';
-                    $backround .= '}';
-                else :
-                    $backround .= $class . '{background: ' . $color . ', url(\'' . $style[$id . '-url'] . '\') ' . $style[$id . '-repeat'] . ' ' . $style[$id . '-position'] . ';
-                                           background-attachment: ' . $style[$id . '-attachment'] . ';
-                                           background-size:  ' . $style[$id . '-size-lap'] . ';}';
-                    $backround .= '@media only screen and (min-width : 669px) and (max-width : 993px){';
-                    $backround .= $class . '{background-size:  ' . $style[$id . '-size-tab'] . ';}';
-                    $backround .= '}';
-                    $backround .= '@media only screen and (max-width : 668px){';
-                    $backround .= $class . '{background-size:  ' . $style[$id . '-size-mob'] . ';}';
-                    $backround .= '}';
-                endif;
-            else :
-                $backround .= $class . '{background: ' . $color . ';}';
-            endif;
-        endif;
-        return $backround;
-    }
-
-    public function CatStringToClassReplacce($string, $number = '000') {
-        $entities = array('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', "t");
-        $replacements = array('!', '*', "'", "(", ")", ";", ":", "@", "&", "=", "+", "$", ",", "/", "?", "%", "#", "[", "]", " ");
-        return 'sa_STCR_' . str_replace($replacements, $entities, urlencode($string)) . $number;
-    }
-
-    public function old_column_render($d, $type) {
-        if ($d == 'image-ultimate-responsive-1') :
-            if ($type == 'lap') :
-                return 'oxi-bt-col-lg-12';
-            elseif ($type == 'tab') :
-                return 'oxi-bt-col-md-12';
-            elseif ($type == 'mob') :
-                return 'oxi-bt-col-sm-12';
-            endif;
-        elseif ($d == 'image-ultimate-responsive-2') :
-            if ($type == 'lap') :
-                return 'oxi-bt-col-lg-6';
-            elseif ($type == 'tab') :
-                return 'oxi-bt-col-md-6';
-            elseif ($type == 'mob') :
-                return 'oxi-bt-col-sm-12';
-            endif;
-        elseif ($d == 'image-ultimate-responsive-3') :
-            if ($type == 'lap') :
-                return 'oxi-bt-col-lg-4';
-            elseif ($type == 'tab') :
-                return 'oxi-bt-col-md-6';
-            elseif ($type == 'mob') :
-                return 'oxi-bt-col-sm-12';
-            endif;
-        elseif ($d == 'image-ultimate-responsive-4') :
-            if ($type == 'lap') :
-                return 'oxi-bt-col-lg-3';
-            elseif ($type == 'tab') :
-                return 'oxi-bt-col-md-6';
-            elseif ($type == 'mob') :
-                return 'oxi-bt-col-sm-12';
-            endif;
-        elseif ($d == 'image-ultimate-responsive-5') :
-            if ($type == 'lap') :
-                return 'oxi-bt-col-lg-3';
-            elseif ($type == 'tab') :
-                return 'oxi-bt-col-md-6';
-            elseif ($type == 'mob') :
-                return 'oxi-bt-col-sm-12';
-            endif;
-        elseif ($d == 'image-ultimate-responsive-6') :
-            if ($type == 'lap') :
-                return 'oxi-bt-col-lg-2';
-            elseif ($type == 'tab') :
-                return 'oxi-bt-col-md-3';
-            elseif ($type == 'mob') :
-                return 'oxi-bt-col-sm-6';
-            endif;
-        endif;
-    }
-
-    public function old_button_alignment_render($d) {
-        if ($d == 'float: left;') :
-            return 'left';
-        elseif ($d == 'margin: 0 auto;') :
-            return 'center';
-        elseif ($d == 'float: right;') :
-            return 'right';
-        endif;
-    }
-
-    public function old_alignment_render($d) {
-        if ($d == 'vertical-align: top;text-align: left;') :
-            return 'image-hover-align-top-top';
-        elseif ($d == 'vertical-align: top;text-align: center;') :
-            return 'image-hover-align-top-center';
-        elseif ($d == 'vertical-align: top;text-align: right;') :
-            return 'image-hover-align-top-right';
-        elseif ($d == 'vertical-align: middle;text-align: left;') :
-            return 'image-hover-align-center-left';
-        elseif ($d == 'vertical-align: middle;text-align: center;') :
-            return 'image-hover-align-center-center';
-        elseif ($d == 'vertical-align: middle;text-align: right;') :
-            return 'image-hover-align-center-right';
-        elseif ($d == 'vertical-align: bottom;text-align: left;') :
-            return 'image-hover-align-bottom-left';
-        elseif ($d == 'vertical-align: bottom;text-align: center;') :
-            return 'image-hover-align-bottom-center';
-        elseif ($d == 'vertical-align: bottom;text-align: right;') :
-            return 'image-hover-align-bottom-right';
-        endif;
-    }
-
-    public function __construct(array $dbdata = [], array $child = [], $admin = 'user') {
-        if (count($dbdata) > 0) :
-            global $wpdb;
-            $this->dbdata = $dbdata;
-            $this->child = $child;
-            $this->admin = $admin;
-            $this->wpdb = $wpdb;
-            $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
-            $this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
-
-            if (array_key_exists('id', $this->dbdata)) :
-                $this->oxiid = (int) $this->dbdata['id'];
-            else :
-                $this->oxiid = rand(100000, 200000);
-            endif;
-            if (!empty($dbdata['rawdata'])) :
-                $this->loader();
-            else :
-                $this->old_loader();
-            endif;
-
-        endif;
-    }
-
     /**
      * Current element loader
      *
      * @since 9.3.0
      */
-    public function loader() {
+    public function loader()
+    {
         $this->style = json_decode(stripslashes($this->dbdata['rawdata']), true);
         $this->CSSDATA = $this->dbdata['stylesheet'];
         $this->WRAPPER = 'oxi-image-hover-wrapper-' . $this->dbdata['id'];
@@ -730,7 +768,8 @@ class Public_Render {
      *
      * @since 9.3.0
      */
-    public function old_loader() {
+    public function old_loader()
+    {
         $this->old_render();
     }
 }
