@@ -81,10 +81,12 @@ class Style_1_Post_Query {
                     $rawdata['image_hover_image-image'] = esc_url(wp_get_attachment_image_url(get_post_thumbnail_id(), $style['display_post_thumb_sizes']));
                     $rawdata['image_hover_image-select'] = 'media-library';
                 endif;
-                $rawdata['image_hover_heading'] = get_the_title();
+                $title = get_the_title();
+                $utf8_title = mb_convert_encoding($title, 'UTF-8', mb_detect_encoding($title));
+                $rawdata['image_hover_heading'] = $utf8_title;
                 $rawdata['image_hover_description'] = implode(" ", array_slice(explode(" ", strip_tags(strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()))), 0, $style['display_post_excerpt'])) . ' ...';
                 $rawdata['image_hover_button_link-url'] = get_the_permalink();
-                $postdata[$i]['rawdata'] = json_encode($rawdata);
+                $postdata[$i]['rawdata'] = json_encode($rawdata, JSON_UNESCAPED_UNICODE);
                 $i++;
             }
         } else {
