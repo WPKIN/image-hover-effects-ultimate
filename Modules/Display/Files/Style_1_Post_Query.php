@@ -55,6 +55,10 @@ class Style_1_Post_Query {
         return $this->post_query($rawdata, $args, $style);
     }
 
+    public function unicode_converter( $text ) {
+        return mb_convert_encoding( $text, 'UTF-8', mb_detect_encoding($text) );
+    }
+
     public function post_query($rawdata, $args, $style) {
         $styleid = $style['display_post_style'];
         $styledata = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $styleid), ARRAY_A);
@@ -81,10 +85,9 @@ class Style_1_Post_Query {
                     $rawdata['image_hover_image-image'] = esc_url(wp_get_attachment_image_url(get_post_thumbnail_id(), $style['display_post_thumb_sizes']));
                     $rawdata['image_hover_image-select'] = 'media-library';
                 endif;
-                $title = get_the_title();
-                $utf8_title = mb_convert_encoding($title, 'UTF-8', mb_detect_encoding($title));
-                $rawdata['image_hover_heading'] = $utf8_title;
-                $rawdata['image_hover_description'] = implode(" ", array_slice(explode(" ", strip_tags(strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()))), 0, $style['display_post_excerpt'])) . ' ...';
+                $rawdata['image_hover_heading'] = $this->unicode_converter( get_the_title() );
+                $description = implode(" ", array_slice(explode(" ", strip_tags(strip_shortcodes(get_the_excerpt() ? get_the_excerpt() : get_the_content()))), 0, $style['display_post_excerpt'])) . ' ...';
+                $rawdata['image_hover_description'] = $this->unicode_converter( $description );
                 $rawdata['image_hover_button_link-url'] = get_the_permalink();
                 $postdata[$i]['rawdata'] = json_encode($rawdata, JSON_UNESCAPED_UNICODE);
                 $i++;
