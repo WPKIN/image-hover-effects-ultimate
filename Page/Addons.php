@@ -107,27 +107,7 @@ class Addons
 
         wp_add_inline_script('oxilab-bootstrap', $data);
     }
-    public function Header()
-    {
-        apply_filters('oxi-image-hover-plugin/admin_menu', TRUE);
-        $this->Admin_header();
-    }
 
-    public function extension()
-    {
-        $response = get_transient(self::GET_LOCAL_PLUGINS);
-        if (!$response || !is_array($response)) {
-            $URL = self::PLUGINS;
-            $request = wp_remote_request($URL);
-            if (!is_wp_error($request)) {
-                $response = json_decode(wp_remote_retrieve_body($request), true);
-                set_transient(self::GET_LOCAL_PLUGINS, $response, 10 * DAY_IN_SECONDS);
-            } else {
-                $response = $request->get_error_message();
-            }
-        }
-        $this->get_plugins = $response;
-    }
 
     public function Admin_header()
     {
@@ -152,7 +132,27 @@ class Addons
 
         return self::$instance;
     }
+    public function Header()
+    {
+        apply_filters('oxi-image-hover-plugin/admin_menu', TRUE);
+        $this->Admin_header();
+    }
 
+    public function extension()
+    {
+        $response = get_transient(self::GET_LOCAL_PLUGINS);
+        if (!$response || !is_array($response)) {
+            $URL = self::PLUGINS;
+            $request = wp_remote_request($URL);
+            if (!is_wp_error($request)) {
+                $response = json_decode(wp_remote_retrieve_body($request), true);
+                set_transient(self::GET_LOCAL_PLUGINS, $response, 10 * DAY_IN_SECONDS);
+            } else {
+                $response = $request->get_error_message();
+            }
+        }
+        $this->get_plugins = $response;
+    }
     public function __construct()
     {
         $this->CSSJS_load();

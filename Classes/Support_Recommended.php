@@ -40,48 +40,6 @@ class Support_Recommended
         add_action('admin_notices', [$this, 'dismiss_button_scripts']);
     }
 
-    public function ajax_action()
-    {
-
-        $wpnonce = sanitize_key(wp_unslash($_POST['_wpnonce']));
-        if (!wp_verify_nonce($wpnonce, 'image_hover_ultimate')) :
-            return new \WP_REST_Request('Invalid URL', 422);
-            die();
-        endif;
-
-        $notice = $_POST['notice'];
-        update_option('oxi_image_hover_recommended', $notice);
-        echo $notice;
-        die();
-    }
-
-    /**
-     * Admin Notice JS file loader
-     * @return void
-     */
-    public function dismiss_button_scripts()
-    {
-        wp_enqueue_script('oxi-image-admin-recommended', OXI_IMAGE_HOVER_URL . 'assets/backend/js/admin-recommended.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        wp_localize_script(
-            'oxi-image-admin-recommended',
-            'oxi_image_admin_recommended',
-            [
-                'ajaxurl' => admin_url('admin-ajax.php'),
-                'nonce' => wp_create_nonce('image_hover_ultimate')
-            ]
-        );
-    }
-    /**
-     * Admin Notice CSS file loader
-     * @return void
-     */
-    public function admin_enqueue_scripts()
-    {
-        wp_enqueue_script("jquery");
-        wp_enqueue_style('oxi-image-admin-notice-css', OXI_IMAGE_HOVER_URL . 'assets/backend/css/notice.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        $this->dismiss_button_scripts();
-    }
-
     /**
      * First Installation Track
      * @return void
@@ -148,6 +106,48 @@ class Support_Recommended
 <?php
         endif;
     }
+
+    /**
+     * Admin Notice JS file loader
+     * @return void
+     */
+    public function dismiss_button_scripts()
+    {
+        wp_enqueue_script('oxi-image-admin-recommended', OXI_IMAGE_HOVER_URL . 'assets/backend/js/admin-recommended.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_localize_script(
+            'oxi-image-admin-recommended',
+            'oxi_image_admin_recommended',
+            [
+                'ajaxurl' => admin_url('admin-ajax.php'),
+                'nonce' => wp_create_nonce('image_hover_ultimate')
+            ]
+        );
+    }
+    /**
+     * Admin Notice CSS file loader
+     * @return void
+     */
+    public function admin_enqueue_scripts()
+    {
+        wp_enqueue_script("jquery");
+        wp_enqueue_style('oxi-image-admin-notice-css', OXI_IMAGE_HOVER_URL . 'assets/backend/css/notice.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        $this->dismiss_button_scripts();
+    }
+    public function ajax_action()
+    {
+
+        $wpnonce = sanitize_key(wp_unslash($_POST['_wpnonce']));
+        if (!wp_verify_nonce($wpnonce, 'image_hover_ultimate')) :
+            return new \WP_REST_Request('Invalid URL', 422);
+            die();
+        endif;
+
+        $notice = $_POST['notice'];
+        update_option('oxi_image_hover_recommended', $notice);
+        echo $notice;
+        die();
+    }
+    
 
     public function extension()
     {

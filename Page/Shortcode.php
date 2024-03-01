@@ -40,65 +40,7 @@ class Shortcode
     use \OXI_IMAGE_HOVER_PLUGINS\Helper\Public_Helper;
     use \OXI_IMAGE_HOVER_PLUGINS\Helper\CSS_JS_Loader;
 
-    public function database_data()
-    {
-        return $this->wpdb->get_results("SELECT * FROM  $this->parent_table ORDER BY id DESC", ARRAY_A);
-    }
-
-    /**
-     * Generate safe path
-     * @since v1.0.0
-     */
-    public function safe_path($path)
-    {
-
-        $path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
-        return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
-    }
-
-    public function manual_import_style()
-    {
-        if (!empty($_REQUEST['_wpnonce'])) {
-            $nonce = $_REQUEST['_wpnonce'];
-        }
-
-        if (!empty($_POST['importdatasubmit']) && sanitize_text_field($_POST['importdatasubmit']) == 'Save') {
-            if (!wp_verify_nonce($nonce, 'image-hover-effects-ultimate-import')) {
-                die('You do not have sufficient permissions to access this page.');
-            } else {
-                if (isset($_FILES['importimagehoverultimatefile'])) :
-                    $filename = $_FILES["importimagehoverultimatefile"]["name"];
-
-                    if (!current_user_can('upload_files')) :
-                        wp_die(__('You do not have permission to upload files.'));
-                    endif;
-
-                    $allowedMimes = [
-                        'json' => 'text/plain'
-                    ];
-
-                    $fileInfo = wp_check_filetype(basename($_FILES['importimagehoverultimatefile']['name']), $allowedMimes);
-                    if (empty($fileInfo['ext'])) {
-                        wp_die(__('You do not have permission to upload files.'));
-                    }
-
-                    $content = json_decode(file_get_contents($_FILES['importimagehoverultimatefile']['tmp_name']), true);
-
-                    if (empty($content)) {
-                        return new \WP_Error('file_error', 'Invalid File');
-                    }
-                    $style = $content['style'];
-                    if (!is_array($style)) {
-                        return new \WP_Error('file_error', 'Invalid Content In File');
-                    }
-                    $ImportApi = new \OXI_IMAGE_HOVER_PLUGINS\Classes\ImageApi;
-                    $new_slug = $ImportApi->post_json_import($content);
-                    echo '<script type="text/javascript"> document.location.href = "' . $new_slug . '"; </script>';
-                    exit;
-                endif;
-            }
-        }
-    }
+   
 
     public function Render()
     {
@@ -242,6 +184,65 @@ class Shortcode
         $data = str_replace('-', ' ', $data);
         $data = str_replace('+', ' ', $data);
         echo esc_html(ucwords($data));
+    }
+    public function database_data()
+    {
+        return $this->wpdb->get_results("SELECT * FROM  $this->parent_table ORDER BY id DESC", ARRAY_A);
+    }
+
+    /**
+     * Generate safe path
+     * @since v1.0.0
+     */
+    public function safe_path($path)
+    {
+
+        $path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
+        return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
+    }
+
+    public function manual_import_style()
+    {
+        if (!empty($_REQUEST['_wpnonce'])) {
+            $nonce = $_REQUEST['_wpnonce'];
+        }
+
+        if (!empty($_POST['importdatasubmit']) && sanitize_text_field($_POST['importdatasubmit']) == 'Save') {
+            if (!wp_verify_nonce($nonce, 'image-hover-effects-ultimate-import')) {
+                die('You do not have sufficient permissions to access this page.');
+            } else {
+                if (isset($_FILES['importimagehoverultimatefile'])) :
+                    $filename = $_FILES["importimagehoverultimatefile"]["name"];
+
+                    if (!current_user_can('upload_files')) :
+                        wp_die(__('You do not have permission to upload files.'));
+                    endif;
+
+                    $allowedMimes = [
+                        'json' => 'text/plain'
+                    ];
+
+                    $fileInfo = wp_check_filetype(basename($_FILES['importimagehoverultimatefile']['name']), $allowedMimes);
+                    if (empty($fileInfo['ext'])) {
+                        wp_die(__('You do not have permission to upload files.'));
+                    }
+
+                    $content = json_decode(file_get_contents($_FILES['importimagehoverultimatefile']['tmp_name']), true);
+
+                    if (empty($content)) {
+                        return new \WP_Error('file_error', 'Invalid File');
+                    }
+                    $style = $content['style'];
+                    if (!is_array($style)) {
+                        return new \WP_Error('file_error', 'Invalid Content In File');
+                    }
+                    $ImportApi = new \OXI_IMAGE_HOVER_PLUGINS\Classes\ImageApi;
+                    $new_slug = $ImportApi->post_json_import($content);
+                    echo '<script type="text/javascript"> document.location.href = "' . $new_slug . '"; </script>';
+                    exit;
+                endif;
+            }
+        }
     }
     public function created_shortcode()
     {

@@ -10,7 +10,8 @@ if (!defined('ABSPATH')) {
  * Description of Admin Controller
  * @author $biplob018
  */
-class Controls {
+class Controls
+{
 
     /**
      * Text control.
@@ -27,30 +28,7 @@ class Controls {
      */
     const WYSIWYG = 'wysiwyg';
 
-    /**
-     * Hidden control.
-     */
-    const HIDDEN = 'hidden';
 
-    /**
-     * Number control.
-     */
-    const NUMBER = 'number';
-
-    /**
-     * Slider control.
-     */
-    const SLIDER = 'slider';
-
-    /**
-     * Select control.
-     */
-    const SELECT = 'select';
-
-    /**
-     * Switcher control.
-     */
-    const SWITCHER = 'switcher';
 
     /**
      * Choose control.
@@ -131,7 +109,30 @@ class Controls {
      * Heading Control.
      */
     const HEADING = 'heading';
+    /**
+     * Hidden control.
+     */
+    const HIDDEN = 'hidden';
 
+    /**
+     * Number control.
+     */
+    const NUMBER = 'number';
+
+    /**
+     * Slider control.
+     */
+    const SLIDER = 'slider';
+
+    /**
+     * Select control.
+     */
+    const SELECT = 'select';
+
+    /**
+     * Switcher control.
+     */
+    const SWITCHER = 'switcher';
     /*
      *
      * Group Control

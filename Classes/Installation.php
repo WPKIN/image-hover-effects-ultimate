@@ -23,6 +23,34 @@ class Installation {
 
     }
 
+    /**
+     * Plugin fixed
+     *
+     * @since 9.3.0
+     */
+    public function fixed_data($agr) {
+        return hex2bin($agr);
+    }
+
+    /**
+     * Plugin fixed debugging data
+     *
+     * @since 9.3.0
+     */
+    public function fixed_debug_data($str) {
+        return bin2hex($str);
+    }
+
+    /**
+     * Access plugin instance. You can create further instances by calling
+     */
+    public static function get_instance() {
+        if (NULL === self::$lfe_instance)
+            self::$lfe_instance = new self;
+
+        return self::$lfe_instance;
+    }
+
     public function Image_Hover_Database() {
         global $wpdb;
         $table_name = $wpdb->prefix . 'image_hover_ultimate_style';
@@ -59,33 +87,7 @@ class Installation {
         add_option('oxi_image_hover_version', OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
 
-    /**
-     * Plugin fixed
-     *
-     * @since 9.3.0
-     */
-    public function fixed_data($agr) {
-        return hex2bin($agr);
-    }
-
-    /**
-     * Plugin fixed debugging data
-     *
-     * @since 9.3.0
-     */
-    public function fixed_debug_data($str) {
-        return bin2hex($str);
-    }
-
-    /**
-     * Access plugin instance. You can create further instances by calling
-     */
-    public static function get_instance() {
-        if (NULL === self::$lfe_instance)
-            self::$lfe_instance = new self;
-
-        return self::$lfe_instance;
-    }
+    
 
     /**
      * Plugin upgrade hook

@@ -15,35 +15,7 @@ trait Admin_helper
     }
 
 
-    public function Public_loader()
-    {
-        global $wpdb;
-        $this->wpdb = $wpdb;
-        $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
-        $this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
-        $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
-    }
-
-    /**
-     * Plugin fixed
-     *
-     * @since 9.3.0
-     */
-    public function fixed_data($agr)
-    {
-        return hex2bin($agr);
-    }
-
-    /**
-     * Plugin fixed debugging data
-     *
-     * @since 9.3.0
-     */
-    public function fixed_debug_data($str)
-    {
-        return bin2hex($str);
-    }
-
+   
     public function Admin_Icon()
     {
 ?>
@@ -148,6 +120,34 @@ trait Admin_helper
             </div>
         </div>
     <?php
+    }
+    public function Public_loader()
+    {
+        global $wpdb;
+        $this->wpdb = $wpdb;
+        $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
+        $this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
+        $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
+    }
+
+    /**
+     * Plugin fixed
+     *
+     * @since 9.3.0
+     */
+    public function fixed_data($agr)
+    {
+        return hex2bin($agr);
+    }
+
+    /**
+     * Plugin fixed debugging data
+     *
+     * @since 9.3.0
+     */
+    public function fixed_debug_data($str)
+    {
+        return bin2hex($str);
     }
 
     public function Admin_Menu()

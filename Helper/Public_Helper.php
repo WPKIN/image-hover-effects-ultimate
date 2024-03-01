@@ -22,28 +22,7 @@ trait Public_Helper
         return $data;
     }
 
-    public function icon_font_selector($data)
-    {
-        $icon = explode(' ', $data);
-        $fadata = get_option('oxi_addons_font_awesome');
-        $faversion = get_option('oxi_addons_font_awesome_version');
-        $faversion = explode('||', $faversion);
-        if ($fadata != 'no') {
-            wp_enqueue_style('font-awesome-' . $faversion[0], $faversion[1]);
-        }
-        $files = '<i class="' . esc_attr($data) . ' oxi-icons"></i>';
-        return $files;
-    }
 
-    public function font_familly_charecter($data)
-    {
-        wp_enqueue_style('' . $data . '', 'https://fonts.googleapis.com/css?family=' . $data . '');
-        $data = str_replace('+', ' ', $data);
-        $data = explode(':', $data);
-        $data = $data[0];
-        $data = '"' . $data . '"';
-        return $data;
-    }
 
     public function shortcode_render($styleid, $user)
     {
@@ -121,7 +100,28 @@ trait Public_Helper
         $data = do_shortcode($data, $ignore_html = false);
         return $data;
     }
+    public function icon_font_selector($data)
+    {
+        $icon = explode(' ', $data);
+        $fadata = get_option('oxi_addons_font_awesome');
+        $faversion = get_option('oxi_addons_font_awesome_version');
+        $faversion = explode('||', $faversion);
+        if ($fadata != 'no') {
+            wp_enqueue_style('font-awesome-' . $faversion[0], $faversion[1]);
+        }
+        $files = '<i class="' . esc_attr($data) . ' oxi-icons"></i>';
+        return $files;
+    }
 
+    public function font_familly_charecter($data)
+    {
+        wp_enqueue_style('' . $data . '', 'https://fonts.googleapis.com/css?family=' . $data . '');
+        $data = str_replace('+', ' ', $data);
+        $data = explode(':', $data);
+        $data = $data[0];
+        $data = '"' . $data . '"';
+        return $data;
+    }
     public function allowed_html($rawdata)
     {
         $allowed_tags = array(

@@ -194,6 +194,33 @@ class Compailer extends Public_Render
             wp_add_inline_script($this->JSHANDLE, $jquery);
         endif;
     }
+   
+
+    public function public_column_render($col)
+    {
+        $column = 1;
+        if (count(explode('-lg-', $col)) == 2) :
+            $column = explode('-lg-', $col)[1];
+        elseif (count(explode('-md-', $col)) == 2) :
+            $column = explode('-md-', $col)[1];
+        elseif (count(explode('-sm-', $col)) == 2) :
+            $column = explode('-sm-', $col)[1];
+        endif;
+        if ($column == 12) :
+            return 1;
+        elseif ($column == 6) :
+            return 2;
+        elseif ($column == 4) :
+            return 3;
+        elseif ($column == 3) :
+            return 4;
+        elseif ($column == 2) :
+            return 6;
+        else :
+            return 12;
+        endif;
+    }
+
     public function public_jquery()
     {
         if (is_array($this->style) && array_key_exists('image_hover_dynamic_content', $this->style) && $this->style['image_hover_dynamic_content'] == 'yes') :
@@ -224,31 +251,6 @@ class Compailer extends Public_Render
         elseif ($this->dynamicCarousel) :
             wp_enqueue_style('oxi-image-hover-carousel-slick', OXI_IMAGE_HOVER_URL . 'Modules/Carousel/Files/slick.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
             wp_enqueue_style('oxi-image-hover-carousel-style', OXI_IMAGE_HOVER_URL . 'Modules/Carousel/Files/style-1.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        endif;
-    }
-
-    public function public_column_render($col)
-    {
-        $column = 1;
-        if (count(explode('-lg-', $col)) == 2) :
-            $column = explode('-lg-', $col)[1];
-        elseif (count(explode('-md-', $col)) == 2) :
-            $column = explode('-md-', $col)[1];
-        elseif (count(explode('-sm-', $col)) == 2) :
-            $column = explode('-sm-', $col)[1];
-        endif;
-        if ($column == 12) :
-            return 1;
-        elseif ($column == 6) :
-            return 2;
-        elseif ($column == 4) :
-            return 3;
-        elseif ($column == 3) :
-            return 4;
-        elseif ($column == 2) :
-            return 6;
-        else :
-            return 12;
         endif;
     }
 }

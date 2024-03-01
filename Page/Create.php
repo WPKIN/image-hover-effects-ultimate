@@ -66,25 +66,7 @@ class Create
     use Public_Helper;
     use CSS_JS_Loader;
 
-    /**
-     * Image Hover Ultimate Pre Active Check.
-     *
-     * @since 9.3.0
-     */
-    public function pre_active_check()
-    {
-        $template = $this->wpdb->get_results("SELECT * FROM  $this->import_table WHERE type = '$this->oxitype' ORDER BY id DESC", ARRAY_A);
-        if (count($template) < 1) :
-            foreach ($this->pre_active as $value) {
-                $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->import_table} (type, name) VALUES (%s, %s)", [$this->oxitype, $value]));
-            }
-            $this->activated_template = $this->pre_clecked;
-        else :
-            foreach ($template as $value) {
-                $this->activated_template[$value['name']] = $value['name'];
-            }
-        endif;
-    }
+    
 
     public function Render()
     {
@@ -109,6 +91,19 @@ class Create
             </div>
         <?php
         endif;
+    }
+    public function Import_header()
+    {
+    ?>
+        <div class="oxi-addons-wrapper">
+            <div class="oxi-addons-import-layouts">
+                <h1><?php echo esc_html(ucfirst($this->effects)); ?> Effects › Import Templates</h1>
+                <p> Select Image Hover layouts, Import Templates for future Use.</p>
+            </div>
+        </div>
+
+    <?php
+        apply_filters('oxi-image-hover-support-and-comments', true);
     }
     public function create_new()
     {
@@ -172,19 +167,27 @@ class Create
         </div>
     <?php
     }
-    public function Import_header()
-    {
-    ?>
-        <div class="oxi-addons-wrapper">
-            <div class="oxi-addons-import-layouts">
-                <h1><?php echo esc_html(ucfirst($this->effects)); ?> Effects › Import Templates</h1>
-                <p> Select Image Hover layouts, Import Templates for future Use.</p>
-            </div>
-        </div>
 
-    <?php
-        apply_filters('oxi-image-hover-support-and-comments', true);
+    /**
+     * Image Hover Ultimate Pre Active Check.
+     *
+     * @since 9.3.0
+     */
+    public function pre_active_check()
+    {
+        $template = $this->wpdb->get_results("SELECT * FROM  $this->import_table WHERE type = '$this->oxitype' ORDER BY id DESC", ARRAY_A);
+        if (count($template) < 1) :
+            foreach ($this->pre_active as $value) {
+                $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->import_table} (type, name) VALUES (%s, %s)", [$this->oxitype, $value]));
+            }
+            $this->activated_template = $this->pre_clecked;
+        else :
+            foreach ($template as $value) {
+                $this->activated_template[$value['name']] = $value['name'];
+            }
+        endif;
     }
+   
 
     public function import_template()
     {

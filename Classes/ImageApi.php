@@ -73,6 +73,96 @@ class ImageApi
         return current_user_can($transient);
     }
 
+    
+
+    public function update_image_hover_plugin()
+    {
+        $stylelist = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->parent_table ORDER by id ASC"), ARRAY_A);
+        foreach ($stylelist as $value) {
+            $raw = json_decode(stripslashes($value['rawdata']), true);
+            $raw['image-hover-style-id'] = $value['id'];
+            $s = explode('-', $value['style_name']);
+            $CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($s[0]) . '\Admin\Effects' . $s[1];
+            $C = new $CLASS('admin');
+            $f = $C->template_css_render($raw);
+        }
+        update_option('image_hover_ultimate_update_complete', 'done');
+    }
+
+
+
+    /**
+     * Template Style Data
+     *
+     * @since 9.3.0
+     */
+    public function post_template_change()
+    {
+        $rawdata = $this->validate_post();
+
+        if ((int) $this->styleid) :
+            $this->wpdb->query($this->wpdb->prepare("UPDATE {$this->parent_table} SET style_name = %s WHERE id = %d", $rawdata, $this->styleid));
+        endif;
+        return 'success';
+    }
+
+    /**
+     * Template Name Change
+     *
+     * @since 9.3.0
+     */
+    public function post_template_name()
+    {
+        $settings = $this->validate_post();
+        $name = $settings['addonsstylename'];
+        $id = $settings['addonsstylenameid'];
+        if ((int) $id) :
+            $this->wpdb->query($this->wpdb->prepare("UPDATE {$this->parent_table} SET name = %s WHERE id = %d", $name, $id));
+            return 'success';
+        endif;
+    }
+
+    /**
+     * Template Name Change
+     *
+     * @since 9.3.0
+     */
+    public function post_elements_rearrange_modal_data()
+    {
+        if ((int) $this->styleid) :
+            $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $this->styleid), ARRAY_A);
+            $render = [];
+            foreach ($child as $k => $value) {
+                $data = json_decode(stripcslashes($value['rawdata']));
+                $render[$value['id']] = $data;
+            }
+            return json_encode($render);
+        endif;
+    }
+
+    /**
+     * Template Name Change
+     *
+     * @since 9.3.0
+     */
+    public function post_elements_template_rearrange_save_data()
+    {
+        $params = explode(',', $this->validate_post());
+        foreach ($params as $value) {
+            if ((int) $value) :
+                $data = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE id = %d ", $value), ARRAY_A);
+                $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d, %s)", [$data['styleid'], $data['rawdata']]));
+                $redirect_id = $this->wpdb->insert_id;
+                if ($redirect_id == 0) {
+                    return;
+                }
+                if ($redirect_id != 0) {
+                    $this->wpdb->query($this->wpdb->prepare("DELETE FROM $this->child_table WHERE id = %d", $value));
+                }
+            endif;
+        }
+        return 'success';
+    }
     public function save_action()
     {
 
@@ -319,96 +409,6 @@ class ImageApi
             return 'Silence is Golden';
         endif;
     }
-
-    public function update_image_hover_plugin()
-    {
-        $stylelist = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->parent_table ORDER by id ASC"), ARRAY_A);
-        foreach ($stylelist as $value) {
-            $raw = json_decode(stripslashes($value['rawdata']), true);
-            $raw['image-hover-style-id'] = $value['id'];
-            $s = explode('-', $value['style_name']);
-            $CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($s[0]) . '\Admin\Effects' . $s[1];
-            $C = new $CLASS('admin');
-            $f = $C->template_css_render($raw);
-        }
-        update_option('image_hover_ultimate_update_complete', 'done');
-    }
-
-
-
-    /**
-     * Template Style Data
-     *
-     * @since 9.3.0
-     */
-    public function post_template_change()
-    {
-        $rawdata = $this->validate_post();
-
-        if ((int) $this->styleid) :
-            $this->wpdb->query($this->wpdb->prepare("UPDATE {$this->parent_table} SET style_name = %s WHERE id = %d", $rawdata, $this->styleid));
-        endif;
-        return 'success';
-    }
-
-    /**
-     * Template Name Change
-     *
-     * @since 9.3.0
-     */
-    public function post_template_name()
-    {
-        $settings = $this->validate_post();
-        $name = $settings['addonsstylename'];
-        $id = $settings['addonsstylenameid'];
-        if ((int) $id) :
-            $this->wpdb->query($this->wpdb->prepare("UPDATE {$this->parent_table} SET name = %s WHERE id = %d", $name, $id));
-            return 'success';
-        endif;
-    }
-
-    /**
-     * Template Name Change
-     *
-     * @since 9.3.0
-     */
-    public function post_elements_rearrange_modal_data()
-    {
-        if ((int) $this->styleid) :
-            $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $this->styleid), ARRAY_A);
-            $render = [];
-            foreach ($child as $k => $value) {
-                $data = json_decode(stripcslashes($value['rawdata']));
-                $render[$value['id']] = $data;
-            }
-            return json_encode($render);
-        endif;
-    }
-
-    /**
-     * Template Name Change
-     *
-     * @since 9.3.0
-     */
-    public function post_elements_template_rearrange_save_data()
-    {
-        $params = explode(',', $this->validate_post());
-        foreach ($params as $value) {
-            if ((int) $value) :
-                $data = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE id = %d ", $value), ARRAY_A);
-                $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d, %s)", [$data['styleid'], $data['rawdata']]));
-                $redirect_id = $this->wpdb->insert_id;
-                if ($redirect_id == 0) {
-                    return;
-                }
-                if ($redirect_id != 0) {
-                    $this->wpdb->query($this->wpdb->prepare("DELETE FROM $this->child_table WHERE id = %d", $value));
-                }
-            endif;
-        }
-        return 'success';
-    }
-
     /**
      * Template Modal Data
      *
@@ -444,61 +444,7 @@ class ImageApi
         return 'success';
     }
 
-    /**
-     * Template Template Render
-     *
-     * @since 9.3.0
-     */
-    public function post_elements_template_render_data()
-    {
-        $settings = json_decode(stripslashes($this->rawdata), true);
-        $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $this->styleid), ARRAY_A);
-        $StyleName = $settings['image-hover-template'];
-        $name = explode('-', $StyleName);
-        ob_start();
-        $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $name[0] . '\Render\Effects' . $name[1];
-        $CLASS = new $cls;
-        $styledata = ['rawdata' => $this->rawdata, 'id' => $this->styleid, 'style_name' => $StyleName, 'stylesheet' => ''];
-        $CLASS->__construct($styledata, $child, 'admin');
-        return ob_get_clean();
-    }
-
-    /**
-     * Template Modal Data Edit Form
-     *
-     * @since 9.3.0
-     */
-    public function post_elements_template_modal_data_edit()
-    {
-        if ((int) $this->childid) :
-            $listdata = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM {$this->child_table} WHERE id = %d ", $this->childid), ARRAY_A);
-            $returnfile = json_decode(stripslashes($listdata['rawdata']), true);
-            $returnfile['shortcodeitemid'] = $this->childid;
-            return json_encode($returnfile);
-        else :
-            return 'Silence is Golden';
-        endif;
-    }
-
-    /**
-     * Template Modal Data Edit Form
-     *
-     * @since 9.3.0
-     */
-    public function post_elements_template_modal_data_clone()
-    {
-        if ((int) $this->childid) :
-            $listdata = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM {$this->child_table} WHERE id = %d ", $this->childid), ARRAY_A);
-            $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d,  %s)", [$listdata['styleid'], $listdata['rawdata']]));
-            $redirect_id = $this->wpdb->insert_id;
-            if ($redirect_id > 0) :
-                return 'done';
-            endif;
-            return 'Silence is Golden';
-        else :
-            return 'Silence is Golden';
-        endif;
-    }
+    
 
     /**
      * Template Child Delete Data
@@ -584,6 +530,61 @@ class ImageApi
         $rawdata = $this->validate_post();
         update_option('oxi_addons_way_points', $rawdata['value']);
         return '<span class="oxi-confirmation-success"></span>';
+    }
+    /**
+     * Template Template Render
+     *
+     * @since 9.3.0
+     */
+    public function post_elements_template_render_data()
+    {
+        $settings = json_decode(stripslashes($this->rawdata), true);
+        $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $this->styleid), ARRAY_A);
+        $StyleName = $settings['image-hover-template'];
+        $name = explode('-', $StyleName);
+        ob_start();
+        $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $name[0] . '\Render\Effects' . $name[1];
+        $CLASS = new $cls;
+        $styledata = ['rawdata' => $this->rawdata, 'id' => $this->styleid, 'style_name' => $StyleName, 'stylesheet' => ''];
+        $CLASS->__construct($styledata, $child, 'admin');
+        return ob_get_clean();
+    }
+
+    /**
+     * Template Modal Data Edit Form
+     *
+     * @since 9.3.0
+     */
+    public function post_elements_template_modal_data_edit()
+    {
+        if ((int) $this->childid) :
+            $listdata = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM {$this->child_table} WHERE id = %d ", $this->childid), ARRAY_A);
+            $returnfile = json_decode(stripslashes($listdata['rawdata']), true);
+            $returnfile['shortcodeitemid'] = $this->childid;
+            return json_encode($returnfile);
+        else :
+            return 'Silence is Golden';
+        endif;
+    }
+
+    /**
+     * Template Modal Data Edit Form
+     *
+     * @since 9.3.0
+     */
+    public function post_elements_template_modal_data_clone()
+    {
+        if ((int) $this->childid) :
+            $listdata = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM {$this->child_table} WHERE id = %d ", $this->childid), ARRAY_A);
+            $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d,  %s)", [$listdata['styleid'], $listdata['rawdata']]));
+            $redirect_id = $this->wpdb->insert_id;
+            if ($redirect_id > 0) :
+                return 'done';
+            endif;
+            return 'Silence is Golden';
+        else :
+            return 'Silence is Golden';
+        endif;
     }
 
     /**

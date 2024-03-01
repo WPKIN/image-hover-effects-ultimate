@@ -58,42 +58,7 @@ class Admin
     }
 
 
-    public function Admin_header()
-    {
-?>
-        <div class="oxi-addons-wrapper">
-            <div class="oxi-addons-import-layouts">
-                <h1>Image Hover › Shortcode</h1>
-                <p>Collect Image Hover Shortcode, Edit, Delect, Clone or Export it. </p>
-            </div>
-        </div>
-    <?php
-    }
-
-    /**
-     * Constructor of Image Hover Home Page
-     *
-     * @since 9.3.0
-     */
-    public function __construct()
-    {
-        global $wpdb;
-        $this->wpdb = $wpdb;
-        $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
-        $this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
-        $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
-
-        $this->CSSJS_load();
-        $this->Render();
-    }
-
-    public function CSSJS_load()
-    {
-        $this->admin_css_loader();
-        $this->admin_home();
-        $this->admin_rest_api();
-        apply_filters('oxi-image-hover-plugin/admin_menu', true);
-    }
+   
     public function Render()
     {
     ?>
@@ -192,7 +157,42 @@ class Admin
         </div>
     <?php
     }
+    public function Admin_header()
+    {
+?>
+        <div class="oxi-addons-wrapper">
+            <div class="oxi-addons-import-layouts">
+                <h1>Image Hover › Shortcode</h1>
+                <p>Collect Image Hover Shortcode, Edit, Delect, Clone or Export it. </p>
+            </div>
+        </div>
+    <?php
+    }
 
+    /**
+     * Constructor of Image Hover Home Page
+     *
+     * @since 9.3.0
+     */
+    public function __construct()
+    {
+        global $wpdb;
+        $this->wpdb = $wpdb;
+        $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
+        $this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
+        $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
+
+        $this->CSSJS_load();
+        $this->Render();
+    }
+
+    public function CSSJS_load()
+    {
+        $this->admin_css_loader();
+        $this->admin_home();
+        $this->admin_rest_api();
+        apply_filters('oxi-image-hover-plugin/admin_menu', true);
+    }
     public function font_awesome_render($data)
     {
         $fadata = get_option('oxi_addons_font_awesome');

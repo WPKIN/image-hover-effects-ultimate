@@ -148,30 +148,7 @@ abstract class Admin_Render
     public $repeater;
     public $ShowOnAdvanceOnly = true;
 
-    /**
-     * Admin Notice JS file loader
-     * @return void
-     */
-    public function admin_editor_load()
-    {
-        wp_enqueue_script('oxi-image-hover-editor', OXI_IMAGE_HOVER_URL . 'assets/backend/js/editor.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-    }
 
-    /**
-     * Template Modal opener
-     * Define Multiple Data With Single Data
-     *
-     * @since 9.3.0
-     */
-    public function modal_opener()
-    {
-        $this->add_substitute_control('', [], [
-            'type' => Controls::MODALOPENER,
-            'title' => esc_html__('Add New Data', 'image-hover-effects-ultimate'),
-            'sub-title' => esc_html__('Open Data Form', 'image-hover-effects-ultimate'),
-            'showing' => true,
-        ]);
-    }
 
 
 
@@ -249,7 +226,30 @@ abstract class Admin_Render
             ]);
         endif;
     }
+    /**
+     * Admin Notice JS file loader
+     * @return void
+     */
+    public function admin_editor_load()
+    {
+        wp_enqueue_script('oxi-image-hover-editor', OXI_IMAGE_HOVER_URL . 'assets/backend/js/editor.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+    }
 
+    /**
+     * Template Modal opener
+     * Define Multiple Data With Single Data
+     *
+     * @since 9.3.0
+     */
+    public function modal_opener()
+    {
+        $this->add_substitute_control('', [], [
+            'type' => Controls::MODALOPENER,
+            'title' => esc_html__('Add New Data', 'image-hover-effects-ultimate'),
+            'sub-title' => esc_html__('Open Data Form', 'image-hover-effects-ultimate'),
+            'showing' => true,
+        ]);
+    }
     /**
      * Template CSS Render
      *
