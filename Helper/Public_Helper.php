@@ -57,21 +57,6 @@ trait Public_Helper
 
         endif;
     }
-    public function validate_post($files = '')
-    {
-
-        $rawdata = [];
-        if (!empty($files)) :
-            $data = json_decode(stripslashes($files), true);
-        endif;
-        if (is_array($data)) :
-            $rawdata = array_map(array($this, 'allowed_html'), $data);
-        else :
-            $rawdata = $this->allowed_html($files);
-        endif;
-
-        return $rawdata;
-    }
 
     /**
      * Plugin Name Convert to View
@@ -86,10 +71,20 @@ trait Public_Helper
         return esc_html(ucwords($data));
     }
 
-    public function effects_converter($data)
+	public function validate_post($files = '')
     {
-        $data = explode('-', $data);
-        return esc_html($data[0]);
+
+        $rawdata = [];
+        if (!empty($files)) :
+            $data = json_decode(stripslashes($files), true);
+        endif;
+        if (is_array($data)) :
+            $rawdata = array_map(array($this, 'allowed_html'), $data);
+        else :
+            $rawdata = $this->allowed_html($files);
+        endif;
+
+        return $rawdata;
     }
 
     public function html_special_charecter($data)
@@ -111,6 +106,12 @@ trait Public_Helper
         }
         $files = '<i class="' . esc_attr($data) . ' oxi-icons"></i>';
         return $files;
+    }
+
+	public function effects_converter($data)
+    {
+        $data = explode('-', $data);
+        return esc_html($data[0]);
     }
 
     public function font_familly_charecter($data)

@@ -46,6 +46,30 @@ trait Sanitization {
         <?php
     }
 
+	   /*
+     * Image Hover Style Admin Panel Section Inner Tabs Child
+     *
+     * @since 9.3.0
+     */
+
+	 public function start_controls_tab() {
+        ?>
+        <div class="shortcode-form-control-content shortcode-form-control-tabs-content shortcode-control-tab-close">
+            <?php
+        }
+
+        /*
+         * Image Hover Style Admin Panel End Section Inner Tabs Child
+         *
+         * @since 9.3.0
+         */
+
+        public function end_controls_tab() {
+            ?>
+        </div>
+        <?php
+    }
+
     /*
      * Image Hover Style Admin Panel Section Inner Tabs
      * This Tabs like inner tabs as Normal view and Hover View
@@ -89,30 +113,6 @@ trait Sanitization {
             public function end_controls_tabs() {
                 ?>
             </div> </div>
-        <?php
-    }
-
-    /*
-     * Image Hover Style Admin Panel Section Inner Tabs Child
-     *
-     * @since 9.3.0
-     */
-
-    public function start_controls_tab() {
-        ?>
-        <div class="shortcode-form-control-content shortcode-form-control-tabs-content shortcode-control-tab-close">
-            <?php
-        }
-
-        /*
-         * Image Hover Style Admin Panel End Section Inner Tabs Child
-         *
-         * @since 9.3.0
-         */
-
-        public function end_controls_tab() {
-            ?>
-        </div>
         <?php
     }
 
