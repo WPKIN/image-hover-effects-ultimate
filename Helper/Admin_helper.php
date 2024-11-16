@@ -302,21 +302,6 @@ trait Admin_helper
 <?php
     }
 
-    /**
-     * Plugin check Current Tabs
-     *
-     * @since 9.3.0
-     */
-    public function check_current_version($agr)
-    {
-        $vs = get_option($this->fixed_data('696d6167655f686f7665725f756c74696d6174655f6c6963656e73655f737461747573'));
-        if ($vs == $this->fixed_data('76616c6964')) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public function admin_recommended()
     {
 
@@ -329,6 +314,21 @@ trait Admin_helper
         endif;
 
         new \OXI_IMAGE_HOVER_PLUGINS\Classes\Support_Recommended();
+    }
+
+	/**
+     * Plugin check Current Tabs
+     *
+     * @since 9.3.0
+     */
+    public function check_current_version($agr)
+    {
+        $vs = get_option($this->fixed_data('696d6167655f686f7665725f756c74696d6174655f6c6963656e73655f737461747573'));
+        if ($vs == $this->fixed_data('76616c6964')) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function admin_notice()

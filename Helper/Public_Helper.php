@@ -10,8 +10,7 @@ if (!defined('ABSPATH')) {
  *
  * @author $biplob018
  */
-trait Public_Helper
-{
+trait Public_Helper {
 
 
     public function admin_special_charecter($data)
@@ -21,8 +20,6 @@ trait Public_Helper
         $data = str_replace('\"', '"', $data);
         return $data;
     }
-
-
 
     public function shortcode_render($styleid, $user)
     {
@@ -95,7 +92,14 @@ trait Public_Helper
         $data = do_shortcode($data, $ignore_html = false);
         return $data;
     }
-    public function icon_font_selector($data)
+
+	public function effects_converter($data)
+    {
+        $data = explode('-', $data);
+        return esc_html($data[0]);
+    }
+
+	public function icon_font_selector($data)
     {
         $icon = explode(' ', $data);
         $fadata = get_option('oxi_addons_font_awesome');
@@ -106,12 +110,6 @@ trait Public_Helper
         }
         $files = '<i class="' . esc_attr($data) . ' oxi-icons"></i>';
         return $files;
-    }
-
-	public function effects_converter($data)
-    {
-        $data = explode('-', $data);
-        return esc_html($data[0]);
     }
 
     public function font_familly_charecter($data)

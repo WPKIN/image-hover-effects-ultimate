@@ -340,23 +340,6 @@ class Public_Render
         endif;
     }
 
-    public function check_media_render($id, $style)
-    {
-
-        $url = '';
-        if (array_key_exists($id . '-select', $style)) :
-            if ($style[$id . '-select'] == 'media-library') :
-                $url = $style[$id . '-image'];
-            else :
-                $url = $style[$id . '-url'];
-            endif;
-            if (!empty($url)) :
-                return true;
-            endif;
-        endif;
-        return false;
-    }
-
     public function media_render($id = '', $style = [])
     {
         $url = '';
@@ -372,6 +355,23 @@ class Public_Render
                 echo 'src="' . esc_url($url) . '" ';
             endif;
         endif;
+    }
+
+	public function check_media_render($id, $style)
+    {
+
+        $url = '';
+        if (array_key_exists($id . '-select', $style)) :
+            if ($style[$id . '-select'] == 'media-library') :
+                $url = $style[$id . '-image'];
+            else :
+                $url = $style[$id . '-url'];
+            endif;
+            if (!empty($url)) :
+                return true;
+            endif;
+        endif;
+        return false;
     }
 
     public function media_background_render($id, $style)
@@ -397,21 +397,6 @@ class Public_Render
         echo '<i class="' . esc_attr($data) . ' oxi-icons"></i>';
     }
 
-    public function tab_column_render($id, $style)
-    {
-        if ($style[$id . '-lap'] == 'oxi-bt-col-lg-8') :
-            return 'oxi-bt-col-md-3';
-        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-5') :
-            return 'oxi-bt-col-md-6';
-        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-4') :
-            return 'oxi-bt-col-md-6';
-        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-3') :
-            return 'oxi-bt-col-md-6';
-        else :
-            return 'oxi-bt-col-md-12';
-        endif;
-    }
-
     public function mob_column_render($id, $style)
     {
 
@@ -423,6 +408,21 @@ class Public_Render
             return 'oxi-bt-col-sm-6';
         else :
             return 'oxi-bt-col-sm-12';
+        endif;
+    }
+
+	public function tab_column_render($id, $style)
+    {
+        if ($style[$id . '-lap'] == 'oxi-bt-col-lg-8') :
+            return 'oxi-bt-col-md-3';
+        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-5') :
+            return 'oxi-bt-col-md-6';
+        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-4') :
+            return 'oxi-bt-col-md-6';
+        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-3') :
+            return 'oxi-bt-col-md-6';
+        else :
+            return 'oxi-bt-col-md-12';
         endif;
     }
 
@@ -442,15 +442,6 @@ class Public_Render
         echo esc_attr($file);
     }
 
-    public function checkurl_render($id, $style)
-    {
-
-        if (array_key_exists($id . '-url', $style) && $style[$id . '-url'] != '') :
-            return true;
-        endif;
-        return false;
-    }
-
     public function url_render($id, $style)
     {
 
@@ -466,6 +457,15 @@ class Public_Render
                 echo ($style[$id . '-id'] != '' ? ' id="' . esc_attr($style[$id . '-id']) . '"' : '');
             endif;
         endif;
+    }
+
+	public function checkurl_render($id, $style)
+    {
+
+        if (array_key_exists($id . '-url', $style) && $style[$id . '-url'] != '') :
+            return true;
+        endif;
+        return false;
     }
 
     public function animation_render($id, $style)
