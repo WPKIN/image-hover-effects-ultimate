@@ -411,21 +411,6 @@ class Public_Render
         endif;
     }
 
-	public function tab_column_render($id, $style)
-    {
-        if ($style[$id . '-lap'] == 'oxi-bt-col-lg-8') :
-            return 'oxi-bt-col-md-3';
-        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-5') :
-            return 'oxi-bt-col-md-6';
-        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-4') :
-            return 'oxi-bt-col-md-6';
-        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-3') :
-            return 'oxi-bt-col-md-6';
-        else :
-            return 'oxi-bt-col-md-12';
-        endif;
-    }
-
     public function column_render($id, $style)
     {
         $file = $style[$id . '-lap'] . ' ';
@@ -442,7 +427,31 @@ class Public_Render
         echo esc_attr($file);
     }
 
-    public function url_render($id, $style)
+	public function tab_column_render($id, $style)
+    {
+        if ($style[$id . '-lap'] == 'oxi-bt-col-lg-8') :
+            return 'oxi-bt-col-md-3';
+        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-5') :
+            return 'oxi-bt-col-md-6';
+        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-4') :
+            return 'oxi-bt-col-md-6';
+        elseif ($style[$id . '-lap'] == 'oxi-bt-col-lg-3') :
+            return 'oxi-bt-col-md-6';
+        else :
+            return 'oxi-bt-col-md-12';
+        endif;
+    }
+
+	public function checkurl_render($id, $style)
+    {
+
+        if (array_key_exists($id . '-url', $style) && $style[$id . '-url'] != '') :
+            return true;
+        endif;
+        return false;
+    }
+
+	public function url_render($id, $style)
     {
 
         if (array_key_exists($id . '-url', $style) && $style[$id . '-url'] != '') :
@@ -456,31 +465,6 @@ class Public_Render
             if (array_key_exists($id . '-id', $style) && $style[$id . '-id']) :
                 echo ($style[$id . '-id'] != '' ? ' id="' . esc_attr($style[$id . '-id']) . '"' : '');
             endif;
-        endif;
-    }
-
-	public function checkurl_render($id, $style)
-    {
-
-        if (array_key_exists($id . '-url', $style) && $style[$id . '-url'] != '') :
-            return true;
-        endif;
-        return false;
-    }
-
-    public function animation_render($id, $style)
-    {
-
-        if (array_key_exists($id . '-type', $style) && $style[$id . '-type'] != '') :
-            echo 'sa-data-animation="' . esc_attr($style[$id . '-type']);
-            if (array_key_exists($id . '-looping', $style) && $style[$id . '-looping'] != '0') :
-                echo 'infinite';
-            endif;
-            echo '"';
-            echo (array_key_exists($id . '-offset-size', $style) ? ' sa-data-animation-offset="' . esc_attr($style[$id . '-offset-size']) . '%"' : '');
-            echo (array_key_exists($id . '-delay-size', $style) ? ' sa-data-animation-delay="' . esc_attr($style[$id . '-delay-size']) . 'ms"' : '');
-            echo (array_key_exists($id . '-duration-size', $style) ? ' sa-data-animation-duration="' . esc_attr($style[$id . '-duration-size']) . 'ms"' : '');
-
         endif;
     }
 
@@ -519,6 +503,22 @@ class Public_Render
             endif;
         endif;
         return $backround;
+    }
+
+	public function animation_render($id, $style)
+    {
+
+        if (array_key_exists($id . '-type', $style) && $style[$id . '-type'] != '') :
+            echo 'sa-data-animation="' . esc_attr($style[$id . '-type']);
+            if (array_key_exists($id . '-looping', $style) && $style[$id . '-looping'] != '0') :
+                echo 'infinite';
+            endif;
+            echo '"';
+            echo (array_key_exists($id . '-offset-size', $style) ? ' sa-data-animation-offset="' . esc_attr($style[$id . '-offset-size']) . '%"' : '');
+            echo (array_key_exists($id . '-delay-size', $style) ? ' sa-data-animation-delay="' . esc_attr($style[$id . '-delay-size']) . 'ms"' : '');
+            echo (array_key_exists($id . '-duration-size', $style) ? ' sa-data-animation-duration="' . esc_attr($style[$id . '-duration-size']) . 'ms"' : '');
+
+        endif;
     }
 
     public function CatStringToClassReplacce($string, $number = '000')
