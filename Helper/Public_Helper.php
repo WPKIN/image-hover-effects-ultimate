@@ -21,6 +21,38 @@ trait Public_Helper {
         return $data;
     }
 
+	/**
+     * Plugin Name Convert to View
+     *
+     * @since 9.3.0
+     */
+    public function name_converter($data)
+    {
+        $data = str_replace('_', ' ', $data);
+        $data = str_replace('-', ' ', $data);
+        $data = str_replace('+', ' ', $data);
+        return esc_html(ucwords($data));
+    }
+
+	public function html_special_charecter($data)
+    {
+        $data = html_entity_decode($data);
+        $data = str_replace("\'", "'", $data);
+        $data = str_replace('\"', '"', $data);
+        $data = do_shortcode($data, $ignore_html = false);
+        return $data;
+    }
+
+	public function font_familly_charecter($data)
+    {
+        wp_enqueue_style('' . $data . '', 'https://fonts.googleapis.com/css?family=' . $data . '');
+        $data = str_replace('+', ' ', $data);
+        $data = explode(':', $data);
+        $data = $data[0];
+        $data = '"' . $data . '"';
+        return $data;
+    }
+
     public function shortcode_render($styleid, $user)
     {
         if (!empty($styleid) && !empty($user) && (int) $styleid) :
@@ -55,18 +87,6 @@ trait Public_Helper {
         endif;
     }
 
-    /**
-     * Plugin Name Convert to View
-     *
-     * @since 9.3.0
-     */
-    public function name_converter($data)
-    {
-        $data = str_replace('_', ' ', $data);
-        $data = str_replace('-', ' ', $data);
-        $data = str_replace('+', ' ', $data);
-        return esc_html(ucwords($data));
-    }
 
 	public function validate_post($files = '')
     {
@@ -82,15 +102,6 @@ trait Public_Helper {
         endif;
 
         return $rawdata;
-    }
-
-    public function html_special_charecter($data)
-    {
-        $data = html_entity_decode($data);
-        $data = str_replace("\'", "'", $data);
-        $data = str_replace('\"', '"', $data);
-        $data = do_shortcode($data, $ignore_html = false);
-        return $data;
     }
 
 	public function effects_converter($data)
@@ -112,15 +123,7 @@ trait Public_Helper {
         return $files;
     }
 
-    public function font_familly_charecter($data)
-    {
-        wp_enqueue_style('' . $data . '', 'https://fonts.googleapis.com/css?family=' . $data . '');
-        $data = str_replace('+', ' ', $data);
-        $data = explode(':', $data);
-        $data = $data[0];
-        $data = '"' . $data . '"';
-        return $data;
-    }
+    
     public function allowed_html($rawdata)
     {
         $allowed_tags = array(

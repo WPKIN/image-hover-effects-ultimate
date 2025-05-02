@@ -265,25 +265,6 @@ trait Sanitization {
             }
 
             /*
-             * Image Hover Style Admin Panel Responsive Control.
-             * Can Possible to modify any Add control to Responsive Control
-             *
-             * @since 9.3.0
-             */
-
-            public function add_responsive_control($id, array $data = [], array $arg = []) {
-                $lap = $id . '-lap';
-                $tab = $id . '-tab';
-                $mob = $id . '-mob';
-                $laparg = ['responsive' => 'laptop'];
-                $tabarg = ['responsive' => 'tab'];
-                $mobarg = ['responsive' => 'mobile'];
-                $this->add_control($lap, $data, array_merge($arg, $laparg));
-                $this->add_control($tab, $data, array_merge($arg, $tabarg));
-                $this->add_control($mob, $data, array_merge($arg, $mobarg));
-            }
-
-            /*
              * Image Hover Style Admin Panel Group Control.
              *
              * @since 9.3.0
@@ -299,6 +280,25 @@ trait Sanitization {
                 $arg = array_merge($defualt, $arg);
                 $fun = $arg['type'] . '_admin_group_control';
                 $this->$fun($id, $data, $arg);
+            }
+
+			/*
+             * Image Hover Style Admin Panel Responsive Control.
+             * Can Possible to modify any Add control to Responsive Control
+             *
+             * @since 9.3.0
+             */
+
+			 public function add_responsive_control($id, array $data = [], array $arg = []) {
+                $lap = $id . '-lap';
+                $tab = $id . '-tab';
+                $mob = $id . '-mob';
+                $laparg = ['responsive' => 'laptop'];
+                $tabarg = ['responsive' => 'tab'];
+                $mobarg = ['responsive' => 'mobile'];
+                $this->add_control($lap, $data, array_merge($arg, $laparg));
+                $this->add_control($tab, $data, array_merge($arg, $tabarg));
+                $this->add_control($mob, $data, array_merge($arg, $mobarg));
             }
 
             /*
