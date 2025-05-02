@@ -277,20 +277,20 @@ Its too easy Chose your style from Effects List and click at Clone.
 == Changelog ==
 == Upgrade Notice ==
 
-= 2.9.7 = 
+= 9.9.7 = 
 *Compatible with 6.8
 *Fixed Shortcode listing issue.
 *Fixed Icon displaying issue.
 
-= 2.9.6 = 
+= 9.9.6 = 
 *Compatible with 6.7.2
 *Fixed color change issue.
 
-= 2.9.5 = 
+= 9.9.5 = 
 *Compatible with 6.7
 *Fixed Data Table search issue.
 
-= 2.9.4 = 
+= 9.9.4 = 
 *Compatible with 6.6.2
 *Fixed Ajax Bugs
 
