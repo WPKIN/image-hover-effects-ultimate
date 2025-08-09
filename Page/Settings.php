@@ -18,8 +18,6 @@ class Settings
 
     public $roles;
     public $saved_role;
-    public $license;
-    public $status;
     public $oxi_fixed_header;
     public $fontawesome;
     public $getfontawesome = [];
@@ -42,8 +40,6 @@ class Settings
         global $wp_roles;
         $this->roles = $wp_roles->get_names();
         $this->saved_role = get_option('oxi_image_user_permission');
-        $this->license = get_option('image_hover_ultimate_license_key');
-        $this->status = get_option('image_hover_ultimate_license_status');
     }
 
     public function css_loader()
@@ -211,49 +207,6 @@ class Settings
                             </tr>
                         </tbody>
                     </table>
-                    <br>
-                    <br>
-                    <h2><?php _e('License Activation'); ?></h2>
-                    <p>Activate your copy to get direct plugin updates and official support.</p>
-                    <table class="form-table" role="presentation">
-                        <tbody>
-                            <tr>
-                                <th scope="row">
-                                    <label for="image_hover_ultimate_license_key">License Key</label>
-                                </th>
-                                <td class="valid">
-                                    <input type="text" class="regular-text" id="image_hover_ultimate_license_key" name="image_hover_ultimate_license_key" value="<?php echo ($this->status == 'valid' && empty($this->license)) ? '****************************************' : esc_attr($this->license); ?>">
-                                    <span class="oxi-addons-settings-connfirmation image_hover_ultimate_license_massage">
-                                        <?php
-                                        if ($this->status == 'valid' && empty($this->license)) :
-                                            echo '<span class="oxi-confirmation-success"></span>';
-                                        elseif ($this->status == 'valid' && !empty($this->license)) :
-                                            echo '<span class="oxi-confirmation-success"></span>';
-                                        elseif (!empty($this->license)) :
-                                            echo '<span class="oxi-confirmation-failed"></span>';
-                                        else :
-                                            echo '<span class="oxi-confirmation-blank"></span>';
-                                        endif;
-                                        ?>
-                                    </span>
-                                    <span class="oxi-addons-settings-connfirmation image_hover_ultimate_license_text">
-                                        <?php
-                                        if ($this->status == 'valid' && empty($this->license)) :
-                                            echo '<span class="oxi-addons-settings-massage">Pre Active</span>';
-                                        elseif ($this->status == 'valid' && !empty($this->license)) :
-                                            echo '<span class="oxi-addons-settings-massage">Active</span>';
-                                        elseif (!empty($this->license)) :
-                                            echo '<span class="oxi-addons-settings-massage">' . esc_html($this->status) . '</span>';
-                                        else :
-                                            echo '<span class="oxi-addons-settings-massage"></span>';
-                                        endif;
-                                        ?>
-                                    </span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
                 </form>
             </div>
         </div>

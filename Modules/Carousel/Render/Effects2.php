@@ -81,7 +81,7 @@ class Effects2 extends Public_Render {
 
         if (!is_array($styledata)) :
             ?>
-            <p> Style Data not found. Kindly Check Carousel & Slider <a href="https://www.oxilabdemos.com/image-hover/docs/hover-extension/carousel-slider/">Documentation</a>.</p>
+            <p> Style Data not found. Kindly Check Carousel & Slider <a href="https://www.wpkindemos.com/imagehover/docs/hover-extension/carousel-slider/">Documentation</a>.</p>
             <?php
             return;
         endif;

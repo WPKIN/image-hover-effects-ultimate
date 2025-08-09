@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {
 class ImageApi
 {
 
-    const API = 'https://oxilabdemos.com/image-hover/wp-json/imagehoverultimate/v2/';
+    const API = 'https://wpkindemos.com/imagehover/wp-json/imagehoverultimate/v2/';
 
     private static $instance = null;
 
@@ -618,124 +618,6 @@ class ImageApi
         $rawdata = $this->validate_post();
         update_option('oxi_image_support_massage', $rawdata['value']);
         return '<span class="oxi-confirmation-success"></span>';
-    }
-
-    /**
-     * Admin License
-     * @return void
-     */
-    public function post_oxi_license()
-    {
-
-        $rawdata = $this->validate_post();
-
-        $new = $rawdata['license'];
-        $old = get_option('image_hover_ultimate_license_key');
-        $status = get_option('image_hover_ultimate_license_status');
-        if ($new == '') :
-            if ($old != '' && $status == 'valid') :
-                $this->deactivate_license($old);
-            endif;
-            delete_option('image_hover_ultimate_license_key');
-            $data = ['massage' => '<span class="oxi-confirmation-blank"></span>', 'text' => ''];
-        else :
-            update_option('image_hover_ultimate_license_key', $new);
-            delete_option('image_hover_ultimate_license_status');
-            $r = $this->activate_license($new);
-            if ($r == 'success') :
-                $data = ['massage' => '<span class="oxi-confirmation-success"></span>', 'text' => 'Active'];
-            else :
-                $data = ['massage' => '<span class="oxi-confirmation-failed"></span>', 'text' => $r];
-            endif;
-        endif;
-        return json_encode($data);
-    }
-
-    public function deactivate_license($key)
-    {
-        $api_params = [
-            'edd_action' => 'deactivate_license',
-            'license' => $key,
-            'item_name' => urlencode('Image Hover Effects Ultimate'),
-            'url' => home_url()
-        ];
-        $response = wp_remote_post('https://www.oxilab.org', ['timeout' => 15, 'sslverify' => false, 'body' => $api_params]);
-        if (is_wp_error($response) || 200 !== wp_remote_retrieve_response_code($response)) {
-
-            if (is_wp_error($response)) {
-                $message = $response->get_error_message();
-            } else {
-                $message = esc_html('An error occurred, please try again.');
-            }
-            return $message;
-        }
-        $license_data = json_decode(wp_remote_retrieve_body($response));
-        if ($license_data->license == 'deactivated') {
-            delete_option('image_hover_ultimate_license_status');
-            delete_option('image_hover_ultimate_license_key');
-        }
-        return 'success';
-    }
-
-    public function activate_license($key)
-    {
-        $api_params = [
-            'edd_action' => 'activate_license',
-            'license' => $key,
-            'item_name' => urlencode('Image Hover Effects Ultimate'),
-            'url' => home_url()
-        ];
-
-        $response = wp_remote_post('https://www.oxilab.org', ['timeout' => 15, 'sslverify' => false, 'body' => $api_params]);
-
-        if (is_wp_error($response) || 200 !== wp_remote_retrieve_response_code($response)) {
-            if (is_wp_error($response)) {
-                $message = $response->get_error_message();
-            } else {
-                $message = esc_html('An error occurred, please try again.');
-            }
-        } else {
-            $license_data = json_decode(wp_remote_retrieve_body($response));
-
-            if (false === $license_data->success) {
-
-                switch ($license_data->error) {
-
-
-                    case 'revoked':
-
-                        $message = esc_html('Your license key has been disabled.');
-                        break;
-
-                    case 'missing':
-
-                        $message = esc_html('Invalid license.');
-                        break;
-
-                    case 'invalid':
-                    case 'site_inactive':
-
-                        $message = esc_html('Your license is not active for this URL.');
-                        break;
-
-                    case 'no_activations_left':
-
-                        $message = esc_html('Your license key has reached its activation limit.');
-                        break;
-
-                    default:
-
-                        $message = esc_html('An error occurred, please try again.');
-                        break;
-                }
-            }
-        }
-
-        if (!empty($message)) {
-            return $message;
-        }
-        update_option('image_hover_ultimate_license_status', $license_data->license);
-        return 'success';
     }
 
     public function post_web_template()

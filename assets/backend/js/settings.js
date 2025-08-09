@@ -35,7 +35,6 @@ jQuery.noConflict();
             }
         }
 
-
         function delay(callback, ms) {
             var timer = 0;
             return function () {
@@ -46,22 +45,6 @@ jQuery.noConflict();
                 }, ms || 0);
             };
         }
-
-
-        $("input[name=image_hover_ultimate_license_key] ").on("keyup", delay(function (e) {
-            var $This = $(this), $value = $This.val();
-            if ($value !== $.trim($value)) {
-                $value = $.trim($value);
-                $This.val($.trim($value));
-            }
-            var rawdata = JSON.stringify({license: $value});
-            var functionname = "oxi_license";
-            $('.image_hover_ultimate_license_massage').html('<span class="spinner sa-spinner-open"></span>');
-            Oxi_Image_Admin_Settings(functionname, rawdata, styleid, childid, function (callback) {
-                $('.image_hover_ultimate_license_massage').html(callback.massage);
-                $('.image_hover_ultimate_license_text .oxi-addons-settings-massage').html(callback.text);
-            });
-        }, 1000));
 
         $("#oxi_image_user_permission").on("change", function (e) {
             var $This = $(this), name = $This.attr('name'), $value = $This.val();

@@ -180,7 +180,7 @@ trait Admin_helper
                     <?php
                     if (apply_filters('oxi-flip-box-plugin/pro_version', false) == FALSE) :
                     ?>
-                        <p>By the way, did you know we also have a <a href="https://oxilabdemos.com/flipbox/pricing/">Premium Version</a>? It offers lots of options with automatic update. It also comes with 16/5 personal support.</p>
+                        <p>By the way, did you know we also have a <a href="https://wpkindemos.com/flipbox/pricing/">Premium Version</a>? It offers lots of options with automatic update. It also comes with 16/5 personal support.</p>
                         <p>Thanks Again!</p>
                     <?php
                     endif;
@@ -274,12 +274,12 @@ trait Admin_helper
                         <?php
                         if (apply_filters('oxi-flip-box-plugin/pro_version', false) == FALSE) :
                         ?>
-                            <li class="fazil-class"><a target="_blank" href="https://oxilabdemos.com/flipbox/pricing/">Upgrade</a></li>
+                            <li class="fazil-class"><a target="_blank" href="https://wpkindemos.com/flipbox/pricing/">Upgrade</a></li>
                         <?php
                         endif;
                         ?>
 
-                        <li class="saadmin-doc"><a target="_black" href="https://oxilabdemos.com/flipbox/docs/installations/how-to-install-the-plugin/">Docs</a></li>
+                        <li class="saadmin-doc"><a target="_black" href="https://wpkindemos.com/flipbox/docs/installations/how-to-install-the-plugin/">Docs</a></li>
                         <li class="saadmin-doc"><a target="_black" href="https://wordpress.org/support/plugin/image-hover-effects-ultimate-visual-composer/">Support</a></li>
                         <li class="saadmin-set"><a href="<?php echo esc_url(admin_url('admin.php?page=oxi-flip-box-ultimate-settings')); ?>"><span class="dashicons dashicons-admin-generic"></span></a></li>
                     </ul>

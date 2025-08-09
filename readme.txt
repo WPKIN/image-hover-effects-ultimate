@@ -1,9 +1,9 @@
 === Image Hover Effects Ultimate (Image Gallery, Effects, Lightbox, Comparison or Magnifier) ===
-Contributors: biplob018, richardmallick
+Contributors: wpkin, richardmallick
 Donate link: https://www.oxilab.org
 Tags: responsive image effects, awesome css3 effects, awesome image effects,  css3 effects, top image effects for wordpress. 
 Requires at least: 3.0.1
-Stable tag: 9.9.7
+Stable tag: 9.10.0
 Tested up to: 6.8
 Requires PHP: 5.4
 License: GPLv2 or later
@@ -25,10 +25,10 @@ Hover effect on the image is an important part of creating an attractive and pro
 
 =Quick Links=
 
-+ [Image Hover Features ](https://www.oxilabdemos.com/image-hover/ "Image Hover Features")
-+ [Demo Effects ](https://www.oxilabdemos.com/image-hover/elements-extension/ "Demo Effects")
++ [Image Hover Features ](https://www.wpkindemos.com/imagehover/ "Image Hover Features")
++ [Demo Effects ](https://www.wpkindemos.com/imagehover/elements-extension/ "Demo Effects")
 + [How to Use (Video) ](https://www.youtube.com/watch?v=SGHeoNPogbE "How to Use (Video)")
-+ [How to Use (Documentation) ](https://www.oxilabdemos.com/image-hover/docs/ "How to Use (Documentation)")
++ [How to Use (Documentation) ](https://www.wpkindemos.com/imagehover/docs/ "How to Use (Documentation)")
 + [Help and Support ](https://wordpress.org/support/plugin/image-hover-effects-ultimate#new-post "Help and Support")
 
 
@@ -276,6 +276,11 @@ Its too easy Chose your style from Effects List and click at Clone.
 
 == Changelog ==
 == Upgrade Notice ==
+
+= 9.10.0 = 
+*Added Freemius for license.
+*Addded PSR4 Namespace and Autoloading.
+*Fixed responsive issues.
 
 = 9.9.7 = 
 *Compatible with 6.8

@@ -95,14 +95,14 @@ trait Admin_helper
                         if (apply_filters('oxi-image-hover-plugin-version', false) == false) :
                         ?>
                             <li class="fazil-class">
-                                <a target="_blank" href="https://www.oxilabdemos.com/image-hover/pricing/">Upgrade
+                                <a target="_blank" href="https://www.wpkindemos.com/imagehover/pricing/">Upgrade
                                 </a>
                             </li>
                         <?php
                         endif;
                         ?>
                         <li class="saadmin-doc">
-                            <a target="_black" href="https://www.oxilabdemos.com/image-hover/docs/">Docs</a>
+                            <a target="_black" href="https://www.wpkindemos.com/imagehover/docs/">Docs</a>
                         </li>
                         <li class="saadmin-doc">
                             <a target="_black" href="https://wordpress.org/support/plugin/image-hover-effects-ultimate/">Support
@@ -283,7 +283,7 @@ trait Admin_helper
                     if (apply_filters('oxi-image-hover-plugin-version', false) != true) :
                     ?>
                         <p>By the way, did you know we also have a
-                            <a href="https://www.oxilabdemos.com/image-hover/pricing/">Premium Version</a>
+                            <a href="https://www.wpkindemos.com/imagehover/pricing/">Premium Version</a>
                             ? It offers lots of options with automatic update. It also comes with 16/5 personal support.
                         </p>
                         <p>Thanks Again!</p>
@@ -319,10 +319,10 @@ trait Admin_helper
      *
      * @since 9.3.0
      */
-    public function check_current_version($agr)
-    {
+    public function check_current_version($agr) {
         $vs = get_option($this->fixed_data('696d6167655f686f7665725f756c74696d6174655f6c6963656e73655f737461747573'));
-        if ($vs == $this->fixed_data('76616c6964')) {
+
+        if ($vs == $this->fixed_data('76616c6964') || wpkin_iheu_v()->can_use_premium_code() ) {
             return true;
         } else {
             return false;

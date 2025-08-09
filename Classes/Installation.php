@@ -87,8 +87,6 @@ class Installation {
         add_option('oxi_image_hover_version', OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
 
-    
-
     /**
      * Plugin upgrade hook
      *
