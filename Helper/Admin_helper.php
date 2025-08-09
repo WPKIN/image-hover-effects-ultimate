@@ -342,13 +342,13 @@ trait Admin_helper
 
 	public function redirect_on_activation()
     {
-        if (get_transient('oxi_image_hover_activation_redirect')) :
-            delete_transient('oxi_image_hover_activation_redirect');
-            if (is_network_admin() || isset($_GET['activate-multi'])) :
-                return;
-            endif;
-            wp_safe_redirect(admin_url("admin.php?page=image-hover-ultimate-support"));
-        endif;
+        // if (get_transient('oxi_image_hover_activation_redirect')) :
+        //     delete_transient('oxi_image_hover_activation_redirect');
+        //     if (is_network_admin() || isset($_GET['activate-multi'])) :
+        //         return;
+        //     endif;
+        //     wp_safe_redirect(admin_url("admin.php?page=image-hover-ultimate-support"));
+        // endif;
     }
 
     /**

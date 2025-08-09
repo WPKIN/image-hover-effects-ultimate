@@ -3,7 +3,7 @@ Contributors: wpkin, richardmallick
 Donate link: https://www.oxilab.org
 Tags: responsive image effects, awesome css3 effects, awesome image effects,  css3 effects, top image effects for wordpress. 
 Requires at least: 3.0.1
-Stable tag: 9.10.0
+Stable tag: 9.10.1
 Tested up to: 6.8
 Requires PHP: 5.4
 License: GPLv2 or later
@@ -276,6 +276,9 @@ Its too easy Chose your style from Effects List and click at Clone.
 
 == Changelog ==
 == Upgrade Notice ==
+
+= 9.10.1 = 
+*Fixed Redirect and not allowed issue.
 
 = 9.10.0 = 
 *Added Freemius for license.
