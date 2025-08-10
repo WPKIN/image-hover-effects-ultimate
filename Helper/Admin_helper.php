@@ -95,14 +95,14 @@ trait Admin_helper
                         if (apply_filters('oxi-image-hover-plugin-version', false) == false) :
                         ?>
                             <li class="fazil-class">
-                                <a target="_blank" href="https://www.wpkindemos.com/imagehover/pricing/">Upgrade
+                                <a target="_blank" href="https://wpkindemos.com/imagehover/pricing/">Upgrade
                                 </a>
                             </li>
                         <?php
                         endif;
                         ?>
                         <li class="saadmin-doc">
-                            <a target="_black" href="https://www.wpkindemos.com/imagehover/docs/">Docs</a>
+                            <a target="_black" href="https://wpkindemos.com/imagehover/docs/">Docs</a>
                         </li>
                         <li class="saadmin-doc">
                             <a target="_black" href="https://wordpress.org/support/plugin/image-hover-effects-ultimate/">Support
@@ -283,7 +283,7 @@ trait Admin_helper
                     if (apply_filters('oxi-image-hover-plugin-version', false) != true) :
                     ?>
                         <p>By the way, did you know we also have a
-                            <a href="https://www.wpkindemos.com/imagehover/pricing/">Premium Version</a>
+                            <a href="https://wpkindemos.com/imagehover/pricing/">Premium Version</a>
                             ? It offers lots of options with automatic update. It also comes with 16/5 personal support.
                         </p>
                         <p>Thanks Again!</p>

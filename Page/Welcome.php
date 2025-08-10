@@ -48,7 +48,7 @@ class Welcome
                                 </div>
                                 <div class="oxi-docs-admin-block-content">
                                     <p>Get started by spending some time with the documentation to get familiar with Image Hover Effects. Build awesome Image Hover Effects for you or your clients with ease.</p>
-                                    <a href="https://www.wpkindemos.com/imagehover/docs/" class="oxi-docs-button" target="_blank">Documentation</a>
+                                    <a href="https://wpkindemos.com/imagehover/docs/" class="oxi-docs-button" target="_blank">Documentation</a>
                                 </div>
                             </div>
                         </div>
@@ -96,17 +96,17 @@ class Welcome
                                 </div>
                                 <div class="oxi-docs-admin-block-content">
                                     <p>Image Hover Ultimate fully compatible with popular Page Builder like
-                                        <a href="https://www.wpkindemos.com/imagehover/docs/integrate-with-page-builder/elementor-page-builder/">Elementor</a>,
-                                        <a href="https://www.wpkindemos.com/imagehover/docs/integrate-with-page-builder/beaver-builder-integration/">Beaver Builder</a>,
-                                        <a href="https://www.wpkindemos.com/imagehover/docs/integrate-with-page-builder/wpbakery-page-builder/">WPBakery</a>,
-                                        <a href="https://www.wpkindemos.com/imagehover/docs/integrate-with-page-builder/visual-composer/"> Visual Composer</a>,
-                                        <a href="https://www.wpkindemos.com/imagehover/docs/integrate-with-page-builder/divi-builder/"> Divi Builder</a>,
-                                        <a href="https://www.wpkindemos.com/imagehover/docs/integrate-with-page-builder/brizy/"> Brizy</a>,
-                                        <a href="https://www.wpkindemos.com/imagehover/docs/integrate-with-page-builder/siteorigin-page-builder/"> SiteOrigin</a>,
-                                        <a href="https://www.wpkindemos.com/imagehover/docs/integrate-with-page-builder/themify-builder/"> Themefy Builder</a>.
+                                        <a href="https://wpkindemos.com/imagehover/docs/integrate-with-page-builder/elementor-page-builder/">Elementor</a>,
+                                        <a href="https://wpkindemos.com/imagehover/docs/integrate-with-page-builder/beaver-builder-integration/">Beaver Builder</a>,
+                                        <a href="https://wpkindemos.com/imagehover/docs/integrate-with-page-builder/wpbakery-page-builder/">WPBakery</a>,
+                                        <a href="https://wpkindemos.com/imagehover/docs/integrate-with-page-builder/visual-composer/"> Visual Composer</a>,
+                                        <a href="https://wpkindemos.com/imagehover/docs/integrate-with-page-builder/divi-builder/"> Divi Builder</a>,
+                                        <a href="https://wpkindemos.com/imagehover/docs/integrate-with-page-builder/brizy/"> Brizy</a>,
+                                        <a href="https://wpkindemos.com/imagehover/docs/integrate-with-page-builder/siteorigin-page-builder/"> SiteOrigin</a>,
+                                        <a href="https://wpkindemos.com/imagehover/docs/integrate-with-page-builder/themify-builder/"> Themefy Builder</a>.
                                         As shortcode based Plugins you can use any wedpress sites and works properly.
                                     </p>
-                                    <a href="https://www.wpkindemos.com/imagehover/docs/integrate-with-page-builder/" class="oxi-docs-button" target="_blank">Learn More</a>
+                                    <a href="https://wpkindemos.com/imagehover/docs/integrate-with-page-builder/" class="oxi-docs-button" target="_blank">Learn More</a>
                                 </div>
                             </div>
                         </div>

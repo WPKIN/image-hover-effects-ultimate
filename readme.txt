@@ -1,9 +1,9 @@
 === Image Hover Effects Ultimate (Image Gallery, Effects, Lightbox, Comparison or Magnifier) ===
 Contributors: wpkin, richardmallick
-Donate link: https://www.oxilab.org
+Donate link:  https://wpkin.com
 Tags: responsive image effects, awesome css3 effects, awesome image effects,  css3 effects, top image effects for wordpress. 
 Requires at least: 3.0.1
-Stable tag: 9.10.1
+Stable tag: 9.10.2
 Tested up to: 6.8
 Requires PHP: 5.4
 License: GPLv2 or later
@@ -25,10 +25,10 @@ Hover effect on the image is an important part of creating an attractive and pro
 
 =Quick Links=
 
-+ [Image Hover Features ](https://www.wpkindemos.com/imagehover/ "Image Hover Features")
-+ [Demo Effects ](https://www.wpkindemos.com/imagehover/elements-extension/ "Demo Effects")
++ [Image Hover Features ](https://wpkindemos.com/imagehover/ "Image Hover Features")
++ [Demo Effects ](https://wpkindemos.com/imagehover/elements-extension/ "Demo Effects")
 + [How to Use (Video) ](https://www.youtube.com/watch?v=SGHeoNPogbE "How to Use (Video)")
-+ [How to Use (Documentation) ](https://www.wpkindemos.com/imagehover/docs/ "How to Use (Documentation)")
++ [How to Use (Documentation) ](https://wpkindemos.com/imagehover/docs/ "How to Use (Documentation)")
 + [Help and Support ](https://wordpress.org/support/plugin/image-hover-effects-ultimate#new-post "Help and Support")
 
 
@@ -164,7 +164,7 @@ At this point you will see the Hover Modification Form with 6 Field
 
 > + First field: "Your Title" You can enter any title, the important thing to remember is that the item width and height are limited so please enter a short title. This is important to maintain the layout of the image wrapper.
 > + Second field: "Your Description" You can quickly insert the description in the description text area. It is important to enter a short description to maintain the layout of the image wrapper.
-> + Third field: "Enter URL" Chose a button URL in this field. EX: https://www.oxilab.org
+> + Third field: "Enter URL" Chose a button URL in this field. EX: https://www.wpkin.com
 > + Forth Field: “Bottom Text” adds bottom text here.
 > + Fifth Field: "Upload Image" to choose an image, the image can come from any source and be any size, you can also use images uploaded right from the post media Uploader. Just copy the URL of the image after you upload it.
 > + Sixth Field: “Hover Background Image” Here you can add an image for the hover background of the image.
@@ -276,6 +276,9 @@ Its too easy Chose your style from Effects List and click at Clone.
 
 == Changelog ==
 == Upgrade Notice ==
+
+= 9.10.2 = 
+*Fixed Demo image not displaying issue.
 
 = 9.10.1 = 
 *Fixed Redirect and not allowed issue.

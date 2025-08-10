@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name:       Image Hover Effects Ultimate (Photo Gallery, Effects, Lightbox, Comparison or Magnifier)
- * Plugin URI:        https://www.wpkindemos.com/imagehover
+ * Plugin URI:        https://wpkin.com
  * Description:       Create Awesome Image Hover Effects as Image Gallery, Lightbox, Comparison or Magnifier with Impressive, Lightweight, Responsive Image Hover Effects Ultimate. Use 500+ modern and elegant CSS hover effects and animations.
- * Version:           9.10.1
+ * Version:           9.10.2
  * Author:            WPKIN
  * Author URI:        https://wpkin.com
  * Text Domain:       image-hover-effects-ultimate
