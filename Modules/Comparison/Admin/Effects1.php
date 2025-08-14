@@ -2,7 +2,7 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Comparison\Admin;
 
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
@@ -11,8 +11,8 @@ if (!defined('ABSPATH')) {
  *
  * @author biplob
  */
-use OXI_IMAGE_HOVER_PLUGINS\Modules\Comparison\Modules as Modules;
-use OXI_IMAGE_HOVER_PLUGINS\Classes\Controls as Controls;
+use OXI_IMAGE_HOVER_PLUGINS\Modules\Comparison\Modules;
+use OXI_IMAGE_HOVER_PLUGINS\Classes\Controls;
 
 class Effects1 extends Modules {
 

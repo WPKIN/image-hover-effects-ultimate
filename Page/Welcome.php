@@ -2,7 +2,7 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Page;
 
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
@@ -11,21 +11,20 @@ if (!defined('ABSPATH')) {
  *
  * @author $biplob018
  */
-class Welcome
-{
+class Welcome {
+
 
     use \OXI_IMAGE_HOVER_PLUGINS\Helper\CSS_JS_Loader;
-    
-    public function Public_Render()
-    {
-        apply_filters('oxi-image-hover-plugin/admin_menu', TRUE);
-?>
+
+    public function Public_Render() {
+        apply_filters( 'oxi-image-hover-plugin/admin_menu', true );
+		?>
         <div class="oxi-addons-wrapper">
             <div class="oxi-addons-import-layouts">
                 <div class="about-wrap text-center">
                     <h1>Welcome to Image Hover Ultimate</h1>
                     <div class="about-text">
-                        Thank you for Installing Image Hover Ultimate, The most friendly Image Hover extension or all in one Package Image effects for any Wordpress Sites. Here's how to get started.
+                        Thank you for Installing Image Hover Ultimate, The most friendly Image Hover extension or all in one Package Image effects for any WordPress Sites. Here's how to get started.
                     </div>
                 </div>
                 <div class="feature-section">
@@ -116,16 +115,14 @@ class Welcome
         </div>
 
 
-<?php
+		<?php
     }
-    public function __construct()
-    {
+    public function __construct() {
         $this->header();
         $this->Public_Render();
     }
 
-    public function header()
-    {
+    public function header() {
         $this->admin_css();
     }
 }

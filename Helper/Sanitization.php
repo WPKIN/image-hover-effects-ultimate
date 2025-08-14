@@ -578,6 +578,7 @@ trait Sanitization {
                     ?>
                     <div class="shortcode-form-control-input-wrapper"  retundata='<?php echo esc_attr($retunvalue); ?>'>
                         <?php
+						// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                         echo wp_editor(
                                 $value,
                                 $id,

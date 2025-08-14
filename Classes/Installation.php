@@ -2,8 +2,9 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Classes;
 
-if (!defined('ABSPATH'))
+if ( ! defined( 'ABSPATH' ) ) {
     exit;
+}
 
 /**
  * Description of Installation
@@ -12,7 +13,7 @@ if (!defined('ABSPATH'))
  */
 class Installation {
 
-    protected static $lfe_instance = NULL;
+    protected static $lfe_instance = null;
 
     /**
      * Constructor of Shortcode Addons
@@ -20,7 +21,6 @@ class Installation {
      * @since 9.3.0
      */
     public function __construct() {
-
     }
 
     /**
@@ -28,8 +28,8 @@ class Installation {
      *
      * @since 9.3.0
      */
-    public function fixed_data($agr) {
-        return hex2bin($agr);
+    public function fixed_data( $agr ) {
+        return hex2bin( $agr );
     }
 
     /**
@@ -37,16 +37,17 @@ class Installation {
      *
      * @since 9.3.0
      */
-    public function fixed_debug_data($str) {
-        return bin2hex($str);
+    public function fixed_debug_data( $str ) {
+        return bin2hex( $str );
     }
 
     /**
      * Access plugin instance. You can create further instances by calling
      */
     public static function get_instance() {
-        if (NULL === self::$lfe_instance)
-            self::$lfe_instance = new self;
+        if ( null === self::$lfe_instance ) {
+            self::$lfe_instance = new self();
+        }
 
         return self::$lfe_instance;
     }
@@ -80,11 +81,11 @@ class Installation {
                 font varchar(200) NULL,
 		PRIMARY KEY  (id)
 	) $charset_collate;";
-        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-        dbDelta($sql1);
-        dbDelta($sql2);
-        dbDelta($sql3);
-        add_option('oxi_image_hover_version', OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+        dbDelta( $sql1 );
+        dbDelta( $sql2 );
+        dbDelta( $sql3 );
+        add_option( 'oxi_image_hover_version', OXI_IMAGE_HOVER_PLUGIN_VERSION );
     }
 
     /**
@@ -106,6 +107,6 @@ class Installation {
 
         $this->Image_Hover_Database();
         // Redirect to options page
-        set_transient('oxi_image_hover_activation_redirect', true, 30);
+        set_transient( 'oxi_image_hover_activation_redirect', true, 30 );
     }
 }

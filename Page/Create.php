@@ -5,7 +5,7 @@ namespace OXI_IMAGE_HOVER_PLUGINS\Page;
 use OXI_IMAGE_HOVER_PLUGINS\Helper\CSS_JS_Loader;
 use OXI_IMAGE_HOVER_PLUGINS\Helper\Public_Helper;
 
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
@@ -14,8 +14,8 @@ if (!defined('ABSPATH')) {
  *
  * @author $biplob018
  */
-class Create
-{
+class Create {
+
 
     /**
      * Database Parent Table
@@ -66,22 +66,21 @@ class Create
     use Public_Helper;
     use CSS_JS_Loader;
 
-    
 
-    public function Render()
-    {
-        $import = (!empty($_GET['import']) ? sanitize_text_field($_GET['import']) : '');
-        if ($import == 'templates') :
-?>
+
+    public function Render() {
+        $import = ( ! empty( $_GET['import'] ) ? sanitize_text_field( $_GET['import'] ) : '' );
+        if ( $import == 'templates' ) :
+			?>
             <div class="oxi-addons-row">
                 <?php
                 $this->Import_header();
                 $this->import_template();
                 ?>
             </div>
-        <?php
+			<?php
         else :
-        ?>
+			?>
             <div class="oxi-addons-row">
                 <?php
                 $this->Admin_header();
@@ -89,24 +88,22 @@ class Create
                 $this->create_new();
                 ?>
             </div>
-        <?php
+			<?php
         endif;
     }
-    public function Import_header()
-    {
-    ?>
+    public function Import_header() {
+		?>
         <div class="oxi-addons-wrapper">
             <div class="oxi-addons-import-layouts">
-                <h1><?php echo esc_html(ucfirst($this->effects)); ?> Effects › Import Templates</h1>
+                <h1><?php echo esc_html( ucfirst( $this->effects ) ); ?> Effects › Import Templates</h1>
                 <p> Select Image Hover layouts, Import Templates for future Use.</p>
             </div>
         </div>
 
-    <?php
-        apply_filters('oxi-image-hover-support-and-comments', true);
+		<?php
+        apply_filters( 'oxi-image-hover-support-and-comments', true );
     }
-    public function create_new()
-    {
+    public function create_new() {
         ?>
         <div class="modal fade" id="oxi-addons-style-create-modal">
             <form method="post" id="oxi-addons-style-modal-form">
@@ -165,7 +162,7 @@ class Create
                 </div>
             </div>
         </div>
-    <?php
+		<?php
     }
 
     /**
@@ -173,50 +170,47 @@ class Create
      *
      * @since 9.3.0
      */
-    public function pre_active_check()
-    {
-        $template = $this->wpdb->get_results("SELECT * FROM  $this->import_table WHERE type = '$this->oxitype' ORDER BY id DESC", ARRAY_A);
-        if (count($template) < 1) :
-            foreach ($this->pre_active as $value) {
-                $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->import_table} (type, name) VALUES (%s, %s)", [$this->oxitype, $value]));
+    public function pre_active_check() {
+        $template = $this->wpdb->get_results( "SELECT * FROM  $this->import_table WHERE type = '$this->oxitype' ORDER BY id DESC", ARRAY_A );
+        if ( count( $template ) < 1 ) :
+            foreach ( $this->pre_active as $value ) {
+                $this->wpdb->query( $this->wpdb->prepare( "INSERT INTO {$this->import_table} (type, name) VALUES (%s, %s)", [ $this->oxitype, $value ] ) );
             }
             $this->activated_template = $this->pre_clecked;
         else :
-            foreach ($template as $value) {
-                $this->activated_template[$value['name']] = $value['name'];
+            foreach ( $template as $value ) {
+                $this->activated_template[ $value['name'] ] = $value['name'];
             }
         endif;
     }
-   
 
-    public function import_template()
-    {
-    ?>
+
+    public function import_template() {
+		?>
         <div class="oxi-addons-row">
             <?php
-            foreach ($this->TEMPLATE as $key => $value) {
-
-                if (!array_key_exists($this->effects . '-' . $key, $this->activated_template)) :
-            ?>
-                    <div class="oxi-addons-col-1" id="<?php echo esc_attr($key); ?>">
+            foreach ( $this->TEMPLATE as $key => $value ) {
+                if ( ! array_key_exists( $this->effects . '-' . $key, $this->activated_template ) ) :
+					?>
+                    <div class="oxi-addons-col-1" id="<?php echo esc_attr( $key ); ?>">
                         <div class="oxi-addons-style-preview">
                             <div class="oxi-addons-style-preview-top oxi-addons-center">
                                 <?php
                                 $i = 1;
-                                $lays = count($value);
-                                foreach ($value as $filename) {
-                                    $folder = OXI_IMAGE_HOVER_PATH . 'Modules/' . ucfirst($this->effects) . '/Layouts/' . $key . '/';
+                                $lays = count( $value );
+                                foreach ( $value as $filename ) {
+                                    $folder = OXI_IMAGE_HOVER_PATH . 'Modules/' . ucfirst( $this->effects ) . '/Layouts/' . $key . '/';
 
-                                    if (is_file($folder . $filename)) {
-                                        $template = file_get_contents($folder . $filename);
-                                        $params = json_decode($template, true);
-                                        $s = explode('-', $params['style']['style_name']);
+                                    if ( is_file( $folder . $filename ) ) {
+                                        $template = file_get_contents( $folder . $filename );
+                                        $params = json_decode( $template, true );
+                                        $s = explode( '-', $params['style']['style_name'] );
 
-                                        if ($lays == 3) :
-                                ?>
+                                        if ( $lays == 3 ) :
+											?>
                                             <div class="oxi-bt-col-lg-4 oxi-bt-col-md-6 oxi-bt-col-sm-12">
                                             <?php
-                                        elseif ($lays == 2) :
+                                        elseif ( $lays == 2 ) :
                                             ?>
                                                 <div class="oxi-bt-col-lg-6 oxi-bt-col-md-12 oxi-bt-col-sm-12">
                                                 <?php
@@ -226,33 +220,33 @@ class Create
                                                     <?php
                                                 endif;
 
-                                                $CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($s[0]) . '\Render\Effects' . $s[1];
-                                                if (class_exists($CLASS)) :
-                                                    new $CLASS($params['style'], $params['child']);
+                                                $CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst( $s[0] ) . '\Render\Effects' . $s[1];
+											if ( class_exists( $CLASS ) ) :
+												new $CLASS( $params['style'], $params['child'] );
                                                 endif;
-                                                    ?>
+											?>
                                                     </div>
                                             <?php
-                                            $i++;
-                                        }
-                                    }
-                                            ?>
+                                            ++$i;
+									}
+								}
+								?>
                                                 </div>
                                                 <div class="oxi-addons-style-preview-bottom">
                                                     <div class="oxi-addons-style-preview-bottom-left">
-                                                        <?php echo esc_html(ucfirst($this->effects)); ?>
-                                                        <?php echo esc_html($key); ?>
+                                                        <?php echo esc_html( ucfirst( $this->effects ) ); ?>
+                                                        <?php echo esc_html( $key ); ?>
                                                     </div>
                                                     <div class="oxi-addons-style-preview-bottom-right">
                                                         <?php
-                                                        if (apply_filters('oxi-image-hover-plugin-version', false) == true || array_key_exists($this->effects . '-' . $key, $this->pre_clecked)) :
-                                                        ?>
-                                                            <button class="btn btn-success oxi-addons-addons-style-btn-active" title="Active Templates" data-value="<?php echo esc_attr($key); ?>" data-effects="<?php echo esc_attr($this->effects); ?>" type="button" value="Active" name="styleactive<?php echo esc_attr($key); ?>">Active Templates</button>
-                                                        <?php
+                                                        if ( apply_filters( 'oxi-image-hover-plugin-version', false ) == true || array_key_exists( $this->effects . '-' . $key, $this->pre_clecked ) ) :
+															?>
+                                                            <button class="btn btn-success oxi-addons-addons-style-btn-active" title="Active Templates" data-value="<?php echo esc_attr( $key ); ?>" data-effects="<?php echo esc_attr( $this->effects ); ?>" type="button" value="Active" name="styleactive<?php echo esc_attr( $key ); ?>">Active Templates</button>
+															<?php
                                                         else :
-                                                        ?>
-                                                            <button class="btn btn-danger" title="Premium Templates" type="button" value="Premium Templates" name="styleactive<?php echo esc_attr($key); ?>">Premium Templates</button>
-                                                        <?php
+															?>
+                                                            <button class="btn btn-danger" title="Premium Templates" type="button" value="Premium Templates" name="styleactive<?php echo esc_attr( $key ); ?>">Premium Templates</button>
+															<?php
                                                         endif;
                                                         ?>
                                                     </div>
@@ -262,83 +256,81 @@ class Create
                     <?php
                 endif;
             }
-                    ?>
+			?>
                         </div>
                     <?php
-                }
+	}
 
-                public function Admin_header()
-                {
-                    ?>
+	public function Admin_header() {
+		?>
                         <div class="oxi-addons-wrapper">
                             <div class="oxi-addons-import-layouts">
-                                <h1><?php echo esc_html(ucfirst($this->effects)); ?> Effects › Create New</h1>
+                                <h1><?php echo esc_html( ucfirst( $this->effects ) ); ?> Effects › Create New</h1>
                                 <p> Select Image Hover layouts, Gives your Image Hover name and create new Image Hover.</p>
                             </div>
                         </div>
 
                     <?php
-                    apply_filters('oxi-image-hover-support-and-comments', true);
-                }
+                    apply_filters( 'oxi-image-hover-support-and-comments', true );
+	}
 
-                public function template()
-                {
-                    ?>
+	public function template() {
+		?>
                         <div class="oxi-addons-row">
-                            <?php
-                            $importbutton = false;
-                            foreach ($this->TEMPLATE as $key => $value) {
-                                if (array_key_exists($this->effects . '-' . $key, $this->activated_template)) :
-                            ?>
-                                    <div class="oxi-addons-col-1" id="<?php echo esc_attr($this->effects) . '-' . esc_attr($key); ?>">
+				<?php
+				$importbutton = false;
+				foreach ( $this->TEMPLATE as $key => $value ) {
+					if ( array_key_exists( $this->effects . '-' . $key, $this->activated_template ) ) :
+						?>
+                                    <div class="oxi-addons-col-1" id="<?php echo esc_attr( $this->effects ) . '-' . esc_attr( $key ); ?>">
                                         <div class="oxi-addons-style-preview">
                                             <div class="oxi-addons-style-preview-top oxi-addons-center">
-                                                <?php
-                                                $i = 1;
+									<?php
+									$i = 1;
 
-                                                $lays = count($value);
-                                                foreach ($value as $filename) {
-                                                    $folder = OXI_IMAGE_HOVER_PATH . 'Modules/' . ucfirst($this->effects) . '/Layouts/' . $key . '/';
+									$lays = count( $value );
+									foreach ( $value as $filename ) {
+										$folder = OXI_IMAGE_HOVER_PATH . 'Modules/' . ucfirst( $this->effects ) . '/Layouts/' . $key . '/';
 
-                                                    if (is_file($folder . $filename)) {
-                                                        $template = file_get_contents($folder . $filename);
-                                                        $params = json_decode($template, true);
-                                                        $s = explode('-', $params['style']['style_name']);
-                                                        if ($lays == 3) :
+										if ( is_file( $folder . $filename ) ) {
+											$template = file_get_contents( $folder . $filename );
+											$params = json_decode( $template, true );
+											$s = explode( '-', $params['style']['style_name'] );
+											if ( $lays == 3 ) :
                                                 ?>
                                                             <div class="oxi-bt-col-lg-4 oxi-bt-col-md-6 oxi-bt-col-sm-12">
-                                                            <?php
-                                                        elseif ($lays == 2) :
-                                                            ?>
+												<?php
+											elseif ( $lays == 2 ) :
+												?>
                                                                 <div class="oxi-bt-col-lg-6 oxi-bt-col-md-12 oxi-bt-col-sm-12">
-                                                                <?php
-                                                            else :
-                                                                ?>
+													<?php
+												else :
+													?>
                                                                     <div class="oxi-bt-col-lg-12 oxi-bt-col-md-12 oxi-bt-col-sm-12">
-                                                                    <?php
-                                                                endif;
+														<?php
+													endif;
 
-                                                                $CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($s[0]) . '\Render\Effects' . $s[1];
-                                                                if (class_exists($CLASS)) :
-                                                                    new $CLASS($params['style'], $params['child']);
-                                                                endif;
-                                                                    ?>
-                                                                    <input type="hidden" id="oxi-template-<?php echo esc_attr($key); ?>-data-<?php echo esc_attr($i); ?>" name="custId" value="Modules/<?php echo esc_attr(ucfirst($this->effects)); ?>/Layouts/<?php echo esc_attr($key); ?>/<?php echo esc_attr($filename); ?>">
+													$CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst( $s[0] ) . '\Render\Effects' . $s[1];
+												if ( class_exists( $CLASS ) ) :
+															new $CLASS( $params['style'], $params['child'] );
+													endif;
+												?>
+                                                                    <input type="hidden" id="oxi-template-<?php echo esc_attr( $key ); ?>-data-<?php echo esc_attr( $i ); ?>" name="custId" value="Modules/<?php echo esc_attr( ucfirst( $this->effects ) ); ?>/Layouts/<?php echo esc_attr( $key ); ?>/<?php echo esc_attr( $filename ); ?>">
                                                                     </div>
                                                             <?php
-                                                            $i++;
-                                                        }
-                                                    }
-                                                            ?>
+                                                            ++$i;
+										}
+									}
+									?>
                                                                 </div>
                                                                 <div class="oxi-addons-style-preview-bottom">
                                                                     <div class="oxi-addons-style-preview-bottom-left">
-                                                                        <?php echo esc_html(ucfirst($this->effects)); ?>
-                                                                        <?php echo esc_html($key); ?>
+															<?php echo esc_html( ucfirst( $this->effects ) ); ?>
+															<?php echo esc_html( $key ); ?>
                                                                     </div>
                                                                     <div class="oxi-addons-style-preview-bottom-right">
-                                                                        <button class="btn btn-warning oxi-addons-addons-style-btn-warning" title="Delete" data-value="<?php echo esc_attr($key); ?>" data-effects="<?php echo esc_html($this->effects); ?>" type="button" value="Deactive">Deactive</button>
-                                                                        <button type="button" class="btn btn-success oxi-addons-addons-template-create" effects-data="oxi-template-<?php echo esc_attr($key); ?>">Create Style</button>
+                                                                        <button class="btn btn-warning oxi-addons-addons-style-btn-warning" title="Delete" data-value="<?php echo esc_attr( $key ); ?>" data-effects="<?php echo esc_html( $this->effects ); ?>" type="button" value="Deactive">Deactive</button>
+                                                                        <button type="button" class="btn btn-success oxi-addons-addons-template-create" effects-data="oxi-template-<?php echo esc_attr( $key ); ?>">Create Style</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -347,14 +339,14 @@ class Create
                                     else :
                                         $importbutton = true;
                                     endif;
-                                }
+				}
 
-                                if ($importbutton) :
-                                        ?>
+				if ( $importbutton ) :
+					?>
                                         <div class="oxi-addons-col-1 oxi-import">
                                             <div class="oxi-addons-style-preview">
                                                 <div class="oxilab-admin-style-preview-top">
-                                                    <a href="<?php echo esc_url(admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$this->effects&import=templates")); ?>">
+                                                    <a href="<?php echo esc_url( admin_url( "admin.php?page=oxi-image-hover-ultimate&effects=$this->effects&import=templates" ) ); ?>">
                                                         <div class="oxilab-admin-add-new-item">
                                                             <span>
                                                                 <i class="fas fa-plus-circle oxi-icons"></i>
@@ -367,76 +359,73 @@ class Create
                                         </div>
                                     <?php
                                 endif;
-                                    ?>
+				?>
 
 
                                         </div>
                                 <?php
-                            }
+	}
 
 
 
-                            public function rec_listFiles($from = '.')
-                            {
-                                if (!is_dir($from)) {
-                                    return false;
-                                }
+	public function rec_listFiles( $from = '.' ) {
+		if ( ! is_dir( $from ) ) {
+			return false;
+		}
 
-                                $files = [];
-                                if ($dh = opendir($from)) {
-                                    while (false !== ($file = readdir($dh))) {
-                                        // Skip '.' and '..'
-                                        if ($file == '.' || $file == '..')
-                                            continue;
-                                        $path = $from . '/' . $file;
-                                        if (is_dir($path)) {
-                                            $files += $this->rec_listFiles($path);
-                                        } else {
-                                            if (strpos($path, 'json') !== false) {
-                                                $folder = explode("/Layouts/", $path);
-                                                $folder = explode("/", $folder[1]);
-                                            }
-                                            if (isset($folder[1])) {
-                                                $files[$folder[0]][] = $folder[1];
-                                            }
-                                        }
-                                    }
-                                    closedir($dh);
-                                }
-                                ksort($files);
-                                return $files;
-                            }
+		$files = [];
+		if ( $dh = opendir( $from ) ) {
+			while ( false !== ( $file = readdir( $dh ) ) ) {
+				// Skip '.' and '..'
+				if ( $file == '.' || $file == '..' ) {
+					continue;
+				}
+				$path = $from . '/' . $file;
+				if ( is_dir( $path ) ) {
+					$files += $this->rec_listFiles( $path );
+				} else {
+					if ( strpos( $path, 'json' ) !== false ) {
+						$folder = explode( '/Layouts/', $path );
+						$folder = explode( '/', $folder[1] );
+					}
+					if ( isset( $folder[1] ) ) {
+						$files[ $folder[0] ][] = $folder[1];
+					}
+				}
+			}
+			closedir( $dh );
+		}
+		ksort( $files );
+		return $files;
+	}
 
-                            public function __construct()
-                            {
-                                global $wpdb;
-                                $this->wpdb = $wpdb;
-                                $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
-                                $this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
-                                $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
-                                $this->effects = (!empty($_GET['effects']) ? sanitize_text_field($_GET['effects']) : '');
-                                $this->oxitype = $this->effects . '-ultimate';
-                                $this->CSSJS_load();
-                                $this->Render();
-                            }
+	public function __construct() {
+		global $wpdb;
+		$this->wpdb = $wpdb;
+		$this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
+		$this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
+		$this->import_table = $this->wpdb->prefix . 'oxi_div_import';
+		$this->effects = ( ! empty( $_GET['effects'] ) ? sanitize_text_field( $_GET['effects'] ) : '' );
+		$this->oxitype = $this->effects . '-ultimate';
+		$this->CSSJS_load();
+		$this->Render();
+	}
 
-                            public function CSSJS_load()
-                            {
+	public function CSSJS_load() {
 
-                                $this->JSON_DATA();
-                                $this->pre_clecked = array_flip($this->pre_active);
-                                $this->admin_css_loader();
-                                $this->admin_rest_api();
-                                $this->pre_active_check();
-                                apply_filters('oxi-image-hover-plugin/admin_menu', true);
-                            }
+		$this->JSON_DATA();
+		$this->pre_clecked = array_flip( $this->pre_active );
+		$this->admin_css_loader();
+		$this->admin_rest_api();
+		$this->pre_active_check();
+		apply_filters( 'oxi-image-hover-plugin/admin_menu', true );
+	}
 
                             /**
                              * Admin Notice JS file loader
                              * @return void
                              */
-                            public function admin_rest_api()
-                            {
-                                wp_enqueue_script('oxi-image-hover-create', OXI_IMAGE_HOVER_URL . 'assets/backend/js/create.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-                            }
-                        }
+	public function admin_rest_api() {
+		wp_enqueue_script( 'oxi-image-hover-create', OXI_IMAGE_HOVER_URL . 'assets/backend/js/create.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION );
+	}
+}

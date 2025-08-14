@@ -2,8 +2,9 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Classes;
 
-if (!defined('ABSPATH'))
+if ( ! defined( 'ABSPATH' ) ) {
     exit;
+}
 
 /**
  * Description of Bootstrap
@@ -11,7 +12,7 @@ if (!defined('ABSPATH'))
  * @author $biplob018
  */
 
-use OXI_IMAGE_HOVER_PLUGINS\Classes\ImageApi as IMAGEAPI;
+use OXI_IMAGE_HOVER_PLUGINS\Classes\ImageApi;
 
 class Bootstrap {
 
@@ -50,32 +51,32 @@ class Bootstrap {
     public $child_table;
 
 	public function __construct() {
-        do_action('image-hover-effects-ultimate/before_init');
+        do_action( 'image-hover-effects-ultimate/before_init' );
         // Load translation
-        add_action('init', array($this, 'i18n'));
+        add_action( 'init', [ $this, 'i18n' ] );
 
         new IMAGEAPI();
-        if (is_admin()) {
+        if ( is_admin() ) {
             $this->User_Admin();
             $this->User_Reviews();
         }
         $this->Admin_Filters();
         $this->Shortcode_loader();
         $this->Public_loader();
-        add_action('init', [$this, 'register_image_hover_ultimate_update']);
+        add_action( 'init', [ $this, 'register_image_hover_ultimate_update' ] );
     }
 
     public static function instance() {
-        if (self::$instance == null) {
-            self::$instance = new self;
+        if ( self::$instance == null ) {
+            self::$instance = new self();
         }
         return self::$instance;
     }
 
     public function User_Admin() {
-        add_action('admin_menu', [$this, 'Admin_Menu']);
-        add_action('admin_head', [$this, 'Admin_Icon']);
-        add_action('admin_init', array($this, 'redirect_on_activation'));
+        add_action( 'admin_menu', [ $this, 'Admin_Menu' ] );
+        add_action( 'admin_head', [ $this, 'Admin_Icon' ] );
+        add_action( 'admin_init', [ $this, 'redirect_on_activation' ] );
     }
 
     /**
@@ -84,11 +85,11 @@ class Bootstrap {
      * @since 9.3.0
      * @access public
      */
-    public function WP_Shortcode($atts) {
-        extract(shortcode_atts(array('id' => ' ',), $atts));
+    public function WP_Shortcode( $atts ) {
+        extract( shortcode_atts( [ 'id' => ' ' ], $atts ) );
         $styleid = (int) $atts['id'];
         ob_start();
-        $this->shortcode_render($styleid, 'user');
+        $this->shortcode_render( $styleid, 'user' );
         return ob_get_clean();
     }
 
@@ -99,7 +100,7 @@ class Bootstrap {
      * @access public
      */
     public function i18n() {
-        load_plugin_textdomain('image-hover-effects-ultimate');
+        load_plugin_textdomain( 'image-hover-effects-ultimate' );
     }
 
     /**
@@ -109,18 +110,18 @@ class Bootstrap {
      * @access public
      */
     protected function Shortcode_loader() {
-        add_shortcode('iheu_ultimate_oxi', [$this, 'WP_Shortcode']);
+        add_shortcode( 'iheu_ultimate_oxi', [ $this, 'WP_Shortcode' ] );
         new \OXI_IMAGE_HOVER_PLUGINS\Modules\Visual_Composer();
         $ImageWidget = new \OXI_IMAGE_HOVER_PLUGINS\Modules\Widget();
-        add_filter('widget_text', 'do_shortcode');
-        add_action('widgets_init', array($ImageWidget, 'iheu_widget_widget'));
+        add_filter( 'widget_text', 'do_shortcode' );
+        add_action( 'widgets_init', [ $ImageWidget, 'iheu_widget_widget' ] );
     }
 
     public function register_image_hover_ultimate_update() {
-        $check = get_option('image_hover_ultimate_update_complete');
-        if ($check != 'done') :
-            add_action('image_hover_ultimate_update', [$this, 'plugin_update']);
-            wp_schedule_single_event(time() + 10, 'image_hover_ultimate_update');
+        $check = get_option( 'image_hover_ultimate_update_complete' );
+        if ( $check != 'done' ) :
+            add_action( 'image_hover_ultimate_update', [ $this, 'plugin_update' ] );
+            wp_schedule_single_event( time() + 10, 'image_hover_ultimate_update' );
         endif;
     }
 

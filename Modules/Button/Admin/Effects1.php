@@ -2,7 +2,7 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Button\Admin;
 
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
  *
  * @author biplo
  */
-use OXI_IMAGE_HOVER_PLUGINS\Modules\Button\Modules as Modules;
+use OXI_IMAGE_HOVER_PLUGINS\Modules\Button\Modules;
 
 class Effects1 extends Modules {
 

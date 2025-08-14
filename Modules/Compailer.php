@@ -2,7 +2,7 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules;
 
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
@@ -13,29 +13,28 @@ if (!defined('ABSPATH')) {
  */
 
 use OXI_IMAGE_HOVER_PLUGINS\Page\Public_Render;
-use OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic\Post_Query as Post_Query;
-use OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic\Layouts_Query as Layouts_Query;
+use OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic\Post_Query;
+use OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic\Layouts_Query;
 
-class Compailer extends Public_Render
-{
-
+class Compailer extends Public_Render {
 
 
-    public function render()
-    {
-?>
-        <div class="oxi-addons-container noLightbox <?php echo esc_attr($this->WRAPPER); ?>" id="<?php echo esc_attr($this->WRAPPER); ?>">
-            <div class="oxi-addons-row"><?php
-                                        $this->default_render($this->style, $this->child, $this->admin);
-                                        ?>
+
+
+    public function render() {
+		?>
+        <div class="oxi-addons-container noLightbox <?php echo esc_attr( $this->WRAPPER ); ?>" id="<?php echo esc_attr( $this->WRAPPER ); ?>">
+            <div class="oxi-addons-row">
+            <?php
+                                        $this->default_render( $this->style, $this->child, $this->admin );
+			?>
             </div>
         </div>
         <?php
     }
 
-    public function default_render($style, $child, $admin)
-    {
-        if ($this->dynamicPost == true) :
+    public function default_render( $style, $child, $admin ) {
+        if ( $this->dynamicPost == true ) :
             $args = [
                 'post_status' => 'publish',
                 'ignore_sticky_posts' => 1,
@@ -46,34 +45,34 @@ class Compailer extends Public_Render
                 'offset' => $style['image_hover_dynamic_content_offset'],
                 'tax_query' => [],
             ];
-            if (!empty($style['image_hover_dynamic_content_author'])) :
+            if ( ! empty( $style['image_hover_dynamic_content_author'] ) ) :
                 $args['author__in'] = $style['image_hover_dynamic_content_author'];
             endif;
 
             $type = $style['image_hover_dynamic_content_type'];
 
-            if (!empty($style[$type . '_exclude'])) {
-                $args['post__not_in'] = $style[$type . '_exclude'];
+            if ( ! empty( $style[ $type . '_exclude' ] ) ) {
+                $args['post__not_in'] = $style[ $type . '_exclude' ];
             }
-            if (!empty($style[$type . '_include'])) {
-                $args['post__in'] = $style[$type . '_include'];
+            if ( ! empty( $style[ $type . '_include' ] ) ) {
+                $args['post__in'] = $style[ $type . '_include' ];
             }
-            if ($type != 'page') :
-                if (!empty($style[$type . '_category'])) :
+            if ( $type != 'page' ) :
+                if ( ! empty( $style[ $type . '_category' ] ) ) :
                     $args['tax_query'][] = [
                         'taxonomy' => $type == 'post' ? 'category' : $type . '_category',
                         'field' => 'term_id',
-                        'terms' => $style[$type . '_category'],
+                        'terms' => $style[ $type . '_category' ],
                     ];
                 endif;
-                if (!empty($style[$type . '_tag'])) :
+                if ( ! empty( $style[ $type . '_tag' ] ) ) :
                     $args['tax_query'][] = [
                         'taxonomy' => $type . '_tag',
                         'field' => 'term_id',
-                        'terms' => $style[$type . '_tag'],
+                        'terms' => $style[ $type . '_tag' ],
                     ];
                 endif;
-                if (!empty($args['tax_query'])) :
+                if ( ! empty( $args['tax_query'] ) ) :
                     $args['tax_query']['relation'] = 'OR';
                 endif;
             endif;
@@ -82,78 +81,78 @@ class Compailer extends Public_Render
                 'display_post_thumb_sizes' => $style['image_hover_dynamic_content_thumb_sizes'],
                 'display_post_excerpt' => (int) $style['image_hover_dynamic_post_excerpt'] ? $style['image_hover_dynamic_post_excerpt'] : 15,
             ];
-            new Post_Query('post_query', $this->dbdata, $args, $settings);
-            if ($this->dynamicLoad) :
-                if ($style['image_hover_dynamic_load_type'] == 'button') :
-        ?>
+            new Post_Query( 'post_query', $this->dbdata, $args, $settings );
+            if ( $this->dynamicLoad ) :
+                if ( $style['image_hover_dynamic_load_type'] == 'button' ) :
+					?>
 
 
                     <div class="oxi-image-hover-load-more-button-wrap oxi-bt-col-sm-12">
-                        <button class="oxi-image-load-more-button" data-class="OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic\Post_Query" data-function="__rest_api_post" data-args='<?php echo esc_attr(json_encode($args)); ?>' data-settings='<?php echo esc_attr(json_encode($settings)); ?>' data-page="1">
+                        <button class="oxi-image-load-more-button" data-class="OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic\Post_Query" data-function="__rest_api_post" data-args='<?php echo esc_attr( json_encode( $args ) ); ?>' data-settings='<?php echo esc_attr( json_encode( $settings ) ); ?>' data-page="1">
                             <div class="oxi-image-hover-loader button__loader"></div>
-                            <span><?php echo esc_html($style['image_hover_dynamic_load_button_text']); ?></span>
+                            <span><?php echo esc_html( $style['image_hover_dynamic_load_button_text'] ); ?></span>
                         </button>
                     </div>
-                <?php
+					<?php
                 else :
-                ?>
-                    <div class="oxi-image-hover-dynamic-load-infinite" id="oxi-image-hover-dynamic-load-infinite-<?php echo (int) $this->dbdata['id']; ?>" data-class="OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic\Post_Query" data-function="__rest_api_post" data-args='<?php echo esc_attr(json_encode($args)); ?>' data-settings='<?php echo esc_attr(json_encode($settings)); ?>' data-page="1">
+					?>
+                    <div class="oxi-image-hover-dynamic-load-infinite" id="oxi-image-hover-dynamic-load-infinite-<?php echo (int) $this->dbdata['id']; ?>" data-class="OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic\Post_Query" data-function="__rest_api_post" data-args='<?php echo esc_attr( json_encode( $args ) ); ?>' data-settings='<?php echo esc_attr( json_encode( $settings ) ); ?>' data-page="1">
                     </div>
-                <?php
+					<?php
                 endif;
             endif;
         else :
             $args = [
-                'posts_per_page' => isset($style['image_hover_dynamic_load_per_page']) ? $style['image_hover_dynamic_load_per_page'] : 10,
+                'posts_per_page' => isset( $style['image_hover_dynamic_load_per_page'] ) ? $style['image_hover_dynamic_load_per_page'] : 10,
                 'offset' => 0,
             ];
             $settings = [
                 'display_post_id' => $this->oxiid,
             ];
 
-            new Layouts_Query('layouts_query', $this->dbdata, $args, $settings);
+            new Layouts_Query( 'layouts_query', $this->dbdata, $args, $settings );
 
-            if ($this->dynamicLoad) :
-                if ($style['image_hover_dynamic_load_type'] == 'button') :
-                ?>
+            if ( $this->dynamicLoad ) :
+                if ( $style['image_hover_dynamic_load_type'] == 'button' ) :
+					?>
                     <div class="oxi-image-hover-load-more-button-wrap oxi-bt-col-sm-12">
-                        <button class="oxi-image-load-more-button" data-class="OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic\Layouts_Query" data-function="__rest_api_post" data-args='<?php echo esc_attr(json_encode($args)); ?>' data-settings='<?php echo esc_attr(json_encode($settings)); ?>' data-page="1">
+                        <button class="oxi-image-load-more-button" data-class="OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic\Layouts_Query" data-function="__rest_api_post" data-args='<?php echo esc_attr( json_encode( $args ) ); ?>' data-settings='<?php echo esc_attr( json_encode( $settings ) ); ?>' data-page="1">
                             <div class="oxi-image-hover-loader button__loader"></div>
-                            <span><?php echo esc_html($style['image_hover_dynamic_load_button_text']); ?></span>
+                            <span><?php echo esc_html( $style['image_hover_dynamic_load_button_text'] ); ?></span>
                         </button>
                     </div>
-                <?php
+					<?php
                 else :
-                ?>
-                    <div class="oxi-image-hover-dynamic-load-infinite" id="oxi-image-hover-dynamic-load-infinite-<?php echo (int) $this->dbdata['id']; ?>" data-class="OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic\Layouts_Query" data-function="__rest_api_post" data-args='<?php echo esc_attr(json_encode($args)); ?>' data-settings='<?php echo esc_attr(json_encode($settings)); ?>' data-page="1">
+					?>
+                    <div class="oxi-image-hover-dynamic-load-infinite" id="oxi-image-hover-dynamic-load-infinite-<?php echo (int) $this->dbdata['id']; ?>" data-class="OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic\Layouts_Query" data-function="__rest_api_post" data-args='<?php echo esc_attr( json_encode( $args ) ); ?>' data-settings='<?php echo esc_attr( json_encode( $settings ) ); ?>' data-page="1">
                     </div>
-<?php
+					<?php
                 endif;
             endif;
         endif;
 
-        if ($this->dynamicCarousel == true) :
-            $lap = $this->public_column_render($style['oxi-image-hover-col-lap']);
-            $tab = $this->public_column_render($style['oxi-image-hover-col-tab']);
-            $mobile = $this->public_column_render($style['oxi-image-hover-col-mob']);
+        if ( $this->dynamicCarousel == true ) :
+            $lap = $this->public_column_render( $style['oxi-image-hover-col-lap'] );
+            $tab = $this->public_column_render( $style['oxi-image-hover-col-tab'] );
+            $mobile = $this->public_column_render( $style['oxi-image-hover-col-mob'] );
 
             $lap_item = $style['carousel_item_slide-lap-size'];
             $tab_item = $style['carousel_item_slide-tab-size'];
             $mobile_item = $style['carousel_item_slide-mob-size'];
 
-            $prev = $this->custom_font_awesome_render($style['carousel_left_arrow']);
-            $next = $this->custom_font_awesome_render($style['carousel_right_arrow']);
+            $prev = $this->custom_font_awesome_render( $style['carousel_left_arrow'] );
+            $next = $this->custom_font_awesome_render( $style['carousel_right_arrow'] );
 
-            $autoplay = ($style['carousel_autoplay'] == 'yes') ? 'true' : 'false';
+            $autoplay = ( $style['carousel_autoplay'] == 'yes' ) ? 'true' : 'false';
             $autoplayspeed = $style['carousel_autoplay_speed'];
             $speed = $style['carousel_speed'];
-            $pause_on_hover = ($style['carousel_pause_on_hover'] == 'yes') ? 'true' : 'false';
-            $infinite = ($style['carousel_infinite'] == 'yes') ? 'true' : 'false';
-            $adaptiveheight = ($style['carousel_adaptive_height'] == 'yes') ? 'true' : 'false';
-            $center_mode = ($style['carousel_center_mode'] == 'yes') ? 'true' : 'false';
+            $pause_on_hover = ( $style['carousel_pause_on_hover'] == 'yes' ) ? 'true' : 'false';
+            $infinite = ( $style['carousel_infinite'] == 'yes' ) ? 'true' : 'false';
+            $adaptiveheight = ( $style['carousel_adaptive_height'] == 'yes' ) ? 'true' : 'false';
+            $center_mode = ( $style['carousel_center_mode'] == 'yes' ) ? 'true' : 'false';
 
-            $arrows = ($style['carousel_show_arrows'] == 'yes') ? 'true' : 'false';
-            $dots = ($style['carousel_show_dots'] == 'yes') ? 'true' : 'false';
+            $arrows = ( $style['carousel_show_arrows'] == 'yes' ) ? 'true' : 'false';
+            $dots = ( $style['carousel_show_dots'] == 'yes' ) ? 'true' : 'false';
 
             $jquery = '(function ($) {
             $(".' . $this->WRAPPER . ' .oxi-addons-row").slick({
@@ -191,66 +190,67 @@ class Compailer extends Public_Render
                 ]
             });
         })(jQuery);';
-            wp_add_inline_script($this->JSHANDLE, $jquery);
+            wp_add_inline_script( $this->JSHANDLE, $jquery );
         endif;
     }
-   
 
-    public function public_column_render($col)
-    {
+
+    public function public_column_render( $col ) {
         $column = 1;
-        if (count(explode('-lg-', $col)) == 2) :
-            $column = explode('-lg-', $col)[1];
-        elseif (count(explode('-md-', $col)) == 2) :
-            $column = explode('-md-', $col)[1];
-        elseif (count(explode('-sm-', $col)) == 2) :
-            $column = explode('-sm-', $col)[1];
+        if ( count( explode( '-lg-', $col ) ) == 2 ) :
+            $column = explode( '-lg-', $col )[1];
+        elseif ( count( explode( '-md-', $col ) ) == 2 ) :
+            $column = explode( '-md-', $col )[1];
+        elseif ( count( explode( '-sm-', $col ) ) == 2 ) :
+            $column = explode( '-sm-', $col )[1];
         endif;
-        if ($column == 12) :
+        if ( $column == 12 ) :
             return 1;
-        elseif ($column == 6) :
+        elseif ( $column == 6 ) :
             return 2;
-        elseif ($column == 4) :
+        elseif ( $column == 4 ) :
             return 3;
-        elseif ($column == 3) :
+        elseif ( $column == 3 ) :
             return 4;
-        elseif ($column == 2) :
+        elseif ( $column == 2 ) :
             return 6;
         else :
             return 12;
         endif;
     }
 
-    public function public_jquery()
-    {
-        if (is_array($this->style) && array_key_exists('image_hover_dynamic_content', $this->style) && $this->style['image_hover_dynamic_content'] == 'yes') :
+    public function public_jquery() {
+        if ( is_array( $this->style ) && array_key_exists( 'image_hover_dynamic_content', $this->style ) && $this->style['image_hover_dynamic_content'] == 'yes' ) :
             $this->dynamicPost = true;
         endif;
-        if (is_array($this->style) && array_key_exists('image_hover_dynamic_load', $this->style) && $this->style['image_hover_dynamic_load'] == 'yes') :
+        if ( is_array( $this->style ) && array_key_exists( 'image_hover_dynamic_load', $this->style ) && $this->style['image_hover_dynamic_load'] == 'yes' ) :
             $this->dynamicLoad = true;
         endif;
-        if (is_array($this->style) && array_key_exists('image_hover_dynamic_carousel', $this->style) && $this->style['image_hover_dynamic_carousel'] == 'yes') :
+        if ( is_array( $this->style ) && array_key_exists( 'image_hover_dynamic_carousel', $this->style ) && $this->style['image_hover_dynamic_carousel'] == 'yes' ) :
             $this->dynamicCarousel = true;
         endif;
 
-        if ($this->dynamicLoad) :
-            wp_enqueue_script('oxi_image_dynamic_loader', OXI_IMAGE_HOVER_URL . 'Modules/Dynamic/Files/dynamic-loader.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        if ( $this->dynamicLoad ) :
+            wp_enqueue_script( 'oxi_image_dynamic_loader', OXI_IMAGE_HOVER_URL . 'Modules/Dynamic/Files/dynamic-loader.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION );
             $this->JSHANDLE = 'oxi_image_dynamic_loader';
-            wp_localize_script('oxi_image_dynamic_loader', 'oxi_image_dynamic_loader', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('image_hover_ultimate')));
-
-        elseif ($this->dynamicCarousel) :
-            wp_enqueue_script('oxi-image-carousel-slick.min', OXI_IMAGE_HOVER_URL . 'Modules/Carousel/Files/slick.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+            wp_localize_script(
+                'oxi_image_dynamic_loader', 'oxi_image_dynamic_loader', [
+					'ajaxurl' => admin_url( 'admin-ajax.php' ),
+					'nonce' => wp_create_nonce( 'image_hover_ultimate' ),
+                ]
+            );
+        elseif ( $this->dynamicCarousel ) :
+            wp_enqueue_script( 'oxi-image-carousel-slick.min', OXI_IMAGE_HOVER_URL . 'Modules/Carousel/Files/slick.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION );
             $this->JSHANDLE = 'oxi-image-carousel-slick.min';
         endif;
     }
-    public function public_css()
-    {
+    public function public_css() {
 
-        if ($this->dynamicLoad) :
-            wp_enqueue_style('oxi-image-dynamic-loader', OXI_IMAGE_HOVER_URL . 'Modules/Dynamic/Files/dynamic-loader.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        elseif ($this->dynamicCarousel) :
-            wp_enqueue_style('oxi-image-hover-carousel-slick', OXI_IMAGE_HOVER_URL . 'Modules/Carousel/Files/slick.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-            wp_enqueue_style('oxi-image-hover-carousel-style', OXI_IMAGE_HOVER_URL . 'Modules/Carousel/Files/style-1.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        if ( $this->dynamicLoad ) :
+            wp_enqueue_style( 'oxi-image-dynamic-loader', OXI_IMAGE_HOVER_URL . 'Modules/Dynamic/Files/dynamic-loader.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION );
+        elseif ( $this->dynamicCarousel ) :
+            wp_enqueue_style( 'oxi-image-hover-carousel-slick', OXI_IMAGE_HOVER_URL . 'Modules/Carousel/Files/slick.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION );
+            wp_enqueue_style( 'oxi-image-hover-carousel-style', OXI_IMAGE_HOVER_URL . 'Modules/Carousel/Files/style-1.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION );
         endif;
     }
 }

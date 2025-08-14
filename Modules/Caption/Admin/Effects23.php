@@ -2,7 +2,7 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Caption\Admin;
 
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
@@ -11,30 +11,29 @@ if (!defined('ABSPATH')) {
  *
  * @author biplo
  */
-use OXI_IMAGE_HOVER_PLUGINS\Modules\Caption\Modules as Modules;
-use OXI_IMAGE_HOVER_PLUGINS\Classes\Controls as Controls;
+use OXI_IMAGE_HOVER_PLUGINS\Modules\Caption\Modules;
+use OXI_IMAGE_HOVER_PLUGINS\Classes\Controls;
 
 class Effects23 extends Modules {
 
     public function register_effects() {
         return $this->add_control(
-                        'image_hover_effects', $this->style, [
-                    'label' => esc_html__('Effects Direction', 'image-hover-effects-ultimate'),
-                    'type' => Controls::SELECT,
-                    'default' => '',
-                    'options' => [
-                        'oxi-image-shift-top-left' => esc_html__('Shift Top Left', 'image-hover-effects-ultimate'),
-                        'oxi-image-shift-top-right' => esc_html__('Shift Top Right', 'image-hover-effects-ultimate'),
-                        'oxi-image-shift-bottom-left' => esc_html__('Shift Bottom Left', 'image-hover-effects-ultimate'),
-                        'oxi-image-shift-bottom-right' => esc_html__('Shift Bottom Right', 'image-hover-effects-ultimate'),
-                    ],
-                    'selector' => [
-                        '{{WRAPPER}} .oxi-image-caption-hover' => '',
-                    ],
-                    'simpledescription' => 'Allows you to Set Effects Direction.',
-                    'description' => 'Allows you to Set Effects Direction.',
-                        ]
+            'image_hover_effects', $this->style, [
+				'label' => esc_html__( 'Effects Direction', 'image-hover-effects-ultimate' ),
+				'type' => Controls::SELECT,
+				'default' => '',
+				'options' => [
+					'oxi-image-shift-top-left' => esc_html__( 'Shift Top Left', 'image-hover-effects-ultimate' ),
+					'oxi-image-shift-top-right' => esc_html__( 'Shift Top Right', 'image-hover-effects-ultimate' ),
+					'oxi-image-shift-bottom-left' => esc_html__( 'Shift Bottom Left', 'image-hover-effects-ultimate' ),
+					'oxi-image-shift-bottom-right' => esc_html__( 'Shift Bottom Right', 'image-hover-effects-ultimate' ),
+				],
+				'selector' => [
+					'{{WRAPPER}} .oxi-image-caption-hover' => '',
+				],
+				'simpledescription' => 'Allows you to Set Effects Direction.',
+				'description' => 'Allows you to Set Effects Direction.',
+			]
         );
     }
-
 }

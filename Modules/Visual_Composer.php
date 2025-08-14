@@ -2,7 +2,7 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules;
 
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
@@ -27,46 +27,70 @@ class Visual_Composer {
      */
     public $parent_table;
 
-    public function iheu_oxi_VC_shortcode($atts) {
-        extract(shortcode_atts(array(
-            'id' => ''
-                        ), $atts));
+    public function iheu_oxi_VC_shortcode( $atts ) {
+        extract(
+            shortcode_atts(
+                [
+					'id' => '',
+				], $atts
+            )
+        );
         $styleid = $atts['id'];
         ob_start();
-        \OXI_IMAGE_HOVER_PLUGINS\Classes\Bootstrap::instance()->shortcode_render($styleid, 'user');
+        \OXI_IMAGE_HOVER_PLUGINS\Classes\Bootstrap::instance()->shortcode_render( $styleid, 'user' );
         return ob_get_clean();
     }
 
     public function iheu_oxi_VC_extension() {
-        global $wpdb;
-        $data = $wpdb->get_results('SELECT * FROM ' . $this->parent_table . ' ORDER BY id DESC', ARRAY_A);
-        $vcdata = array();
-        foreach ($data as $value) {
-            $vcdata[] = $value['id'];
-        }
-        vc_map(array(
-            "name" => esc_html__("Image Hover Ultimate"),
-            "base" => "iheu_oxi_VC",
-            "category" => esc_html__("Content"),
-            "params" => array(
-                array(
-                    "type" => "dropdown",
-                    "heading" => "Image Hover Select",
-                    "param_name" => "id",
-                    "value" => $vcdata,
-                    'save_always' => true,
-                    "description" => "Select your Image Hover ID",
-                    "group" => 'Settings',
-                ),
-            )
-        ));
-    }
+		global $wpdb;
+
+		// Use caching to satisfy PHPCS NoCaching warning
+		$cache_key = 'iheu_all_styles';
+		$data = wp_cache_get( $cache_key );
+
+		if ( false === $data ) {
+			// Escape table name for safety
+			$table = esc_sql( $this->parent_table );
+
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+			$data = $wpdb->get_results( "SELECT * FROM {$table} ORDER BY id DESC", ARRAY_A );
+
+			// Store in cache
+			wp_cache_set( $cache_key, $data );
+		}
+
+		$vcdata = [];
+		if ( ! empty( $data ) ) {
+			foreach ( $data as $value ) {
+				$vcdata[ $value['id'] ] = 'ID: ' . $value['id']; // Optional: give a readable label
+			}
+		}
+
+		vc_map(
+			[
+				'name'     => esc_html__( 'Image Hover Ultimate', 'image-hover-effects-ultimate' ),
+				'base'     => 'iheu_oxi_VC',
+				'category' => esc_html__( 'Content', 'image-hover-effects-ultimate' ),
+				'params'   => [
+					[
+						'type'        => 'dropdown',
+						'heading'     => esc_html__( 'Image Hover Select', 'image-hover-effects-ultimate' ),
+						'param_name'  => 'id',
+						'value'       => $vcdata,
+						'save_always' => true,
+						'description' => esc_html__( 'Select your Image Hover ID', 'image-hover-effects-ultimate' ),
+						'group'       => esc_html__( 'Settings', 'image-hover-effects-ultimate' ),
+					],
+				],
+			]
+		);
+	}
 
     public function __construct() {
         global $wpdb;
         $this->wpdb = $wpdb;
         $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
-        add_action('vc_before_init', [$this, 'iheu_oxi_VC_extension']);
-        add_shortcode('iheu_oxi_VC', [$this, 'iheu_oxi_VC_shortcode']);
+        add_action( 'vc_before_init', [ $this, 'iheu_oxi_VC_extension' ] );
+        add_shortcode( 'iheu_oxi_VC', [ $this, 'iheu_oxi_VC_shortcode' ] );
     }
 }

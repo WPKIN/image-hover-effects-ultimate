@@ -31,22 +31,25 @@ if ( ! function_exists( 'wpkin_iheu_v' ) ) {
         global $wpkin_iheu_v;
 
         if ( ! isset( $wpkin_iheu_v ) ) {
-            $wpkin_iheu_v = fs_dynamic_init( array(
-                'id'                  => '20097',
-                'slug'                => 'oxi-image-hover-ultimate',
-                'type'                => 'plugin',
-                'public_key'          => 'pk_5ae72b1982d4390e3fef586fb2b4e',
-                'is_premium'          => false,
-                'has_premium_version' => false,
-                'has_addons'          => false,
-                'has_paid_plans'      => true,
-                'menu'                => array(
-                    'slug'           => 'oxi-image-hover-ultimate',
-                    'first-path'     => 'admin.php?page=image-hover-ultimate-support',
-                    'contact'        => false,
-                    'support'        => false,
-                ),
-            ) );
+            $wpkin_iheu_v = fs_dynamic_init(
+                [
+					'id'                  => '20097',
+					'slug'                => 'oxi-image-hover-ultimate',
+					'type'                => 'plugin',
+					'public_key'          => 'pk_5ae72b1982d4390e3fef586fb2b4e',
+					'is_premium'          => false,
+					'has_premium_version' => false,
+					'has_addons'          => false,
+					'has_paid_plans'      => true,
+					'menu'                => [
+						'slug'           => 'oxi-image-hover-ultimate',
+						'first-path'     => 'admin.php?page=image-hover-ultimate-support',
+						'contact'        => false,
+						'support'        => false,
+						'pricing'        => false,
+					],
+				]
+            );
         }
 
         return $wpkin_iheu_v;
@@ -58,29 +61,32 @@ if ( ! function_exists( 'wpkin_iheu_v' ) ) {
     do_action( 'wpkin_iheu_v_loaded' );
 }
 
-define('OXI_IMAGE_HOVER_FILE', __FILE__);
-define('OXI_IMAGE_HOVER_BASENAME', plugin_basename(__FILE__));
-define('OXI_IMAGE_HOVER_PATH', plugin_dir_path(__FILE__));
-define('OXI_IMAGE_HOVER_URL', plugins_url('/', __FILE__));
-define('OXI_IMAGE_HOVER_PLUGIN_VERSION', '9.10.1');
-define('OXI_IMAGE_HOVER_TEXTDOMAIN', 'image-hover-effects-ultimate');
-
+define( 'OXI_IMAGE_HOVER_FILE', __FILE__ );
+define( 'OXI_IMAGE_HOVER_BASENAME', plugin_basename( __FILE__ ) );
+define( 'OXI_IMAGE_HOVER_PATH', plugin_dir_path( __FILE__ ) );
+define( 'OXI_IMAGE_HOVER_URL', plugins_url( '/', __FILE__ ) );
+define( 'OXI_IMAGE_HOVER_PLUGIN_VERSION', '9.10.1' );
+define( 'OXI_IMAGE_HOVER_TEXTDOMAIN', 'image-hover-effects-ultimate' );
 
 /**
  * Run plugin after all others plugins
  *
  * @since 9.3.0
  */
-add_action('plugins_loaded', function () {
-    \OXI_IMAGE_HOVER_PLUGINS\Classes\Bootstrap::instance();
-});
+add_action(
+    'plugins_loaded', function () {
+		\OXI_IMAGE_HOVER_PLUGINS\Classes\Bootstrap::instance();
+	}
+);
 
 /**
  * Activation hook
  *
  * @since 9.3.0
  */
-register_activation_hook(__FILE__, function () {
-    $Installation = new \OXI_IMAGE_HOVER_PLUGINS\Classes\Installation();
-    $Installation->plugin_activation_hook();
-});
+register_activation_hook(
+    __FILE__, function () {
+		$Installation = new \OXI_IMAGE_HOVER_PLUGINS\Classes\Installation();
+		$Installation->plugin_activation_hook();
+	}
+);

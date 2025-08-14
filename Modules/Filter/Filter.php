@@ -2,9 +2,9 @@
 
 	namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Filter;
 
-	if (!defined('ABSPATH')) {
-		exit;
-	}
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 	/**
 	 * Description of General
@@ -12,38 +12,35 @@
 	 * @author biplo
 	 */
 
-	use OXI_IMAGE_HOVER_PLUGINS\Page\Create as Create;
+	use OXI_IMAGE_HOVER_PLUGINS\Page\Create;
 
-	class Filter extends Create
-	{
+class Filter extends Create {
 
-		public function Admin_header ()
-		{
-			?>
+
+	public function Admin_header() {
+		?>
             <div class="oxi-addons-wrapper">
                 <div class="oxi-addons-import-layouts">
                     <h1>Filter & Sorting › Create New</h1>
                     <p> Select Image Hover layouts, Gives your Image Hover name and create new Image Hover.</p>
                 </div>
             </div>
-			<?php
-		}
+		<?php
+	}
 
-		public function Import_header ()
-		{
-			?>
+	public function Import_header() {
+		?>
             <div class="oxi-addons-wrapper">
                 <div class="oxi-addons-import-layouts">
                     <h1>Filter & Sorting › Import Templates</h1>
                     <p> Select Image Hover layouts, Import Templates for future Use.</p>
                 </div>
             </div>
-			<?php
-		}
+		<?php
+	}
 
-		public function create_new ()
-		{
-			?>
+	public function create_new() {
+		?>
             <div class="modal fade" id="oxi-addons-style-create-modal">
                 <form method="post" id="oxi-addons-style-modal-form">
                     <div class="modal-dialog modal-sm">
@@ -55,10 +52,10 @@
                             <div class="modal-body">
                                 <div class=" form-group row">
                                     <label for="addons-style-name" class="col-sm-6 col-form-label"
-                                           oxi-addons-tooltip="Give your Shortcode Name Here">Name</label>
+                                            oxi-addons-tooltip="Give your Shortcode Name Here">Name</label>
                                     <div class="col-sm-6 addons-dtm-laptop-lock">
                                         <input class="form-control" type="text" value="" id="style-name"
-                                               name="style-name" required>
+                                                name="style-name" required>
                                     </div>
                                 </div>
                                 <div class="form-group row d-none">
@@ -76,21 +73,19 @@
                                 <input type="hidden" id="oxistyledata" name="oxistyledata" value="">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                 <input type="submit" class="btn btn-success" name="addonsdatasubmit"
-                                       id="addonsdatasubmit" value="Save">
+                                        id="addonsdatasubmit" value="Save">
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
-			<?php
-		}
-
-		public function JSON_DATA ()
-		{
-			$this->TEMPLATE = $this->rec_listFiles(OXI_IMAGE_HOVER_PATH . 'Modules/' . ucfirst($this->effects) . '/Layouts');
-			$this->pre_active = [
-			  'filter-1',
-			];
-		}
-
+		<?php
 	}
+
+	public function JSON_DATA() {
+		$this->TEMPLATE = $this->rec_listFiles( OXI_IMAGE_HOVER_PATH . 'Modules/' . ucfirst( $this->effects ) . '/Layouts' );
+		$this->pre_active = [
+			'filter-1',
+		];
+	}
+}

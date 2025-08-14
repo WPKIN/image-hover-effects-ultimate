@@ -2,7 +2,7 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Classes;
 
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
@@ -10,8 +10,8 @@ if (!defined('ABSPATH')) {
  * Description of Admin Controller
  * @author $biplob018
  */
-class Controls
-{
+class Controls {
+
 
     /**
      * Text control.

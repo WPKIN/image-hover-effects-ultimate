@@ -2,7 +2,7 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Page;
 
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
@@ -12,10 +12,10 @@ if (!defined('ABSPATH')) {
  * @author $biplob018
  */
 
-use OXI_IMAGE_HOVER_PLUGINS\Classes\Controls as Controls;
+use OXI_IMAGE_HOVER_PLUGINS\Classes\Controls;
 
-abstract class Admin_Render
-{
+abstract class Admin_Render {
+
 
     use \OXI_IMAGE_HOVER_PLUGINS\Helper\CSS_JS_Loader;
     use \OXI_IMAGE_HOVER_PLUGINS\Helper\Sanitization;
@@ -158,8 +158,7 @@ abstract class Admin_Render
      *
      * @since 9.3.0
      */
-    public function modal_form_data()
-    {
+    public function modal_form_data() {
         $this->form = 'single';
     }
 
@@ -169,8 +168,7 @@ abstract class Admin_Render
      *
      * @since 9.3.0
      */
-    public function register_controls()
-    {
+    public function register_controls() {
         return true;
     }
 
@@ -179,15 +177,15 @@ abstract class Admin_Render
      *
      * @since 9.3.0
      */
-    public function modal_form()
-    {
-?>
+    public function modal_form() {
+		?>
         <div class="modal fade" id="oxi-addons-list-data-modal">
             <div class="modal-dialog modal-md">
                 <form method="post" id="oxi-template-modal-form">
-                    <div class="modal-content"><?php
+                    <div class="modal-content">
+                    <?php
                                                 $this->modal_form_data();
-                                                ?>
+					?>
                         <div class="modal-footer">
                             <input type="hidden" id="shortcodeitemid" name="shortcodeitemid" value="">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -198,7 +196,7 @@ abstract class Admin_Render
                 </form>
             </div>
         </div>
-    <?php
+		<?php
     }
 
     /**
@@ -206,8 +204,7 @@ abstract class Admin_Render
      *
      * @since 9.3.0
      */
-    public function Rearrange()
-    {
+    public function Rearrange() {
         echo '';
     }
 
@@ -216,23 +213,23 @@ abstract class Admin_Render
      *
      * @since 9.3.0
      */
-    public function shortcode_rearrange()
-    {
+    public function shortcode_rearrange() {
         $rearrange = $this->Rearrange();
-        if (!empty($rearrange)) :
-            $this->add_substitute_control($rearrange, [], [
-                'type' => Controls::REARRANGE,
-                'showing' => true,
-            ]);
+        if ( ! empty( $rearrange ) ) :
+            $this->add_substitute_control(
+                $rearrange, [], [
+					'type' => Controls::REARRANGE,
+					'showing' => true,
+				]
+            );
         endif;
     }
     /**
      * Admin Notice JS file loader
      * @return void
      */
-    public function admin_editor_load()
-    {
-        wp_enqueue_script('oxi-image-hover-editor', OXI_IMAGE_HOVER_URL . 'assets/backend/js/editor.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+    public function admin_editor_load() {
+        wp_enqueue_script( 'oxi-image-hover-editor', OXI_IMAGE_HOVER_URL . 'assets/backend/js/editor.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION );
     }
 
     /**
@@ -241,22 +238,22 @@ abstract class Admin_Render
      *
      * @since 9.3.0
      */
-    public function modal_opener()
-    {
-        $this->add_substitute_control('', [], [
-            'type' => Controls::MODALOPENER,
-            'title' => esc_html__('Add New Data', 'image-hover-effects-ultimate'),
-            'sub-title' => esc_html__('Open Data Form', 'image-hover-effects-ultimate'),
-            'showing' => true,
-        ]);
+    public function modal_opener() {
+        $this->add_substitute_control(
+            '', [], [
+				'type' => Controls::MODALOPENER,
+				'title' => esc_html__( 'Add New Data', 'image-hover-effects-ultimate' ),
+				'sub-title' => esc_html__( 'Open Data Form', 'image-hover-effects-ultimate' ),
+				'showing' => true,
+			]
+        );
     }
     /**
      * Template CSS Render
      *
      * @since 9.3.0
      */
-    public function inline_template_css_render($style)
-    {
+    public function inline_template_css_render( $style ) {
         $styleid = $style['image-hover-style-id'];
         $this->style = $style;
         $this->oxiid = (int) $styleid;
@@ -267,22 +264,22 @@ abstract class Admin_Render
         $dt = $this->register_controls();
         ob_end_clean();
         $fullcssfile = '';
-        foreach ($this->CSSDATA as $key => $responsive) {
+        foreach ( $this->CSSDATA as $key => $responsive ) {
             $tempcss = '';
-            foreach ($responsive as $class => $classes) {
+            foreach ( $responsive as $class => $classes ) {
                 $tempcss .= $class . '{';
-                foreach ($classes as $properties) {
+                foreach ( $classes as $properties ) {
                     $tempcss .= $properties;
                 }
                 $tempcss .= '}';
             }
-            if ($key == 'laptop') :
+            if ( $key == 'laptop' ) :
                 $fullcssfile .= $tempcss;
-            elseif ($key == 'tab') :
+            elseif ( $key == 'tab' ) :
                 $fullcssfile .= '@media only screen and (min-width : 669px) and (max-width : 993px){';
                 $fullcssfile .= $tempcss;
                 $fullcssfile .= '}';
-            elseif ($key == 'mobile') :
+            elseif ( $key == 'mobile' ) :
                 $fullcssfile .= '@media only screen and (max-width : 668px){';
                 $fullcssfile .= $tempcss;
                 $fullcssfile .= '}';
@@ -296,8 +293,7 @@ abstract class Admin_Render
      *
      * @since 9.3.0
      */
-    public function template_css_render($style)
-    {
+    public function template_css_render( $style ) {
         $styleid = $style['image-hover-style-id'];
         $this->oxiid = (int) $styleid;
         $this->WRAPPER = '.oxi-image-hover-wrapper-' . $this->oxiid;
@@ -309,51 +305,50 @@ abstract class Admin_Render
         ob_end_clean();
 
         $fullcssfile = '';
-        foreach ($this->CSSDATA as $key => $responsive) {
+        foreach ( $this->CSSDATA as $key => $responsive ) {
             $tempcss = '';
-            foreach ($responsive as $class => $classes) {
+            foreach ( $responsive as $class => $classes ) {
                 $tempcss .= $class . '{';
-                foreach ($classes as $properties) {
+                foreach ( $classes as $properties ) {
                     $tempcss .= $properties;
                 }
                 $tempcss .= '}';
             }
-            if ($key == 'laptop') :
+            if ( $key == 'laptop' ) :
                 $fullcssfile .= $tempcss;
-            elseif ($key == 'tab') :
+            elseif ( $key == 'tab' ) :
                 $fullcssfile .= '@media only screen and (min-width : 669px) and (max-width : 993px){';
                 $fullcssfile .= $tempcss;
                 $fullcssfile .= '}';
-            elseif ($key == 'mobile') :
+            elseif ( $key == 'mobile' ) :
                 $fullcssfile .= '@media only screen and (max-width : 668px){';
                 $fullcssfile .= $tempcss;
                 $fullcssfile .= '}';
             endif;
         }
-        $font = json_encode($this->font);
-        $this->wpdb->query($this->wpdb->prepare("UPDATE {$this->parent_table} SET stylesheet = %s WHERE id = %d", $fullcssfile, $styleid));
-        $this->wpdb->query($this->wpdb->prepare("UPDATE {$this->parent_table} SET font_family = %s WHERE id = %d", $font, $styleid));
+        $font = json_encode( $this->font );
+        $this->wpdb->query( $this->wpdb->prepare( "UPDATE {$this->parent_table} SET stylesheet = %s WHERE id = %d", $fullcssfile, $styleid ) );
+        $this->wpdb->query( $this->wpdb->prepare( "UPDATE {$this->parent_table} SET font_family = %s WHERE id = %d", $font, $styleid ) );
         return 'success';
     }
 
-    public function import_font_family()
-    {
-        $this->font_family = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->import_table WHERE type = %s ORDER by id ASC", 'shortcode-addons'), ARRAY_A);
+    public function import_font_family() {
+        $this->font_family = $this->wpdb->get_results( $this->wpdb->prepare( "SELECT * FROM $this->import_table WHERE type = %s ORDER by id ASC", 'shortcode-addons' ), ARRAY_A );
         $google = $custom = '';
-        foreach ($this->font_family as $key => $value) {
-            if ($value['name'] == 'custom') {
+        foreach ( $this->font_family as $key => $value ) {
+            if ( $value['name'] == 'custom' ) {
                 $custom .= '|' . $value['font'];
             } else {
                 $google .= '|' . $value['font'];
-                $this->google_font[$value['font']] = $value['font'];
+                $this->google_font[ $value['font'] ] = $value['font'];
             }
         }
-        if ($google == '') :
+        if ( $google == '' ) :
             $google = '|ABeeZee|Abel|Abhaya+Libre|Abril+Fatface|Aclonica|Acme|Actor|Adamina|Advent+Pro|Aguafina+Script|Akronim|Aladin|Aldrich|Alef|Alegreya|Alegreya+SC|Alegreya+Sans|Alegreya+Sans+SC|Aleo|Alex+Brush|Alfa+Slab+One|Alice|Alike|Alike+Angular|Allan|Allerta|Allerta+Stencil|Allura|Almarai|Almendra|Almendra+Display|Almendra+SC|Amarante|Amaranth|Amatic+SC|Amethysta|Amiko|Amiri|Amita|Anaheim|Andada|Andika|Angkor|Annie+Use+Your+Telescope|Anonymous+Pro|Antic|Antic+Didone|Antic+Slab|Anton|Arapey|Arbutus|Arbutus+Slab|Architects+Daughter|Archivo|Archivo+Black|Archivo+Narrow|Aref+Ruqaa|Arima+Madurai|Arimo|Arizonia|Armata|Arsenal|Artifika|Arvo|Arya|Asap|Asap+Condensed|Asar|Asset|Assistant|Astloch|Asul|Athiti|Atma|Atomic+Age|Aubrey|Audiowide|Autour+One|Average|Average+Sans|Averia+Gruesa+Libre|Averia+Libre|Averia+Sans+Libre|Averia+Serif+Libre|B612|B612+Mono|Bad+Script|Bahiana|Bahianita|Bai+Jamjuree|Baloo|Baloo+Bhai|Baloo+Bhaijaan|Baloo+Bhaina|Baloo+Chettan|Baloo+Da|Baloo+Paaji|Baloo+Tamma|Baloo+Tammudu|Baloo+Thambi|Balthazar|Bangers|Barlow|Barlow+Condensed|Barlow+Semi+Condensed|Barriecito|Barrio|Basic|Battambang|Baumans|Bayon|Be+Vietnam|Belgrano|Bellefair|Belleza|BenchNine|Bentham|Berkshire+Swash|Beth+Ellen|Bevan|Big+Shoulders+Display|Big+Shoulders+Text|Bigelow+Rules|Bigshot+One|Bilbo|Bilbo+Swash+Caps|BioRhyme|BioRhyme+Expanded|Biryani|Bitter|Black+And+White+Picture|Black+Han+Sans|Black+Ops+One|Blinker|Bokor|Bonbon|Boogaloo|Bowlby+One|Bowlby+One+SC|Brawler|Bree+Serif|Bubblegum+Sans|Bubbler+One|Buda|Buenard|Bungee|Bungee+Hairline|Bungee+Inline|Bungee+Outline|Bungee+Shade|Butcherman|Butterfly+Kids|Cabin|Cabin+Condensed|Cabin+Sketch|Caesar+Dressing|Cagliostro|Cairo|Calligraffitti|Cambay|Cambo|Candal|Cantarell|Cantata+One|Cantora+One|Capriola|Cardo|Carme|Carrois+Gothic|Carrois+Gothic+SC|Carter+One|Catamaran|Caudex|Caveat|Caveat+Brush|Cedarville+Cursive|Ceviche+One|Chakra+Petch|Changa|Changa+One|Chango|Charm|Charmonman|Chathura|Chau+Philomene+One|Chela+One|Chelsea+Market|Chenla|Cherry+Cream+Soda|Cherry+Swash|Chewy|Chicle|Chilanka|Chivo|Chonburi|Cinzel|Cinzel+Decorative|Clicker+Script|Coda|Coda+Caption|Codystar|Coiny|Combo|Comfortaa|Coming+Soon|Concert+One|Condiment|Content|Contrail+One|Convergence|Cookie|Copse|Corben|Cormorant|Cormorant+Garamond|Cormorant+Infant|Cormorant+SC|Cormorant+Unicase|Cormorant+Upright|Courgette|Cousine|Coustard|Covered+By+Your+Grace|Crafty+Girls|Creepster|Crete+Round|Crimson+Pro|Crimson+Text|Croissant+One|Crushed|Cuprum|Cute+Font|Cutive|Cutive+Mono|DM+Sans|DM+Serif+Display|DM+Serif+Text|Damion|Dancing+Script|Dangrek|Darker+Grotesque|David+Libre|Dawning+of+a+New+Day|Days+One|Dekko|Delius|Delius+Swash+Caps|Delius+Unicase|Della+Respira|Denk+One|Devonshire|Dhurjati|Didact+Gothic|Diplomata|Diplomata+SC|Do+Hyeon|Dokdo|Domine|Donegal+One|Doppio+One|Dorsa|Dosis|Dr+Sugiyama|Duru+Sans|Dynalight|EB+Garamond|Eagle+Lake|East+Sea+Dokdo|Eater|Economica|Eczar|El+Messiri|Electrolize|Elsie|Elsie+Swash+Caps|Emblema+One|Emilys+Candy|Encode+Sans|Encode+Sans+Condensed|Encode+Sans+Expanded|Encode+Sans+Semi+Condensed|Encode+Sans+Semi+Expanded|Engagement|Englebert|Enriqueta|Erica+One|Esteban|Euphoria+Script|Ewert|Exo|Exo+2|Expletus+Sans|Fahkwang|Fanwood+Text|Farro|Farsan|Fascinate|Fascinate+Inline|Faster+One|Fasthand|Fauna+One|Faustina|Federant|Federo|Felipa|Fenix|Finger+Paint|Fira+Code|Fira+Mono|Fira+Sans|Fira+Sans+Condensed|Fira+Sans+Extra+Condensed|Fjalla+One|Fjord+One|Flamenco|Flavors|Fondamento|Fontdiner+Swanky|Forum|Francois+One|Frank+Ruhl+Libre|Freckle+Face|Fredericka+the+Great|Fredoka+One|Freehand|Fresca|Frijole|Fruktur|Fugaz+One|GFS+Didot|GFS+Neohellenic|Gabriela|Gaegu|Gafata|Galada|Galdeano|Galindo|Gamja+Flower|Gayathri|Gentium+Basic|Gentium+Book+Basic|Geo|Geostar|Geostar+Fill|Germania+One|Gidugu|Gilda+Display|Give+You+Glory|Glass+Antiqua|Glegoo|Gloria+Hallelujah|Goblin+One|Gochi+Hand|Gorditas|Gothic+A1|Goudy+Bookletter+1911|Graduate|Grand+Hotel|Gravitas+One|Great+Vibes|Grenze|Griffy|Gruppo|Gudea|Gugi|Gurajada|Habibi|Halant|Hammersmith+One|Hanalei|Hanalei+Fill|Handlee|Hanuman|Happy+Monkey|Harmattan|Headland+One|Heebo|Henny+Penny|Hepta+Slab|Herr+Von+Muellerhoff|Hi+Melody|Hind|Hind+Guntur|Hind+Madurai|Hind+Siliguri|Hind+Vadodara|Holtwood+One+SC|Homemade+Apple|Homenaje|IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed|IBM+Plex+Serif|IM+Fell+DW+Pica|IM+Fell+DW+Pica+SC|IM+Fell+Double+Pica|IM+Fell+Double+Pica+SC|IM+Fell+English|IM+Fell+English+SC|IM+Fell+French+Canon|IM+Fell+French+Canon+SC|IM+Fell+Great+Primer|IM+Fell+Great+Primer+SC|Iceberg|Iceland|Imprima|Inconsolata|Inder|Indie+Flower|Inika|Inknut+Antiqua|Irish+Grover|Istok+Web|Italiana|Italianno|Itim|Jacques+Francois|Jacques+Francois+Shadow|Jaldi|Jim+Nightshade|Jockey+One|Jolly+Lodger|Jomhuria|Josefin+Sans|Josefin+Slab|Joti+One|Jua|Judson|Julee|Julius+Sans+One|Junge|Jura|Just+Another+Hand|Just+Me+Again+Down+Here|K2D|Kadwa|Kalam|Kameron|Kanit|Kantumruy|Karla|Karma|Katibeh|Kaushan+Script|Kavivanar|Kavoon|Kdam+Thmor|Keania+One|Kelly+Slab|Kenia|Khand|Khmer|Khula|Kirang+Haerang|Kite+One|Knewave|KoHo|Kodchasan|Kosugi|Kosugi+Maru|Kotta+One|Koulen|Kranky|Kreon|Kristi|Krona+One|Krub|Kumar+One|Kumar+One+Outline|Kurale|La+Belle+Aurore|Lacquer|Laila|Lakki+Reddy|Lalezar|Lancelot|Lateef|Lato|League+Script|Leckerli+One|Ledger|Lekton|Lemon|Lemonada|Lexend+Deca|Lexend+Exa|Lexend+Giga|Lexend+Mega|Lexend+Peta|Lexend+Tera|Lexend+Zetta|Libre+Barcode+128|Libre+Barcode+128+Text|Libre+Barcode+39|Libre+Barcode+39+Extended|Libre+Barcode+39+Extended+Text|Libre+Barcode+39+Text|Libre+Baskerville|Libre+Caslon+Display|Libre+Caslon+Text|Libre+Franklin|Life+Savers|Lilita+One|Lily+Script+One|Limelight|Linden+Hill|Literata|Liu+Jian+Mao+Cao|Livvic|Lobster|Lobster+Two|Londrina+Outline|Londrina+Shadow|Londrina+Sketch|Londrina+Solid|Long+Cang|Lora|Love+Ya+Like+A+Sister|Loved+by+the+King|Lovers+Quarrel|Luckiest+Guy|Lusitana|Lustria|M+PLUS+1p|M+PLUS+Rounded+1c|Ma+Shan+Zheng|Macondo|Macondo+Swash+Caps|Mada|Magra|Maiden+Orange|Maitree|Major+Mono+Display|Mako|Mali|Mallanna|Mandali|Manjari|Mansalva|Manuale|Marcellus|Marcellus+SC|Marck+Script|Margarine|Markazi+Text|Marko+One|Marmelad|Martel|Martel+Sans|Marvel|Mate|Mate+SC|Maven+Pro|McLaren|Meddon|MedievalSharp|Medula+One|Meera+Inimai|Megrim|Meie+Script|Merienda|Merienda+One|Merriweather|Merriweather+Sans|Metal|Metal+Mania|Metamorphous|Metrophobic|Michroma|Milonga|Miltonian|Miltonian+Tattoo|Mina|Miniver|Miriam+Libre|Mirza|Miss+Fajardose|Mitr|Modak|Modern+Antiqua|Mogra|Molengo|Molle|Monda|Monofett|Monoton|Monsieur+La+Doulaise|Montaga|Montez|Montserrat|Montserrat+Alternates|Montserrat+Subrayada|Moul|Moulpali|Mountains+of+Christmas|Mouse+Memoirs|Mr+Bedfort|Mr+Dafoe|Mr+De+Haviland|Mrs+Saint+Delafield|Mrs+Sheppards|Mukta|Mukta+Mahee|Mukta+Malar|Mukta+Vaani|Muli|Mystery+Quest|NTR|Nanum+Brush+Script|Nanum+Gothic|Nanum+Gothic+Coding|Nanum+Myeongjo|Nanum+Pen+Script|Neucha|Neuton|New+Rocker|News+Cycle|Niconne|Niramit|Nixie+One|Nobile|Nokora|Norican|Nosifer|Notable|Nothing+You+Could+Do|Noticia+Text|Noto+Sans|Noto+Sans+HK|Noto+Sans+JP|Noto+Sans+KR|Noto+Sans+SC|Noto+Sans+TC|Noto+Serif|Noto+Serif+JP|Noto+Serif+KR|Noto+Serif+SC|Noto+Serif+TC|Nova+Cut|Nova+Flat|Nova+Mono|Nova+Oval|Nova+Round|Nova+Script|Nova+Slim|Nova+Square|Numans|Nunito|Nunito+Sans|Odor+Mean+Chey|Offside|Old+Standard+TT|Oldenburg|Oleo+Script|Oleo+Script+Swash+Caps|Open+Sans|Open+Sans+Condensed|Oranienbaum|Orbitron|Oregano|Orienta|Original+Surfer|Oswald|Over+the+Rainbow|Overlock|Overlock+SC|Overpass|Overpass+Mono|Ovo|Oxygen|Oxygen+Mono|PT+Mono|PT+Sans|PT+Sans+Caption|PT+Sans+Narrow|PT+Serif|PT+Serif+Caption|Pacifico|Padauk|Palanquin|Palanquin+Dark|Pangolin|Paprika|Parisienne|Passero+One|Passion+One|Pathway+Gothic+One|Patrick+Hand|Patrick+Hand+SC|Pattaya|Patua+One|Pavanam|Paytone+One|Peddana|Peralta|Permanent+Marker|Petit+Formal+Script|Petrona|Philosopher|Piedra|Pinyon+Script|Pirata+One|Plaster|Play|Playball|Playfair+Display|Playfair+Display+SC|Podkova|Poiret+One|Poller+One|Poly|Pompiere|Pontano+Sans|Poor+Story|Poppins|Port+Lligat+Sans|Port+Lligat+Slab|Pragati+Narrow|Prata|Preahvihear|Press+Start+2P|Pridi|Princess+Sofia|Prociono|Prompt|Prosto+One|Proza+Libre|Puritan|Purple+Purse|Quando|Quantico|Quattrocento|Quattrocento+Sans|Questrial|Quicksand|Quintessential|Qwigley|Racing+Sans+One|Radley|Rajdhani|Rakkas|Raleway|Raleway+Dots|Ramabhadra|Ramaraja|Rambla|Rammetto+One|Ranchers|Rancho|Ranga|Rasa|Rationale|Ravi+Prakash|Red+Hat+Display|Red+Hat+Text|Redressed|Reem+Kufi|Reenie+Beanie|Revalia|Rhodium+Libre|Ribeye|Ribeye+Marrow|Righteous|Risque|Roboto|Roboto+Condensed|Roboto+Mono|Roboto+Slab|Rochester|Rock+Salt|Rokkitt|Romanesco|Ropa+Sans|Rosario|Rosarivo|Rouge+Script|Rozha+One|Rubik|Rubik+Mono+One|Ruda|Rufina|Ruge+Boogie|Ruluko|Rum+Raisin|Ruslan+Display|Russo+One|Ruthie|Rye|Sacramento|Sahitya|Sail|Saira|Saira+Condensed|Saira+Extra+Condensed|Saira+Semi+Condensed|Saira+Stencil+One|Salsa|Sanchez|Sancreek|Sansita|Sarabun|Sarala|Sarina|Sarpanch|Satisfy|Sawarabi+Gothic|Sawarabi+Mincho|Scada|Scheherazade|Schoolbell|Scope+One|Seaweed+Script|Secular+One|Sedgwick+Ave|Sedgwick+Ave+Display|Sevillana|Seymour+One|Shadows+Into+Light|Shadows+Into+Light+Two|Shanti|Share|Share+Tech|Share+Tech+Mono|Shojumaru|Short+Stack|Shrikhand|Siemreap|Sigmar+One|Signika|Signika+Negative|Simonetta|Single+Day|Sintony|Sirin+Stencil|Six+Caps|Skranji|Slabo+13px|Slabo+27px|Slackey|Smokum|Smythe|Sniglet|Snippet|Snowburst+One|Sofadi+One|Sofia|Song+Myung|Sonsie+One|Sorts+Mill+Goudy|Source+Code+Pro|Source+Sans+Pro|Source+Serif+Pro|Space+Mono|Special+Elite|Spectral|Spectral+SC|Spicy+Rice|Spinnaker|Spirax|Squada+One|Sree+Krushnadevaraya|Sriracha|Srisakdi|Staatliches|Stalemate|Stalinist+One|Stardos+Stencil|Stint+Ultra+Condensed|Stint+Ultra+Expanded|Stoke|Strait|Stylish|Sue+Ellen+Francisco|Suez+One|Sumana|Sunflower|Sunshiney|Supermercado+One|Sura|Suranna|Suravaram|Suwannaphum|Swanky+and+Moo+Moo|Syncopate|Tajawal|Tangerine|Taprom|Tauri|Taviraj|Teko|Telex|Tenali+Ramakrishna|Tenor+Sans|Text+Me+One|Thasadith|The+Girl+Next+Door|Tienne|Tillana|Timmana|Tinos|Titan+One|Titillium+Web|Trade+Winds|Trirong|Trocchi|Trochut|Trykker|Tulpen+One|Turret+Road|Ubuntu|Ubuntu+Condensed|Ubuntu+Mono|Ultra|Uncial+Antiqua|Underdog|Unica+One|UnifrakturCook|UnifrakturMaguntia|Unkempt|Unlock|Unna|VT323|Vampiro+One|Varela|Varela+Round|Vast+Shadow|Vesper+Libre|Vibes|Vibur|Vidaloka|Viga|Voces|Volkhov|Vollkorn|Vollkorn+SC|Voltaire|Waiting+for+the+Sunrise|Wallpoet|Walter+Turncoat|Warnes|Wellfleet|Wendy+One|Wire+One|Work+Sans|Yanone+Kaffeesatz|Yantramanav|Yatra+One|Yellowtail|Yeon+Sung|Yeseva+One|Yesteryear|Yrsa|ZCOOL+KuaiLe|ZCOOL+QingKe+HuangYou|ZCOOL+XiaoWei|Zeyada|Zhi+Mang+Xing|Zilla+Slab|Zilla+Slab+Highlight';
-            $g = explode('|', $google);
-            foreach ($g as $value) {
-                if (!empty($value)) :
-                    $this->google_font[$value] = $value;
+            $g = explode( '|', $google );
+            foreach ( $g as $value ) {
+                if ( ! empty( $value ) ) :
+                    $this->google_font[ $value ] = $value;
                 endif;
             }
         endif;
@@ -375,8 +370,8 @@ abstract class Admin_Render
                                                 lookahead: 2,
                                                 googleApi: \'https://fonts.googleapis.com/css?family=\',
                                                 localFontsUrl: \'/fonts/\',
-                                                systemFonts: \'' . $this->str_replace_first('|', '', $custom) . '\'.split(\'|\'),
-                                                googleFonts: \'' . $this->str_replace_first('|', '', $google) . '\'.split(\'|\')
+                                                systemFonts: \'' . $this->str_replace_first( '|', '', $custom ) . '\'.split(\'|\'),
+                                                googleFonts: \'' . $this->str_replace_first( '|', '', $google ) . '\'.split(\'|\')
                                         };
 
                                         var Fontselect = (function(){
@@ -670,7 +665,7 @@ abstract class Admin_Render
                         })(jQuery);
                         jQuery(\'.shortcode-addons-family\').fontselect();';
 
-        if (apply_filters('oxi-image-hover-plugin-version', false) == false) :
+        if ( apply_filters( 'oxi-image-hover-plugin-version', false ) == false ) :
             $data .= 'jQuery(".oxi-addons-minicolor").each(function (index, value) {
                             jQuery(this).parent().parent().siblings(".shortcode-form-control-title").append(" <span class=\"oxi-pro-only\">Pro Only</span>");
                             var datavalue = jQuery(this).val();
@@ -682,7 +677,7 @@ abstract class Admin_Render
                             jQuery(this).attr("oxilabvalue", datavalue);
                         });';
         endif;
-        wp_add_inline_script('oxi-image-hover-editor', $data);
+        wp_add_inline_script( 'oxi-image-hover-editor', $data );
     }
 
     /**
@@ -690,18 +685,17 @@ abstract class Admin_Render
      *
      * @since 9.3.0
      */
-    public function render()
-    {
-    ?>
+    public function render() {
+		?>
         <div class="wrap">
             <div class="oxi-addons-wrapper">
                 <?php
-                apply_filters('oxi-image-hover-plugin/admin_menu', true);
+                apply_filters( 'oxi-image-hover-plugin/admin_menu', true );
                 ?>
                 <div class="oxi-addons-style-20-spacer"></div>
                 <div class="oxi-addons-row">
                     <?php
-                    apply_filters('oxi-image-hover-support-and-comments', true);
+                    apply_filters( 'oxi-image-hover-support-and-comments', true );
                     ?>
                     <div class="oxi-addons-wrapper oxi-addons-image-tabs-mode">
                         <div class="oxi-addons-settings" id="oxisettingsreload">
@@ -716,30 +710,31 @@ abstract class Admin_Render
                                         <div class="oxi-addons-setting-save">
 
                                             <?php
-                                            if (array_key_exists('css', $this->dbdata)) :
-                                                if ($this->dbdata['css'] != '') :
-                                            ?>
+                                            if ( array_key_exists( 'css', $this->dbdata ) ) :
+                                                if ( $this->dbdata['css'] != '' ) :
+													?>
                                                     <button type="button" class="btn btn-secondary" data-value="<?php echo (int) $this->dbdata['id']; ?>" id="oxi-addons-setting-rebuild">Rebuild
                                                     </button>
-                                            <?php
+													<?php
                                                 endif;
-
                                             endif;
                                             ?>
                                             <button type="button" class="btn btn-danger" id="oxi-addons-setting-reload">Reload
                                             </button>
-                                            <input type="hidden" id="image-hover-preview-color" name="image-hover-preview-color" value="<?php
-                                                                                                                                        if (is_array($this->style)) :
-                                                                                                                                            if (array_key_exists('image-hover-preview-color', $this->style)) :
-                                                                                                                                                echo esc_attr($this->style['image-hover-preview-color']);
-                                                                                                                                            endif;
-                                                                                                                                            echo '#FFF';
+                                            <input type="hidden" id="image-hover-preview-color" name="image-hover-preview-color" value="
+                                            <?php
+											if ( is_array( $this->style ) ) :
+												if ( array_key_exists( 'image-hover-preview-color', $this->style ) ) :
+													echo esc_attr( $this->style['image-hover-preview-color'] );
+												endif;
+												echo '#FFF';
                                                                                                                                         else :
                                                                                                                                             echo '#FFF';
                                                                                                                                         endif;
-                                                                                                                                        ?>">
+                                                                                                                                        ?>
+                                                                                                                                        ">
                                             <input type="hidden" id="image-hover-style-id" name="image-hover-style-id" value="<?php echo (int) $this->dbdata['id']; ?>">
-                                            <input type="hidden" id="image-hover-template" name="image-hover-template" value="<?php echo esc_attr(ucfirst($this->dbdata['style_name'])); ?>">
+                                            <input type="hidden" id="image-hover-template" name="image-hover-template" value="<?php echo esc_attr( ucfirst( $this->dbdata['style_name'] ) ); ?>">
                                             <button type="button" class="btn btn-success" id="oxi-addons-templates-submit">
                                                 Save
                                             </button>
@@ -749,7 +744,7 @@ abstract class Admin_Render
                             </div>
                             <div class="oxi-addons-style-right">
                                 <?php
-                                if ($this->form == 'single') :
+                                if ( $this->form == 'single' ) :
                                     $this->shortcode_name();
                                     $this->shortcode_info();
                                     $this->shortcode_style_changer();
@@ -772,38 +767,42 @@ abstract class Admin_Render
                                             Preview
                                         </div>
                                         <div class="oxi-addons-style-left-preview-heading-right">
-                                            <input type="text" data-format="rgb" data-opacity="TRUE" class="oxi-addons-minicolor" id="oxi-addons-2-0-color" name="oxi-addons-2-0-color" value="<?php
-                                                                                                                                                                                                if (is_array($this->style)) :
-                                                                                                                                                                                                    if (array_key_exists('image-hover-preview-color', $this->style)) :
-                                                                                                                                                                                                        echo esc_attr($this->style['image-hover-preview-color']);
-                                                                                                                                                                                                    endif;
-                                                                                                                                                                                                    echo '#FFF';
+                                            <input type="text" data-format="rgb" data-opacity="TRUE" class="oxi-addons-minicolor" id="oxi-addons-2-0-color" name="oxi-addons-2-0-color" value="
+                                            <?php
+											if ( is_array( $this->style ) ) :
+												if ( array_key_exists( 'image-hover-preview-color', $this->style ) ) :
+													echo esc_attr( $this->style['image-hover-preview-color'] );
+												endif;
+												echo '#FFF';
                                                                                                                                                                                                 else :
                                                                                                                                                                                                     echo '#FFF';
                                                                                                                                                                                                 endif;
-                                                                                                                                                                                                ?>">
+                                                                                                                                                                                                ?>
+                                                                                                                                                                                                ">
                                         </div>
                                     </div>
-                                    <div class="oxi-addons-preview-data" id="oxi-addons-preview-data" template-wrapper="<?php echo esc_attr($this->WRAPPER); ?> .oxi-addons-row" style="background:<?php
-                                                                                                                                                                                                    if (is_array($this->style)) :
-                                                                                                                                                                                                        if (array_key_exists('image-hover-preview-color', $this->style)) :
-                                                                                                                                                                                                            echo esc_attr($this->style['image-hover-preview-color']);
-                                                                                                                                                                                                        endif;
-                                                                                                                                                                                                        echo '#FFF';
+                                    <div class="oxi-addons-preview-data" id="oxi-addons-preview-data" template-wrapper="<?php echo esc_attr( $this->WRAPPER ); ?> .oxi-addons-row" style="background:
+                                    <?php
+									if ( is_array( $this->style ) ) :
+										if ( array_key_exists( 'image-hover-preview-color', $this->style ) ) :
+											echo esc_attr( $this->style['image-hover-preview-color'] );
+										endif;
+										echo '#FFF';
                                                                                                                                                                                                     else :
                                                                                                                                                                                                         echo '#FFF';
                                                                                                                                                                                                     endif;
-                                                                                                                                                                                                    ?>">
+                                                                                                                                                                                                    ?>
+                                                                                                                                                                                                    ">
                                         <?php
-                                        $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($this->StyleName[0]) . '\Render\Effects' . $this->StyleName[1];
-                                        new $cls($this->dbdata, $this->child, 'admin');
+                                        $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst( $this->StyleName[0] ) . '\Render\Effects' . $this->StyleName[1];
+                                        new $cls( $this->dbdata, $this->child, 'admin' );
                                         ?>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="shortcode-addons-form-repeater-store" style="display: none">
-                            <?php $this->allowed_html_sanitize($this->repeater); ?>
+                            <?php $this->allowed_html_sanitize( $this->repeater ); ?>
                         </div>
                     </div>
                     <div id="OXIAADDONSCHANGEDPOPUP" class="modal fade">
@@ -824,22 +823,20 @@ abstract class Admin_Render
                 </div>
             </div>
         </div>
-<?php
+		<?php
     }
 
-    public function __construct($type = '')
-    {
+    public function __construct( $type = '' ) {
         global $wpdb;
         $this->wpdb = $wpdb;
         $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
         $this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
         $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
-        $this->oxiid = (!empty($_GET['styleid']) ? (int) $_GET['styleid'] : '');
+        $this->oxiid = ( ! empty( $_GET['styleid'] ) ? (int) $_GET['styleid'] : '' );
         $this->WRAPPER = '.oxi-image-hover-wrapper-' . $this->oxiid;
         $this->CSSWRAPPER = '.oxi-image-hover-wrapper-' . $this->oxiid . ' .oxi-addons-row';
 
-        if ($type != 'admin') {
-
+        if ( $type != 'admin' ) {
             $this->hooks();
             $this->render();
         }
@@ -850,13 +847,14 @@ abstract class Admin_Render
      *
      * @since 9.3.0
      */
-    public function shortcode_info()
-    {
-        $this->add_substitute_control($this->oxiid, $this->dbdata, [
-            'type' => Controls::SHORTCODEINFO,
-            'title' => esc_html__('Shortcode', 'image-hover-effects-ultimate'),
-            'showing' => true,
-        ]);
+    public function shortcode_info() {
+        $this->add_substitute_control(
+            $this->oxiid, $this->dbdata, [
+				'type' => Controls::SHORTCODEINFO,
+				'title' => esc_html__( 'Shortcode', 'image-hover-effects-ultimate' ),
+				'showing' => true,
+			]
+        );
     }
 
     /**
@@ -865,14 +863,15 @@ abstract class Admin_Render
      *
      * @since 9.3.0
      */
-    public function shortcode_name()
-    {
-        $this->add_substitute_control('', $this->dbdata, [
-            'type' => Controls::SHORTCODENAME,
-            'title' => esc_html__('Shortcode Name', 'image-hover-effects-ultimate'),
-            'placeholder' => esc_html__('Set Your Shortcode Name', 'image-hover-effects-ultimate'),
-            'showing' => true,
-        ]);
+    public function shortcode_name() {
+        $this->add_substitute_control(
+            '', $this->dbdata, [
+				'type' => Controls::SHORTCODENAME,
+				'title' => esc_html__( 'Shortcode Name', 'image-hover-effects-ultimate' ),
+				'placeholder' => esc_html__( 'Set Your Shortcode Name', 'image-hover-effects-ultimate' ),
+				'showing' => true,
+			]
+        );
     }
 
     /**
@@ -881,32 +880,32 @@ abstract class Admin_Render
      *
      * @since 9.3.0
      */
-    public function shortcode_style_changer()
-    {
-        $this->add_substitute_control($this->oxiid, $this->dbdata, [
-            'type' => Controls::SHORTCODESTYLE,
-            'title' => esc_html__('Template Changer', 'image-hover-effects-ultimate'),
-            'showing' => false,
-        ]);
+    public function shortcode_style_changer() {
+        $this->add_substitute_control(
+            $this->oxiid, $this->dbdata, [
+				'type' => Controls::SHORTCODESTYLE,
+				'title' => esc_html__( 'Template Changer', 'image-hover-effects-ultimate' ),
+				'showing' => false,
+			]
+        );
     }
     /**
      * Template hooks
      *
      * @since 9.3.0
      */
-    public function hooks()
-    {
+    public function hooks() {
         $this->admin_elements_frontend_loader();
         $this->admin_editor_load();
-        $this->dbdata = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $this->oxiid), ARRAY_A);
-        $this->child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $this->oxiid), ARRAY_A);
-        if (!empty($this->dbdata['rawdata'])) :
-            $s = json_decode(stripslashes($this->dbdata['rawdata']), true);
-            if (is_array($s)) :
+        $this->dbdata = $this->wpdb->get_row( $this->wpdb->prepare( 'SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $this->oxiid ), ARRAY_A );
+        $this->child = $this->wpdb->get_results( $this->wpdb->prepare( "SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $this->oxiid ), ARRAY_A );
+        if ( ! empty( $this->dbdata['rawdata'] ) ) :
+            $s = json_decode( stripslashes( $this->dbdata['rawdata'] ), true );
+            if ( is_array( $s ) ) :
                 $this->style = $s;
             endif;
         endif;
-        $this->StyleName = explode('-', ucfirst($this->dbdata['style_name']));
+        $this->StyleName = explode( '-', ucfirst( $this->dbdata['style_name'] ) );
         $this->oxitype = $this->StyleName[0];
         $this->import_font_family();
     }

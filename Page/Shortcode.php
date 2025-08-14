@@ -2,12 +2,12 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Page;
 
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-class Shortcode
-{
+class Shortcode {
+
 
     /**
      * Database Parent Table
@@ -40,11 +40,10 @@ class Shortcode
     use \OXI_IMAGE_HOVER_PLUGINS\Helper\Public_Helper;
     use \OXI_IMAGE_HOVER_PLUGINS\Helper\CSS_JS_Loader;
 
-   
 
-    public function Render()
-    {
-?>
+
+    public function Render() {
+		?>
         <div class="oxi-addons-row">
             <?php
             $this->Admin_header();
@@ -52,25 +51,23 @@ class Shortcode
             $this->create_new();
             ?>
         </div>
-    <?php
+		<?php
     }
 
-    public function Admin_header()
-    {
-    ?>
+    public function Admin_header() {
+		?>
         <div class="oxi-addons-wrapper">
             <div class="oxi-addons-import-layouts">
                 <h1>Image Hover › Shortcode</h1>
                 <p>Collect Image Hover Shortcode, Edit, Delect, Clone or Export it.</p>
             </div>
         </div>
-    <?php
-        apply_filters('oxi-image-hover-support-and-comments', true);
+		<?php
+        apply_filters( 'oxi-image-hover-support-and-comments', true );
     }
 
-    public function create_new()
-    {
-    ?>
+    public function create_new() {
+		?>
 
         <div class="oxi-addons-row">
             <div class="oxi-addons-col-1 oxi-import">
@@ -106,7 +103,7 @@ class Shortcode
                         </div>
                     </div>
                 </div>
-                <?php echo wp_nonce_field("image-hover-effects-ultimate-import") ?>
+                <?php wp_nonce_field( 'image-hover-effects-ultimate-import' ); ?>
             </form>
         </div>
 
@@ -135,42 +132,39 @@ class Shortcode
                 </div>
             </form>
         </div>
-    <?php
+		<?php
     }
 
-    private function get_export_link($template_id)
-    {
+    private function get_export_link( $template_id ) {
 
         return add_query_arg(
             [
                 'action' => 'image_hover_settings',
                 'functionname' => 'shortcode_export',
-                '_wpnonce' => wp_create_nonce('image_hover_ultimate'),
+                '_wpnonce' => wp_create_nonce( 'image_hover_ultimate' ),
                 'rawdata' => 'Get Export Data',
                 'styleid' => $template_id,
             ],
-            admin_url('admin-ajax.php'),
+            admin_url( 'admin-ajax.php' ),
         );
     }
 
 
 
-    public function CSSJS_load()
-    {
+    public function CSSJS_load() {
         $this->manual_import_style();
         $this->admin_css_loader();
         $this->admin_home();
         $this->admin_rest_api();
-        apply_filters('oxi-image-hover-plugin/admin_menu', true);
+        apply_filters( 'oxi-image-hover-plugin/admin_menu', true );
     }
 
     /**
      * Admin Notice JS file loader
      * @return void
      */
-    public function admin_rest_api()
-    {
-        wp_enqueue_script('oxi-image-hover-shortcode', OXI_IMAGE_HOVER_URL . 'assets/backend/js/shortcode.js', false, OXI_IMAGE_HOVER_TEXTDOMAIN);
+    public function admin_rest_api() {
+        wp_enqueue_script( 'oxi-image-hover-shortcode', OXI_IMAGE_HOVER_URL . 'assets/backend/js/shortcode.js', false, OXI_IMAGE_HOVER_TEXTDOMAIN );
     }
 
     /**
@@ -178,75 +172,68 @@ class Shortcode
      *
      * @since 9.3.0
      */
-    public function name_($data)
-    {
-        $data = str_replace('_', ' ', $data);
-        $data = str_replace('-', ' ', $data);
-        $data = str_replace('+', ' ', $data);
-        echo esc_html(ucwords($data));
+    public function name_( $data ) {
+        $data = str_replace( '_', ' ', $data );
+        $data = str_replace( '-', ' ', $data );
+        $data = str_replace( '+', ' ', $data );
+        echo esc_html( ucwords( $data ) );
     }
-    public function database_data()
-    {
-        return $this->wpdb->get_results("SELECT * FROM  $this->parent_table ORDER BY id DESC", ARRAY_A);
+    public function database_data() {
+        return $this->wpdb->get_results( "SELECT * FROM  $this->parent_table ORDER BY id DESC", ARRAY_A );
     }
 
     /**
      * Generate safe path
      * @since v1.0.0
      */
-    public function safe_path($path)
-    {
+    public function safe_path( $path ) {
 
-        $path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
-        return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
+        $path = str_replace( [ '//', '\\\\' ], [ '/', '\\' ], $path );
+        return str_replace( [ '/', '\\' ], DIRECTORY_SEPARATOR, $path );
     }
 
-    public function manual_import_style()
-    {
-        if (!empty($_REQUEST['_wpnonce'])) {
+    public function manual_import_style() {
+        if ( ! empty( $_REQUEST['_wpnonce'] ) ) {
             $nonce = $_REQUEST['_wpnonce'];
         }
 
-        if (!empty($_POST['importdatasubmit']) && sanitize_text_field($_POST['importdatasubmit']) == 'Save') {
-            if (!wp_verify_nonce($nonce, 'image-hover-effects-ultimate-import')) {
-                die('You do not have sufficient permissions to access this page.');
-            } else {
-                if (isset($_FILES['importimagehoverultimatefile'])) :
-                    $filename = $_FILES["importimagehoverultimatefile"]["name"];
+        if ( ! empty( $_POST['importdatasubmit'] ) && sanitize_text_field( $_POST['importdatasubmit'] ) == 'Save' ) {
+            if ( ! wp_verify_nonce( $nonce, 'image-hover-effects-ultimate-import' ) ) {
+                die( 'You do not have sufficient permissions to access this page.' );
+            } elseif ( isset( $_FILES['importimagehoverultimatefile'] ) ) {
+                    $filename = $_FILES['importimagehoverultimatefile']['name'];
 
-                    if (!current_user_can('upload_files')) :
-                        wp_die(__('You do not have permission to upload files.'));
+				if ( ! current_user_can( 'upload_files' ) ) :
+					wp_die( esc_html__( 'You do not have permission to upload files.', 'image-hover-effects-ultimate' ) );
                     endif;
 
                     $allowedMimes = [
-                        'json' => 'text/plain'
+                        'json' => 'text/plain',
                     ];
 
-                    $fileInfo = wp_check_filetype(basename($_FILES['importimagehoverultimatefile']['name']), $allowedMimes);
-                    if (empty($fileInfo['ext'])) {
-                        wp_die(__('You do not have permission to upload files.'));
+                    $fileInfo = wp_check_filetype( basename( $_FILES['importimagehoverultimatefile']['name'] ), $allowedMimes );
+                    if ( empty( $fileInfo['ext'] ) ) {
+                        wp_die( esc_html__( 'You do not have permission to upload files.', 'image-hover-effects-ultimate' ) );
                     }
 
-                    $content = json_decode(file_get_contents($_FILES['importimagehoverultimatefile']['tmp_name']), true);
+                    $content = json_decode( file_get_contents( $_FILES['importimagehoverultimatefile']['tmp_name'] ), true );
 
-                    if (empty($content)) {
-                        return new \WP_Error('file_error', 'Invalid File');
+                    if ( empty( $content ) ) {
+                        return new \WP_Error( 'file_error', 'Invalid File' );
                     }
                     $style = $content['style'];
-                    if (!is_array($style)) {
-                        return new \WP_Error('file_error', 'Invalid Content In File');
+                    if ( ! is_array( $style ) ) {
+                        return new \WP_Error( 'file_error', 'Invalid Content In File' );
                     }
-                    $ImportApi = new \OXI_IMAGE_HOVER_PLUGINS\Classes\ImageApi;
-                    $new_slug = $ImportApi->post_json_import($content);
-                    echo '<script type="text/javascript"> document.location.href = "' . $new_slug . '"; </script>';
+                    $ImportApi = new \OXI_IMAGE_HOVER_PLUGINS\Classes\ImageApi();
+                    $new_slug = $ImportApi->post_json_import( $content );
+                    echo '<script type="text/javascript">document.location.href = ' . wp_json_encode( $new_slug ) . ';</script>';
                     exit;
-                endif;
             }
         }
     }
-    public function created_shortcode()
-    {
-    ?>
+    public function created_shortcode() {
+		?>
         <div class="oxi-addons-row">
             <div class="oxi-addons-row table-responsive abop" style="margin-bottom: 20px; opacity: 0; height: 0px">
                 <table class="table table-hover widefat oxi_addons_table_data" style="background-color: #fff; border: 1px solid #ccc">
@@ -261,33 +248,32 @@ class Shortcode
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($this->database_data() as $value) {
-
-                            $effects = $this->effects_converter($value['style_name']);
+                        foreach ( $this->database_data() as $value ) {
+                            $effects = $this->effects_converter( $value['style_name'] );
 
                             $id = $value['id'];
-                        ?>
+							?>
                             <tr>
                                 <td><?php echo (int) $id; ?></td>
-                                <td><?php $this->name_($value['name']) ?></td>
-                                <td><?php $this->name_($value['style_name']) ?></td>
-                                <td><span>Shortcode &nbsp;&nbsp;<input type="text" onclick="this.setSelectionRange(0, this.value.length)" value="[iheu_ultimate_oxi id=&quot;<?php echo (int) $id ?>&quot;]"></span>
+                                <td><?php $this->name_( $value['name'] ); ?></td>
+                                <td><?php $this->name_( $value['style_name'] ); ?></td>
+                                <td><span>Shortcode &nbsp;&nbsp;<input type="text" onclick="this.setSelectionRange(0, this.value.length)" value="[iheu_ultimate_oxi id=&quot;<?php echo (int) $id; ?>&quot;]"></span>
                                     <br>
-                                    <span>Php Code &nbsp;&nbsp; <input type="text" onclick="this.setSelectionRange(0, this.value.length)" value="&lt;?php echo do_shortcode(&#039;[iheu_ultimate_oxi  id=&quot;<?php echo (int) $id ?>&quot;]&#039;); ?&gt;"></span>
+                                    <span>Php Code &nbsp;&nbsp; <input type="text" onclick="this.setSelectionRange(0, this.value.length)" value="&lt;?php echo do_shortcode(&#039;[iheu_ultimate_oxi  id=&quot;<?php echo (int) $id; ?>&quot;]&#039;); ?&gt;"></span>
                                 </td>
                                 <td>
-                                    <a href="<?php echo esc_url(admin_url("admin.php?page=oxi-image-hover-ultimate&effects=$effects&styleid=$id")) ?>" title="Edit" class="btn btn-primary" style="float:left; margin-right: 5px;">Edit
+                                    <a href="<?php echo esc_url( admin_url( "admin.php?page=oxi-image-hover-ultimate&effects=$effects&styleid=$id" ) ); ?>" title="Edit" class="btn btn-primary" style="float:left; margin-right: 5px;">Edit
                                     </a>
                                     <a href="#" title="Clone" class="btn btn-secondary oxi-addons-style-clone" datavalue="<?php echo (int) $id; ?>" style="float:left; margin-right: 5px;">Clone
                                     </a>
-                                    <a href="<?php echo esc_url($this->get_export_link($id)); ?>" title="Export" class="btn btn-info" style="float:left; margin-right: 5px;">Export
+                                    <a href="<?php echo esc_url( $this->get_export_link( $id ) ); ?>" title="Export" class="btn btn-info" style="float:left; margin-right: 5px;">Export
                                     </a>
 
                                     <button class="btn btn-danger oxi-addons-style-delete" style="float:left" title="Delete" value="<?php echo (int) $id; ?>" type="button" value="delete">Delete
                                     </button>
                                 </td>
                             </tr>
-                        <?php
+							<?php
                         }
                         ?>
                     </tbody>
@@ -296,7 +282,7 @@ class Shortcode
             <br>
             <br>
         </div>
-<?php
+		<?php
     }
 
     /**
@@ -304,8 +290,7 @@ class Shortcode
      *
      * @since 9.3.0
      */
-    public function __construct()
-    {
+    public function __construct() {
         global $wpdb;
         $this->wpdb = $wpdb;
         $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';

@@ -2,7 +2,7 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Carousel;
 
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
@@ -12,11 +12,11 @@ if (!defined('ABSPATH')) {
  * @author biplo
  */
 
-use OXI_IMAGE_HOVER_PLUGINS\Classes\Controls as Controls;
-use OXI_IMAGE_HOVER_PLUGINS\Page\Admin_Render as Admin_Render;
+use OXI_IMAGE_HOVER_PLUGINS\Classes\Controls;
+use OXI_IMAGE_HOVER_PLUGINS\Page\Admin_Render;
 
-class Modules extends Admin_Render
-{
+class Modules extends Admin_Render {
+
 
 
     /**
@@ -25,60 +25,56 @@ class Modules extends Admin_Render
      *
      * @since 9.3.0
      */
-    public function modal_opener()
-    {
+    public function modal_opener() {
     }
 
-    public function register_controls()
-    {
+    public function register_controls() {
         $this->start_section_header(
             'oxi-image-hover-start-tabs',
             [
                 'options' => [
-                    'general-settings' => esc_html__('General Settings', 'image-hover-effects-ultimate'),
-                    'custom' => esc_html__('Custom CSS', 'image-hover-effects-ultimate'),
-                ]
+                    'general-settings' => esc_html__( 'General Settings', 'image-hover-effects-ultimate' ),
+                    'custom' => esc_html__( 'Custom CSS', 'image-hover-effects-ultimate' ),
+                ],
             ]
         );
         $this->register_general_tabs();
         $this->register_custom_tabs();
     }
 
-    public function register_custom_tabs()
-    {
+    public function register_custom_tabs() {
         $this->start_section_tabs(
             'oxi-image-hover-start-tabs',
             [
                 'condition' => [
-                    'oxi-image-hover-start-tabs' => 'custom'
+                    'oxi-image-hover-start-tabs' => 'custom',
                 ],
-                'padding' => '10px'
+                'padding' => '10px',
             ]
         );
 
         $this->start_controls_section(
             'oxi-image-hover',
             [
-                'label' => esc_html__('Custom CSS', 'image-hover-effects-ultimate'),
-                'showing' => TRUE,
+                'label' => esc_html__( 'Custom CSS', 'image-hover-effects-ultimate' ),
+                'showing' => true,
             ]
         );
         $this->add_control(
             'image-hover-custom-css',
             $this->style,
             [
-                'label' => esc_html__('', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( '', 'image-hover-effects-ultimate' ),
                 'type' => Controls::TEXTAREA,
                 'default' => '',
-                'description' => 'Custom CSS Section. You can add custom css into textarea.'
+                'description' => 'Custom CSS Section. You can add custom css into textarea.',
             ]
         );
         $this->end_controls_section();
         $this->end_section_tabs();
     }
 
-    public function register_general_tabs()
-    {
+    public function register_general_tabs() {
         $this->start_section_tabs(
             'oxi-image-hover-start-tabs',
             [
@@ -98,42 +94,41 @@ class Modules extends Admin_Render
         $this->end_section_tabs();
     }
 
-    public function register_carousel_query_settings()
-    {
+    public function register_carousel_query_settings() {
         $this->start_controls_section(
             'display-post',
             [
-                'label' => esc_html__('Carousel Query', 'image-hover-effects-ultimate'),
-                'showing' => TRUE,
+                'label' => esc_html__( 'Carousel Query', 'image-hover-effects-ultimate' ),
+                'showing' => true,
             ]
         );
         $this->add_control(
             'carousel_note',
             $this->style,
             [
-                'label' => esc_html__('Note', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( 'Note', 'image-hover-effects-ultimate' ),
                 'type' => Controls::HEADING,
-                'description' => 'Works after saving and reloading all the fields.'
+                'description' => 'Works after saving and reloading all the fields.',
             ]
         );
         $this->add_control(
             'carousel_register_style',
             $this->style,
             [
-                'label' => esc_html__('Carousel Style', 'image-hover-effects-ultimate'),
-                'loader' => TRUE,
+                'label' => esc_html__( 'Carousel Style', 'image-hover-effects-ultimate' ),
+                'loader' => true,
                 'type' => Controls::SELECT,
                 'options' => $this->all_style(),
-                'description' => 'Confirm Your Shortcode name which one you wanna create carousel.'
+                'description' => 'Confirm Your Shortcode name which one you wanna create carousel.',
             ]
         );
         $this->add_responsive_control(
             'carousel_item_slide',
             $this->style,
             [
-                'label' => esc_html__('Multiple Items', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( 'Multiple Items', 'image-hover-effects-ultimate' ),
                 'type' => Controls::SLIDER,
-                'separator' => TRUE,
+                'separator' => true,
                 'default' => [
                     'unit' => 'px',
                     'size' => '1',
@@ -145,155 +140,153 @@ class Modules extends Admin_Render
                         'step' => 1,
                     ],
                 ],
-                'description' => 'How many Item You want to Slide per click.'
+                'description' => 'How many Item You want to Slide per click.',
             ]
         );
         $this->add_control(
             'carousel_autoplay',
             $this->style,
             [
-                'label' => esc_html__('Autoplay', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( 'Autoplay', 'image-hover-effects-ultimate' ),
                 'type' => Controls::SWITCHER,
-                'loader' => TRUE,
+                'loader' => true,
                 'default' => 'yes',
-                'yes' => esc_html__('Yes', 'image-hover-effects-ultimate'),
-                'no' => esc_html__('No', 'image-hover-effects-ultimate'),
+                'yes' => esc_html__( 'Yes', 'image-hover-effects-ultimate' ),
+                'no' => esc_html__( 'No', 'image-hover-effects-ultimate' ),
                 'return_value' => 'yes',
-                'description' => 'Do you want slider autoplay?.'
+                'description' => 'Do you want slider autoplay?.',
             ]
         );
         $this->add_control(
             'carousel_autoplay_speed',
             $this->style,
             [
-                'label' => esc_html__('Autoplay Speed', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( 'Autoplay Speed', 'image-hover-effects-ultimate' ),
                 'type' => Controls::NUMBER,
                 'default' => 2000,
                 'condition' => [
                     'carousel_autoplay' => 'yes',
                 ],
-                'description' => 'Set Autoplay Speed, Set with millisecond.'
+                'description' => 'Set Autoplay Speed, Set with millisecond.',
             ]
         );
         $this->add_control(
             'carousel_speed',
             $this->style,
             [
-                'label' => esc_html__('Animation Speed', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( 'Animation Speed', 'image-hover-effects-ultimate' ),
                 'type' => Controls::NUMBER,
                 'default' => 500,
-                'description' => 'Set Animation Speed, Set with millisecond.'
+                'description' => 'Set Animation Speed, Set with millisecond.',
             ]
         );
         $this->add_control(
             'carousel_pause_on_hover',
             $this->style,
             [
-                'label' => esc_html__('Pause on Hover', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( 'Pause on Hover', 'image-hover-effects-ultimate' ),
                 'type' => Controls::SWITCHER,
-                'loader' => TRUE,
+                'loader' => true,
                 'default' => 'yes',
-                'yes' => esc_html__('Yes', 'image-hover-effects-ultimate'),
-                'no' => esc_html__('No', 'image-hover-effects-ultimate'),
+                'yes' => esc_html__( 'Yes', 'image-hover-effects-ultimate' ),
+                'no' => esc_html__( 'No', 'image-hover-effects-ultimate' ),
                 'return_value' => 'yes',
-                'description' => 'Do you want Pause on Hover.'
+                'description' => 'Do you want Pause on Hover.',
             ]
         );
         $this->add_control(
             'carousel_infinite',
             $this->style,
             [
-                'label' => esc_html__('Infinite Loop', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( 'Infinite Loop', 'image-hover-effects-ultimate' ),
                 'type' => Controls::SWITCHER,
-                'loader' => TRUE,
+                'loader' => true,
                 'default' => 'yes',
-                'yes' => esc_html__('Yes', 'image-hover-effects-ultimate'),
-                'no' => esc_html__('No', 'image-hover-effects-ultimate'),
+                'yes' => esc_html__( 'Yes', 'image-hover-effects-ultimate' ),
+                'no' => esc_html__( 'No', 'image-hover-effects-ultimate' ),
                 'return_value' => 'yes',
-                'description' => 'Do you want Infinite Loop.'
+                'description' => 'Do you want Infinite Loop.',
             ]
         );
         $this->add_control(
             'carousel_adaptive_height',
             $this->style,
             [
-                'label' => esc_html__('Adaptive Height', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( 'Adaptive Height', 'image-hover-effects-ultimate' ),
                 'type' => Controls::SWITCHER,
-                'loader' => TRUE,
+                'loader' => true,
                 'default' => 'yes',
-                'yes' => esc_html__('Yes', 'image-hover-effects-ultimate'),
-                'no' => esc_html__('No', 'image-hover-effects-ultimate'),
+                'yes' => esc_html__( 'Yes', 'image-hover-effects-ultimate' ),
+                'no' => esc_html__( 'No', 'image-hover-effects-ultimate' ),
                 'return_value' => 'yes',
-                'description' => 'Do you want auto height.'
+                'description' => 'Do you want auto height.',
             ]
         );
         $this->add_control(
             'carousel_center_mode',
             $this->style,
             [
-                'label' => esc_html__('Center Mode', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( 'Center Mode', 'image-hover-effects-ultimate' ),
                 'type' => Controls::SWITCHER,
-                'loader' => TRUE,
+                'loader' => true,
                 'default' => 'no',
-                'yes' => esc_html__('Yes', 'image-hover-effects-ultimate'),
-                'no' => esc_html__('No', 'image-hover-effects-ultimate'),
+                'yes' => esc_html__( 'Yes', 'image-hover-effects-ultimate' ),
+                'no' => esc_html__( 'No', 'image-hover-effects-ultimate' ),
                 'return_value' => 'yes',
-                'description' => 'Do you want center mode Options?'
+                'description' => 'Do you want center mode Options?',
             ]
         );
         $this->add_control(
             'carousel_show_arrows',
             $this->style,
             [
-                'label' => esc_html__('Arrows', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( 'Arrows', 'image-hover-effects-ultimate' ),
                 'type' => Controls::SWITCHER,
-                'loader' => TRUE,
+                'loader' => true,
                 'default' => 'yes',
-                'yes' => esc_html__('Yes', 'image-hover-effects-ultimate'),
-                'no' => esc_html__('No', 'image-hover-effects-ultimate'),
+                'yes' => esc_html__( 'Yes', 'image-hover-effects-ultimate' ),
+                'no' => esc_html__( 'No', 'image-hover-effects-ultimate' ),
                 'return_value' => 'yes',
-                'description' => 'Do you want Arrows for navigation.'
+                'description' => 'Do you want Arrows for navigation.',
             ]
         );
         $this->add_control(
             'carousel_show_dots',
             $this->style,
             [
-                'label' => esc_html__('Dots', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( 'Dots', 'image-hover-effects-ultimate' ),
                 'type' => Controls::SWITCHER,
-                'loader' => TRUE,
+                'loader' => true,
                 'default' => 'no',
-                'yes' => esc_html__('Yes', 'image-hover-effects-ultimate'),
-                'no' => esc_html__('No', 'image-hover-effects-ultimate'),
+                'yes' => esc_html__( 'Yes', 'image-hover-effects-ultimate' ),
+                'no' => esc_html__( 'No', 'image-hover-effects-ultimate' ),
                 'return_value' => 'yes',
-                'description' => 'Do you want Dots for pagination.'
+                'description' => 'Do you want Dots for pagination.',
             ]
         );
 
         $this->end_controls_section();
     }
-    public function all_style()
-    {
+    public function all_style() {
         $a = 'button%';
         $b = 'general%';
         $c = 'square%';
         $d = 'caption%';
-        $alldata = $this->wpdb->get_results($this->wpdb->prepare("SELECT id, name FROM $this->parent_table WHERE style_name LIKE %s OR style_name LIKE %s OR style_name LIKE %s OR style_name LIKE %s ORDER by id ASC", $a, $b, $c, $d), ARRAY_A);
+        $alldata = $this->wpdb->get_results( $this->wpdb->prepare( "SELECT id, name FROM $this->parent_table WHERE style_name LIKE %s OR style_name LIKE %s OR style_name LIKE %s OR style_name LIKE %s ORDER by id ASC", $a, $b, $c, $d ), ARRAY_A );
         $st = [];
-        foreach ($alldata as $k => $value) {
-            $st[$value['id']] = $value['name'] != '' ? $value['name'] : 'Shortcode ID ' . $value['id'];
+        foreach ( $alldata as $k => $value ) {
+            $st[ $value['id'] ] = $value['name'] != '' ? $value['name'] : 'Shortcode ID ' . $value['id'];
         }
 
         return $st;
     }
 
-    public function register_carousel_arrows_settings()
-    {
+    public function register_carousel_arrows_settings() {
         $this->start_controls_section(
             'carousel-arrow',
             [
-                'label' => esc_html__('Carousel Arrows', 'image-hover-effects-ultimate'),
-                'showing' => TRUE,
+                'label' => esc_html__( 'Carousel Arrows', 'image-hover-effects-ultimate' ),
+                'showing' => true,
                 'condition' => [
                     'carousel_show_arrows' => 'yes',
                 ],
@@ -304,9 +297,9 @@ class Modules extends Admin_Render
             'oxi-image-hover-start-tabs',
             [
                 'options' => [
-                    'normal' => esc_html__('Left Arrow Icon', 'image-hover-effects-ultimate'),
-                    'hover' => esc_html__('Right Arrow Icon', 'image-hover-effects-ultimate'),
-                ]
+                    'normal' => esc_html__( 'Left Arrow Icon', 'image-hover-effects-ultimate' ),
+                    'hover' => esc_html__( 'Right Arrow Icon', 'image-hover-effects-ultimate' ),
+                ],
             ]
         );
         $this->start_controls_tab();
@@ -314,10 +307,10 @@ class Modules extends Admin_Render
             'carousel_left_arrow',
             $this->style,
             [
-                'label' => esc_html__('Left Arrow', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( 'Left Arrow', 'image-hover-effects-ultimate' ),
                 'type' => Controls::ICON,
                 'default' => 'fas fa-chevron-left',
-                'description' => 'Select Left Arrow Icon From Icon List.'
+                'description' => 'Select Left Arrow Icon From Icon List.',
             ]
         );
         $this->end_controls_tab();
@@ -326,10 +319,10 @@ class Modules extends Admin_Render
             'carousel_right_arrow',
             $this->style,
             [
-                'label' => esc_html__('Right Arrow', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( 'Right Arrow', 'image-hover-effects-ultimate' ),
                 'type' => Controls::ICON,
                 'default' => 'fas fa-chevron-right',
-                'description' => 'Select Right Arrow Icon From Icon List.'
+                'description' => 'Select Right Arrow Icon From Icon List.',
             ]
         );
         $this->end_controls_tab();
@@ -338,9 +331,9 @@ class Modules extends Admin_Render
             'carousel_arrows_size',
             $this->style,
             [
-                'label' => esc_html__('Size', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( 'Size', 'image-hover-effects-ultimate' ),
                 'type' => Controls::SLIDER,
-                'separator' => TRUE,
+                'separator' => true,
                 'default' => [
                     'unit' => 'px',
                     'size' => '20',
@@ -365,14 +358,14 @@ class Modules extends Admin_Render
                 'selector' => [
                     '{{WRAPPER}} .oxi_carousel_arrows .oxi-icons' => 'font-size:{{SIZE}}{{UNIT}}; line-height:{{SIZE}}{{UNIT}};',
                 ],
-                'description' => 'Set Arrow icon size.'
+                'description' => 'Set Arrow icon size.',
             ]
         );
         $this->add_responsive_control(
             'carousel_arrows_position_x',
             $this->style,
             [
-                'label' => esc_html__('Position X', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( 'Position X', 'image-hover-effects-ultimate' ),
                 'type' => Controls::SLIDER,
                 'default' => [
                     'unit' => 'px',
@@ -399,14 +392,14 @@ class Modules extends Admin_Render
                     '{{WRAPPER}} .oxi_carousel_arrows.oxi_carousel_prev' => 'left:{{SIZE}}{{UNIT}}; right:auto;',
                     '{{WRAPPER}} .oxi_carousel_arrows.oxi_carousel_next' => 'right:{{SIZE}}{{UNIT}}; left:auto',
                 ],
-                'description' => 'Set Arrow icon Posiztion X.'
+                'description' => 'Set Arrow icon Posiztion X.',
             ]
         );
         $this->add_responsive_control(
             'carousel_arrows_position_y',
             $this->style,
             [
-                'label' => esc_html__('Position Y', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( 'Position Y', 'image-hover-effects-ultimate' ),
                 'type' => Controls::SLIDER,
                 'default' => [
                     'unit' => '%',
@@ -432,16 +425,16 @@ class Modules extends Admin_Render
                 'selector' => [
                     '{{WRAPPER}} .oxi_carousel_arrows' => 'top:{{SIZE}}{{UNIT}}; transform: translateY(-{{SIZE}}{{UNIT}});',
                 ],
-                'description' => 'Set Arrow icon Posiztion Y.'
+                'description' => 'Set Arrow icon Posiztion Y.',
             ]
         );
         $this->start_controls_tabs(
             'oxi-image-hover-start-tabs',
             [
                 'options' => [
-                    'normal' => esc_html__('Normal', 'image-hover-effects-ultimate'),
-                    'hover' => esc_html__('Hover', 'image-hover-effects-ultimate'),
-                ]
+                    'normal' => esc_html__( 'Normal', 'image-hover-effects-ultimate' ),
+                    'hover' => esc_html__( 'Hover', 'image-hover-effects-ultimate' ),
+                ],
             ]
         );
         $this->start_controls_tab();
@@ -449,26 +442,26 @@ class Modules extends Admin_Render
             'carousel_arrows_color',
             $this->style,
             [
-                'label' => esc_html__('Color', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( 'Color', 'image-hover-effects-ultimate' ),
                 'type' => Controls::COLOR,
                 'default' => '#ffffff',
                 'selector' => [
                     '{{WRAPPER}} .oxi_carousel_arrows .oxi-icons' => 'color: {{VALUE}} !important;',
                 ],
-                'description' => 'Select Arrow icon Color.'
+                'description' => 'Select Arrow icon Color.',
             ]
         );
         $this->add_control(
             'carousel_arrows_background',
             $this->style,
             [
-                'label' => esc_html__('Background', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( 'Background', 'image-hover-effects-ultimate' ),
                 'type' => Controls::GRADIENT,
                 'default' => 'rgba(171, 0, 201, 1)',
                 'selector' => [
                     '{{WRAPPER}} .oxi_carousel_arrows .oxi-icons' => 'background: {{VALUE}} !important;',
                 ],
-                'description' => 'Confirm Arrow Background Color.'
+                'description' => 'Confirm Arrow Background Color.',
             ]
         );
         $this->add_group_control(
@@ -477,9 +470,9 @@ class Modules extends Admin_Render
             [
                 'type' => Controls::BORDER,
                 'selector' => [
-                    '{{WRAPPER}} .oxi_carousel_arrows .oxi-icons' => ''
+                    '{{WRAPPER}} .oxi_carousel_arrows .oxi-icons' => '',
                 ],
-                'description' => 'Confirm Arrow Border with Customization.'
+                'description' => 'Confirm Arrow Border with Customization.',
             ]
         );
         $this->add_group_control(
@@ -490,7 +483,7 @@ class Modules extends Admin_Render
                 'selector' => [
                     '{{WRAPPER}} .oxi_carousel_arrows .oxi-icons' => '',
                 ],
-                'description' => 'Confirm Arrow Background Shadow.'
+                'description' => 'Confirm Arrow Background Shadow.',
             ]
         );
         $this->end_controls_tab();
@@ -499,26 +492,26 @@ class Modules extends Admin_Render
             'carousel_arrows_color_hover',
             $this->style,
             [
-                'label' => esc_html__('Color', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( 'Color', 'image-hover-effects-ultimate' ),
                 'type' => Controls::COLOR,
                 'default' => '#ffffff',
                 'selector' => [
                     '{{WRAPPER}} .oxi_carousel_arrows .oxi-icons:hover' => 'color: {{VALUE}} !important;',
                 ],
-                'description' => 'Confirm Arrow hover icon Color.'
+                'description' => 'Confirm Arrow hover icon Color.',
             ]
         );
         $this->add_control(
             'carousel_arrows_background_hover',
             $this->style,
             [
-                'label' => esc_html__('Background', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( 'Background', 'image-hover-effects-ultimate' ),
                 'type' => Controls::GRADIENT,
                 'default' => 'rgba(171, 0, 201, 1)',
                 'selector' => [
                     '{{WRAPPER}} .oxi_carousel_arrows .oxi-icons:hover' => 'background: {{VALUE}} !important;',
                 ],
-                'description' => 'Confirm Arrow hover icon Background Color.'
+                'description' => 'Confirm Arrow hover icon Background Color.',
             ]
         );
         $this->add_group_control(
@@ -527,9 +520,9 @@ class Modules extends Admin_Render
             [
                 'type' => Controls::BORDER,
                 'selector' => [
-                    '{{WRAPPER}} .oxi_carousel_arrows .oxi-icons:hover' => ''
+                    '{{WRAPPER}} .oxi_carousel_arrows .oxi-icons:hover' => '',
                 ],
-                'description' => 'Confirm Arrow hover Border with Customization.'
+                'description' => 'Confirm Arrow hover Border with Customization.',
             ]
         );
         $this->add_group_control(
@@ -540,7 +533,7 @@ class Modules extends Admin_Render
                 'selector' => [
                     '{{WRAPPER}} .oxi_carousel_arrows .oxi-icons:hover' => '',
                 ],
-                'description' => 'Confirm Arrow hover Background Shadow.'
+                'description' => 'Confirm Arrow hover Background Shadow.',
             ]
         );
         $this->end_controls_tab();
@@ -549,9 +542,9 @@ class Modules extends Admin_Render
             'carousel_arrows_radius',
             $this->style,
             [
-                'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( 'Border Radius', 'image-hover-effects-ultimate' ),
                 'type' => Controls::DIMENSIONS,
-                'separator' => TRUE,
+                'separator' => true,
                 'default' => [
                     'unit' => 'px',
                     'size' => '',
@@ -583,7 +576,7 @@ class Modules extends Admin_Render
             'carousel_arrows_padding',
             $this->style,
             [
-                'label' => esc_html__('Padding', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( 'Padding', 'image-hover-effects-ultimate' ),
                 'type' => Controls::DIMENSIONS,
                 'default' => [
                     'unit' => 'px',
@@ -615,13 +608,12 @@ class Modules extends Admin_Render
         $this->end_controls_section();
     }
 
-    public function register_carousel_dots_settings()
-    {
+    public function register_carousel_dots_settings() {
         $this->start_controls_section(
             'shortcode-addons',
             [
-                'label' => esc_html__('Carousel Dots', 'image-hover-effects-ultimate'),
-                'showing' => FALSE,
+                'label' => esc_html__( 'Carousel Dots', 'image-hover-effects-ultimate' ),
+                'showing' => false,
                 'condition' => [
                     'carousel_show_dots' => 'yes',
                 ],
@@ -631,7 +623,7 @@ class Modules extends Admin_Render
             'carousel_dots_position_width',
             $this->style,
             [
-                'label' => esc_html__('Width', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( 'Width', 'image-hover-effects-ultimate' ),
                 'type' => Controls::SLIDER,
                 'default' => [
                     'unit' => 'px',
@@ -664,7 +656,7 @@ class Modules extends Admin_Render
             'carousel_dots_position_height',
             $this->style,
             [
-                'label' => esc_html__('Height', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( 'Height', 'image-hover-effects-ultimate' ),
                 'type' => Controls::SLIDER,
                 'default' => [
                     'unit' => 'px',
@@ -697,7 +689,7 @@ class Modules extends Admin_Render
             'carousel_dots_position_Y',
             $this->style,
             [
-                'label' => esc_html__('Position Y', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( 'Position Y', 'image-hover-effects-ultimate' ),
                 'type' => Controls::SLIDER,
                 'default' => [
                     'unit' => '%',
@@ -730,7 +722,7 @@ class Modules extends Admin_Render
             'carousel_dots_spacing',
             $this->style,
             [
-                'label' => esc_html__('Spacing', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( 'Spacing', 'image-hover-effects-ultimate' ),
                 'type' => Controls::SLIDER,
                 'default' => [
                     'unit' => 'px',
@@ -763,10 +755,10 @@ class Modules extends Admin_Render
             'shortcode-addons-start-tabs',
             [
                 'options' => [
-                    'normal' => esc_html__('Normal', 'image-hover-effects-ultimate'),
-                    'hover' => esc_html__('Hover', 'image-hover-effects-ultimate'),
-                    'active' => esc_html__('Active', 'image-hover-effects-ultimate'),
-                ]
+                    'normal' => esc_html__( 'Normal', 'image-hover-effects-ultimate' ),
+                    'hover' => esc_html__( 'Hover', 'image-hover-effects-ultimate' ),
+                    'active' => esc_html__( 'Active', 'image-hover-effects-ultimate' ),
+                ],
             ]
         );
         $this->start_controls_tab();
@@ -774,7 +766,7 @@ class Modules extends Admin_Render
             'carousel_dots_bg_color',
             $this->style,
             [
-                'label' => esc_html__('Background', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( 'Background', 'image-hover-effects-ultimate' ),
                 'type' => Controls::COLOR,
                 'default' => 'rgb(0, 0, 0)',
                 'oparetor' => 'RGB',
@@ -803,7 +795,7 @@ class Modules extends Admin_Render
             'carousel_dots_bg_color_hover',
             $this->style,
             [
-                'label' => esc_html__('Background', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( 'Background', 'image-hover-effects-ultimate' ),
                 'type' => Controls::COLOR,
                 'default' => 'rgb(119, 119, 119)',
                 'oparetor' => 'RGB',
@@ -831,7 +823,7 @@ class Modules extends Admin_Render
             'carousel_dots_bg_color_active',
             $this->style,
             [
-                'label' => esc_html__('Background', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( 'Background', 'image-hover-effects-ultimate' ),
                 'type' => Controls::COLOR,
                 'default' => '#AB00C9',
                 'oparetor' => 'RGB',
@@ -858,9 +850,9 @@ class Modules extends Admin_Render
             'carousel_dots_border_radius_normal',
             $this->style,
             [
-                'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
+                'label' => esc_html__( 'Border Radius', 'image-hover-effects-ultimate' ),
                 'type' => Controls::DIMENSIONS,
-                'separator' => TRUE,
+                'separator' => true,
                 'default' => [
                     'unit' => 'px',
                     'size' => '',

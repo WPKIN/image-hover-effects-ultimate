@@ -2,7 +2,7 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\General\Admin;
 
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
@@ -11,12 +11,10 @@ if (!defined('ABSPATH')) {
  *
  * @author biplo
  */
-use OXI_IMAGE_HOVER_PLUGINS\Modules\General\Modules as Modules;
+use OXI_IMAGE_HOVER_PLUGINS\Modules\General\Modules;
 
 class Effects29 extends Modules {
 
     public function register_effects() {
-
     }
-
 }
