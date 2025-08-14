@@ -72,7 +72,7 @@ class Modules extends Admin_Render {
             'category_menu_settings',
             $this->style,
             [
-                'label' => esc_html__( '', 'image-hover-effects-ultimate' ),
+                'label' => '',
                 'type' => Controls::REPEATER,
                 'fields' => [
                     'category_item_text' => [
@@ -656,7 +656,7 @@ class Modules extends Admin_Render {
             'image-hover-custom-css',
             $this->style,
             [
-                'label' => esc_html__( '', 'image-hover-effects-ultimate' ),
+                'label' => '',
                 'type' => Controls::TEXTAREA,
                 'default' => '',
                 'description' => 'Custom CSS Section. You can add custom css into textarea.',

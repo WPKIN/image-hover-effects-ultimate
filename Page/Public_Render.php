@@ -196,9 +196,8 @@ class Public_Render {
         if ( $touch != 'normal' ) {
             wp_enqueue_script( 'oxi-image-hover-touch', OXI_IMAGE_HOVER_URL . 'assets/frontend/js/touch.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION );
         }
-        wp_enqueue_script( 'oxi-image-hover', OXI_IMAGE_HOVER_URL . 'assets/frontend/js/jquery.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION );
+        wp_enqueue_script( 'oxi-image-hover', OXI_IMAGE_HOVER_URL . 'assets/frontend/js/oxi-jquery.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION );
     }
-
 
     public function oxi_addons_admin_edit_delete_clone( $param ) {
         ?>

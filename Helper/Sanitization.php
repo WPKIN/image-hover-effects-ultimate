@@ -187,7 +187,7 @@ trait Sanitization {
                     'default' => '',
                     'label_on' => esc_html__('Yes', 'image-hover-effects-ultimate'),
                     'label_off' => esc_html__('No', 'image-hover-effects-ultimate'),
-                    'placeholder' => esc_html__('', 'image-hover-effects-ultimate'),
+                    'placeholder' => '',
                     'selector-data' => TRUE,
                     'render' => TRUE,
                     'responsive' => 'laptop',
@@ -1549,7 +1549,7 @@ trait Sanitization {
                                 $id . '-select',
                                 $data,
                                 [
-                                    'label' => esc_html__($level, 'image-hover-effects-ultimate'),
+                                    'label' => $level,
                                     'type' => Controls::CHOOSE,
                                     'loader' => TRUE,
                                     'default' => $type,

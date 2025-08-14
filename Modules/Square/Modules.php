@@ -1330,7 +1330,7 @@ class Modules extends Admin_Render {
             'image-hover-custom-css',
             $this->style,
             [
-                'label' => esc_html__( '', 'image-hover-effects-ultimate' ),
+                'label' => '',
                 'type' => Controls::TEXTAREA,
                 'default' => '',
                 'description' => 'Custom CSS Section. You can add custom css into textarea.',

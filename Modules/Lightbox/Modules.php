@@ -17,9 +17,6 @@ use OXI_IMAGE_HOVER_PLUGINS\Page\Admin_Render;
 
 class Modules extends Admin_Render {
 
-
-
-
     /*
      * @return void
      * Start Module Method for Genaral Style  #Light-box
@@ -1394,7 +1391,7 @@ class Modules extends Admin_Render {
             'image-hover-custom-css',
             $this->style,
             [
-                'label' => esc_html__( '', 'image-hover-effects-ultimate' ),
+                'label' => '',
                 'type' => Controls::TEXTAREA,
                 'default' => '',
                 'description' => 'Custom CSS Section. You can add custom css into textarea.',
