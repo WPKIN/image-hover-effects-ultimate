@@ -16,7 +16,6 @@ use OXI_IMAGE_HOVER_PLUGINS\Classes\Controls;
 
 abstract class Admin_Render {
 
-
     use \OXI_IMAGE_HOVER_PLUGINS\Helper\CSS_JS_Loader;
     use \OXI_IMAGE_HOVER_PLUGINS\Helper\Sanitization;
 

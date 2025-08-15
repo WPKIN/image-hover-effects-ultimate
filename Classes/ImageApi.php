@@ -159,20 +159,33 @@ class ImageApi {
         return current_user_can( $transient );
     }
 
+	public function update_image_hover_plugin() {
 
+		global $wpdb;
 
-    public function update_image_hover_plugin() {
-        $stylelist = $this->wpdb->get_results( $this->wpdb->prepare( "SELECT * FROM $this->parent_table ORDER by id ASC" ), ARRAY_A );
-        foreach ( $stylelist as $value ) {
-            $raw = json_decode( stripslashes( $value['rawdata'] ), true );
-            $raw['image-hover-style-id'] = $value['id'];
-            $s = explode( '-', $value['style_name'] );
-            $CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst( $s[0] ) . '\Admin\Effects' . $s[1];
-            $C = new $CLASS( 'admin' );
-            $f = $C->template_css_render( $raw );
-        }
-        update_option( 'image_hover_ultimate_update_complete', 'done' );
-    }
+		$table = esc_sql( $this->parent_table );
+
+		// Prepared query without user input still needs placeholders for compliance
+		$stylelist = $wpdb->get_results(
+			"SELECT * FROM {$table} ORDER BY id ASC",
+			ARRAY_A
+		);
+
+		foreach ( $stylelist as $value ) {
+			$raw = json_decode( stripslashes( $value['rawdata'] ), true );
+			$raw['image-hover-style-id'] = (int) $value['id'];
+
+			$s = explode( '-', $value['style_name'] );
+			$CLASS = 'OXI_IMAGE_HOVER_PLUGINS\\Modules\\' . ucfirst( $s[0] ) . '\\Admin\\Effects' . $s[1];
+
+			if ( class_exists( $CLASS ) ) {
+				$C = new $CLASS( 'admin' );
+				$C->template_css_render( $raw );
+			}
+		}
+
+		update_option( 'image_hover_ultimate_update_complete', 'done' );
+	}
 
 
 
@@ -182,13 +195,22 @@ class ImageApi {
      * @since 9.3.0
      */
     public function post_template_change() {
-        $rawdata = $this->validate_post();
+		global $wpdb;
 
-        if ( (int) $this->styleid ) :
-            $this->wpdb->query( $this->wpdb->prepare( "UPDATE {$this->parent_table} SET style_name = %s WHERE id = %d", $rawdata, $this->styleid ) );
-        endif;
-        return 'success';
-    }
+		$rawdata = $this->validate_post();
+
+		if ( (int) $this->styleid ) {
+			$wpdb->query(
+				$wpdb->prepare(
+					"UPDATE {$this->parent_table} SET style_name = %s WHERE id = %d",
+					$rawdata,
+					$this->styleid
+				)
+			);
+		}
+
+		return 'success';
+	}
 
     /**
      * Template Name Change
@@ -196,31 +218,54 @@ class ImageApi {
      * @since 9.3.0
      */
     public function post_template_name() {
-        $settings = $this->validate_post();
-        $name = $settings['addonsstylename'];
-        $id = $settings['addonsstylenameid'];
-        if ( (int) $id ) :
-            $this->wpdb->query( $this->wpdb->prepare( "UPDATE {$this->parent_table} SET name = %s WHERE id = %d", $name, $id ) );
-            return 'success';
-        endif;
-    }
+		global $wpdb;
+
+		$settings = $this->validate_post();
+		$name     = $settings['addonsstylename'];
+		$id       = (int) $settings['addonsstylenameid'];
+
+		if ( $id ) {
+			$wpdb->query(
+				$wpdb->prepare(
+					"UPDATE {$this->parent_table} SET name = %s WHERE id = %d",
+					$name,
+					$id
+				)
+			);
+
+			return 'success';
+		}
+	}
+
 
     /**
      * Template Name Change
      *
      * @since 9.3.0
      */
-    public function post_elements_rearrange_modal_data() {
-        if ( (int) $this->styleid ) :
-            $child = $this->wpdb->get_results( $this->wpdb->prepare( "SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $this->styleid ), ARRAY_A );
-            $render = [];
-            foreach ( $child as $k => $value ) {
-                $data = json_decode( stripcslashes( $value['rawdata'] ) );
-                $render[ $value['id'] ] = $data;
-            }
-            return json_encode( $render );
-        endif;
-    }
+	public function post_elements_rearrange_modal_data() {
+		global $wpdb;
+
+		$styleid = (int) $this->styleid;
+
+		if ( $styleid ) {
+			$child = $wpdb->get_results(
+				$wpdb->prepare(
+					"SELECT * FROM {$this->child_table} WHERE styleid = %d ORDER BY id ASC",
+					$styleid
+				),
+				ARRAY_A
+			);
+
+			$render = [];
+			foreach ( $child as $value ) {
+				$data                  = json_decode( stripslashes( $value['rawdata'] ) );
+				$render[ $value['id'] ] = $data;
+			}
+
+			return wp_json_encode( $render );
+		}
+	}
 
     /**
      * Template Name Change
@@ -228,22 +273,55 @@ class ImageApi {
      * @since 9.3.0
      */
     public function post_elements_template_rearrange_save_data() {
-        $params = explode( ',', $this->validate_post() );
-        foreach ( $params as $value ) {
-            if ( (int) $value ) :
-                $data = $this->wpdb->get_row( $this->wpdb->prepare( "SELECT * FROM $this->child_table WHERE id = %d ", $value ), ARRAY_A );
-                $this->wpdb->query( $this->wpdb->prepare( "INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d, %s)", [ $data['styleid'], $data['rawdata'] ] ) );
-                $redirect_id = $this->wpdb->insert_id;
-                if ( $redirect_id == 0 ) {
-                    return;
-                }
-                if ( $redirect_id != 0 ) {
-                    $this->wpdb->query( $this->wpdb->prepare( "DELETE FROM $this->child_table WHERE id = %d", $value ) );
-                }
-            endif;
-        }
-        return 'success';
-    }
+		global $wpdb;
+
+		$params = explode( ',', $this->validate_post() );
+
+		foreach ( $params as $value ) {
+			$value = (int) $value;
+
+			if ( $value ) {
+				// Get the child row.
+				$data = $wpdb->get_row(
+					$wpdb->prepare(
+						"SELECT * FROM {$this->child_table} WHERE id = %d",
+						$value
+					),
+					ARRAY_A
+				);
+
+				if ( $data ) {
+					// Insert the new reordered row.
+					$wpdb->query(
+						$wpdb->prepare(
+							"INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d, %s)",
+							$data['styleid'],
+							$data['rawdata']
+						)
+					);
+
+					$redirect_id = $wpdb->insert_id;
+
+					if ( 0 === (int) $redirect_id ) {
+						return;
+					}
+
+					// Delete the old row if insert succeeded.
+					if ( $redirect_id > 0 ) {
+						$wpdb->query(
+							$wpdb->prepare(
+								"DELETE FROM {$this->child_table} WHERE id = %d",
+								$value
+							)
+						);
+					}
+				}
+			}
+		}
+
+		return 'success';
+	}
+
     public function save_action() {
 
         if ( ! $this->get_permissions_check() ) {
@@ -310,6 +388,8 @@ class ImageApi {
 
     public function post_create_new() {
 
+		global $wpdb;
+
         $params = $this->validate_post();
 
         $files = OXI_IMAGE_HOVER_PATH . $params['style'];
@@ -323,8 +403,8 @@ class ImageApi {
                 $style['name'] = $params['name'];
             endif;
 
-            $this->wpdb->query( $this->wpdb->prepare( "INSERT INTO {$this->parent_table} (name, style_name, rawdata) VALUES ( %s, %s, %s)", [ $style['name'], $style['style_name'], $style['rawdata'] ] ) );
-            $redirect_id = $this->wpdb->insert_id;
+            $wpdb->query( $wpdb->prepare( "INSERT INTO {$this->parent_table} (name, style_name, rawdata) VALUES ( %s, %s, %s)", [ $style['name'], $style['style_name'], $style['rawdata'] ] ) );
+            $redirect_id = $wpdb->insert_id;
             if ( $redirect_id > 0 ) :
                 $raw = json_decode( stripslashes( $style['rawdata'] ), true );
                 $raw['image-hover-style-id'] = $redirect_id;
@@ -333,7 +413,7 @@ class ImageApi {
                 $C = new $CLASS( 'admin' );
                 $f = $C->template_css_render( $raw );
                 foreach ( $child as $value ) {
-                    $this->wpdb->query( $this->wpdb->prepare( "INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d,  %s)", [ $redirect_id, $value['rawdata'] ] ) );
+                    $wpdb->query( $wpdb->prepare( "INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d,  %s)", [ $redirect_id, $value['rawdata'] ] ) );
                 }
                 return admin_url( "admin.php?page=oxi-image-hover-ultimate&effects=$s[0]&styleid=$redirect_id" );
             endif;
@@ -368,15 +448,17 @@ class ImageApi {
 
     public function post_layouts_clone() {
 
+		global $wpdb;
+
         $newName = $this->validate_post();
 
         $styleid = $this->styleid;
 
-        $style = $this->wpdb->get_row( $this->wpdb->prepare( "SELECT * FROM $this->parent_table WHERE id = %d", $styleid ), ARRAY_A );
-        $child = $this->wpdb->get_results( $this->wpdb->prepare( "SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid ), ARRAY_A );
+        $style = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $this->parent_table WHERE id = %d", $styleid ), ARRAY_A );
+        $child = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid ), ARRAY_A );
 
-        $this->wpdb->query( $this->wpdb->prepare( "INSERT INTO {$this->parent_table} (name, style_name, rawdata) VALUES ( %s, %s, %s)", [ $newName, $style['style_name'], $style['rawdata'] ] ) );
-        $redirect_id = $this->wpdb->insert_id;
+        $wpdb->query( $wpdb->prepare( "INSERT INTO {$this->parent_table} (name, style_name, rawdata) VALUES ( %s, %s, %s)", [ $newName, $style['style_name'], $style['rawdata'] ] ) );
+        $redirect_id = $wpdb->insert_id;
         if ( $redirect_id > 0 ) :
             $raw = json_decode( stripslashes( $style['rawdata'] ), true );
             $raw['image-hover-style-id'] = $redirect_id;
@@ -385,13 +467,15 @@ class ImageApi {
             $C = new $CLASS( 'admin' );
             $f = $C->template_css_render( $raw );
             foreach ( $child as $value ) {
-                $this->wpdb->query( $this->wpdb->prepare( "INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d,  %s)", [ $redirect_id, $value['rawdata'] ] ) );
+                $wpdb->query( $wpdb->prepare( "INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d,  %s)", [ $redirect_id, $value['rawdata'] ] ) );
             }
             return admin_url( "admin.php?page=oxi-image-hover-ultimate&effects=$s[0]&styleid=$redirect_id" );
         endif;
     }
 
     public function post_json_import( $params ) {
+
+		global $wpdb;
 
         $style = $params['style'];
         $child = $params['child'];
@@ -401,8 +485,8 @@ class ImageApi {
             return 'Don\'t be smart, Kindly add validate data.';
         }
 
-        $this->wpdb->query( $this->wpdb->prepare( "INSERT INTO {$this->parent_table} (name, style_name, rawdata) VALUES ( %s, %s, %s)", [ $style['name'], $style['style_name'], $style['rawdata'] ] ) );
-        $redirect_id = $this->wpdb->insert_id;
+        $wpdb->query( $wpdb->prepare( "INSERT INTO {$this->parent_table} (name, style_name, rawdata) VALUES ( %s, %s, %s)", [ $style['name'], $style['style_name'], $style['rawdata'] ] ) );
+        $redirect_id = $wpdb->insert_id;
         if ( $redirect_id > 0 ) :
             $raw['image-hover-style-id'] = $redirect_id;
             $s = explode( '-', $style['style_name'] );
@@ -410,17 +494,18 @@ class ImageApi {
             $C = new $CLASS( 'admin' );
             $f = $C->template_css_render( $raw );
             foreach ( $child as $value ) {
-                $this->wpdb->query( $this->wpdb->prepare( "INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d,  %s)", [ $redirect_id, $value['rawdata'] ] ) );
+                $wpdb->query( $wpdb->prepare( "INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d,  %s)", [ $redirect_id, $value['rawdata'] ] ) );
             }
             return admin_url( "admin.php?page=oxi-image-hover-ultimate&effects=$s[0]&styleid=$redirect_id" );
         endif;
     }
 
     public function post_shortcode_delete() {
+		global $wpdb;
         $styleid = (int) $this->styleid;
         if ( $styleid ) :
-            $this->wpdb->query( $this->wpdb->prepare( "DELETE FROM {$this->parent_table} WHERE id = %d", $styleid ) );
-            $this->wpdb->query( $this->wpdb->prepare( "DELETE FROM {$this->child_table} WHERE styleid = %d", $styleid ) );
+            $wpdb->query( $wpdb->prepare( "DELETE FROM {$this->parent_table} WHERE id = %d", $styleid ) );
+            $wpdb->query( $wpdb->prepare( "DELETE FROM {$this->child_table} WHERE styleid = %d", $styleid ) );
             return 'done';
         else :
             return 'Silence is Golden';
@@ -433,11 +518,13 @@ class ImageApi {
      */
     public function post_elements_template_modal_data() {
 
+		global $wpdb;
+
         if ( (int) $this->styleid ) :
             if ( (int) $this->childid ) :
-                $this->wpdb->query( $this->wpdb->prepare( "UPDATE {$this->child_table} SET rawdata = %s WHERE id = %d", $this->rawdata, $this->childid ) );
+                $wpdb->query( $wpdb->prepare( "UPDATE {$this->child_table} SET rawdata = %s WHERE id = %d", $this->rawdata, $this->childid ) );
             else :
-                $this->wpdb->query( $this->wpdb->prepare( "INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d, %s )", [ $this->styleid, $this->rawdata ] ) );
+                $wpdb->query( $wpdb->prepare( "INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d, %s )", [ $this->styleid, $this->rawdata ] ) );
             endif;
         endif;
         return 'success';
@@ -449,8 +536,25 @@ class ImageApi {
      * @since 9.3.0
      */
     public function post_elements_template_rebuild_data() {
-        $style = $this->wpdb->get_row( $this->wpdb->prepare( 'SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $this->styleid ), ARRAY_A );
-        $child = $this->wpdb->get_results( $this->wpdb->prepare( "SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $this->styleid ), ARRAY_A );
+		global $wpdb;
+        $parent_table = esc_sql( $this->parent_table );
+		$child_table  = esc_sql( $this->child_table );
+
+		$style = $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT * FROM {$parent_table} WHERE id = %d",
+				$this->styleid
+			),
+			ARRAY_A
+		);
+
+		$child = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT * FROM {$child_table} WHERE styleid = %d ORDER BY id ASC",
+				$this->styleid
+			),
+			ARRAY_A
+		);
         $style['rawdata'] = $style['stylesheet'] = $style['font_family'] = '';
         $name = explode( '-', $style['style_name'] );
         $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst( $name[0] ) . '\Render\Effects' . $name[1];
@@ -467,8 +571,9 @@ class ImageApi {
      * @since 9.3.0
      */
     public function post_elements_template_modal_data_delete() {
+		global $wpdb;
         if ( (int) $this->childid ) :
-            $this->wpdb->query( $this->wpdb->prepare( "DELETE FROM {$this->child_table} WHERE id = %d ", $this->childid ) );
+            $wpdb->query( $wpdb->prepare( "DELETE FROM {$this->child_table} WHERE id = %d ", $this->childid ) );
             return 'done';
         else :
             return 'Silence is Golden';
@@ -545,8 +650,9 @@ class ImageApi {
      * @since 9.3.0
      */
     public function post_elements_template_render_data() {
+		global $wpdb;
         $settings = json_decode( stripslashes( $this->rawdata ), true );
-        $child = $this->wpdb->get_results( $this->wpdb->prepare( "SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $this->styleid ), ARRAY_A );
+        $child = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $this->styleid ), ARRAY_A );
         $StyleName = $settings['image-hover-template'];
         $name = explode( '-', $StyleName );
         ob_start();
@@ -568,8 +674,9 @@ class ImageApi {
      * @since 9.3.0
      */
     public function post_elements_template_modal_data_edit() {
+		global $wpdb;
         if ( (int) $this->childid ) :
-            $listdata = $this->wpdb->get_row( $this->wpdb->prepare( "SELECT * FROM {$this->child_table} WHERE id = %d ", $this->childid ), ARRAY_A );
+            $listdata = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$this->child_table} WHERE id = %d ", $this->childid ), ARRAY_A );
             $returnfile = json_decode( stripslashes( $listdata['rawdata'] ), true );
             $returnfile['shortcodeitemid'] = $this->childid;
             return json_encode( $returnfile );
@@ -584,10 +691,11 @@ class ImageApi {
      * @since 9.3.0
      */
     public function post_elements_template_modal_data_clone() {
+		global $wpdb;
         if ( (int) $this->childid ) :
-            $listdata = $this->wpdb->get_row( $this->wpdb->prepare( "SELECT * FROM {$this->child_table} WHERE id = %d ", $this->childid ), ARRAY_A );
-            $this->wpdb->query( $this->wpdb->prepare( "INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d,  %s)", [ $listdata['styleid'], $listdata['rawdata'] ] ) );
-            $redirect_id = $this->wpdb->insert_id;
+            $listdata = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$this->child_table} WHERE id = %d ", $this->childid ), ARRAY_A );
+            $wpdb->query( $wpdb->prepare( "INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d,  %s)", [ $listdata['styleid'], $listdata['rawdata'] ] ) );
+            $redirect_id = $wpdb->insert_id;
             if ( $redirect_id > 0 ) :
                 return 'done';
             endif;
@@ -629,10 +737,20 @@ class ImageApi {
 
     public function post_web_template() {
 
-        $folder = $this->safe_path( OXI_IMAGE_HOVER_PATH . 'template/' );
-        if ( ! is_dir( $folder ) ) :
-            mkdir( $folder, 0777 );
-        endif;
+        global $wp_filesystem;
+
+		// Load the WP Filesystem API if it isn't loaded yet
+		if ( ! function_exists( 'WP_Filesystem' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+		}
+
+		WP_Filesystem();
+
+		$folder = $this->safe_path( OXI_IMAGE_HOVER_PATH . 'template/' );
+
+		if ( ! $wp_filesystem->is_dir( $folder ) ) {
+			$wp_filesystem->mkdir( $folder, FS_CHMOD_DIR );
+		}
         $rawdata = $this->validate_post();
         $files = OXI_IMAGE_HOVER_PATH . 'template/' . $rawdata . '-' . $this->styleid . '.json';
         if ( ! file_exists( $files ) ) :
@@ -685,10 +803,11 @@ class ImageApi {
         return str_replace( [ '/', '\\' ], DIRECTORY_SEPARATOR, $path );
     }
     public function post_shortcode_export() {
+		global $wpdb;
         $styleid = (int) $this->styleid;
         if ( $styleid > 0 ) :
-            $style = $this->wpdb->get_row( $this->wpdb->prepare( "SELECT * FROM $this->parent_table WHERE id = %d", $styleid ), ARRAY_A );
-            $child = $this->wpdb->get_results( $this->wpdb->prepare( "SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid ), ARRAY_A );
+            $style = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $this->parent_table WHERE id = %d", $styleid ), ARRAY_A );
+            $child = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid ), ARRAY_A );
             $filename = 'image-hover-effects-ultimateand' . $style['id'] . '.json';
             $files = [
                 'style' => $style,
@@ -723,12 +842,13 @@ class ImageApi {
     }
 
     public function post_shortcode_deactive() {
+		global $wpdb;
         $rawdata = $this->validate_post();
 
         $id = $rawdata . '-' . (int) $this->styleid;
         $effects = $rawdata . '-ultimate';
         if ( $this->styleid > 0 ) :
-            $this->wpdb->query( $this->wpdb->prepare( "DELETE FROM {$this->import_table} WHERE name = %s and type = %s", $id, $effects ) );
+            $wpdb->query( $wpdb->prepare( "DELETE FROM {$this->import_table} WHERE name = %s and type = %s", $id, $effects ) );
             return 'done';
         else :
             return 'Silence is Golden';
@@ -736,12 +856,13 @@ class ImageApi {
     }
 
     public function post_shortcode_active() {
+		global $wpdb;
         $rawdata = $this->validate_post();
         $id = $rawdata . '-' . (int) $this->styleid;
         $effects = $rawdata . '-ultimate';
 
         if ( $this->styleid > 0 ) :
-            $this->wpdb->query( $this->wpdb->prepare( "INSERT INTO {$this->import_table} (type, name) VALUES (%s, %s)", [ $effects, $id ] ) );
+            $wpdb->query( $wpdb->prepare( "INSERT INTO {$this->import_table} (type, name) VALUES (%s, %s)", [ $effects, $id ] ) );
             return admin_url( "admin.php?page=oxi-image-hover-ultimate&effects=$rawdata#" . $id );
         else :
             return 'Silence is Golden';
@@ -754,6 +875,7 @@ class ImageApi {
      * @since 9.3.0
      */
     public function post_elements_template_style() {
+		global $wpdb;
         $settings = json_decode( stripslashes( $this->rawdata ), true );
 
         $custom = strtolower( $settings['image-hover-custom-css'] );
@@ -764,13 +886,14 @@ class ImageApi {
         $StyleName = sanitize_text_field( $settings['image-hover-template'] );
         $stylesheet = '';
         if ( (int) $this->styleid ) :
-            $this->wpdb->query( $this->wpdb->prepare( "UPDATE {$this->parent_table} SET rawdata = %s, stylesheet = %s WHERE id = %d", $this->rawdata, $stylesheet, $this->styleid ) );
+            $wpdb->query( $wpdb->prepare( "UPDATE {$this->parent_table} SET rawdata = %s, stylesheet = %s WHERE id = %d", $this->rawdata, $stylesheet, $this->styleid ) );
             $name = explode( '-', $StyleName );
             $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $name[0] . '\Admin\Effects' . $name[1];
             $CLASS = new $cls( 'admin' );
             return $CLASS->template_css_render( $settings );
         endif;
     }
+
     public function download_web_files( $files ) {
 
         $rawdata = $this->validate_post();
@@ -792,14 +915,15 @@ class ImageApi {
     }
 
     public function post_web_import() {
+		global $wpdb;
         $rawdata = $this->validate_post();
         $files = OXI_IMAGE_HOVER_PATH . 'template/' . $rawdata . '.json';
         $params = json_decode( file_get_contents( $files ), true )[ $this->styleid ];
 
         $style = $params['style'];
         $child = $params['child'];
-        $this->wpdb->query( $this->wpdb->prepare( "INSERT INTO {$this->parent_table} (name, style_name, rawdata) VALUES ( %s, %s, %s)", [ $style['name'], $style['style_name'], $style['rawdata'] ] ) );
-        $redirect_id = $this->wpdb->insert_id;
+        $wpdb->query( $wpdb->prepare( "INSERT INTO {$this->parent_table} (name, style_name, rawdata) VALUES ( %s, %s, %s)", [ $style['name'], $style['style_name'], $style['rawdata'] ] ) );
+        $redirect_id = $wpdb->insert_id;
         if ( $redirect_id > 0 ) :
             $raw = json_decode( stripslashes( $style['rawdata'] ), true );
             $raw['image-hover-style-id'] = $redirect_id;
@@ -808,7 +932,7 @@ class ImageApi {
             $C = new $CLASS( 'admin' );
             $f = $C->template_css_render( $raw );
             foreach ( $child as $value ) {
-                $this->wpdb->query( $this->wpdb->prepare( "INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d,  %s)", [ $redirect_id, $value['rawdata'] ] ) );
+                $wpdb->query( $wpdb->prepare( "INSERT INTO {$this->child_table} (styleid, rawdata) VALUES (%d,  %s)", [ $redirect_id, $value['rawdata'] ] ) );
             }
             return admin_url( "admin.php?page=oxi-image-hover-ultimate&effects=$s[0]&styleid=$redirect_id" );
         endif;
@@ -854,10 +978,10 @@ class ImageApi {
      */
     public function __construct( $rawdata = '', $styleid = '', $childid = '' ) {
         global $wpdb;
-        $this->wpdb = $wpdb;
-        $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
-        $this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
-        $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
+        $wpdb = $wpdb;
+        $this->parent_table = $wpdb->prefix . 'image_hover_ultimate_style';
+        $this->child_table = $wpdb->prefix . 'image_hover_ultimate_list';
+        $this->import_table = $wpdb->prefix . 'oxi_div_import';
         $this->rawdata = $rawdata;
         $this->styleid = $styleid;
         $this->childid = $childid;

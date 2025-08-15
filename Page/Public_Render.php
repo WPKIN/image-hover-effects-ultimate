@@ -590,7 +590,7 @@ class Public_Render {
             if ( array_key_exists( 'id', $this->dbdata ) ) :
                 $this->oxiid = (int) $this->dbdata['id'];
             else :
-                $this->oxiid = rand( 100000, 200000 );
+                $this->oxiid = wp_rand( 100000, 200000 );
             endif;
             if ( ! empty( $dbdata['rawdata'] ) ) :
                 $this->loader();
