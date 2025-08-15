@@ -959,5 +959,4 @@ abstract class Admin_Render {
 		// Load font family
 		$this->import_font_family();
 	}
-
 }

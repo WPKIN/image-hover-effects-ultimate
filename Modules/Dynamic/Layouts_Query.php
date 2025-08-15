@@ -52,7 +52,6 @@ class Layouts_Query {
 			if ( method_exists( $this, $function ) ) {
 				return $this->{$function}( $rawdata, $args, $optional );
 			}
-
 		endif;
 	}
 
@@ -114,5 +113,4 @@ class Layouts_Query {
 			new $cls( $dbdata, $postdata, 'request' );
 		endif;
 	}
-
 }

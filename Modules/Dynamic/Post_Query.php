@@ -2,12 +2,12 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic;
 
-if (! defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class Post_Query
-{
+class Post_Query {
+
 
 	/**
 	 * Define $wpdb
@@ -37,13 +37,13 @@ class Post_Query
 	 */
 	public $child_table;
 
-	public function __construct($function = '', $rawdata = '', $args = '', $optional = '') {
-		if (! empty($function) && ! empty($rawdata)) :
+	public function __construct( $function = '', $rawdata = '', $args = '', $optional = '' ) {
+		if ( ! empty( $function ) && ! empty( $rawdata ) ) :
 			global $wpdb;
 			$this->wpdb = $wpdb;
 			$this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
 			$this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
-			return $this->$function($rawdata, $args, $optional);
+			return $this->$function( $rawdata, $args, $optional );
 		endif;
 	}
 
@@ -152,5 +152,4 @@ class Post_Query
 		$cls       = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $StyleName[0] . '\Render\Effects' . $StyleName[1];
 		new $cls( $dbdata, $postdata, 'request' );
 	}
-
 }

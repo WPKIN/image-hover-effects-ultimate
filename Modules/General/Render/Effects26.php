@@ -97,6 +97,7 @@ class Effects26 extends Public_Render {
     }
 
     public function old_render() {
+		global $wpdb;
         $style = $this->dbdata['css'];
         $styledata = explode( '|', $style );
         foreach ( $this->child as $k => $value ) {
@@ -112,7 +113,13 @@ class Effects26 extends Public_Render {
                 'image_hover_button_text' => $value['buttom_text'],
             ];
             $dd = json_encode( $rowdata );
-            $this->wpdb->query( $this->wpdb->prepare( "UPDATE {$this->child_table} SET rawdata = %s WHERE id = %d", $dd, $value['id'] ) );
+            $wpdb->query(
+				$wpdb->prepare(
+					'UPDATE ' . esc_sql( $this->child_table ) . ' SET rawdata = %s WHERE id = %d',
+					$dd,
+					(int) $value['id']
+				)
+			);
         }
 
         $new = [
@@ -221,7 +228,13 @@ class Effects26 extends Public_Render {
             'image-hover-custom-css' => $styledata[83],
         ];
         $row = json_encode( $new );
-        $this->wpdb->query( $this->wpdb->prepare( "UPDATE {$this->parent_table} SET rawdata = %s WHERE id = %d", $row, $this->oxiid ) );
+        $wpdb->query(
+			$wpdb->prepare(
+				'UPDATE ' . esc_sql( $this->parent_table ) . ' SET rawdata = %s WHERE id = %d',
+				$row,
+				(int) $this->oxiid
+			)
+		);
         $name = explode( '-', $this->dbdata['style_name'] );
         $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\General\Admin\Effects' . $name[1];
         $CLASS = new $cls( 'admin' );
