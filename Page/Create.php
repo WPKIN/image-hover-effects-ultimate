@@ -16,7 +16,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Create {
 
-
     /**
      * Database Parent Table
      *
@@ -171,19 +170,39 @@ class Create {
      * @since 9.3.0
      */
     public function pre_active_check() {
-        $template = $this->wpdb->get_results( "SELECT * FROM  $this->import_table WHERE type = '$this->oxitype' ORDER BY id DESC", ARRAY_A );
-        if ( count( $template ) < 1 ) :
-            foreach ( $this->pre_active as $value ) {
-                $this->wpdb->query( $this->wpdb->prepare( "INSERT INTO {$this->import_table} (type, name) VALUES (%s, %s)", [ $this->oxitype, $value ] ) );
-            }
-            $this->activated_template = $this->pre_clecked;
-        else :
-            foreach ( $template as $value ) {
-                $this->activated_template[ $value['name'] ] = $value['name'];
-            }
-        endif;
-    }
 
+		global $wpdb;
+
+		// Escape table name
+		$table = esc_sql( $this->import_table );
+
+		// Fetch existing templates for this oxitype
+		$template = $this->wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT * FROM {$table} WHERE type = %s ORDER BY id DESC",
+				$this->oxitype
+			),
+			ARRAY_A
+		);
+
+		if ( count( $template ) < 1 ) {
+			// Insert default templates
+			foreach ( $this->pre_active as $value ) {
+				$wpdb->query(
+					$wpdb->prepare(
+						"INSERT INTO {$table} (type, name) VALUES (%s, %s)",
+						$this->oxitype,
+						$value
+					)
+				);
+			}
+			$this->activated_template = $this->pre_clecked;
+		} else {
+			foreach ( $template as $value ) {
+				$this->activated_template[ $value['name'] ] = $value['name'];
+			}
+		}
+	}
 
     public function import_template() {
 		?>
@@ -421,10 +440,10 @@ class Create {
 		apply_filters( 'oxi-image-hover-plugin/admin_menu', true );
 	}
 
-                            /**
-                             * Admin Notice JS file loader
-                             * @return void
-                             */
+	/**
+	 * Admin Notice JS file loader
+	 * @return void
+	 */
 	public function admin_rest_api() {
 		wp_enqueue_script( 'oxi-image-hover-create', OXI_IMAGE_HOVER_URL . 'assets/backend/js/create.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION );
 	}

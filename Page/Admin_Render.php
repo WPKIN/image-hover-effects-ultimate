@@ -293,47 +293,76 @@ abstract class Admin_Render {
      *
      * @since 9.3.0
      */
-    public function template_css_render( $style ) {
-        $styleid = $style['image-hover-style-id'];
-        $this->oxiid = (int) $styleid;
-        $this->WRAPPER = '.oxi-image-hover-wrapper-' . $this->oxiid;
-        $this->CSSWRAPPER = '.oxi-image-hover-wrapper-' . $this->oxiid . ' .oxi-addons-row';
-        $this->style = $style;
-        ob_start();
-        $dt = $this->import_font_family();
-        $dt .= $this->register_controls();
-        ob_end_clean();
+	public function template_css_render( $style ) {
+		global $wpdb;
 
-        $fullcssfile = '';
-        foreach ( $this->CSSDATA as $key => $responsive ) {
-            $tempcss = '';
-            foreach ( $responsive as $class => $classes ) {
-                $tempcss .= $class . '{';
-                foreach ( $classes as $properties ) {
-                    $tempcss .= $properties;
-                }
-                $tempcss .= '}';
-            }
-            if ( $key == 'laptop' ) :
-                $fullcssfile .= $tempcss;
-            elseif ( $key == 'tab' ) :
-                $fullcssfile .= '@media only screen and (min-width : 669px) and (max-width : 993px){';
-                $fullcssfile .= $tempcss;
-                $fullcssfile .= '}';
-            elseif ( $key == 'mobile' ) :
-                $fullcssfile .= '@media only screen and (max-width : 668px){';
-                $fullcssfile .= $tempcss;
-                $fullcssfile .= '}';
-            endif;
-        }
-        $font = json_encode( $this->font );
-        $this->wpdb->query( $this->wpdb->prepare( "UPDATE {$this->parent_table} SET stylesheet = %s WHERE id = %d", $fullcssfile, $styleid ) );
-        $this->wpdb->query( $this->wpdb->prepare( "UPDATE {$this->parent_table} SET font_family = %s WHERE id = %d", $font, $styleid ) );
-        return 'success';
-    }
+		$styleid = (int) $style['image-hover-style-id'];
+		$this->oxiid = $styleid;
+		$this->WRAPPER = '.oxi-image-hover-wrapper-' . $this->oxiid;
+		$this->CSSWRAPPER = '.oxi-image-hover-wrapper-' . $this->oxiid . ' .oxi-addons-row';
+		$this->style = $style;
+
+		ob_start();
+		$dt = $this->import_font_family();
+		$dt .= $this->register_controls();
+		ob_end_clean();
+
+		$fullcssfile = '';
+		foreach ( $this->CSSDATA as $key => $responsive ) {
+			$tempcss = '';
+			foreach ( $responsive as $class => $classes ) {
+				$tempcss .= $class . '{';
+				foreach ( $classes as $properties ) {
+					$tempcss .= $properties;
+				}
+				$tempcss .= '}';
+			}
+			if ( $key === 'laptop' ) {
+				$fullcssfile .= $tempcss;
+			} elseif ( $key === 'tab' ) {
+				$fullcssfile .= '@media only screen and (min-width : 669px) and (max-width : 993px){' . $tempcss . '}';
+			} elseif ( $key === 'mobile' ) {
+				$fullcssfile .= '@media only screen and (max-width : 668px){' . $tempcss . '}';
+			}
+		}
+
+		$font = wp_json_encode( $this->font );
+
+		// Make sure the table name is safe (hardcoded)
+		$table = esc_sql( $this->parent_table );
+
+		// Update stylesheet
+		$wpdb->query(
+			$wpdb->prepare(
+				"UPDATE {$table} SET stylesheet = %s WHERE id = %d",
+				$fullcssfile,
+				$styleid
+			)
+		);
+
+		// Update font_family
+		$wpdb->query(
+			$wpdb->prepare(
+				"UPDATE {$table} SET font_family = %s WHERE id = %d",
+				$font,
+				$styleid
+			)
+		);
+
+		return 'success';
+	}
+
 
     public function import_font_family() {
-        $this->font_family = $this->wpdb->get_results( $this->wpdb->prepare( "SELECT * FROM $this->import_table WHERE type = %s ORDER by id ASC", 'shortcode-addons' ), ARRAY_A );
+		global $wpdb;
+        $table = esc_sql( $this->import_table ); // escape table name
+		$this->font_family = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT * FROM {$table} WHERE type = %s ORDER BY id ASC",
+				'shortcode-addons' // value placeholder
+			),
+			ARRAY_A
+		);
         $google = $custom = '';
         foreach ( $this->font_family as $key => $value ) {
             if ( $value['name'] == 'custom' ) {
@@ -895,18 +924,41 @@ abstract class Admin_Render {
      * @since 9.3.0
      */
     public function hooks() {
-        $this->admin_elements_frontend_loader();
-        $this->admin_editor_load();
-        $this->dbdata = $this->wpdb->get_row( $this->wpdb->prepare( 'SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $this->oxiid ), ARRAY_A );
-        $this->child = $this->wpdb->get_results( $this->wpdb->prepare( "SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $this->oxiid ), ARRAY_A );
-        if ( ! empty( $this->dbdata['rawdata'] ) ) :
-            $s = json_decode( stripslashes( $this->dbdata['rawdata'] ), true );
-            if ( is_array( $s ) ) :
-                $this->style = $s;
-            endif;
-        endif;
-        $this->StyleName = explode( '-', ucfirst( $this->dbdata['style_name'] ) );
-        $this->oxitype = $this->StyleName[0];
-        $this->import_font_family();
-    }
+		global $wpdb;
+		// Load frontend and editor assets
+		$this->admin_elements_frontend_loader();
+		$this->admin_editor_load();
+
+		// Escape table names
+		$parent_table = esc_sql( $this->parent_table );
+		$child_table  = esc_sql( $this->child_table );
+
+		// Fetch main style data
+		$this->dbdata = $wpdb->get_row(
+			$wpdb->prepare( "SELECT * FROM {$parent_table} WHERE id = %d", $this->oxiid ),
+			ARRAY_A
+		);
+
+		// Fetch child data
+		$this->child = $wpdb->get_results(
+			$wpdb->prepare( "SELECT * FROM {$child_table} WHERE styleid = %d ORDER BY id ASC", $this->oxiid ),
+			ARRAY_A
+		);
+
+		// Decode raw JSON data
+		if ( ! empty( $this->dbdata['rawdata'] ) ) {
+			$s = json_decode( stripslashes( $this->dbdata['rawdata'] ), true );
+			if ( is_array( $s ) ) {
+				$this->style = $s;
+			}
+		}
+
+		// Extract style type
+		$this->StyleName = explode( '-', ucfirst( $this->dbdata['style_name'] ) );
+		$this->oxitype   = $this->StyleName[0];
+
+		// Load font family
+		$this->import_font_family();
+	}
+
 }
