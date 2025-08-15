@@ -268,11 +268,28 @@ class Modules extends Admin_Render {
         $this->end_controls_section();
     }
     public function all_style() {
+		global $wpdb;
         $a = 'button%';
         $b = 'general%';
         $c = 'square%';
         $d = 'caption%';
-        $alldata = $this->wpdb->get_results( $this->wpdb->prepare( "SELECT id, name FROM $this->parent_table WHERE style_name LIKE %s OR style_name LIKE %s OR style_name LIKE %s OR style_name LIKE %s ORDER by id ASC", $a, $b, $c, $d ), ARRAY_A );
+
+		$table = esc_sql( $this->parent_table ); // Escape table name
+		$alldata = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT id, name FROM {$table} 
+				WHERE style_name LIKE %s 
+				OR style_name LIKE %s 
+				OR style_name LIKE %s 
+				OR style_name LIKE %s 
+				ORDER BY id ASC",
+				$a,
+				$b,
+				$c,
+				$d
+			),
+			ARRAY_A
+		);
         $st = [];
         foreach ( $alldata as $k => $value ) {
             $st[ $value['id'] ] = $value['name'] != '' ? $value['name'] : 'Shortcode ID ' . $value['id'];

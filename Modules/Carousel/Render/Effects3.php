@@ -85,21 +85,36 @@ class Effects3 extends Public_Render {
     }
 
     public function default_render( $style, $child, $admin ) {
+		global $wpdb;
         if ( ! array_key_exists( 'carousel_register_style', $style ) && $style['carousel_register_style'] < 1 ) :
             ?>
-            <p>Kindly Select Image Effects First to Extend Carousel.</p>
+            <p><?php esc_html_e( 'Kindly Select Image Effects First to Extend Carousel.', 'image-hover-effects-ultimate' ); ?></p>
             <?php
             return;
         endif;
-        $styledata = $this->wpdb->get_row( $this->wpdb->prepare( 'SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $style['carousel_register_style'] ), ARRAY_A );
+        $table = esc_sql( $this->parent_table ); // escape the table name
+		$styledata = $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT * FROM {$table} WHERE id = %d",
+				(int) $style['carousel_register_style']
+			),
+			ARRAY_A
+		);
 
         if ( ! is_array( $styledata ) ) :
             ?>
-            <p> Style Data not found. Kindly Check Carousel & Slider <a href="https://wpkindemos.com/imagehover/docs/hover-extension/carousel-slider/">Documentation</a>.</p>
+            <p> <?php esc_html_e( 'Style Data not found. Kindly Check Carousel & Slider', 'image-hover-effects-ultimate' ); ?> <a href="https://wpkindemos.com/imagehover/docs/hover-extension/carousel-slider/"><?php esc_html_e( 'Documentation', 'image-hover-effects-ultimate' ); ?></a>.</p>
             <?php
             return;
         endif;
-        $files = $this->wpdb->get_results( $this->wpdb->prepare( "SELECT * FROM $this->child_table WHERE styleid = %d", $style['carousel_register_style'] ), ARRAY_A );
+        $table = esc_sql( $this->child_table ); // escape table name
+		$files = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT * FROM {$table} WHERE styleid = %d",
+				(int) $style['carousel_register_style']
+			),
+			ARRAY_A
+		);
         $StyleName = explode( '-', ucfirst( $styledata['style_name'] ) );
         $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $StyleName[0] . '\Render\Effects' . $StyleName[1];
         new $cls( $styledata, $files, 'request' );
