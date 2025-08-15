@@ -10,18 +10,32 @@ trait Admin_helper {
     }
 
 	public function Flip_Create() {
-        $styleid = ( ! empty( $_GET['styleid'] ) ? (int) $_GET['styleid'] : '' );
-        if ( ! empty( $styleid ) && $styleid > 0 ) :
-            $style = $this->wpdb->get_row( $this->wpdb->prepare( 'SELECT style_name FROM ' . $this->parent_table . ' WHERE id = %d ', $styleid ), ARRAY_A );
-            $style = ucfirst( $style['style_name'] );
-            $cls = '\OXI_FLIP_BOX_PLUGINS\Inc\\' . $style;
-            if ( class_exists( $cls ) ) :
-                new $cls();
-            endif;
-        else :
-            new \OXI_FLIP_BOX_PLUGINS\Page\Create();
-        endif;
-    }
+		global $wpdb;
+
+		$styleid = ! empty( $_GET['styleid'] ) ? (int) $_GET['styleid'] : 0;
+
+		if ( $styleid > 0 ) {
+			// Escape table name properly
+			$table = esc_sql( $this->parent_table );
+
+			// Use $wpdb->prepare() safely
+			$style = $wpdb->get_row(
+				$wpdb->prepare( "SELECT style_name FROM {$table} WHERE id = %d", $styleid ),
+				ARRAY_A
+			);
+
+			if ( ! empty( $style['style_name'] ) ) {
+				$style_name = ucfirst( $style['style_name'] );
+				$cls = '\\OXI_FLIP_BOX_PLUGINS\\Inc\\' . $style_name;
+				if ( class_exists( $cls ) ) {
+					new $cls();
+				}
+			}
+		} else {
+			new \OXI_FLIP_BOX_PLUGINS\Page\Create();
+		}
+	}
+
 
     public function Flip_Addons() {
         new \OXI_FLIP_BOX_PLUGINS\Page\Addons();

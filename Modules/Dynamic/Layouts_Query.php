@@ -19,14 +19,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Layouts_Query {
 
-
-    /**
-     * Define $wpdb
-     *
-     * @since 9.3.0
-     */
-    public $wpdb;
-
     /**
      * Database Parent Table
      *
@@ -48,41 +40,79 @@ class Layouts_Query {
      */
     public $child_table;
 
+	public function __construct( $function = '', $rawdata = '', $args = '', $optional = '' ) {
+		// Only run if both function and rawdata are provided
+		if ( ! empty( $function ) && ! empty( $rawdata ) ) :
+
+			// Define table names
+			$this->parent_table = $GLOBALS['wpdb']->prefix . 'image_hover_ultimate_style';
+			$this->child_table  = $GLOBALS['wpdb']->prefix . 'image_hover_ultimate_list';
+
+			// Call the requested function dynamically
+			if ( method_exists( $this, $function ) ) {
+				return $this->{$function}( $rawdata, $args, $optional );
+			}
+
+		endif;
+	}
 
     public function __rest_api_post( $style, $args, $optional ) {
+		global $wpdb;
 
-        if ( ! is_array( $args ) ) :
-            $args = json_decode( stripslashes( $args ), true );
-        endif;
-        $args['offset'] = (int) $args['offset'] + ( ( (int) $optional - 1 ) * (int) $args['posts_per_page'] );
+		// Decode args if not array
+		if ( ! is_array( $args ) ) :
+			$args = json_decode( stripslashes( $args ), true );
+		endif;
 
-        if ( ! is_array( $style ) ) :
-            $style = json_decode( stripslashes( $style ), true );
-        endif;
-        $rawdata = $this->wpdb->get_row( $this->wpdb->prepare( 'SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $style['display_post_id'] ), ARRAY_A );
+		$args['offset'] = (int) $args['offset'] + ( ( (int) $optional - 1 ) * (int) $args['posts_per_page'] );
 
-        return $this->layouts_query( $rawdata, $args, $style );
-    }
-    public function layouts_query( $dbdata, $args, $style ) {
-        $postdata = $this->wpdb->get_results( $this->wpdb->prepare( "SELECT * FROM $this->child_table WHERE styleid = %d LIMIT %d, %d", $dbdata['id'], $args['offset'], $args['posts_per_page'] ), ARRAY_A );
+		// Decode style if not array
+		if ( ! is_array( $style ) ) :
+			$style = json_decode( stripslashes( $style ), true );
+		endif;
 
-        if ( count( $postdata ) != $args['posts_per_page'] ) :
-            echo 'Image Hover Empty Data';
-        elseif ( count( $postdata ) == 0 ) :
-            echo 'Image Hover Empty Data';
-        endif;
+		// Escape table name
+		$parent_table = esc_sql( $this->parent_table );
 
-        $StyleName = explode( '-', ucfirst( $dbdata['style_name'] ) );
-        $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $StyleName[0] . '\Render\Effects' . $StyleName[1];
-        new $cls( $dbdata, $postdata, 'request' );
-    }
-    public function __construct( $function = '', $rawdata = '', $args = '', $optional = '' ) {
-        if ( ! empty( $function ) && ! empty( $rawdata ) ) :
-            global $wpdb;
-            $this->wpdb = $wpdb;
-            $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
-            $this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
-            return $this->$function( $rawdata, $args, $optional );
-        endif;
-    }
+		// Fetch raw data safely
+		$rawdata = $wpdb->get_row(
+			$wpdb->prepare( "SELECT * FROM {$parent_table} WHERE id = %d", $style['display_post_id'] ),
+			ARRAY_A
+		);
+
+		return $this->layouts_query( $rawdata, $args, $style );
+	}
+
+	public function layouts_query( $dbdata, $args, $style ) {
+		global $wpdb;
+
+		// Escape table name
+		$child_table = esc_sql( $this->child_table );
+
+		// Fetch posts safely with proper placeholders
+		$postdata = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT * FROM {$child_table} WHERE styleid = %d LIMIT %d, %d",
+				(int) $dbdata['id'],
+				(int) $args['offset'],
+				(int) $args['posts_per_page']
+			),
+			ARRAY_A
+		);
+
+		// Handle empty data
+		if ( count( $postdata ) != (int) $args['posts_per_page'] || count( $postdata ) == 0 ) :
+			echo esc_html__( 'Image Hover Empty Data', 'image-hover-effects-ultimate' );
+			return;
+		endif;
+
+		// Generate class name dynamically
+		$StyleName = explode( '-', ucfirst( $dbdata['style_name'] ) );
+		$cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $StyleName[0] . '\Render\Effects' . $StyleName[1];
+
+		if ( class_exists( $cls ) ) :
+			new $cls( $dbdata, $postdata, 'request' );
+		endif;
+	}
+
 }

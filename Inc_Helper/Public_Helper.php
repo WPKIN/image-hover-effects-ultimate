@@ -36,17 +36,36 @@ trait Public_Helper {
         return $files;
     }
 
-    public function shortcode_render( $styleid, $user ) {
-        if ( ! empty( (int) $styleid ) && ! empty( $user ) ) :
-            $style = $this->wpdb->get_row( $this->wpdb->prepare( 'SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $styleid ), ARRAY_A );
-            $style_name = ucfirst( $style['style_name'] );
-            $child = $this->wpdb->get_results( $this->wpdb->prepare( "SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid ), ARRAY_A );
-            $C = 'OXI_FLIP_BOX_PLUGINS\Public_Render\\' . $style_name;
-            if ( class_exists( $C ) ) :
-                new $C( $style, $child, $user );
-            endif;
-        endif;
-    }
+	public function shortcode_render( $styleid, $user ) {
+		if ( ! empty( (int) $styleid ) && ! empty( $user ) ) :
+			global $wpdb;
+
+			// Escape table names
+			$parent_table = esc_sql( $this->parent_table );
+			$child_table  = esc_sql( $this->child_table );
+
+			// Get parent style
+			$style = $wpdb->get_row(
+				$wpdb->prepare( "SELECT * FROM {$parent_table} WHERE id = %d", $styleid ),
+				ARRAY_A
+			);
+
+			if ( ! empty( $style['style_name'] ) ) :
+				$style_name = ucfirst( $style['style_name'] );
+
+				// Get child elements
+				$child = $wpdb->get_results(
+					$wpdb->prepare( "SELECT * FROM {$child_table} WHERE styleid = %d ORDER BY id ASC", $styleid ),
+					ARRAY_A
+				);
+
+				$C = 'OXI_FLIP_BOX_PLUGINS\Public_Render\\' . $style_name;
+				if ( class_exists( $C ) ) :
+					new $C( $style, $child, $user );
+				endif;
+			endif;
+		endif;
+	}
 
 	public function font_familly_charecter( $data ) {
 

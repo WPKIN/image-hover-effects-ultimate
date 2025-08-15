@@ -94,14 +94,16 @@ class Bootstrap {
     }
 
     /**
-     * Load Textdomain
-     *
-     * @since 9.3.0
-     * @access public
-     */
-    public function i18n() {
-        load_plugin_textdomain( 'image-hover-effects-ultimate' );
-    }
+	 * Load plugin textdomain for translations.
+	 *
+	 * @since 9.3.0
+	 */
+	public function i18n() {
+		load_textdomain(
+			'image-hover-effects-ultimate',
+			plugin_dir_path( __FILE__ ) . 'languages/image-hover-effects-ultimate-' . get_locale() . '.mo'
+		);
+	}
 
     /**
      * Shortcode loader
