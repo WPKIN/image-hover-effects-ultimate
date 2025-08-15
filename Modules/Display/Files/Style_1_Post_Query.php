@@ -56,18 +56,35 @@ class Style_1_Post_Query {
     }
 
     public function post_query( $rawdata, $args, $style ) {
+		global $wpdb;
         $styleid = $style['display_post_style'];
-        $styledata = $this->wpdb->get_row( $this->wpdb->prepare( 'SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $styleid ), ARRAY_A );
+        $table   = esc_sql( $this->parent_table ); // Escape table name
+
+		$styledata = $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT * FROM {$table} WHERE id = %d",
+				(int) $styleid
+			),
+			ARRAY_A
+		);
         if ( ! is_array( $styledata ) ) :
-            ?><p> Style Data not found. Kindly Check Display Post <a href="https://wpkindemos.com/imagehover/docs/hover-extension/display-post/">Documentation</a>.</p>
+            ?><p> <?php esc_html_e( 'Style Data not found. Kindly Check Display Post', 'image-hover-effects-ultimate' ); ?> <a href="https://wpkindemos.com/imagehover/docs/hover-extension/display-post/"><?php esc_html_e( 'Documentation', 'image-hover-effects-ultimate' ); ?></a>.</p>
             <?php
             return;
         endif;
 
-        $child = $this->wpdb->get_row( $this->wpdb->prepare( "SELECT * FROM $this->child_table WHERE styleid = %d", $styleid ), ARRAY_A );
+        $child_table = esc_sql( $this->child_table ); // Escape table name
+		$child = $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT * FROM {$child_table} WHERE styleid = %d",
+				(int) $styleid
+			),
+			ARRAY_A
+		);
+
         if ( ! is_array( $child ) ) :
             ?>
-            <p>Set Initial Data How to Decorate your Display Post. Kindly Check Display Post <a href="https://wpkindemos.com/imagehover/docs/hover-extension/display-post/">Documentation</a>.</p>
+            <p><?php esc_html_e( 'Set Initial Data How to Decorate your Display Post. Kindly Check Display Post', 'image-hover-effects-ultimate' ); ?> <a href="https://wpkindemos.com/imagehover/docs/hover-extension/display-post/"><?php esc_html_e( 'Documentation', 'image-hover-effects-ultimate' ); ?></a>.</p>
             <?php
             return;
         endif;
@@ -87,21 +104,17 @@ class Style_1_Post_Query {
                 $title = get_the_title();
                 $utf8_title = mb_convert_encoding( $title, 'UTF-8', mb_detect_encoding( $title ) );
                 $rawdata['image_hover_heading'] = $utf8_title;
-                $rawdata['image_hover_description'] = implode( ' ', array_slice( explode( ' ', strip_tags( strip_shortcodes( get_the_excerpt() ? get_the_excerpt() : get_the_content() ) ) ), 0, $style['display_post_excerpt'] ) ) . ' ...';
+                $rawdata['image_hover_description'] = implode( ' ', array_slice( explode( ' ', wp_strip_all_tags( strip_shortcodes( get_the_excerpt() ? get_the_excerpt() : get_the_content() ) ) ), 0, $style['display_post_excerpt'] ) ) . ' ...';
                 $rawdata['image_hover_button_link-url'] = get_the_permalink();
                 $postdata[ $i ]['rawdata'] = json_encode( $rawdata, JSON_UNESCAPED_UNICODE );
                 ++$i;
             }
         } else {
-            ?>
-            Image Hover Empty Data 
-            <?php
+            esc_html_e( 'Image Hover Empty Data ', 'image-hover-effects-ultimate' );
             return;
         }
         if ( count( $postdata ) != $args['posts_per_page'] ) :
-            ?>
-            Image Hover Empty Data 
-            <?php
+            esc_html_e( 'Image Hover Empty Data ', 'image-hover-effects-ultimate' );
             return;
         endif;
         wp_reset_postdata();

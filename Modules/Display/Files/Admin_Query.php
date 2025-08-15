@@ -114,10 +114,25 @@ trait Admin_Query {
     }
 
     public function post_style() {
+		global $wpdb;
         $g = 'general%';
         $c = 'caption%';
         $s = 'square%';
-        $alldata = $this->wpdb->get_results( $this->wpdb->prepare( "SELECT id, name FROM $this->parent_table WHERE style_name LIKE %s OR style_name LIKE %s OR style_name LIKE %s ORDER by id ASC", $g, $s, $c ), ARRAY_A );
+        
+		$table = esc_sql( $this->parent_table ); // Escape table name
+		$alldata = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT id, name FROM {$table} 
+				WHERE style_name LIKE %s 
+				OR style_name LIKE %s 
+				OR style_name LIKE %s 
+				ORDER BY id ASC",
+				$g,
+				$s,
+				$c
+			),
+			ARRAY_A
+		);
         $st = [];
         foreach ( $alldata as $k => $value ) {
             $st[ $value['id'] ] = $value['name'] != '' ? $value['name'] : 'Shortcode ID ' . $value['id'];

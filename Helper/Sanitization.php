@@ -697,7 +697,7 @@ trait Sanitization {
                             <div class="shortcode-form-units-choices">
                                 <?php
                                 foreach ($arg['range'] as $key => $val) {
-                                    $rand = rand(10000, 233333333);
+                                    $rand = wp_rand(10000, 233333333);
                                     ?>
                                     <input id="<?php echo esc_attr($id); ?>-choices-<?php echo esc_attr($rand); ?>" type="radio" name="<?php echo esc_attr($id); ?>-choices"  value="<?php echo esc_html($key); ?>" <?php
                                     if ($key == $unit):
@@ -1104,7 +1104,7 @@ trait Sanitization {
                             <div class="shortcode-form-units-choices">
                                 <?php
                                 foreach ($arg['range'] as $key => $val) {
-                                    $rand = rand(10000, 233333333);
+                                    $rand = wp_rand(10000, 233333333);
                                     ?>
 
                                     <input id="<?php echo esc_attr($id); ?>-choices-<?php echo esc_attr($rand); ?>" type="radio" name="<?php echo esc_attr($id); ?>-choices"  value="<?php echo esc_html($key); ?>" <?php

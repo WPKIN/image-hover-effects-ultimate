@@ -163,10 +163,19 @@ trait Admin_helper {
     }
 
     public function Image_Parent() {
+		global $wpdb;
         $effects = ( ! empty( $_GET['effects'] ) ? ucfirst( sanitize_text_field( $_GET['effects'] ) ) : '' );
         $styleid = ( ! empty( $_GET['styleid'] ) ? (int) $_GET['styleid'] : '' );
         if ( ! empty( $effects ) && ! empty( $styleid ) ) :
-            $style = $this->wpdb->get_row( $this->wpdb->prepare( 'SELECT style_name FROM ' . $this->parent_table . ' WHERE id = %d ', $styleid ), ARRAY_A );
+		$parent_table = esc_sql( $this->parent_table ); // Escape table name
+
+		$style = $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT style_name FROM {$parent_table} WHERE id = %d",
+				(int) $styleid
+			),
+			ARRAY_A
+		);
             $name = explode( '-', $style['style_name'] );
             if ( $effects != ucfirst( $name[0] ) ) :
                 wp_die( esc_html( 'Invalid URL.' ) );
