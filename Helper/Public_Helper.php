@@ -80,16 +80,15 @@ trait Public_Helper {
                     new $C( $style, [], $user );
                 endif;
             else :
-            
-			$child_table = esc_sql( $this->child_table ); // Escape table name
+				$child_table = esc_sql( $this->child_table ); // Escape table name
 
-			$child = $wpdb->get_results(
-				$wpdb->prepare(
-					"SELECT * FROM {$child_table} WHERE styleid = %d ORDER BY id ASC",
-					(int) $styleid
-				),
-				ARRAY_A
-			);
+				$child = $wpdb->get_results(
+                    $wpdb->prepare(
+                        "SELECT * FROM {$child_table} WHERE styleid = %d ORDER BY id ASC",
+                        (int) $styleid
+                    ),
+                    ARRAY_A
+				);
 
                 $name = explode( '-', ucfirst( $style['style_name'] ) );
                 $C = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst( $name[0] ) . '\Render\Effects' . $name[1];

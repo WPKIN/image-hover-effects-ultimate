@@ -118,7 +118,7 @@ trait Admin_Query {
         $g = 'general%';
         $c = 'caption%';
         $s = 'square%';
-        
+
 		$table = esc_sql( $this->parent_table ); // Escape table name
 		$alldata = $wpdb->get_results(
 			$wpdb->prepare(

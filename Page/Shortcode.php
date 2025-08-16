@@ -178,9 +178,14 @@ class Shortcode {
         $data = str_replace( '+', ' ', $data );
         echo esc_html( ucwords( $data ) );
     }
-    public function database_data() {
-        return $this->wpdb->get_results( "SELECT * FROM  $this->parent_table ORDER BY id DESC", ARRAY_A );
-    }
+
+	public function database_data() {
+		global $wpdb;
+		$table = esc_sql( $this->parent_table ); // safely escape dynamic table name
+
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		return $wpdb->get_results( "SELECT * FROM {$table} ORDER BY id DESC", ARRAY_A );
+	}
 
     /**
      * Generate safe path
@@ -193,45 +198,55 @@ class Shortcode {
     }
 
     public function manual_import_style() {
-        if ( ! empty( $_REQUEST['_wpnonce'] ) ) {
-            $nonce = $_REQUEST['_wpnonce'];
-        }
+		// Make sure the request is POST
+		if ( ! empty( $_POST['importdatasubmit'] ) ) {
 
-        if ( ! empty( $_POST['importdatasubmit'] ) && sanitize_text_field( $_POST['importdatasubmit'] ) == 'Save' ) {
-            if ( ! wp_verify_nonce( $nonce, 'image-hover-effects-ultimate-import' ) ) {
-                die( 'You do not have sufficient permissions to access this page.' );
-            } elseif ( isset( $_FILES['importimagehoverultimatefile'] ) ) {
-                    $filename = $_FILES['importimagehoverultimatefile']['name'];
+			// Unsplash and sanitize the submit button
+			$import_submit = sanitize_text_field( wp_unslash( $_POST['importdatasubmit'] ) );
 
-				if ( ! current_user_can( 'upload_files' ) ) :
-					wp_die( esc_html__( 'You do not have permission to upload files.', 'image-hover-effects-ultimate' ) );
-                    endif;
+			if ( $import_submit === 'Save' ) {
 
-                    $allowedMimes = [
-                        'json' => 'text/plain',
-                    ];
+				// Nonce: unslash and sanitize
+				$nonce = ! empty( $_POST['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ) : '';
 
-                    $fileInfo = wp_check_filetype( basename( $_FILES['importimagehoverultimatefile']['name'] ), $allowedMimes );
-                    if ( empty( $fileInfo['ext'] ) ) {
-                        wp_die( esc_html__( 'You do not have permission to upload files.', 'image-hover-effects-ultimate' ) );
-                    }
+				if ( ! wp_verify_nonce( $nonce, 'image-hover-effects-ultimate-import' ) ) {
+					wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'image-hover-effects-ultimate' ) );
+				}
 
-                    $content = json_decode( file_get_contents( $_FILES['importimagehoverultimatefile']['tmp_name'] ), true );
+				// Check if file is uploaded
+				if ( ! empty( $_FILES['importimagehoverultimatefile'] ) 
+					&& isset( $_FILES['importimagehoverultimatefile']['name'], $_FILES['importimagehoverultimatefile']['tmp_name'] ) ) {
 
-                    if ( empty( $content ) ) {
-                        return new \WP_Error( 'file_error', 'Invalid File' );
-                    }
-                    $style = $content['style'];
-                    if ( ! is_array( $style ) ) {
-                        return new \WP_Error( 'file_error', 'Invalid Content In File' );
-                    }
-                    $ImportApi = new \OXI_IMAGE_HOVER_PLUGINS\Classes\ImageApi();
-                    $new_slug = $ImportApi->post_json_import( $content );
-                    echo '<script type="text/javascript">document.location.href = ' . wp_json_encode( $new_slug ) . ';</script>';
-                    exit;
-            }
-        }
-    }
+					$filename = sanitize_file_name( $_FILES['importimagehoverultimatefile']['name'] );
+					$tmp_name = sanitize_text_field( wp_unslash( $_FILES['importimagehoverultimatefile']['tmp_name'] ) );
+
+					if ( ! current_user_can( 'upload_files' ) ) {
+						wp_die( esc_html__( 'You do not have permission to upload files.', 'image-hover-effects-ultimate' ) );
+					}
+
+					$allowedMimes = [ 'json' => 'application/json' ];
+					$fileInfo     = wp_check_filetype( $filename, $allowedMimes );
+
+					if ( empty( $fileInfo['ext'] ) ) {
+						wp_die( esc_html__( 'You can only upload JSON files.', 'image-hover-effects-ultimate' ) );
+					}
+
+					$content = json_decode( file_get_contents( $tmp_name ), true );
+
+					if ( empty( $content ) || ! isset( $content['style'] ) || ! is_array( $content['style'] ) ) {
+						return new \WP_Error( 'file_error', esc_html__( 'Invalid content in file.', 'image-hover-effects-ultimate' ) );
+					}
+
+					$ImportApi = new \OXI_IMAGE_HOVER_PLUGINS\Classes\ImageApi();
+					$new_slug  = $ImportApi->post_json_import( $content );
+
+					echo '<script type="text/javascript">document.location.href = ' . wp_json_encode( $new_slug ) . ';</script>';
+					exit;
+				}
+			}
+		}
+	}
+
     public function created_shortcode() {
 		?>
         <div class="oxi-addons-row">
