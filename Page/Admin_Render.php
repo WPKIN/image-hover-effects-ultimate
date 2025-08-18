@@ -382,7 +382,6 @@ abstract class Admin_Render {
         endif;
 
         $custom .= '|Arial|Helvetica+Neue|Courier+New|Times+New+Roman|Comic+Sans+MS|Verdana|Impact|cursive|inherit';
-
         $data = '(function($){
 
                                 var fontsLoaded = {};
@@ -669,10 +668,7 @@ abstract class Admin_Render {
                                                                 if (fontsLoaded[font]) { return; }
                                                                 fontsLoaded[font] = true;
 
-                                                                if (this.options.googleFonts.indexOf(font) > -1) {
-                                                                        $(\'link:last\').after(\'<link href="\' + this.options.googleApi + font + \'" rel="stylesheet" type="text/css">\');
-                                                                }
-                                                                else if (this.options.localFonts.indexOf(font) > -1) {
+                                                                if (this.options.localFonts.indexOf(font) > -1) {
                                                                         font = this.toReadable(font);
                                                                         $(\'head\').append("<style> @font-face { font-family:\'" + font + "\'; font-style:normal; font-weight:400; src:local(\'" + font + "\'), url(\'" + this.options.localFontsUrl + font + ".woff\') format(\'woff\'); } </style>");
                                                                 }

@@ -67,6 +67,7 @@ class Style_1_Post_Query {
 			),
 			ARRAY_A
 		);
+
         if ( ! is_array( $styledata ) ) :
             ?><p> <?php esc_html_e( 'Style Data not found. Kindly Check Display Post', 'image-hover-effects-ultimate' ); ?> <a href="https://wpkindemos.com/imagehover/docs/hover-extension/display-post/"><?php esc_html_e( 'Documentation', 'image-hover-effects-ultimate' ); ?></a>.</p>
             <?php
@@ -89,6 +90,7 @@ class Style_1_Post_Query {
             return;
         endif;
         $demo = json_decode( stripslashes( $child['rawdata'] ), true );
+
         $query = new \WP_Query( $args );
         $postdata = [];
         $i = 1;
@@ -113,10 +115,7 @@ class Style_1_Post_Query {
             esc_html_e( 'Image Hover Empty Data ', 'image-hover-effects-ultimate' );
             return;
         }
-        if ( count( $postdata ) != $args['posts_per_page'] ) :
-            esc_html_e( 'Image Hover Empty Data ', 'image-hover-effects-ultimate' );
-            return;
-        endif;
+
         wp_reset_postdata();
         $StyleName = explode( '-', ucfirst( $styledata['style_name'] ) );
         $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $StyleName[0] . '\Render\Effects' . $StyleName[1];

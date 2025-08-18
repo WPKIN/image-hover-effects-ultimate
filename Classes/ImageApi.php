@@ -59,6 +59,8 @@ class ImageApi {
 			'href' => [],
 			'rel' => [],
 			'title' => [],
+			'data-src' => [],
+			'data-sub-html' => [],
 		],
 		'abbr' => [
 			'title' => [],
@@ -101,7 +103,9 @@ class ImageApi {
 		'em' => [],
 		'h1' => [],
 		'h2' => [],
-		'h3' => [],
+		'h3' => [
+			'class' => []
+		],
 		'h4' => [],
 		'h5' => [],
 		'h6' => [],
