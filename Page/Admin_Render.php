@@ -147,9 +147,24 @@ abstract class Admin_Render {
     public $repeater;
     public $ShowOnAdvanceOnly = true;
 
+    public function __construct( $type = '' ) {
+		global $wpdb;
+		$this->wpdb         = $wpdb;
+		$this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
+		$this->child_table  = $this->wpdb->prefix . 'image_hover_ultimate_list';
+		$this->import_table = $this->wpdb->prefix . 'oxi_div_import';
 
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$this->oxiid = isset( $_GET['styleid'] ) ? absint( $_GET['styleid'] ) : '';
 
+		$this->WRAPPER    = '.oxi-image-hover-wrapper-' . $this->oxiid;
+		$this->CSSWRAPPER = '.oxi-image-hover-wrapper-' . $this->oxiid . ' .oxi-addons-row';
 
+		if ( 'admin' !== $type ) {
+			$this->hooks();
+			$this->render();
+		}
+	}
 
     /**
      * Template Modal Form Data
@@ -327,22 +342,20 @@ abstract class Admin_Render {
 
 		$font = wp_json_encode( $this->font );
 
-		// Make sure the table name is safe (hardcoded)
-		$table = esc_sql( $this->parent_table );
-
 		// Update stylesheet
 		$wpdb->query(
 			$wpdb->prepare(
-				"UPDATE {$table} SET stylesheet = %s WHERE id = %d",
+				'UPDATE ' . esc_sql( $this->parent_table ) . ' SET stylesheet = %s WHERE id = %d',
 				$fullcssfile,
 				$styleid
 			)
 		);
 
 		// Update font_family
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$wpdb->query(
 			$wpdb->prepare(
-				"UPDATE {$table} SET font_family = %s WHERE id = %d",
+				'UPDATE ' . esc_sql( $this->parent_table ) . ' SET font_family = %s WHERE id = %d',
 				$font,
 				$styleid
 			)
@@ -354,10 +367,9 @@ abstract class Admin_Render {
 
     public function import_font_family() {
 		global $wpdb;
-        $table = esc_sql( $this->import_table ); // escape table name
 		$this->font_family = $wpdb->get_results(
 			$wpdb->prepare(
-				"SELECT * FROM {$table} WHERE type = %s ORDER BY id ASC",
+				'SELECT * FROM ' . esc_sql( $this->import_table ) . ' WHERE type = %s ORDER BY id ASC',
 				'shortcode-addons' // value placeholder
 			),
 			ARRAY_A
@@ -850,21 +862,6 @@ abstract class Admin_Render {
 		<?php
     }
 
-    public function __construct( $type = '' ) {
-        global $wpdb;
-        $this->wpdb = $wpdb;
-        $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
-        $this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
-        $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
-        $this->oxiid = ( ! empty( $_GET['styleid'] ) ? (int) $_GET['styleid'] : '' );
-        $this->WRAPPER = '.oxi-image-hover-wrapper-' . $this->oxiid;
-        $this->CSSWRAPPER = '.oxi-image-hover-wrapper-' . $this->oxiid . ' .oxi-addons-row';
-
-        if ( $type != 'admin' ) {
-            $this->hooks();
-            $this->render();
-        }
-    }
     /**
      * Template Information
      * Parent Sector where users will get Information
@@ -924,19 +921,15 @@ abstract class Admin_Render {
 		$this->admin_elements_frontend_loader();
 		$this->admin_editor_load();
 
-		// Escape table names
-		$parent_table = esc_sql( $this->parent_table );
-		$child_table  = esc_sql( $this->child_table );
-
 		// Fetch main style data
 		$this->dbdata = $wpdb->get_row(
-			$wpdb->prepare( "SELECT * FROM {$parent_table} WHERE id = %d", $this->oxiid ),
+			$wpdb->prepare( 'SELECT * FROM ' . esc_sql( $this->parent_table ) . ' WHERE id = %d', $this->oxiid ),
 			ARRAY_A
 		);
 
 		// Fetch child data
 		$this->child = $wpdb->get_results(
-			$wpdb->prepare( "SELECT * FROM {$child_table} WHERE styleid = %d ORDER BY id ASC", $this->oxiid ),
+			$wpdb->prepare( 'SELECT * FROM ' . esc_sql( $this->child_table ) . ' WHERE styleid = %d ORDER BY id ASC', $this->oxiid ),
 			ARRAY_A
 		);
 

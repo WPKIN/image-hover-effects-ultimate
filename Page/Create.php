@@ -65,11 +65,26 @@ class Create {
     use Public_Helper;
     use CSS_JS_Loader;
 
+	public function __construct() {
+		global $wpdb;
+		$this->wpdb = $wpdb;
+		$this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
+		$this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
+		$this->import_table = $this->wpdb->prefix . 'oxi_div_import';
 
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$this->effects = isset( $_GET['effects'] ) ? sanitize_text_field( wp_unslash( $_GET['effects'] ) ) : '';
+
+		$this->oxitype = $this->effects . '-ultimate';
+		$this->CSSJS_load();
+		$this->Render();
+	}
 
     public function Render() {
-        $import = ( ! empty( $_GET['import'] ) ? sanitize_text_field( $_GET['import'] ) : '' );
-        if ( $import == 'templates' ) :
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$import = ( ! empty( $_GET['import'] ) ? sanitize_text_field( wp_unslash( $_GET['import'] ) ) : '' );
+
+		if ( $import == 'templates' ) :
 			?>
             <div class="oxi-addons-row">
                 <?php
@@ -173,13 +188,10 @@ class Create {
 
 		global $wpdb;
 
-		// Escape table name
-		$table = esc_sql( $this->import_table );
-
 		// Fetch existing templates for this oxitype
 		$template = $this->wpdb->get_results(
 			$wpdb->prepare(
-				"SELECT * FROM {$table} WHERE type = %s ORDER BY id DESC",
+				'SELECT * FROM ' . esc_sql( $this->import_table ) . ' WHERE type = %s ORDER BY id DESC',
 				$this->oxitype
 			),
 			ARRAY_A
@@ -190,7 +202,7 @@ class Create {
 			foreach ( $this->pre_active as $value ) {
 				$wpdb->query(
 					$wpdb->prepare(
-						"INSERT INTO {$table} (type, name) VALUES (%s, %s)",
+						'INSERT INTO ' . esc_sql( $this->import_table ) . ' (type, name) VALUES (%s, %s)',
 						$this->oxitype,
 						$value
 					)
@@ -416,18 +428,6 @@ class Create {
 		}
 		ksort( $files );
 		return $files;
-	}
-
-	public function __construct() {
-		global $wpdb;
-		$this->wpdb = $wpdb;
-		$this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
-		$this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
-		$this->import_table = $this->wpdb->prefix . 'oxi_div_import';
-		$this->effects = ( ! empty( $_GET['effects'] ) ? sanitize_text_field( $_GET['effects'] ) : '' );
-		$this->oxitype = $this->effects . '-ultimate';
-		$this->CSSJS_load();
-		$this->Render();
 	}
 
 	public function CSSJS_load() {

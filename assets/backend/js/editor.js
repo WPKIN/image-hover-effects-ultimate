@@ -60,8 +60,6 @@ jQuery.noConflict();
             return
         }
 
-
-        console.log(rawdata);
         $('#manual-style-functionname').val(functionname);
         $('#manual-style-rawdata').html(rawdata);
         $('#manual-style-styleid').val(styleid);

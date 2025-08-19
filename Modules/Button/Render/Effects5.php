@@ -1,5 +1,4 @@
 <?php
-
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Button\Render;
 
 if ( ! defined( 'ABSPATH' ) ) {

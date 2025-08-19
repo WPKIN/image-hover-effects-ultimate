@@ -214,9 +214,8 @@ class Shortcode {
 				}
 
 				// Check if file is uploaded
-				if ( ! empty( $_FILES['importimagehoverultimatefile'] ) 
+				if ( ! empty( $_FILES['importimagehoverultimatefile'] )
 					&& isset( $_FILES['importimagehoverultimatefile']['name'], $_FILES['importimagehoverultimatefile']['tmp_name'] ) ) {
-
 					$filename = sanitize_file_name( $_FILES['importimagehoverultimatefile']['name'] );
 					$tmp_name = sanitize_text_field( wp_unslash( $_FILES['importimagehoverultimatefile']['tmp_name'] ) );
 
