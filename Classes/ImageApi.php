@@ -144,6 +144,23 @@ class ImageApi {
 		],
 	];
 
+	/**
+     * Constructor of plugin class
+     *
+     * @since 9.3.0
+     */
+    public function __construct( $rawdata = '', $styleid = '', $childid = '' ) {
+        global $wpdb;
+        $wpdb = $wpdb;
+        $this->parent_table = $wpdb->prefix . 'image_hover_ultimate_style';
+        $this->child_table = $wpdb->prefix . 'image_hover_ultimate_list';
+        $this->import_table = $wpdb->prefix . 'oxi_div_import';
+        $this->rawdata = $rawdata;
+        $this->styleid = $styleid;
+        $this->childid = $childid;
+        $this->build_api();
+    }
+
     public function get_permissions_check() {
         $transient = get_transient( 'oxi_image_user_permission_role' );
         if ( false === $transient ) {
@@ -952,18 +969,22 @@ class ImageApi {
 			);
 		}
 
-        $classname = isset( $_POST['class'] ) ? '\\' . str_replace( '\\\\', '\\', sanitize_text_field( $_POST['class'] ) ) : '';
+        $classname = isset( $_POST['class'] ) ? '\\' . str_replace( '\\\\', '\\', sanitize_text_field( wp_unslash( $_POST['class'] ) ) ) : '';
+
         if ( strpos( $classname, 'OXI_IMAGE_HOVER_PLUGINS' ) === false ) :
             return new WP_REST_Request( 'Invalid URL', 422 );
         endif;
-        $functionname = isset( $_POST['functionname'] ) ? sanitize_text_field( $_POST['functionname'] ) : '';
+        $functionname = isset( $_POST['functionname'] ) ? sanitize_text_field( wp_unslash( $_POST['functionname'] ) ) : '';
+
         if ( $functionname != '__rest_api_post' ) :
             return new WP_REST_Request( 'Invalid URL', 422 );
         endif;
-        $rawdata = isset( $_POST['rawdata'] ) ? sanitize_post( $_POST['rawdata'] ) : '';
-        $args = isset( $_POST['args'] ) ? sanitize_post( $_POST['args'] ) : '';
-        $optional = isset( $_POST['optional'] ) ? sanitize_post( $_POST['optional'] ) : '';
-        if ( ! empty( $classname ) && ! empty( $functionname ) && class_exists( $classname ) ) :
+        
+		$rawdata  = isset( $_POST['rawdata'] ) ? sanitize_text_field( wp_unslash( $_POST['rawdata'] ) ) : '';
+        $args     = isset( $_POST['args'] ) && is_array( $_POST['args'] ) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['args'] ) ) : [];
+        $optional = isset( $_POST['optional'] ) ? sanitize_text_field( wp_unslash( $_POST['optional'] ) ) : '';
+        
+		if ( ! empty( $classname ) && ! empty( $functionname ) && class_exists( $classname ) ) :
             $CLASS = new $classname();
             $CLASS->__construct( $functionname, $rawdata, $args, $optional );
         endif;
@@ -976,23 +997,6 @@ class ImageApi {
         }
 
         return self::$instance;
-    }
-
-    /**
-     * Constructor of plugin class
-     *
-     * @since 9.3.0
-     */
-    public function __construct( $rawdata = '', $styleid = '', $childid = '' ) {
-        global $wpdb;
-        $wpdb = $wpdb;
-        $this->parent_table = $wpdb->prefix . 'image_hover_ultimate_style';
-        $this->child_table = $wpdb->prefix . 'image_hover_ultimate_list';
-        $this->import_table = $wpdb->prefix . 'oxi_div_import';
-        $this->rawdata = $rawdata;
-        $this->styleid = $styleid;
-        $this->childid = $childid;
-        $this->build_api();
     }
 
     public function build_api() {
