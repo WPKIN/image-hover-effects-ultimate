@@ -2,10 +2,10 @@
 Contributors: wpkin, richardmallick
 Donate link:  https://wpkin.com
 Tags: responsive image effects, awesome css3 effects, awesome image effects,  css3 effects, top image effects for wordpress. 
-Requires at least: 3.0.1
-Stable tag: 9.10.2
+Requires at least: 6.2
 Tested up to: 6.8
-Requires PHP: 5.4
+Requires PHP: 7.4
+Stable tag: 9.10.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -275,7 +275,12 @@ Its too easy Chose your style from Effects List and click at Clone.
 
 
 == Changelog ==
-== Upgrade Notice ==
+
+= 9.10.3 = 
+* Fixed all reported security issues.
+* Improved input sanitization and escaping throughout the plugin.
+* Updated database queries to use $wpdb->prepare() for better security.
+* Minor performance and code quality improvements.
 
 = 9.10.2 = 
 *Fixed Demo image not displaying issue.
