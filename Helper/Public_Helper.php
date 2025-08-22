@@ -41,7 +41,7 @@ trait Public_Helper {
     }
 
 	public function font_familly_charecter( $data ) {
-        wp_enqueue_style( '' . $data . '', 'https://fonts.googleapis.com/css?family=' . $data . '' );
+        wp_enqueue_style( '' . $data . '', 'https://fonts.googleapis.com/css?family=' . $data . '', false, OXI_IMAGE_HOVER_PLUGIN_VERSION );
         $data = str_replace( '+', ' ', $data );
         $data = explode( ':', $data );
         $data = $data[0];
@@ -52,11 +52,10 @@ trait Public_Helper {
     public function shortcode_render( $styleid, $user ) {
 		global $wpdb;
         if ( ! empty( $styleid ) && ! empty( $user ) && (int) $styleid ) :
-			$parent_table = esc_sql( $this->parent_table ); // Escape table name
 
 			$style = $wpdb->get_row(
 				$wpdb->prepare(
-					"SELECT * FROM {$parent_table} WHERE id = %d",
+					"SELECT * FROM " . esc_sql( $this->parent_table ) . " WHERE id = %d",
 					(int) $styleid
 				),
 				ARRAY_A
@@ -80,11 +79,10 @@ trait Public_Helper {
                     new $C( $style, [], $user );
                 endif;
             else :
-				$child_table = esc_sql( $this->child_table ); // Escape table name
 
 				$child = $wpdb->get_results(
                     $wpdb->prepare(
-                        "SELECT * FROM {$child_table} WHERE styleid = %d ORDER BY id ASC",
+                        "SELECT * FROM " . esc_sql( $this->child_table ) . " WHERE styleid = %d ORDER BY id ASC",
                         (int) $styleid
                     ),
                     ARRAY_A
@@ -126,7 +124,7 @@ trait Public_Helper {
         $faversion = get_option( 'oxi_addons_font_awesome_version' );
         $faversion = explode( '||', $faversion );
         if ( $fadata != 'no' ) {
-            wp_enqueue_style( 'font-awesome-' . $faversion[0], $faversion[1] );
+            wp_enqueue_style( 'font-awesome-' . $faversion[0], $faversion[1], false, OXI_IMAGE_HOVER_PLUGIN_VERSION );
         }
         $files = '<i class="' . esc_attr( $data ) . ' oxi-icons"></i>';
         return $files;

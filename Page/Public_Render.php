@@ -291,14 +291,14 @@ class Public_Render {
             return;
         endif;
         foreach ( $data as $value ) {
-            wp_enqueue_style( '' . $value . '', 'https://fonts.googleapis.com/css?family=' . $value . '' );
+            wp_enqueue_style( '' . $value . '', 'https://fonts.googleapis.com/css?family=' . $value . '', false, OXI_IMAGE_HOVER_PLUGIN_VERSION );
         }
     }
 
     public function font_familly( $data = '' ) {
         $api = get_option( 'oxi_addons_google_font' );
         if ( $api != 'no' ) :
-            wp_enqueue_style( '' . $data . '', 'https://fonts.googleapis.com/css?family=' . $data . '' );
+            wp_enqueue_style( '' . $data . '', 'https://fonts.googleapis.com/css?family=' . $data . '', false, OXI_IMAGE_HOVER_PLUGIN_VERSION );
         endif;
         $data = str_replace( '+', ' ', $data );
         $data = explode( ':', $data );

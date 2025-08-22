@@ -13,7 +13,7 @@ trait CSS_JS_Loader {
 
     public function loader_font_familly_validation( $data = [] ) {
         foreach ( $data as $value ) {
-            wp_enqueue_style( '' . $value . '', 'https://fonts.googleapis.com/css?family=' . $value . '' );
+            wp_enqueue_style( '' . $value . '', 'https://fonts.googleapis.com/css?family=' . $value . '', false, OXI_IMAGE_HOVER_PLUGIN_VERSION );
         }
     }
 

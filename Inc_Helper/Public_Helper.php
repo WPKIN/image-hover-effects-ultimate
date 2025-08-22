@@ -30,7 +30,7 @@ trait Public_Helper {
         $faversion = get_option( 'oxi_addons_font_awesome_version' );
         $faversion = explode( '||', $faversion );
         if ( $fadata != 'no' ) {
-            wp_enqueue_style( 'font-awesome-' . $faversion[0], $faversion[1] );
+            wp_enqueue_style( 'font-awesome-' . $faversion[0], $faversion[1], false, OXI_IMAGE_HOVER_PLUGIN_VERSION );
         }
         $files = '<i class="' . $data . ' oxi-icons"></i>';
         return $files;
@@ -78,7 +78,7 @@ trait Public_Helper {
             'inherit' => '',
         ];
         if ( $check != 'no' && ! array_key_exists( $data, $custom ) ) :
-            wp_enqueue_style( '' . $data . '', 'https://fonts.googleapis.com/css?family=' . $data . '' );
+            wp_enqueue_style( '' . $data . '', 'https://fonts.googleapis.com/css?family=' . $data . '', false, OXI_IMAGE_HOVER_PLUGIN_VERSION );
         endif;
         $data = str_replace( '+', ' ', $data );
         $data = explode( ':', $data );

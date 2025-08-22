@@ -57,9 +57,11 @@ trait Admin_helper {
                 <nav class="oxilab-sa-admin-nav">
                     <ul class="oxilab-sa-admin-menu">
                         <?php
-                        $GETPage = sanitize_text_field( $_GET['page'] );
-                        $effects = ( ! empty( $_GET['effects'] ) ? sanitize_text_field( $_GET['effects'] ) : '' );
-                        if ( $effects != '' && $GETPage == 'oxi-image-hover-ultimate' ) :
+						// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.NonceVerification.Recommended
+                        $GETPage = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
+						// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.NonceVerification.Recommended
+                        $effects = isset( $_GET['effects'] ) && ! empty( $_GET['effects'] ) ? sanitize_text_field( wp_unslash( $_GET['effects'] ) ) : '';
+						if ( $effects != '' && $GETPage == 'oxi-image-hover-ultimate' ) :
                             $url = $this->admin_url_convert( 'oxi-image-hover-ultimate' ) . '&effects=' . $effects;
 							?>
 
@@ -164,14 +166,15 @@ trait Admin_helper {
 
     public function Image_Parent() {
 		global $wpdb;
-        $effects = ( ! empty( $_GET['effects'] ) ? ucfirst( sanitize_text_field( $_GET['effects'] ) ) : '' );
-        $styleid = ( ! empty( $_GET['styleid'] ) ? (int) $_GET['styleid'] : '' );
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.NonceVerification.Recommended
+        $effects = isset( $_GET['effects'] ) && ! empty( $_GET['effects'] ) ? ucfirst( sanitize_text_field( wp_unslash( $_GET['effects'] ) ) ) : '';
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.NonceVerification.Recommended
+		$styleid = isset( $_GET['styleid'] ) && ! empty( $_GET['styleid'] ) ? intval( $_GET['styleid'] )  : '';
         if ( ! empty( $effects ) && ! empty( $styleid ) ) :
-			$parent_table = esc_sql( $this->parent_table ); // Escape table name
 
 			$style = $wpdb->get_row(
                 $wpdb->prepare(
-                    "SELECT style_name FROM {$parent_table} WHERE id = %d",
+                    "SELECT style_name FROM " . esc_sql( $this->parent_table ) . " WHERE id = %d",
                     (int) $styleid
                 ),
                 ARRAY_A

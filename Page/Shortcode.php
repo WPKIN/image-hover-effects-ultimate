@@ -181,10 +181,8 @@ class Shortcode {
 
 	public function database_data() {
 		global $wpdb;
-		$table = esc_sql( $this->parent_table ); // safely escape dynamic table name
-
 		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-		return $wpdb->get_results( "SELECT * FROM {$table} ORDER BY id DESC", ARRAY_A );
+		return $wpdb->get_results( "SELECT * FROM " . esc_sql( $this->parent_table ) . " ORDER BY id DESC", ARRAY_A );
 	}
 
     /**
