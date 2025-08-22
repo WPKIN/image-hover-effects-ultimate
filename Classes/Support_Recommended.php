@@ -189,7 +189,6 @@ class Support_Recommended {
             );
         }
 
-        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified below.
         $wpnonce = isset( $_POST['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ) : '';
 
         if ( ! wp_verify_nonce( $wpnonce, 'image_hover_ultimate' ) ) {
@@ -199,9 +198,7 @@ class Support_Recommended {
             );
         }
 
-        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified above.
-        $notice_raw = isset( $_POST['notice'] ) ? wp_unslash( $_POST['notice'] ) : '';
-        $notice     = sanitize_text_field( $notice_raw );
+        $notice = isset( $_POST['notice'] ) ? sanitize_text_field( wp_unslash( $_POST['notice'] ) ) : '';
 
         update_option( 'oxi_image_hover_recommended', $notice );
 

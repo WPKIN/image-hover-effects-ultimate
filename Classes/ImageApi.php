@@ -1,5 +1,4 @@
 <?php
-
 namespace OXI_IMAGE_HOVER_PLUGINS\Classes;
 
 use WP_REST_Request;
