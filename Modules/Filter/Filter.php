@@ -1,6 +1,6 @@
 <?php
 
-	namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Filter;
+namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Filter;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
