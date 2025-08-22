@@ -82,10 +82,9 @@ class Effects1 extends Public_Render {
             <?php
             return;
         endif;
-		$table = esc_sql( $this->parent_table ); // escape the table name
 		$styledata = $wpdb->get_row(
 			$wpdb->prepare(
-				"SELECT * FROM {$table} WHERE id = %d",
+				"SELECT * FROM " . esc_sql( $this->parent_table ) . " WHERE id = %d",
 				(int) $style['carousel_register_style']
 			),
 			ARRAY_A
@@ -97,10 +96,9 @@ class Effects1 extends Public_Render {
             <?php
             return;
         endif;
-        $table = esc_sql( $this->child_table ); // escape table name
 		$files = $wpdb->get_results(
 			$wpdb->prepare(
-				"SELECT * FROM {$table} WHERE styleid = %d",
+				"SELECT * FROM " . esc_sql( $this->child_table ) . " WHERE styleid = %d",
 				(int) $style['carousel_register_style']
 			),
 			ARRAY_A

@@ -119,10 +119,9 @@ trait Admin_Query {
         $c = 'caption%';
         $s = 'square%';
 
-		$table = esc_sql( $this->parent_table ); // Escape table name
 		$alldata = $wpdb->get_results(
 			$wpdb->prepare(
-				"SELECT id, name FROM {$table} 
+				"SELECT id, name FROM " . esc_sql( $this->parent_table ) . "
 				WHERE style_name LIKE %s 
 				OR style_name LIKE %s 
 				OR style_name LIKE %s 

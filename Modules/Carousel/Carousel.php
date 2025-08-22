@@ -1,6 +1,6 @@
 <?php
 
-	namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Carousel;
+namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Carousel;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

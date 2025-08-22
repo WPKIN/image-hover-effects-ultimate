@@ -70,12 +70,9 @@ class Layouts_Query {
 			$style = json_decode( stripslashes( $style ), true );
 		endif;
 
-		// Escape table name
-		$parent_table = esc_sql( $this->parent_table );
-
 		// Fetch raw data safely
 		$rawdata = $wpdb->get_row(
-			$wpdb->prepare( "SELECT * FROM {$parent_table} WHERE id = %d", $style['display_post_id'] ),
+			$wpdb->prepare( "SELECT * FROM " . esc_sql( $this->parent_table ) . " WHERE id = %d", $style['display_post_id'] ),
 			ARRAY_A
 		);
 
@@ -85,13 +82,10 @@ class Layouts_Query {
 	public function layouts_query( $dbdata, $args, $style ) {
 		global $wpdb;
 
-		// Escape table name
-		$child_table = esc_sql( $this->child_table );
-
 		// Fetch posts safely with proper placeholders
 		$postdata = $wpdb->get_results(
 			$wpdb->prepare(
-				"SELECT * FROM {$child_table} WHERE styleid = %d LIMIT %d, %d",
+				"SELECT * FROM " . esc_sql( $this->child_table ) . " WHERE styleid = %d LIMIT %d, %d",
 				(int) $dbdata['id'],
 				(int) $args['offset'],
 				(int) $args['posts_per_page']

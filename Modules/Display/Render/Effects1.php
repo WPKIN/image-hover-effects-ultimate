@@ -1,6 +1,6 @@
 <?php
 
-	namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Display\Render;
+namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Display\Render;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
