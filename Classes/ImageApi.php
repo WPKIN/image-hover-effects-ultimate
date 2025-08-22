@@ -344,16 +344,16 @@ class ImageApi {
             die();
         }
 
-        if ( ! isset( $_REQUEST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key(wp_unslash( $_REQUEST['_wpnonce'] )), 'image_hover_ultimate' ) ) {
+        if ( ! isset( $_REQUEST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_REQUEST['_wpnonce'] ) ), 'image_hover_ultimate' ) ) {
 			return new \WP_Error(
 				'invalid_nonce',
 				esc_html__( 'Invalid request.', 'image-hover-effects-ultimate' ),
-				array( 'status' => 422 )
+				[ 'status' => 422 ]
 			);
 		}
 
         $functionname = isset( $_REQUEST['functionname'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['functionname'] ) ) : '';
-		$this->rawdata = isset( $_REQUEST['rawdata'] ) ? sanitize_textarea_field(wp_unslash( $_REQUEST['rawdata'] )) : '';
+		$this->rawdata = isset( $_REQUEST['rawdata'] ) ? sanitize_textarea_field( wp_unslash( $_REQUEST['rawdata'] ) ) : '';
 		$this->styleid = isset( $_REQUEST['styleid'] ) ? (int) $_REQUEST['styleid'] : 0;
 		$this->childid = isset( $_REQUEST['childid'] ) ? (int) $_REQUEST['childid'] : 0;
 
@@ -433,14 +433,13 @@ class ImageApi {
                     $wpdb->query( $wpdb->prepare( 'INSERT INTO ' . esc_sql( $this->child_table ) . ' (styleid, rawdata) VALUES (%d,  %s)', [ $redirect_id, $value['rawdata'] ] ) );
                 }
 
-				$nonce_url =  wp_nonce_url(
+				$nonce_url = wp_nonce_url(
 					admin_url( "admin.php?page=oxi-image-hover-ultimate&effects=$s[0]&styleid=$redirect_id" ),
 					'image_hover_ultimate_url',
 					'_wpnonce'
 				);
 
 				return html_entity_decode( $nonce_url );
-
             endif;
         }
         return;
@@ -479,8 +478,8 @@ class ImageApi {
 
         $styleid = $this->styleid;
 
-        $style = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM " . esc_sql( $this->parent_table ) . " WHERE id = %d", $styleid ), ARRAY_A );
-        $child = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM " . esc_sql( $this->child_table ) . " WHERE styleid = %d ORDER by id ASC", $styleid ), ARRAY_A );
+        $style = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM ' . esc_sql( $this->parent_table ) . ' WHERE id = %d', $styleid ), ARRAY_A );
+        $child = $wpdb->get_results( $wpdb->prepare( 'SELECT * FROM ' . esc_sql( $this->child_table ) . ' WHERE styleid = %d ORDER by id ASC', $styleid ), ARRAY_A );
 
         $wpdb->query( $wpdb->prepare( 'INSERT INTO ' . esc_sql( $this->parent_table ) . ' (name, style_name, rawdata) VALUES ( %s, %s, %s)', [ $newName, $style['style_name'], $style['rawdata'] ] ) );
         $redirect_id = $wpdb->insert_id;
@@ -495,9 +494,9 @@ class ImageApi {
                 $wpdb->query( $wpdb->prepare( 'INSERT INTO ' . esc_sql( $this->child_table ) . ' (styleid, rawdata) VALUES (%d,  %s)', [ $redirect_id, $value['rawdata'] ] ) );
             }
 			$nonce_url = wp_nonce_url(
-					admin_url( "admin.php?page=oxi-image-hover-ultimate&effects=$s[0]&styleid=$redirect_id" ),
-					'image_hover_ultimate_url',
-					'_wpnonce'
+                admin_url( "admin.php?page=oxi-image-hover-ultimate&effects=$s[0]&styleid=$redirect_id" ),
+                'image_hover_ultimate_url',
+                '_wpnonce'
 			);
 
 			return html_entity_decode( $nonce_url );
@@ -577,7 +576,7 @@ class ImageApi {
 
 		$style = $wpdb->get_row(
 			$wpdb->prepare(
-				"SELECT * FROM " . esc_sql( $this->parent_table ) . " WHERE id = %d",
+				'SELECT * FROM ' . esc_sql( $this->parent_table ) . ' WHERE id = %d',
 				$this->styleid
 			),
 			ARRAY_A
@@ -585,7 +584,7 @@ class ImageApi {
 
 		$child = $wpdb->get_results(
 			$wpdb->prepare(
-				"SELECT * FROM " . esc_sql($this->child_table) . " WHERE styleid = %d ORDER BY id ASC",
+				'SELECT * FROM ' . esc_sql( $this->child_table ) . ' WHERE styleid = %d ORDER BY id ASC',
 				$this->styleid
 			),
 			ARRAY_A
@@ -687,7 +686,7 @@ class ImageApi {
     public function post_elements_template_render_data() {
 		global $wpdb;
         $settings = json_decode( stripslashes( $this->rawdata ), true );
-        $child = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM " . esc_sql( $this->child_table ) . " WHERE styleid = %d ORDER by id ASC", $this->styleid ), ARRAY_A );
+        $child = $wpdb->get_results( $wpdb->prepare( 'SELECT * FROM ' . esc_sql( $this->child_table ) . ' WHERE styleid = %d ORDER by id ASC', $this->styleid ), ARRAY_A );
         $StyleName = $settings['image-hover-template'];
         $name = explode( '-', $StyleName );
         ob_start();
@@ -841,8 +840,8 @@ class ImageApi {
 		global $wpdb;
         $styleid = (int) $this->styleid;
         if ( $styleid > 0 ) :
-            $style = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM " . esc_sql( $this->parent_table ) . " WHERE id = %d", $styleid ), ARRAY_A );
-            $child = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM " . esc_sql( $this->child_table ) . " WHERE styleid = %d ORDER by id ASC", $styleid ), ARRAY_A );
+            $style = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM ' . esc_sql( $this->parent_table ) . ' WHERE id = %d', $styleid ), ARRAY_A );
+            $child = $wpdb->get_results( $wpdb->prepare( 'SELECT * FROM ' . esc_sql( $this->child_table ) . ' WHERE styleid = %d ORDER by id ASC', $styleid ), ARRAY_A );
             $filename = 'image-hover-effects-ultimateand' . $style['id'] . '.json';
             $files = [
                 'style' => $style,
@@ -992,7 +991,7 @@ class ImageApi {
 			return new \WP_Error(
 				'invalid_nonce',
 				esc_html__( 'Invalid request.', 'image-hover-effects-ultimate' ),
-				array( 'status' => 422 )
+				[ 'status' => 422 ]
 			);
 		}
 
@@ -1006,11 +1005,11 @@ class ImageApi {
         if ( $functionname != '__rest_api_post' ) :
             return new WP_REST_Request( 'Invalid URL', 422 );
         endif;
-        
+
 		$rawdata  = isset( $_POST['rawdata'] ) ? sanitize_text_field( wp_unslash( $_POST['rawdata'] ) ) : '';
         $args     = isset( $_POST['args'] ) && is_array( $_POST['args'] ) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['args'] ) ) : [];
         $optional = isset( $_POST['optional'] ) ? sanitize_text_field( wp_unslash( $_POST['optional'] ) ) : '';
-        
+
 		if ( ! empty( $classname ) && ! empty( $functionname ) && class_exists( $classname ) ) :
             $CLASS = new $classname();
             $CLASS->__construct( $functionname, $rawdata, $args, $optional );

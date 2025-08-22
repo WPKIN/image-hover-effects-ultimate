@@ -22,21 +22,21 @@ class Effects1 extends Public_Render {
         wp_enqueue_style(
             'oxi-image-hover-light-box',
             OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/Lightbox.css',
-            array(),
+            [],
             OXI_IMAGE_HOVER_PLUGIN_VERSION
         );
 
         wp_enqueue_style(
             'oxi-image-hover-light-style-1',
             OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/style-1.css',
-            array(),
+            [],
             OXI_IMAGE_HOVER_PLUGIN_VERSION
         );
 
         wp_enqueue_style(
             'oxi-image-hover-lightgallery',
             OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/lightgallery.min.css',
-            array(),
+            [],
             OXI_IMAGE_HOVER_PLUGIN_VERSION
         );
     }
@@ -50,7 +50,7 @@ class Effects1 extends Public_Render {
         wp_enqueue_script(
             'oxi-image-hover-lightgallery',
             OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/lightgallery.min.js',
-            array( 'jquery' ),
+            [ 'jquery' ],
             OXI_IMAGE_HOVER_PLUGIN_VERSION,
             true
         );
@@ -58,7 +58,7 @@ class Effects1 extends Public_Render {
         wp_enqueue_script(
             'oxi-image-hover-lightgallery-video',
             OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/lg-video.min.js',
-            array( 'oxi-image-hover-lightgallery', 'jquery' ),
+            [ 'oxi-image-hover-lightgallery', 'jquery' ],
             OXI_IMAGE_HOVER_PLUGIN_VERSION,
             true
         );
@@ -68,7 +68,7 @@ class Effects1 extends Public_Render {
         wp_enqueue_script(
             'oxi-image-hover-lightgallery-mousewheel',
             OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/jquery.mousewheel.min.js',
-            array( 'jquery' ),
+            [ 'jquery' ],
             OXI_IMAGE_HOVER_PLUGIN_VERSION,
             true
         );
@@ -113,7 +113,7 @@ class Effects1 extends Public_Render {
             $sub_html = '';
 
             if ( ! empty( $value['oxi_image_light_box_title'] ) ) {
-                $allowed_tags = array( 'h1','h2','h3','h4','h5','h6','div','p','span' );
+                $allowed_tags = [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'p', 'span' ];
                 $raw_tag      = isset( $style['oxi_image_light_box_tag'] ) ? strtolower( (string) $style['oxi_image_light_box_tag'] ) : 'h3';
                 $tag          = in_array( $raw_tag, $allowed_tags, true ) ? $raw_tag : 'h3';
 

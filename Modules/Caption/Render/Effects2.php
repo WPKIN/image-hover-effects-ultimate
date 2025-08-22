@@ -1,4 +1,5 @@
 <?php
+
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Caption\Render;
 
 if ( ! defined( 'ABSPATH' ) ) {

@@ -40,13 +40,9 @@ trait Public_Helper {
 		if ( ! empty( (int) $styleid ) && ! empty( $user ) ) :
 			global $wpdb;
 
-			// Escape table names
-			$parent_table = esc_sql( $this->parent_table );
-			$child_table  = esc_sql( $this->child_table );
-
 			// Get parent style
 			$style = $wpdb->get_row(
-				$wpdb->prepare( "SELECT * FROM {$parent_table} WHERE id = %d", $styleid ),
+				$wpdb->prepare( 'SELECT * FROM ' . esc_sql( $this->parent_table ) . ' WHERE id = %d', $styleid ),
 				ARRAY_A
 			);
 
@@ -55,7 +51,7 @@ trait Public_Helper {
 
 				// Get child elements
 				$child = $wpdb->get_results(
-					$wpdb->prepare( "SELECT * FROM {$child_table} WHERE styleid = %d ORDER BY id ASC", $styleid ),
+					$wpdb->prepare( 'SELECT * FROM ' . esc_sql( $this->child_table ) . ' WHERE styleid = %d ORDER BY id ASC', $styleid ),
 					ARRAY_A
 				);
 

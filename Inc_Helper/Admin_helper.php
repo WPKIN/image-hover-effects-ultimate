@@ -36,13 +36,13 @@ trait Admin_helper {
 			wp_die( esc_html__( 'Security check failed.', 'image-hover-effects-ultimate' ) );
 		}
 
-		$styleid = ! empty( $_GET['styleid'] ) ? intval($_GET['styleid']) : 0;
+		$styleid = ! empty( $_GET['styleid'] ) ? intval( $_GET['styleid'] ) : 0;
 
 		if ( $styleid > 0 ) {
 
 			// Use $wpdb->prepare() safely
 			$style = $wpdb->get_row(
-				$wpdb->prepare( "SELECT style_name FROM " . esc_sql( $this->parent_table ) . " WHERE id = %d", $styleid ),
+				$wpdb->prepare( 'SELECT style_name FROM ' . esc_sql( $this->parent_table ) . ' WHERE id = %d', $styleid ),
 				ARRAY_A
 			);
 
@@ -268,7 +268,7 @@ trait Admin_helper {
                         <?php
 
 						// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-                        $GETPage = isset( $_GET['page']) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
+                        $GETPage = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
 
                         foreach ( $response as $key => $value ) {
 							?>
