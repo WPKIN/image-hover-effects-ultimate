@@ -205,8 +205,6 @@ class ImageApi {
 		update_option( 'image_hover_ultimate_update_complete', 'done' );
 	}
 
-
-
     /**
      * Template Style Data
      *
@@ -254,7 +252,6 @@ class ImageApi {
 			return 'success';
 		}
 	}
-
 
     /**
      * Template Name Change
@@ -435,7 +432,15 @@ class ImageApi {
                 foreach ( $child as $value ) {
                     $wpdb->query( $wpdb->prepare( 'INSERT INTO ' . esc_sql( $this->child_table ) . ' (styleid, rawdata) VALUES (%d,  %s)', [ $redirect_id, $value['rawdata'] ] ) );
                 }
-                return admin_url( "admin.php?page=oxi-image-hover-ultimate&effects=$s[0]&styleid=$redirect_id" );
+
+				$nonce_url =  wp_nonce_url(
+					admin_url( "admin.php?page=oxi-image-hover-ultimate&effects=$s[0]&styleid=$redirect_id" ),
+					'image_hover_ultimate_url',
+					'_wpnonce'
+				);
+
+				return html_entity_decode( $nonce_url );
+
             endif;
         }
         return;
@@ -489,7 +494,13 @@ class ImageApi {
             foreach ( $child as $value ) {
                 $wpdb->query( $wpdb->prepare( 'INSERT INTO ' . esc_sql( $this->child_table ) . ' (styleid, rawdata) VALUES (%d,  %s)', [ $redirect_id, $value['rawdata'] ] ) );
             }
-            return admin_url( "admin.php?page=oxi-image-hover-ultimate&effects=$s[0]&styleid=$redirect_id" );
+			$nonce_url = wp_nonce_url(
+					admin_url( "admin.php?page=oxi-image-hover-ultimate&effects=$s[0]&styleid=$redirect_id" ),
+					'image_hover_ultimate_url',
+					'_wpnonce'
+			);
+
+			return html_entity_decode( $nonce_url );
         endif;
     }
 
@@ -516,7 +527,13 @@ class ImageApi {
             foreach ( $child as $value ) {
                 $wpdb->query( $wpdb->prepare( 'INSERT INTO ' . esc_sql( $this->child_table ) . ' (styleid, rawdata) VALUES (%d,  %s)', [ $redirect_id, $value['rawdata'] ] ) );
             }
-            return admin_url( "admin.php?page=oxi-image-hover-ultimate&effects=$s[0]&styleid=$redirect_id" );
+			$nonce_url = wp_nonce_url(
+				admin_url( "admin.php?page=oxi-image-hover-ultimate&effects=$s[0]&styleid=$redirect_id" ),
+				'image_hover_ultimate_url',
+				'_wpnonce'
+			);
+
+			return html_entity_decode( $nonce_url );
         endif;
     }
 
@@ -881,7 +898,13 @@ class ImageApi {
 
         if ( $this->styleid > 0 ) :
             $wpdb->query( $wpdb->prepare( 'INSERT INTO ' . esc_sql( $this->import_table ) . ' (type, name) VALUES (%s, %s)', [ $effects, $id ] ) );
-            return admin_url( "admin.php?page=oxi-image-hover-ultimate&effects=$rawdata#" . $id );
+			$nonce_url = wp_nonce_url(
+				admin_url( "admin.php?page=oxi-image-hover-ultimate&effects=$rawdata#" . $id ),
+				'image_hover_ultimate_url',
+				'_wpnonce'
+			);
+
+			return html_entity_decode( $nonce_url );
         else :
             return 'Silence is Golden';
         endif;
@@ -952,7 +975,12 @@ class ImageApi {
             foreach ( $child as $value ) {
                 $wpdb->query( $wpdb->prepare( 'INSERT INTO ' . esc_sql( $this->child_table ) . ' (styleid, rawdata) VALUES (%d,  %s)', [ $redirect_id, $value['rawdata'] ] ) );
             }
-            return admin_url( "admin.php?page=oxi-image-hover-ultimate&effects=$s[0]&styleid=$redirect_id" );
+			$nonce_url = wp_nonce_url(
+				admin_url( "admin.php?page=oxi-image-hover-ultimate&effects=$s[0]&styleid=$redirect_id" ),
+				'image_hover_ultimate_url',
+				'_wpnonce'
+			);
+			return html_entity_decode( $nonce_url );
         endif;
     }
 

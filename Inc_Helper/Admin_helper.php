@@ -9,34 +9,6 @@ trait Admin_helper {
         new \OXI_FLIP_BOX_PLUGINS\Page\Import();
     }
 
-	public function Flip_Create() {
-		global $wpdb;
-
-		$styleid = ! empty( $_GET['styleid'] ) ? (int) $_GET['styleid'] : 0;
-
-		if ( $styleid > 0 ) {
-			// Escape table name properly
-			$table = esc_sql( $this->parent_table );
-
-			// Use $wpdb->prepare() safely
-			$style = $wpdb->get_row(
-				$wpdb->prepare( "SELECT style_name FROM {$table} WHERE id = %d", $styleid ),
-				ARRAY_A
-			);
-
-			if ( ! empty( $style['style_name'] ) ) {
-				$style_name = ucfirst( $style['style_name'] );
-				$cls = '\\OXI_FLIP_BOX_PLUGINS\\Inc\\' . $style_name;
-				if ( class_exists( $cls ) ) {
-					new $cls();
-				}
-			}
-		} else {
-			new \OXI_FLIP_BOX_PLUGINS\Page\Create();
-		}
-	}
-
-
     public function Flip_Addons() {
         new \OXI_FLIP_BOX_PLUGINS\Page\Addons();
     }
@@ -57,14 +29,49 @@ trait Admin_helper {
         _default_wp_die_handler( $message, 'Flipbox Error' );
     }
 
+	public function Flip_Create() {
+		global $wpdb;
+
+		if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'image_hover_ultimate_url' ) ) {
+			wp_die( esc_html__( 'Security check failed.', 'image-hover-effects-ultimate' ) );
+		}
+
+		$styleid = ! empty( $_GET['styleid'] ) ? intval($_GET['styleid']) : 0;
+
+		if ( $styleid > 0 ) {
+
+			// Use $wpdb->prepare() safely
+			$style = $wpdb->get_row(
+				$wpdb->prepare( "SELECT style_name FROM " . esc_sql( $this->parent_table ) . " WHERE id = %d", $styleid ),
+				ARRAY_A
+			);
+
+			if ( ! empty( $style['style_name'] ) ) {
+				$style_name = ucfirst( $style['style_name'] );
+				$cls = '\\OXI_FLIP_BOX_PLUGINS\\Inc\\' . $style_name;
+				if ( class_exists( $cls ) ) {
+					new $cls();
+				}
+			}
+		} else {
+			new \OXI_FLIP_BOX_PLUGINS\Page\Create();
+		}
+	}
+
     public function verify_request_nonce() {
-        if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
-            $METHOD = $_POST;
-        } else {
-            $METHOD = $_GET;
-        }
-        return ! empty( $METHOD['_wpnonce'] ) && wp_verify_nonce( $METHOD['_wpnonce'], 'oxi-flip-box-editor' );
-    }
+		// Safely get the request method.
+		$request_method = isset( $_SERVER['REQUEST_METHOD'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) : '';
+
+		// Get nonce based on the method.
+		$nonce = '';
+		if ( 'POST' === $request_method ) {
+			$nonce = isset( $_POST['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ) : '';
+		} elseif ( 'GET' === $request_method ) {
+			$nonce = isset( $_GET['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ) : '';
+		}
+
+		return ! empty( $nonce ) && wp_verify_nonce( $nonce, 'oxi-flip-box-editor' );
+	}
 
     public function Admin_Menu() {
         $user_role = get_option( 'oxi_addons_user_permission' );
@@ -85,36 +92,46 @@ trait Admin_helper {
         add_dashboard_page( 'Welcome To Flipbox - Awesomes Flip Boxes Image Overlay', 'Welcome To Flipbox - Awesomes Flip Boxes Image Overlay', 'read', 'oxi-flip-box-activation', [ $this, 'oxi_flip_box_activation' ] );
     }
 
-    public function data_process() {
-        if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
-            $METHOD = $_POST;
-        } else {
-            $METHOD = $_GET;
-        }
-        if ( ! $this->verify_request_nonce() ) {
-            $this->handle_direct_action_error( 'Access Denied' );
-        }
-        $functionname = isset( $METHOD['functionname'] ) ? sanitize_text_field( $METHOD['functionname'] ) : '';
-        $rawdata = isset( $METHOD['rawdata'] ) ? sanitize_post( $METHOD['rawdata'] ) : '';
-        $styleid = isset( $METHOD['styleid'] ) ? (int) $METHOD['styleid'] : '';
-        $childid = isset( $METHOD['childid'] ) ? (int) $METHOD['childid'] : '';
+	public function data_process() {
 
-        if ( ! empty( $functionname ) && ! empty( $rawdata ) ) :
-            new \OXI_FLIP_BOX_PLUGINS\Classes\Admin_Ajax( $functionname, $rawdata, $styleid, $childid );
-        endif;
+		// Safely get the request method.
+		$request_method = isset( $_SERVER['REQUEST_METHOD'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) : '';
 
-        die();
-    }
+		// Check nonce before doing anything else.
+		if ( ! $this->verify_request_nonce() ) {
+			$this->handle_direct_action_error( 'Access Denied' );
+		}
+
+		// Collect data safely.
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.NonceVerification.Recommended
+		$method_data = ( 'POST' === $request_method ) ? $_POST : $_GET;
+
+		// Sanitize inputs.
+		$functionname = isset( $method_data['functionname'] ) ? sanitize_text_field( wp_unslash( $method_data['functionname'] ) ) : '';
+		$rawdata      = isset( $method_data['rawdata'] ) ? sanitize_text_field( wp_unslash( $method_data['rawdata'] ) ) : '';
+		$styleid      = isset( $method_data['styleid'] ) ? intval( $method_data['styleid'] ) : 0;
+		$childid      = isset( $method_data['childid'] ) ? intval( $method_data['childid'] ) : 0;
+
+		// Process only if required data is present.
+		if ( ! empty( $functionname ) && ! empty( $rawdata ) ) {
+			new \OXI_FLIP_BOX_PLUGINS\Classes\Admin_Ajax( $functionname, $rawdata, $styleid, $childid );
+		}
+
+		wp_die();
+	}
+
 
     public function redirect_on_activation() {
-        if ( get_transient( 'oxi_flip_box_activation_redirect' ) ) :
-            delete_transient( 'oxi_flip_box_activation_redirect' );
-            if ( is_network_admin() || isset( $_GET['activate-multi'] ) ) :
-                return;
-            endif;
-            wp_safe_redirect( admin_url( 'admin.php?page=oxi-flip-box-activation' ) );
-        endif;
-    }
+		if ( get_transient( 'oxi_flip_box_activation_redirect' ) ) :
+			delete_transient( 'oxi_flip_box_activation_redirect' );
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			if ( is_network_admin() || isset( $_GET['activate-multi'] ) ) :
+				return;
+			endif;
+			wp_safe_redirect( admin_url( 'admin.php?page=oxi-flip-box-activation' ) );
+			exit;
+		endif;
+	}
 
     public function welcome_remove_menus() {
         remove_submenu_page( 'index.php', 'oxi-flip-box-activation' );
@@ -249,7 +266,9 @@ trait Admin_helper {
                 <nav class="oxilab-sa-admin-nav">
                     <ul class="oxilab-sa-admin-menu">
                         <?php
-                        $GETPage = sanitize_text_field( $_GET['page'] );
+
+						// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                        $GETPage = isset( $_GET['page']) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
 
                         foreach ( $response as $key => $value ) {
 							?>
