@@ -72,7 +72,7 @@ class Layouts_Query {
 
 		// Fetch raw data safely
 		$rawdata = $wpdb->get_row(
-			$wpdb->prepare( "SELECT * FROM " . esc_sql( $this->parent_table ) . " WHERE id = %d", $style['display_post_id'] ),
+			$wpdb->prepare( 'SELECT * FROM ' . esc_sql( $this->parent_table ) . ' WHERE id = %d', $style['display_post_id'] ),
 			ARRAY_A
 		);
 
@@ -85,7 +85,7 @@ class Layouts_Query {
 		// Fetch posts safely with proper placeholders
 		$postdata = $wpdb->get_results(
 			$wpdb->prepare(
-				"SELECT * FROM " . esc_sql( $this->child_table ) . " WHERE styleid = %d LIMIT %d, %d",
+				'SELECT * FROM ' . esc_sql( $this->child_table ) . ' WHERE styleid = %d LIMIT %d, %d',
 				(int) $dbdata['id'],
 				(int) $args['offset'],
 				(int) $args['posts_per_page']

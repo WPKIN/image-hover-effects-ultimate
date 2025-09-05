@@ -49,9 +49,8 @@ class Visual_Composer {
 		$data = wp_cache_get( $cache_key );
 
 		if ( false === $data ) {
-
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
-			$data = $wpdb->get_results( "SELECT * FROM " . esc_sql( $this->parent_table ). " ORDER BY id DESC", ARRAY_A );
+			$data = $wpdb->get_results( 'SELECT * FROM ' . esc_sql( $this->parent_table ) . ' ORDER BY id DESC', ARRAY_A );
 
 			// Store in cache
 			wp_cache_set( $cache_key, $data );

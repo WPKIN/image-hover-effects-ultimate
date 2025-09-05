@@ -121,11 +121,11 @@ trait Admin_Query {
 
 		$alldata = $wpdb->get_results(
 			$wpdb->prepare(
-				"SELECT id, name FROM " . esc_sql( $this->parent_table ) . "
+				'SELECT id, name FROM ' . esc_sql( $this->parent_table ) . '
 				WHERE style_name LIKE %s 
 				OR style_name LIKE %s 
 				OR style_name LIKE %s 
-				ORDER BY id ASC",
+				ORDER BY id ASC',
 				$g,
 				$s,
 				$c

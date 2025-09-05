@@ -61,32 +61,212 @@ if ( ! function_exists( 'wpkin_iheu_v' ) ) {
     do_action( 'wpkin_iheu_v_loaded' );
 }
 
-define( 'OXI_IMAGE_HOVER_FILE', __FILE__ );
-define( 'OXI_IMAGE_HOVER_BASENAME', plugin_basename( __FILE__ ) );
-define( 'OXI_IMAGE_HOVER_PATH', plugin_dir_path( __FILE__ ) );
-define( 'OXI_IMAGE_HOVER_URL', plugins_url( '/', __FILE__ ) );
-define( 'OXI_IMAGE_HOVER_PLUGIN_VERSION', '9.10.4' );
-define( 'OXI_IMAGE_HOVER_TEXTDOMAIN', 'image-hover-effects-ultimate' );
+/** If class `WPKin_Imagehover` doesn't exists yet. */
+if ( ! class_exists( 'WPKin_Imagehover' ) ) {
+
+	/**
+	 * Sets up and initializes the plugin.
+	 * Main initiation class
+	 *
+	 * @since 1.0.0
+	 */
+	final class WPKin_Imagehover {
+
+		use \OXI_IMAGE_HOVER_PLUGINS\Helper\Public_Helper;
+		use \OXI_IMAGE_HOVER_PLUGINS\Helper\Admin_helper;
+
+		/**
+		 * Database Parent Table
+		 *
+		 * @since 9.3.0
+		 */
+		public $parent_table;
+
+		/**
+		 * Database Import Table
+		 *
+		 * @since 9.3.0
+		 */
+		public $import_table;
+
+		/**
+		 * Database Import Table
+		 *
+		 * @since 9.3.0
+		 */
+		public $child_table;
+
+		/**
+		 * Class Constractor
+		 */
+		private function __construct() {
+
+			$this->define_constance();
+			register_activation_hook( __FILE__, [ $this, 'activate' ] );
+			register_deactivation_hook( __FILE__, [ $this, 'deactivate' ] );
+			do_action( 'image-hover-effects-ultimate/before_init' );
+			// Load translation
+			add_action( 'init', [ $this, 'i18n' ] );
+			add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
+		}
+
+		/**
+		 * Initilize a singleton instance
+		 *
+		 * @return /Product_Layouts
+		 */
+		public static function init() {
+
+			static $instance = false;
+
+			if ( ! $instance ) {
+				$instance = new self();
+			}
+
+			return $instance;
+		}
+
+		/**
+		 * Plugin Constance
+		 *
+		 * @return void
+		 */
+		public function define_constance() {
+			define( 'OXI_IMAGE_HOVER_FILE', __FILE__ );
+			define( 'OXI_IMAGE_HOVER_BASENAME', plugin_basename( __FILE__ ) );
+			define( 'OXI_IMAGE_HOVER_PATH', plugin_dir_path( __FILE__ ) );
+			define( 'OXI_IMAGE_HOVER_URL', plugins_url( '/', __FILE__ ) );
+			define( 'OXI_IMAGE_HOVER_PLUGIN_VERSION', '9.10.4' );
+			define( 'OXI_IMAGE_HOVER_TEXTDOMAIN', 'image-hover-effects-ultimate' );
+		}
+
+		/**
+		 * Plugins Loaded
+		 *
+		 * @return void
+		 */
+		public function init_plugin() {
+			new OXI_IMAGE_HOVER_PLUGINS\Classes\ImageApi();
+
+			if ( is_admin() ) {
+				$this->User_Admin();
+				$this->User_Reviews();
+			}
+			$this->Admin_Filters();
+			$this->Shortcode_loader();
+			$this->Public_loader();
+		}
+
+		/**
+		 * Load Textdomain
+		 *
+		 * Load plugin localization files.
+		 *
+		 * Fired by `init` action hook.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @access public
+		 */
+		public function i18n() {
+			load_plugin_textdomain( 'image-hover-effects-ultimate', false, dirname( OXI_IMAGE_HOVER_BASENAME ) . '/languages/' );
+			$this->register_image_hover_ultimate_update();
+		}
+
+		/**
+		 * After Activate Plugin
+		 *
+		 * Fired by `register_activation_hook` hook.
+		 *
+		 * @return void
+		 *
+		 * @since 1.0.0
+		 *
+		 * @access public
+		 */
+		public function activate() {
+			$Installation = new \OXI_IMAGE_HOVER_PLUGINS\Classes\Installation();
+			$Installation->plugin_activation_hook();
+		}
+
+		/**
+		 * After Deactivate Plugin
+		 *
+		 * Fired by `register_deactivation_hook` hook.
+		 *
+		 * @return void
+		 *
+		 * @since 1.0.0
+		 *
+		 * @access public
+		 */
+		public function deactivate() {
+		}
+
+		public function User_Admin() {
+			add_action( 'admin_menu', [ $this, 'Admin_Menu' ] );
+			add_action( 'admin_head', [ $this, 'Admin_Icon' ] );
+		}
+
+		/**
+		 * Execute Shortcode
+		 *
+		 * @since 9.3.0
+		 * @access public
+		 */
+		public function WP_Shortcode( $atts ) {
+			extract( shortcode_atts( [ 'id' => ' ' ], $atts ) );
+			$styleid = (int) $atts['id'];
+			ob_start();
+			$this->shortcode_render( $styleid, 'user' );
+			return ob_get_clean();
+		}
+
+		/**
+		 * Shortcode loader
+		 *
+		 * @since 9.3.0
+		 * @access public
+		 */
+		protected function Shortcode_loader() {
+			add_shortcode( 'iheu_ultimate_oxi', [ $this, 'WP_Shortcode' ] );
+			new \OXI_IMAGE_HOVER_PLUGINS\Modules\Visual_Composer();
+			$ImageWidget = new \OXI_IMAGE_HOVER_PLUGINS\Modules\Widget();
+			add_filter( 'widget_text', 'do_shortcode' );
+			add_action( 'widgets_init', [ $ImageWidget, 'iheu_widget_widget' ] );
+		}
+
+		public function register_image_hover_ultimate_update() {
+			$check = get_option( 'image_hover_ultimate_update_complete' );
+			if ( $check != 'done' ) :
+				add_action( 'image_hover_ultimate_update', [ $this, 'plugin_update' ] );
+				wp_schedule_single_event( time() + 10, 'image_hover_ultimate_update' );
+			endif;
+		}
+
+		public function plugin_update() {
+			$upgrade = new \OXI_IMAGE_HOVER_PLUGINS\Classes\ImageApi();
+			$upgrade->update_image_hover_plugin();
+		}
+	}
+
+}
 
 /**
- * Run plugin after all others plugins
+ * Initilize the main plugin
  *
- * @since 9.3.0
+ * @return /WPKin_Imagehover
  */
-add_action(
-    'plugins_loaded', function () {
-		\OXI_IMAGE_HOVER_PLUGINS\Classes\Bootstrap::instance();
+function wpkin_imagehover() {
+
+	if ( class_exists( 'WPKin_Imagehover' ) ) {
+		return WPKin_Imagehover::init();
 	}
-);
+
+	return false;
+}
 
 /**
- * Activation hook
- *
- * @since 9.3.0
+ * Kick-off the plugin
  */
-register_activation_hook(
-    __FILE__, function () {
-		$Installation = new \OXI_IMAGE_HOVER_PLUGINS\Classes\Installation();
-		$Installation->plugin_activation_hook();
-	}
-);
+wpkin_imagehover();

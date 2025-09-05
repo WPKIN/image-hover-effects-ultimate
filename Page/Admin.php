@@ -7,7 +7,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Admin {
 
-
     /**
      * Database Parent Table
      *
@@ -39,6 +38,22 @@ class Admin {
     use \OXI_IMAGE_HOVER_PLUGINS\Helper\Public_Helper;
     use \OXI_IMAGE_HOVER_PLUGINS\Helper\CSS_JS_Loader;
 
+	/**
+     * Constructor of Image Hover Home Page
+     *
+     * @since 9.3.0
+     */
+    public function __construct() {
+        global $wpdb;
+        $this->wpdb = $wpdb;
+        $this->parent_table = $wpdb->prefix . 'image_hover_ultimate_style';
+        $this->child_table = $wpdb->prefix . 'image_hover_ultimate_list';
+        $this->import_table = $wpdb->prefix . 'oxi_div_import';
+
+        $this->CSSJS_load();
+        $this->Render();
+    }
+
     /**
      * Admin Notice JS file loader
      * @return void
@@ -53,8 +68,6 @@ class Admin {
         $data = str_replace( '+', ' ', $data );
         echo esc_html( ucwords( $data ) );
     }
-
-
 
     public function Render() {
 		?>
@@ -144,14 +157,8 @@ class Admin {
                         $oxilink = 'admin.php?page=oxi-image-hover-ultimate&effects=' . $k;
 						?>
                         <div class="oxi-addons-shortcode-import" id="<?php echo esc_attr( $value['name'] ); ?>" oxi-addons-search="<?php echo esc_html( $value['name'] ); ?>">
-                            <a class="addons-pre-check" href="<?php echo esc_url( admin_url( $oxilink ) ); ?>" sub-type="
-                            <?php
-							if ( apply_filters( 'oxi-image-hover-plugin-version', false ) == false && $key == 'Extension' ) :
-								echo 'premium';
-                                                                                                                        endif;
-							?>
-                            ">
-                                <div class="oxi-addons-shortcode-import-top">
+                            <a class="addons-pre-check" href="<?php echo esc_url( admin_url( $oxilink ) ); ?>" sub-type="<?php echo ( apply_filters( 'oxi-image-hover-plugin-version', false ) == false && $key == 'Extension' ) ? 'premium' : ''; ?>">
+                            <div class="oxi-addons-shortcode-import-top">
                                     <?php
                                     $ifco = array_key_exists( 'icon', $value ) ? $value['icon'] : 'fas fa-cloud-download-alt';
                                     $this->font_awesome_render( $ifco );
@@ -188,22 +195,6 @@ class Admin {
             </div>
         </div>
 		<?php
-    }
-
-    /**
-     * Constructor of Image Hover Home Page
-     *
-     * @since 9.3.0
-     */
-    public function __construct() {
-        global $wpdb;
-        $this->wpdb = $wpdb;
-        $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
-        $this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
-        $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
-
-        $this->CSSJS_load();
-        $this->Render();
     }
 
     public function CSSJS_load() {

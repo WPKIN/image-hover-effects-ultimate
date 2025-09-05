@@ -52,10 +52,9 @@ trait Public_Helper {
     public function shortcode_render( $styleid, $user ) {
 		global $wpdb;
         if ( ! empty( $styleid ) && ! empty( $user ) && (int) $styleid ) :
-
 			$style = $wpdb->get_row(
 				$wpdb->prepare(
-					"SELECT * FROM " . esc_sql( $this->parent_table ) . " WHERE id = %d",
+					'SELECT * FROM ' . esc_sql( $this->parent_table ) . ' WHERE id = %d',
 					(int) $styleid
 				),
 				ARRAY_A
@@ -79,10 +78,9 @@ trait Public_Helper {
                     new $C( $style, [], $user );
                 endif;
             else :
-
 				$child = $wpdb->get_results(
                     $wpdb->prepare(
-                        "SELECT * FROM " . esc_sql( $this->child_table ) . " WHERE styleid = %d ORDER BY id ASC",
+                        'SELECT * FROM ' . esc_sql( $this->child_table ) . ' WHERE styleid = %d ORDER BY id ASC',
                         (int) $styleid
                     ),
                     ARRAY_A

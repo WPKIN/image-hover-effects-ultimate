@@ -276,12 +276,12 @@ class Modules extends Admin_Render {
 
 		$alldata = $wpdb->get_results(
 			$wpdb->prepare(
-				"SELECT id, name FROM " . esc_sql( $this->parent_table ) . "
+				'SELECT id, name FROM ' . esc_sql( $this->parent_table ) . '
 				WHERE style_name LIKE %s 
 				OR style_name LIKE %s 
 				OR style_name LIKE %s 
 				OR style_name LIKE %s 
-				ORDER BY id ASC",
+				ORDER BY id ASC',
 				$a,
 				$b,
 				$c,

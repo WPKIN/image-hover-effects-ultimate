@@ -94,7 +94,7 @@ class Effects3 extends Public_Render {
         endif;
 		$styledata = $wpdb->get_row(
 			$wpdb->prepare(
-				"SELECT * FROM " . esc_sql( $this->parent_table ) . " WHERE id = %d",
+				'SELECT * FROM ' . esc_sql( $this->parent_table ) . ' WHERE id = %d',
 				(int) $style['carousel_register_style']
 			),
 			ARRAY_A
@@ -108,7 +108,7 @@ class Effects3 extends Public_Render {
         endif;
 		$files = $wpdb->get_results(
 			$wpdb->prepare(
-				"SELECT * FROM " . esc_sql( $this->child_table ) . " WHERE styleid = %d",
+				'SELECT * FROM ' . esc_sql( $this->child_table ) . ' WHERE styleid = %d',
 				(int) $style['carousel_register_style']
 			),
 			ARRAY_A

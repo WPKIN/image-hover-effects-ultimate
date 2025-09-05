@@ -169,12 +169,11 @@ trait Admin_helper {
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.NonceVerification.Recommended
         $effects = isset( $_GET['effects'] ) && ! empty( $_GET['effects'] ) ? ucfirst( sanitize_text_field( wp_unslash( $_GET['effects'] ) ) ) : '';
         // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.NonceVerification.Recommended
-		$styleid = isset( $_GET['styleid'] ) && ! empty( $_GET['styleid'] ) ? intval( $_GET['styleid'] )  : '';
+		$styleid = isset( $_GET['styleid'] ) && ! empty( $_GET['styleid'] ) ? intval( $_GET['styleid'] ) : '';
         if ( ! empty( $effects ) && ! empty( $styleid ) ) :
-
 			$style = $wpdb->get_row(
                 $wpdb->prepare(
-                    "SELECT style_name FROM " . esc_sql( $this->parent_table ) . " WHERE id = %d",
+                    'SELECT style_name FROM ' . esc_sql( $this->parent_table ) . ' WHERE id = %d',
                     (int) $styleid
                 ),
                 ARRAY_A
@@ -326,16 +325,6 @@ trait Admin_helper {
             return;
         endif;
         new \OXI_IMAGE_HOVER_PLUGINS\Classes\Support_Reviews();
-    }
-
-	public function redirect_on_activation() {
-        // if (get_transient('oxi_image_hover_activation_redirect')) :
-        //     delete_transient('oxi_image_hover_activation_redirect');
-        //     if (is_network_admin() || isset($_GET['activate-multi'])) :
-        //         return;
-        //     endif;
-        //     wp_safe_redirect(admin_url("admin.php?page=image-hover-ultimate-support"));
-        // endif;
     }
 
     /**

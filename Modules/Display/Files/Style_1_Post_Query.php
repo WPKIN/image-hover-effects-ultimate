@@ -61,7 +61,7 @@ class Style_1_Post_Query {
 
 		$styledata = $wpdb->get_row(
 			$wpdb->prepare(
-				"SELECT * FROM " . esc_sql( $this->parent_table ) . " WHERE id = %d",
+				'SELECT * FROM ' . esc_sql( $this->parent_table ) . ' WHERE id = %d',
 				(int) $styleid
 			),
 			ARRAY_A
@@ -75,7 +75,7 @@ class Style_1_Post_Query {
 
 		$child = $wpdb->get_row(
 			$wpdb->prepare(
-				"SELECT * FROM " . esc_sql( $this->child_table ) . " WHERE styleid = %d",
+				'SELECT * FROM ' . esc_sql( $this->child_table ) . ' WHERE styleid = %d',
 				(int) $styleid
 			),
 			ARRAY_A

@@ -14,17 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class ImageApi {
 
-
-    const API = 'https://wpkindemos.com/imagehover/wp-json/imagehoverultimate/v2/';
-
     private static $instance = null;
-
-    /**
-     * Define $wpdb
-     *
-     * @since 9.3.0
-     */
-    public $wpdb;
 
     /**
      * Database Parent Table
@@ -150,7 +140,6 @@ class ImageApi {
      */
     public function __construct( $rawdata = '', $styleid = '', $childid = '' ) {
         global $wpdb;
-        $wpdb = $wpdb;
         $this->parent_table = $wpdb->prefix . 'image_hover_ultimate_style';
         $this->child_table = $wpdb->prefix . 'image_hover_ultimate_list';
         $this->import_table = $wpdb->prefix . 'oxi_div_import';
@@ -597,8 +586,6 @@ class ImageApi {
         return 'success';
     }
 
-
-
     /**
      * Template Child Delete Data
      *
@@ -612,16 +599,6 @@ class ImageApi {
         else :
             return 'Silence is Golden';
         endif;
-    }
-
-    /**
-     * Admin Notice API  loader
-     * @return void
-     */
-    public function post_oxi_recommended() {
-        $data = 'done';
-        update_option( 'oxi_image_hover_recommended', $data );
-        return $data;
     }
 
     /**
@@ -769,64 +746,6 @@ class ImageApi {
         return '<span class="oxi-confirmation-success"></span>';
     }
 
-    public function post_web_template() {
-
-        global $wp_filesystem;
-
-		// Load the WP Filesystem API if it isn't loaded yet
-		if ( ! function_exists( 'WP_Filesystem' ) ) {
-			require_once ABSPATH . 'wp-admin/includes/file.php';
-		}
-
-		WP_Filesystem();
-
-		$folder = $this->safe_path( OXI_IMAGE_HOVER_PATH . 'template/' );
-
-		if ( ! $wp_filesystem->is_dir( $folder ) ) {
-			$wp_filesystem->mkdir( $folder, FS_CHMOD_DIR );
-		}
-        $rawdata = $this->validate_post();
-        $files = OXI_IMAGE_HOVER_PATH . 'template/' . $rawdata . '-' . $this->styleid . '.json';
-        if ( ! file_exists( $files ) ) :
-            $this->download_web_files( $files );
-        endif;
-        $template_data = json_decode( file_get_contents( $files ), true );
-
-        $render = '';
-        $vs = get_option( $this->fixed_data( '696d6167655f686f7665725f756c74696d6174655f6c6963656e73655f737461747573' ) );
-        foreach ( $template_data as $key => $value ) {
-            if ( $vs == $this->fixed_data( '76616c6964' ) ) {
-                $button = '<button type="button" class="btn btn-success oxi-addons-addons-web-template-import-button" web-data="' . $value['style']['style_name'] . '" web-template="' . $value['style']['id'] . '">Import</button>';
-            } else {
-                $button = '<button class="btn btn-warning oxi-addons-addons-style-btn-warning" title="Pro Only" type="submit" value="pro only" name="addonsstyleproonly">Pro Only</button>';
-            }
-            $render .= '<div class="oxi-addons-col-1">
-                                    <div class="oxi-addons-style-preview">
-                                        <div class="oxi-addons-style-preview-top oxi-addons-center">';
-            $C = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst( $rawdata ) . '\Render\Effects' . $this->styleid;
-
-            ob_start();
-            if ( class_exists( $C ) ) :
-                new $C( $value['style'], $value['child'], 'web' );
-            endif;
-            $render .= ob_get_contents();
-            ob_end_clean();
-
-            $render .= '                </div>
-                                        <div class="oxi-addons-style-preview-bottom">
-                                            <div class="oxi-addons-style-preview-bottom-left">
-                                                ' . $value['style']['name'] . '
-                                            </div>
-                                            <div class="oxi-addons-style-preview-bottom-right">
-                                                ' . $button . '
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>';
-        }
-        return $render;
-    }
-
     /**
      * Generate safe path
      * @since v1.0.0
@@ -932,22 +851,6 @@ class ImageApi {
             $CLASS = new $cls( 'admin' );
             return $CLASS->template_css_render( $settings );
         endif;
-    }
-
-    public function download_web_files( $files ) {
-
-        $rawdata = $this->validate_post();
-        $URL = self::API . $rawdata . '/' . $this->styleid;
-        $request = wp_remote_request( $URL );
-        if ( ! is_wp_error( $request ) ) {
-            $response = json_decode( wp_remote_retrieve_body( $request ), true );
-        } else {
-            return $request->get_error_message();
-        }
-
-        $data = json_decode( $response, true );
-        if ( file_put_contents( $files, json_encode( $data ) ) ) {
-        }
     }
 
     public function fixed_data( $agr ) {
