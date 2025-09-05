@@ -295,12 +295,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "f103601b29efebd7ff4a1ca7b3eeea9e3336a2a2"
+                "reference": "f7c23a43eee861070ab4e88819a4e76a611c7e4f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/f103601b29efebd7ff4a1ca7b3eeea9e3336a2a2",
-                "reference": "f103601b29efebd7ff4a1ca7b3eeea9e3336a2a2",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/f7c23a43eee861070ab4e88819a4e76a611c7e4f",
+                "reference": "f7c23a43eee861070ab4e88819a4e76a611c7e4f",
                 "shasum": ""
             },
             "require": {
@@ -344,9 +344,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.6.1"
+                "source": "https://github.com/nikic/PHP-Parser/tree/master"
             },
-            "time": "2025-08-13T20:13:15+00:00"
+            "time": "2025-08-19T18:41:44+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -683,12 +683,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHPCSExtra.git",
-                "reference": "70f03c415e82a43271088a28ab4b2897e34c2f0c"
+                "reference": "639d1625f6ff27c616052c8478dd06eb41fd43a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSExtra/zipball/70f03c415e82a43271088a28ab4b2897e34c2f0c",
-                "reference": "70f03c415e82a43271088a28ab4b2897e34c2f0c",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSExtra/zipball/639d1625f6ff27c616052c8478dd06eb41fd43a5",
+                "reference": "639d1625f6ff27c616052c8478dd06eb41fd43a5",
                 "shasum": ""
             },
             "require": {
@@ -758,7 +758,7 @@
                     "type": "thanks_dev"
                 }
             ],
-            "time": "2025-08-10T00:40:35+00:00"
+            "time": "2025-08-18T02:06:20+00:00"
         },
         {
             "name": "phpcsstandards/phpcsutils",
@@ -766,12 +766,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHPCSUtils.git",
-                "reference": "f7eb16f2fa4237d5db9e8fed8050239bee17a9bd"
+                "reference": "0f6b8020bb218754b11e0e4845667b5176206b18"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSUtils/zipball/f7eb16f2fa4237d5db9e8fed8050239bee17a9bd",
-                "reference": "f7eb16f2fa4237d5db9e8fed8050239bee17a9bd",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSUtils/zipball/0f6b8020bb218754b11e0e4845667b5176206b18",
+                "reference": "0f6b8020bb218754b11e0e4845667b5176206b18",
                 "shasum": ""
             },
             "require": {
@@ -852,7 +852,7 @@
                     "type": "thanks_dev"
                 }
             ],
-            "time": "2025-08-10T01:04:45+00:00"
+            "time": "2025-08-25T20:42:19+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -1179,12 +1179,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "8a4cda11e4c9d2953a6b42d5ff35ad4c6a8baf5f"
+                "reference": "a59e49b0cc1ad46fb48ff03471b86e311a63bf43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/8a4cda11e4c9d2953a6b42d5ff35ad4c6a8baf5f",
-                "reference": "8a4cda11e4c9d2953a6b42d5ff35ad4c6a8baf5f",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a59e49b0cc1ad46fb48ff03471b86e311a63bf43",
+                "reference": "a59e49b0cc1ad46fb48ff03471b86e311a63bf43",
                 "shasum": ""
             },
             "require": {
@@ -1282,7 +1282,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-08-14T13:23:50+00:00"
+            "time": "2025-08-24T05:20:24+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -2290,12 +2290,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHP_CodeSniffer.git",
-                "reference": "916eb08bd9e2c0a27e2891c7a8494f9a29951b4c"
+                "reference": "ca606d9f60838b9a96ceb12dec7b935d5d64efce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/916eb08bd9e2c0a27e2891c7a8494f9a29951b4c",
-                "reference": "916eb08bd9e2c0a27e2891c7a8494f9a29951b4c",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/ca606d9f60838b9a96ceb12dec7b935d5d64efce",
+                "reference": "ca606d9f60838b9a96ceb12dec7b935d5d64efce",
                 "shasum": ""
             },
             "require": {
@@ -2367,7 +2367,7 @@
                     "type": "thanks_dev"
                 }
             ],
-            "time": "2025-08-12T00:26:48+00:00"
+            "time": "2025-08-21T23:53:01+00:00"
         },
         {
             "name": "theseer/tokenizer",

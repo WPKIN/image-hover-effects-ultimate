@@ -42,7 +42,7 @@
     <rule ref="WordPress.WP.I18n">
         <properties>
             <!-- Value: replace the text domain used. -->
-            <property name="text_domain" type="array" value="image-hover-effects-ultimate		"/>
+            <property name="text_domain" type="array" value="image-hover-effects-ultimate"/>
         </properties>
     </rule>
     <rule ref="WordPress.WhiteSpace.ControlStructureSpacing">
