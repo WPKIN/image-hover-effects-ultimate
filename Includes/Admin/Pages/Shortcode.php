@@ -1,13 +1,12 @@
 <?php
 
-namespace OXI_IMAGE_HOVER_PLUGINS\Page;
+namespace OXI_IMAGE_HOVER_PLUGINS\Includes\Admin\Pages;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
 class Shortcode {
-
 
     /**
      * Database Parent Table
@@ -41,6 +40,21 @@ class Shortcode {
     use \OXI_IMAGE_HOVER_PLUGINS\Helper\CSS_JS_Loader;
 
 
+    /**
+     * Constructor of Oxilab tabs Home Page
+     *
+     * @since 9.3.0
+     */
+    public function __construct() {
+        global $wpdb;
+        $this->wpdb = $wpdb;
+        $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
+        $this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
+        $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
+
+        $this->CSSJS_load();
+        $this->Render();
+    }
 
     public function Render() {
 		?>
@@ -153,7 +167,7 @@ class Shortcode {
 
     public function CSSJS_load() {
         $this->manual_import_style();
-        $this->admin_css_loader();
+        $this->admin_js();
         $this->admin_home();
         $this->admin_rest_api();
         apply_filters( 'oxi-image-hover-plugin/admin_menu', true );
@@ -297,19 +311,4 @@ class Shortcode {
 		<?php
     }
 
-    /**
-     * Constructor of Oxilab tabs Home Page
-     *
-     * @since 9.3.0
-     */
-    public function __construct() {
-        global $wpdb;
-        $this->wpdb = $wpdb;
-        $this->parent_table = $this->wpdb->prefix . 'image_hover_ultimate_style';
-        $this->child_table = $this->wpdb->prefix . 'image_hover_ultimate_list';
-        $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
-
-        $this->CSSJS_load();
-        $this->Render();
-    }
 }

@@ -50,7 +50,7 @@ trait CSS_JS_Loader {
 
 
     public function admin_elements_frontend_loader() {
-        $this->admin_css_loader();
+        $this->admin_js();
         wp_enqueue_script( 'jquery' );
         wp_enqueue_script( 'jquery-ui-core' );
         wp_enqueue_script( 'jquery-ui-widget' );

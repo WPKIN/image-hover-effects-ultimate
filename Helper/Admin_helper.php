@@ -37,11 +37,7 @@ trait Admin_helper {
             'Shortcode' => [
                 'name' => 'Shortcode',
                 'homepage' => 'oxi-image-hover-shortcode',
-            ],
-            'Addons' => [
-                'name' => 'Addons',
-                'homepage' => 'oxi-image-hover-ultimate-addons',
-            ],
+            ]
         ];
 
         $bgimage = OXI_IMAGE_HOVER_URL . 'image/sm-logo.png';
@@ -142,74 +138,6 @@ trait Admin_helper {
      */
     public function fixed_debug_data( $str ) {
         return bin2hex( $str );
-    }
-
-    public function Admin_Menu() {
-        $user_role = get_option( 'oxi_image_user_permission' );
-        $role_object = get_role( $user_role );
-        $first_key = '';
-        if ( isset( $role_object->capabilities ) && is_array( $role_object->capabilities ) ) {
-            reset( $role_object->capabilities );
-            $first_key = key( $role_object->capabilities );
-        } else {
-            $first_key = 'manage_options';
-        }
-        add_menu_page( 'Image Hover', 'Image Hover', $first_key, 'oxi-image-hover-ultimate', [ $this, 'Image_Parent' ] );
-        add_submenu_page( 'oxi-image-hover-ultimate', 'Image Hover', 'Image Hover', $first_key, 'oxi-image-hover-ultimate', [ $this, 'Image_Parent' ] );
-        add_submenu_page( 'oxi-image-hover-ultimate', 'Shortcode', 'Shortcode', $first_key, 'oxi-image-hover-shortcode', [ $this, 'Image_Shortcode' ] );
-        add_submenu_page( 'oxi-image-hover-ultimate', 'Settings', 'Settings', $first_key, 'oxi-image-hover-ultimate-settings', [ $this, 'Image_Settings' ] );
-        add_submenu_page( 'oxi-image-hover-ultimate', 'Support', 'Support', $first_key, 'image-hover-ultimate-support', [ $this, 'oxi_image_hover_support' ] );
-    }
-
-    public function custom_redirect() {
-    }
-
-    public function Image_Parent() {
-		global $wpdb;
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.NonceVerification.Recommended
-        $effects = isset( $_GET['effects'] ) && ! empty( $_GET['effects'] ) ? ucfirst( sanitize_text_field( wp_unslash( $_GET['effects'] ) ) ) : '';
-        // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.NonceVerification.Recommended
-		$styleid = isset( $_GET['styleid'] ) && ! empty( $_GET['styleid'] ) ? intval( $_GET['styleid'] ) : '';
-        if ( ! empty( $effects ) && ! empty( $styleid ) ) :
-			$style = $wpdb->get_row(
-                $wpdb->prepare(
-                    'SELECT style_name FROM ' . esc_sql( $this->parent_table ) . ' WHERE id = %d',
-                    (int) $styleid
-                ),
-                ARRAY_A
-			);
-            $name = explode( '-', $style['style_name'] );
-            if ( $effects != ucfirst( $name[0] ) ) :
-                wp_die( esc_html( 'Invalid URL.' ) );
-            endif;
-            $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $effects . '\Admin\\Effects' . $name[1];
-            if ( class_exists( $cls ) ) :
-                new $cls();
-            else :
-                wp_die( esc_html( 'Invalid URL.' ) );
-            endif;
-        elseif ( ! empty( $effects ) ) :
-            $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $effects . '\\' . $effects . '';
-            if ( class_exists( $cls ) ) :
-                new $cls();
-            else :
-                wp_die( esc_html( 'Invalid URL.' ) );
-            endif;
-        else :
-            new \OXI_IMAGE_HOVER_PLUGINS\Page\Admin();
-        endif;
-    }
-
-    public function Image_Shortcode() {
-        new \OXI_IMAGE_HOVER_PLUGINS\Page\Shortcode();
-    }
-
-    public function Image_Settings() {
-        new \OXI_IMAGE_HOVER_PLUGINS\Page\Settings();
-    }
-
-    public function oxi_image_hover_support() {
-        new \OXI_IMAGE_HOVER_PLUGINS\Page\Welcome();
     }
 
     /**
@@ -340,8 +268,6 @@ trait Admin_helper {
         endif;
         return $data;
     }
-
-
 
     public function Admin_Filters() {
         add_filter( $this->fixed_data( '6f78692d696d6167652d686f7665722d737570706f72742d616e642d636f6d6d656e7473' ), [ $this, $this->fixed_data( '537570706f7274416e64436f6d6d656e7473' ) ] );

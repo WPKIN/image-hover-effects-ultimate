@@ -1,5 +1,5 @@
 <?php
-namespace OXI_IMAGE_HOVER_PLUGINS\Page;
+namespace OXI_IMAGE_HOVER_PLUGINS\Includes\Admin\Pages;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -80,53 +80,76 @@ class Admin {
     }
 
     public function Elements_Render() {
+		$is_pro = apply_filters( 'oxi-image-hover-plugin-version', false ) == false ? 'Premium' : '';
         $Elements = [
-            'Image-Effects' => [
+            'Image Effects' => [
                 'button' => [
 					'name' => 'button-effects',
 					'version' => 1.0,
+					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/button-effects.svg',
+					'status' => 'Popular'
 				],
                 'general' => [
 					'name' => 'general-effects',
 					'version' => 1.0,
+					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/general-effects.svg',
+					'status' => ''
 				],
                 'square' => [
 					'name' => 'square-effects',
 					'version' => 1.0,
+					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/square-effects.svg',
+					'status' => 'New'
 				],
                 'caption' => [
 					'name' => 'caption-effects',
 					'version' => 1.0,
+					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/caption-effects.svg',
+					'status' => ''
 				],
                 'flipbox' => [
 					'name' => 'flipbox-effects',
 					'version' => 1.0,
+					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/flipbox-effects.svg',
+					'status' => 'Popular'
 				],
                 'magnifier' => [
 					'name' => 'image-magnifier',
 					'version' => 1.0,
+					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/image-magnifier.svg',
+					'status' => 'Updated'
 				],
                 'comparison' => [
 					'name' => 'image-comparison',
 					'version' => 1.0,
+					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/image-comparison.svg',
+					'status' => ''
 				],
                 'lightbox' => [
 					'name' => 'image-lightbox',
 					'version' => 1.0,
+					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/image-lightbox.svg',
+					'status' => 'Updated'
 				],
             ],
             'Extension' => [
                 'display' => [
                     'name' => 'display-post',
                     'version' => 1.0,
+					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/display-post.svg',
+					'status' => $is_pro
                 ],
                 'carousel' => [
                     'name' => 'carousel-slider',
                     'version' => 1.0,
+					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/carousel-slider.svg',
+					'status' => $is_pro
                 ],
                 'filter' => [
                     'name' => 'filter-&-sorting',
                     'version' => 1.0,
+					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/filter-sorting.svg',
+					'status' => $is_pro
                 ],
             ],
         ];
@@ -150,6 +173,7 @@ class Admin {
                             </div>
                         </div>
                     </div>
+					<div class="oxi-addons-elements-list">
                     <?php
                     $elementshtml = '';
 
@@ -158,23 +182,23 @@ class Admin {
 						?>
                         <div class="oxi-addons-shortcode-import" id="<?php echo esc_attr( $value['name'] ); ?>" oxi-addons-search="<?php echo esc_html( $value['name'] ); ?>">
                             <a class="addons-pre-check" href="<?php echo esc_url( admin_url( $oxilink ) ); ?>" sub-type="<?php echo ( apply_filters( 'oxi-image-hover-plugin-version', false ) == false && $key == 'Extension' ) ? 'premium' : ''; ?>">
-                            <div class="oxi-addons-shortcode-import-top">
-                                    <?php
-                                    $ifco = array_key_exists( 'icon', $value ) ? $value['icon'] : 'fas fa-cloud-download-alt';
-                                    $this->font_awesome_render( $ifco );
-                                    ?>
-
+                            <?php if ( $value['status'] ) {
+								$status = '';
+								if ( 'Premium' === $value['status'] ) {
+									$status = 'pro-status';
+								} elseif ( 'Updated' === $value['status'] ) {
+									$status = 'Updated-status';
+								}
+							 ?>
+								<div class="oxi-addons-element-status <?php echo esc_attr( $status ); ?>"><?php echo esc_html($value['status']); ?></div>
+							<?php } ?>
+							<div class="oxi-addons-shortcode-import-top">
+									<div class="oxi-addons-image-hover-icon">
+										 <img src="<?php echo $value['icon']; ?>" alt="">
+									</div>
                                 </div>
                                 <div class="oxi-addons-shortcode-import-bottom">
-                                    <span><?php $this->name_converter( $value['name'] ); ?>
-                                        <?php
-                                        if ( apply_filters( 'oxi-image-hover-plugin-version', false ) == false && $key == 'Extension' ) :
-											?>
-                                            <b style="color: red;font-weight: 600;font-size: 12px;">Pro Only</b>
-											<?php
-                                        endif;
-                                        ?>
-                                        </span>
+                                    <span><?php $this->name_converter( $value['name'] ); ?> </span>
                                 </div>
                             </a>
                         </div>
@@ -182,6 +206,7 @@ class Admin {
                     }
                 }
                 ?>
+				</div>
             </div>
         </div>
 		<?php
@@ -198,7 +223,7 @@ class Admin {
     }
 
     public function CSSJS_load() {
-        $this->admin_css_loader();
+        $this->admin_js();
         $this->admin_home();
         $this->admin_rest_api();
         apply_filters( 'oxi-image-hover-plugin/admin_menu', true );

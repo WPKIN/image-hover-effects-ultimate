@@ -43,7 +43,7 @@ if ( ! function_exists( 'wpkin_iheu_v' ) ) {
 					'has_paid_plans'      => true,
 					'menu'                => [
 						'slug'           => 'oxi-image-hover-ultimate',
-						'first-path'     => 'admin.php?page=image-hover-ultimate-support',
+						'first-path'     => 'admin.php?page=image-hover-ultimate-getting-started',
 						'contact'        => false,
 						'support'        => false,
 						'pricing'        => false,
@@ -146,9 +146,12 @@ if ( ! class_exists( 'WPKin_Imagehover' ) ) {
 		 * @return void
 		 */
 		public function init_plugin() {
+
+			new OXI_IMAGE_HOVER_PLUGINS\Includes\Assets();
 			new OXI_IMAGE_HOVER_PLUGINS\Classes\ImageApi();
 
 			if ( is_admin() ) {
+				new OXI_IMAGE_HOVER_PLUGINS\Includes\Admin();
 				$this->User_Admin();
 				$this->User_Reviews();
 			}
@@ -204,7 +207,6 @@ if ( ! class_exists( 'WPKin_Imagehover' ) ) {
 		}
 
 		public function User_Admin() {
-			add_action( 'admin_menu', [ $this, 'Admin_Menu' ] );
 			add_action( 'admin_head', [ $this, 'Admin_Icon' ] );
 		}
 

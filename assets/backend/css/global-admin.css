@@ -1,0 +1,12 @@
+
+li#toplevel_page_oxi-image-hover-ultimate .wp-submenu a[href="admin.php?page=image-hover-ultimate-getting-started"] {
+    border-top: 1px solid hsla(0deg, 0%, 100%, .2);
+    border-bottom: 1px solid hsla(0deg, 0%, 100%, .2);
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    margin: 6px 0;
+}
+li#toplevel_page_oxi-image-hover-ultimate .wp-submenu a[href="admin.php?page=image-hover-ultimate-getting-started"] {
+    color: #f5cd47 !important;
+}

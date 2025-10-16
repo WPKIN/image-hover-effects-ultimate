@@ -434,7 +434,7 @@ class Create {
 
 		$this->JSON_DATA();
 		$this->pre_clecked = array_flip( $this->pre_active );
-		$this->admin_css_loader();
+		$this->admin_js();
 		$this->admin_rest_api();
 		$this->pre_active_check();
 		apply_filters( 'oxi-image-hover-plugin/admin_menu', true );

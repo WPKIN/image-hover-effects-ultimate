@@ -1,6 +1,6 @@
 <?php
 
-namespace OXI_IMAGE_HOVER_PLUGINS\Page;
+namespace OXI_IMAGE_HOVER_PLUGINS\Includes\Admin\Pages;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -39,7 +39,7 @@ class Settings {
     }
 
     public function css_loader() {
-        $this->admin_css_loader();
+        $this->admin_js();
         wp_enqueue_script(
             'oxi-image-hover-settings',
             OXI_IMAGE_HOVER_URL . 'assets/backend/js/settings.js',
