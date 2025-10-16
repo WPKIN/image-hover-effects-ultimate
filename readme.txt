@@ -1,7 +1,7 @@
 === Image Hover Effects Ultimate ===
 Contributors: wpkin, richardmallick
 Donate link:  https://wpkin.com
-Tags: responsive image effects, awesome css3 effects, awesome image effects,  css3 effects, top image effects for wordpress. 
+Tags: responsive image effects, awesome css3 effects, awesome image effects, css3 effects, top image effects for wordpress. 
 Requires at least: 6.2
 Tested up to: 6.8
 Requires PHP: 7.4
