@@ -115,7 +115,7 @@ class Effects1 extends Public_Render {
                             data-function="__rest_api_post" data-args='<?php echo esc_attr( json_encode( $args ) ); ?>'
                             data-settings='<?php echo esc_attr( json_encode( $settings ) ); ?>' data-page="1">
                         <div class="oxi-image-hover-loader button__loader"></div>
-                        <span><?php echo esc_html( $style['display_post_load_button_text'] ); ?></span>
+                        <span><?php $this->text_render( $style['display_post_load_button_text'] ); ?></span>
                     </button>
                     </div>
                     <?php

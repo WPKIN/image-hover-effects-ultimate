@@ -9,198 +9,571 @@ class Changelog {
         // Full changelog array
         $logs = [
             [
-                'version' => '2.10.2',
-                'date' => '05-09-2025',
-                'sections' => [
-                    'fix' => [
-                        'Fixed 1596 characters of unexpected output during activation issue.',
-                    ],
-                ],
-            ],
-            [
-                'version' => '2.10.1',
-                'date' => '05-09-2025',
+                'version' => '9.10.4',
+                'date' => '16-10-2025',
                 'sections' => [
                     'enhancement' => [
-						'Improved plugin structure for better readability and maintainability.',
-						'Updated the Getting Started page for clearer instructions.',
-					],
-                    'fix' => [
-                        'Fixed security issue.',
-                    ],
-                ],
-            ],
-            [
-                'version' => '2.10.0',
-                'date' => '15-08-2025',
-                'sections' => [
-                    'new' => [
-                        'Added Getting Started page.',
-                        'Added Freemius for license management.',
-                    ],
-                ],
-            ],
-            [
-                'version' => '2.9.8',
-                'date' => '10-07-2025',
-                'sections' => [
-                    'enhancement' => [
-                        'Tested compatibility with WordPress 6.8.',
+                        'Update UI/UX.',
+                        'Added Getting started page.',
+                        'Refactored coding structure.',
+                        'Enhanced error handling and debugging throughout shortcode system.',
+                        'Improved input validation for all shortcode rendering.',
                     ],
                     'fix' => [
-                        'Fixed shortcode list issue.',
+                        'Fixed HTML tags not rendering in Lightbox title and description fields.',
+                        'Fixed HTML tags not rendering in button text across all modules.',
+                        'Fixed Visual Composer integration - dropdown now properly passes Style ID.',
+                        'Fixed Widget fatal error - corrected Bootstrap class reference.',
+                        'Fixed Widget block editor error with proper validation.',
+                        'Fixed PHP 8.2 deprecation warning for dynamic properties.',
                     ],
                 ],
             ],
             [
-                'version' => '2.9.7',
-                'date' => '20-06-2025',
+                'version' => '9.10.3',
+                'date' => '15-03-2025',
                 'sections' => [
                     'enhancement' => [
-                        'Tested compatibility with WordPress 6.7.',
+                        'Improved input sanitization and escaping throughout the plugin.',
+                        'Updated database queries to use $wpdb->prepare() for better security.',
+                        'Minor performance and code quality improvements.',
                     ],
                     'fix' => [
-                        'Fixed data table search issue.',
+                        'Fixed all reported security issues.',
                     ],
                 ],
             ],
             [
-                'version' => '2.9.6',
-                'date' => '05-05-2025',
+                'version' => '9.10.2',
+                'date' => '20-12-2024',
                 'sections' => [
-                    'enhancement' => [
-                        'Tested compatibility with WordPress 6.6.2.',
-                    ],
                     'fix' => [
-                        'Fixed Ajax bugs.',
+                        'Fixed Demo image not displaying issue.',
                     ],
                 ],
             ],
             [
-                'version' => '2.9.5',
-                'date' => '01-04-2025',
+                'version' => '9.10.1',
+                'date' => '05-11-2024',
                 'sections' => [
-                    'enhancement' => [
-                        'Tested compatibility with WordPress 6.4.3.',
-                    ],
                     'fix' => [
-                        'Fixed Ajax bugs.',
+                        'Fixed Redirect and not allowed issue.',
                     ],
                 ],
             ],
             [
-                'version' => '2.9.3',
-                'date' => '12-02-2025',
-                'sections' => [
-                    'enhancement' => [
-                        'Tested compatibility with WordPress 6.3.0.',
-                    ],
-                    'fix' => [
-                        'Fixed Ajax bugs.',
-                    ],
-                ],
-            ],
-            [
-                'version' => '2.9.2',
-                'date' => '25-01-2025',
-                'sections' => [
-                    'enhancement' => [
-                        'Tested compatibility with WordPress 6.2.2.',
-                    ],
-                    'fix' => [
-                        'Fixed some settings issues.',
-                    ],
-                ],
-            ],
-            [
-                'version' => '2.9.1',
-                'date' => '10-01-2025',
-                'sections' => [
-                    'enhancement' => [
-                        'Tested compatibility with WordPress 6.2.0.',
-                    ],
-                    'fix' => [
-                        'Fixed Ajax bugs.',
-                    ],
-                ],
-            ],
-            [
-                'version' => '2.9.0',
-                'date' => '15-12-2024',
-                'sections' => [
-                    'enhancement' => [
-                        'Tested compatibility with WordPress 6.1.1.',
-                    ],
-                    'fix' => [
-                        'Fixed echo bugs.',
-                    ],
-                ],
-            ],
-            [
-                'version' => '2.8.5',
-                'date' => '01-11-2024',
-                'sections' => [
-                    'enhancement' => [
-                        'Tested compatibility with WordPress 6.0.3.',
-                        'Fixed some settings issues.',
-                    ],
-                ],
-            ],
-            [
-                'version' => '2.8.4',
-                'date' => '15-10-2024',
-                'sections' => [
-                    'enhancement' => [
-                        'Tested compatibility with WordPress 6.0.1.',
-                        'Fixed some settings issues.',
-                    ],
-                ],
-            ],
-            [
-                'version' => '2.8.3',
-                'date' => '01-10-2024',
-                'sections' => [
-                    'enhancement' => [
-                        'Tested compatibility with WordPress 6.0.0.',
-                    ],
-                    'new' => [
-                        'Added alt tag for images.',
-                    ],
-                ],
-            ],
-            [
-                'version' => '2.8.2',
+                'version' => '9.10.0',
                 'date' => '15-09-2024',
                 'sections' => [
-                    'fix' => [
-                        'Solved HTML issues.',
-                    ],
-                ],
-            ],
-            [
-                'version' => '2.8.0',
-                'date' => '01-09-2024',
-                'sections' => [
                     'new' => [
-                        'Added support for HTML tags.',
+                        'Added Freemius for license.',
+                        'Added PSR4 Namespace and Autoloading.',
                     ],
-                ],
-            ],
-            [
-                'version' => '2.7.1',
-                'date' => '15-08-2024',
-                'sections' => [
                     'fix' => [
-                        'Fixed image hover effect issues.',
+                        'Fixed responsive issues.',
                     ],
                 ],
             ],
             [
-                'version' => '2.7.0',
-                'date' => '01-08-2024',
+                'version' => '9.9.7',
+                'date' => '25-07-2024',
                 'sections' => [
                     'enhancement' => [
-                        'Updated Image Hover modules.',
+                        'Compatible with WordPress 6.8.',
+                    ],
+                    'fix' => [
+                        'Fixed Shortcode listing issue.',
+                        'Fixed Icon displaying issue.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.9.6',
+                'date' => '10-05-2024',
+                'sections' => [
+                    'enhancement' => [
+                        'Compatible with WordPress 6.7.2.',
+                    ],
+                    'fix' => [
+                        'Fixed color change issue.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.9.5',
+                'date' => '20-03-2024',
+                'sections' => [
+                    'enhancement' => [
+                        'Compatible with WordPress 6.7.',
+                    ],
+                    'fix' => [
+                        'Fixed Data Table search issue.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.9.4',
+                'date' => '15-01-2024',
+                'sections' => [
+                    'enhancement' => [
+                        'Compatible with WordPress 6.6.2.',
+                    ],
+                    'fix' => [
+                        'Fixed Ajax Bugs.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.9.3',
+                'date' => '20-11-2023',
+                'sections' => [
+                    'enhancement' => [
+                        'Update Admin Ajax.',
+                        'Compatible with WordPress 6.4.3.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.9.1',
+                'date' => '15-09-2023',
+                'sections' => [
+                    'enhancement' => [
+                        'Update Admin Ajax.',
+                        'Compatible with WordPress 6.3.0.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.9.0',
+                'date' => '05-07-2023',
+                'sections' => [
+                    'enhancement' => [
+                        'Compatible with WordPress 6.2.2.',
+                    ],
+                    'fix' => [
+                        'Custom CSS issues.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.8.6',
+                'date' => '20-05-2023',
+                'sections' => [
+                    'enhancement' => [
+                        'Update Admin Ajax.',
+                        'Compatible with WordPress 6.2.0.',
+                    ],
+                    'fix' => [
+                        'Solved json files issue.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.8.5',
+                'date' => '10-03-2023',
+                'sections' => [
+                    'enhancement' => [
+                        'Compatible with WordPress 6.1.1.',
+                    ],
+                    'fix' => [
+                        'Solve XSS Issues.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.8.4',
+                'date' => '25-01-2023',
+                'sections' => [
+                    'enhancement' => [
+                        'Compatible with WordPress 6.0.4.',
+                    ],
+                    'fix' => [
+                        'Solve Magnifier issues.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.8.3',
+                'date' => '15-11-2022',
+                'sections' => [
+                    'enhancement' => [
+                        'Compatible with WordPress 6.0.1.',
+                    ],
+                    'fix' => [
+                        'Solve settings issues.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.8.2',
+                'date' => '20-09-2022',
+                'sections' => [
+                    'enhancement' => [
+                        'Compatible with WordPress 6.0.',
+                    ],
+                    'new' => [
+                        'Add alt tag.',
+                    ],
+                    'fix' => [
+                        'Solve templates issues.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.8.1',
+                'date' => '05-07-2022',
+                'sections' => [
+                    'new' => [
+                        'Support HTML.',
+                        'Support Shortcode.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.8.0',
+                'date' => '20-05-2022',
+                'sections' => [
+                    'enhancement' => [
+                        'Modify Admin.',
+                        'Add Validation to render html.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.7.3',
+                'date' => '10-03-2022',
+                'sections' => [
+                    'fix' => [
+                        'Fixed Escape Issues.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.7.2',
+                'date' => '25-01-2022',
+                'sections' => [
+                    'new' => [
+                        'HTML Supported.',
+                    ],
+                    'fix' => [
+                        'Fixed Admin Bugs.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.7.1',
+                'date' => '15-11-2021',
+                'sections' => [
+                    'enhancement' => [
+                        'Modify Admin Request.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.7.0',
+                'date' => '20-09-2021',
+                'sections' => [
+                    'enhancement' => [
+                        'Modify Admin Request.',
+                        'Admin Query.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.6.2',
+                'date' => '10-07-2021',
+                'sections' => [
+                    'enhancement' => [
+                        'Update Rest API Request.',
+                        'Admin Query.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.6.1',
+                'date' => '25-05-2021',
+                'sections' => [
+                    'enhancement' => [
+                        'Edit Clone Delete Button Modify.',
+                    ],
+                    'fix' => [
+                        'Solved Ajax Load.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.6.0',
+                'date' => '15-03-2021',
+                'sections' => [
+                    'new' => [
+                        'Return Clone Button.',
+                        'Add Ajax Load.',
+                        'Dynamic Content.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.5.3',
+                'date' => '20-01-2021',
+                'sections' => [
+                    'enhancement' => [
+                        'Modify Oxilab Template.',
+                    ],
+                    'fix' => [
+                        'Solved After Property.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.5.2',
+                'date' => '10-11-2020',
+                'sections' => [
+                    'new' => [
+                        'Add Web Import Options.',
+                        'View Oxilab Template.',
+                    ],
+                    'enhancement' => [
+                        'Modify Admin Panel.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.5.1',
+                'date' => '25-09-2020',
+                'sections' => [
+                    'new' => [
+                        'Add JSON Import Export Options.',
+                    ],
+                    'enhancement' => [
+                        'Regular Update.',
+                        'Support for 5.7.2 version.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.5.0',
+                'date' => '15-07-2020',
+                'sections' => [
+                    'new' => [
+                        'Add 2 new Layouts into General Effects.',
+                    ],
+                    'enhancement' => [
+                        'Upgrade Responsive Style.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.4.3',
+                'date' => '05-05-2020',
+                'sections' => [
+                    'enhancement' => [
+                        'Upgrade Admin Issue.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.4.1',
+                'date' => '20-03-2020',
+                'sections' => [
+                    'enhancement' => [
+                        'Upgrade Admin Issue.',
+                    ],
+                    'fix' => [
+                        'Extension Bugs.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.4.0',
+                'date' => '10-01-2020',
+                'sections' => [
+                    'enhancement' => [
+                        'Upgrade Docs Issue.',
+                    ],
+                    'fix' => [
+                        'Carousel Bugs.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.3.4',
+                'date' => '25-11-2019',
+                'sections' => [
+                    'enhancement' => [
+                        'Upgrade Nested CSS Issue.',
+                    ],
+                    'fix' => [
+                        'Fixed Extension Bugs.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.3.3',
+                'date' => '15-09-2019',
+                'sections' => [
+                    'enhancement' => [
+                        'Upgrade Visual Composer Issues.',
+                    ],
+                    'fix' => [
+                        'Fixed Bugs.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.3.2',
+                'date' => '05-07-2019',
+                'sections' => [
+                    'enhancement' => [
+                        'Upgrade Modules.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.3.1',
+                'date' => '20-05-2019',
+                'sections' => [
+                    'enhancement' => [
+                        'Upgrade Database Issue.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.3',
+                'date' => '10-03-2019',
+                'sections' => [
+                    'new' => [
+                        'New Admin panel.',
+                        '8 type of Effects.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.2',
+                'date' => '25-01-2019',
+                'sections' => [
+                    'fix' => [
+                        'Fixed Bugs.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.1',
+                'date' => '15-11-2018',
+                'sections' => [
+                    'fix' => [
+                        'Fixed Bugs with page builders.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '9.0',
+                'date' => '05-09-2018',
+                'sections' => [
+                    'fix' => [
+                        'Fixed Bugs with Update Admin.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '8.9',
+                'date' => '20-07-2018',
+                'sections' => [
+                    'fix' => [
+                        'Fixed with Gutenberg.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '8.8',
+                'date' => '10-05-2018',
+                'sections' => [
+                    'new' => [
+                        'Added Font Awesome upto 7.1.',
+                    ],
+                    'fix' => [
+                        'Fixed Bugs.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '8.7',
+                'date' => '25-03-2018',
+                'sections' => [
+                    'fix' => [
+                        'Fixed Bugs.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '8.6',
+                'date' => '15-01-2018',
+                'sections' => [
+                    'new' => [
+                        'Added Font Awesome 5.5.',
+                    ],
+                    'fix' => [
+                        'Fixed Bugs.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '8.5',
+                'date' => '20-11-2017',
+                'sections' => [
+                    'fix' => [
+                        'Fixed Bugs.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '8.4',
+                'date' => '10-09-2017',
+                'sections' => [
+                    'fix' => [
+                        'Fixed Bugs.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '8.3',
+                'date' => '25-07-2017',
+                'sections' => [
+                    'new' => [
+                        'Add image Rearrange Options.',
+                    ],
+                    'enhancement' => [
+                        'Update font Awesome.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '8.2',
+                'date' => '15-05-2017',
+                'sections' => [
+                    'new' => [
+                        'Add Mobile or Touch Device Behavior.',
+                    ],
+                    'fix' => [
+                        'Solved Some Responsive Data.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '8.1',
+                'date' => '05-03-2017',
+                'sections' => [
+                    'new' => [
+                        'Add License Option.',
+                        'User Capabilities.',
+                    ],
+                ],
+            ],
+            [
+                'version' => '8.0',
+                'date' => '20-01-2017',
+                'sections' => [
+                    'enhancement' => [
+                        'Customize Responsive Data.',
                     ],
                 ],
             ],

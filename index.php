@@ -76,6 +76,13 @@ if ( ! class_exists( 'WPKin_Imagehover' ) ) {
 		use \OXI_IMAGE_HOVER_PLUGINS\Helper\Admin_helper;
 
 		/**
+		 * WordPress Database Object
+		 *
+		 * @since 9.3.0
+		 */
+		public $wpdb;
+
+		/**
 		 * Database Parent Table
 		 *
 		 * @since 9.3.0

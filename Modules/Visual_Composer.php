@@ -28,20 +28,41 @@ class Visual_Composer {
     public $parent_table;
 
     public function iheu_oxi_VC_shortcode( $atts ) {
-        extract(
-            shortcode_atts(
-                [
-					'id' => '',
-				], $atts
-            )
+        $atts = shortcode_atts(
+            [
+				'id' => '',
+			], 
+            $atts,
+            'iheu_oxi_VC'
         );
-        $styleid = $atts['id'];
+        
+        // Visual Composer passes the value, convert to integer
+        $styleid = ! empty( $atts['id'] ) ? absint( $atts['id'] ) : 0;
+        
+        if ( empty( $styleid ) ) {
+            if ( current_user_can( 'manage_options' ) ) {
+                return '<p style="color:red;">Visual Composer Image Hover: No Style ID selected</p>';
+            }
+            return '';
+        }
+        
         ob_start();
-        \OXI_IMAGE_HOVER_PLUGINS\Classes\Bootstrap::instance()->shortcode_render( $styleid, 'user' );
+        if ( function_exists( 'wpkin_imagehover' ) && wpkin_imagehover() ) {
+            wpkin_imagehover()->shortcode_render( $styleid, 'user' );
+        } else {
+            if ( current_user_can( 'manage_options' ) ) {
+                echo '<p style="color:red;">Visual Composer Image Hover: Plugin not properly initialized</p>';
+            }
+        }
         return ob_get_clean();
     }
 
     public function iheu_oxi_VC_extension() {
+		// Check if vc_map function exists (Visual Composer is active)
+		if ( ! function_exists( 'vc_map' ) ) {
+			return;
+		}
+		
 		global $wpdb;
 
 		// Use caching to satisfy PHPCS NoCaching warning
@@ -57,26 +78,37 @@ class Visual_Composer {
 		}
 
 		$vcdata = [];
-		if ( ! empty( $data ) ) {
+		if ( ! empty( $data ) && is_array( $data ) ) {
 			foreach ( $data as $value ) {
-				$vcdata[ $value['id'] ] = 'ID: ' . $value['id']; // Optional: give a readable label
+				if ( isset( $value['id'] ) ) {
+					// Visual Composer format: array key = display text, array value = actual value to save
+					$label = 'ID: ' . $value['id'] . ( ! empty( $value['name'] ) ? ' - ' . $value['name'] : '' );
+					$vcdata[ $label ] = $value['id'];
+				}
 			}
+		}
+		
+		// Add a default option if no styles exist
+		if ( empty( $vcdata ) ) {
+			$vcdata = [ esc_html__( 'No styles available', 'image-hover-effects-ultimate' ) => '' ];
 		}
 
 		vc_map(
 			[
-				'name'     => esc_html__( 'Image Hover Ultimate', 'image-hover-effects-ultimate' ),
-				'base'     => 'iheu_oxi_VC',
-				'category' => esc_html__( 'Content', 'image-hover-effects-ultimate' ),
-				'params'   => [
+				'name'        => esc_html__( 'Image Hover Ultimate', 'image-hover-effects-ultimate' ),
+				'base'        => 'iheu_oxi_VC',
+				'category'    => esc_html__( 'Content', 'image-hover-effects-ultimate' ),
+				'description' => esc_html__( 'Display Image Hover Effects', 'image-hover-effects-ultimate' ),
+				'icon'        => 'icon-wpb-image-hover',
+				'params'      => [
 					[
 						'type'        => 'dropdown',
-						'heading'     => esc_html__( 'Image Hover Select', 'image-hover-effects-ultimate' ),
+						'heading'     => esc_html__( 'Select Image Hover Style', 'image-hover-effects-ultimate' ),
 						'param_name'  => 'id',
 						'value'       => $vcdata,
 						'save_always' => true,
-						'description' => esc_html__( 'Select your Image Hover ID', 'image-hover-effects-ultimate' ),
-						'group'       => esc_html__( 'Settings', 'image-hover-effects-ultimate' ),
+						'description' => esc_html__( 'Select your Image Hover Style ID', 'image-hover-effects-ultimate' ),
+						'admin_label' => true,
 					],
 				],
 			]

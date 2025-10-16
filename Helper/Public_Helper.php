@@ -51,48 +51,87 @@ trait Public_Helper {
 
     public function shortcode_render( $styleid, $user ) {
 		global $wpdb;
-        if ( ! empty( $styleid ) && ! empty( $user ) && (int) $styleid ) :
-			$style = $wpdb->get_row(
+		
+		// Validate inputs
+		if ( empty( $styleid ) ) {
+			if ( current_user_can( 'manage_options' ) ) {
+				echo '<p style="color:red;">Image Hover: No Style ID provided</p>';
+			}
+			return;
+		}
+		
+		if ( empty( $user ) ) {
+			if ( current_user_can( 'manage_options' ) ) {
+				echo '<p style="color:red;">Image Hover: Invalid user parameter</p>';
+			}
+			return;
+		}
+		
+		$styleid = absint( $styleid );
+		
+		if ( $styleid === 0 ) {
+			if ( current_user_can( 'manage_options' ) ) {
+				echo '<p style="color:red;">Image Hover: Invalid Style ID (must be a positive number)</p>';
+			}
+			return;
+		}
+		
+		$style = $wpdb->get_row(
+			$wpdb->prepare(
+				'SELECT * FROM ' . esc_sql( $this->parent_table ) . ' WHERE id = %d',
+				$styleid
+			),
+			ARRAY_A
+		);
+
+		if ( ! is_array( $style ) || empty( $style ) ) {
+			if ( current_user_can( 'manage_options' ) ) {
+				echo '<p style="color:red;">Image Hover: Style ID ' . esc_html( $styleid ) . ' not found in database</p>';
+			} else {
+				echo '<p>Shortcode Deleted, kindly add correct Shortcode</p>';
+			}
+			return;
+		}
+		
+		if ( ! array_key_exists( 'rawdata', $style ) ) {
+			$Installation = new \OXI_IMAGE_HOVER_PLUGINS\Classes\Installation();
+			$Installation->plugin_upgrade_hook();
+		}
+		
+		$rawdata = json_decode( stripslashes( $style['rawdata'] ), true );
+
+		// Check if this is a dynamic/carousel style
+		if ( ( ( is_array( $rawdata ) && array_key_exists( 'image_hover_dynamic_content', $rawdata ) && $rawdata['image_hover_dynamic_content'] == 'yes' ) ||
+			( is_array( $rawdata ) && array_key_exists( 'image_hover_dynamic_load', $rawdata ) && $rawdata['image_hover_dynamic_load'] == 'yes' ) ||
+			( is_array( $rawdata ) && array_key_exists( 'image_hover_dynamic_carousel', $rawdata ) && $rawdata['image_hover_dynamic_carousel'] == 'yes' ) ) && apply_filters( 'oxi-image-hover-plugin-version', false ) ) {
+			
+			$C = '\OXI_IMAGE_HOVER_PLUGINS\Modules\Compailer';
+			if ( class_exists( $C ) ) {
+				new $C( $style, [], $user );
+			} elseif ( current_user_can( 'manage_options' ) ) {
+				echo '<p style="color:red;">Image Hover: Compailer class not found</p>';
+			}
+			
+		} else {
+			// Get child elements
+			$child = $wpdb->get_results(
 				$wpdb->prepare(
-					'SELECT * FROM ' . esc_sql( $this->parent_table ) . ' WHERE id = %d',
-					(int) $styleid
+					'SELECT * FROM ' . esc_sql( $this->child_table ) . ' WHERE styleid = %d ORDER BY id ASC',
+					$styleid
 				),
 				ARRAY_A
 			);
 
-            if ( ! is_array( $style ) ) :
-                echo '<p> Shortcode Deleted, kindly add currect Shortcode</p>';
-                return;
-            endif;
-            if ( ! array_key_exists( 'rawdata', $style ) ) :
-                $Installation = new \OXI_IMAGE_HOVER_PLUGINS\Classes\Installation();
-                $Installation->plugin_upgrade_hook();
-            endif;
-            $rawdata = json_decode( stripslashes( $style['rawdata'] ), true );
-
-            if ( ( ( is_array( $rawdata ) && array_key_exists( 'image_hover_dynamic_content', $rawdata ) && $rawdata['image_hover_dynamic_content'] == 'yes' ) ||
-                ( is_array( $rawdata ) && array_key_exists( 'image_hover_dynamic_load', $rawdata ) && $rawdata['image_hover_dynamic_load'] == 'yes' ) ||
-                ( is_array( $rawdata ) && array_key_exists( 'image_hover_dynamic_carousel', $rawdata ) && $rawdata['image_hover_dynamic_carousel'] == 'yes' ) ) && apply_filters( 'oxi-image-hover-plugin-version', false ) ) :
-                $C = '\OXI_IMAGE_HOVER_PLUGINS\Modules\Compailer';
-                if ( class_exists( $C ) ) :
-                    new $C( $style, [], $user );
-                endif;
-            else :
-				$child = $wpdb->get_results(
-                    $wpdb->prepare(
-                        'SELECT * FROM ' . esc_sql( $this->child_table ) . ' WHERE styleid = %d ORDER BY id ASC',
-                        (int) $styleid
-                    ),
-                    ARRAY_A
-				);
-
-                $name = explode( '-', ucfirst( $style['style_name'] ) );
-                $C = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst( $name[0] ) . '\Render\Effects' . $name[1];
-                if ( class_exists( $C ) ) :
-                    new $C( $style, $child, $user );
-                endif;
-            endif;
-        endif;
+			// Build the render class name
+			$name = explode( '-', ucfirst( $style['style_name'] ) );
+			$C = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst( $name[0] ) . '\Render\Effects' . $name[1];
+			
+			if ( class_exists( $C ) ) {
+				new $C( $style, $child, $user );
+			} elseif ( current_user_can( 'manage_options' ) ) {
+				echo '<p style="color:red;">Image Hover: Render class not found: ' . esc_html( $C ) . '</p>';
+			}
+		}
     }
 
 

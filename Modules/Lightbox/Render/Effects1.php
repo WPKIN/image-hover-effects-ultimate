@@ -117,11 +117,11 @@ class Effects1 extends Public_Render {
                 $raw_tag      = isset( $style['oxi_image_light_box_tag'] ) ? strtolower( (string) $style['oxi_image_light_box_tag'] ) : 'h3';
                 $tag          = in_array( $raw_tag, $allowed_tags, true ) ? $raw_tag : 'h3';
 
-                $sub_html .= '<' . $tag . ' class="oxi_addons__heading">' . esc_html( $value['oxi_image_light_box_title'] ) . '</' . $tag . '>';
+                $sub_html .= '<' . $tag . ' class="oxi_addons__heading">' . $this->return_text( $value['oxi_image_light_box_title'] ) . '</' . $tag . '>';
             }
 
             if ( ! empty( $value['oxi_image_light_box_desc'] ) ) {
-                $sub_html .= '<div class="oxi_addons__details">' . esc_html( $value['oxi_image_light_box_desc'] ) . '</div>';
+                $sub_html .= '<div class="oxi_addons__details">' . $this->return_text( $value['oxi_image_light_box_desc'] ) . '</div>';
             }
 
             // IMPORTANT: Sanitize as safe HTML, then escape for attribute context.
@@ -145,7 +145,7 @@ class Effects1 extends Public_Render {
 
                         <?php if ( ! empty( $value['oxi_image_light_box_button_text'] ) && ( isset( $style['oxi_image_light_box_clickable'] ) && 'button' === $style['oxi_image_light_box_clickable'] ) ) : ?>
                             <div class="oxi_addons__button_main">
-                                <button class="oxi_addons__button"><?php echo esc_html( $value['oxi_image_light_box_button_text'] ); ?></button>
+                                <button class="oxi_addons__button"><?php $this->text_render( $value['oxi_image_light_box_button_text'] ); ?></button>
                             </div>
                         <?php endif; ?>
 

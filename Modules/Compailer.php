@@ -90,7 +90,7 @@ class Compailer extends Public_Render {
                     <div class="oxi-image-hover-load-more-button-wrap oxi-bt-col-sm-12">
                         <button class="oxi-image-load-more-button" data-class="OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic\Post_Query" data-function="__rest_api_post" data-args='<?php echo esc_attr( json_encode( $args ) ); ?>' data-settings='<?php echo esc_attr( json_encode( $settings ) ); ?>' data-page="1">
                             <div class="oxi-image-hover-loader button__loader"></div>
-                            <span><?php echo esc_html( $style['image_hover_dynamic_load_button_text'] ); ?></span>
+                            <span><?php $this->text_render( $style['image_hover_dynamic_load_button_text'] ); ?></span>
                         </button>
                     </div>
 					<?php
@@ -118,7 +118,7 @@ class Compailer extends Public_Render {
                     <div class="oxi-image-hover-load-more-button-wrap oxi-bt-col-sm-12">
                         <button class="oxi-image-load-more-button" data-class="OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic\Layouts_Query" data-function="__rest_api_post" data-args='<?php echo esc_attr( json_encode( $args ) ); ?>' data-settings='<?php echo esc_attr( json_encode( $settings ) ); ?>' data-page="1">
                             <div class="oxi-image-hover-loader button__loader"></div>
-                            <span><?php echo esc_html( $style['image_hover_dynamic_load_button_text'] ); ?></span>
+                            <span><?php $this->text_render( $style['image_hover_dynamic_load_button_text'] ); ?></span>
                         </button>
                     </div>
 					<?php

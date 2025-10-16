@@ -42,13 +42,15 @@ class Widget extends \WP_Widget {
 
 
     public function widget( $args, $instance ) {
-		$title = apply_filters( 'widget_title', $instance['title'] );
+		$title = isset( $instance['title'] ) ? apply_filters( 'widget_title', $instance['title'] ) : '';
 
 		// Escape before_widget
 		echo wp_kses_post( $args['before_widget'] );
 
 		// Render your shortcode
-		\OXI_IMAGE_HOVER_PLUGINS\Classes\Bootstrap::instance()->shortcode_render( $title, 'user' );
+		if ( function_exists( 'wpkin_imagehover' ) && wpkin_imagehover() ) {
+			wpkin_imagehover()->shortcode_render( $title, 'user' );
+		}
 
 		// Escape after_widget
 		echo wp_kses_post( $args['after_widget'] );

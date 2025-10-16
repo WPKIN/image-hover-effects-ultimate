@@ -279,7 +279,15 @@ Its too easy Chose your style from Effects List and click at Clone.
 = 9.10.4 = 
 * Update UI/UX
 * Added Getting started page.
-* Refactored coding structure. 
+* Refactored coding structure.
+* Fixed HTML tags not rendering in Lightbox title and description fields.
+* Fixed HTML tags not rendering in button text across all modules.
+* Fixed Visual Composer integration - dropdown now properly passes Style ID.
+* Fixed Widget fatal error - corrected Bootstrap class reference.
+* Fixed Widget block editor error with proper validation.
+* Fixed PHP 8.2 deprecation warning for dynamic properties.
+* Enhanced error handling and debugging throughout shortcode system.
+* Improved input validation for all shortcode rendering. 
 
 = 9.10.3 = 
 * Fixed all reported security issues.
