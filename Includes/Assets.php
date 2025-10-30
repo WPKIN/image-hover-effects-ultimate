@@ -30,13 +30,12 @@ class Assets {
 		$current_page   = isset( $_GET['page'] ) && $_GET['page'] ? $_GET['page'] : '';
 
 		wp_enqueue_style( 'image-hover-ultimate-global-admin-style', OXI_IMAGE_HOVER_URL . 'assets/backend/css/global-admin.css', false, filemtime( OXI_IMAGE_HOVER_PATH . 'assets/backend/css/global-admin.css' ) );
-		wp_enqueue_style( 'oxilab-admin-css', OXI_IMAGE_HOVER_URL . 'asset/backend/css/admin.css', false, filemtime( OXI_IMAGE_HOVER_PATH . 'assets/backend/css/admin.css' ) );
 
 		if ( 'oxi-image-hover-ultimate' === $current_page || 'oxi-image-hover-shortcode' === $current_page || 'oxi-image-hover-ultimate-settings' === $current_page ) {
 			$this->loader_font_familly_validation( [ 'Bree+Serif', 'Source+Sans+Pro' ] );
 			wp_enqueue_style( 'oxilab-image-hover-bootstraps', OXI_IMAGE_HOVER_URL . 'assets/backend/css/bootstrap.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION );
 			wp_enqueue_style( 'font-awsome.mins', OXI_IMAGE_HOVER_URL . 'assets/frontend/css/font-awsome.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION );
-			wp_enqueue_style( 'oxilab-admin-csss', OXI_IMAGE_HOVER_URL . 'assets/backend/css/admin.css', false, filemtime( OXI_IMAGE_HOVER_PATH . 'assets/backend/css/admin.css' ) );
+			wp_enqueue_style( 'oxilab-image-hover-admin-css', OXI_IMAGE_HOVER_URL . 'assets/backend/css/admin.css', false, filemtime( OXI_IMAGE_HOVER_PATH . 'assets/backend/css/admin.css' ) );
 		}
 
 		if ( 'image-hover-ultimate-getting-started' === $current_page ) {

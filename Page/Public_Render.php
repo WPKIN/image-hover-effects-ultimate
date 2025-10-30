@@ -189,14 +189,21 @@ class Public_Render {
         wp_enqueue_script( 'jquery' );
         wp_enqueue_style( 'oxi-animation', OXI_IMAGE_HOVER_URL . 'assets/frontend/css/animation.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION );
         wp_enqueue_style( 'oxi-image-hover', OXI_IMAGE_HOVER_URL . 'assets/frontend/css/style.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION );
+        
+        // Prepare dependencies for oxi-image-hover script
+        $animation_dependencies = array( 'jquery' );
+        
         if ( get_option( 'oxi_addons_way_points' ) != 'no' ) {
-            wp_enqueue_script( 'waypoints.min', OXI_IMAGE_HOVER_URL . 'assets/frontend/js/waypoints.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION );
+            wp_enqueue_script( 'waypoints.min', OXI_IMAGE_HOVER_URL . 'assets/frontend/js/waypoints.min.js', array( 'jquery' ), OXI_IMAGE_HOVER_PLUGIN_VERSION, true );
+            $animation_dependencies[] = 'waypoints.min';
         }
+        
         $touch = get_option( 'image_hover_ultimate_mobile_device_key' );
         if ( $touch != 'normal' ) {
-            wp_enqueue_script( 'oxi-image-hover-touch', OXI_IMAGE_HOVER_URL . 'assets/frontend/js/touch.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION );
+            wp_enqueue_script( 'oxi-image-hover-touch', OXI_IMAGE_HOVER_URL . 'assets/frontend/js/touch.js', array( 'jquery' ), OXI_IMAGE_HOVER_PLUGIN_VERSION, true );
         }
-        wp_enqueue_script( 'oxi-image-hover', OXI_IMAGE_HOVER_URL . 'assets/frontend/js/oxi-jquery.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION );
+        
+        wp_enqueue_script( 'oxi-image-hover', OXI_IMAGE_HOVER_URL . 'assets/frontend/js/oxi-jquery.js', $animation_dependencies, OXI_IMAGE_HOVER_PLUGIN_VERSION, true );
     }
 
     public function oxi_addons_admin_edit_delete_clone( $param ) {

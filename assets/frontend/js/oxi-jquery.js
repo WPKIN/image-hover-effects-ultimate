@@ -1,4 +1,3 @@
-jQuery.noConflict();
 (function ($) {
     'use strict';
 
@@ -21,15 +20,23 @@ jQuery.noConflict();
 
                 const trigger = (container) ? container : element;
 
-                trigger.waypoint(function () {
+                // Check if waypoint is available
+                if (typeof $.fn.waypoint === 'function') {
+                    trigger.waypoint(function () {
+                        element
+                                .addClass("animated")
+                                .addClass(animationClass);
+
+                    }, {
+                        triggerOnce: true,
+                        offset: containerOffset || animationOffset
+                    });
+                } else {
+                    // Fallback: trigger animation immediately if waypoint not available
                     element
                             .addClass("animated")
                             .addClass(animationClass);
-
-                }, {
-                    triggerOnce: true,
-                    offset: containerOffset || animationOffset
-                });
+                }
             });
         }
 

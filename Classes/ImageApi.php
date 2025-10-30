@@ -342,7 +342,7 @@ class ImageApi {
 		}
 
         $functionname = isset( $_REQUEST['functionname'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['functionname'] ) ) : '';
-		$this->rawdata = isset( $_REQUEST['rawdata'] ) ? sanitize_textarea_field( wp_unslash( $_REQUEST['rawdata'] ) ) : '';
+		$this->rawdata = isset( $_REQUEST['rawdata'] ) ? wp_kses_post( wp_unslash( $_REQUEST['rawdata'] ) ) : '';
 		$this->styleid = isset( $_REQUEST['styleid'] ) ? (int) $_REQUEST['styleid'] : 0;
 		$this->childid = isset( $_REQUEST['childid'] ) ? (int) $_REQUEST['childid'] : 0;
 
