@@ -695,15 +695,31 @@ class Public_Render {
             ],
         ];
 
-        echo wp_kses( $rawdata, $allowed_tags );
+        echo wp_kses( (string) $rawdata, $allowed_tags );
     }
 
     public function text_render( $data ) {
-        echo wp_kses_post( do_shortcode( str_replace( 'spTac', '&nbsp;', str_replace( 'spBac', '<br>', html_entity_decode( $data ) ) ), $ignore_html = false ) );
+        $safe = do_shortcode(
+            str_replace(
+                'spTac',
+                '&nbsp;',
+                str_replace( 'spBac', '<br>', html_entity_decode( (string) $data ) )
+            ),
+            $ignore_html = false
+        );
+        echo wp_kses_post( (string) $safe );
     }
 
     public function return_text( $data ) {
-        return wp_kses_post( do_shortcode( str_replace( 'spTac', '&nbsp;', str_replace( 'spBac', '<br>', html_entity_decode( $data ) ) ), $ignore_html = false ) );
+        $safe = do_shortcode(
+            str_replace(
+                'spTac',
+                '&nbsp;',
+                str_replace( 'spBac', '<br>', html_entity_decode( (string) $data ) )
+            ),
+            $ignore_html = false
+        );
+        return wp_kses_post( (string) $safe );
     }
 
     public function custom_font_awesome_render( $data ) {

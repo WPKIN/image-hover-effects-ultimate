@@ -258,7 +258,7 @@ trait Public_Helper {
         if ( is_array( $rawdata ) ) :
             return $rawdata = array_map( [ $this, 'allowed_html' ], $rawdata );
         else :
-            return wp_kses( $rawdata, $allowed_tags );
+            return wp_kses( (string) $rawdata, $allowed_tags );
         endif;
     }
 }

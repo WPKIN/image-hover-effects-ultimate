@@ -5,7 +5,7 @@ Tags: responsive image effects, awesome css3 effects, awesome image effects, css
 Requires at least: 6.2
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 9.10.4
+Stable tag: 9.10.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -275,6 +275,11 @@ Its too easy Chose your style from Effects List and click at Clone.
 
 
 == Changelog ==
+
+= 9.10.5 =
+* Fix: Resolved WordPress 6.7 notice "_load_textdomain_just_in_time" by initializing the plugin on `init` after translations load, ensuring proper text domain handling.
+* Fix: Allowed safe HTML in Short Description by replacing `sanitize_textarea_field` with `wp_kses_post` during form submission, enabling `<br>` line breaks and similar tags.
+* Improvement: Kept initialization lightweight and deferred heavy operations to later hooks to maintain performance.
 
 = 9.10.4 = 
 * Update UI/UX
@@ -726,4 +731,4 @@ Upgrade to Resolve Viewport Capable Hover effects.
 Upgrade to Resolve Touchscreen Device Capable Hover effects.
 
 = 7.3 =
-Upgrade to Resolve Touchscreen Device Capable Hover effects. Also Solved some responsive bugs. 
+Upgrade to Resolve Touchscreen Device Capable Hover effects. Also Solved some responsive bugs.

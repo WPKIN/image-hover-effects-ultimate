@@ -9,6 +9,19 @@ class Changelog {
         // Full changelog array
         $logs = [
             [
+                'version' => '9.10.5',
+                'date' => '24-10-2025',
+                'sections' => [
+                    'enhancement' => [
+                        'Kept initialization lightweight and deferred heavy operations to later hooks.',
+                    ],
+                    'fix' => [
+                        'Resolved WordPress 6.7 notice "_load_textdomain_just_in_time" by initializing the plugin on init after translations load.',
+                        'Allowed safe HTML in Short Description by using wp_kses_post during submission, enabling <br> line breaks.',
+                    ],
+                ],
+            ],
+            [
                 'version' => '9.10.4',
                 'date' => '16-10-2025',
                 'sections' => [
