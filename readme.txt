@@ -5,7 +5,7 @@ Tags: responsive image effects, awesome css3 effects, awesome image effects, css
 Requires at least: 6.2
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 9.10.5
+Stable tag: 9.10.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -275,6 +275,14 @@ Its too easy Chose your style from Effects List and click at Clone.
 
 
 == Changelog ==
+
+= 9.10.6 =
+* New: Enhanced frontend asset loader with conditional dependencies; loads Waypoints and Touch scripts only when enabled in settings to reduce page weight.
+* New: Added cache-busting for admin assets via file modification time for Getting Started and admin screens to ensure fresh updates without manual cache clear.
+* Improvement: Optimized inline JS injection timing for smoother rendering across admin and frontend contexts.
+* Improvement: Hardened AJAX/REST flows with stricter nonce verification and safe JSON output sanitization in `ImageApi`.
+* Fix: Minor stability fixes across shortcode rendering and widget output escaping.
+* Fix: Fixed security issue for Lightbox.
 
 = 9.10.5 =
 * Fix: Resolved WordPress 6.7 notice "_load_textdomain_just_in_time" by initializing the plugin on `init` after translations load, ensuring proper text domain handling.

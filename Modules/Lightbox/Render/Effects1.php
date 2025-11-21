@@ -34,8 +34,8 @@ class Effects1 extends Public_Render {
         );
 
         wp_enqueue_style(
-            'oxi-image-hover-lightgallery',
-            OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/lightgallery.min.css',
+            'oxi-image-hover-glightbox',
+            OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/glightbox.min.css',
             [],
             OXI_IMAGE_HOVER_PLUGIN_VERSION
         );
@@ -48,32 +48,14 @@ class Effects1 extends Public_Render {
         wp_enqueue_script( 'jquery' );
 
         wp_enqueue_script(
-            'oxi-image-hover-lightgallery',
-            OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/lightgallery.min.js',
-            [ 'jquery' ],
+            'oxi-image-hover-glightbox',
+            OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/glightbox.min.js',
+            [],
             OXI_IMAGE_HOVER_PLUGIN_VERSION,
             true
         );
 
-        wp_enqueue_script(
-            'oxi-image-hover-lightgallery-video',
-            OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/lg-video.min.js',
-            [ 'oxi-image-hover-lightgallery', 'jquery' ],
-            OXI_IMAGE_HOVER_PLUGIN_VERSION,
-            true
-        );
-
-        $this->JSHANDLE = 'oxi-image-hover-lightgallery-video';
-
-        wp_enqueue_script(
-            'oxi-image-hover-lightgallery-mousewheel',
-            OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/jquery.mousewheel.min.js',
-            [ 'jquery' ],
-            OXI_IMAGE_HOVER_PLUGIN_VERSION,
-            true
-        );
-
-        $this->JSHANDLE = 'oxi-image-hover-lightgallery-mousewheel';
+        $this->JSHANDLE = 'oxi-image-hover-glightbox';
     }
 
     /**
@@ -124,15 +106,20 @@ class Effects1 extends Public_Render {
                 $sub_html .= '<div class="oxi_addons__details">' . $this->return_text( $value['oxi_image_light_box_desc'] ) . '</div>';
             }
 
-            // IMPORTANT: Sanitize as safe HTML, then escape for attribute context.
             $sub_html_safe = wp_kses_post( $sub_html );
+            $sub_id        = 'oxi_lg_sub_html_' . (int) $this->oxiid . '_' . (int) $key;
             ?>
             <div class="oxi_addons__light_box_style_1 oxi_addons__light_box <?php $this->column_render( 'oxi-image-hover-col', $style ); ?> <?php echo ( 'admin' === $admin ) ? 'oxi-addons-admin-edit-list' : ''; ?>">
                 <div class="oxi_addons__light_box_parent oxi_addons__light_box_parent-<?php echo esc_attr( (int) $this->oxiid . '-' . (int) $key ); ?>">
 
-                    <a class="oxi_addons__light_box_item"
+                    <div id="<?php echo esc_attr( $sub_id ); ?>" class="oxi_addons__lg_subhtml" style="display:none;">
+                        <?php echo $sub_html_safe; ?>
+                    </div>
+
+                    <a class="glightbox oxi_addons__light_box_item"
                         href="<?php echo esc_url( $media_url ); ?>"
-                        data-sub-html="<?php echo esc_attr( $sub_html_safe ); ?>">
+                        data-caption-id="<?php echo esc_attr( $sub_id ); ?>"
+                        data-type="<?php echo esc_attr( $is_image ? 'image' : 'video' ); ?>">
 
                         <?php if ( isset( $style['oxi_image_light_box_clickable'] ) && 'image' === $style['oxi_image_light_box_clickable'] && '' !== $this->custom_media_render( 'oxi_image_light_box_image_front', $value ) ) : ?>
                             <div class="oxi_addons__image_main <?php echo esc_attr( isset( $style['oxi_image_light_box_custom_width_height_swither'] ) ? $style['oxi_image_light_box_custom_width_height_swither'] : '' ); ?>"
@@ -164,7 +151,6 @@ class Effects1 extends Public_Render {
 
     /**
      * Inline initialization for LightGallery
-     * (Optionally sanitizes data-sub-html via DOMPurify if present.)
      *
      * @return string
      */
@@ -173,24 +159,17 @@ class Effects1 extends Public_Render {
         foreach ( $this->child as $key => $val ) {
             $jquery .= 'jQuery(function($){
                 var $wrap = $(".' . esc_js( $this->WRAPPER ) . ' .oxi_addons__light_box_parent-' . esc_js( $this->oxiid ) . '-' . esc_js( $key ) . '");
-                if (window.DOMPurify) {
-                    $wrap.find("a.oxi_addons__light_box_item").each(function(){
-                        var html = $(this).attr("data-sub-html");
-                        if (typeof html === "string") {
-                            try {
-                                var clean = DOMPurify.sanitize(html, {
-                                    ALLOWED_TAGS: ["a","b","strong","em","i","u","p","br","span","div","h1","h2","h3","h4","h5","h6"],
-                                    ALLOWED_ATTR: ["href","class","target","rel"]
-                                });
-                                $(this).attr("data-sub-html", clean);
-                            } catch(e) {}
-                        }
-                    });
-                }
-                $wrap.lightGallery({
-                    share: false,
-                    addClass: "oxi_addons_light_box_overlay_' . esc_js( $this->oxiid ) . '"
-                });
+                var $a = $wrap.find("a.oxi_addons__light_box_item");
+                if (!$a.length || typeof GLightbox === "undefined") return;
+                var captionId = $a.attr("data-caption-id");
+                var captionEl = captionId ? document.getElementById(captionId) : null;
+                var elements = [{
+                    href: $a.attr("href"),
+                    type: $a.attr("data-type") || undefined,
+                    description: captionEl ? captionEl.innerHTML : ""
+                }];
+                var lightbox = GLightbox({ elements: elements, touchNavigation: true, loop: true });
+                $a.on("click", function(e){ e.preventDefault(); lightbox.open(); });
             });';
         }
         return $jquery;

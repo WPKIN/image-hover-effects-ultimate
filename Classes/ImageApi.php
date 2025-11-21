@@ -49,7 +49,6 @@ class ImageApi {
 			'rel' => [],
 			'title' => [],
 			'data-src' => [],
-			'data-sub-html' => [],
 		],
 		'abbr' => [
 			'title' => [],

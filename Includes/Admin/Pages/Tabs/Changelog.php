@@ -9,8 +9,26 @@ class Changelog {
         // Full changelog array
         $logs = [
             [
+                'version' => '9.10.6',
+                'date' => '21-11-2025',
+                'sections' => [
+                    'new' => [
+                        'Enhanced frontend asset loader with conditional Waypoints and Touch scripts.',
+                        'Added cache-busting for admin assets via file modification time.',
+                    ],
+                    'enhancement' => [
+                        'Optimized inline JS injection timing for smoother rendering.',
+                        'Hardened AJAX/REST flows with stricter nonce verification and safe JSON output.',
+                    ],
+                    'fix' => [
+                        'Minor stability fixes in shortcode rendering and widget output escaping.',
+                        'Fixed security issue for Lightbox.',
+                    ],
+                ],
+            ],
+            [
                 'version' => '9.10.5',
-                'date' => '24-10-2025',
+                'date' => '21-11-2025',
                 'sections' => [
                     'enhancement' => [
                         'Kept initialization lightweight and deferred heavy operations to later hooks.',

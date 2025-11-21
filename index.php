@@ -3,7 +3,7 @@
  * Plugin Name:       Image Hover Effects Ultimate
  * Plugin URI:        https://wpkin.com
  * Description:       Create Awesome Image Hover Effects as Image Gallery, Lightbox, Comparison and Magnifier with Impressive, Lightweight, Responsive Image Hover Effects Ultimate. Use 500+ modern and elegant CSS hover effects and animations.
- * Version:           9.10.5
+ * Version:           9.10.6
  * Author:            WPKIN
  * Author URI:        https://wpkin.com
  * Text Domain:       image-hover-effects-ultimate
@@ -112,9 +112,6 @@ if ( ! class_exists( 'WPKin_Imagehover' ) ) {
 			register_activation_hook( __FILE__, [ $this, 'activate' ] );
 			register_deactivation_hook( __FILE__, [ $this, 'deactivate' ] );
 			do_action( 'image-hover-effects-ultimate/before_init' );
-			// Load translation
-			add_action( 'init', [ $this, 'i18n' ] );
-			// Initialize plugin after translations are loaded to avoid early textdomain loading notices.
 			add_action( 'init', [ $this, 'init_plugin' ], 20 );
 		}
 
@@ -144,7 +141,7 @@ if ( ! class_exists( 'WPKin_Imagehover' ) ) {
 			define( 'OXI_IMAGE_HOVER_BASENAME', plugin_basename( __FILE__ ) );
 			define( 'OXI_IMAGE_HOVER_PATH', plugin_dir_path( __FILE__ ) );
 			define( 'OXI_IMAGE_HOVER_URL', plugins_url( '/', __FILE__ ) );
-			define( 'OXI_IMAGE_HOVER_PLUGIN_VERSION', '9.10.5' );
+            define( 'OXI_IMAGE_HOVER_PLUGIN_VERSION', '9.10.6' );
 			define( 'OXI_IMAGE_HOVER_TEXTDOMAIN', 'image-hover-effects-ultimate' );
 		}
 
@@ -166,21 +163,6 @@ if ( ! class_exists( 'WPKin_Imagehover' ) ) {
 			$this->Admin_Filters();
 			$this->Shortcode_loader();
 			$this->Public_loader();
-		}
-
-		/**
-		 * Load Textdomain
-		 *
-		 * Load plugin localization files.
-		 *
-		 * Fired by `init` action hook.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @access public
-		 */
-		public function i18n() {
-			load_plugin_textdomain( 'image-hover-effects-ultimate', false, dirname( OXI_IMAGE_HOVER_BASENAME ) . '/languages/' );
 			$this->register_image_hover_ultimate_update();
 		}
 
