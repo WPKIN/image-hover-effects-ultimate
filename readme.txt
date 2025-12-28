@@ -3,9 +3,9 @@ Contributors: wpkin, richardmallick
 Donate link:  https://wpkin.com
 Tags: responsive image effects, awesome css3 effects, awesome image effects, css3 effects, top image effects for wordpress. 
 Requires at least: 6.2
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 9.10.6
+Stable tag: 9.10.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -275,6 +275,14 @@ Its too easy Chose your style from Effects List and click at Clone.
 
 
 == Changelog ==
+
+= 9.10.7 =
+* New: Added item count display for each module in the "Image Hover" dashboard page.
+* New: Added "Create New" and "Import" buttons to the Shortcode page header for better navigation.
+* Improvement: Moved inline CSS styles to the external admin stylesheet for better maintainability.
+* Improvement: Cleaned up the Shortcode page interface by removing the unused "Import Image Hover Files" box.
+* Improvement: Refined item count display logic to hide counts for extension modules.
+* Fix: Restored original header text on the Shortcode page after initial layout changes.
 
 = 9.10.6 =
 * New: Enhanced frontend asset loader with conditional dependencies; loads Waypoints and Touch scripts only when enabled in settings to reduce page weight.

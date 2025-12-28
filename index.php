@@ -3,7 +3,7 @@
  * Plugin Name:       Image Hover Effects Ultimate
  * Plugin URI:        https://wpkin.com
  * Description:       Create Awesome Image Hover Effects as Image Gallery, Lightbox, Comparison and Magnifier with Impressive, Lightweight, Responsive Image Hover Effects Ultimate. Use 500+ modern and elegant CSS hover effects and animations.
- * Version:           9.10.6
+ * Version:           9.10.7
  * Author:            WPKIN
  * Author URI:        https://wpkin.com
  * Text Domain:       image-hover-effects-ultimate

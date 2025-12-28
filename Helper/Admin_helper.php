@@ -183,37 +183,6 @@ trait Admin_helper {
             return;
         }
 		?>
-
-        <div class="oxi-addons-admin-notifications">
-            <h3>
-                <span class="dashicons dashicons-flag"></span>
-                Trouble or Need Support?
-            </h3>
-            <p></p>
-            <div class="oxi-addons-admin-notifications-holder">
-                <div class="oxi-addons-admin-notifications-alert">
-                    <p>Unable to create your desire design or need any help? You can
-                        <a href="https://wordpress.org/support/plugin/image-hover-effects-ultimate#new-post">Ask any question</a>
-                        and get reply from our expert members. We will be glad to answer any question you may have about our plugin.
-                    </p>
-                    <?php
-                    if ( apply_filters( 'oxi-image-hover-plugin-version', false ) != true ) :
-						?>
-                        <p>By the way, did you know we also have a
-                            <a href="https://wpkindemos.com/imagehover/pricing/">Premium Version</a>
-                            ? It offers lots of options with automatic update. It also comes with 16/5 personal support.
-                        </p>
-                        <p>Thanks Again!</p>
-						<?php
-                    endif;
-                    ?>
-
-                    <p></p>
-                </div>
-            </div>
-            <p></p>
-        </div>
-
 		<?php
     }
 

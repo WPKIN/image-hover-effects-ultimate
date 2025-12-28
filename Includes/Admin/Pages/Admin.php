@@ -87,49 +87,57 @@ class Admin {
 					'name' => 'button-effects',
 					'version' => 1.0,
 					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/button-effects.svg',
-					'status' => 'Popular'
+					'status' => 'Popular',
+                    'items' => 11
 				],
                 'general' => [
 					'name' => 'general-effects',
 					'version' => 1.0,
 					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/general-effects.svg',
-					'status' => ''
+					'status' => '',
+                    'items' => 33
 				],
                 'square' => [
 					'name' => 'square-effects',
 					'version' => 1.0,
 					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/square-effects.svg',
-					'status' => 'New'
+					'status' => 'New',
+                    'items' => 22
 				],
                 'caption' => [
 					'name' => 'caption-effects',
 					'version' => 1.0,
 					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/caption-effects.svg',
-					'status' => ''
+					'status' => '',
+                    'items' => 31
 				],
                 'flipbox' => [
 					'name' => 'flipbox-effects',
 					'version' => 1.0,
 					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/flipbox-effects.svg',
-					'status' => 'Popular'
+					'status' => 'Popular',
+                    'items' => 29
 				],
                 'magnifier' => [
 					'name' => 'image-magnifier',
 					'version' => 1.0,
 					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/image-magnifier.svg',
-					'status' => 'Updated'
+					'status' => 'Updated',
+                    'items' => 2
 				],
                 'comparison' => [
 					'name' => 'image-comparison',
 					'version' => 1.0,
 					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/image-comparison.svg',
-					'status' => ''
+					'status' => '',
+                    'items' => 4
 				],
                 'lightbox' => [
 					'name' => 'image-lightbox',
 					'version' => 1.0,
 					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/image-lightbox.svg',
-					'status' => 'Updated'
+					'status' => 'Updated',
+                    'items' => 2
 				],
             ],
             'Extension' => [
@@ -137,19 +145,22 @@ class Admin {
                     'name' => 'display-post',
                     'version' => 1.0,
 					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/display-post.svg',
-					'status' => $is_pro
+					'status' => $is_pro,
+                    'items' => ''
                 ],
                 'carousel' => [
                     'name' => 'carousel-slider',
                     'version' => 1.0,
 					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/carousel-slider.svg',
-					'status' => $is_pro
+					'status' => $is_pro,
+                    'items' => ''
                 ],
                 'filter' => [
                     'name' => 'filter-&-sorting',
                     'version' => 1.0,
 					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/filter-sorting.svg',
-					'status' => $is_pro
+					'status' => $is_pro,
+                    'items' => ''
                 ],
             ],
         ];
@@ -200,6 +211,11 @@ class Admin {
                                 <div class="oxi-addons-shortcode-import-bottom">
                                     <span><?php $this->name_converter( $value['name'] ); ?> </span>
                                 </div>
+								 <?php if ( ! empty( $value['items'] ) ) : ?>
+                                        <div class="oxi-addons-element-items">
+                                            <span class="oxi-addons-items-count"><?php echo (int) $value['items']; ?></span> Items
+                                        </div>
+                                    <?php endif; ?>
                             </a>
                         </div>
 						<?php

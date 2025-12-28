@@ -74,6 +74,11 @@ class Shortcode {
             <div class="oxi-addons-import-layouts">
                 <h1>Image Hover › Shortcode</h1>
                 <p>Collect Image Hover Shortcode, Edit, Delect, Clone or Export it.</p>
+                <div class="oxi-addons-shortcode-header-controls">
+                    <span class="oxi-addons-shortcode-title">Shortcode</span>
+                    <a href="<?php echo esc_url( admin_url( 'admin.php?page=oxi-image-hover-ultimate' ) ); ?>" class="btn btn-success">Create New</a>
+                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#oxi-addons-style-import-modal">Import</a>
+                </div>
             </div>
         </div>
 		<?php
@@ -82,24 +87,6 @@ class Shortcode {
 
     public function create_new() {
 		?>
-
-        <div class="oxi-addons-row">
-            <div class="oxi-addons-col-1 oxi-import">
-                <div class="oxi-addons-style-preview">
-                    <div class="oxilab-admin-style-preview-top">
-                        <a href="#" id="oxi-import-style">
-                            <div class="oxilab-admin-add-new-item">
-                                <span>
-                                    <i class="fas fa-plus-circle oxi-icons"></i>
-                                    Import Image Hover Files
-                                </span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="modal fade" id="oxi-addons-style-import-modal">
             <form method="post" id="oxi-addons-import-modal-form" enctype="multipart/form-data">
                 <div class="modal-dialog modal-sm modal-dialog-centered">
