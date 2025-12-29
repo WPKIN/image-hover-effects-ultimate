@@ -65,6 +65,7 @@ trait CSS_JS_Loader {
     public function admin_js() {
         wp_enqueue_script( 'jquery' );
         wp_enqueue_script( 'oxilab-bootstrap', OXI_IMAGE_HOVER_URL . 'assets/backend/js/bootstrap.min.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION );
+        wp_enqueue_script( 'oxi-premium-modal', OXI_IMAGE_HOVER_URL . 'assets/backend/js/pro-modal.js', ['jquery', 'oxilab-bootstrap'], OXI_IMAGE_HOVER_PLUGIN_VERSION );
         wp_localize_script(
             'oxilab-bootstrap', 'ImageHoverUltimate', [
 				'root' => esc_url_raw( rest_url() ),

@@ -30,11 +30,6 @@ class Square extends Create {
 			'square-8',
 			'square-9',
 			'square-10',
-			'square-11',
-			'square-12',
-			'square-13',
-			'square-14',
-			'square-15',
 		];
 	}
 }

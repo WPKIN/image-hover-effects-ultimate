@@ -213,7 +213,7 @@ class Admin {
                                 </div>
 								 <?php if ( ! empty( $value['items'] ) ) : ?>
                                         <div class="oxi-addons-element-items">
-                                            <span class="oxi-addons-items-count"><?php echo (int) $value['items']; ?></span> Items
+                                            <span class="oxi-addons-items-count"><?php echo (int) $value['items']; ?></span> Templates
                                         </div>
                                     <?php endif; ?>
                             </a>

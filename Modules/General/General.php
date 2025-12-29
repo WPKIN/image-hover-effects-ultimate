@@ -32,11 +32,6 @@ class General extends Create {
 			'general-8',
 			'general-9',
 			'general-10',
-			'general-11',
-			'general-12',
-			'general-13',
-			'general-14',
-			'general-15',
 		];
 	}
 }

@@ -39,7 +39,8 @@ jQuery.noConflict();
     $(".addons-pre-check").on("click", function (e) {
         var data = $(this).attr('sub-type');
         if (data === 'premium') {
-            alert("Sorry Extension will Works with only Premium Version");
+            e.preventDefault();
+            $('#oxi-premium-modal').modal('show');
             return false;
         } else {
             return true;

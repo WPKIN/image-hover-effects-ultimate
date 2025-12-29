@@ -28,17 +28,6 @@ class Display extends Create {
 		<?php
 	}
 
-	public function Import_header() {
-		?>
-            <div class="oxi-addons-wrapper">
-                <div class="oxi-addons-import-layouts">
-                    <h1>Display Post › Import Templates</h1>
-                    <p> Select Image Hover layouts, Import Templates for future Use.</p>
-                </div>
-            </div>
-		<?php
-	}
-
 	public function create_new() {
 		?>
             <div class="modal fade" id="oxi-addons-style-create-modal">

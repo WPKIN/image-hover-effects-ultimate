@@ -282,6 +282,7 @@ Its too easy Chose your style from Effects List and click at Clone.
 * Improvement: Moved inline CSS styles to the external admin stylesheet for better maintainability.
 * Improvement: Cleaned up the Shortcode page interface by removing the unused "Import Image Hover Files" box.
 * Improvement: Refined item count display logic to hide counts for extension modules.
+* Improvement: Simplified template selection by showing all available templates on the effect page, removing the need for a separate "Add More" step.
 * Fix: Restored original header text on the Shortcode page after initial layout changes.
 
 = 9.10.6 =
