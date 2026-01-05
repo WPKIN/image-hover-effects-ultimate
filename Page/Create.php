@@ -84,7 +84,10 @@ class Create {
         ?>
         <div class="oxi-addons-row">
             <?php
-            $this->Admin_header();
+            // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.NonceVerification.Recommended
+            if ( ! ( isset( $_GET['effects'] ) && isset( $_GET['styleid'] ) ) ) {
+                $this->Admin_header();
+            }
             $this->template();
             $this->create_new();
             ?>

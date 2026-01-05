@@ -1,0 +1,517 @@
+#adminmenumain,
+#wpadminbar,
+#wpfooter,
+.notice,
+.updated,
+.error,
+.is-dismissible,
+.update-nag {
+  display: none !important;
+}
+#wpcontent {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+html.wp-toolbar {
+  padding-top: 0 !important;
+}
+.auto-fold #wpcontent {
+  padding-left: 0 !important;
+}
+
+/* Custom Header for Editor Page */
+.oxi-addons-header {
+  background: #fff;
+  padding: 10px 20px;
+  /* margin-bottom: 20px; */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+}
+
+/* Add padding to wrapper to compensate for fixed header */
+.wrap > .oxi-addons-wrapper {
+  padding-top: 80px;
+}
+
+/* Left Side */
+.oxi-addons-header-left {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.oxi-addons-header-left a {
+  text-decoration: none;
+  font-size: 13px;
+  color: #0073aa;
+  background: #f0f6fc;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.3s;
+  line-height: normal;
+}
+.oxi-addons-header-left a:hover {
+  background: #e1ecf7;
+  color: #005a87;
+}
+
+/* Center Side */
+.oxi-addons-header-center {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+}
+.wpte-header-devices {
+  display: flex;
+  background: #f0f0f1;
+  border-radius: 4px;
+  padding: 2px;
+}
+.wpte-device-btn {
+  background: transparent;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  color: #50575e;
+  border-radius: 3px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wpte-device-btn svg {
+  display: block;
+}
+.wpte-device-btn:hover,
+.wpte-device-btn.active {
+  background: #fff;
+  color: #8b3dff;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Right Side */
+.oxi-addons-header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.oxi-btn-upgrade {
+  background: #d63638;
+  color: #fff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 15px;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+.oxi-btn-upgrade:hover {
+  background: #b32d2e;
+  color: #fff;
+}
+.oxi-header-tooltip {
+  position: relative;
+  cursor: help;
+  color: #888;
+}
+.oxi-header-tooltip:hover .oxi-tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+.oxi-tooltip-text {
+  visibility: hidden;
+  width: 220px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+  top: 150%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.oxi-tooltip-text::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #333 transparent;
+}
+.oxi-header-shortcode {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0;
+  overflow: hidden;
+}
+.oxi-shortcode-text {
+  padding: 5px 10px;
+  font-size: 12px;
+  color: #555;
+  min-width: 220px;
+  font-family: monospace;
+  white-space: nowrap;
+}
+.oxi-copy-btn {
+  border: none;
+  background: #f0f0f1;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-left: 1px solid #ddd;
+  color: #555;
+}
+.oxi-copy-btn:hover {
+  background: #e5e5e5;
+  color: #0073aa;
+}
+
+/* Shortcode Name Dropdown */
+.oxi-header-name-dropdown {
+  position: relative;
+}
+.oxi-header-name-toggle {
+  background: #f0f6fc;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #0073aa;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.oxi-header-name-toggle:hover {
+  background: #e1ecf7;
+  color: #005a87;
+}
+.oxi-header-name-toggle i {
+  font-size: 16px;
+  color: inherit;
+}
+.oxi-header-name-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 10px;
+  background: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  border-radius: 4px;
+  min-width: 250px;
+  z-index: 9999;
+  padding: 15px;
+}
+.oxi-header-name-dropdown.active .oxi-header-name-content {
+  display: block;
+}
+.oxi-header-name-group {
+  display: flex;
+  align-items: center;
+}
+.oxi-header-name-input {
+  flex-grow: 1;
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-right: none;
+  border-radius: 4px 0 0 4px;
+  font-size: 13px;
+  color: #333;
+  width: 100%;
+}
+.oxi-header-name-save-btn {
+  background: #28a745;
+  color: #fff;
+  border: none;
+  padding: 6px 15px;
+  cursor: pointer;
+  border-radius: 0 4px 4px 0;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.oxi-header-name-save-btn:hover {
+  background: #218838;
+}
+
+/* Layout Restructuring */
+.oxi-addons-row {
+    padding: 0 !important;
+}
+
+.oxi-addons-image-tabs-mode {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 0;
+    align-items: stretch;
+    width: 100%;
+    min-height: calc(100vh - 80px);
+}
+
+/* Sidebar Actions (Add New, Rearrange) */
+.oxi-addons-sidebar-actions {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    background: #fcfcfc;
+}
+
+/* Sidebar (Settings/Tabs) */
+.oxi-addons-settings {
+    width: 300px !important;
+    min-width: 300px;
+    flex-shrink: 0;
+    margin-right: 0 !important; /* Reset any float/margin */
+    background: #fff;
+    border-right: 1px solid #e5e5e5;
+    z-index: 10;
+    position: fixed;
+    top: 60px; /* Align with content start */
+    left: 0;
+    bottom: 0;
+    height: calc(100vh - 60px);
+    overflow: hidden !important; /* Prevent outer scroll */
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 0 !important;
+}
+
+/* Make inner content of sidebar full width */
+.oxi-addons-style-left {
+    width: 100% !important;
+    float: none !important;
+    padding-right: 0 !important;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Header Styling */
+.oxi-sidebar-header-section {
+    flex-shrink: 0;
+    background: #fff;
+}
+.oxi-sidebar-breadcrumb {
+    background: #eff2f9;
+    padding: 10px 15px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.oxi-sidebar-btn {
+    flex: 1;
+    background: #fff;
+    border: 1px solid #dae1ee;
+    border-radius: 4px;
+    color: #2271b1;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: center;
+    padding: 6px 4px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: all 0.2s;
+    line-height: normal;
+}
+.oxi-sidebar-btn:hover {
+    background: #fff;
+    color: #135e96;
+    border-color: #2271b1;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+.oxi-sidebar-main-title {
+    background: #efe5fd;
+    color: #1d2327;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    padding: 12px;
+    border-bottom: 1px solid #e2e4e7;
+}
+
+/* Main Form Layout */
+#oxi-addons-form-submit {
+    flex-grow: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.oxi-addons-style-settings {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.oxi-addons-tabs-wrapper {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 0;
+    background: #E3E3E3;
+}
+
+/* Tabs Styling */
+.oxi-addons-tabs-wrapper .nav-tabs {
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+.oxi-addons-tabs-wrapper .nav-tabs > li {
+    flex: 1;
+    margin: 0;
+    text-align: center;
+}
+.oxi-addons-tabs-wrapper .nav-tabs > li > a {
+    display: block;
+    padding: 12px 5px;
+    color: #555;
+    font-weight: 600;
+    border: none;
+    border-bottom: 2px solid transparent;
+    text-decoration: none;
+    margin: 0;
+    font-size: 14px;
+    background: transparent;
+}
+.oxi-addons-tabs-wrapper .nav-tabs > li.active > a,
+.oxi-addons-tabs-wrapper .nav-tabs > li > a:hover {
+    color: #1d2327;
+    background: transparent;
+    border-bottom: 2px solid #8b3dff; /* Purple accent */
+}
+
+/* Tab Content */
+.oxi-addons-tabs-wrapper .tab-content {
+    padding: 15px;
+}
+
+/* Footer Styling */
+.oxi-addons-setting-save {
+    background: #393939; /* Dark grey */
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    border-top: 1px solid #ddd;
+}
+.oxi-addons-setting-save .btn-success {
+    background: #46b450;
+    border-color: #46b450;
+    color: #fff;
+    font-weight: 600;
+    padding: 2px 20px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.oxi-addons-setting-save .btn-success:hover {
+    background: #369a40;
+}
+.oxi-addons-setting-save .btn-secondary,
+.oxi-addons-setting-save .btn-danger {
+    background: transparent;
+    border: 1px solid #666;
+    color: #ccc;
+    font-size: 12px;
+    padding: 3px 20px;
+    border-radius: 4px;
+}
+.oxi-addons-setting-save .btn-secondary:hover,
+.oxi-addons-setting-save .btn-danger:hover {
+    border-color: #999;
+    color: #fff;
+}
+
+.oxi-addons-setting-save .btn{
+	margin: 0;
+}
+
+/* Hide the old right sidebar if it's still there */
+/*.oxi-addons-style-right {
+    display: none !important;
+}*/
+
+/* Preview Area (Main Content) */
+.oxi-addons-Preview {
+    flex-grow: 1;
+    width: calc(100% - 315px) !important;
+    margin-left: 315px !important; /* Push right to clear fixed sidebar */
+    margin-bottom: 0 !important;
+    background: #f0f0f1; /* Match WP background or desired color */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 80px);
+}
+
+.oxi-addons-Preview .oxi-addons-wrapper {
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ensure preview content fills the space */
+.oxi-addons-style-left-preview {
+    width: 100% !important;
+    float: none !important;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Right Sidebar (now below preview) */
+.oxi-addons-style-right {
+    display: block !important;
+    width: 100% !important;
+    background: #fff;
+    padding: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.oxi-addons-style-left-preview-heading {
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 20px;
+}
+
+.oxi-addons-preview-data {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow: auto;
+}

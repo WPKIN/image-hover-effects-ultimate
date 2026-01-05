@@ -716,6 +716,105 @@ abstract class Admin_Render {
         wp_add_inline_script( 'oxi-image-hover-editor', $data );
     }
 
+	public function oxi_admin_edit_page_header() {
+		ob_start();
+		?>
+        <div class="oxi-addons-header">
+            <div class="oxi-addons-header-left">
+                <a href="<?php echo admin_url( 'admin.php?page=oxi-image-hover-ultimate' ); ?>" class="oxi-btn-back">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i> Back
+                </a>
+                <a href="<?php echo home_url(); ?>" target="_blank" class="oxi-btn-visit">
+                     <i class="fa fa-globe" aria-hidden="true"></i> Visit Site
+                </a>
+                <a href="<?php echo admin_url(); ?>" class="oxi-btn-dashboard">
+                    <i class="fa fa-wordpress" aria-hidden="true"></i> Dashboard
+                </a>
+            </div>
+            <div class="oxi-addons-header-center">
+                <div class="wpte-header-devices" aria-label="Preview devices">
+                    <button type="button" class="wpte-device-btn wpte-form-responsive-switcher-desktop active" data-device="desktop" aria-label="Desktop preview">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                            <path d="M4 5h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-5v2h3a1 1 0 1 1 0 2H6a1 1 0 1 1 0-2h3v-2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zm0 2v9h16V7H4z"></path>
+                        </svg>
+                    </button>
+                    <button type="button" class="wpte-device-btn wpte-form-responsive-switcher-tablet" data-device="tablet" aria-label="Tablet preview">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                            <path d="M7 2h10a3 3 0 0 1 3 3v14a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3zm0 2a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H7zm5 16a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3z"></path>
+                        </svg>
+                    </button>
+                    <button type="button" class="wpte-device-btn wpte-form-responsive-switcher-mobile" data-device="mobile" aria-label="Mobile preview">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                            <path d="M8 2h8a3 3 0 0 1 3 3v14a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3zm0 2a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H8zm4 15a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="oxi-addons-header-right">
+                 <a href="https://wpkindemos.com/imagehover/pricing/" target="_blank" class="oxi-btn-upgrade">
+                    Upgrade
+                </a>
+                <div class="oxi-header-tooltip">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                    <span class="oxi-tooltip-text">Copy & paste the shortcode directly into any WordPress post, page or Page Builder.</span>
+                </div>
+                <div class="oxi-header-shortcode">
+                    <div class="oxi-shortcode-text">[iheu_ultimate_oxi id="<?php echo $this->oxiid; ?>"]</div>
+                     <button type="button" class="oxi-copy-btn">
+                        <i class="fa fa-copy" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="oxi-header-name-dropdown">
+                    <button type="button" class="oxi-header-name-toggle">
+                        <i class="fa fa-bars" aria-hidden="true"></i>
+                    </button>
+                    <div class="oxi-header-name-content">
+                        <form method="post" id="shortcode-addons-name-change-submit" style="margin: 0;">
+                            <div class="oxi-header-name-group">
+                                <input type="hidden" name="addonsstylenameid" value="<?php echo (int) $this->dbdata['id']; ?>">
+                                <input type="text" class="oxi-header-name-input" name="addonsstylename" placeholder="<?php echo esc_attr__( 'Set Your Shortcode Name', 'image-hover-effects-ultimate' ); ?>" value="<?php echo isset($this->dbdata['name']) ? esc_attr($this->dbdata['name']) : ''; ?>">
+                                <button type="button" class="oxi-header-name-save-btn" id="addonsstylenamechange">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+        jQuery(document).ready(function($) {
+            // Copy Shortcode
+            $('.oxi-copy-btn').on('click', function() {
+                var $temp = $("<input>");
+                $("body").append($temp);
+                $temp.val($('.oxi-shortcode-text').text()).select();
+                document.execCommand("copy");
+                $temp.remove();
+                
+                var $icon = $(this).find('i');
+                var originalClass = $icon.attr('class');
+                $icon.removeClass('fa-copy').addClass('fa-check');
+                setTimeout(function() {
+                    $icon.attr('class', originalClass);
+                }, 1500);
+            });
+
+            // Shortcode Name Dropdown
+            $('.oxi-header-name-toggle').on('click', function(e) {
+                e.stopPropagation();
+                $(this).parent().toggleClass('active');
+            });
+
+            $(document).on('click', function(e) {
+                if (!$(e.target).closest('.oxi-header-name-dropdown').length) {
+                    $('.oxi-header-name-dropdown').removeClass('active');
+                }
+            });
+        });
+        </script>
+        <?php
+		return ob_get_clean();
+	}
+
     /**
      * Template Parent Render
      *
@@ -726,16 +825,19 @@ abstract class Admin_Render {
         <div class="wrap">
             <div class="oxi-addons-wrapper">
                 <?php
-                apply_filters( 'oxi-image-hover-plugin/admin_menu', true );
+                if ( empty( $this->oxiid ) ) {
+                    apply_filters( 'oxi-image-hover-plugin/admin_menu', true );
+                } else {
+                    echo $this->oxi_admin_edit_page_header();
+                }
                 ?>
-                <div class="oxi-addons-style-20-spacer"></div>
                 <div class="oxi-addons-row">
-                    <?php
-                    apply_filters( 'oxi-image-hover-support-and-comments', true );
-                    ?>
                     <div class="oxi-addons-wrapper oxi-addons-image-tabs-mode">
                         <div class="oxi-addons-settings" id="oxisettingsreload">
                             <div class="oxi-addons-style-left">
+                                <div class="oxi-sidebar-main-title">
+                                        Settings
+                                    </div>
                                 <form method="post" id="oxi-addons-form-submit">
                                     <div class="oxi-addons-style-settings">
                                         <div class="oxi-addons-tabs-wrapper">
@@ -778,22 +880,7 @@ abstract class Admin_Render {
                                     </div>
                                 </form>
                             </div>
-                            <div class="oxi-addons-style-right">
-                                <?php
-                                if ( $this->form == 'single' ) :
-                                    $this->shortcode_name();
-                                    $this->shortcode_info();
-                                    $this->shortcode_style_changer();
-                                else :
-                                    $this->modal_opener();
-                                    $this->shortcode_name();
-                                    $this->shortcode_info();
-                                    $this->shortcode_style_changer();
-                                    $this->shortcode_rearrange();
-                                endif;
-                                $this->modal_form();
-                                ?>
-                            </div>
+
                         </div>
                         <div class="oxi-addons-Preview" id="oxipreviewreload">
                             <div class="oxi-addons-wrapper">
@@ -835,6 +922,22 @@ abstract class Admin_Render {
                                         ?>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="oxi-addons-style-right">
+                                <?php
+                                if ( $this->form == 'single' ) :
+                                    //$this->shortcode_name();
+                                    //$this->shortcode_info();
+                                    $this->shortcode_style_changer();
+                                else :
+                                    $this->modal_opener();
+                                    //$this->shortcode_name();
+                                    //$this->shortcode_info();
+                                    $this->shortcode_style_changer();
+                                    $this->shortcode_rearrange();
+                                endif;
+                                $this->modal_form();
+                                ?>
                             </div>
                         </div>
                         <div class="shortcode-addons-form-repeater-store" style="display: none">

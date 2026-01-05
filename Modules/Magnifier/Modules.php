@@ -18,7 +18,19 @@ use OXI_IMAGE_HOVER_PLUGINS\Page\Admin_Render;
 class Modules extends Admin_Render {
 
 
-
+ 	public function register_controls() {
+        $this->start_section_header(
+            'oxi-image-hover-start-tabs',
+            [
+                'options' => [
+                    'general-settings' => esc_html__( 'General Settings', 'image-hover-effects-ultimate' ),
+                    'custom' => esc_html__( 'Custom CSS', 'image-hover-effects-ultimate' ),
+                ],
+            ]
+        );
+        $this->register_general_tabs();
+        $this->register_custom_tabs();
+    }
 
     /*
      * @return void
@@ -285,7 +297,7 @@ class Modules extends Admin_Render {
                 'condition' => [
                     'oxi-image-hover-start-tabs' => 'custom',
                 ],
-                'padding' => '10px',
+                'padding' => '0',
             ]
         );
 
@@ -459,19 +471,6 @@ class Modules extends Admin_Render {
             ?>
         </div>
 		<?php
-    }
-    public function register_controls() {
-        $this->start_section_header(
-            'oxi-image-hover-start-tabs',
-            [
-                'options' => [
-                    'general-settings' => esc_html__( 'General Settings', 'image-hover-effects-ultimate' ),
-                    'custom' => esc_html__( 'Custom CSS', 'image-hover-effects-ultimate' ),
-                ],
-            ]
-        );
-        $this->register_general_tabs();
-        $this->register_custom_tabs();
     }
 
     public function register_general_tabs() {

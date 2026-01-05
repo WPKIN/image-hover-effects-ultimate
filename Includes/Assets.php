@@ -36,6 +36,12 @@ class Assets {
 			wp_enqueue_style( 'oxilab-image-hover-bootstraps', OXI_IMAGE_HOVER_URL . 'assets/backend/css/bootstrap.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION );
 			wp_enqueue_style( 'font-awsome.mins', OXI_IMAGE_HOVER_URL . 'assets/frontend/css/font-awsome.min.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION );
 			wp_enqueue_style( 'oxilab-image-hover-admin-css', OXI_IMAGE_HOVER_URL . 'assets/backend/css/admin.css', false, filemtime( OXI_IMAGE_HOVER_PATH . 'assets/backend/css/admin.css' ) );
+
+            // Load single editor page CSS only on editor page
+            // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.NonceVerification.Recommended
+            if ( isset( $_GET['effects'] ) && isset( $_GET['styleid'] ) ) {
+                wp_enqueue_style( 'oxilab-image-hover-single-editor-css', OXI_IMAGE_HOVER_URL . 'assets/backend/css/single_editor_page.css', false, filemtime( OXI_IMAGE_HOVER_PATH . 'assets/backend/css/single_editor_page.css' ) );
+            }
 		}
 
 		if ( 'image-hover-ultimate-getting-started' === $current_page ) {

@@ -198,7 +198,7 @@ class Modules extends Admin_Render {
                 'condition' => [
                     'oxi-image-hover-start-tabs' => 'custom',
                 ],
-                'padding' => '10px',
+                'padding' => '0',
             ]
         );
 

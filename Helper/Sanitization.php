@@ -230,6 +230,7 @@ trait Sanitization {
                 <div class="shortcode-form-control shortcode-control-type-<?php echo esc_attr($arg['type']); ?> <?php echo esc_attr($separator); ?>  <?php echo esc_attr($toggle); ?>  <?php echo esc_attr($responsiveclass); ?> <?php echo esc_attr($loader); ?> " <?php $this->forms_condition($arg) ?>>
                     <div class="shortcode-form-control-content">
                         <div class="shortcode-form-control-field">
+							<div class="shortcode-form-control-label">
                             <label for="" class="shortcode-form-control-title"><?php echo esc_html($arg['label']); ?></label>
                             <?php
                             if ($responsive == 'yes') :
@@ -247,7 +248,9 @@ trait Sanitization {
                                 </div>
                                 <?php
                             endif;
-
+							?>
+							</div>
+							<?php
                             $fun = $arg['type'] . '_admin_control';
                             $this->$fun($id, $data, $arg);
                             ?>
@@ -3054,7 +3057,7 @@ trait Sanitization {
 
             public function start_section_devider() {
                 ?>
-                <div class="oxi-addons-col-6">
+                <div class="oxi-addons-col-12">
                     <?php
                 }
 
