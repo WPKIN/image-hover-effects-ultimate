@@ -595,9 +595,9 @@ class Modules extends Admin_Render {
                 'shortcode-addons-start-tabs',
                 [
                     'options' => [
-                        'caption-settings' => esc_html__( 'General Settings', 'image-hover-effects-ultimate' ),
-                        'typography' => esc_html__( 'Typography', 'image-hover-effects-ultimate' ),
-                        'custom' => esc_html__( 'Custom CSS', 'image-hover-effects-ultimate' ),
+                        'caption-settings' => esc_html__( 'Content', 'image-hover-effects-ultimate' ),
+                        'style' => esc_html__( 'Style', 'image-hover-effects-ultimate' ),
+                        'advanced' => esc_html__( 'Advanced', 'image-hover-effects-ultimate' ),
                     ],
                 ]
             );
@@ -606,10 +606,10 @@ class Modules extends Admin_Render {
                 'shortcode-addons-start-tabs',
                 [
                     'options' => [
-                        'caption-settings' => esc_html__( 'General Settings', 'image-hover-effects-ultimate' ),
-                        'typography' => esc_html__( 'Typography', 'image-hover-effects-ultimate' ),
-                        'dynamic' => esc_html__( 'Dynamic Content', 'image-hover-effects-ultimate' ),
-                        'custom' => esc_html__( 'Custom CSS', 'image-hover-effects-ultimate' ),
+                        'caption-settings' => esc_html__( 'Content', 'image-hover-effects-ultimate' ),
+                        'style' => esc_html__( 'Style', 'image-hover-effects-ultimate' ),
+                        'dynamic' => esc_html__( 'Dynamic', 'image-hover-effects-ultimate' ),
+                        'advanced' => esc_html__( 'Advanced', 'image-hover-effects-ultimate' ),
                     ],
                 ]
             );
@@ -624,46 +624,33 @@ class Modules extends Admin_Render {
             ]
         );
         $this->start_section_devider();
-        // register_column_effects
         $this->register_column_effects();
-        //register_general_style
-        $this->register_general_style();
-        $this->end_section_devider();
-        $this->start_section_devider();
-        //register_content_settings
-        $this->register_content_settings();
-
         $this->end_section_devider();
         $this->end_section_tabs();
         $this->start_section_tabs(
             'oxi-image-hover-start-tabs',
             [
                 'condition' => [
-                    'oxi-image-hover-start-tabs' => 'typography',
+                    'oxi-image-hover-start-tabs' => 'style',
                 ],
             ]
         );
         $this->start_section_devider();
-        //register_content_settings
+
+        $this->register_content_settings();
+        $this->register_general_style();
         $this->register_heading_settings();
-
-        $this->end_section_devider();
-        $this->start_section_devider();
-        //register_content_settings
         $this->register_description_settings();
-
-        //register_button_settings
         $this->register_button_settings();
-
         $this->end_section_devider();
-
         $this->end_section_tabs();
+
         $this->register_dynamic_data();
         $this->start_section_tabs(
             'oxi-image-hover-start-tabs',
             [
                 'condition' => [
-                    'oxi-image-hover-start-tabs' => 'custom',
+                    'oxi-image-hover-start-tabs' => 'advanced',
                 ],
                 'padding' => '0',
             ]

@@ -703,12 +703,12 @@ abstract class Admin_Render {
 
         if ( apply_filters( 'oxi-image-hover-plugin-version', false ) == false ) :
             $data .= 'jQuery(".oxi-addons-minicolor").each(function (index, value) {
-                            jQuery(this).parent().parent().siblings(".shortcode-form-control-title").append(" <span class=\"oxi-pro-only\">Pro Only</span>");
+                            jQuery(this).closest(".shortcode-form-control-field").find(".shortcode-form-control-title").append(" <span class=\"oxi-pro-only\">Pro Only</span>");
                             var datavalue = jQuery(this).val();
                             jQuery(this).attr("oxilabvalue", datavalue);
                         });
                         jQuery(".oxi-addons-gradient-color").each(function (index, value) {
-                            jQuery(this).parent().parent().siblings(".shortcode-form-control-title").append(" <span class=\"oxi-pro-only\">Pro Only</span>");
+                            jQuery(this).closest(".shortcode-form-control-field").find(".shortcode-form-control-title").append(" <span class=\"oxi-pro-only\">Pro Only</span>");
                             var datavalue = jQuery(this).val();
                             jQuery(this).attr("oxilabvalue", datavalue);
                         });';

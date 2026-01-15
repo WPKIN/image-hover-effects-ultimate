@@ -20,7 +20,19 @@ class Modules extends Admin_Render {
 
     public $allcategory = [];
 
-
+ 	public function register_controls() {
+        $this->start_section_header(
+            'oxi-image-hover-start-tabs',
+            [
+                'options' => [
+                    'general-settings' => esc_html__( 'Content', 'image-hover-effects-ultimate' ),
+                    'advanced' => esc_html__( 'Advanced', 'image-hover-effects-ultimate' ),
+                ],
+            ]
+        );
+        $this->register_general_tabs();
+        $this->register_custom_tabs();
+    }
 
     public function register_general_tabs() {
         $this->start_section_tabs(
@@ -93,7 +105,7 @@ class Modules extends Admin_Render {
             'image-hover',
             [
                 'label' => esc_html__( 'Menu Style', 'image-hover-effects-ultimate' ),
-                'showing' => true,
+                'showing' => false,
             ]
         );
         $this->add_control(
@@ -537,7 +549,7 @@ class Modules extends Admin_Render {
             'image-hover',
             [
                 'label' => esc_html__( 'Item Data Settings', 'image-hover-effects-ultimate' ),
-                'showing' => true,
+                'showing' => false,
             ]
         );
         $this->add_group_control(
@@ -620,26 +632,13 @@ class Modules extends Admin_Render {
         );
         $this->end_controls_section();
     }
-    public function register_controls() {
-        $this->start_section_header(
-            'oxi-image-hover-start-tabs',
-            [
-                'options' => [
-                    'general-settings' => esc_html__( 'General Settings', 'image-hover-effects-ultimate' ),
-                    'custom' => esc_html__( 'Custom CSS', 'image-hover-effects-ultimate' ),
-                ],
-            ]
-        );
-        $this->register_general_tabs();
-        $this->register_custom_tabs();
-    }
 
     public function register_custom_tabs() {
         $this->start_section_tabs(
             'oxi-image-hover-start-tabs',
             [
                 'condition' => [
-                    'oxi-image-hover-start-tabs' => 'custom',
+                    'oxi-image-hover-start-tabs' => 'advanced',
                 ],
                 'padding' => '0',
             ]

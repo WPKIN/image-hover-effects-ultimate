@@ -23,8 +23,8 @@ class Modules extends Admin_Render {
             'oxi-image-hover-start-tabs',
             [
                 'options' => [
-                    'general-settings' => esc_html__( 'General Settings', 'image-hover-effects-ultimate' ),
-                    'custom' => esc_html__( 'Custom CSS', 'image-hover-effects-ultimate' ),
+                    'general-settings' => esc_html__( 'Content & Style', 'image-hover-effects-ultimate' ),
+                    'advanced' => esc_html__( 'Advanced', 'image-hover-effects-ultimate' ),
                 ],
             ]
         );
@@ -42,7 +42,7 @@ class Modules extends Admin_Render {
             'shortcode-addons',
             [
                 'label' => esc_html__( 'Image Settings', 'image-hover-effects-ultimate' ),
-                'showing' => true,
+                'showing' => false,
             ]
         );
         $this->add_responsive_control(
@@ -188,6 +188,99 @@ class Modules extends Admin_Render {
             ]
         );
 
+		$this->add_group_control(
+            'oxi_image_magnifier_button_border',
+            $this->style,
+            [
+                'type' => Controls::BORDER,
+                'selector' => [
+                    '{{WRAPPER}} .oxi_addons__image_magnifier' => '',
+                ],
+                'description' => 'Border property is used to set the Border of the Magnifier Body.',
+            ]
+        );
+        $this->add_responsive_control(
+            'oxi_image_magnifier_radius',
+            $this->style,
+            [
+                'label' => esc_html__( 'Border Radius', 'image-hover-effects-ultimate' ),
+                'type' => Controls::DIMENSIONS,
+                'default' => [
+                    'unit' => 'px',
+                    'size' => '',
+                ],
+                'range' => [
+                    '%' => [
+                        'min' => 0,
+                        'max' => 50,
+                        'step' => .1,
+                    ],
+                    'px' => [
+                        'min' => -100,
+                        'max' => 200,
+                        'step' => 1,
+                    ],
+                    'em' => [
+                        'min' => 0,
+                        'max' => 10,
+                        'step' => .1,
+                    ],
+                ],
+                'selector' => [
+                    '{{WRAPPER}} .oxi_addons__image_magnifier' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .oxi_addons__image_magnifier .oxi_addons__image' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .oxi_addons__image_magnifier .zoomableInPlace' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .oxi_addons__image_magnifier .zoomable' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'description' => 'Allows you to add rounded corners to Magnifier with options.',
+            ]
+        );
+        $this->add_group_control(
+            'oxi_image_magnifier_shadow',
+            $this->style,
+            [
+                'label' => esc_html__( 'Box Shadow', 'image-hover-effects-ultimate' ),
+                'type' => Controls::BOXSHADOW,
+                'selector' => [
+                    '{{WRAPPER}} .oxi_addons__image_magnifier' => '',
+                ],
+                'description' => 'Allows you at hover to attaches one or more shadows into Magnifier Body.',
+            ]
+        );
+        $this->add_responsive_control(
+            'oxi_image_magnifier_margin',
+            $this->style,
+            [
+                'label' => esc_html__( 'Margin', 'image-hover-effects-ultimate' ),
+                'type' => Controls::DIMENSIONS,
+                'default' => [
+                    'unit' => 'px',
+                    'size' => '',
+                ],
+                'range' => [
+                    '%' => [
+                        'min' => 0,
+                        'max' => 50,
+                        'step' => .1,
+                    ],
+                    'px' => [
+                        'min' => -200,
+                        'max' => 200,
+                        'step' => 1,
+                    ],
+                    'em' => [
+                        'min' => 0,
+                        'max' => 10,
+                        'step' => .1,
+                    ],
+                ],
+                'selector' => [
+                    '{{WRAPPER}} .oxi_addons__image_magnifier_column' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'description' => 'Generate space outside of Magnifier Body.',
+            ]
+        );
+
         $this->end_controls_section();
     }
 
@@ -295,7 +388,7 @@ class Modules extends Admin_Render {
             'oxi-image-hover-start-tabs',
             [
                 'condition' => [
-                    'oxi-image-hover-start-tabs' => 'custom',
+                    'oxi-image-hover-start-tabs' => 'advanced',
                 ],
                 'padding' => '0',
             ]
@@ -515,99 +608,6 @@ class Modules extends Admin_Render {
                 'selector' => [
                     '{{WRAPPER}} .oxi_addons__image_magnifier_column' => '',
                 ],
-            ]
-        );
-
-        $this->add_group_control(
-            'oxi_image_magnifier_button_border',
-            $this->style,
-            [
-                'type' => Controls::BORDER,
-                'selector' => [
-                    '{{WRAPPER}} .oxi_addons__image_magnifier' => '',
-                ],
-                'description' => 'Border property is used to set the Border of the Magnifier Body.',
-            ]
-        );
-        $this->add_responsive_control(
-            'oxi_image_magnifier_radius',
-            $this->style,
-            [
-                'label' => esc_html__( 'Border Radius', 'image-hover-effects-ultimate' ),
-                'type' => Controls::DIMENSIONS,
-                'default' => [
-                    'unit' => 'px',
-                    'size' => '',
-                ],
-                'range' => [
-                    '%' => [
-                        'min' => 0,
-                        'max' => 50,
-                        'step' => .1,
-                    ],
-                    'px' => [
-                        'min' => -100,
-                        'max' => 200,
-                        'step' => 1,
-                    ],
-                    'em' => [
-                        'min' => 0,
-                        'max' => 10,
-                        'step' => .1,
-                    ],
-                ],
-                'selector' => [
-                    '{{WRAPPER}} .oxi_addons__image_magnifier' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    '{{WRAPPER}} .oxi_addons__image_magnifier .oxi_addons__image' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    '{{WRAPPER}} .oxi_addons__image_magnifier .zoomableInPlace' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    '{{WRAPPER}} .oxi_addons__image_magnifier .zoomable' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-                'description' => 'Allows you to add rounded corners to Magnifier with options.',
-            ]
-        );
-        $this->add_group_control(
-            'oxi_image_magnifier_shadow',
-            $this->style,
-            [
-                'label' => esc_html__( 'Box Shadow', 'image-hover-effects-ultimate' ),
-                'type' => Controls::BOXSHADOW,
-                'selector' => [
-                    '{{WRAPPER}} .oxi_addons__image_magnifier' => '',
-                ],
-                'description' => 'Allows you at hover to attaches one or more shadows into Magnifier Body.',
-            ]
-        );
-        $this->add_responsive_control(
-            'oxi_image_magnifier_margin',
-            $this->style,
-            [
-                'label' => esc_html__( 'Margin', 'image-hover-effects-ultimate' ),
-                'type' => Controls::DIMENSIONS,
-                'default' => [
-                    'unit' => 'px',
-                    'size' => '',
-                ],
-                'range' => [
-                    '%' => [
-                        'min' => 0,
-                        'max' => 50,
-                        'step' => .1,
-                    ],
-                    'px' => [
-                        'min' => -200,
-                        'max' => 200,
-                        'step' => 1,
-                    ],
-                    'em' => [
-                        'min' => 0,
-                        'max' => 10,
-                        'step' => .1,
-                    ],
-                ],
-                'selector' => [
-                    '{{WRAPPER}} .oxi_addons__image_magnifier_column' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-                'description' => 'Generate space outside of Magnifier Body.',
             ]
         );
         $this->end_controls_section();

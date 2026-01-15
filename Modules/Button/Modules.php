@@ -38,7 +38,94 @@ class Modules extends Admin_Render {
         return '';
     }
 
+		public function register_controls() {
+		if ( apply_filters( 'oxi-image-hover-plugin-version', false ) == false ) :
+			$this->start_section_header(
+				'shortcode-addons-start-tabs',
+				[
+					'options' => [
+						'button-settings' => esc_html__( 'Content', 'image-hover-effects-ultimate' ),
+						'style' => esc_html__( 'Style', 'image-hover-effects-ultimate' ),
+						'advanced' => esc_html__( 'Advanced', 'image-hover-effects-ultimate' ),
+					],
+				]
+			);
+		else :
+			$this->start_section_header(
+				'shortcode-addons-start-tabs',
+				[
+					'options' => [
+						'button-settings' => esc_html__( 'Content', 'image-hover-effects-ultimate' ),
+						'style' => esc_html__( 'Style', 'image-hover-effects-ultimate' ),
+						'dynamic' => esc_html__( 'Dynamic', 'image-hover-effects-ultimate' ),
+						'advanced' => esc_html__( 'Advanced', 'image-hover-effects-ultimate' ),
+					],
+				]
+			);
+		endif;
 
+		$this->start_section_tabs(
+			'oxi-image-hover-start-tabs',
+			[
+				'condition' => [
+					'oxi-image-hover-start-tabs' => 'button-settings',
+				],
+			]
+		);
+		$this->start_section_devider();
+		$this->register_column_effects();
+		$this->end_section_devider();
+		$this->end_section_tabs();
+
+		$this->start_section_tabs(
+			'oxi-image-hover-start-tabs',
+			[
+				'condition' => [
+					'oxi-image-hover-start-tabs' => 'style',
+				],
+			]
+		);
+
+		$this->start_section_devider();
+		$this->register_content_settings();
+		$this->register_general_style();
+		$this->register_icon_settings();
+		$this->end_section_devider();
+
+		$this->end_section_tabs();
+
+		$this->register_dynamic_data();
+
+		$this->start_section_tabs(
+			'oxi-image-hover-start-tabs',
+			[
+				'condition' => [
+					'oxi-image-hover-start-tabs' => 'advanced',
+				],
+				'padding' => '0',
+			]
+		);
+
+		$this->start_controls_section(
+			'oxi-image-hover',
+			[
+				'label' => esc_html__( 'Custom CSS', 'image-hover-effects-ultimate' ),
+				'showing' => true,
+			]
+		);
+		$this->add_control(
+			'image-hover-custom-css',
+			$this->style,
+			[
+				'label' => '',
+				'type' => Controls::TEXTAREA,
+				'default' => '',
+				'description' => 'Custom CSS Section. You can add custom css into textarea.',
+			]
+		);
+		$this->end_controls_section();
+		$this->end_section_tabs();
+	}
 
     public function modal_form_data() {
 		?><div class="modal-header">
@@ -834,81 +921,6 @@ class Modules extends Admin_Render {
 			]
 		);
 		$this->end_controls_section();
-	}
-
-	public function register_controls() {
-		if ( apply_filters( 'oxi-image-hover-plugin-version', false ) == false ) :
-			$this->start_section_header(
-				'shortcode-addons-start-tabs',
-				[
-					'options' => [
-						'button-settings' => esc_html__( 'General Settings', 'image-hover-effects-ultimate' ),
-						'custom' => esc_html__( 'Custom CSS', 'image-hover-effects-ultimate' ),
-					],
-				]
-			);
-		else :
-			$this->start_section_header(
-				'shortcode-addons-start-tabs',
-				[
-					'options' => [
-						'button-settings' => esc_html__( 'General Settings', 'image-hover-effects-ultimate' ),
-						'dynamic' => esc_html__( 'Dynamic Content', 'image-hover-effects-ultimate' ),
-						'custom' => esc_html__( 'Custom CSS', 'image-hover-effects-ultimate' ),
-					],
-				]
-			);
-		endif;
-
-		$this->start_section_tabs(
-			'oxi-image-hover-start-tabs',
-			[
-				'condition' => [
-					'oxi-image-hover-start-tabs' => 'button-settings',
-				],
-			]
-		);
-		$this->start_section_devider();
-		$this->register_column_effects();
-		$this->register_icon_settings();
-		$this->end_section_devider();
-		$this->start_section_devider();
-		$this->register_general_style();
-		$this->register_content_settings();
-		$this->end_section_devider();
-		$this->end_section_tabs();
-
-		$this->register_dynamic_data();
-
-		$this->start_section_tabs(
-			'oxi-image-hover-start-tabs',
-			[
-				'condition' => [
-					'oxi-image-hover-start-tabs' => 'custom',
-				],
-				'padding' => '0',
-			]
-		);
-
-		$this->start_controls_section(
-			'oxi-image-hover',
-			[
-				'label' => esc_html__( 'Custom CSS', 'image-hover-effects-ultimate' ),
-				'showing' => true,
-			]
-		);
-		$this->add_control(
-			'image-hover-custom-css',
-			$this->style,
-			[
-				'label' => '',
-				'type' => Controls::TEXTAREA,
-				'default' => '',
-				'description' => 'Custom CSS Section. You can add custom css into textarea.',
-			]
-		);
-		$this->end_controls_section();
-		$this->end_section_tabs();
 	}
 
 	public function register_dynamic_data() {

@@ -56,6 +56,39 @@ class Modules extends Admin_Render {
         'General-33',
     ];
 
+	public function register_controls() {
+
+        if ( apply_filters( 'oxi-image-hover-plugin-version', false ) == false ) :
+            $this->start_section_header(
+                'shortcode-addons-start-tabs',
+                [
+                    'options' => [
+                        'general-settings' => esc_html__( 'Content', 'image-hover-effects-ultimate' ),
+                        'style' => esc_html__( 'Style', 'image-hover-effects-ultimate' ),
+                        'advanced' => esc_html__( 'Advanced', 'image-hover-effects-ultimate' ),
+                    ],
+                ]
+            );
+        else :
+            $this->start_section_header(
+                'shortcode-addons-start-tabs',
+                [
+                    'options' => [
+                        'general-settings' => esc_html__( 'Content', 'image-hover-effects-ultimate' ),
+                        'style' => esc_html__( 'Style', 'image-hover-effects-ultimate' ),
+                        'dynamic' => esc_html__( 'Dynamic', 'image-hover-effects-ultimate' ),
+                        'advanced' => esc_html__( 'Advanced', 'image-hover-effects-ultimate' ),
+                    ],
+                ]
+            );
+        endif;
+
+        $this->register_general_data();
+        $this->register_typography_data();
+        $this->register_dynamic_data();
+        $this->register_custom_css_data();
+    }
+
 
     public function register_content_settings() {
         $this->start_controls_section(
@@ -1134,39 +1167,6 @@ class Modules extends Admin_Render {
         $this->end_controls_section();
     }
 
-    public function register_controls() {
-
-        if ( apply_filters( 'oxi-image-hover-plugin-version', false ) == false ) :
-            $this->start_section_header(
-                'shortcode-addons-start-tabs',
-                [
-                    'options' => [
-                        'general-settings' => esc_html__( 'General Settings', 'image-hover-effects-ultimate' ),
-                        'typography' => esc_html__( 'Typography', 'image-hover-effects-ultimate' ),
-                        'custom' => esc_html__( 'Custom CSS', 'image-hover-effects-ultimate' ),
-                    ],
-                ]
-            );
-        else :
-            $this->start_section_header(
-                'shortcode-addons-start-tabs',
-                [
-                    'options' => [
-                        'general-settings' => esc_html__( 'General Settings', 'image-hover-effects-ultimate' ),
-                        'typography' => esc_html__( 'Typography', 'image-hover-effects-ultimate' ),
-                        'dynamic' => esc_html__( 'Dynamic Content', 'image-hover-effects-ultimate' ),
-                        'custom' => esc_html__( 'Custom CSS', 'image-hover-effects-ultimate' ),
-                    ],
-                ]
-            );
-        endif;
-
-        $this->register_general_data();
-        $this->register_typography_data();
-        $this->register_dynamic_data();
-        $this->register_custom_css_data();
-    }
-
     public function register_general_data() {
         $this->start_section_tabs(
             'oxi-image-hover-start-tabs',
@@ -1178,10 +1178,6 @@ class Modules extends Admin_Render {
         );
         $this->start_section_devider();
         $this->register_column_effects();
-        $this->register_general_style();
-        $this->end_section_devider();
-        $this->start_section_devider();
-        $this->register_content_settings();
         $this->end_section_devider();
         $this->end_section_tabs();
     }
@@ -1191,15 +1187,15 @@ class Modules extends Admin_Render {
             'oxi-image-hover-start-tabs',
             [
                 'condition' => [
-                    'oxi-image-hover-start-tabs' => 'typography',
+                    'oxi-image-hover-start-tabs' => 'style',
                 ],
             ]
         );
         $this->start_section_devider();
+        $this->register_content_settings();
+		$this->register_general_style();
         $this->register_heading_settings();
         $this->register_heading_Underline();
-        $this->end_section_devider();
-        $this->start_section_devider();
         $this->register_description_settings();
         $this->register_button_settings();
         $this->end_section_devider();
@@ -1427,7 +1423,7 @@ class Modules extends Admin_Render {
             'oxi-image-hover-start-tabs',
             [
                 'condition' => [
-                    'oxi-image-hover-start-tabs' => 'custom',
+                    'oxi-image-hover-start-tabs' => 'advanced',
                 ],
                 'padding' => '0',
             ]

@@ -17,112 +17,24 @@ use OXI_IMAGE_HOVER_PLUGINS\Classes\Controls;
 
 class Modules extends Admin_Render {
 
+	public function register_controls() {
 
-    use \OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic;
+         $this->start_section_header(
+			'oxi-image-hover-start-tabs',
+			[
+				'options' => [
+					'general-settings' => esc_html__( 'Content', 'image-hover-effects-ultimate' ),
+					'frontend' => esc_html__( 'Front', 'image-hover-effects-ultimate' ),
+					'backend' => esc_html__( 'Back', 'image-hover-effects-ultimate' ),
+					'advanced' => esc_html__( 'Advanced', 'image-hover-effects-ultimate' ),
+				],
+			]
+		);
 
-    public function register_dynamic_control() {
-        $this->start_controls_section(
-            'oxi-image-hover',
-            [
-                'label' => esc_html__( 'Dynamic Settings', 'image-hover-effects-ultimate' ),
-                'showing' => true,
-            ]
-        );
-
-        if ( apply_filters( 'oxi-image-hover-plugin-version', false ) == false ) :
-            $this->add_control(
-                'image_hover_premium_note',
-                $this->style,
-                [
-                    'label' => esc_html__( 'Note', 'image-hover-effects-ultimate' ),
-                    'type' => Controls::HEADING,
-                    'description' => 'Dynamic Property only for Premium Version.',
-                ]
-            );
-        else :
-            $this->add_control(
-                'image_hover_dynamic_note',
-                $this->style,
-                [
-                    'label' => esc_html__( 'Note', 'image-hover-effects-ultimate' ),
-                    'type' => Controls::HEADING,
-                    'description' => 'Dynamic Property will works only at live Sites. Kindly use shortcode at page or post then check it.',
-                ]
-            );
-        endif;
-
-        $this->add_control(
-            'image_hover_dynamic_load_per_page',
-            $this->style,
-            [
-                'label' => esc_html__( 'Load Once', 'image-hover-effects-ultimate' ),
-                'type' => Controls::NUMBER,
-                'default' => '10',
-                'min' => 1,
-                'description' => 'How many Image or Content You want to Viewing per load.',
-            ]
-        );
-
-        $this->add_control(
-            'image_hover_dynamic_carousel',
-            $this->style,
-            [
-                'label' => esc_html__( 'Carousel', 'image-hover-effects-ultimate' ),
-                'type' => Controls::SWITCHER,
-                'default' => 'no',
-                'yes' => esc_html__( 'Yes', 'image-hover-effects-ultimate' ),
-                'no' => esc_html__( 'No', 'image-hover-effects-ultimate' ),
-                'return_value' => 'yes',
-                'description' => 'Wanna Add Carousel into Hover Effects?.',
-                'notcondition' => true,
-                'condition' => [
-                    'image_hover_dynamic_load' => 'yes',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'image_hover_dynamic_load',
-            $this->style,
-            [
-                'label' => esc_html__( 'Load More', 'image-hover-effects-ultimate' ),
-                'type' => Controls::SWITCHER,
-                'default' => 'no',
-                'yes' => esc_html__( 'Yes', 'image-hover-effects-ultimate' ),
-                'no' => esc_html__( 'No', 'image-hover-effects-ultimate' ),
-                'return_value' => 'yes',
-                'description' => 'Wanna load More Options?.',
-                'notcondition' => true,
-                'condition' => [
-                    'image_hover_dynamic_carousel' => 'yes',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'image_hover_dynamic_load_type',
-            $this->style,
-            [
-                'label' => esc_html__( 'Load More Type', 'image-hover-effects-ultimate' ),
-                'type' => Controls::CHOOSE,
-                'operator' => Controls::OPERATOR_TEXT,
-                'default' => 'button',
-                'options' => [
-                    'button' => [
-                        'title' => esc_html__( 'Button', 'image-hover-effects-ultimate' ),
-                    ],
-                    'infinite' => [
-                        'title' => esc_html__( 'Infinite', 'image-hover-effects-ultimate' ),
-                    ],
-                ],
-                'condition' => [
-                    'image_hover_dynamic_load' => 'yes',
-                ],
-                'description' => 'Select Load More Type, As we offer Infinite loop or Button.',
-            ]
-        );
-
-        $this->end_controls_section();
+        $this->register_general_tabs();
+        $this->register_frontend_tabs();
+        $this->register_backend_tabs();
+        $this->register_custom_tabs();
     }
 
     public function register_general_tabs() {
@@ -179,11 +91,8 @@ class Modules extends Admin_Render {
         );
         $this->start_section_devider();
         $this->register_back_content_settings();
-        $this->register_back_description_settings();
-        $this->end_section_devider();
-
-        $this->start_section_devider();
         $this->register_back_heading_settings();
+        $this->register_back_description_settings();
         $this->register_back_icon_settings();
         $this->register_back_button_settings();
         $this->end_section_devider();
@@ -196,7 +105,7 @@ class Modules extends Admin_Render {
             'oxi-image-hover-start-tabs',
             [
                 'condition' => [
-                    'oxi-image-hover-start-tabs' => 'custom',
+                    'oxi-image-hover-start-tabs' => 'advanced',
                 ],
                 'padding' => '0',
             ]
@@ -328,7 +237,7 @@ class Modules extends Admin_Render {
             'oxi-image-hover',
             [
                 'label' => esc_html__( 'Width & Height', 'image-hover-effects-ultimate' ),
-                'showing' => true,
+                'showing' => false,
             ]
         );
         $this->add_responsive_control(
@@ -432,7 +341,7 @@ class Modules extends Admin_Render {
         $this->start_controls_section(
             'oxi-image-hover',
             [
-                'label' => esc_html__( 'Content Settings', 'image-hover-effects-ultimate' ),
+                'label' => esc_html__( 'Content Style', 'image-hover-effects-ultimate' ),
                 'showing' => true,
             ]
         );
@@ -577,7 +486,7 @@ class Modules extends Admin_Render {
         $this->start_controls_section(
             'oxi-image-hover',
             [
-                'label' => esc_html__( 'Heading Settings', 'image-hover-effects-ultimate' ),
+                'label' => esc_html__( 'Heading Style', 'image-hover-effects-ultimate' ),
                 'showing' => true,
             ]
         );
@@ -852,7 +761,7 @@ class Modules extends Admin_Render {
         $this->start_controls_section(
             'oxi-image-hover',
             [
-                'label' => esc_html__( 'Description Settings', 'image-hover-effects-ultimate' ),
+                'label' => esc_html__( 'Description Style', 'image-hover-effects-ultimate' ),
                 'showing' => false,
             ]
         );
@@ -1141,7 +1050,7 @@ class Modules extends Admin_Render {
         $this->start_controls_section(
             'oxi-image-hover',
             [
-                'label' => esc_html__( 'Content Settings', 'image-hover-effects-ultimate' ),
+                'label' => esc_html__( 'Content Style', 'image-hover-effects-ultimate' ),
                 'showing' => true,
             ]
         );
@@ -1297,8 +1206,8 @@ class Modules extends Admin_Render {
         $this->start_controls_section(
             'oxi-image-hover',
             [
-                'label' => esc_html__( 'Heading Settings', 'image-hover-effects-ultimate' ),
-                'showing' => true,
+                'label' => esc_html__( 'Heading Style', 'image-hover-effects-ultimate' ),
+                'showing' => false,
             ]
         );
         $this->add_control(
@@ -1622,7 +1531,7 @@ class Modules extends Admin_Render {
         $this->start_controls_section(
             'oxi-image-hover',
             [
-                'label' => esc_html__( 'Description Settings', 'image-hover-effects-ultimate' ),
+                'label' => esc_html__( 'Description Style', 'image-hover-effects-ultimate' ),
                 'showing' => false,
             ]
         );
@@ -2009,74 +1918,11 @@ class Modules extends Admin_Render {
         $this->end_controls_section();
     }
 
-    public function register_controls() {
-
-        if ( apply_filters( 'oxi-image-hover-plugin-version', false ) == false ) :
-            $this->start_section_header(
-                'oxi-image-hover-start-tabs',
-                [
-                    'options' => [
-                        'general-settings' => esc_html__( 'General Settings', 'image-hover-effects-ultimate' ),
-                        'frontend' => esc_html__( 'Frontend', 'image-hover-effects-ultimate' ),
-                        'backend' => esc_html__( 'Backend', 'image-hover-effects-ultimate' ),
-                        'custom' => esc_html__( 'Custom CSS', 'image-hover-effects-ultimate' ),
-                    ],
-                ]
-            );
-        else :
-            $this->start_section_header(
-                'oxi-image-hover-start-tabs',
-                [
-                    'options' => [
-                        'general-settings' => esc_html__( 'General Settings', 'image-hover-effects-ultimate' ),
-                        'frontend' => esc_html__( 'Frontend', 'image-hover-effects-ultimate' ),
-                        'backend' => esc_html__( 'Backend', 'image-hover-effects-ultimate' ),
-                        'dynamic' => esc_html__( 'Dynamic Content', 'image-hover-effects-ultimate' ),
-                        'custom' => esc_html__( 'Custom CSS', 'image-hover-effects-ultimate' ),
-                    ],
-                ]
-            );
-        endif;
-
-        $this->register_general_tabs();
-        $this->register_frontend_tabs();
-        $this->register_backend_tabs();
-        $this->register_dynamic_data();
-        $this->register_custom_tabs();
-    }
-
-    public function register_dynamic_data() {
-        $this->start_section_tabs(
-            'oxi-image-hover-start-tabs',
-            [
-                'condition' => [
-                    'oxi-image-hover-start-tabs' => 'dynamic',
-                ],
-            ]
-        );
-        $this->start_section_devider();
-
-        $this->register_dynamic_control();
-
-        $this->end_section_devider();
-
-        $this->start_section_devider();
-
-        $this->register_carousel_query_settings();
-        $this->register_carousel_arrows_settings();
-
-        $this->register_dynamic_load_more_button();
-
-        $this->end_section_devider();
-
-        $this->end_section_tabs();
-    }
-
     public function register_back_button_settings() {
         $this->start_controls_section(
             'oxi-image-hover',
             [
-                'label' => esc_html__( 'Button Settings', 'image-hover-effects-ultimate' ),
+                'label' => esc_html__( 'Button Style', 'image-hover-effects-ultimate' ),
                 'showing' => false,
             ]
         );

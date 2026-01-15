@@ -147,7 +147,7 @@ class Effects3 extends Modules {
         $this->start_controls_section(
             'shortcode-addons', [
 				'label' => esc_html__( 'Image Settings', 'image-hover-effects-ultimate' ),
-				'showing' => true,
+				'showing' => false,
 			]
         );
         $this->add_responsive_control(

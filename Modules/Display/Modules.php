@@ -35,8 +35,8 @@ class Modules extends Admin_Render {
             'oxi-image-hover-start-tabs',
             [
                 'options' => [
-                    'general-settings' => esc_html__( 'General Settings', 'image-hover-effects-ultimate' ),
-                    'custom' => esc_html__( 'Custom CSS', 'image-hover-effects-ultimate' ),
+                    'general-settings' => esc_html__( 'Content', 'image-hover-effects-ultimate' ),
+                    'advanced' => esc_html__( 'Advanced', 'image-hover-effects-ultimate' ),
                 ],
             ]
         );
@@ -49,7 +49,7 @@ class Modules extends Admin_Render {
             'oxi-image-hover-start-tabs',
             [
                 'condition' => [
-                    'oxi-image-hover-start-tabs' => 'custom',
+                    'oxi-image-hover-start-tabs' => 'advanced',
                 ],
                 'padding' => '0',
             ]
@@ -190,7 +190,7 @@ class Modules extends Admin_Render {
             'display-post',
             [
                 'label' => esc_html__( 'Post Condition', 'image-hover-effects-ultimate' ),
-                'showing' => true,
+                'showing' => false,
             ]
         );
         $this->add_control(

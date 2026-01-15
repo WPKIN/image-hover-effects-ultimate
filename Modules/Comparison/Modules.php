@@ -18,7 +18,19 @@ use OXI_IMAGE_HOVER_PLUGINS\Page\Admin_Render;
 class Modules extends Admin_Render {
 
 
-
+	public function register_controls() {
+		$this->start_section_header(
+			'oxi-image-hover-start-tabs',
+			[
+				'options' => [
+					'general-settings' => esc_html__( 'Content', 'image-hover-effects-ultimate' ),
+					'advanced'         => esc_html__( 'Advanced', 'image-hover-effects-ultimate' ),
+				],
+			]
+		);
+		$this->register_general_tabs();
+		$this->register_custom_tabs();
+	}
 
     /*
      * @return void
@@ -371,26 +383,12 @@ class Modules extends Admin_Render {
                                 <?php
 	}
 
-	public function register_controls() {
-		$this->start_section_header(
-			'oxi-image-hover-start-tabs',
-			[
-				'options' => [
-					'general-settings' => esc_html__( 'General Settings', 'image-hover-effects-ultimate' ),
-					'custom' => esc_html__( 'Custom CSS', 'image-hover-effects-ultimate' ),
-				],
-			]
-		);
-		$this->register_general_tabs();
-		$this->register_custom_tabs();
-	}
-
 	public function register_custom_tabs() {
 		$this->start_section_tabs(
 			'oxi-image-hover-start-tabs',
 			[
 				'condition' => [
-					'oxi-image-hover-start-tabs' => 'custom',
+					'oxi-image-hover-start-tabs' => 'advanced',
 				],
 				'padding' => '0',
 			]
@@ -441,7 +439,7 @@ class Modules extends Admin_Render {
 			'shortcode-addons',
 			[
 				'label' => esc_html__( 'Image Settings', 'image-hover-effects-ultimate' ),
-				'showing' => true,
+				'showing' => false,
 			]
 		);
 		$this->add_responsive_control(

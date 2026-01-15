@@ -142,7 +142,7 @@ class Effects27 extends Modules {
     public function register_back_button_settings() {
         $this->start_controls_section(
             'oxi-image-hover', [
-				'label' => esc_html__( 'Button Settings', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__( 'Button Style', 'image-hover-effects-ultimate' ),
 				'showing' => false,
 			]
         );

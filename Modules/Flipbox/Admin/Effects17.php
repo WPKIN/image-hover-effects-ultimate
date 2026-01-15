@@ -36,7 +36,7 @@ class Effects17 extends Modules {
     public function register_front_heading_settings() {
         $this->start_controls_section(
             'oxi-image-hover', [
-				'label' => esc_html__( 'Heading Settings', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__( 'Heading Style', 'image-hover-effects-ultimate' ),
 				'showing' => true,
 			]
         );
@@ -139,7 +139,7 @@ class Effects17 extends Modules {
     public function register_back_content_settings() {
         $this->start_controls_section(
             'oxi-image-hover', [
-				'label' => esc_html__( 'Content Settings', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__( 'Content Style', 'image-hover-effects-ultimate' ),
 				'showing' => true,
 			]
         );

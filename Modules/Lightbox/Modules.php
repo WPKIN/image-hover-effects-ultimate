@@ -17,6 +17,20 @@ use OXI_IMAGE_HOVER_PLUGINS\Page\Admin_Render;
 
 class Modules extends Admin_Render {
 
+	public function register_controls() {
+        $this->start_section_header(
+            'oxi-image-hover-start-tabs',
+            [
+                'options' => [
+                    'general-settings' => esc_html__( 'Content', 'image-hover-effects-ultimate' ),
+                    'advanced' => esc_html__( 'Advanced', 'image-hover-effects-ultimate' ),
+                ],
+            ]
+        );
+        $this->register_general_tabs();
+        $this->register_custom_tabs();
+    }
+
     /*
      * @return void
      * Start Module Method for Genaral Style  #Light-box
@@ -513,7 +527,7 @@ class Modules extends Admin_Render {
             'oxi-image-hover',
             [
                 'label' => esc_html__( 'Light Settings', 'image-hover-effects-ultimate' ),
-                'showing' => true,
+                'showing' => false,
             ]
         );
 
@@ -544,8 +558,8 @@ class Modules extends Admin_Render {
         $this->start_controls_section(
             'oxi-image-hover',
             [
-                'label' => esc_html__( 'Heading Details Settings', 'image-hover-effects-ultimate' ),
-                'showing' => true,
+                'label' => esc_html__( 'Heading & Details Style', 'image-hover-effects-ultimate' ),
+                'showing' => false,
             ]
         );
 
@@ -1118,7 +1132,7 @@ class Modules extends Admin_Render {
         $this->start_controls_section(
             'shortcode-addons',
             [
-                'label' => esc_html__( 'Image Overlay Settings', 'image-hover-effects-ultimate' ),
+                'label' => esc_html__( 'Image Overlay & Icon', 'image-hover-effects-ultimate' ),
                 'showing' => false,
                 'condition' => [
                     'oxi_image_light_box_clickable' => 'image',
@@ -1355,26 +1369,13 @@ class Modules extends Admin_Render {
         </div>
 		<?php
     }
-    public function register_controls() {
-        $this->start_section_header(
-            'oxi-image-hover-start-tabs',
-            [
-                'options' => [
-                    'general-settings' => esc_html__( 'General Settings', 'image-hover-effects-ultimate' ),
-                    'custom' => esc_html__( 'Custom CSS', 'image-hover-effects-ultimate' ),
-                ],
-            ]
-        );
-        $this->register_general_tabs();
-        $this->register_custom_tabs();
-    }
 
     public function register_custom_tabs() {
         $this->start_section_tabs(
             'oxi-image-hover-start-tabs',
             [
                 'condition' => [
-                    'oxi-image-hover-start-tabs' => 'custom',
+                    'oxi-image-hover-start-tabs' => 'advanced',
                 ],
                 'padding' => '0',
             ]

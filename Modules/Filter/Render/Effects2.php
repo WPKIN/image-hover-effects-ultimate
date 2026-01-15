@@ -172,8 +172,18 @@ class Effects2 extends Public_Render {
             <div class="image-hover-category  image-hover-category-<?php echo (int) $oxiid; ?>">
                 <div class="image-hover-category-data  image-hover-category-data-<?php echo (int) $oxiid; ?>">
                 <?php
-				foreach ( $child as $value ) :
-					$childdata = json_decode( stripslashes( $value['rawdata'] ), true );
+                foreach ( $child as $value ) :
+                    $childdata = json_decode( stripslashes( $value['rawdata'] ), true );
+                    if ( ! is_array( $childdata ) ) :
+                        $childdata = json_decode( $value['rawdata'], true );
+                    endif;
+                    if ( ! is_array( $childdata ) ) :
+                        $childdata = json_decode( html_entity_decode( stripslashes( $value['rawdata'] ), ENT_QUOTES ), true );
+                    endif;
+
+                    if ( ! is_array( $childdata ) ) {
+                        continue;
+                    }
 					?>
                         <div class="image-hover-category-item-show  
                         <?php

@@ -5,7 +5,8 @@
 .updated,
 .error,
 .is-dismissible,
-.update-nag {
+.update-nag,
+div.fs-notice.promotion, div.fs-notice.success, div.fs-notice.updated {
   display: none !important;
 }
 #wpcontent {
@@ -289,10 +290,10 @@ html.wp-toolbar {
     border-right: 1px solid #e5e5e5;
     z-index: 10;
     position: fixed;
-    top: 60px; /* Align with content start */
+    top: 58px; /* Align with content start */
     left: 0;
     bottom: 0;
-    height: calc(100vh - 60px);
+    height: calc(100vh - 58px);
     overflow: hidden !important; /* Prevent outer scroll */
     display: flex !important;
     flex-direction: column !important;
