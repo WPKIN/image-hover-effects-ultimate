@@ -1062,4 +1062,131 @@ jQuery.noConflict();
         $(this).parents('.shortcode-form-repeater-fields-wrapper').trigger('sortupdate');
         OxiAddonsPreviewDataLoader();
     });
+
+    /**
+     * Sidebar Resize and Collapse Functionality
+     * Elementor-style resizable sidebar with custom scrollbar and collapse toggle
+     */
+    (function() {
+        const $sidebar = $('.oxi-addons-settings');
+        const $preview = $('.oxi-addons-Preview');
+        
+        if (!$sidebar.length || !$preview.length) return;
+
+        // Constants
+        const MIN_WIDTH = 300;
+        const MAX_WIDTH = 600;
+        const DEFAULT_WIDTH = 300;
+        const STORAGE_KEY_WIDTH = 'oxi_sidebar_width';
+        const STORAGE_KEY_COLLAPSED = 'oxi_sidebar_collapsed';
+
+        // Create toggle button (as sibling, not child of sidebar)
+        const $toggleBtn = $('<div class="oxi-sidebar-toggle-btn"><i class="fa fa-angle-left"></i></div>');
+        $sidebar.after($toggleBtn); // Insert after sidebar, not inside it
+
+        // Create resize handle
+        const $resizeHandle = $('<div class="oxi-sidebar-resize-handle"></div>');
+        $sidebar.append($resizeHandle);
+
+        // Restore saved width only (sidebar always starts expanded)
+        const savedWidth = localStorage.getItem(STORAGE_KEY_WIDTH);
+
+        if (savedWidth) {
+            setSidebarWidth(parseInt(savedWidth, 10));
+        }
+
+        // Always start with sidebar expanded (no collapsed state restoration)
+        // User can manually collapse if needed
+
+        // Resize functionality
+        let isResizing = false;
+        let startX = 0;
+        let startWidth = 0;
+
+        $resizeHandle.on('mousedown', function(e) {
+            isResizing = true;
+            startX = e.pageX;
+            startWidth = $sidebar.width();
+            $resizeHandle.addClass('resizing');
+            $('body').css('user-select', 'none');
+            e.preventDefault();
+        });
+
+        $(document).on('mousemove', function(e) {
+            if (!isResizing) return;
+
+            const diff = e.pageX - startX;
+            const newWidth = Math.min(Math.max(startWidth + diff, MIN_WIDTH), MAX_WIDTH);
+            setSidebarWidth(newWidth);
+        });
+
+        $(document).on('mouseup', function() {
+            if (isResizing) {
+                isResizing = false;
+                $resizeHandle.removeClass('resizing');
+                $('body').css('user-select', '');
+                
+                // Save to localStorage
+                const currentWidth = $sidebar.width();
+                localStorage.setItem(STORAGE_KEY_WIDTH, currentWidth);
+            }
+        });
+
+        // Collapse/Expand functionality
+        $toggleBtn.on('click', function() {
+            const isCollapsed = $sidebar.hasClass('collapsed');
+            
+            if (isCollapsed) {
+                // Expand
+                $sidebar.removeClass('collapsed');
+                localStorage.setItem(STORAGE_KEY_COLLAPSED, 'false');
+                // Move button to sidebar's right edge
+                const currentWidth = $sidebar.width();
+                $toggleBtn.css('left', currentWidth + 'px');
+            } else {
+                // Collapse
+                $sidebar.addClass('collapsed');
+                localStorage.setItem(STORAGE_KEY_COLLAPSED, 'true');
+                // Move button to left edge
+                $toggleBtn.css('left', '0');
+            }
+        });
+
+        // Helper function to set sidebar width
+        function setSidebarWidth(width) {
+            $sidebar.css('width', width + 'px');
+            
+            // Inject dynamic CSS with !important to override existing rules
+            let dynamicStyle = $('#oxi-sidebar-dynamic-style');
+            if (!dynamicStyle.length) {
+                dynamicStyle = $('<style id="oxi-sidebar-dynamic-style"></style>');
+                $('head').append(dynamicStyle);
+            }
+            
+            const css = `
+                .oxi-addons-Preview {
+                    width: calc(100% - ${width + 30}px) !important;
+                    margin-left: ${width + 30}px !important;
+                }
+                .oxi-addons-settings.collapsed ~ .oxi-addons-Preview {
+                    width: 100% !important;
+                    margin-left: 0 !important;
+                }
+            `;
+            dynamicStyle.html(css);
+            
+            // Update toggle button position
+            $toggleBtn.css('left', width + 'px');
+        }
+
+        // Prevent resize on collapsed state
+        $resizeHandle.on('mousedown', function(e) {
+            if ($sidebar.hasClass('collapsed')) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+    })();
+
 })(jQuery);
