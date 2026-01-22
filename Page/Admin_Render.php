@@ -943,17 +943,6 @@ abstract class Admin_Render
 							</div>
 							<div class="oxi-addons-style-right">
 								<?php
-								if ($this->form == 'single') :
-									//$this->shortcode_name();
-									//$this->shortcode_info();
-									$this->shortcode_style_changer();
-								else :
-									$this->modal_opener();
-									//$this->shortcode_name();
-									//$this->shortcode_info();
-									$this->shortcode_style_changer();
-									$this->shortcode_rearrange();
-								endif;
 								$this->modal_form();
 								?>
 							</div>

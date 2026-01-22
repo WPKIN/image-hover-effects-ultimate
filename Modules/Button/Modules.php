@@ -2,8 +2,8 @@
 
 namespace OXI_IMAGE_HOVER_PLUGINS\Modules\Button;
 
-if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+if (! defined('ABSPATH')) {
+	exit;
 }
 
 /**
@@ -15,38 +15,41 @@ if ( ! defined( 'ABSPATH' ) ) {
 use OXI_IMAGE_HOVER_PLUGINS\Page\Admin_Render;
 use OXI_IMAGE_HOVER_PLUGINS\Classes\Controls;
 
-class Modules extends Admin_Render {
+class Modules extends Admin_Render
+{
 
 
-    use \OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic;
+	use \OXI_IMAGE_HOVER_PLUGINS\Modules\Dynamic;
 
-    public $StyleChanger = [
-        'Button-1',
-        'Button-2',
-        'Button-3',
-        'Button-4',
-        'Button-5',
-        'Button-6',
-        'Button-7',
-        'Button-8',
-        'Button-9',
-        'Button-10',
-        'Button-11',
-    ];
+	public $StyleChanger = [
+		'Button-1',
+		'Button-2',
+		'Button-3',
+		'Button-4',
+		'Button-5',
+		'Button-6',
+		'Button-7',
+		'Button-8',
+		'Button-9',
+		'Button-10',
+		'Button-11',
+	];
 
-    public function register_effects() {
-        return '';
-    }
+	public function register_effects()
+	{
+		return '';
+	}
 
-		public function register_controls() {
-		if ( apply_filters( 'oxi-image-hover-plugin-version', false ) == false ) :
+	public function register_controls()
+	{
+		if (apply_filters('oxi-image-hover-plugin-version', false) == false) :
 			$this->start_section_header(
 				'shortcode-addons-start-tabs',
 				[
 					'options' => [
-						'button-settings' => esc_html__( 'Content', 'image-hover-effects-ultimate' ),
-						'style' => esc_html__( 'Style', 'image-hover-effects-ultimate' ),
-						'advanced' => esc_html__( 'Advanced', 'image-hover-effects-ultimate' ),
+						'button-settings' => esc_html__('Content', 'image-hover-effects-ultimate'),
+						'style' => esc_html__('Style', 'image-hover-effects-ultimate'),
+						'advanced' => esc_html__('Advanced', 'image-hover-effects-ultimate'),
 					],
 				]
 			);
@@ -55,10 +58,10 @@ class Modules extends Admin_Render {
 				'shortcode-addons-start-tabs',
 				[
 					'options' => [
-						'button-settings' => esc_html__( 'Content', 'image-hover-effects-ultimate' ),
-						'style' => esc_html__( 'Style', 'image-hover-effects-ultimate' ),
-						'dynamic' => esc_html__( 'Dynamic', 'image-hover-effects-ultimate' ),
-						'advanced' => esc_html__( 'Advanced', 'image-hover-effects-ultimate' ),
+						'button-settings' => esc_html__('Content', 'image-hover-effects-ultimate'),
+						'style' => esc_html__('Style', 'image-hover-effects-ultimate'),
+						'dynamic' => esc_html__('Dynamic', 'image-hover-effects-ultimate'),
+						'advanced' => esc_html__('Advanced', 'image-hover-effects-ultimate'),
 					],
 				]
 			);
@@ -73,6 +76,7 @@ class Modules extends Admin_Render {
 			]
 		);
 		$this->start_section_devider();
+		$this->modal_opener();
 		$this->register_column_effects();
 		$this->end_section_devider();
 		$this->end_section_tabs();
@@ -106,10 +110,13 @@ class Modules extends Admin_Render {
 			]
 		);
 
+		$this->shortcode_rearrange();
+		$this->shortcode_style_changer();
+
 		$this->start_controls_section(
 			'oxi-image-hover',
 			[
-				'label' => esc_html__( 'Custom CSS', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__('Custom CSS', 'image-hover-effects-ultimate'),
 				'showing' => true,
 			]
 		);
@@ -127,126 +134,129 @@ class Modules extends Admin_Render {
 		$this->end_section_tabs();
 	}
 
-    public function modal_form_data() {
-		?><div class="modal-header">
-            <h4 class="modal-title">Image Hover Form</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <div class="modal-body">
-        <?php
-                                $this->add_control(
-                                    'image_hover_title',
-                                    $this->style,
-                                    [
-                                        'label' => esc_html__( 'Rearrange Title', 'image-hover-effects-ultimate' ),
-                                        'type' => Controls::TEXT,
-                                        'default' => 'Image Serial',
-                                        'placeholder' => 'Image Serial Name',
-                                        'description' => 'Add Your Image Serial Name for rearrange Image.',
-                                    ]
-                                );
-                                $this->add_control(
-                                    'image_hover_first_icon',
-                                    $this->style,
-                                    [
-                                        'label' => esc_html__( 'First Icon', 'image-hover-effects-ultimate' ),
-                                        'type' => Controls::ICON,
-                                        'separator' => true,
-                                        'default' => '',
-                                        'placeholder' => 'Heading',
-                                        'description' => 'Add Your Image Hover First Icon.',
-                                    ]
-                                );
-                                $this->add_group_control(
-                                    'image_hover_first_icon_link',
-                                    $this->style,
-                                    [
-                                        'label' => esc_html__( 'First URL', 'image-hover-effects-ultimate' ),
-                                        'type' => Controls::URL,
-                                        'default' => '',
-                                        'placeholder' => 'https://www.yoururl.com',
-                                        'description' => 'Add Your Desire Link or Url for First Icon',
-                                    ]
-                                );
-                                $this->add_control(
-                                    'image_hover_second_icon',
-                                    $this->style,
-                                    [
-                                        'label' => esc_html__( 'Second Icon', 'image-hover-effects-ultimate' ),
-                                        'type' => Controls::ICON,
-                                        'separator' => true,
-                                        'default' => '',
-                                        'placeholder' => 'Heading',
-                                        'description' => 'Add Your Image Hover Second Icon.',
-                                    ]
-                                );
-                                $this->add_group_control(
-                                    'image_hover_second_icon_link',
-                                    $this->style,
-                                    [
-                                        'label' => esc_html__( 'Second URL', 'image-hover-effects-ultimate' ),
-                                        'type' => Controls::URL,
-                                        'default' => '',
-                                        'placeholder' => 'https://www.yoururl.com',
-                                        'description' => 'Add Your Desire Link or Url for Second Icon',
-                                    ]
-                                );
+	public function modal_form_data()
+	{
+?><div class="modal-header">
+			<h4 class="modal-title">Image Hover Form</h4>
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+		</div>
+		<div class="modal-body">
+			<?php
+			$this->add_control(
+				'image_hover_title',
+				$this->style,
+				[
+					'label' => esc_html__('Rearrange Title', 'image-hover-effects-ultimate'),
+					'type' => Controls::TEXT,
+					'default' => 'Image Serial',
+					'placeholder' => 'Image Serial Name',
+					'description' => 'Add Your Image Serial Name for rearrange Image.',
+				]
+			);
+			$this->add_control(
+				'image_hover_first_icon',
+				$this->style,
+				[
+					'label' => esc_html__('First Icon', 'image-hover-effects-ultimate'),
+					'type' => Controls::ICON,
+					'separator' => true,
+					'default' => '',
+					'placeholder' => 'Heading',
+					'description' => 'Add Your Image Hover First Icon.',
+				]
+			);
+			$this->add_group_control(
+				'image_hover_first_icon_link',
+				$this->style,
+				[
+					'label' => esc_html__('First URL', 'image-hover-effects-ultimate'),
+					'type' => Controls::URL,
+					'default' => '',
+					'placeholder' => 'https://www.yoururl.com',
+					'description' => 'Add Your Desire Link or Url for First Icon',
+				]
+			);
+			$this->add_control(
+				'image_hover_second_icon',
+				$this->style,
+				[
+					'label' => esc_html__('Second Icon', 'image-hover-effects-ultimate'),
+					'type' => Controls::ICON,
+					'separator' => true,
+					'default' => '',
+					'placeholder' => 'Heading',
+					'description' => 'Add Your Image Hover Second Icon.',
+				]
+			);
+			$this->add_group_control(
+				'image_hover_second_icon_link',
+				$this->style,
+				[
+					'label' => esc_html__('Second URL', 'image-hover-effects-ultimate'),
+					'type' => Controls::URL,
+					'default' => '',
+					'placeholder' => 'https://www.yoururl.com',
+					'description' => 'Add Your Desire Link or Url for Second Icon',
+				]
+			);
 
-                                $this->start_controls_tabs(
-                                    'image_hover-start-tabs',
-                                    [
-                                        'separator' => true,
-                                        'options' => [
-                                            'frontend' => esc_html__( 'Image', 'image-hover-effects-ultimate' ),
-                                            'backend' => esc_html__( 'Feature Image', 'image-hover-effects-ultimate' ),
-                                        ],
-                                    ]
-                                );
-                                $this->start_controls_tab();
+			$this->start_controls_tabs(
+				'image_hover-start-tabs',
+				[
+					'separator' => true,
+					'options' => [
+						'frontend' => esc_html__('Image', 'image-hover-effects-ultimate'),
+						'backend' => esc_html__('Feature Image', 'image-hover-effects-ultimate'),
+					],
+				]
+			);
+			$this->start_controls_tab();
 
-                                $this->add_group_control(
-                                    'image_hover_image',
-                                    $this->style,
-                                    [
-                                        'label' => esc_html__( 'Image', 'image-hover-effects-ultimate' ),
-                                        'type' => Controls::MEDIA,
-                                        'description' => 'Add or Modify Your Image. You can use Media Library or Custom URL',
-                                    ]
-                                );
+			$this->add_group_control(
+				'image_hover_image',
+				$this->style,
+				[
+					'label' => esc_html__('Image', 'image-hover-effects-ultimate'),
+					'type' => Controls::MEDIA,
+					'description' => 'Add or Modify Your Image. You can use Media Library or Custom URL',
+				]
+			);
 
-                                $this->end_controls_tab();
+			$this->end_controls_tab();
 
-                                $this->start_controls_tab();
-                                $this->add_group_control(
-                                    'image_hover_feature_image',
-                                    $this->style,
-                                    [
-                                        'label' => esc_html__( 'Feature Image', 'image-hover-effects-ultimate' ),
-                                        'type' => Controls::MEDIA,
-                                        'description' => 'Add or Modify Your Feature Image. Adjust background to get better design.',
-                                    ]
-                                );
-                                $this->end_controls_tab();
-                                $this->end_controls_tabs();
-		?>
-                                </div>
-                                <?php
+			$this->start_controls_tab();
+			$this->add_group_control(
+				'image_hover_feature_image',
+				$this->style,
+				[
+					'label' => esc_html__('Feature Image', 'image-hover-effects-ultimate'),
+					'type' => Controls::MEDIA,
+					'description' => 'Add or Modify Your Feature Image. Adjust background to get better design.',
+				]
+			);
+			$this->end_controls_tab();
+			$this->end_controls_tabs();
+			?>
+		</div>
+<?php
 	}
 
-            /**
-             * Template Parent Item Data Rearrange
-             *
-             * @since 2.0.0
-             */
-	public function Rearrange() {
+	/**
+	 * Template Parent Item Data Rearrange
+	 *
+	 * @since 2.0.0
+	 */
+	public function Rearrange()
+	{
 		return '<li class="list-group-item" id="{{id}}">{{image_hover_title}}</li>';
 	}
 
-	public function register_column_effects() {
+	public function register_column_effects()
+	{
 		$this->start_controls_section(
 			'oxi-image-hover',
 			[
-				'label' => esc_html__( 'Column & Effects', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__('Column & Effects', 'image-hover-effects-ultimate'),
 				'showing' => true,
 			]
 		);
@@ -267,7 +277,7 @@ class Modules extends Admin_Render {
 			'oxi-image-hover-effects-time',
 			$this->style,
 			[
-				'label' => esc_html__( 'Effects Time (S)', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__('Effects Time (S)', 'image-hover-effects-ultimate'),
 				'type' => Controls::SLIDER,
 				'simpleenable' => false,
 				'default' => [
@@ -306,11 +316,12 @@ class Modules extends Admin_Render {
 		$this->end_controls_section();
 	}
 
-	public function register_general_style() {
+	public function register_general_style()
+	{
 		$this->start_controls_section(
 			'oxi-image-hover',
 			[
-				'label' => esc_html__( 'Width & Height', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__('Width & Height', 'image-hover-effects-ultimate'),
 				'showing' => true,
 			]
 		);
@@ -318,7 +329,7 @@ class Modules extends Admin_Render {
 			'oxi-image-hover-width',
 			$this->style,
 			[
-				'label' => esc_html__( 'Width', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__('Width', 'image-hover-effects-ultimate'),
 				'type' => Controls::SLIDER,
 				'default' => [
 					'unit' => 'px',
@@ -352,7 +363,7 @@ class Modules extends Admin_Render {
 			'oxi-image-hover-height',
 			$this->style,
 			[
-				'label' => esc_html__( 'Height', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__('Height', 'image-hover-effects-ultimate'),
 				'type' => Controls::SLIDER,
 				'default' => [
 					'unit' => 'px',
@@ -381,7 +392,7 @@ class Modules extends Admin_Render {
 			'oxi-image-hover-margin',
 			$this->style,
 			[
-				'label' => esc_html__( 'Margin', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__('Margin', 'image-hover-effects-ultimate'),
 				'type' => Controls::DIMENSIONS,
 				'simpledimensions' => 'double',
 				'default' => [
@@ -414,11 +425,12 @@ class Modules extends Admin_Render {
 		);
 		$this->end_controls_section();
 	}
-	public function register_content_settings() {
+	public function register_content_settings()
+	{
 		$this->start_controls_section(
 			'oxi-image-hover',
 			[
-				'label' => esc_html__( 'General Settings', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__('General Settings', 'image-hover-effects-ultimate'),
 				'showing' => true,
 			]
 		);
@@ -426,7 +438,7 @@ class Modules extends Admin_Render {
 			'oxi-image-hover-background-color',
 			$this->style,
 			[
-				'label' => esc_html__( 'Background', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__('Background', 'image-hover-effects-ultimate'),
 				'type' => Controls::GRADIENT,
 				'default' => 'rgba(255, 116, 3, 1)',
 				'oparetor' => true,
@@ -441,19 +453,19 @@ class Modules extends Admin_Render {
 			'oxi-image-hover-content-alignment',
 			$this->style,
 			[
-				'label' => esc_html__( 'Content Alignment', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__('Content Alignment', 'image-hover-effects-ultimate'),
 				'type' => Controls::SELECT,
 				'default' => 'image-hover-align-center-center',
 				'options' => [
-					'image-hover-align-top-left' => esc_html__( 'Top Left', 'image-hover-effects-ultimate' ),
-					'image-hover-align-top-center' => esc_html__( 'Top Center', 'image-hover-effects-ultimate' ),
-					'image-hover-align-top-right' => esc_html__( 'Top Right', 'image-hover-effects-ultimate' ),
-					'image-hover-align-center-left' => esc_html__( 'Center Left', 'image-hover-effects-ultimate' ),
-					'image-hover-align-center-center' => esc_html__( 'Center Center', 'image-hover-effects-ultimate' ),
-					'image-hover-align-center-right' => esc_html__( 'Center Right', 'image-hover-effects-ultimate' ),
-					'image-hover-align-bottom-left' => esc_html__( 'Bottom Left', 'image-hover-effects-ultimate' ),
-					'image-hover-align-bottom-center' => esc_html__( 'Bottom Center', 'image-hover-effects-ultimate' ),
-					'image-hover-align-bottom-right' => esc_html__( 'Bottom Right', 'image-hover-effects-ultimate' ),
+					'image-hover-align-top-left' => esc_html__('Top Left', 'image-hover-effects-ultimate'),
+					'image-hover-align-top-center' => esc_html__('Top Center', 'image-hover-effects-ultimate'),
+					'image-hover-align-top-right' => esc_html__('Top Right', 'image-hover-effects-ultimate'),
+					'image-hover-align-center-left' => esc_html__('Center Left', 'image-hover-effects-ultimate'),
+					'image-hover-align-center-center' => esc_html__('Center Center', 'image-hover-effects-ultimate'),
+					'image-hover-align-center-right' => esc_html__('Center Right', 'image-hover-effects-ultimate'),
+					'image-hover-align-bottom-left' => esc_html__('Bottom Left', 'image-hover-effects-ultimate'),
+					'image-hover-align-bottom-center' => esc_html__('Bottom Center', 'image-hover-effects-ultimate'),
+					'image-hover-align-bottom-right' => esc_html__('Bottom Right', 'image-hover-effects-ultimate'),
 				],
 				'selector' => [
 					'{{WRAPPER}} .oxi-image-hover-caption-tab' => '',
@@ -466,8 +478,8 @@ class Modules extends Admin_Render {
 			'image-hover-content-start-tabs',
 			[
 				'options' => [
-					'normal' => esc_html__( 'Normal ', 'image-hover-effects-ultimate' ),
-					'hover' => esc_html__( 'Hover ', 'image-hover-effects-ultimate' ),
+					'normal' => esc_html__('Normal ', 'image-hover-effects-ultimate'),
+					'hover' => esc_html__('Hover ', 'image-hover-effects-ultimate'),
 				],
 			]
 		);
@@ -476,7 +488,7 @@ class Modules extends Admin_Render {
 			'oxi-image-hover-border-radius',
 			$this->style,
 			[
-				'label' => esc_html__( 'Border Radius', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
 				'type' => Controls::DIMENSIONS,
 				'default' => [
 					'unit' => 'px',
@@ -531,7 +543,7 @@ class Modules extends Admin_Render {
 			'oxi-image-hover-hover-border-radius',
 			$this->style,
 			[
-				'label' => esc_html__( 'Border Radius', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
 				'type' => Controls::DIMENSIONS,
 				'default' => [
 					'unit' => 'px',
@@ -595,7 +607,7 @@ class Modules extends Admin_Render {
 			'oxi-image-hover-padding',
 			$this->style,
 			[
-				'label' => esc_html__( 'Padding', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__('Padding', 'image-hover-effects-ultimate'),
 				'type' => Controls::DIMENSIONS,
 				'separator' => true,
 				'simpledimensions' => 'double',
@@ -630,11 +642,12 @@ class Modules extends Admin_Render {
 		$this->end_controls_section();
 	}
 
-	public function register_icon_settings() {
+	public function register_icon_settings()
+	{
 		$this->start_controls_section(
 			'oxi-image-hover',
 			[
-				'label' => esc_html__( 'Icon Settings', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__('Icon Settings', 'image-hover-effects-ultimate'),
 				'showing' => true,
 			]
 		);
@@ -642,7 +655,7 @@ class Modules extends Admin_Render {
 			'oxi-image-hover-icon-width-height',
 			$this->style,
 			[
-				'label' => esc_html__( 'Width Height', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__('Width Height', 'image-hover-effects-ultimate'),
 				'type' => Controls::SLIDER,
 				'default' => [
 					'unit' => 'px',
@@ -671,7 +684,7 @@ class Modules extends Admin_Render {
 			'oxi-image-hover-icon-size',
 			$this->style,
 			[
-				'label' => esc_html__( 'Size', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__('Size', 'image-hover-effects-ultimate'),
 				'type' => Controls::SLIDER,
 				'default' => [
 					'unit' => 'px',
@@ -700,8 +713,8 @@ class Modules extends Admin_Render {
 			'oxi-image-hover-start-tabs',
 			[
 				'options' => [
-					'normal' => esc_html__( 'Normal ', 'image-hover-effects-ultimate' ),
-					'hover' => esc_html__( 'Hover ', 'image-hover-effects-ultimate' ),
+					'normal' => esc_html__('Normal ', 'image-hover-effects-ultimate'),
+					'hover' => esc_html__('Hover ', 'image-hover-effects-ultimate'),
 				],
 			]
 		);
@@ -710,7 +723,7 @@ class Modules extends Admin_Render {
 			'oxi-image-hover-icon-color',
 			$this->style,
 			[
-				'label' => esc_html__( 'Color', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__('Color', 'image-hover-effects-ultimate'),
 				'type' => Controls::COLOR,
 				'default' => '#ffffff',
 				'selector' => [
@@ -724,7 +737,7 @@ class Modules extends Admin_Render {
 			'oxi-image-hover-icon-background',
 			$this->style,
 			[
-				'label' => esc_html__( 'Background', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__('Background', 'image-hover-effects-ultimate'),
 				'type' => Controls::GRADIENT,
 				'default' => 'rgba(171, 0, 201, 1)',
 				'selector' => [
@@ -750,7 +763,7 @@ class Modules extends Admin_Render {
 			'oxi-image-hover-icon-radius',
 			$this->style,
 			[
-				'label' => esc_html__( 'Border Radius', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
 				'type' => Controls::DIMENSIONS,
 				'default' => [
 					'unit' => 'px',
@@ -798,7 +811,7 @@ class Modules extends Admin_Render {
 			'oxi-image-hover-icon-hover-color',
 			$this->style,
 			[
-				'label' => esc_html__( 'Color', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__('Color', 'image-hover-effects-ultimate'),
 				'type' => Controls::COLOR,
 				'default' => '#ffffff',
 				'selector' => [
@@ -812,7 +825,7 @@ class Modules extends Admin_Render {
 			'oxi-image-hover-icon-hover-background',
 			$this->style,
 			[
-				'label' => esc_html__( 'Background', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__('Background', 'image-hover-effects-ultimate'),
 				'type' => Controls::GRADIENT,
 				'default' => '#ffffff',
 				'selector' => [
@@ -838,7 +851,7 @@ class Modules extends Admin_Render {
 			'oxi-image-hover-icon-hover-radius',
 			$this->style,
 			[
-				'label' => esc_html__( 'Border Radius', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__('Border Radius', 'image-hover-effects-ultimate'),
 				'type' => Controls::DIMENSIONS,
 				'default' => [
 					'unit' => 'px',
@@ -888,7 +901,7 @@ class Modules extends Admin_Render {
 			'oxi-image-hover-icon-margin',
 			$this->style,
 			[
-				'label' => esc_html__( 'Margin', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__('Margin', 'image-hover-effects-ultimate'),
 				'type' => Controls::DIMENSIONS,
 				'simpledimensions' => 'double',
 				'separator' => true,
@@ -923,7 +936,8 @@ class Modules extends Admin_Render {
 		$this->end_controls_section();
 	}
 
-	public function register_dynamic_data() {
+	public function register_dynamic_data()
+	{
 		$this->start_section_tabs(
 			'oxi-image-hover-start-tabs',
 			[
@@ -950,21 +964,22 @@ class Modules extends Admin_Render {
 		$this->end_section_tabs();
 	}
 
-	public function register_dynamic_control() {
+	public function register_dynamic_control()
+	{
 		$this->start_controls_section(
 			'oxi-image-hover',
 			[
-				'label' => esc_html__( 'Dynamic Settings', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__('Dynamic Settings', 'image-hover-effects-ultimate'),
 				'showing' => true,
 			]
 		);
 
-		if ( apply_filters( 'oxi-image-hover-plugin-version', false ) == false ) :
+		if (apply_filters('oxi-image-hover-plugin-version', false) == false) :
 			$this->add_control(
 				'image_hover_premium_note',
 				$this->style,
 				[
-					'label' => esc_html__( 'Note', 'image-hover-effects-ultimate' ),
+					'label' => esc_html__('Note', 'image-hover-effects-ultimate'),
 					'type' => Controls::HEADING,
 					'description' => 'Dynamic Property only for Premium Version.',
 				]
@@ -974,7 +989,7 @@ class Modules extends Admin_Render {
 				'image_hover_dynamic_note',
 				$this->style,
 				[
-					'label' => esc_html__( 'Note', 'image-hover-effects-ultimate' ),
+					'label' => esc_html__('Note', 'image-hover-effects-ultimate'),
 					'type' => Controls::HEADING,
 					'description' => 'Dynamic Property will works only at live Sites. Kindly use shortcode at page or post then check it.',
 				]
@@ -985,7 +1000,7 @@ class Modules extends Admin_Render {
 			'image_hover_dynamic_load_per_page',
 			$this->style,
 			[
-				'label' => esc_html__( 'Load Once', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__('Load Once', 'image-hover-effects-ultimate'),
 				'type' => Controls::NUMBER,
 				'default' => '10',
 				'min' => 1,
@@ -996,11 +1011,11 @@ class Modules extends Admin_Render {
 			'image_hover_dynamic_carousel',
 			$this->style,
 			[
-				'label' => esc_html__( 'Carousel', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__('Carousel', 'image-hover-effects-ultimate'),
 				'type' => Controls::SWITCHER,
 				'default' => 'no',
-				'yes' => esc_html__( 'Yes', 'image-hover-effects-ultimate' ),
-				'no' => esc_html__( 'No', 'image-hover-effects-ultimate' ),
+				'yes' => esc_html__('Yes', 'image-hover-effects-ultimate'),
+				'no' => esc_html__('No', 'image-hover-effects-ultimate'),
 				'return_value' => 'yes',
 				'description' => 'Wanna Add Carousel into Hover Effects?.',
 				'notcondition' => true,
@@ -1014,11 +1029,11 @@ class Modules extends Admin_Render {
 			'image_hover_dynamic_load',
 			$this->style,
 			[
-				'label' => esc_html__( 'Load More', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__('Load More', 'image-hover-effects-ultimate'),
 				'type' => Controls::SWITCHER,
 				'default' => 'no',
-				'yes' => esc_html__( 'Yes', 'image-hover-effects-ultimate' ),
-				'no' => esc_html__( 'No', 'image-hover-effects-ultimate' ),
+				'yes' => esc_html__('Yes', 'image-hover-effects-ultimate'),
+				'no' => esc_html__('No', 'image-hover-effects-ultimate'),
 				'return_value' => 'yes',
 				'description' => 'Wanna load More Options?.',
 				'notcondition' => true,
@@ -1032,16 +1047,16 @@ class Modules extends Admin_Render {
 			'image_hover_dynamic_load_type',
 			$this->style,
 			[
-				'label' => esc_html__( 'Load More Type', 'image-hover-effects-ultimate' ),
+				'label' => esc_html__('Load More Type', 'image-hover-effects-ultimate'),
 				'type' => Controls::CHOOSE,
 				'operator' => Controls::OPERATOR_TEXT,
 				'default' => 'button',
 				'options' => [
 					'button' => [
-						'title' => esc_html__( 'Button', 'image-hover-effects-ultimate' ),
+						'title' => esc_html__('Button', 'image-hover-effects-ultimate'),
 					],
 					'infinite' => [
-						'title' => esc_html__( 'Infinite', 'image-hover-effects-ultimate' ),
+						'title' => esc_html__('Infinite', 'image-hover-effects-ultimate'),
 					],
 				],
 				'condition' => [
@@ -1054,14 +1069,17 @@ class Modules extends Admin_Render {
 		$this->end_controls_section();
 	}
 
-	public function modal_opener() {
+	public function modal_opener()
+	{
 		$this->add_substitute_control(
-            '', [], [
+			'',
+			[],
+			[
 				'type' => Controls::MODALOPENER,
-				'title' => esc_html__( 'Add New Image Hover', 'image-hover-effects-ultimate' ),
-				'sub-title' => esc_html__( 'Open Image Hover Form', 'image-hover-effects-ultimate' ),
+				'title' => esc_html__('Add New Image Hover', 'image-hover-effects-ultimate'),
+				'sub-title' => esc_html__('Open Image Hover Form', 'image-hover-effects-ultimate'),
 				'showing' => true,
 			]
-        );
+		);
 	}
 }

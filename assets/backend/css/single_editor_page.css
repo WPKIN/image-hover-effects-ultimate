@@ -358,7 +358,7 @@ html.wp-toolbar {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 99998; /* Below header but above content */
+    z-index: 999; /* Below header but above content */
     box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease, left 0.3s ease; /* Smooth left movement */
 }
