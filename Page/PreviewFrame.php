@@ -188,6 +188,10 @@ class PreviewFrame
 					width: 100%;
 				}
 
+				.oxi-addons-row {
+					padding-bottom: 20px;
+				}
+
 				/* Strict Isolation: Hide everything except our content */
 				body.oxi-preview-frame>*:not(div):not(script):not(style):not(link) {
 					display: none !important;

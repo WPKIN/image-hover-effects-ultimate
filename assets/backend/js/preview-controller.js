@@ -123,7 +123,7 @@
                 this.applyIframeScrollbarStyles();
 
             } else {
-                $('html, body').css('overflow', '');
+                $('html, body').css('overflow', 'hidden');
                 $('#oxi-preview-wrapper').css({ 'height': '', 'overflow': '' });
                 if (this.iframe) { this.iframe.style.height = ''; }
                 if (this.iframeDoc && this.iframeDoc.body && this.iframeDoc.documentElement) {

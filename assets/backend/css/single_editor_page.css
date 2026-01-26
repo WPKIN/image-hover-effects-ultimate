@@ -10,8 +10,7 @@ div.fs-notice.promotion, div.fs-notice.success, div.fs-notice.updated {
   display: none !important;
 }
 button:focus,
-button:active,
-button:hover{
+button:active{
 	border: none !important;
 	outline: none !important;
 	box-shadow: none !important;	
@@ -27,11 +26,15 @@ html.wp-toolbar {
   padding-left: 0 !important;
 }
 
+/* Hide browser scrollbar on editor page */
+html, body {
+  overflow: hidden !important;
+}
+
 /* Custom Header for Editor Page */
 .oxi-addons-header {
   background: #fff;
   padding: 10px 20px;
-  /* margin-bottom: 20px; */
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
@@ -51,34 +54,47 @@ html.wp-toolbar {
 
 /* Left Side */
 .oxi-addons-header-left {
-  display: flex;
-  gap: 10px;
-  align-items: center;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    z-index: 1;
 }
 .oxi-addons-header-left a {
   text-decoration: none;
-  font-size: 13px;
-  color: #0073aa;
-  background: #f0f6fc;
-  padding: 6px 12px;
-  border-radius: 4px;
-  font-weight: 500;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  transition: all 0.3s;
-  line-height: normal;
+color: #1A73E8;
+font-size: 14px;
+display: inline-block;
+padding: 8px 10px;
+background: #E9F3FF;
+border-radius: 5px;
 }
 .oxi-addons-header-left a:hover {
   background: #e1ecf7;
   color: #005a87;
 }
 
-/* Center Side */
-.oxi-addons-header-center {
+/* Middle-Left Side (Tooltip and Shortcode) */
+.oxi-addons-header-middle-left {
   display: flex;
-  justify-content: center;
-  flex-grow: 1;
+  gap: 5px;
+  align-items: center;
+  margin-left: 7%;
+  margin-right: auto;
+  z-index: 1;
+}
+
+/* Center Side (Device Icons Only) - Absolutely Centered */
+.oxi-addons-header-center {
+  position: absolute;
+  left: 58%;
+  transform: translateX(-58%);
+  display: flex;
+  align-items: center;
+  z-index: 2;
+  pointer-events: none;
+}
+.oxi-addons-header-center > * {
+  pointer-events: auto;
 }
 .oxi-iheu-header-devices {
     background: #fff;
@@ -117,6 +133,7 @@ html.wp-toolbar {
   display: flex;
   align-items: center;
   gap: 15px;
+  z-index: 1;
 }
 .oxi-btn-upgrade {
   background: #d63638;
@@ -172,31 +189,33 @@ html.wp-toolbar {
 .oxi-header-shortcode {
   display: flex;
   align-items: center;
-  background: #fff;
-  border: 1px solid #ddd;
+  background: #edf2fb;
+  border: 1px solid #d5e5fb;
   border-radius: 4px;
   padding: 0;
   overflow: hidden;
 }
 .oxi-shortcode-text {
-  padding: 5px 10px;
-  font-size: 12px;
-  color: #555;
-  min-width: 220px;
-  font-family: monospace;
-  white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    height: 34px;
+    padding: 0 5px;
+    background: #edf2fb;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 14px;
+    color: #d73a49;
 }
 .oxi-copy-btn {
   border: none;
-  background: #f0f0f1;
+  color: #1A73E8;
+  background: #e4edfa;
   padding: 6px 10px;
   cursor: pointer;
-  border-left: 1px solid #ddd;
-  color: #555;
+  border-left: 1px solid #d5e5fb;
 }
 .oxi-copy-btn:hover {
-  background: #e5e5e5;
   color: #0073aa;
+  background: #d5e5fb;
 }
 
 /* Shortcode Name Dropdown */
@@ -602,12 +621,12 @@ html.wp-toolbar {
     flex-grow: 1;
     width: calc(100% - 330px) !important;
     margin-left: 330px !important; /* Push right to clear fixed sidebar */
-    margin-bottom: 0 !important;
+    margin-bottom: 20px !important;
     background: #f0f0f1; /* Match WP background or desired color */
     position: relative;
     display: flex;
     flex-direction: column;
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - 100px);
     transition: width 0.3s ease, margin-left 0.3s ease;
 	padding-right: 20px;
 }
@@ -653,6 +672,6 @@ html.wp-toolbar {
 .oxi-addons-preview-data {
     flex-grow: 1;
     display: flex;
-    padding: 20px;
+    padding: 30px 10px;
     overflow: auto;
 }

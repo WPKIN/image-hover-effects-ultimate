@@ -741,15 +741,27 @@ abstract class Admin_Render
 	?>
 		<div class="oxi-addons-header">
 			<div class="oxi-addons-header-left">
-				<a href="<?php echo admin_url('admin.php?page=oxi-image-hover-ultimate'); ?>" class="oxi-btn-back">
+				<a href="javascript:history.back()" class="oxi-btn-back">
 					<i class="fa fa-arrow-left" aria-hidden="true"></i> Back
 				</a>
-				<a href="<?php echo home_url(); ?>" target="_blank" class="oxi-btn-visit">
-					<i class="fa fa-globe" aria-hidden="true"></i> Visit Site
+				<a href="<?php echo admin_url('admin.php?page=oxi-image-hover-ultimate'); ?>" class="oxi-btn-dashboard">
+					Dashboard
 				</a>
-				<a href="<?php echo admin_url(); ?>" class="oxi-btn-dashboard">
-					<i class="fa fa-wordpress" aria-hidden="true"></i> Dashboard
+				<a href="<?php echo admin_url('admin.php?page=oxi-image-hover-shortcode'); ?>" class="oxi-btn-dashboard">
+					Shortcode List
 				</a>
+			</div>
+			<div class="oxi-addons-header-middle-left">
+				<div class="oxi-header-tooltip">
+					<i class="fa fa-info-circle" aria-hidden="true"></i>
+					<span class="oxi-tooltip-text">Copy & paste the shortcode directly into any WordPress post, page or Page Builder.</span>
+				</div>
+				<div class="oxi-header-shortcode">
+					<div class="oxi-shortcode-text">[iheu_ultimate_oxi id="<?php echo $this->oxiid; ?>"]</div>
+					<button type="button" class="oxi-copy-btn">
+						<i class="fa fa-copy" aria-hidden="true"></i>
+					</button>
+				</div>
 			</div>
 			<div class="oxi-addons-header-center">
 				<div class="oxi-iheu-header-devices" aria-label="Preview devices">
@@ -774,16 +786,9 @@ abstract class Admin_Render
 				<a href="https://wpkindemos.com/imagehover/pricing/" target="_blank" class="oxi-btn-upgrade">
 					Upgrade
 				</a>
-				<div class="oxi-header-tooltip">
-					<i class="fa fa-info-circle" aria-hidden="true"></i>
-					<span class="oxi-tooltip-text">Copy & paste the shortcode directly into any WordPress post, page or Page Builder.</span>
-				</div>
-				<div class="oxi-header-shortcode">
-					<div class="oxi-shortcode-text">[iheu_ultimate_oxi id="<?php echo $this->oxiid; ?>"]</div>
-					<button type="button" class="oxi-copy-btn">
-						<i class="fa fa-copy" aria-hidden="true"></i>
-					</button>
-				</div>
+				<a href="<?php echo home_url(); ?>" target="_blank" class="oxi-btn-visit">
+					<i class="fa fa-globe" aria-hidden="true"></i> Visit Site
+				</a>
 				<div class="oxi-header-name-dropdown">
 					<button type="button" class="oxi-header-name-toggle">
 						<i class="fa fa-bars" aria-hidden="true"></i>
