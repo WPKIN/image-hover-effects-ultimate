@@ -663,7 +663,7 @@ class Modules extends Admin_Render
 		);
 
 		$this->shortcode_rearrange();
-		$this->shortcode_style_changer();
+		// $this->shortcode_style_changer();
 
 		$this->start_controls_section(
 			'oxi-image-hover',

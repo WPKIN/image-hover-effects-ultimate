@@ -7,6 +7,79 @@ jQuery.noConflict();
     var childid = "";
     var WRAPPER = $('#oxi-addons-preview-data').attr('template-wrapper');
 
+    /**
+     * Helper function to inject styles into preview (iframe or fallback)
+     * @param {string} cls - CSS selector
+     * @param {string} Cval - CSS value
+     * @param {string} responsive - 'tab', 'mobile', or '' for desktop
+     */
+    /**
+     * Helper function to inject styles into preview (iframe or fallback)
+     * @param {string} cls - CSS selector
+     * @param {string} Cval - CSS value
+     * @param {string} responsive - 'tab', 'mobile', or '' for desktop
+     */
+    window.oxiInjectPreviewStyle = function(cls, Cval, responsive) {
+        
+        // Try iframe preview first
+        if (window.PreviewController && PreviewController.isIframeReady) {
+            PreviewController.injectStyles(Cval, cls, responsive || 'desktop');
+        } else {
+            // Fallback to old method
+            if (responsive === 'tab') {
+                $("#oxi-addons-preview-data").append('<style>@media only screen and (min-width : 669px) and (max-width : 993px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} < /style>');
+            } else if (responsive === 'mobile') {
+                $("#oxi-addons-preview-data").append('<style>@media only screen and (max-width : 668px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} < /style>');
+            } else {
+                $("#oxi-addons-preview-data").append('<style>#oxi-addons-preview-data ' + cls + '{' + Cval + '} < /style>');
+            }
+        }
+    };
+
+    /**
+     * Helper to update text content in preview (iframe or fallback)
+     */
+    window.oxiUpdatePreviewText = function(cls, text) {
+        if (window.PreviewController && PreviewController.isIframeReady) {
+            // Remove #oxi-addons-preview-data prefix for iframe search
+            var iframeSelector = cls.replace('#oxi-addons-preview-data ', '');
+            var $el = $(PreviewController.iframeDoc).find(iframeSelector);
+            $el.html(text);
+        } else {
+            $(cls).html(text);
+        }
+    };
+
+    /**
+     * Helper to update classes in preview (iframe or fallback)
+     */
+    window.oxiUpdatePreviewClass = function(cls, removeArr, addVal) {
+        if (window.PreviewController && PreviewController.isIframeReady) {
+            // Remove prefix for iframe
+            var iframeSelector = cls.replace('#oxi-addons-preview-data ', '');
+            var $el = $(PreviewController.iframeDoc).find(iframeSelector);
+            
+            if(removeArr && removeArr.length > 0) {
+                $.each(removeArr, function(i, v) {
+                    $el.removeClass(v);
+                });
+            }
+            if(addVal) {
+                $el.addClass(addVal);
+            }
+        } else {
+            // Fallback
+            if(removeArr && removeArr.length > 0) {
+                $.each(removeArr, function(i, v) {
+                    $(cls).removeClass(v);
+                });
+            }
+            if(addVal) {
+                $(cls).addClass(addVal);
+            }
+        }
+    };
+
     function NEWRegExp(par = '') {
         return new RegExp(par, "g");
     }
@@ -70,6 +143,12 @@ jQuery.noConflict();
 
 
     function OxiAddonsPreviewDataLoader() {
+        // If iframe is active, reload it to reflect structural changes
+        if (window.PreviewController && PreviewController.isIframeReady) {
+            PreviewController.reloadPreview();
+            return;
+        }
+
         OxiAddonsTemplateSettings('elements_template_render_data', JSON.stringify($("#oxi-addons-form-submit").serializeJSON({checkboxUncheckedValue: "0"})), styleid, childid, function (callback) {
             $("#oxi-addons-preview-data").html(callback);
         });
@@ -251,93 +330,106 @@ jQuery.noConflict();
         });
     }
 
-    $("body").on("click", ".shortcode-addons-template-item-edit", function (e) {
-        e.preventDefault();
-        $('#oxi-template-modal-form')[0].reset();
-        var rawdata = "edit";
-        var functionname = "elements_template_modal_data_edit";
-        var childid = $(this).attr("value");
-        OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, function (callback) {
-            if (callback === "Go to hell") {
-                alert("Data Error");
-            } else {
-                $("#shortcode-addons-template-modal-form input[type='checkbox']").attr('checked', false);
-                $.each($.parseJSON(callback), function (key, value) {
-                    var tp = $('input[name="' + key + '"]').attr("type");
-                    if (typeof tp !== 'undefined') {
-                        if (tp === 'radio') {
-                            $('input[name=' + key + ']').val([value]);
-                        } else if (tp === 'checkbox') {
-                            if (value != '0') {
-                                $('input[name=' + key + ']').attr('checked', 'true');
+    // Expose actions for iframe communication
+    window.oxiPreviewActions = {
+        edit: function(childid) {
+            $('#oxi-template-modal-form')[0].reset();
+            var rawdata = "edit";
+            var functionname = "elements_template_modal_data_edit";
+            OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, function (callback) {
+                if (callback === "Go to hell") {
+                    alert("Data Error");
+                } else {
+                    $("#shortcode-addons-template-modal-form input[type='checkbox']").attr('checked', false);
+                    $.each($.parseJSON(callback), function (key, value) {
+                        var tp = $('input[name="' + key + '"]').attr("type");
+                        if (typeof tp !== 'undefined') {
+                            if (tp === 'radio') {
+                                $('input[name=' + key + ']').val([value]);
+                            } else if (tp === 'checkbox') {
+                                if (value != '0') {
+                                    $('input[name=' + key + ']').attr('checked', 'true');
+                                } else {
+                                    $('input[name=' + key + ']').prop('checked', false).removeAttr('checked');
+                                }
+                            } else if (tp === 'hidden') {
+    
+                                $('input[name=' + key + ']').val(value);
+                                if ($('input[name=' + key + ']').hasClass('shortcode-addons-media-control-link')) {
+                                    $('#' + key).siblings('.shortcode-addons-media-control').removeClass('shortcode-addons-media-control-hidden-button');
+                                    $('input[name=' + key + ']').siblings('.shortcode-addons-media-control').children('.shortcode-addons-media-control-image-load').css({'background-image': 'url(' + value + ')'});
+                                }
                             } else {
-                                $('input[name=' + key + ']').prop('checked', false).removeAttr('checked');
-                            }
-                        } else if (tp === 'hidden') {
-
-                            $('input[name=' + key + ']').val(value);
-                            if ($('input[name=' + key + ']').hasClass('shortcode-addons-media-control-link')) {
-                                $('#' + key).siblings('.shortcode-addons-media-control').removeClass('shortcode-addons-media-control-hidden-button');
-                                $('input[name=' + key + ']').siblings('.shortcode-addons-media-control').children('.shortcode-addons-media-control-image-load').css({'background-image': 'url(' + value + ')'});
+                                $("#" + key).val(value);
                             }
                         } else {
                             $("#" + key).val(value);
                         }
+                    });
+                    $("[data-condition]").each(function (index, value) {
+                        $(this).addClass('shortcode-addons-form-conditionize');
+                    });
+                    $('.shortcode-addons-form-conditionize').conditionize();
+                    $('.shortcode-control-type-select .shortcode-addons-select-input').each(function (e) {
+                        $id = $(this).attr('id');
+                        $('#' + $id).select2({width: '100%'});
+                    });
+                    $("#oxi-template-modal-submit").html("Submit");
+                    $("#oxi-addons-list-data-modal").modal("show");
+                }
+            });
+        },
+        clone: function(childid) {
+            var rawdata = "delete";
+            var functionname = "elements_template_modal_data_clone";
+            OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, function (callback) {
+                if (callback === "done") {
+                    OxiAddonsPreviewDataLoader();
+                } else {
+                    alert("Data Error");
+                }
+            });
+        },
+        delete: function(childid) {
+            var rawdata = "delete";
+            var functionname = "elements_template_modal_data_delete";
+            var status = confirm("Do you Want to Delete this?");
+            if (status === false) {
+                return false;
+            } else {
+                OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, function (callback) {
+                    if (callback === "done") {
+                        $("#OXIAADDONSCHANGEDPOPUP .icon-box").html('<span class="dashicons dashicons-trash"></span>');
+                        $("#OXIAADDONSCHANGEDPOPUP .modal-body.text-center h4").html("Deleted :(");
+                        $("#OXIAADDONSCHANGEDPOPUP .modal-body.text-center p").html("Your data has been delete successfully.");
+                        $("#OXIAADDONSCHANGEDPOPUP").modal("show");
+                        // OxiAddonsModalConfirm(".shortcode-addons-template-item-delete", "Delete") // Can't confirm on missing element
+                        setTimeout(function () {
+                            $("#OXIAADDONSCHANGEDPOPUP").modal("hide");
+                        }, 3000);
+                        OxiAddonsPreviewDataLoader();
                     } else {
-                        $("#" + key).val(value);
+                        alert("Data Error")
                     }
                 });
-                $("[data-condition]").each(function (index, value) {
-                    $(this).addClass('shortcode-addons-form-conditionize');
-                });
-                $('.shortcode-addons-form-conditionize').conditionize();
-                $('.shortcode-control-type-select .shortcode-addons-select-input').each(function (e) {
-                    $id = $(this).attr('id');
-                    $('#' + $id).select2({width: '100%'});
-                });
-                $("#oxi-template-modal-submit").html("Submit");
-                $("#oxi-addons-list-data-modal").modal("show");
             }
-        });
+        }
+    };
+
+    $("body").on("click", ".shortcode-addons-template-item-edit", function (e) {
+        e.preventDefault();
+        window.oxiPreviewActions.edit($(this).attr("value"));
     });
 
 
     $("body").on("click", ".shortcode-addons-template-item-clone", function (e) {
         e.preventDefault();
-        var rawdata = "delete";
-        var functionname = "elements_template_modal_data_clone";
-        var childid = $(this).attr("value");
-        OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, function (callback) {
-            if (callback === "done") {
-                OxiAddonsPreviewDataLoader();
-            } else {
-                alert("Data Error");
-            }
-        });
-
+        window.oxiPreviewActions.clone($(this).attr("value"));
     });
+    
     $("body").on("click", ".shortcode-addons-template-item-delete", function (e) {
         e.preventDefault();
-        var rawdata = "delete";
-        var functionname = "elements_template_modal_data_delete";
-        var childid = $(this).attr("value");
-        var status = confirm("Do you Want to Delete this?");
-        if (status === false) {
-            return false;
-        } else {
-            OxiAddonsTemplateSettings(functionname, rawdata, styleid, childid, function (callback) {
-                if (callback === "done") {
-                    $("#OXIAADDONSCHANGEDPOPUP .icon-box").html('<span class="dashicons dashicons-trash"></span>');
-                    $("#OXIAADDONSCHANGEDPOPUP .modal-body.text-center h4").html("Deleted :(");
-                    $("#OXIAADDONSCHANGEDPOPUP .modal-body.text-center p").html("Your data has been delete successfully.");
-                    $("#OXIAADDONSCHANGEDPOPUP").modal("show");
-                    OxiAddonsModalConfirm(".shortcode-addons-template-item-delete", "Delete")
-                    OxiAddonsPreviewDataLoader();
-                } else {
-                    alert("Data Error")
-                }
-            });
-        }
+        window.oxiPreviewActions.delete($(this).attr("value"));
     });
 
 
@@ -351,7 +443,7 @@ jQuery.noConflict();
                     el = el.replace(NEWRegExp("{{KEY}}"), $input.attr('name').split('saarsa')[1]);
                 }
                 var cls = el.replace(NEWRegExp("{{WRAPPER}}"), WRAPPER);
-                $(cls).html($input.val());
+                oxiUpdatePreviewText(cls, $input.val());
             });
         }
     });
@@ -365,11 +457,11 @@ jQuery.noConflict();
                     el = el.replace(NEWRegExp("{{KEY}}"), $input.attr('name').split('saarsa')[1]);
                 }
                 var cls = el.replace(NEWRegExp("{{WRAPPER}}"), WRAPPER);
-                $(cls).html($input.val());
+                oxiUpdatePreviewText(cls, $input.val());
             });
         }
     });
-    $(".shortcode-control-type-number input").on("keyup", function () {
+    $(".shortcode-control-type-number input").on("keyup change input", function () {
         $input = $(this);
         if ($input.attr("retundata") !== '') {
             var $data = JSON.parse($input.attr("retundata"));
@@ -383,11 +475,11 @@ jQuery.noConflict();
                     Cval = ShortCodeMultipleSelector_Handler(Cval);
                 }
                 if ($input.attr('responsive') === 'tab') {
-                    $("#oxi-addons-preview-data").append('<style>@media only screen and (min-width : 669px) and (max-width : 993px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} < /style>');
+                    oxiInjectPreviewStyle(cls, Cval, 'tab');
                 } else if ($input.attr('responsive') === 'mobile') {
-                    $("#oxi-addons-preview-data").append('<style>@media only screen and (max-width : 668px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} < /style>');
+                    oxiInjectPreviewStyle(cls, Cval, 'mobile');
                 } else {
-                    $("#oxi-addons-preview-data").append('<style>#oxi-addons-preview-data ' + cls + '{' + Cval + '} < /style>');
+                    oxiInjectPreviewStyle(cls, Cval, '');
                 }
             });
             if ($input.val() === '') {
@@ -413,17 +505,14 @@ jQuery.noConflict();
                     if (o.type === 'CSS') {
                         var Cval = o.value.replace(NEWRegExp("{{VALUE}}"), $input.val());
                         if ($input.attr('responsive') === 'tab') {
-                            $("#oxi-addons-preview-data").append('<style>@media only screen and (min-width : 669px) and (max-width : 993px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} < /style>');
+                            oxiInjectPreviewStyle(cls, Cval, 'tab');
                         } else if ($input.attr('responsive') === 'mobile') {
-                            $("#oxi-addons-preview-data").append('<style>@media only screen and (max-width : 668px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} < /style>');
+                            oxiInjectPreviewStyle(cls, Cval, 'mobile');
                         } else {
-                            $("#oxi-addons-preview-data").append('<style>#oxi-addons-preview-data ' + cls + '{' + Cval + '} < /style>');
+                            oxiInjectPreviewStyle(cls, Cval, '');
                         }
                     } else {
-                        $.each(arr, function (i, v) {
-                            $(cls).removeClass(v);
-                        });
-                        $(cls).addClass($input.val());
+                        oxiUpdatePreviewClass(cls, arr, $input.val());
                     }
 
                 });
@@ -453,17 +542,14 @@ jQuery.noConflict();
                     if (o.type === 'CSS') {
                         var Cval = o.value.replace(NEWRegExp("{{VALUE}}"), $value);
                         if ($input.attr('responsive') === 'tab') {
-                            $("#oxi-addons-preview-data").append('<style>@media only screen and (min-width : 669px) and (max-width : 993px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} < /style>');
+                            oxiInjectPreviewStyle(cls, Cval, 'tab');
                         } else if ($input.attr('responsive') === 'mobile') {
-                            $("#oxi-addons-preview-data").append('<style>@media only screen and (max-width : 668px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} < /style>');
+                            oxiInjectPreviewStyle(cls, Cval, 'mobile');
                         } else {
-                            $("#oxi-addons-preview-data").append('<style>#oxi-addons-preview-data ' + cls + '{' + Cval + '} < /style>');
+                            oxiInjectPreviewStyle(cls, Cval, '');
                         }
                     } else {
-                        $.each(arr, function (i, v) {
-                            $(cls).removeClass(v);
-                        });
-                        $(cls).addClass($value);
+                        oxiUpdatePreviewClass(cls, arr, $value);
                     }
                 });
             });
@@ -509,11 +595,11 @@ jQuery.noConflict();
                     var cls = el.replace(NEWRegExp("{{WRAPPER}}"), WRAPPER);
                     var Cval = obj.replace(NEWRegExp("{{VALUE}}"), $input.val());
                     if ($input.attr('responsive') === 'tab') {
-                        $("#oxi-addons-preview-data").append('<style>@media only screen and (min-width : 669px) and (max-width : 993px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} < /style>');
+                        oxiInjectPreviewStyle(cls, Cval, 'tab');
                     } else if ($input.attr('responsive') === 'mobile') {
-                        $("#oxi-addons-preview-data").append('<style>@media only screen and (max-width : 668px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} < /style>');
+                        oxiInjectPreviewStyle(cls, Cval, 'mobile');
                     } else {
-                        $("#oxi-addons-preview-data").append('<style>#oxi-addons-preview-data ' + cls + '{' + Cval + '} < /style>');
+                        oxiInjectPreviewStyle(cls, Cval, '');
                     }
                 });
                 if ($input.val() === '') {
@@ -558,11 +644,11 @@ jQuery.noConflict();
                     var cls = el.replace(NEWRegExp("{{WRAPPER}}"), WRAPPER);
                     var Cval = obj.replace(NEWRegExp("{{VALUE}}"), $VALUE);
                     if ($input.attr('responsive') === 'tab') {
-                        $("#oxi-addons-preview-data").append('<style>@media only screen and (min-width : 669px) and (max-width : 993px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} < /style>');
+                        oxiInjectPreviewStyle(cls, Cval, 'tab');
                     } else if ($input.attr('responsive') === 'mobile') {
-                        $("#oxi-addons-preview-data").append('<style>@media only screen and (max-width : 668px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} < /style>');
+                        oxiInjectPreviewStyle(cls, Cval, 'mobile');
                     } else {
-                        $("#oxi-addons-preview-data").append('<style>#oxi-addons-preview-data ' + cls + '{' + Cval + '} < /style>');
+                        oxiInjectPreviewStyle(cls, Cval, '');
                     }
                 });
             }
@@ -581,11 +667,11 @@ jQuery.noConflict();
                 var cls = el.replace(NEWRegExp("{{WRAPPER}}"), WRAPPER);
                 var Cval = obj.replace(NEWRegExp("{{VALUE}}"), font[0]);
                 if ($input.attr('responsive') === 'tab') {
-                    $("#oxi-addons-preview-data").append('<style>@media only screen and (min-width : 669px) and (max-width : 993px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} < /style>');
+                    oxiInjectPreviewStyle(cls, Cval, 'tab');
                 } else if ($input.attr('responsive') === 'mobile') {
-                    $("#oxi-addons-preview-data").append('<style>@media only screen and (max-width : 668px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} < /style>');
+                    oxiInjectPreviewStyle(cls, Cval, 'mobile');
                 } else {
-                    $("#oxi-addons-preview-data").append('<style>#oxi-addons-preview-data ' + cls + '{' + Cval + '} < /style>');
+                    oxiInjectPreviewStyle(cls, Cval, '');
                 }
             });
         }
@@ -644,11 +730,11 @@ jQuery.noConflict();
                                     Cval = ShortCodeMultipleSelector_Handler(Cval);
                                 }
                                 if ($input.attr('responsive') === 'tab') {
-                                    $("#oxi-addons-preview-data").append('<style>@media only screen and (min-width : 669px) and (max-width : 993px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} < /style>');
+                                    oxiInjectPreviewStyle(cls, Cval, 'tab');
                                 } else if ($input.attr('responsive') === 'mobile') {
-                                    $("#oxi-addons-preview-data").append('<style>@media only screen and (max-width : 668px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} < /style>');
+                                    oxiInjectPreviewStyle(cls, Cval, 'mobile');
                                 } else {
-                                    $("#oxi-addons-preview-data").append('<style>#oxi-addons-preview-data ' + cls + '{' + Cval + '} < /style>');
+                                    oxiInjectPreviewStyle(cls, Cval, '');
                                 }
                             });
                         } else {
@@ -691,11 +777,11 @@ jQuery.noConflict();
                                     Cval = ShortCodeMultipleSelector_Handler(Cval);
                                 }
                                 if ($input.attr('responsive') === 'tab') {
-                                    $("#oxi-addons-preview-data").append('<style>@media only screen and (min-width : 669px) and (max-width : 993px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} < /style>');
+                                    oxiInjectPreviewStyle(cls, Cval, 'tab');
                                 } else if ($input.attr('responsive') === 'mobile') {
-                                    $("#oxi-addons-preview-data").append('<style>@media only screen and (max-width : 668px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} < /style>');
+                                    oxiInjectPreviewStyle(cls, Cval, 'mobile');
                                 } else {
-                                    $("#oxi-addons-preview-data").append('<style>#oxi-addons-preview-data ' + cls + '{' + Cval + '} < /style>');
+                                    oxiInjectPreviewStyle(cls, Cval, '');
                                 }
                             });
                         }
@@ -706,7 +792,7 @@ jQuery.noConflict();
     }
 
     ShortCodeFormSliderINT();
-    $(".shortcode-form-slider-input input").on("keyup", function () {
+    $(".shortcode-form-slider-input input").on("keyup change input", function () {
         $input = $(this);
         $custom = $input.attr("custom");
         var html5Slider = $(this).parent().siblings('.shortcode-form-slider');
@@ -728,11 +814,11 @@ jQuery.noConflict();
                         Cval = ShortCodeMultipleSelector_Handler(Cval);
                     }
                     if ($input.attr('responsive') === 'tab') {
-                        $("#oxi-addons-preview-data").append('<style>@media only screen and (min-width : 669px) and (max-width : 993px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} < /style>');
+                        oxiInjectPreviewStyle(cls, Cval, 'tab');
                     } else if ($input.attr('responsive') === 'mobile') {
-                        $("#oxi-addons-preview-data").append('<style>@media only screen and (max-width : 668px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} < /style>');
+                        oxiInjectPreviewStyle(cls, Cval, 'mobile');
                     } else {
-                        $("#oxi-addons-preview-data").append('<style>#oxi-addons-preview-data ' + cls + '{' + Cval + '} < /style>');
+                        oxiInjectPreviewStyle(cls, Cval, '');
                     }
                 });
             } else {
@@ -775,11 +861,11 @@ jQuery.noConflict();
                         Cval = ShortCodeMultipleSelector_Handler(Cval);
                     }
                     if ($input.attr('responsive') === 'tab') {
-                        $("#oxi-addons-preview-data").append('<style>@media only screen and (min-width : 669px) and (max-width : 993px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} < /style>');
+                        oxiInjectPreviewStyle(cls, Cval, 'tab');
                     } else if ($input.attr('responsive') === 'mobile') {
-                        $("#oxi-addons-preview-data").append('<style>@media only screen and (max-width : 668px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} < /style>');
+                        oxiInjectPreviewStyle(cls, Cval, 'mobile');
                     } else {
-                        $("#oxi-addons-preview-data").append('<style>#oxi-addons-preview-data ' + cls + '{' + Cval + '} < /style>');
+                        oxiInjectPreviewStyle(cls, Cval, '');
                     }
                 });
             }
@@ -836,7 +922,7 @@ jQuery.noConflict();
         input.attr('step', $(id).attr('step'));
 
     });
-    $(".shortcode-control-type-dimensions input").on("input", function () {
+    $(".shortcode-control-type-dimensions input").on("input keyup change", function () {
         $this = $(this);
         if ($this.parent().siblings('.shortcode-form-control-dimension').children('.shortcode-form-link-dimensions').hasClass('link-dimensions-unlink')) {
             if ($this.val() === '') {
@@ -878,11 +964,11 @@ jQuery.noConflict();
                 Cval = Cval.replace(NEWRegExp("{{BOTTOM}}"), $('#' + BOTTOM).val());
                 Cval = Cval.replace(NEWRegExp("{{LEFT}}"), $('#' + LEFT).val());
                 if ($input.attr('responsive') === 'tab') {
-                    $("#oxi-addons-preview-data").append('<style>@media only screen and (min-width : 669px) and (max-width : 993px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} < /style>');
+                    oxiInjectPreviewStyle(cls, Cval, 'tab');
                 } else if ($input.attr('responsive') === 'mobile') {
-                    $("#oxi-addons-preview-data").append('<style>@media only screen and (max-width : 668px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} < /style>');
+                    oxiInjectPreviewStyle(cls, Cval, 'mobile');
                 } else {
-                    $("#oxi-addons-preview-data").append('<style>#oxi-addons-preview-data ' + cls + '{' + Cval + '} < /style>');
+                    oxiInjectPreviewStyle(cls, Cval, '');
                 }
             });
             if ($input.val() === '') {
@@ -929,11 +1015,11 @@ jQuery.noConflict();
                     var cls = el.replace(NEWRegExp("{{WRAPPER}}"), WRAPPER);
                     Cval = $BACKGROUND;
                     if ($This.attr('responsive') === 'tab') {
-                        $("#oxi-addons-preview-data").append('<style>@media only screen and (min-width : 669px) and (max-width : 993px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} < /style>');
+                        oxiInjectPreviewStyle(cls, Cval, 'tab');
                     } else if ($This.attr('responsive') === 'mobile') {
-                        $("#oxi-addons-preview-data").append('<style>@media only screen and (max-width : 668px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} < /style>');
+                        oxiInjectPreviewStyle(cls, Cval, 'mobile');
                     } else {
-                        $("#oxi-addons-preview-data").append('<style>#oxi-addons-preview-data ' + cls + '{' + Cval + '} < /style>');
+                        oxiInjectPreviewStyle(cls, Cval, '');
                     }
                 });
                 if (_VALUE === '') {
@@ -1190,3 +1276,75 @@ jQuery.noConflict();
     })();
 
 })(jQuery);
+
+// ========================================
+// Device Button Click Handler
+// Syncs Header and Sidebar Device Icons
+// ========================================
+jQuery(document).ready(function($) {
+    // Track if we're programmatically triggering a click to avoid infinite loops
+    var preventLoop = false;
+    
+    // Header device button click
+    $(document).on('click', '.oxi-device-btn', function() {
+        if (preventLoop) return;
+        
+        var device = $(this).data('device');
+        
+        // Always reveal the sidebar device icons by adding the class to form containers
+        $('#oxi-addons-form-submit').addClass('shortcode-responsive-switchers-open');
+        $('#oxi-template-modal-form').addClass('shortcode-responsive-switchers-open');
+        
+        // Update header button active state
+        $('.oxi-device-btn').removeClass('active');
+        $(this).addClass('active');
+        
+        // Prevent infinite loop, then trigger click on corresponding sidebar button
+        // This will execute the existing field-switching logic
+        preventLoop = true;
+        $('.shortcode-form-responsive-switcher-' + device).trigger('click');
+        preventLoop = false;
+        
+        // Call preview controller to resize iframe
+        if (window.PreviewController) {
+            PreviewController.switchDevice(device);
+        }
+        
+        // Update preview wrapper if exists
+        var $previewWrapper = $('.wpte-preview-wrapper');
+        if ($previewWrapper.length) {
+            $previewWrapper.attr('data-device', device);
+        }
+    });
+    
+    // Sidebar device button click - sync back to header
+    $(document).on('click', '.shortcode-form-responsive-switcher', function() {
+        if (preventLoop) return;
+        
+        var device = '';
+        if ($(this).hasClass('shortcode-form-responsive-switcher-desktop')) {
+            device = 'desktop';
+        } else if ($(this).hasClass('shortcode-form-responsive-switcher-tablet')) {
+            device = 'tablet';
+        } else if ($(this).hasClass('shortcode-form-responsive-switcher-mobile')) {
+            device = 'mobile';
+        }
+        
+        if (device) {
+            // Sync header button active state
+            $('.oxi-device-btn').removeClass('active');
+            $('.oxi-device-btn[data-device="' + device + '"]').addClass('active');
+            
+            // Call preview controller to resize iframe
+            if (window.PreviewController) {
+                PreviewController.switchDevice(device);
+            }
+            
+            // Update preview wrapper if exists
+            var $previewWrapper = $('.wpte-preview-wrapper');
+            if ($previewWrapper.length) {
+                $previewWrapper.attr('data-device', device);
+            }
+        }
+    });
+});

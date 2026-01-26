@@ -111,7 +111,7 @@ class Modules extends Admin_Render
 		);
 
 		$this->shortcode_rearrange();
-		$this->shortcode_style_changer();
+		// $this->shortcode_style_changer();
 
 		$this->start_controls_section(
 			'oxi-image-hover',
@@ -512,7 +512,7 @@ class Modules extends Admin_Render
 					],
 				],
 				'selector' => [
-					'{{WRAPPER}} .oxi-image-hover-figure,'
+					'{{WRAPPER}} .oxi-image-hover .oxi-image-hover-figure,'
 						. '{{WRAPPER}} .oxi-image-hover-figure:before,'
 						. '{{WRAPPER}} .oxi-image-hover-image,'
 						. '{{WRAPPER}} .oxi-image-hover-image:before,'

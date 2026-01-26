@@ -254,6 +254,9 @@ abstract class Admin_Render
 	public function admin_editor_load()
 	{
 		wp_enqueue_script('oxi-image-hover-editor', OXI_IMAGE_HOVER_URL . 'assets/backend/js/editor.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+		wp_enqueue_script('oxi-image-hover-preview-controller', OXI_IMAGE_HOVER_URL . 'assets/backend/js/preview-controller.js', array('jquery'), OXI_IMAGE_HOVER_PLUGIN_VERSION);
+		wp_enqueue_style('oxi-image-hover-iframe-preview', OXI_IMAGE_HOVER_URL . 'assets/backend/css/iframe-preview.css', array(), OXI_IMAGE_HOVER_PLUGIN_VERSION);
+		wp_enqueue_script('oxi-image-hover-parent-receiver', OXI_IMAGE_HOVER_URL . 'assets/backend/js/parent-message-receiver.js', array('jquery'), OXI_IMAGE_HOVER_PLUGIN_VERSION);
 	}
 
 	/**
@@ -749,18 +752,18 @@ abstract class Admin_Render
 				</a>
 			</div>
 			<div class="oxi-addons-header-center">
-				<div class="wpte-header-devices" aria-label="Preview devices">
-					<button type="button" class="wpte-device-btn wpte-form-responsive-switcher-desktop active" data-device="desktop" aria-label="Desktop preview">
+				<div class="oxi-iheu-header-devices" aria-label="Preview devices">
+					<button class="oxi-device-btn wpte-form-responsive-switcher-desktop active" data-device="desktop" aria-label="Desktop preview">
 						<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
 							<path d="M4 5h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-5v2h3a1 1 0 1 1 0 2H6a1 1 0 1 1 0-2h3v-2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zm0 2v9h16V7H4z"></path>
 						</svg>
 					</button>
-					<button type="button" class="wpte-device-btn wpte-form-responsive-switcher-tablet" data-device="tablet" aria-label="Tablet preview">
+					<button class="oxi-device-btn wpte-form-responsive-switcher-tablet" data-device="tablet" aria-label="Tablet preview">
 						<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
 							<path d="M7 2h10a3 3 0 0 1 3 3v14a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3zm0 2a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H7zm5 16a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3z"></path>
 						</svg>
 					</button>
-					<button type="button" class="wpte-device-btn wpte-form-responsive-switcher-mobile" data-device="mobile" aria-label="Mobile preview">
+					<button class="oxi-device-btn wpte-form-responsive-switcher-mobile" data-device="mobile" aria-label="Mobile preview">
 						<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
 							<path d="M8 2h8a3 3 0 0 1 3 3v14a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3zm0 2a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H8zm4 15a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3z"></path>
 						</svg>
@@ -854,7 +857,7 @@ abstract class Admin_Render
 						<div class="oxi-addons-settings" id="oxisettingsreload">
 							<div class="oxi-addons-style-left">
 								<div class="oxi-sidebar-main-title">
-									Settings
+									<?php isset($this->dbdata['style_name']) ? esc_html_e($this->oxi_style_name_format($this->dbdata['style_name'])) : ''; ?>
 								</div>
 								<form method="post" id="oxi-addons-form-submit">
 									<div class="oxi-addons-style-settings">
@@ -904,9 +907,6 @@ abstract class Admin_Render
 							<div class="oxi-addons-wrapper">
 								<div class="oxi-addons-style-left-preview">
 									<div class="oxi-addons-style-left-preview-heading">
-										<div class="oxi-addons-style-left-preview-heading-left oxi-addons-image-tabs-sortable-title">
-											Preview
-										</div>
 										<div class="oxi-addons-style-left-preview-heading-right">
 											<input type="text" data-format="rgb" data-opacity="TRUE" class="oxi-addons-minicolor" id="oxi-addons-2-0-color" name="oxi-addons-2-0-color" value="
                                             <?php
@@ -922,30 +922,22 @@ abstract class Admin_Render
                                                                                                                                                                                                 ">
 										</div>
 									</div>
-									<div class="oxi-addons-preview-data" id="oxi-addons-preview-data" template-wrapper="<?php echo esc_attr($this->WRAPPER); ?> .oxi-addons-row" style="background:
-                                    <?php
-									if (is_array($this->style)) :
-										if (array_key_exists('image-hover-preview-color', $this->style)) :
-											echo esc_attr($this->style['image-hover-preview-color']);
-										endif;
-										echo '#FFF';
-									else :
-										echo '#FFF';
-									endif;
-									?>
-                                                                                                                                                                                                    ">
-										<?php
-										$cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($this->StyleName[0]) . '\Render\Effects' . $this->StyleName[1];
-										new $cls($this->dbdata, $this->child, 'admin');
-										?>
+									<div id="oxi-preview-wrapper" class="oxi-preview-wrapper" data-device="desktop">
+										<iframe
+											id="oxi-preview-iframe"
+											class="oxi-preview-iframe"
+											src="<?php echo esc_url(admin_url('admin-ajax.php?action=oxi_image_hover_preview_frame&styleid=' . $this->oxiid)); ?>"
+											frameborder="0"
+											title="<?php esc_attr_e('Preview', 'image-hover-effects-ultimate'); ?>">
+										</iframe>
 									</div>
+									<!-- Keep wrapper data attribute for editor.js but hide it completely -->
+									<div id="oxi-addons-preview-data" template-wrapper="<?php echo esc_attr($this->WRAPPER); ?> .oxi-addons-row" style="display:none;"></div>
 								</div>
 							</div>
-							<div class="oxi-addons-style-right">
-								<?php
-								$this->modal_form();
-								?>
-							</div>
+							<?php
+							$this->modal_form();
+							?>
 						</div>
 						<div class="shortcode-addons-form-repeater-store" style="display: none">
 							<?php $this->allowed_html_sanitize($this->repeater); ?>
@@ -1028,6 +1020,13 @@ abstract class Admin_Render
 				'showing' => false,
 			]
 		);
+	}
+
+	function oxi_style_name_format($string)
+	{
+		$string = str_replace('-', ' Effect ', $string);
+		$string = ucwords($string);
+		return $string;
 	}
 	/**
 	 * Template hooks

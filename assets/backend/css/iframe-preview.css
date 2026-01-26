@@ -1,0 +1,76 @@
+/* ===============================================
+   Iframe Preview Styles
+   =============================================== */
+
+/* Preview wrapper with device attribute */
+#oxi-preview-wrapper {
+    position: relative;
+    width: 100%;
+    transition: all 0.3s ease;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Iframe base styles */
+#oxi-preview-iframe {
+    width: 100%;
+    border: none;
+    background: #fff;
+    transition: all 0.3s ease;
+    flex-grow: 1;
+    min-height: 400px;
+}
+
+/* Desktop view - full width */
+#oxi-preview-wrapper[data-device="desktop"] {
+    width: 100%;
+    margin: 0 auto;
+}
+
+#oxi-preview-wrapper[data-device="desktop"] #oxi-preview-iframe {
+    width: 100%;
+}
+
+/* Tablet view - 768px centered */
+#oxi-preview-wrapper[data-device="tablet"] {
+    max-width: 768px;
+    margin: 0 auto;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+#oxi-preview-wrapper[data-device="tablet"] #oxi-preview-iframe {
+    width: 768px;
+    height: 100%;
+}
+
+/* Mobile view - 360px centered */
+#oxi-preview-wrapper[data-device="mobile"] {
+    max-width: 360px;
+    margin: 0 auto;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+#oxi-preview-wrapper[data-device="mobile"] #oxi-preview-iframe {
+    width: 360px;
+    height: 100%;
+}
+
+/* Loading state */
+#oxi-preview-iframe:not([src]) {
+    background: #f5f5f5;
+}
+
+#oxi-preview-iframe:not([src])::after {
+    content: 'Loading preview...';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #666;
+    font-size: 14px;
+}

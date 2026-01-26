@@ -9,6 +9,13 @@
 div.fs-notice.promotion, div.fs-notice.success, div.fs-notice.updated {
   display: none !important;
 }
+button:focus,
+button:active,
+button:hover{
+	border: none !important;
+	outline: none !important;
+	box-shadow: none !important;	
+}
 #wpcontent {
   margin-left: 0 !important;
   padding-left: 0 !important;
@@ -73,33 +80,37 @@ html.wp-toolbar {
   justify-content: center;
   flex-grow: 1;
 }
-.wpte-header-devices {
-  display: flex;
-  background: #f0f0f1;
-  border-radius: 4px;
-  padding: 2px;
+.oxi-iheu-header-devices {
+    background: #fff;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    padding: 4px;
+    display: inline-flex;
+    gap: 6px;
 }
-.wpte-device-btn {
-  background: transparent;
-  border: none;
-  padding: 6px 12px;
-  cursor: pointer;
-  color: #50575e;
-  border-radius: 3px;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.oxi-iheu-header-devices .oxi-device-btn {
+  	border: 0;
+    background: transparent;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    color: #4a4a4a;
+    cursor: pointer;
 }
 .wpte-device-btn svg {
   display: block;
 }
-.wpte-device-btn:hover,
-.wpte-device-btn.active {
-  background: #fff;
-  color: #8b3dff;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+.oxi-device-btn:hover {
+  background: #f0f0f0;
 }
+.oxi-device-btn.active {
+  background: #9b5cff;
+  color: #fff;
+}
+
 
 /* Right Side */
 .oxi-addons-header-right {
@@ -642,8 +653,6 @@ html.wp-toolbar {
 .oxi-addons-preview-data {
     flex-grow: 1;
     display: flex;
-    align-items: center;
-    justify-content: center;
     padding: 20px;
     overflow: auto;
 }

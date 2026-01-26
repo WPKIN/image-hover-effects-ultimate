@@ -279,11 +279,15 @@ Its too easy Chose your style from Effects List and click at Clone.
 = 9.10.7 =
 * New: Added item count display for each module in the "Image Hover" dashboard page.
 * New: Added "Create New" and "Import" buttons to the Shortcode page header for better navigation.
+* New: Implemented iframe-based preview for strict style isolation and better performance.
+* New: Added responsive device controls (Desktop, Tablet, Mobile) with live preview scaling.
 * Improvement: Moved inline CSS styles to the external admin stylesheet for better maintainability.
 * Improvement: Cleaned up the Shortcode page interface by removing the unused "Import Image Hover Files" box.
 * Improvement: Refined item count display logic to hide counts for extension modules.
 * Improvement: Simplified template selection by showing all available templates on the effect page, removing the need for a separate "Add More" step.
 * Fix: Restored original header text on the Shortcode page after initial layout changes.
+* Fix: Fixed CSS specificity issues where saved styles could override live preview changes.
+* Fix: Resolved browser event handling for numeric inputs to ensure immediate preview updates.
 
 = 9.10.6 =
 * New: Enhanced frontend asset loader with conditional dependencies; loads Waypoints and Touch scripts only when enabled in settings to reduce page weight.
