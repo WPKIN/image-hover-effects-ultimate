@@ -322,7 +322,7 @@ class Modules extends Admin_Render
 			'oxi-image-hover',
 			[
 				'label' => esc_html__('Width & Height', 'image-hover-effects-ultimate'),
-				'showing' => true,
+				'showing' => false,
 			]
 		);
 		$this->add_responsive_control(
@@ -648,7 +648,7 @@ class Modules extends Admin_Render
 			'oxi-image-hover',
 			[
 				'label' => esc_html__('Icon Settings', 'image-hover-effects-ultimate'),
-				'showing' => true,
+				'showing' => false,
 			]
 		);
 		$this->add_responsive_control(

@@ -253,7 +253,12 @@ abstract class Admin_Render
 	 */
 	public function admin_editor_load()
 	{
+		// Enqueue OverlayScrollbars library for true overlay scrollbars
+		wp_enqueue_style('overlayscrollbars', OXI_IMAGE_HOVER_URL . 'assets/backend/css/overlayscrollbars.min.css', array(), '2.4.6');
+		wp_enqueue_script('overlayscrollbars', OXI_IMAGE_HOVER_URL . 'assets/backend/js/overlayscrollbars.browser.es6.min.js', array(), '2.4.6', false);
+
 		wp_enqueue_script('oxi-image-hover-editor', OXI_IMAGE_HOVER_URL . 'assets/backend/js/editor.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+		wp_enqueue_script('oxi-image-hover-overlay-scrollbar', OXI_IMAGE_HOVER_URL . 'assets/backend/js/overlay-scrollbar.js', array('jquery', 'overlayscrollbars'), OXI_IMAGE_HOVER_PLUGIN_VERSION);
 		wp_enqueue_script('oxi-image-hover-preview-controller', OXI_IMAGE_HOVER_URL . 'assets/backend/js/preview-controller.js', array('jquery'), OXI_IMAGE_HOVER_PLUGIN_VERSION);
 		wp_enqueue_style('oxi-image-hover-iframe-preview', OXI_IMAGE_HOVER_URL . 'assets/backend/css/iframe-preview.css', array(), OXI_IMAGE_HOVER_PLUGIN_VERSION);
 		wp_enqueue_script('oxi-image-hover-parent-receiver', OXI_IMAGE_HOVER_URL . 'assets/backend/js/parent-message-receiver.js', array('jquery'), OXI_IMAGE_HOVER_PLUGIN_VERSION);
@@ -751,37 +756,6 @@ abstract class Admin_Render
 					Shortcode List
 				</a>
 			</div>
-			<div class="oxi-addons-header-middle-left">
-				<div class="oxi-header-tooltip">
-					<i class="fa fa-info-circle" aria-hidden="true"></i>
-					<span class="oxi-tooltip-text">Copy & paste the shortcode directly into any WordPress post, page or Page Builder.</span>
-				</div>
-				<div class="oxi-header-shortcode">
-					<div class="oxi-shortcode-text">[iheu_ultimate_oxi id="<?php echo $this->oxiid; ?>"]</div>
-					<button type="button" class="oxi-copy-btn">
-						<i class="fa fa-copy" aria-hidden="true"></i>
-					</button>
-				</div>
-			</div>
-			<div class="oxi-addons-header-center">
-				<div class="oxi-iheu-header-devices" aria-label="Preview devices">
-					<button class="oxi-device-btn wpte-form-responsive-switcher-desktop active" data-device="desktop" aria-label="Desktop preview">
-						<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
-							<path d="M4 5h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-5v2h3a1 1 0 1 1 0 2H6a1 1 0 1 1 0-2h3v-2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zm0 2v9h16V7H4z"></path>
-						</svg>
-					</button>
-					<button class="oxi-device-btn wpte-form-responsive-switcher-tablet" data-device="tablet" aria-label="Tablet preview">
-						<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
-							<path d="M7 2h10a3 3 0 0 1 3 3v14a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3zm0 2a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H7zm5 16a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3z"></path>
-						</svg>
-					</button>
-					<button class="oxi-device-btn wpte-form-responsive-switcher-mobile" data-device="mobile" aria-label="Mobile preview">
-						<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
-							<path d="M8 2h8a3 3 0 0 1 3 3v14a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3zm0 2a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H8zm4 15a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3z"></path>
-						</svg>
-					</button>
-				</div>
-			</div>
 			<div class="oxi-addons-header-right">
 				<a href="https://wpkindemos.com/imagehover/pricing/" target="_blank" class="oxi-btn-upgrade">
 					Upgrade
@@ -789,20 +763,11 @@ abstract class Admin_Render
 				<a href="<?php echo home_url(); ?>" target="_blank" class="oxi-btn-visit">
 					<i class="fa fa-globe" aria-hidden="true"></i> Visit Site
 				</a>
-				<div class="oxi-header-name-dropdown">
-					<button type="button" class="oxi-header-name-toggle">
-						<i class="fa fa-bars" aria-hidden="true"></i>
-					</button>
-					<div class="oxi-header-name-content">
-						<form method="post" id="shortcode-addons-name-change-submit" style="margin: 0;">
-							<div class="oxi-header-name-group">
-								<input type="hidden" name="addonsstylenameid" value="<?php echo (int) $this->dbdata['id']; ?>">
-								<input type="text" class="oxi-header-name-input" name="addonsstylename" placeholder="<?php echo esc_attr__('Set Your Shortcode Name', 'image-hover-effects-ultimate'); ?>" value="<?php echo isset($this->dbdata['name']) ? esc_attr($this->dbdata['name']) : ''; ?>">
-								<button type="button" class="oxi-header-name-save-btn" id="addonsstylenamechange">Save</button>
-							</div>
-						</form>
-					</div>
-				</div>
+				<form method="post" id="shortcode-addons-name-change-submit">
+					<input type="hidden" name="addonsstylenameid" value="<?php echo (int) $this->dbdata['id']; ?>">
+					<input type="text" class="oxi-header-name-input" name="addonsstylename" placeholder="<?php echo esc_attr__('Set Your Shortcode Name', 'image-hover-effects-ultimate'); ?>" value="<?php echo isset($this->dbdata['name']) ? esc_attr($this->dbdata['name']) : ''; ?>">
+					<button type="button" class="oxi-header-name-save-btn" id="addonsstylenamechange">Save</button>
+				</form>
 			</div>
 		</div>
 		<script>
@@ -823,17 +788,6 @@ abstract class Admin_Render
 					}, 1500);
 				});
 
-				// Shortcode Name Dropdown
-				$('.oxi-header-name-toggle').on('click', function(e) {
-					e.stopPropagation();
-					$(this).parent().toggleClass('active');
-				});
-
-				$(document).on('click', function(e) {
-					if (!$(e.target).closest('.oxi-header-name-dropdown').length) {
-						$('.oxi-header-name-dropdown').removeClass('active');
-					}
-				});
 			});
 		</script>
 	<?php
@@ -857,7 +811,7 @@ abstract class Admin_Render
 					echo $this->oxi_admin_edit_page_header();
 				}
 				?>
-				<div class="oxi-addons-row">
+				<div class="oxi-addons-rows">
 					<div class="oxi-addons-wrapper oxi-addons-image-tabs-mode">
 						<div class="oxi-addons-settings" id="oxisettingsreload">
 							<div class="oxi-addons-style-left">
@@ -912,7 +866,38 @@ abstract class Admin_Render
 							<div class="oxi-addons-wrapper">
 								<div class="oxi-addons-style-left-preview">
 									<div class="oxi-addons-style-left-preview-heading">
-										<div class="oxi-addons-style-left-preview-heading-right">
+										<div class="oxi-preview-header-left">
+											<div class="oxi-header-tooltip">
+												<i class="fa fa-info-circle" aria-hidden="true"></i>
+												<span class="oxi-tooltip-text">Copy & paste the shortcode directly into any WordPress post, page or Page Builder.</span>
+											</div>
+											<div class="oxi-header-shortcode">
+												<div class="oxi-shortcode-text">[iheu_ultimate_oxi id="<?php echo $this->oxiid; ?>"]</div>
+												<button type="button" class="oxi-copy-btn">
+													<i class="fa fa-copy" aria-hidden="true"></i>
+												</button>
+											</div>
+										</div>
+										<div class="oxi-preview-header-center">
+											<div class="oxi-iheu-header-devices" aria-label="Preview devices">
+												<button class="oxi-device-btn wpte-form-responsive-switcher-desktop active" data-device="desktop" aria-label="Desktop preview">
+													<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+														<path d="M4 5h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-5v2h3a1 1 0 1 1 0 2H6a1 1 0 1 1 0-2h3v-2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zm0 2v9h16V7H4z"></path>
+													</svg>
+												</button>
+												<button class="oxi-device-btn wpte-form-responsive-switcher-tablet" data-device="tablet" aria-label="Tablet preview">
+													<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+														<path d="M7 2h10a3 3 0 0 1 3 3v14a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3zm0 2a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H7zm5 16a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3z"></path>
+													</svg>
+												</button>
+												<button class="oxi-device-btn wpte-form-responsive-switcher-mobile" data-device="mobile" aria-label="Mobile preview">
+													<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+														<path d="M8 2h8a3 3 0 0 1 3 3v14a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3zm0 2a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H8zm4 15a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3z"></path>
+													</svg>
+												</button>
+											</div>
+										</div>
+										<div class="oxi-preview-header-right">
 											<input type="text" data-format="rgb" data-opacity="TRUE" class="oxi-addons-minicolor" id="oxi-addons-2-0-color" name="oxi-addons-2-0-color" value="
                                             <?php
 											if (is_array($this->style)) :

@@ -84,6 +84,11 @@ class PreviewFrame
 			'image-hover-front',
 			'oxi-image-hover-front',
 			'oxi-image-hover',
+			'oxi-image-hover-iframe-forwarder',
+			'oxi-image-hover-overlay-scrollbar',
+
+			// OverlayScrollbars Library
+			'overlayscrollbars',
 
 			// Font Awesome (often needed)
 			'font-awesome',
@@ -156,10 +161,17 @@ class PreviewFrame
 			// Enqueue admin styles for button styling
 			wp_enqueue_style('oxi-image-hover-bootstrap', OXI_IMAGE_HOVER_URL . 'assets/backend/css/bootstrap.min.css', array(), OXI_IMAGE_HOVER_PLUGIN_VERSION);
 			wp_enqueue_style('oxi-image-hover-admin', OXI_IMAGE_HOVER_URL . 'assets/backend/css/admin.css', array(), OXI_IMAGE_HOVER_PLUGIN_VERSION);
+			wp_enqueue_style('oxi-image-hover-single-editor', OXI_IMAGE_HOVER_URL . 'assets/backend/css/single_editor_page.css', array(), OXI_IMAGE_HOVER_PLUGIN_VERSION);
 			wp_enqueue_style('oxi-image-hover-frontend-style', OXI_IMAGE_HOVER_URL . 'assets/frontend/css/style.css', array(), OXI_IMAGE_HOVER_PLUGIN_VERSION);
+
+			// Enqueue OverlayScrollbars library for preview iframe
+			wp_enqueue_style('overlayscrollbars', OXI_IMAGE_HOVER_URL . 'assets/backend/css/overlayscrollbars.min.css', array(), '2.4.6');
+			wp_enqueue_script('overlayscrollbars', OXI_IMAGE_HOVER_URL . 'assets/backend/js/overlayscrollbars.browser.es6.min.js', array(), '2.4.6', false);
+
 			wp_enqueue_style('image-hover-addons');
 			wp_enqueue_script('image-hover-addons');
 			wp_enqueue_script('oxi-image-hover-iframe-forwarder', OXI_IMAGE_HOVER_URL . 'assets/backend/js/iframe-button-forwarder.js', array('jquery'), OXI_IMAGE_HOVER_PLUGIN_VERSION);
+			wp_enqueue_script('oxi-image-hover-overlay-scrollbar', OXI_IMAGE_HOVER_URL . 'assets/backend/js/overlay-scrollbar.js', array('jquery', 'overlayscrollbars'), OXI_IMAGE_HOVER_PLUGIN_VERSION);
 
 			// Load essential WordPress styles
 			wp_head();
@@ -174,35 +186,6 @@ class PreviewFrame
 				font_familly_validation($font_family);
 			}
 			?>
-
-
-			<style>
-				body {
-					margin: 0;
-					padding: 20px;
-					min-height: 100%;
-					font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-				}
-
-				.oxi-image-hover-wrapper {
-					width: 100%;
-				}
-
-				.oxi-addons-row {
-					padding-bottom: 20px;
-				}
-
-				/* Strict Isolation: Hide everything except our content */
-				body.oxi-preview-frame>*:not(div):not(script):not(style):not(link) {
-					display: none !important;
-				}
-
-				/* Ensure our wrappers are visible and contain floats */
-				#oxi-isolated-content {
-					display: flow-root !important;
-					width: 100%;
-				}
-			</style>
 		</head>
 
 		<body class="oxi-preview-frame">

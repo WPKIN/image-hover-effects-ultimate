@@ -1050,7 +1050,12 @@ jQuery.noConflict();
     });
     $("#oxi-addons-2-0-color").on("change", function (e) {
         $input = $(this).val();
-        $("#oxi-addons-preview-data").css('background', $input);
+        // Update iframe preview background color
+        var iframe = document.getElementById('oxi-preview-iframe');
+        if (iframe && iframe.contentDocument) {
+            $(iframe.contentDocument.body).css('background-color', $input);
+        }
+        // Also update the hidden field for saving
         $("#image-hover-preview-color").val($input);
     });
     if ($('div').hasClass('shortcode-form-repeater-fields-wrapper')) {

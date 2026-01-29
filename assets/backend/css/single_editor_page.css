@@ -26,15 +26,15 @@ html.wp-toolbar {
   padding-left: 0 !important;
 }
 
-/* Hide browser scrollbar on editor page */
-html, body {
+/* Hide browser scrollbar on main editor page only */
+body.toplevel_page_oxi-image-hover-ultimate {
   overflow: hidden !important;
 }
 
 /* Custom Header for Editor Page */
 .oxi-addons-header {
   background: #fff;
-  padding: 10px 20px;
+  padding: 8px 20px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
@@ -52,25 +52,35 @@ html, body {
   padding-top: 80px;
 }
 
-/* Left Side */
+/* Left Side - Navigation Buttons */
 .oxi-addons-header-left {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 8px;
     z-index: 1;
 }
 .oxi-addons-header-left a {
   text-decoration: none;
-color: #1A73E8;
-font-size: 14px;
-display: inline-block;
-padding: 8px 10px;
-background: #E9F3FF;
-border-radius: 5px;
+  color: #5F6368;
+  font-size: 13px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: #F8F9FA;
+  border: 1px solid #E8EAED;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 .oxi-addons-header-left a:hover {
-  background: #e1ecf7;
-  color: #005a87;
+  background: #F1F3F4;
+  border-color: #DADCE0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.oxi-addons-header-left a i {
+  font-size: 12px;
 }
 
 /* Middle-Left Side (Tooltip and Shortcode) */
@@ -98,11 +108,12 @@ border-radius: 5px;
 }
 .oxi-iheu-header-devices {
     background: #fff;
-    border: 1px solid #E0E0E0;
+    border: 1px solid #E8EAED;
     border-radius: 8px;
     padding: 4px;
     display: inline-flex;
-    gap: 6px;
+    gap: 4px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 .oxi-iheu-header-devices .oxi-device-btn {
   	border: 0;
@@ -113,17 +124,18 @@ border-radius: 5px;
     display: inline-flex !important;
     align-items: center;
     justify-content: center;
-    color: #4a4a4a;
+    color: #5F6368;
     cursor: pointer;
+    transition: all 0.2s ease;
 }
 .wpte-device-btn svg {
   display: block;
 }
 .oxi-device-btn:hover {
-  background: #f0f0f0;
+  background: #F8F9FA;
 }
 .oxi-device-btn.active {
-  background: #9b5cff;
+  background: #1A73E8;
   color: #fff;
 }
 
@@ -132,22 +144,62 @@ border-radius: 5px;
 .oxi-addons-header-right {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
   z-index: 1;
 }
+
+/* Upgrade Button - Warning Orange Theme */
 .oxi-btn-upgrade {
-  background: #d63638;
-  color: #fff;
+  background: #FEF7E0;
+  color: #E37400;
   text-decoration: none;
   font-size: 13px;
   font-weight: 600;
-  padding: 8px 15px;
-  border-radius: 4px;
-  transition: all 0.3s;
+  padding: 8px 16px;
+  border: 1px solid #F9AB00;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 .oxi-btn-upgrade:hover {
-  background: #b32d2e;
-  color: #fff;
+  background: #FDE293;
+  border-color: #E37400;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  color: #E37400;
+}
+.oxi-btn-upgrade::before {
+  content: "⭐";
+  font-size: 12px;
+}
+
+/* Visit Site Button - Primary Blue Theme */
+.oxi-btn-visit {
+	background: #E8F0FE;
+	color: #1A73E8 !important;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 14px;
+  border: 1px solid #D2E3FC;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.oxi-btn-visit:hover {
+  background: #D2E3FC;
+  border-color: #1A73E8;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  color: #1557B0 !important;
+}
+.oxi-btn-visit i {
+  font-size: 12px;
+  color: inherit !important;
 }
 .oxi-header-tooltip {
   position: relative;
@@ -290,7 +342,7 @@ border-radius: 5px;
 
 /* Layout Restructuring */
 .oxi-addons-row {
-    padding: 0 !important;
+    padding: 15px;
 }
 
 .oxi-addons-image-tabs-mode {
@@ -491,45 +543,11 @@ border-radius: 5px;
 .oxi-addons-tabs-wrapper {
     flex-grow: 1;
     overflow-y: auto;
+    overflow-x: hidden;
     padding: 0;
     background: #E3E3E3;
-    scrollbar-width: thin;
-    scrollbar-color: transparent transparent;
-    transition: scrollbar-color 0.3s ease;
 }
 
-/* Custom Scrollbar - Webkit Browsers */
-.oxi-addons-tabs-wrapper::-webkit-scrollbar {
-    width: 10px;
-}
-
-.oxi-addons-tabs-wrapper::-webkit-scrollbar-track {
-    background: transparent;
-    border-radius: 10px;
-}
-
-.oxi-addons-tabs-wrapper::-webkit-scrollbar-thumb {
-    background: transparent;
-    border-radius: 10px;
-    transition: background 0.3s ease;
-}
-
-/* Show scrollbar on hover */
-.oxi-addons-tabs-wrapper:hover {
-    scrollbar-color: rgba(139, 61, 255, 0.5) rgba(0, 0, 0, 0.05);
-}
-
-.oxi-addons-tabs-wrapper:hover::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.05);
-}
-
-.oxi-addons-tabs-wrapper:hover::-webkit-scrollbar-thumb {
-    background: rgba(139, 61, 255, 0.5);
-}
-
-.oxi-addons-tabs-wrapper:hover::-webkit-scrollbar-thumb:hover {
-    background: rgba(139, 61, 255, 0.7);
-}
 
 /* Tabs Styling */
 .oxi-addons-tabs-wrapper .nav-tabs {
@@ -667,11 +685,79 @@ border-radius: 5px;
     background: #fff;
     border-bottom: 1px solid #ddd;
     padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Preview Header Left - Shortcode and Tooltip */
+.oxi-preview-header-left {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Preview Header Center - Device Icons */
+.oxi-preview-header-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+/* Preview Header Right - Color Picker */
+.oxi-preview-header-right {
+    display: flex;
+    align-items: center;
 }
 
 .oxi-addons-preview-data {
     flex-grow: 1;
     display: flex;
-    padding: 30px 10px;
     overflow: auto;
 }
+
+/* Shortcode Name Input Group - Unified Design */
+#shortcode-addons-name-change-submit {
+	margin: 0;
+	display: inline-flex;
+	align-items: center;
+	background: #fff;
+	border: 1px solid #E8EAED;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+}
+#shortcode-addons-name-change-submit:focus-within {
+	border-color: #1A73E8;
+	box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+}
+#shortcode-addons-name-change-submit .oxi-header-name-input {
+	border: none;
+	box-shadow: none;
+	outline: none;
+	padding: 8px 12px;
+	font-size: 13px;
+	color: #202124;
+	background: transparent;
+	min-width: 180px;
+}
+#shortcode-addons-name-change-submit .oxi-header-name-input::placeholder {
+	color: #5F6368;
+}
+#shortcode-addons-name-change-submit .oxi-header-name-save-btn {
+	background: #0F9D58;
+	color: #fff;
+	border: none;
+	padding: 8px 16px;
+	font-size: 13px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	border-left: 1px solid #E8EAED;
+}
+#shortcode-addons-name-change-submit .oxi-header-name-save-btn:hover {
+	background: #0B8043;
+}
+
