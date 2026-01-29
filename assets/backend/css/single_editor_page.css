@@ -704,6 +704,28 @@ transition: all 0.2s ease;
 .oxi-preview-header-right {
     display: flex;
     align-items: center;
+    gap: 8px;
+}
+
+/* Specific styling for preview header color picker - larger size */
+.oxi-preview-header-right .oxi-addons-minicolor {
+    width: 200px !important;
+    height: 36px !important;
+    border-radius: 4px;
+	border-color: #ddd !important;
+}
+
+/* Icon picker input in preview header - reduced width */
+.oxi-preview-header-right .minicolors-swatch {
+	left: 1px !important;
+	top: 1px !important;
+    width: 34px !important;
+    height: 34px !important;
+	border-radius: 4px !important;
+}
+
+.oxi-preview-header-right .minicolors {
+    width: auto !important;
 }
 
 .oxi-addons-preview-data {

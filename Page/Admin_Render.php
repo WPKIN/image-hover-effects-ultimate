@@ -757,9 +757,11 @@ abstract class Admin_Render
 				</a>
 			</div>
 			<div class="oxi-addons-header-right">
-				<a href="https://wpkindemos.com/imagehover/pricing/" target="_blank" class="oxi-btn-upgrade">
-					Upgrade
-				</a>
+				<?php if (apply_filters('oxi-image-hover-plugin-version', false) == false) : ?>
+					<a href="https://wpkindemos.com/imagehover/pricing/" target="_blank" class="oxi-btn-upgrade">
+						Upgrade
+					</a>
+				<?php endif; ?>
 				<a href="<?php echo home_url(); ?>" target="_blank" class="oxi-btn-visit">
 					<i class="fa fa-globe" aria-hidden="true"></i> Visit Site
 				</a>
