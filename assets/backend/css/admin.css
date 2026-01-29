@@ -1388,7 +1388,7 @@ a:hover.oxi-addons-more-layouts {
 }
 .oxi-addons-tabs-ul li.active {
   background: #e9f3ff;
-  border-bottom: 2px solid #9b5cff;
+  border-bottom: 2px solid #f75186;
 }
 .oxi-addons-tabs-content {
   width: 100%;
@@ -1511,9 +1511,6 @@ a:hover.oxi-addons-more-layouts {
   cursor: pointer;
   transition: all 0.33s;
 }
-.oxi-addons-item-form:hover .oxi-addons-item-form-item {
-  padding: 30px;
-}
 .oxi-addons-home-item-form-item {
   width: 100%;
   float: left;
@@ -1522,8 +1519,7 @@ a:hover.oxi-addons-more-layouts {
   transition: all 0.2s linear;
 }
 .oxi-addons-item-form-item:hover {
-  background-color: #999999;
-  color: #fff;
+  background-color: #f4f4f4;
 }
 .oxi-addons-item-form-item span {
   width: 100%;
@@ -1534,18 +1530,12 @@ a:hover.oxi-addons-more-layouts {
   font-weight: 600;
   padding: 10px 10px;
 }
-.oxi-addons-item-form:hover .oxi-addons-item-form-item span {
-  border: 4px dotted;
-  font-size: 20px;
-  padding: 30px 10px;
-}
+
 .oxi-addons-home-item-form-item span {
   width: 100%;
   float: left;
 }
-.oxi-addons-item-form-item:hover span {
-  border-color: #fff;
-}
+
 .oxi-addons-item-form-item span .oxi-icons {
   font-size: 50px;
   color: #999999;
@@ -1553,11 +1543,9 @@ a:hover.oxi-addons-more-layouts {
   width: auto;
   height: auto;
 }
-.oxi-addons-item-form:hover .oxi-addons-item-form-item span .oxi-icons {
-  font-size: 100px;
-}
+
 .oxi-addons-item-form-item:hover span .oxi-icons {
-  color: #fff;
+  color: #000000;
 }
 .oxi-addons-home-item-form-item span .oxi-icons {
   font-size: 80px;

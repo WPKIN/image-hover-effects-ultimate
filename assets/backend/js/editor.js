@@ -188,6 +188,10 @@ jQuery.noConflict();
     $("#oxi-addons-rearrange-data-modal-open").on("click", function () {
         var rawdata = 'rearrange_modal_data';
         var functionname = "elements_rearrange_modal_data";
+        
+        // Move modal to body to escape any parent stacking context issues
+        $("#oxi-addons-list-rearrange-modal").appendTo("body");
+        
         $("#modal-rearrange-store-file").hide();
         $("#oxi-addons-list-rearrange-saving").show();
         $("#oxi-addons-modal-rearrange").hide();

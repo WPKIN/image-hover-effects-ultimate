@@ -34,7 +34,7 @@ body.toplevel_page_oxi-image-hover-ultimate {
 /* Custom Header for Editor Page */
 .oxi-addons-header {
   background: #fff;
-  padding: 8px 20px;
+  padding: 0px 20px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
@@ -56,23 +56,19 @@ body.toplevel_page_oxi-image-hover-ultimate {
 .oxi-addons-header-left {
     display: flex;
     align-items: center;
-    gap: 8px;
     z-index: 1;
 }
 .oxi-addons-header-left a {
   text-decoration: none;
-  color: #5F6368;
-  font-size: 13px;
-  font-weight: 500;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 14px;
-  background: #F8F9FA;
-  border: 1px solid #E8EAED;
-  border-radius: 6px;
-  transition: all 0.2s ease;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+color: #5F6368;
+font-size: 13px;
+font-weight: 500;
+display: inline-flex;
+align-items: center;
+gap: 6px;
+padding: 18px 14px;
+border-right: 1px solid #f6c8e1;
+transition: all 0.2s ease;
 }
 .oxi-addons-header-left a:hover {
   background: #F1F3F4;
@@ -135,7 +131,7 @@ body.toplevel_page_oxi-image-hover-ultimate {
   background: #F8F9FA;
 }
 .oxi-device-btn.active {
-  background: #1A73E8;
+  background: #f75186;
   color: #fff;
 }
 
@@ -219,7 +215,7 @@ body.toplevel_page_oxi-image-hover-ultimate {
   border-radius: 6px;
   padding: 8px;
   position: absolute;
-  z-index: 1;
+  z-index: 99;
   top: 150%;
   left: 50%;
   transform: translateX(-50%);
@@ -241,8 +237,8 @@ body.toplevel_page_oxi-image-hover-ultimate {
 .oxi-header-shortcode {
   display: flex;
   align-items: center;
-  background: #edf2fb;
-  border: 1px solid #d5e5fb;
+  background: #ffffff;
+  border: 1px solid #fadbe5;
   border-radius: 4px;
   padding: 0;
   overflow: hidden;
@@ -252,22 +248,21 @@ body.toplevel_page_oxi-image-hover-ultimate {
     align-items: center;
     height: 34px;
     padding: 0 5px;
-    background: #edf2fb;
+    background: #ffffff;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     font-size: 14px;
     color: #d73a49;
 }
 .oxi-copy-btn {
   border: none;
-  color: #1A73E8;
-  background: #e4edfa;
+  color: #f75186;
+  background: #fadbe5;
   padding: 6px 10px;
   cursor: pointer;
-  border-left: 1px solid #d5e5fb;
+  border-left: 1px solid #fadbe5;
 }
 .oxi-copy-btn:hover {
-  color: #0073aa;
-  background: #d5e5fb;
+  background: #f8d5e0;
 }
 
 /* Shortcode Name Dropdown */
@@ -372,10 +367,10 @@ body.toplevel_page_oxi-image-hover-ultimate {
     border-right: 1px solid #e5e5e5;
     z-index: 10;
     position: fixed;
-    top: 58px; /* Align with content start */
+    top: 56px; /* Align with content start */
     left: 0;
     bottom: 0;
-    height: calc(100vh - 58px);
+    height: calc(100vh - 56px);
     overflow: hidden !important; /* Prevent outer scroll */
     display: flex !important;
     flex-direction: column !important;
@@ -440,7 +435,7 @@ body.toplevel_page_oxi-image-hover-ultimate {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 999; /* Below header but above content */
+    z-index: 9; /* Below header but above content */
     box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease, left 0.3s ease; /* Smooth left movement */
 }
@@ -451,7 +446,7 @@ body.toplevel_page_oxi-image-hover-ultimate {
 }
 
 .oxi-sidebar-toggle-btn i {
-    color: #8b3dff;
+    color: #f75186;
     font-size: 16px;
     transition: transform 0.3s ease;
 }
@@ -516,13 +511,13 @@ body.toplevel_page_oxi-image-hover-ultimate {
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 .oxi-sidebar-main-title {
-    background: #efe5fd;
+    background: #FDE4EC;
     color: #1d2327;
     font-size: 16px;
     font-weight: 600;
     text-align: center;
     padding: 12px;
-    border-bottom: 1px solid #e2e4e7;
+    border-bottom: 1px solid #FDE4EC;
 }
 
 /* Main Form Layout */
@@ -726,8 +721,6 @@ body.toplevel_page_oxi-image-hover-ultimate {
 	border: 1px solid #E8EAED;
     border-radius: 6px;
     overflow: hidden;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-    transition: all 0.2s ease;
 }
 #shortcode-addons-name-change-submit:focus-within {
 	border-color: #1A73E8;
@@ -737,7 +730,7 @@ body.toplevel_page_oxi-image-hover-ultimate {
 	border: none;
 	box-shadow: none;
 	outline: none;
-	padding: 8px 12px;
+	padding: 0px 12px;
 	font-size: 13px;
 	color: #202124;
 	background: transparent;
