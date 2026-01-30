@@ -31,8 +31,6 @@ jQuery.noConflict();
                             optional: $page
                         }
                     }).done(function (response) {
-                       console.log($(window).height());
-                       console.log( $WRAPPERID);
                         var word = 'Image Hover Empty Data';
                         var regex = new RegExp('\\b' + word + '\\b');
                         var button = regex.test(response);

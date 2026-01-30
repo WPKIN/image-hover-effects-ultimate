@@ -176,9 +176,38 @@ class PreviewFrame
 			// Load essential WordPress styles
 			wp_head();
 
+
 			// Load saved stylesheet
 			if (! empty($this->dbdata['stylesheet'])) {
 				echo '<style id="ih-saved-styles">' . wp_strip_all_tags($this->dbdata['stylesheet']) . '</style>';
+			}
+
+
+			// If this is a carousel, also load the nested button/hover layout stylesheet
+			$style_parts = explode('-', $style_name);
+			if (strtolower($style_parts[0]) === 'carousel') {
+				$rawdata = ! empty($this->dbdata['rawdata']) ? json_decode(stripslashes($this->dbdata['rawdata']), true) : [];
+				if (! empty($rawdata['carousel_register_style'])) {
+					global $wpdb;
+					$parent_table = $wpdb->prefix . 'image_hover_ultimate_style';
+					$button_data = $wpdb->get_row(
+						$wpdb->prepare(
+							'SELECT stylesheet FROM ' . esc_sql($parent_table) . ' WHERE id = %d',
+							(int) $rawdata['carousel_register_style']
+						),
+						ARRAY_A
+					);
+					if (is_array($button_data) && ! empty($button_data['stylesheet'])) {
+						$button_css = html_entity_decode(str_replace('<br>', '', str_replace('&nbsp;', ' ', $button_data['stylesheet'])));
+						// Replace the button's wrapper ID with the carousel's wrapper ID so styles apply
+						$button_css = str_replace(
+							'oxi-image-hover-wrapper-' . $rawdata['carousel_register_style'],
+							'oxi-image-hover-wrapper-' . $this->layout_id,
+							$button_css
+						);
+						echo '<style id="ih-carousel-button-styles">' . $button_css . '</style>';
+					}
+				}
 			}
 
 			// Load font families
@@ -197,10 +226,17 @@ class PreviewFrame
 			echo '<div class="oxi-image-hover-wrapper-' . $this->layout_id . '">';
 			echo '<div class="oxi-addons-row">';
 
-			// Inner content wrapper for isolation if needed, but the ID must be on parent
-			echo '<div class="oxi-isolated-content">';
+			// Determine which render class to use (before rendering, to check if carousel)
+			$style_parts = explode('-', $style_name);
+			$is_carousel_or_filter = in_array(strtolower($style_parts[0]), ['carousel', 'filter']);
 
-			// Render with admin mode to show Edit/Clone/Del buttons
+			// Inner content wrapper for isolation ONLY for non-carousel layouts
+			// Carousel layouts need full width and have their own container structure
+			if (!$is_carousel_or_filter) {
+				echo '<div class="oxi-isolated-content">';
+			}
+
+			// Render with admin mode
 			global $wpdb;
 			$child_table = $wpdb->prefix . 'image_hover_ultimate_list';
 			$child = $wpdb->get_results(
@@ -211,8 +247,6 @@ class PreviewFrame
 				ARRAY_A
 			);
 
-			// Determine which render class to use
-			$style_parts = explode('-', $style_name);
 			$render_class = '\\OXI_IMAGE_HOVER_PLUGINS\\Modules\\' . ucfirst($style_parts[0]) . '\\Render\\Effects' . $style_parts[1];
 
 			// Render with admin mode
@@ -223,7 +257,10 @@ class PreviewFrame
 				echo do_shortcode('[iheu_ultimate_oxi id="' . $this->layout_id . '"]');
 			}
 
-			echo '</div>'; // End #oxi-isolated-content
+			// Close isolation wrapper only if it was opened
+			if (!$is_carousel_or_filter) {
+				echo '</div>'; // End .oxi-isolated-content
+			}
 			echo '</div>'; // End .oxi-addons-row
 			echo '</div>'; // End .oxi-image-hover-wrapper-[ID]
 

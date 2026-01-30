@@ -24,10 +24,8 @@ jQuery.noConflict();
                     }
                 });
                 try {
-                    console.log(JSON.parse(result));
                     return callback(JSON.parse(result));
                 } catch (e) {
-                    console.log(result);
                     return callback(result)
                 }
             } catch (error) {

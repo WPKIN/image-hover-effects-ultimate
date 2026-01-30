@@ -13,8 +13,6 @@ jQuery.noConflict();
                 notice: 'Done',
             }
         }).done(function (response) {
-
-            console.log(response);
             $('.oxi-addons-admin-notifications').remove();
         });
         return false;

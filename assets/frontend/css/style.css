@@ -551,6 +551,11 @@ a.PositionConflictUnset {
     .oxi-addons-container .oxi-addons-row{
         overflow: hidden;
     }
+    /* Carousel needs overflow:visible so dots positioned outside container remain visible */
+    .oxi-addons-container.oxi-image-hover-wrapper .oxi-addons-row,
+    .slick-slider.oxi-addons-row{
+        overflow: visible;
+    }
 }
 
 .oxi-addons-container  .sa-data-animation{

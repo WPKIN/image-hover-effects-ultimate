@@ -93,7 +93,6 @@ jQuery.noConflict();
     });
 
     function set_local_data(functionname, rawdata, styleid, childid) {
-        console.log(rawdata);
         $('#manual-style-functionname').val(functionname);
         $('#manual-style-rawdata').html(rawdata);
         $('#manual-style-styleid').val(styleid);
