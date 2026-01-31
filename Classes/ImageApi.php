@@ -270,7 +270,7 @@ class ImageApi
 
 			$render = [];
 			foreach ($child as $value) {
-				$data                  = json_decode(stripslashes($value['rawdata']));
+				$data                  = json_decode($value['rawdata']); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				$render[$value['id']] = $data;
 			}
 
@@ -424,7 +424,7 @@ class ImageApi
 			$wpdb->query($wpdb->prepare('INSERT INTO ' . esc_sql($this->parent_table) . ' (name, style_name, rawdata) VALUES ( %s, %s, %s)', [$style['name'], $style['style_name'], $style['rawdata']]));
 			$redirect_id = $wpdb->insert_id;
 			if ($redirect_id > 0) :
-				$raw = json_decode(stripslashes($style['rawdata']), true);
+				$raw = json_decode($style['rawdata'], true); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				$raw['image-hover-style-id'] = $redirect_id;
 				$s = explode('-', $style['style_name']);
 				$CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($s[0]) . '\Admin\Effects' . $s[1];
@@ -450,9 +450,9 @@ class ImageApi
 	{
 		$rawdata = [];
 		if (! empty($data)) :
-			$arrfiles = json_decode(stripslashes($data), true);
+			$arrfiles = json_decode($data, true); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		else :
-			$arrfiles = json_decode(stripslashes($this->rawdata), true);
+			$arrfiles = json_decode($this->rawdata, true); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		endif;
 		if (is_array($arrfiles)) :
 			$rawdata = array_map([$this, 'allowed_html'], $arrfiles);
@@ -488,7 +488,7 @@ class ImageApi
 		$wpdb->query($wpdb->prepare('INSERT INTO ' . esc_sql($this->parent_table) . ' (name, style_name, rawdata) VALUES ( %s, %s, %s)', [$newName, $style['style_name'], $style['rawdata']]));
 		$redirect_id = $wpdb->insert_id;
 		if ($redirect_id > 0) :
-			$raw = json_decode(stripslashes($style['rawdata']), true);
+			$raw = json_decode($style['rawdata'], true); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			$raw['image-hover-style-id'] = $redirect_id;
 			$s = explode('-', $style['style_name']);
 			$CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($s[0]) . '\Admin\Effects' . $s[1];
@@ -514,7 +514,7 @@ class ImageApi
 
 		$style = $params['style'];
 		$child = $params['child'];
-		$raw = json_decode(stripslashes($style['rawdata']), true);
+		$raw = json_decode($style['rawdata'], true); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		$custom = strtolower($raw['image-hover-custom-css']);
 		if (preg_match('/style/i', $custom) || preg_match('/script/i', $custom)) {
 			return 'Don\'t be smart, Kindly add validate data.';
@@ -688,7 +688,7 @@ class ImageApi
 	public function post_elements_template_render_data()
 	{
 		global $wpdb;
-		$settings = json_decode(stripslashes($this->rawdata), true);
+		$settings = json_decode($this->rawdata, true); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		$child = $wpdb->get_results($wpdb->prepare('SELECT * FROM ' . esc_sql($this->child_table) . ' WHERE styleid = %d ORDER by id ASC', $this->styleid), ARRAY_A);
 		$StyleName = $settings['image-hover-template'];
 		$name = explode('-', $StyleName);
@@ -715,7 +715,7 @@ class ImageApi
 		global $wpdb;
 		if ((int) $this->childid) :
 			$listdata = $wpdb->get_row($wpdb->prepare('SELECT * FROM ' . esc_sql($this->child_table) . ' WHERE id = %d ', $this->childid), ARRAY_A);
-			$returnfile = json_decode(stripslashes($listdata['rawdata']), true);
+			$returnfile = json_decode($listdata['rawdata'], true); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			$returnfile['shortcodeitemid'] = $this->childid;
 			return json_encode($returnfile);
 		else :
