@@ -110,7 +110,7 @@ class Modules extends Admin_Render
 			[
 				'label' => esc_html__('Note', 'image-hover-effects-ultimate'),
 				'type' => Controls::HEADING,
-				'description' => 'Works after saving and reloading all the fields.',
+				'description' => 'Works after saving all the fields.',
 			]
 		);
 		$this->add_control(
@@ -668,7 +668,7 @@ class Modules extends Admin_Render
 					],
 				],
 				'selector' => [
-					'{{WRAPPER}} .oxi_carousel_dots li' => 'width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .oxi_carousel_dots li, {{WRAPPER}} .swiper-pagination-bullet' => 'width: {{SIZE}}{{UNIT}};',
 				],
 				'description' => 'Confirm Dots Width with multiple options.',
 			]
@@ -701,7 +701,7 @@ class Modules extends Admin_Render
 					],
 				],
 				'selector' => [
-					'{{WRAPPER}} .oxi_carousel_dots li' => 'height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .oxi_carousel_dots li, {{WRAPPER}} .swiper-pagination-bullet' => 'height: {{SIZE}}{{UNIT}};',
 				],
 				'description' => 'Confirm Dots Height with multiple options.',
 			]
@@ -767,7 +767,7 @@ class Modules extends Admin_Render
 					],
 				],
 				'selector' => [
-					'{{WRAPPER}} .oxi_carousel_dots li' => 'margin: 0px {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .oxi_carousel_dots li, {{WRAPPER}} .swiper-pagination-bullet' => 'margin: 0px {{SIZE}}{{UNIT}};',
 				],
 				'description' => 'Confirm Dots Spacing with multiple options.',
 			]
@@ -792,7 +792,7 @@ class Modules extends Admin_Render
 				'default' => 'rgb(0, 0, 0)',
 				'oparetor' => 'RGB',
 				'selector' => [
-					'{{WRAPPER}} .oxi_carousel_dots li button:before' => 'background: {{VALUE}};',
+					'{{WRAPPER}} .oxi_carousel_dots li button:before, {{WRAPPER}} .swiper-pagination-bullet' => 'background: {{VALUE}};',
 				],
 				'description' => 'Confirm Dots Background Color.',
 			]
@@ -821,7 +821,7 @@ class Modules extends Admin_Render
 				'default' => 'rgb(119, 119, 119)',
 				'oparetor' => 'RGB',
 				'selector' => [
-					'{{WRAPPER}} .oxi_carousel_dots li:hover button:before' => 'background: {{VALUE}};',
+					'{{WRAPPER}} .oxi_carousel_dots li:hover button:before, {{WRAPPER}} .swiper-pagination-bullet:hover' => 'background: {{VALUE}};',
 				],
 				'description' => 'Confirm Dots hover Background Color.',
 			]
@@ -849,7 +849,7 @@ class Modules extends Admin_Render
 				'default' => '#AB00C9',
 				'oparetor' => 'RGB',
 				'selector' => [
-					'{{WRAPPER}} .oxi_carousel_dots li.slick-active button:before' => 'background: {{VALUE}};',
+					'{{WRAPPER}} .oxi_carousel_dots li.slick-active button:before, {{WRAPPER}} .swiper-pagination-bullet-active' => 'background: {{VALUE}};',
 				],
 				'description' => 'Confirm Dots hover Background Color.',
 			]
@@ -896,7 +896,7 @@ class Modules extends Admin_Render
 					],
 				],
 				'selector' => [
-					'{{WRAPPER}} .oxi_carousel_dots li button:before' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .oxi_carousel_dots li button:before, {{WRAPPER}} .swiper-pagination-bullet' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'description' => 'Allows you to add rounded  to Dots with options.',
 			]

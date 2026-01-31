@@ -125,7 +125,7 @@ class Effects1 extends Public_Render
 
 		if (! is_array($styledata)) :
 		?>
-			<p> <?php esc_html_e('Style Data not found. Kindly Check Carousel & Slider', 'image-hover-effects-ultimate'); ?> <a href="https://wpkindemos.com/imagehover/docs/hover-extension/carousel-slider/"><?php esc_html_e('Documentation', 'image-hover-effects-ultimate'); ?></a>.</p>
+			<p> <?php esc_html_e('Style Data not found. Kindly Click the Save button and Check Carousel & Slider', 'image-hover-effects-ultimate'); ?> <a href="https://wpkindemos.com/imagehover/docs/hover-extension/carousel-slider/"><?php esc_html_e('Documentation', 'image-hover-effects-ultimate'); ?></a>.</p>
 <?php
 			return;
 		endif;
@@ -165,7 +165,7 @@ class Effects1 extends Public_Render
 		$dots = ($style['carousel_show_dots'] == 'yes') ? 'true' : 'false';
 
 		$jquery = '(function ($) {
-            $(".' . $this->WRAPPER . '.oxi-addons-container > .oxi-addons-row").slick({
+            $("#' . $this->WRAPPER . '.oxi-addons-container > .oxi-addons-row").slick({
                 fade: false,
                 autoplay: ' . $autoplay . ',
                 autoplaySpeed: ' . $autoplayspeed . ',
