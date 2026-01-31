@@ -23,6 +23,33 @@ class Effects2 extends Public_Render
 		wp_enqueue_style('oxi-image-hover-style-2', OXI_IMAGE_HOVER_URL . 'Modules/Carousel/Files/style-2.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
 	}
 
+	public function inline_public_css()
+	{
+		$css = '';
+		if (! empty($this->style['carousel_register_style'])) {
+			global $wpdb;
+			$styledata = $wpdb->get_row(
+				$wpdb->prepare(
+					'SELECT stylesheet FROM ' . esc_sql($this->parent_table) . ' WHERE id = %d',
+					(int) $this->style['carousel_register_style']
+				),
+				ARRAY_A
+			);
+			if (is_array($styledata) && ! empty($styledata['stylesheet'])) {
+				$css = $styledata['stylesheet'];
+				if (isset($this->oxiid)) {
+					$css = str_replace(
+						'oxi-image-hover-wrapper-' . $this->style['carousel_register_style'],
+						'oxi-image-hover-wrapper-' . $this->oxiid,
+						$css
+					);
+				}
+			}
+		}
+
+		return $css;
+	}
+
 	public function render()
 	{
 ?>
