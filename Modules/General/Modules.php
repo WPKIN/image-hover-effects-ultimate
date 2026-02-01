@@ -315,7 +315,7 @@ class Modules extends Admin_Render
 			'oxi-image-hover',
 			[
 				'label' => esc_html__('Description Settings', 'image-hover-effects-ultimate'),
-				'showing' => true,
+				'showing' => false,
 			]
 		);
 		$this->add_group_control(
@@ -453,7 +453,7 @@ class Modules extends Admin_Render
 			'oxi-image-hover',
 			[
 				'label' => esc_html__('Heading Settings', 'image-hover-effects-ultimate'),
-				'showing' => true,
+				'showing' => false,
 			]
 		);
 		$this->add_control(
@@ -1294,7 +1294,7 @@ class Modules extends Admin_Render
 			'oxi-image-hover',
 			[
 				'label' => esc_html__('Width & Height', 'image-hover-effects-ultimate'),
-				'showing' => true,
+				'showing' => false,
 			]
 		);
 		$this->add_responsive_control(
