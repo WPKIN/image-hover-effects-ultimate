@@ -338,7 +338,16 @@
             if (this.iframe) {
                 this.isIframeReady = false;
                 this.clearStyles();
-                this.iframe.src = this.iframe.src;
+                
+                // Update timestamp to force fresh reload
+                var src = this.iframe.src;
+                var newSrc = '';
+                if (src.indexOf('t=') > -1) {
+                    newSrc = src.replace(/t=\d+/, 't=' + Date.now());
+                } else {
+                    newSrc = src + (src.indexOf('?') > -1 ? '&' : '?') + 't=' + Date.now();
+                }
+                this.iframe.src = newSrc;
             }
         }
     };

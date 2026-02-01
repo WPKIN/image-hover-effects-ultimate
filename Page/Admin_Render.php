@@ -257,11 +257,11 @@ abstract class Admin_Render
 		wp_enqueue_style('overlayscrollbars', OXI_IMAGE_HOVER_URL . 'assets/backend/css/overlayscrollbars.min.css', array(), '2.4.6');
 		wp_enqueue_script('overlayscrollbars', OXI_IMAGE_HOVER_URL . 'assets/backend/js/overlayscrollbars.browser.es6.min.js', array(), '2.4.6', false);
 
-		wp_enqueue_script('oxi-image-hover-editor', OXI_IMAGE_HOVER_URL . 'assets/backend/js/editor.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-		wp_enqueue_script('oxi-image-hover-overlay-scrollbar', OXI_IMAGE_HOVER_URL . 'assets/backend/js/overlay-scrollbar.js', array('jquery', 'overlayscrollbars'), OXI_IMAGE_HOVER_PLUGIN_VERSION);
-		wp_enqueue_script('oxi-image-hover-preview-controller', OXI_IMAGE_HOVER_URL . 'assets/backend/js/preview-controller.js', array('jquery'), OXI_IMAGE_HOVER_PLUGIN_VERSION);
+		wp_enqueue_script('oxi-image-hover-editor', OXI_IMAGE_HOVER_URL . 'assets/backend/js/editors.js', false, filemtime(OXI_IMAGE_HOVER_PATH . 'assets/backend/js/editors.js'));
+		wp_enqueue_script('oxi-image-hover-overlay-scrollbar', OXI_IMAGE_HOVER_URL . 'assets/backend/js/overlay-scrollbar.js', array('jquery', 'overlayscrollbars'), filemtime(OXI_IMAGE_HOVER_PATH . 'assets/backend/js/overlay-scrollbar.js'));
+		wp_enqueue_script('oxi-image-hover-preview-controller', OXI_IMAGE_HOVER_URL . 'assets/backend/js/preview-controllers.js', array('jquery'), filemtime(OXI_IMAGE_HOVER_PATH . 'assets/backend/js/preview-controllers.js'));
 		wp_enqueue_style('oxi-image-hover-iframe-preview', OXI_IMAGE_HOVER_URL . 'assets/backend/css/iframe-preview.css', array(), OXI_IMAGE_HOVER_PLUGIN_VERSION);
-		wp_enqueue_script('oxi-image-hover-parent-receiver', OXI_IMAGE_HOVER_URL . 'assets/backend/js/parent-message-receiver.js', array('jquery'), OXI_IMAGE_HOVER_PLUGIN_VERSION);
+		wp_enqueue_script('oxi-image-hover-parent-receiver', OXI_IMAGE_HOVER_URL . 'assets/backend/js/parent-message-receivers.js', array('jquery'), filemtime(OXI_IMAGE_HOVER_PATH . 'assets/backend/js/parent-message-receivers.js'));
 	}
 
 	/**
@@ -923,7 +923,7 @@ abstract class Admin_Render
 										<iframe
 											id="oxi-preview-iframe"
 											class="oxi-preview-iframe"
-											src="<?php echo esc_url(admin_url('admin-ajax.php?action=oxi_image_hover_preview_frame&styleid=' . $this->oxiid)); ?>"
+											src="<?php echo esc_url(admin_url('admin-ajax.php?action=oxi_image_hover_preview_frame&styleid=' . $this->oxiid . '&t=' . time())); ?>"
 											frameborder="0"
 											title="<?php esc_attr_e('Preview', 'image-hover-effects-ultimate'); ?>">
 										</iframe>

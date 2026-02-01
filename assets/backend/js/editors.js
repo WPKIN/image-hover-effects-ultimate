@@ -21,18 +21,41 @@ jQuery.noConflict();
      */
     window.oxiInjectPreviewStyle = function(cls, Cval, responsive) {
         
-        // Try iframe preview first
+        // Try iframe preview using Controller if ready
         if (window.PreviewController && PreviewController.isIframeReady) {
             PreviewController.injectStyles(Cval, cls, responsive || 'desktop');
-        } else {
-            // Fallback to old method
-            if (responsive === 'tab') {
-                $("#oxi-addons-preview-data").append('<style>@media only screen and (min-width : 669px) and (max-width : 993px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} < /style>');
-            } else if (responsive === 'mobile') {
-                $("#oxi-addons-preview-data").append('<style>@media only screen and (max-width : 668px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} < /style>');
-            } else {
-                $("#oxi-addons-preview-data").append('<style>#oxi-addons-preview-data ' + cls + '{' + Cval + '} < /style>');
+            return;
+        } 
+        
+        // Fallback: Try to access iframe directly (if Controller is not ready but iframe exists)
+        var $iframe = $('#oxi-preview-iframe');
+        if ($iframe.length) {
+            try {
+                var $iframeContents = $iframe.contents();
+                if ($iframeContents.length && $iframeContents.find('#oxi-addons-preview-data').length) {
+                    var $target = $iframeContents.find("#oxi-addons-preview-data");
+                    var styleTag = '<style>#oxi-addons-preview-data ' + cls + '{' + Cval + '} </style>';
+                    
+                    if (responsive === 'tab') {
+                        styleTag = '<style>@media only screen and (min-width : 669px) and (max-width : 993px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} </style>';
+                    } else if (responsive === 'mobile') {
+                        styleTag = '<style>@media only screen and (max-width : 668px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} </style>';
+                    }
+                    $target.append(styleTag);
+                    return;
+                }
+            } catch (e) {
+                // Cross-origin or access error, ensure we don't crash
             }
+        }
+
+        // Final Fallback: Append to current document (old method, strictly for no-iframe mode)
+        if (responsive === 'tab') {
+            $("#oxi-addons-preview-data").append('<style>@media only screen and (min-width : 669px) and (max-width : 993px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} </style>');
+        } else if (responsive === 'mobile') {
+            $("#oxi-addons-preview-data").append('<style>@media only screen and (max-width : 668px){#oxi-addons-preview-data ' + cls + '{' + Cval + '}} </style>');
+        } else {
+            $("#oxi-addons-preview-data").append('<style>#oxi-addons-preview-data ' + cls + '{' + Cval + '} </style>');
         }
     };
 
@@ -40,43 +63,77 @@ jQuery.noConflict();
      * Helper to update text content in preview (iframe or fallback)
      */
     window.oxiUpdatePreviewText = function(cls, text) {
+        // Try Controller
         if (window.PreviewController && PreviewController.isIframeReady) {
-            // Remove #oxi-addons-preview-data prefix for iframe search
             var iframeSelector = cls.replace('#oxi-addons-preview-data ', '');
             var $el = $(PreviewController.iframeDoc).find(iframeSelector);
             $el.html(text);
-        } else {
-            $(cls).html(text);
+            return;
         }
+
+        // Fallback: Direct Iframe Access
+        var $iframe = $('#oxi-preview-iframe');
+        if ($iframe.length) {
+            try {
+                var $iframeContents = $iframe.contents();
+                if ($iframeContents.length) {
+                     var iframeSelector = cls.replace('#oxi-addons-preview-data ', '');
+                     $iframeContents.find(iframeSelector).html(text);
+                     return;
+                }
+            } catch(e) {}
+        }
+
+        // Final Fallback
+        $(cls).html(text);
     };
 
     /**
      * Helper to update classes in preview (iframe or fallback)
      */
     window.oxiUpdatePreviewClass = function(cls, removeArr, addVal) {
+        // Try Controller
         if (window.PreviewController && PreviewController.isIframeReady) {
-            // Remove prefix for iframe
             var iframeSelector = cls.replace('#oxi-addons-preview-data ', '');
             var $el = $(PreviewController.iframeDoc).find(iframeSelector);
             
             if(removeArr && removeArr.length > 0) {
-                $.each(removeArr, function(i, v) {
-                    $el.removeClass(v);
-                });
+                $.each(removeArr, function(i, v) { $el.removeClass(v); });
             }
-            if(addVal) {
-                $el.addClass(addVal);
-            }
-        } else {
-            // Fallback
-            if(removeArr && removeArr.length > 0) {
-                $.each(removeArr, function(i, v) {
-                    $(cls).removeClass(v);
-                });
-            }
-            if(addVal) {
-                $(cls).addClass(addVal);
-            }
+            if(addVal) $el.addClass(addVal);
+            return;
+        }
+
+        // Fallback: Direct Iframe Access
+        var $iframe = $('#oxi-preview-iframe');
+        var handled = false;
+        if ($iframe.length) {
+            try {
+                var $iframeContents = $iframe.contents();
+                if ($iframeContents.length) {
+                    var iframeSelector = cls.replace('#oxi-addons-preview-data ', '');
+                    var $el = $iframeContents.find(iframeSelector);
+                    if ($el.length) {
+                        if(removeArr && removeArr.length > 0) {
+                            $.each(removeArr, function(i, v) { $el.removeClass(v); });
+                        }
+                        if(addVal) $el.addClass(addVal);
+                        handled = true;
+                    }
+                }
+            } catch(e) {}
+        }
+        
+        if (handled) return;
+
+        // Final Fallback
+        if(removeArr && removeArr.length > 0) {
+            $.each(removeArr, function(i, v) {
+                $(cls).removeClass(v);
+            });
+        }
+        if(addVal) {
+            $(cls).addClass(addVal);
         }
     };
 
@@ -143,12 +200,27 @@ jQuery.noConflict();
 
 
     function OxiAddonsPreviewDataLoader() {
-        // If iframe is active, reload it to reflect structural changes
-        if (window.PreviewController && PreviewController.isIframeReady) {
+        // Method 1: Try Controller (Preferred)
+        if (window.PreviewController && typeof window.PreviewController.reloadPreview === 'function') {
             PreviewController.reloadPreview();
             return;
         }
 
+        // Method 2: Direct Iframe Access (Fallback if Controller is missing/broken)
+        var $iframe = $('#oxi-preview-iframe');
+        if ($iframe.length) {
+            var src = $iframe.attr('src');
+            var newSrc = '';
+            if (src.indexOf('t=') > -1) {
+                newSrc = src.replace(/t=\d+/, 't=' + Date.now());
+            } else {
+                newSrc = src + (src.indexOf('?') > -1 ? '&' : '?') + 't=' + Date.now();
+            }
+            $iframe.attr('src', newSrc);
+            return;
+        }
+
+        // Method 3: Legacy (Hidden Div - only if no iframe exists)
         OxiAddonsTemplateSettings('elements_template_render_data', JSON.stringify($("#oxi-addons-form-submit").serializeJSON({checkboxUncheckedValue: "0"})), styleid, childid, function (callback) {
             $("#oxi-addons-preview-data").html(callback);
         });

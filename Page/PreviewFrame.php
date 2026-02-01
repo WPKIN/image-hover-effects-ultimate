@@ -170,8 +170,8 @@ class PreviewFrame
 
 			wp_enqueue_style('image-hover-addons');
 			wp_enqueue_script('image-hover-addons');
-			wp_enqueue_script('oxi-image-hover-iframe-forwarder', OXI_IMAGE_HOVER_URL . 'assets/backend/js/iframe-button-forwarder.js', array('jquery'), OXI_IMAGE_HOVER_PLUGIN_VERSION);
-			wp_enqueue_script('oxi-image-hover-overlay-scrollbar', OXI_IMAGE_HOVER_URL . 'assets/backend/js/overlay-scrollbar.js', array('jquery', 'overlayscrollbars'), OXI_IMAGE_HOVER_PLUGIN_VERSION);
+			wp_enqueue_script('oxi-image-hover-iframe-forwarder', OXI_IMAGE_HOVER_URL . 'assets/backend/js/iframe-button-forwarders.js', array('jquery'), filemtime(OXI_IMAGE_HOVER_PATH . 'assets/backend/js/iframe-button-forwarders.js'));
+			wp_enqueue_script('oxi-image-hover-overlay-scrollbar', OXI_IMAGE_HOVER_URL . 'assets/backend/js/overlay-scrollbar.js', array('jquery', 'overlayscrollbars'), filemtime(OXI_IMAGE_HOVER_PATH . 'assets/backend/js/overlay-scrollbar.js'));
 
 			// Load essential WordPress styles
 			wp_head();
