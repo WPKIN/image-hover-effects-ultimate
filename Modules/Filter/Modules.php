@@ -60,7 +60,7 @@ class Modules extends Admin_Render
 		$this->start_controls_section(
 			'image-hover',
 			[
-				'label' => esc_html__('Category Menu', 'image-hover-effects-ultimate'),
+				'label' => esc_html__('Tabs Settings', 'image-hover-effects-ultimate'),
 				'showing' => true,
 			]
 		);
