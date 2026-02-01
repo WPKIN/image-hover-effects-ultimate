@@ -186,7 +186,7 @@ class PreviewFrame
 			// If this is a carousel, also load the nested button/hover layout stylesheet
 			$style_parts = explode('-', $style_name);
 			if (strtolower($style_parts[0]) === 'carousel') {
-				$rawdata = ! empty($this->dbdata['rawdata']) ? json_decode(stripslashes($this->dbdata['rawdata']), true) : [];
+				$rawdata = ! empty($this->dbdata['rawdata']) ? json_decode($this->dbdata['rawdata'], true) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				if (! empty($rawdata['carousel_register_style'])) {
 					global $wpdb;
 					$parent_table = $wpdb->prefix . 'image_hover_ultimate_style';

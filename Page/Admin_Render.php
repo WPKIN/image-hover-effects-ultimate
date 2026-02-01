@@ -804,6 +804,11 @@ abstract class Admin_Render
 	public function render()
 	{
 	?>
+		<!-- Editor Preloader -->
+		<div class="oxi-image-hover-editor-preloader">
+			<div class="oxi-image-hover-editor-spinner"></div>
+		</div>
+
 		<div class="wrap">
 			<div class="oxi-addons-wrapper">
 				<?php
@@ -1046,7 +1051,7 @@ abstract class Admin_Render
 
 		// Decode raw JSON data
 		if (! empty($this->dbdata['rawdata'])) {
-			$s = json_decode(stripslashes($this->dbdata['rawdata']), true);
+			$s = json_decode($this->dbdata['rawdata'], true); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			if (is_array($s)) {
 				$this->style = $s;
 			}

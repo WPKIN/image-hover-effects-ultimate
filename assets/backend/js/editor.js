@@ -1356,4 +1356,9 @@ jQuery(document).ready(function($) {
             }
         }
     });
+
+    // Remove Preloader
+    setTimeout(function() {
+        $('.oxi-image-hover-editor-preloader').addClass('loaded');
+    }, 800);
 });

@@ -776,3 +776,38 @@ transition: all 0.2s ease;
 	background: #0B8043;
 }
 
+/* Preloader */
+.oxi-image-hover-editor-preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    z-index: 100000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.oxi-image-hover-editor-preloader.loaded {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.oxi-image-hover-editor-spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #f75186; /* Theme Pink */
+    border-radius: 50%;
+    animation: oxi-spin 1s linear infinite;
+}
+
+@keyframes oxi-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+

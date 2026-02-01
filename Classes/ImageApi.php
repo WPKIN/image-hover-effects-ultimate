@@ -183,7 +183,7 @@ class ImageApi
 		);
 
 		foreach ($stylelist as $value) {
-			$raw = json_decode(stripslashes($value['rawdata']), true);
+			$raw = json_decode($value['rawdata'], true); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			$raw['image-hover-style-id'] = (int) $value['id'];
 
 			$s = explode('-', $value['style_name']);
@@ -421,6 +421,9 @@ class ImageApi
 				$style['name'] = $params['name'];
 			endif;
 
+			// Ensure rawdata is unslashed before insertion to match safe JSON format
+			$style['rawdata'] = is_string($style['rawdata']) ? stripslashes($style['rawdata']) : $style['rawdata'];
+
 			$wpdb->query($wpdb->prepare('INSERT INTO ' . esc_sql($this->parent_table) . ' (name, style_name, rawdata) VALUES ( %s, %s, %s)', [$style['name'], $style['style_name'], $style['rawdata']]));
 			$redirect_id = $wpdb->insert_id;
 			if ($redirect_id > 0) :
@@ -519,6 +522,9 @@ class ImageApi
 		if (preg_match('/style/i', $custom) || preg_match('/script/i', $custom)) {
 			return 'Don\'t be smart, Kindly add validate data.';
 		}
+
+		// Ensure rawdata is unslashed before insertion
+		$style['rawdata'] = is_string($style['rawdata']) ? stripslashes($style['rawdata']) : $style['rawdata'];
 
 		$wpdb->query($wpdb->prepare('INSERT INTO ' . esc_sql($this->parent_table) . ' (name, style_name, rawdata) VALUES ( %s, %s, %s)', [$style['name'], $style['style_name'], $style['rawdata']]));
 		$redirect_id = $wpdb->insert_id;
@@ -872,7 +878,7 @@ class ImageApi
 	public function post_elements_template_style()
 	{
 		global $wpdb;
-		$settings = json_decode(stripslashes($this->rawdata), true);
+		$settings = json_decode($this->rawdata, true); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 		$custom = strtolower($settings['image-hover-custom-css']);
 		if (preg_match('/style/i', $custom) || preg_match('/script/i', $custom)) {
@@ -904,10 +910,14 @@ class ImageApi
 
 		$style = $params['style'];
 		$child = $params['child'];
+
+		// Ensure rawdata is unslashed before insertion
+		$style['rawdata'] = is_string($style['rawdata']) ? stripslashes($style['rawdata']) : $style['rawdata'];
+
 		$wpdb->query($wpdb->prepare('INSERT INTO ' . esc_sql($this->parent_table) . ' (name, style_name, rawdata) VALUES ( %s, %s, %s)', [$style['name'], $style['style_name'], $style['rawdata']]));
 		$redirect_id = $wpdb->insert_id;
 		if ($redirect_id > 0) :
-			$raw = json_decode(stripslashes($style['rawdata']), true);
+			$raw = json_decode($style['rawdata'], true); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			$raw['image-hover-style-id'] = $redirect_id;
 			$s = explode('-', $style['style_name']);
 			$CLASS = 'OXI_IMAGE_HOVER_PLUGINS\Modules\\' . ucfirst($s[0]) . '\Admin\Effects' . $s[1];
