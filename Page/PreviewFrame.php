@@ -183,29 +183,39 @@ class PreviewFrame
 			}
 
 
-			// If this is a carousel, also load the nested button/hover layout stylesheet
+			// If this is a carousel or display module, also load the nested button/hover layout stylesheet
 			$style_parts = explode('-', $style_name);
-			if (strtolower($style_parts[0]) === 'carousel') {
+			$module_type = strtolower($style_parts[0]);
+
+			if ($module_type === 'carousel' || $module_type === 'display') {
 				$rawdata = ! empty($this->dbdata['rawdata']) ? json_decode($this->dbdata['rawdata'], true) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-				if (! empty($rawdata['carousel_register_style'])) {
+
+				$nested_style_id = 0;
+				if ($module_type === 'carousel' && ! empty($rawdata['carousel_register_style'])) {
+					$nested_style_id = $rawdata['carousel_register_style'];
+				} elseif ($module_type === 'display' && ! empty($rawdata['display_post_style'])) {
+					$nested_style_id = $rawdata['display_post_style'];
+				}
+
+				if ($nested_style_id) {
 					global $wpdb;
 					$parent_table = $wpdb->prefix . 'image_hover_ultimate_style';
 					$button_data = $wpdb->get_row(
 						$wpdb->prepare(
 							'SELECT stylesheet FROM ' . esc_sql($parent_table) . ' WHERE id = %d',
-							(int) $rawdata['carousel_register_style']
+							(int) $nested_style_id
 						),
 						ARRAY_A
 					);
 					if (is_array($button_data) && ! empty($button_data['stylesheet'])) {
 						$button_css = html_entity_decode(str_replace('<br>', '', str_replace('&nbsp;', ' ', $button_data['stylesheet'])));
-						// Replace the button's wrapper ID with the carousel's wrapper ID so styles apply
+						// Replace the button's wrapper ID with the current wrapper ID so styles apply
 						$button_css = str_replace(
-							'oxi-image-hover-wrapper-' . $rawdata['carousel_register_style'],
+							'oxi-image-hover-wrapper-' . $nested_style_id,
 							'oxi-image-hover-wrapper-' . $this->layout_id,
 							$button_css
 						);
-						echo '<style id="ih-carousel-button-styles">' . $button_css . '</style>';
+						echo '<style id="ih-nested-styles">' . $button_css . '</style>';
 					}
 				}
 			}

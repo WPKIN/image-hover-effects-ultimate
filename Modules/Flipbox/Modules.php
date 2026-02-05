@@ -253,7 +253,7 @@ class Modules extends Admin_Render
 				'type' => Controls::SLIDER,
 				'default' => [
 					'unit' => 'px',
-					'size' => '',
+					'size' => '10',
 				],
 				'range' => [
 					'px' => [
@@ -494,7 +494,7 @@ class Modules extends Admin_Render
 			'oxi-image-hover',
 			[
 				'label' => esc_html__('Heading Style', 'image-hover-effects-ultimate'),
-				'showing' => true,
+				'showing' => false,
 			]
 		);
 		$this->add_control(

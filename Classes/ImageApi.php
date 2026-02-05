@@ -408,17 +408,17 @@ class ImageApi
 
 		global $wpdb;
 
-		$params = $this->validate_post();
+		$user_input = $this->validate_post();
 
-		$files = OXI_IMAGE_HOVER_PATH . $params['style'];
+		$files = OXI_IMAGE_HOVER_PATH . $user_input['style'];
 
 		if (is_file($files)) {
 			$rawdata = file_get_contents($files);
-			$params = json_decode($rawdata, true);
-			$style = $params['style'];
-			$child = $params['child'];
-			if (! empty($params['name'])) :
-				$style['name'] = $params['name'];
+			$file_data = json_decode($rawdata, true);
+			$style = $file_data['style'];
+			$child = $file_data['child'];
+			if (! empty($user_input['name'])) :
+				$style['name'] = $user_input['name'];
 			endif;
 
 			// Ensure rawdata is unslashed before insertion to match safe JSON format
