@@ -5,7 +5,7 @@ Tags: responsive image effects, awesome css3 effects, awesome image effects, css
 Requires at least: 6.2
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 9.10.7
+Stable tag: 9.11.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -276,7 +276,7 @@ Its too easy Chose your style from Effects List and click at Clone.
 
 == Changelog ==
 
-= 9.10.7 =
+= 9.11.0 =
 * New: Added item count display for each module in the "Image Hover" dashboard page.
 * New: Added "Create New" and "Import" buttons to the Shortcode page header for better navigation.
 * New: Implemented iframe-based preview for strict style isolation and better performance.
@@ -288,6 +288,8 @@ Its too easy Chose your style from Effects List and click at Clone.
 * Fix: Restored original header text on the Shortcode page after initial layout changes.
 * Fix: Fixed CSS specificity issues where saved styles could override live preview changes.
 * Fix: Resolved browser event handling for numeric inputs to ensure immediate preview updates.
+* Fix: Solved Shortcode backward compatibility issues with legacy data.
+* Fix: Resolved Pro feature access issues with legacy license status.
 
 = 9.10.6 =
 * New: Enhanced frontend asset loader with conditional dependencies; loads Waypoints and Touch scripts only when enabled in settings to reduce page weight.

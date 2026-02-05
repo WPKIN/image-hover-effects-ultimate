@@ -1051,7 +1051,10 @@ abstract class Admin_Render
 
 		// Decode raw JSON data
 		if (! empty($this->dbdata['rawdata'])) {
-			$s = json_decode($this->dbdata['rawdata'], true); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			$s = json_decode($this->dbdata['rawdata'], true);
+			if ($s === null) {
+				$s = json_decode(stripslashes($this->dbdata['rawdata']), true);
+			}
 			if (is_array($s)) {
 				$this->style = $s;
 			}
