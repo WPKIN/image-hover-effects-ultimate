@@ -4404,3 +4404,27 @@ span.oxi-confirmation-success:after {
 #oxi-premium-modal h2.text-warning {
     color: #ffc107 !important;
 }
+
+/* Marketing Text Styles */
+.oxi-addons-text-blocks-description {
+    margin: 20px 0px;
+	text-align: center;
+}
+.oxi-addons-marketing-text {
+	margin-top: 10px;
+    color: #585858;
+    padding: 6px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.oxi-addons-marketing-text span {
+    color: #eb3131;
+    font-weight: 800;
+    margin: 0 4px;
+    font-size: 1.1em;
+}

@@ -613,7 +613,7 @@ class Modules extends Admin_Render
 					'options' => [
 						'caption-settings' => esc_html__('Content', 'image-hover-effects-ultimate'),
 						'style' => esc_html__('Style', 'image-hover-effects-ultimate'),
-						'dynamic' => esc_html__('Dynamic', 'image-hover-effects-ultimate'),
+						// 'dynamic' => esc_html__('Dynamic', 'image-hover-effects-ultimate'),
 						'advanced' => esc_html__('Advanced', 'image-hover-effects-ultimate'),
 					],
 				]
