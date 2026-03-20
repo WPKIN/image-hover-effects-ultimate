@@ -16,7 +16,7 @@ jQuery(document).ready(function ($) {
                     <h3 class="modal-title font-weight-bold mb-2">Unlock PRO Features</h3>
                     <h2 class="text-warning font-weight-bold mb-3">UPTO 26% OFF</h2>
                     <p class="text-muted mb-4">Upgrade to the Pro version to enable Pro features.</p>
-                    <a href="https://wpkindemos.com/imagehover/pricing/" target="_blank" class="btn btn-success btn-lg px-5">Upgrade Now</a>
+                    <a href="https://oxilab.dev/image-hover-effects/pricing/" target="_blank" class="btn btn-success btn-lg px-5">Upgrade Now</a>
                 </div>
             </div>
         </div>

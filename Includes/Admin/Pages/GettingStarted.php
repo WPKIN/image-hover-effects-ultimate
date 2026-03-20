@@ -7,20 +7,23 @@ namespace OXI_IMAGE_HOVER_PLUGINS\Includes\Admin\Pages;
  *
  * @author Richard
  */
-class GettingStarted {
+class GettingStarted
+{
 
-	public function __construct() {
+	public function __construct()
+	{
 		$this->Public_Render();
 	}
 
-	public function Public_Render() {
-		?>
+	public function Public_Render()
+	{
+?>
 		<div id="wpkin-flipbox-getting-started">
 			<div class="wpkin-flipbox-plugin-container">
 				<div class="getting-started-header">
-					<img src="<?php echo esc_attr( OXI_IMAGE_HOVER_URL . 'image/sm-logo.png' ); ?>" alt="Image Hover Effects Ultimate">
+					<img src="<?php echo esc_attr(OXI_IMAGE_HOVER_URL . 'image/sm-logo.svg'); ?>" alt="Image Hover Effects Ultimate">
 					<p class="wpkin-flipbox-plugin-description">
-						<?php echo esc_html__( "Thank you for choosing Image Hover Effects Ultimate - the most powerful WordPress plugin for creating stunning image effects with 500+ modern hover animations. Here's how to get started.", 'image-hover-effects-ultimate' ); ?>
+						<?php echo esc_html__("Thank you for choosing Image Hover Effects Ultimate - the most powerful WordPress plugin for creating stunning image effects with 500+ modern hover animations. Here's how to get started.", 'image-hover-effects-ultimate'); ?>
 					</p>
 				</div>
 				<div class="getting-started-menu">
@@ -48,36 +51,36 @@ class GettingStarted {
 
 				<div class="introduction" data="introduction">
 					<?php
-                    $int = new Tabs\Introduction();
+					$int = new Tabs\Introduction();
 					$int->render();
-                    ?>
+					?>
 				</div>
 				<div class="basic-usage" data="basic-usage">
 					<?php
-                    $int = new Tabs\BasicUses();
+					$int = new Tabs\BasicUses();
 					$int->render();
-                    ?>
+					?>
 				</div>
 				<div class="help" data="help">
 					<?php
-                    $int = new Tabs\Help();
+					$int = new Tabs\Help();
 					$int->render();
-                    ?>
+					?>
 				</div>
 				<div class="what-new" data="what-new">
 					<?php
-                    $int = new Tabs\Changelog();
+					$int = new Tabs\Changelog();
 					$int->render();
-                    ?>
+					?>
 				</div>
 				<div class="get-pro" data="get-pro">
 					<?php
-                    $int = new Tabs\GetPro();
+					$int = new Tabs\GetPro();
 					$int->render();
-                    ?>
+					?>
 				</div>
 			</div>
 		</div>
-		<?php
+<?php
 	}
 }

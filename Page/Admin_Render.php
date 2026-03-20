@@ -758,7 +758,7 @@ abstract class Admin_Render
 			</div>
 			<div class="oxi-addons-header-right">
 				<?php if (apply_filters('oxi-image-hover-plugin-version', false) == false) : ?>
-					<a href="https://wpkindemos.com/imagehover/pricing/" target="_blank" class="oxi-btn-upgrade">
+					<a href="https://oxilab.dev/image-hover-effects/pricing/" target="_blank" class="oxi-btn-upgrade">
 						Upgrade
 					</a>
 				<?php endif; ?>

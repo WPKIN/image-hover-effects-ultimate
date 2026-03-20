@@ -95,56 +95,56 @@ class Admin
 					'version' => 1.0,
 					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/button-effects.svg',
 					'status' => 'Popular',
-					'items' => 11
+					'items' => 0
 				],
 				'general' => [
 					'name' => 'general-effects',
 					'version' => 1.0,
 					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/general-effects.svg',
 					'status' => '',
-					'items' => 33
+					'items' => 0
 				],
 				'square' => [
 					'name' => 'square-effects',
 					'version' => 1.0,
 					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/square-effects.svg',
 					'status' => 'New',
-					'items' => 22
+					'items' => 0
 				],
 				'caption' => [
 					'name' => 'caption-effects',
 					'version' => 1.0,
 					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/caption-effects.svg',
 					'status' => '',
-					'items' => 31
+					'items' => 0
 				],
 				'flipbox' => [
 					'name' => 'flipbox-effects',
 					'version' => 1.0,
 					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/flipbox-effects.svg',
 					'status' => 'Popular',
-					'items' => 29
+					'items' => 0
 				],
 				'magnifier' => [
 					'name' => 'image-magnifier',
 					'version' => 1.0,
 					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/image-magnifier.svg',
 					'status' => 'Updated',
-					'items' => 2
+					'items' => 0
 				],
 				'comparison' => [
 					'name' => 'image-comparison',
 					'version' => 1.0,
 					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/image-comparison.svg',
 					'status' => '',
-					'items' => 4
+					'items' => 0
 				],
 				'lightbox' => [
 					'name' => 'image-lightbox',
 					'version' => 1.0,
 					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/image-lightbox.svg',
 					'status' => 'Updated',
-					'items' => 2
+					'items' => 0
 				],
 			],
 			'Extension' => [
@@ -191,13 +191,16 @@ class Admin
 								<div class="oxi-addons-text-blocks-description">
 									<div class="oxi-addons-marketing-text">
 										<?php
-										$total_templates = 0;
-										foreach ($elements as $item) {
-											if (isset($item['items']) && is_numeric($item['items'])) {
-												$total_templates += (int) $item['items'];
-											}
-										}
-										if ($total_templates > 0) {
+										$total_templates = 150;
+										// foreach ($elements as $item) {
+										// 	if (isset($item['items']) && is_numeric($item['items'])) {
+										// 		$total_templates += (int) $item['items'];
+										// 	}
+										// }
+										// if ($total_templates > 0) {
+										// 	echo '<span> ' . $total_templates . '+</span> Templates & <span>500+</span> Effects 🚀';
+										// }
+										if ($key == 'Image Effects') {
 											echo '<span> ' . $total_templates . '+</span> Templates & <span>500+</span> Effects 🚀';
 										}
 										?>

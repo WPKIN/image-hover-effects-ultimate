@@ -2,11 +2,11 @@
 
 /**
  * Plugin Name:       Image Hover Effects Ultimate
- * Plugin URI:        https://wpkin.com
+ * Plugin URI:        https://oxilab.dev
  * Description:       Create Awesome Image Hover Effects as Image Gallery, Lightbox, Comparison and Magnifier with Impressive, Lightweight, Responsive Image Hover Effects Ultimate. Use 500+ modern and elegant CSS hover effects and animations.
- * Version:           9.11.0
- * Author:            WPKIN
- * Author URI:        https://wpkin.com
+ * Version:           9.11.1
+ * Author:            Oxilab
+ * Author URI:        https://oxilab.dev
  * Text Domain:       image-hover-effects-ultimate
  * License:           GPLv2 or later
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
@@ -147,7 +147,7 @@ if (! class_exists('WPKin_Imagehover')) {
 			define('OXI_IMAGE_HOVER_BASENAME', plugin_basename(__FILE__));
 			define('OXI_IMAGE_HOVER_PATH', plugin_dir_path(__FILE__));
 			define('OXI_IMAGE_HOVER_URL', plugins_url('/', __FILE__));
-			define('OXI_IMAGE_HOVER_PLUGIN_VERSION', '9.11.0');
+			define('OXI_IMAGE_HOVER_PLUGIN_VERSION', '9.11.1');
 			define('OXI_IMAGE_HOVER_TEXTDOMAIN', 'image-hover-effects-ultimate');
 		}
 
@@ -164,7 +164,6 @@ if (! class_exists('WPKin_Imagehover')) {
 
 			if (is_admin()) {
 				new OXI_IMAGE_HOVER_PLUGINS\Includes\Admin();
-				$this->User_Admin();
 				$this->User_Reviews();
 			}
 			$this->Admin_Filters();
@@ -202,11 +201,6 @@ if (! class_exists('WPKin_Imagehover')) {
 		 * @access public
 		 */
 		public function deactivate() {}
-
-		public function User_Admin()
-		{
-			add_action('admin_head', [$this, 'Admin_Icon']);
-		}
 
 		/**
 		 * Execute Shortcode

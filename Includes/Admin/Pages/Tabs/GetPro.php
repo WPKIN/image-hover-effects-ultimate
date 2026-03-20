@@ -252,7 +252,7 @@ class GetPro {
                     <?php echo __( 'with Image Hover Effects PRO', 'image-hover-effects-ultimate' ); ?>
                 </h2>
                 <p><?php echo __( 'Unlock 500+ premium hover effects, advanced animations, and extensive customization options to create stunning image galleries and effects that engage your visitors.', 'image-hover-effects-ultimate' ); ?></p>
-                <a href="https://wpkindemos.com/imagehover/pricing/" class="wpkin-btn btn-primary get-pro-btn" target="_blank" rel="noopener noreferrer">
+                <a href="https://oxilab.dev/image-hover-effects/pricing/" class="wpkin-btn btn-primary get-pro-btn" target="_blank" rel="noopener noreferrer">
                     <i class="dashicons dashicons-awards"></i> <?php echo __( 'Get PRO Now', 'image-hover-effects-ultimate' ); ?>
                 </a>
             </div>
@@ -300,7 +300,7 @@ class GetPro {
                     <p><?php echo __( 'Upgrade to PRO and unlock 500+ premium hover effects, 10+ extension modules, advanced customization, and premium support to transform your website visuals and image galleries.', 'image-hover-effects-ultimate' ); ?></p>
                 </div>
                 <div class="cta-btn">
-                    <a href="https://wpkindemos.com/imagehover/pricing/" class="wpkin-btn btn-primary" target="_blank" rel="noopener noreferrer">
+                    <a href="https://oxilab.dev/image-hover-effects/pricing/" class="wpkin-btn btn-primary" target="_blank" rel="noopener noreferrer">
                         <i class="dashicons dashicons-cart"></i> <?php echo __( 'Upgrade Now', 'image-hover-effects-ultimate' ); ?>
                     </a>
                 </div>
