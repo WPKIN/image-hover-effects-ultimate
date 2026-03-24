@@ -47,8 +47,8 @@ class Visual_Composer {
         }
         
         ob_start();
-        if ( function_exists( 'wpkin_imagehover' ) && wpkin_imagehover() ) {
-            wpkin_imagehover()->shortcode_render( $styleid, 'user' );
+        if ( function_exists( 'oxilab_imagehover' ) && oxilab_imagehover() ) {
+            oxilab_imagehover()->shortcode_render( $styleid, 'user' );
         } else {
             if ( current_user_can( 'manage_options' ) ) {
                 echo '<p style="color:red;">Visual Composer Image Hover: Plugin not properly initialized</p>';

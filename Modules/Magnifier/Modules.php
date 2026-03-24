@@ -456,7 +456,7 @@ class Modules extends Admin_Render
 					'type' => Controls::MEDIA,
 					'default' => [
 						'type' => 'media-library',
-						'link' => 'https://www.shortcode-addons.com/wp-content/uploads/2020/01/placeholder.png',
+						'link' => 'https://cdn.oxilab.dev/imagehover/placeholder.webp',
 					],
 				]
 			);

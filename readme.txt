@@ -1,6 +1,6 @@
-=== Image Hover Effects Ultimate (Image Gallery, Effects, Lightbox, Comparison & Magnifier) ===
-Contributors: oxilab, wpkin, richardmallick
-Tags: image hover effects, css hover effects, hover animation, image hover animation, image gallery
+=== Image Hover Effects Ultimate ( Image Gallery, Effects, Lightbox, Comparison & Magnifier ) ===
+Contributors: oxilab, oxilab, richardmallick
+Tags: image hover effects, css3 effects, image hover animation, image gallery, photo gallery
 Requires at least: 6.2
 Tested up to: 6.9
 Requires PHP: 7.4
@@ -18,7 +18,7 @@ Add stunning image hover effects to WordPress. 500+ CSS3 animations, 10 effect m
 
 Trusted by **20,000+ WordPress users**, the plugin is lightweight, fully responsive, and compatible with Elementor, Gutenberg, WPBakery, Divi, Beaver Builder, and SiteOrigin.
 
-🎬 **[Live Demos](https://oxilab.dev/image-hover-effects/)** | ⭐ **[Upgrade to Pro](https://oxilab.dev/image-hover-effects/pricing/)** | 📖 **[Documentation](https://wpkindemos.com/imagehover/docs/)** | 🆘 **[Support](https://wordpress.org/support/plugin/image-hover-effects-ultimate#new-post)**
+🎬 **[Live Demos](https://demos.oxilab.dev/imagehover/demos/)** | ⭐ **[Upgrade to Pro](https://oxilab.dev/image-hover-effects/pricing/)** | 📖 **[Documentation](https://oxilab.dev/docs/image-hover-effects/)** | 🆘 **[Support](https://wordpress.org/support/plugin/image-hover-effects-ultimate#new-post)**
 
 ---
 
@@ -82,7 +82,7 @@ Pro unlocks the full creative toolkit and priority support:
 * 📹 **Video tutorials** for every feature
 * 🎧 **24/7 priority support** with responses within 12 hours
 
-👉 **[See All Pro Features](https://oxilab.dev/image-hover-effects/pricing/)**
+👉 **[See All Free vs Pro Features](https://oxilab.dev/image-hover-effects/pricing/)**
 
 ---
 

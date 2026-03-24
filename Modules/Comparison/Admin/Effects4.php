@@ -218,7 +218,7 @@ class Effects4 extends Modules {
 					'type' => Controls::MEDIA,
 					'default' => [
 						'type' => 'media-library',
-						'link' => 'https://wpkindemos.com/imagehover/wp-content/uploads/2020/01/placeholder.png',
+						'link' => 'https://cdn.oxilab.dev/imagehover/placeholder.webp',
 					],
 					'description' => 'Update Your Before Image of Comparison Box.',
 				]
@@ -233,7 +233,7 @@ class Effects4 extends Modules {
 					'type' => Controls::MEDIA,
 					'default' => [
 						'type' => 'media-library',
-						'link' => 'https://wpkindemos.com/imagehover/wp-content/uploads/2020/01/placeholder.png',
+						'link' => 'https://cdn.oxilab.dev/imagehover/placeholder.webp',
 					],
 					'description' => 'Update Your After Image of Comparison Box.',
 				]

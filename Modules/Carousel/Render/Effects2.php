@@ -123,7 +123,7 @@ class Effects2 extends Public_Render
 		);
 		if (! is_array($styledata)) :
 		?>
-			<p> <?php esc_html_e('Style Data not found. Kindly Click the Save button and Check Carousel & Slider', 'image-hover-effects-ultimate'); ?> <a href="https://wpkindemos.com/imagehover/docs/hover-extension/carousel-slider/"><?php esc_html_e('Documentation', 'image-hover-effects-ultimate'); ?></a>.</p>
+			<p> <?php esc_html_e('Style Data not found. Kindly Click the Save button and Check Carousel & Slider', 'image-hover-effects-ultimate'); ?> <a href="https://oxilab.dev/docs/image-hover-effects/extensions/carousel-slider-turn-hover-effects-into-a-sliding-carousel/"><?php esc_html_e('Documentation', 'image-hover-effects-ultimate'); ?></a>.</p>
 <?php
 			return;
 		endif;

@@ -88,7 +88,7 @@ class Post_Query {
 			<p>
 				<?php esc_html_e( 'Set Initial Data How to Decorate your Display Post.', 'image-hover-effects-ultimate' ); ?>
 				<?php esc_html_e( 'Kindly Check Display Post', 'image-hover-effects-ultimate' ); ?>
-				<a href="https://wpkindemos.com/imagehover/docs/hover-extension/display-post/" target="_blank">
+				<a href="https://oxilab.dev/docs/image-hover-effects/extensions/display-post-show-wordpress-posts-with-hover-effects/" target="_blank">
 					<?php esc_html_e( 'Documentation', 'image-hover-effects-ultimate' ); ?>
 				</a>.
 			</p>

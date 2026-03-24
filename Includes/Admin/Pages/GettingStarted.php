@@ -18,11 +18,13 @@ class GettingStarted
 	public function Public_Render()
 	{
 ?>
-		<div id="wpkin-flipbox-getting-started">
-			<div class="wpkin-flipbox-plugin-container">
+		<div id="oxilab-flipbox-getting-started">
+			<div class="oxilab-flipbox-plugin-container">
 				<div class="getting-started-header">
-					<img src="<?php echo esc_attr(OXI_IMAGE_HOVER_URL . 'image/sm-logo.svg'); ?>" alt="Image Hover Effects Ultimate">
-					<p class="wpkin-flipbox-plugin-description">
+					<div class="oxi-image-hover-logo">
+						<img src="<?php echo esc_attr(OXI_IMAGE_HOVER_URL . 'image/sm-logo.svg'); ?>" alt="Image Hover Effects Ultimate">
+					</div>
+					<p class="oxilab-flipbox-plugin-description">
 						<?php echo esc_html__("Thank you for choosing Image Hover Effects Ultimate - the most powerful WordPress plugin for creating stunning image effects with 500+ modern hover animations. Here's how to get started.", 'image-hover-effects-ultimate'); ?>
 					</p>
 				</div>

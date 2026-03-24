@@ -89,7 +89,7 @@ trait Admin_helper
 						endif;
 						?>
 						<li class="saadmin-doc">
-							<a target="_black" href="https://wpkindemos.com/imagehover/docs/">Docs</a>
+							<a target="_black" href="https://oxilab.dev/docs/image-hover-effects/">Docs</a>
 						</li>
 						<li class="saadmin-doc">
 							<a target="_black" href="https://wordpress.org/support/plugin/image-hover-effects-ultimate/">Support
@@ -208,7 +208,7 @@ trait Admin_helper
 	{
 		$vs = get_option($this->fixed_data('696d6167655f686f7665725f756c74696d6174655f6c6963656e73655f737461747573'));
 
-		if ($vs == $this->fixed_data('76616c6964') || wpkin_iheu_v()->can_use_premium_code()) {
+		if ($vs == $this->fixed_data('76616c6964') || oxilab_iheu_v()->can_use_premium_code()) {
 			return true;
 		} else {
 			return false;

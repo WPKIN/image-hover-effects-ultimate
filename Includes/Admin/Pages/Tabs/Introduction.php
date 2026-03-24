@@ -126,7 +126,7 @@ class Introduction {
 					<p><?php echo esc_html__( 'Image Hover Effects Ultimate gives you everything you need to create beautiful, interactive image galleries and effects that boost engagement and make your site stand out. Start building today!', 'image-hover-effects-ultimate' ); ?></p>
 				</div>
 				<div>
-					<a href="admin.php?page=oxi-image-hover-ultimate" class="wpkin-btn btn-primary get-pro-btn">
+					<a href="admin.php?page=oxi-image-hover-ultimate" class="oxilab-btn btn-primary get-pro-btn">
 						<?php echo esc_html__( 'Create Image Hover Now', 'image-hover-effects-ultimate' ); ?>
 					</a>
 				</div>

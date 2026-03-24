@@ -6,7 +6,7 @@ class Help {
 
 	public function render() {
 		?>
-		<div id="help" class="wpkin-help getting-started-content active">
+		<div id="help" class="oxilab-help getting-started-content active">
 			<div class="content-heading heading-questions">
 				<h2>
 					<?php _e( 'Frequently Asked', 'image-hover-effects-ultimate' ); ?>
@@ -27,7 +27,7 @@ class Help {
 					<div class="faq-body" style="display:none;">
 						<p>
 							<?php _e( 'For any pre-sale inquiries, please contact us directly by submitting a form here:', 'image-hover-effects-ultimate' ); ?>
-							<a href="https://wpkin.com/contact-us/" target="_blank" rel="noopener noreferrer">
+							<a href="https://oxilab.dev/support/" target="_blank" rel="noopener noreferrer">
 								<?php _e( 'Contact Us', 'image-hover-effects-ultimate' ); ?>
 							</a>
 						</p>
@@ -45,7 +45,7 @@ class Help {
 					<div class="faq-body" style="display:none;">
 						<p>
 							<?php _e( "Go to Plugins → Add New → Upload Plugin, choose the Image Hover Effects .zip file, install and activate. You can also install it directly from the WordPress plugin directory by searching for 'Image Hover Effects Ultimate'.", 'image-hover-effects-ultimate' ); ?>
-							<a href="https://wpkindemos.com/imagehover/docs/" target="_blank" rel="noopener noreferrer">
+							<a href="https://oxilab.dev/docs/image-hover-effects/ihe-getting-started/how-to-install-activate-image-hover-effects-ultimate/" target="_blank" rel="noopener noreferrer">
 								<?php _e( 'Read Installation Guide', 'image-hover-effects-ultimate' ); ?>
 							</a>
 						</p>
@@ -110,7 +110,7 @@ class Help {
 					<div class="faq-body" style="display:none;">
 						<p>
 							<?php _e( 'For free users, you can ask questions in the WordPress.org support forum. For Pro users, premium email support is available. You can also contact us directly:', 'image-hover-effects-ultimate' ); ?>
-							<a href="https://wpkin.com/contact-us/" target="_blank" rel="noopener noreferrer">
+							<a href="https://oxilab.dev/support/" target="_blank" rel="noopener noreferrer">
 								<?php _e( 'Contact Support', 'image-hover-effects-ultimate' ); ?>
 							</a>
 						</p>
@@ -152,7 +152,7 @@ class Help {
 					</p>
 				</div>
 				<div class="cta-btn">
-					<a href="https://wordpress.org/support/plugin/image-hover-effects-ultimate/" class="wpkin-btn btn-primary" target="_blank" rel="noopener noreferrer">
+					<a href="https://wordpress.org/support/plugin/image-hover-effects-ultimate/" class="oxilab-btn btn-primary" target="_blank" rel="noopener noreferrer">
 						<i class="dashicons dashicons-sos"></i>
 						<?php _e( 'Get Support', 'image-hover-effects-ultimate' ); ?>
 					</a>

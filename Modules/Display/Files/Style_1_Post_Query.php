@@ -72,7 +72,7 @@ class Style_1_Post_Query
 		);
 
 		if (! is_array($styledata)) :
-?><p> <?php esc_html_e('Style Data not found. Kindly Check Display Post', 'image-hover-effects-ultimate'); ?> <a href="https://wpkindemos.com/imagehover/docs/hover-extension/display-post/"><?php esc_html_e('Documentation', 'image-hover-effects-ultimate'); ?></a>.</p>
+?><p> <?php esc_html_e('Style Data not found. Kindly Check Display Post', 'image-hover-effects-ultimate'); ?> <a href="https://oxilab.dev/docs/image-hover-effects/extensions/display-post-show-wordpress-posts-with-hover-effects/"><?php esc_html_e('Documentation', 'image-hover-effects-ultimate'); ?></a>.</p>
 		<?php
 			return;
 		endif;
@@ -87,7 +87,7 @@ class Style_1_Post_Query
 
 		if (! is_array($child)) :
 		?>
-			<p><?php esc_html_e('Set Initial Data How to Decorate your Display Post. Kindly Check Display Post', 'image-hover-effects-ultimate'); ?> <a href="https://wpkindemos.com/imagehover/docs/hover-extension/display-post/"><?php esc_html_e('Documentation', 'image-hover-effects-ultimate'); ?></a>.</p>
+			<p><?php esc_html_e('Set Initial Data How to Decorate your Display Post. Kindly Check Display Post', 'image-hover-effects-ultimate'); ?> <a href="https://oxilab.dev/docs/image-hover-effects/extensions/display-post-show-wordpress-posts-with-hover-effects/"><?php esc_html_e('Documentation', 'image-hover-effects-ultimate'); ?></a>.</p>
 <?php
 			return;
 		endif;

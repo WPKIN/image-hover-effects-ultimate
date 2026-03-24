@@ -1292,7 +1292,7 @@ class Modules extends Admin_Render
 					'type' => Controls::MEDIA,
 					'default' => [
 						'type' => 'media-library',
-						'link' => 'https://www.shortcode-addons.com/wp-content/uploads/2020/01/placeholder.png',
+						'link' => 'https://cdn.oxilab.dev/imagehover/placeholder.webp',
 					],
 					'condition' => [
 						'oxi_image_light_box_clickable' => 'image',
@@ -1357,7 +1357,7 @@ class Modules extends Admin_Render
 					'type' => Controls::MEDIA,
 					'default' => [
 						'type' => 'media-library',
-						'link' => 'https://www.shortcode-addons.com/wp-content/uploads/2020/01/placeholder.png',
+						'link' => 'https://cdn.oxilab.dev/imagehover/placeholder.webp',
 					],
 					'condition' => [
 						'oxi_image_light_box_select_type' => 'image',

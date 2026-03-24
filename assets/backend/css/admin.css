@@ -5,6 +5,11 @@
   margin: 0px 0px 0px 0px !important;
   width: 100%;
 }
+
+#fs_connect {
+    margin: 60px auto 20px !important;
+    width: 484px !important;
+}
 /*#wpwrap .notice{
     display: none;
 }*/

@@ -48,8 +48,8 @@ class Widget extends \WP_Widget {
 		echo wp_kses_post( $args['before_widget'] );
 
 		// Render your shortcode
-		if ( function_exists( 'wpkin_imagehover' ) && wpkin_imagehover() ) {
-			wpkin_imagehover()->shortcode_render( $title, 'user' );
+		if ( function_exists( 'oxilab_imagehover' ) && oxilab_imagehover() ) {
+			oxilab_imagehover()->shortcode_render( $title, 'user' );
 		}
 
 		// Escape after_widget
