@@ -18,71 +18,67 @@ class GettingStarted
 	public function Public_Render()
 	{
 ?>
-		<div id="oxilab-flipbox-getting-started">
-			<div class="oxilab-flipbox-plugin-container">
-				<div class="getting-started-header">
-					<div class="oxi-image-hover-logo">
-						<img src="<?php echo esc_attr(OXI_IMAGE_HOVER_URL . 'image/sm-logo.svg'); ?>" alt="Image Hover Effects Ultimate">
-					</div>
-					<p class="oxilab-flipbox-plugin-description">
-						<?php echo esc_html__("Thank you for choosing Image Hover Effects Ultimate - the most powerful WordPress plugin for creating stunning image effects with 500+ modern hover animations. Here's how to get started.", 'image-hover-effects-ultimate'); ?>
-					</p>
-				</div>
-				<div class="getting-started-menu">
-					<div class="menu-item active" data-target="introduction">
-						<img src="<?php echo OXI_IMAGE_HOVER_URL . 'image/getting-started/menu/introduction.svg'; ?>">
-						<span>Introduction</span>
-					</div>
-					<div class="menu-item" data-target="basic-usage">
-						<img src="<?php echo OXI_IMAGE_HOVER_URL . 'image/getting-started/menu/basic-usage.svg'; ?>">
-						<span>Basic Usage</span>
-					</div>
-					<div class="menu-item" data-target="help">
-						<img src="<?php echo OXI_IMAGE_HOVER_URL . 'image/getting-started/menu/help.svg'; ?>">
-						<span>Help</span>
-					</div>
-					<div class="menu-item" data-target="what-new">
-						<img src="<?php echo OXI_IMAGE_HOVER_URL . 'image/getting-started/menu/what-new.svg'; ?>">
-						<span>Changelog</span>
-					</div>
-					<div class="menu-item" data-target="get-pro">
-						<img src="<?php echo OXI_IMAGE_HOVER_URL . 'image/getting-started/menu/get-pro.svg'; ?>">
-						<span>Get PRO</span>
-					</div>
-				</div>
+	<div class="oxi-gs-wrap">
+		<div class="oxi-gs-header">
+			<h1><?php esc_html_e( 'Welcome to Image Hover Effects Ultimate', 'image-hover-effects-ultimate' ); ?></h1>
+			<p><?php esc_html_e( "Thank you for installing Image Hover Effects Ultimate. Let's start creating stunning hover effects!", 'image-hover-effects-ultimate' ); ?></p>
+		</div>
 
-				<div class="introduction" data="introduction">
-					<?php
-					$int = new Tabs\Introduction();
-					$int->render();
-					?>
-				</div>
-				<div class="basic-usage" data="basic-usage">
-					<?php
-					$int = new Tabs\BasicUses();
-					$int->render();
-					?>
-				</div>
-				<div class="help" data="help">
-					<?php
-					$int = new Tabs\Help();
-					$int->render();
-					?>
-				</div>
-				<div class="what-new" data="what-new">
-					<?php
-					$int = new Tabs\Changelog();
-					$int->render();
-					?>
-				</div>
-				<div class="get-pro" data="get-pro">
-					<?php
-					$int = new Tabs\GetPro();
-					$int->render();
-					?>
-				</div>
+		<div class="oxi-gs-video-wrap">
+			<div class="oxi-gs-video">
+				<iframe src="https://www.youtube.com/embed/SGHeoNPogbE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 			</div>
 		</div>
+	</div>
+	<div class="oxi-gs-cards-wrap">
+		<div class="oxi-gs-cards">
+
+			<div class="oxi-gs-card">
+				<div class="oxi-gs-card-icon">
+					<span class="dashicons dashicons-media-document"></span>
+				</div>
+				<h3><?php esc_html_e( 'Documentation', 'image-hover-effects-ultimate' ); ?></h3>
+				<p><?php esc_html_e( 'Get started by spending some time with the documentation to get familiar with Image Hover Effects. Build awesome hover effects for you or your clients with ease.', 'image-hover-effects-ultimate' ); ?></p>
+				<a href="https://oxilab.dev/docs/image-hover-effects/" class="oxi-gs-btn" target="_blank" rel="noopener noreferrer">
+					<?php esc_html_e( 'Documentation', 'image-hover-effects-ultimate' ); ?>
+				</a>
+			</div>
+
+			<div class="oxi-gs-card">
+				<div class="oxi-gs-card-icon">
+					<span class="dashicons dashicons-thumbs-up"></span>
+				</div>
+				<h3><?php esc_html_e( 'Contribute to Image Hover Effects', 'image-hover-effects-ultimate' ); ?></h3>
+				<p><?php esc_html_e( 'You can contribute to make Image Hover Effects better by reporting bugs & creating issues. Our development team always tries to make more powerful plugins with solved issues.', 'image-hover-effects-ultimate' ); ?></p>
+				<a href="https://oxilab.dev/support/" class="oxi-gs-btn" target="_blank" rel="noopener noreferrer">
+					<?php esc_html_e( 'Report a Bug', 'image-hover-effects-ultimate' ); ?>
+				</a>
+			</div>
+
+			<div class="oxi-gs-card">
+				<div class="oxi-gs-card-icon">
+					<span class="dashicons dashicons-video-alt3"></span>
+				</div>
+				<h3><?php esc_html_e( 'Video Tutorials', 'image-hover-effects-ultimate' ); ?></h3>
+				<p><?php esc_html_e( "Unable to use Image Hover Effects Ultimate? Don't worry, you can check our video tutorials to make it easier to use.", 'image-hover-effects-ultimate' ); ?></p>
+				<a href="https://www.youtube.com/@oxilabdev" class="oxi-gs-btn" target="_blank" rel="noopener noreferrer">
+					<?php esc_html_e( 'Video Tutorials', 'image-hover-effects-ultimate' ); ?>
+				</a>
+			</div>
+
+			<div class="oxi-gs-card">
+				<div class="oxi-gs-card-icon">
+					<span class="dashicons dashicons-phone"></span>
+				</div>
+				<h3><?php esc_html_e( 'Support', 'image-hover-effects-ultimate' ); ?></h3>
+				<p><?php esc_html_e( "Do you need our support? Don't worry, our experienced developer will help you.", 'image-hover-effects-ultimate' ); ?></p>
+				<a href="https://wordpress.org/support/plugin/image-hover-effects-ultimate/#new-post" class="oxi-gs-btn" target="_blank" rel="noopener noreferrer">
+					<?php esc_html_e( 'Get Support', 'image-hover-effects-ultimate' ); ?>
+				</a>
+			</div>
+
+		</div>
+	</div>
 <?php
 	}
 }

@@ -1,5 +1,5 @@
 === Image Hover Effects Ultimate ( Image Gallery, Effects, Lightbox, Comparison & Magnifier ) ===
-Contributors: oxilab, oxilab, richardmallick
+Contributors: oxilab, wpkin, richardmallick
 Tags: image hover effects, css3 effects, image hover animation, image gallery, photo gallery
 Requires at least: 6.2
 Tested up to: 6.9
@@ -166,8 +166,8 @@ The free version gives you access to all 10 modules and hundreds of layouts. Pro
 
 == 📸 Screenshots ==
 
-1. 🗂️ Image Hover dashboard showing all effect modules with item counts.
-2. 🖼️ Template library — browse and select from 1500+ pre-designed layouts.
+1. 🗂️ Image Hover dashboard showing all effect modules.
+2. 🖼️ Template library — browse and select from 150+ pre-designed layouts.
 3. ✏️ Naming a new shortcode before customization begins.
 4. 🎛️ Fully customizable admin panel with live preview.
 5. ➕ Image upload and content form for individual hover items.
@@ -175,7 +175,7 @@ The free version gives you access to all 10 modules and hundreds of layouts. Pro
 7. 🔤 Typography controls with Google Fonts for headings and descriptions.
 8. 📱 Responsive device preview controls — Desktop, Tablet, and Mobile.
 9. 🎠 Carousel and Slider extension with hover effects.
-10. 🔽 Filter and sorting extension for categorized image galleries.
+10. 🔽 Shortcode List.
 
 ---
 

@@ -47,8 +47,6 @@ class Assets {
 		if ( 'image-hover-ultimate-getting-started' === $current_page ) {
 			//CSS
 			wp_enqueue_style( 'image-hover-ultimate-admin-welcome', OXI_IMAGE_HOVER_URL . 'assets/backend/css/getting-started.css', false, filemtime( OXI_IMAGE_HOVER_PATH . 'assets/backend/css/getting-started.css' ) );
-			//JS
-			wp_enqueue_script( 'image-hover-ultimate-admin-welcome-js', OXI_IMAGE_HOVER_URL . 'assets/backend/js/getting-started.js', [ 'jquery' ], filemtime( OXI_IMAGE_HOVER_PATH . 'assets/backend/js/getting-started.js' ), true );
 		}
 	}
 
