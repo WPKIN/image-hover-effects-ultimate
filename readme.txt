@@ -113,7 +113,7 @@ Here is why 20,000+ users choose it:
 
 ---
 
-== ⚙️ Installation ==
+== Installation ==
 
 **⬇️ Option 1 — Install from WordPress.org (Recommended)**
 
@@ -140,7 +140,7 @@ Here is why 20,000+ users choose it:
 
 ---
 
-== ❓ Frequently Asked Questions ==
+== Frequently Asked Questions ==
 
 = 🔌 Does this plugin work with Elementor? =
 
@@ -164,7 +164,7 @@ The free version gives you access to all 10 modules and hundreds of layouts. Pro
 
 ---
 
-== 📸 Screenshots ==
+== Screenshots ==
 
 1. 🗂️ Image Hover dashboard showing all effect modules.
 2. 🖼️ Template library — browse and select from 150+ pre-designed layouts.
@@ -179,7 +179,7 @@ The free version gives you access to all 10 modules and hundreds of layouts. Pro
 
 ---
 
-== 🔄 Changelog ==
+== Changelog ==
 
 = 9.11.1 =
 * 🐛 Fix: Resolved PHP 8.4 compatibility issue with mb_ereg_replace function
@@ -276,7 +276,7 @@ The free version gives you access to all 10 modules and hundreds of layouts. Pro
 
 ---
 
-== ⚠️ Upgrade Notice ==
+== Upgrade Notice ==
 
 = 9.11.1 =
 ✅ Recommended for all users. Fixes a PHP 8.4 compatibility issue and updates demo images to faster WebP CDN format.
