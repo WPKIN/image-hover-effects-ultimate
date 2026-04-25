@@ -4,7 +4,7 @@ Tags: image hover effects, css3 effects, image hover animation, image gallery, p
 Requires at least: 6.2
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 9.11.1
+Stable tag: 9.11.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -180,6 +180,13 @@ The free version gives you access to all 10 modules and hundreds of layouts. Pro
 ---
 
 == Changelog ==
+
+= 9.11.2 =
+* 🆕 New: Added Elementor Widget for Image Hover Effects — select and embed shortcodes directly from the Elementor editor
+* 🐛 Fix: Resolved CSS and JS not loading in the Elementor editor for module-specific styles (Flipbox, General, Carousel, etc.)
+* 🐛 Fix: Fixed inline CSS and JS not rendering during Elementor AJAX widget re-renders
+* 🐛 Fix: Fixed styles missing after saving and reloading the Elementor editor
+* ✨ Improvement: Registered base CSS/JS assets for proper Elementor dependency resolution
 
 = 9.11.1 =
 * 🐛 Fix: Resolved PHP 8.4 compatibility issue with mb_ereg_replace function

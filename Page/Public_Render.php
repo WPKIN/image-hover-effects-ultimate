@@ -115,20 +115,93 @@ class Public_Render {
     public $dynamicLoad;
 
     /**
+     * CSS collected after wp_head has fired, output in wp_footer
+     */
+    public static $pending_late_css = [];
+
+    /**
+     * Module CSS URLs to inject as <link> elements for Elementor editor/preview via wp_footer
+     */
+    public static $pending_editor_links = [];
+
+    /**
      * load css and js hooks
      *
      * @since 9.3.0
      */
     public function hooks() {
+        $is_elementor_edit = class_exists( '\\Elementor\\Plugin' )
+            && isset( \Elementor\Plugin::$instance )
+            && isset( \Elementor\Plugin::$instance->editor )
+            && \Elementor\Plugin::$instance->editor->is_edit_mode();
+
+        $is_elementor_preview = class_exists( '\\Elementor\\Plugin' )
+            && isset( \Elementor\Plugin::$instance )
+            && isset( \Elementor\Plugin::$instance->preview )
+            && method_exists( \Elementor\Plugin::$instance->preview, 'is_preview_mode' )
+            && \Elementor\Plugin::$instance->preview->is_preview_mode();
+
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $is_elementor_ajax = wp_doing_ajax()
+            && class_exists( '\\Elementor\\Plugin' )
+            && ! empty( $_REQUEST['action'] )
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            && in_array( $_REQUEST['action'], [ 'elementor_ajax', 'elementor_render_widget' ], true );
+
+        // In ANY Elementor context (editor page load, preview iframe, AJAX
+        // widget re-render) the module-specific CSS/JS enqueued by public_css()
+        // and public_jquery() may not be output by WordPress — either because
+        // wp_head already fired (full page) or because wp_footer never fires
+        // (AJAX). We snapshot the queue, diff it, and echo raw <link>/<script>
+        // tags directly so they are always present in the rendered output.
+        $is_elementor_context = $is_elementor_ajax || $is_elementor_edit || $is_elementor_preview;
+
+        if ( $is_elementor_context ) {
+            $styles_before  = wp_styles()->queue;
+            $scripts_before = wp_scripts()->queue;
+        }
+
         $this->public_frontend_loader();
         $this->public_jquery();
         $this->public_css();
         $this->render();
+
+        // Output any newly-enqueued CSS/JS files as direct <link>/<script> tags.
+        if ( $is_elementor_context ) {
+            $new_styles  = array_diff( wp_styles()->queue, $styles_before );
+            $new_scripts = array_diff( wp_scripts()->queue, $scripts_before );
+
+            foreach ( $new_styles as $handle ) {
+                $obj = wp_styles()->registered[ $handle ] ?? null;
+                if ( $obj && ! empty( $obj->src ) ) {
+                    $src = $obj->src;
+                    $ver = $obj->ver ? $obj->ver : '';
+                    if ( $ver ) {
+                        $src = add_query_arg( 'ver', $ver, $src );
+                    }
+                    echo '<link rel="stylesheet" id="' . esc_attr( $handle ) . '-css" href="' . esc_url( $src ) . '" media="all" />';
+                }
+            }
+
+            foreach ( $new_scripts as $handle ) {
+                $obj = wp_scripts()->registered[ $handle ] ?? null;
+                if ( $obj && ! empty( $obj->src ) ) {
+                    $src = $obj->src;
+                    $ver = $obj->ver ? $obj->ver : '';
+                    if ( $ver ) {
+                        $src = add_query_arg( 'ver', $ver, $src );
+                    }
+                    echo '<script src="' . esc_url( $src ) . '" id="' . esc_attr( $handle ) . '-js"></script>';
+                }
+            }
+        }
+
         $inlinecss = $this->inline_public_css() . $this->inline_css . $this->style['image-hover-custom-css'];
-        $inlinejs = $this->inline_public_jquery();
+        $inlinejs   = $this->inline_public_jquery();
+
         if ( $this->CSSDATA == '' && $this->admin == 'admin' ) {
-            $name = explode( '-', $this->dbdata['style_name'] );
-            $cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $name[0] . '\Admin\\Effects' . $name[1];
+            $name  = explode( '-', $this->dbdata['style_name'] );
+            $cls   = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $name[0] . '\Admin\\Effects' . $name[1];
             $CLASS = new $cls( 'admin' );
             $inlinecss .= $CLASS->inline_template_css_render( $this->style );
         } else {
@@ -136,28 +209,31 @@ class Public_Render {
             $inlinecss .= $this->CSSDATA;
         }
 
-		if ( ! empty( $inlinejs ) ) {
-			$jquery = '(function ($) { setTimeout(function () {' . $inlinejs . '}, 2000); })(jQuery);';
+        if ( ! empty( $inlinejs ) ) {
+            if ( $this->admin === 'admin' || $this->admin === 'web' || true === $this->dynamicLoad ) {
+                $jquery = '(function ($) { setTimeout(function () {' . $inlinejs . '}, 2000); })(jQuery);';
+            } else {
+                $jquery = '(function ($) { setTimeout(function () {' . $inlinejs . '}, 500); })(jQuery);';
+            }
 
-			if ( $this->admin === 'admin' || $this->admin === 'web' || true === $this->dynamicLoad ) {
-				// Only load while Rest API called
-				wp_add_inline_script( $this->JSHANDLE, $jquery );
-			} else {
-				$jquery_delay = '(function ($) { setTimeout(function () {' . $inlinejs . '}, 500); })(jQuery);';
-				wp_add_inline_script( $this->JSHANDLE, $jquery_delay );
-			}
-		}
+            if ( $is_elementor_context ) {
+                echo '<script>' . $jquery . '</script>';
+            } else {
+                wp_add_inline_script( $this->JSHANDLE, $jquery );
+            }
+        }
 
-		if ( ! empty( $inlinecss ) ) {
-			$css = html_entity_decode( str_replace( '<br>', '', str_replace( '&nbsp;', ' ', $inlinecss ) ) );
+        if ( ! empty( $inlinecss ) ) {
+            $css = html_entity_decode( str_replace( '<br>', '', str_replace( '&nbsp;', ' ', $inlinecss ) ) );
 
-			if ( $this->admin === 'admin' || $this->admin === 'web' ) {
-				// Only load while AJAX called
-				wp_add_inline_style( 'oxi-image-hover', $css );
-			} else {
-				wp_add_inline_style( 'oxi-image-hover', $css );
-			}
-		}
+            if ( $is_elementor_context ) {
+                echo '<style id="oxi-iheu-inline-css-' . esc_attr( $this->oxiid ) . '">' . $css . '</style>';
+            } elseif ( $this->admin === 'admin' ) {
+                wp_add_inline_style( 'oxi-image-hover', $css );
+            } else {
+                self::$pending_late_css[] = [ 'css' => $css ];
+            }
+        }
     }
     /**
      * load current element render since 9.3.0

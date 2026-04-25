@@ -27,6 +27,52 @@ class Effects3 extends Public_Render
 	{
 
 		$style = $this->style;
+
+		// Build Swiper config for Elementor editor re-initialization
+		$effects         = isset( $style['carousel_effect'] ) ? $style['carousel_effect'] : 'slide';
+		$autoplay_delay  = ( isset( $style['carousel_autoplay'] ) && $style['carousel_autoplay'] === 'yes' )
+			? (int) $style['carousel_autoplay_speed'] : 99999;
+		$speed           = ! empty( $style['carousel_speed'] ) ? (int) $style['carousel_speed'] : 500;
+		$pause_on_hover  = ( isset( $style['carousel_pause_on_hover'] ) && $style['carousel_pause_on_hover'] === 'yes' );
+		$centeredSlides  = ( $effects === 'coverflow' );
+		$infinite        = ( isset( $style['carousel_infinite'] ) && $style['carousel_infinite'] === 'yes' );
+		$adaptiveheight  = ( isset( $style['carousel_adaptive_height'] ) && $style['carousel_adaptive_height'] === 'yes' );
+		$grab_cursor     = ( isset( $style['carousel_grab_cursor'] ) && $style['carousel_grab_cursor'] === 'yes' );
+
+		$lap    = isset( $style['carousel_item-lap-size'] ) ? $style['carousel_item-lap-size'] : 'auto';
+		$tab    = isset( $style['carousel_item-tab-size'] ) ? $style['carousel_item-tab-size'] : 'auto';
+		$mobile = isset( $style['carousel_item-mob-size'] ) ? $style['carousel_item-mob-size'] : 'auto';
+		if ( $effects === 'cube' ) {
+			$lap = 1; $tab = 1; $mobile = 1;
+		} elseif ( $effects !== 'coverflow' && $effects !== 'slide' ) {
+			$lap = 'auto'; $tab = 'auto'; $mobile = 'auto';
+		}
+
+		$swiper_config = [
+			'direction'      => 'horizontal',
+			'speed'          => $speed,
+			'effect'         => $effects,
+			'centeredSlides' => $centeredSlides,
+			'grabCursor'     => $grab_cursor,
+			'autoHeight'     => $adaptiveheight,
+			'loop'           => $infinite,
+			'cubeEffect'     => [ 'shadow' => false, 'slideShadows' => false, 'shadowOffset' => 0, 'shadowScale' => 0 ],
+			'autoplay'       => [ 'delay' => $autoplay_delay ],
+			'pagination'     => [ 'el' => '.oxi_carousel_dots_' . $this->oxiid, 'clickable' => true ],
+			'navigation'     => [
+				'nextEl' => '.oxi_carousel_next_' . $this->oxiid,
+				'prevEl' => '.oxi_carousel_prev_' . $this->oxiid,
+			],
+			'breakpoints'    => [
+				960 => [ 'slidesPerView' => $lap ],
+				600 => [ 'slidesPerView' => $tab ],
+				480 => [ 'slidesPerView' => $mobile ],
+			],
+			'_pauseOnHover'  => $pause_on_hover,
+			'_rtl'           => isset( $style['carousel_direction'] ) ? $style['carousel_direction'] : '',
+		];
+
+		$swiper_config_attr = esc_attr( wp_json_encode( $swiper_config ) );
 ?>
 		<div class="oxi-addons-container <?php echo esc_attr($this->WRAPPER); ?> oxi-image-hover-wrapper-
         <?php
@@ -34,7 +80,7 @@ class Effects3 extends Public_Render
 			echo esc_attr($this->style['carousel_register_style']);
 		endif;
 		?>
-        " id="<?php echo esc_attr($this->WRAPPER); ?>">
+        " id="<?php echo esc_attr($this->WRAPPER); ?>" data-swiper-config="<?php echo $swiper_config_attr; ?>">
 			<div class="oxi-addons-row swiper-container oxi-addons-swiper-wrapper">
 				<div class="swiper-wrapper">
 					<?php
@@ -240,6 +286,9 @@ class Effects3 extends Public_Render
                     });
                 };
         })(jQuery);';
-		wp_add_inline_script($this->JSHANDLE, $jquery);
+		// Skip inline script in Elementor context - handled by elementor-carousel-init.js
+		if (!did_action('elementor/preview/enqueue_scripts')) {
+			wp_add_inline_script($this->JSHANDLE, $jquery);
+		}
 	}
 }

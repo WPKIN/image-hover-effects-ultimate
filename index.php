@@ -4,7 +4,7 @@
  * Plugin Name:       Image Hover Effects Ultimate
  * Plugin URI:        https://oxilab.dev
  * Description:       Create Awesome Image Hover Effects as Image Gallery, Lightbox, Comparison and Magnifier with Impressive, Lightweight, Responsive Image Hover Effects Ultimate. Use 500+ modern and elegant CSS hover effects and animations.
- * Version:           9.11.1
+ * Version:           9.11.2
  * Author:            Oxilab
  * Author URI:        https://oxilab.dev
  * Text Domain:       image-hover-effects-ultimate
@@ -147,7 +147,7 @@ if (! class_exists('Oxilab_Imagehover')) {
 			define('OXI_IMAGE_HOVER_BASENAME', plugin_basename(__FILE__));
 			define('OXI_IMAGE_HOVER_PATH', plugin_dir_path(__FILE__));
 			define('OXI_IMAGE_HOVER_URL', plugins_url('/', __FILE__));
-			define('OXI_IMAGE_HOVER_PLUGIN_VERSION', '9.11.1');
+			define('OXI_IMAGE_HOVER_PLUGIN_VERSION', '9.11.2');
 			define('OXI_IMAGE_HOVER_TEXTDOMAIN', 'image-hover-effects-ultimate');
 		}
 
@@ -227,6 +227,7 @@ if (! class_exists('Oxilab_Imagehover')) {
 		{
 			add_shortcode('iheu_ultimate_oxi', [$this, 'WP_Shortcode']);
 			new \OXI_IMAGE_HOVER_PLUGINS\Modules\Visual_Composer();
+			new \OXI_IMAGE_HOVER_PLUGINS\Modules\Elementor();
 			$ImageWidget = new \OXI_IMAGE_HOVER_PLUGINS\Modules\Widget();
 			add_filter('widget_text', 'do_shortcode');
 			add_action('widgets_init', [$ImageWidget, 'iheu_widget_widget']);
