@@ -776,27 +776,25 @@ class Public_Render {
     }
 
     public function text_render( $data ) {
-        $safe = do_shortcode(
-            str_replace(
-                'spTac',
-                '&nbsp;',
-                str_replace( 'spBac', '<br>', html_entity_decode( (string) $data ) )
-            ),
-            $ignore_html = false
+        $text = str_replace(
+            'spTac',
+            '&nbsp;',
+            str_replace( 'spBac', '<br>', html_entity_decode( (string) $data ) )
         );
-        echo wp_kses_post( (string) $safe );
+        
+        $safe_text = wp_kses_post( $text );
+        echo do_shortcode( $safe_text );
     }
 
     public function return_text( $data ) {
-        $safe = do_shortcode(
-            str_replace(
-                'spTac',
-                '&nbsp;',
-                str_replace( 'spBac', '<br>', html_entity_decode( (string) $data ) )
-            ),
-            $ignore_html = false
+        $text = str_replace(
+            'spTac',
+            '&nbsp;',
+            str_replace( 'spBac', '<br>', html_entity_decode( (string) $data ) )
         );
-        return wp_kses_post( (string) $safe );
+        
+        $safe_text = wp_kses_post( $text );
+        return do_shortcode( $safe_text );
     }
 
     public function custom_font_awesome_render( $data ) {

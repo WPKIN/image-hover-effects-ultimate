@@ -186,6 +186,9 @@ The free version gives you access to all 10 modules and hundreds of layouts. Pro
 * 🐛 Fix: Resolved issue where the shortcode edit button URL wouldn't update on dropdown change
 * 🐛 Fix: Fixed CSS and JS failing to load on the plugin's internal backend template listing and editor pages
 * 🐛 Fix: Corrected asset isolation logic in the iframe preview which accidentally blocked some internal scripts
+* 🐛 Fix: Whitelisted missing external dependencies (e.g., image zoom, isotope) in the iframe preview to prevent layout breaks
+* 🐛 Fix: Resolved CSS handle collisions between the Lightbox and Magnifier modules which caused Lightbox styles to fail loading
+* 🐛 Fix: Fixed raw CSS text leaking onto the screen in nested modules (e.g., Filter) by properly sanitizing content before shortcode evaluation
 
 = 9.11.2 =
 * 🆕 New: Added Elementor Widget for Image Hover Effects — select and embed shortcodes directly from the Elementor editor
