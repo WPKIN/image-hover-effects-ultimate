@@ -20,14 +20,14 @@ class Effects1 extends Public_Render {
      */
     public function public_css() {
         wp_enqueue_style(
-            'oxi-image-hover-light-box',
+            'oxi-image-hover-lightbox-box',
             OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/Lightbox.css',
             [],
             OXI_IMAGE_HOVER_PLUGIN_VERSION
         );
 
         wp_enqueue_style(
-            'oxi-image-hover-light-style-1',
+            'oxi-image-hover-lightbox-style-1',
             OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/style-1.css',
             [],
             OXI_IMAGE_HOVER_PLUGIN_VERSION

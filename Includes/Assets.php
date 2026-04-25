@@ -52,6 +52,10 @@ class Assets {
 		wp_enqueue_style( 'oxi-image-hover-light-style-1',                    $u . 'Modules/Magnifier/Files/style-1.css',          [], $v );
 		wp_enqueue_style( 'image_zoom.css',                                   $u . 'Modules/Magnifier/Files/image_zoom.min.css',   [], $v );
 		wp_enqueue_style( 'oxi-image-hover-glightbox',                        $u . 'Modules/Lightbox/Files/glightbox.min.css',     [], $v );
+		wp_enqueue_style( 'oxi-image-hover-lightbox-box',                     $u . 'Modules/Lightbox/Files/Lightbox.css',          [], $v );
+		wp_enqueue_style( 'oxi-image-hover-lightbox-style-1',                 $u . 'Modules/Lightbox/Files/style-1.css',           [], $v );
+		wp_enqueue_style( 'oxi-image-hover-lightbox-style-2',                 $u . 'Modules/Lightbox/Files/style-2.css',           [], $v );
+		wp_enqueue_style( 'OxiPopup',                                         $u . 'Modules/Lightbox/Files/Popup.css',             [], $v );
 		wp_enqueue_style( 'oxi-image-hover-display-style-1',                  $u . 'Modules/Display/Files/style-1.css',            [], $v );
 	}
 
@@ -90,6 +94,7 @@ class Assets {
 
 		// Lightbox
 		wp_enqueue_script( 'oxi-image-hover-glightbox',    $u . 'Modules/Lightbox/Files/glightbox.min.js',          [ 'jquery' ],                                   $v, true );
+		wp_enqueue_script( 'OxiPopup',                     $u . 'Modules/Lightbox/Files/Popup.js',                  [ 'jquery' ],                                   $v, true );
 
 		// Display
 		wp_enqueue_script( 'oxi_image_style_1_loader',     $u . 'Modules/Display/Files/style-1-loader.js',          [ 'jquery' ],                                   $v, true );
@@ -180,6 +185,11 @@ class Assets {
 		// Lightbox
 		wp_register_script( 'oxi-image-hover-glightbox', OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/glightbox.min.js', [ 'jquery' ], OXI_IMAGE_HOVER_PLUGIN_VERSION, true );
 		wp_register_style( 'oxi-image-hover-glightbox', OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/glightbox.min.css', [], OXI_IMAGE_HOVER_PLUGIN_VERSION );
+		wp_register_style( 'oxi-image-hover-lightbox-box', OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/Lightbox.css', [], OXI_IMAGE_HOVER_PLUGIN_VERSION );
+		wp_register_style( 'oxi-image-hover-lightbox-style-1', OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/style-1.css', [], OXI_IMAGE_HOVER_PLUGIN_VERSION );
+		wp_register_style( 'oxi-image-hover-lightbox-style-2', OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/style-2.css', [], OXI_IMAGE_HOVER_PLUGIN_VERSION );
+		wp_register_style( 'OxiPopup', OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/Popup.css', [], OXI_IMAGE_HOVER_PLUGIN_VERSION );
+		wp_register_script( 'OxiPopup', OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/Popup.js', [ 'jquery' ], OXI_IMAGE_HOVER_PLUGIN_VERSION, true );
 
 		// Display
 		wp_register_script( 'oxi_image_style_1_loader', OXI_IMAGE_HOVER_URL . 'Modules/Display/Files/style-1-loader.js', [ 'jquery' ], OXI_IMAGE_HOVER_PLUGIN_VERSION, true );

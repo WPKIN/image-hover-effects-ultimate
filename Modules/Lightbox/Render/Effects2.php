@@ -11,8 +11,8 @@ use OXI_IMAGE_HOVER_PLUGINS\Page\Public_Render;
 class Effects2 extends Public_Render {
 
     public function public_css() {
-        wp_enqueue_style('oxi-image-hover-light-box', OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/Lightbox.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
-        wp_enqueue_style('oxi-image-hover-light-style-2', OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/style-2.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-image-hover-lightbox-box', OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/Lightbox.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-image-hover-lightbox-style-2', OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/style-2.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
         wp_enqueue_style('OxiPopup', OXI_IMAGE_HOVER_URL . 'Modules/Lightbox/Files/Popup.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION);
     }
 
