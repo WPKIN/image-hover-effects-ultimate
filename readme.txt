@@ -4,7 +4,7 @@ Tags: image hover effects, css3 effects, image hover animation, image gallery, p
 Requires at least: 6.2
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 9.11.3
+Stable tag: 9.11.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -180,6 +180,11 @@ The free version gives you access to all 10 modules and hundreds of layouts. Pro
 ---
 
 == Changelog ==
+
+= 9.11.4 =
+* 🐛 Fix: Fixed Flipbox back side image not displaying across all styles — corrected invalid CSS syntax where `!important` was placed inside `url()` (Style 1) and replaced `background` shorthand with `background-image` to prevent unintended property resets
+* 🐛 Fix: Fixed Flipbox back side overlay color not working — background image is now applied to the correct layer (`backend:after`) so the admin-configured background color properly acts as a semi-transparent overlay on top of the image
+* ✨ Improvement: Replaced `background-size: 100% 100%` with `background-size: cover` and added `background-position: center center` and `background-repeat: no-repeat` for better image rendering across all Flipbox styles
 
 = 9.11.3 =
 * ✨ Improvement: Added dynamic "Edit Shortcode" button to Elementor Widget for quick access to the styling dashboard

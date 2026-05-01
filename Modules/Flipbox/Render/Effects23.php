@@ -88,7 +88,7 @@ class Effects23 extends Public_Render {
 
                 if ( $this->media_background_render( 'image_hover_back_image', $value ) != '' ) :
                     $url = $this->media_background_render( 'image_hover_back_image', $value );
-                    $this->inline_css .= '.' . $this->WRAPPER . ' .oxi-image-flipbox-hover-' . $this->oxiid . '-' . $val['id'] . ' .oxi-image-hover-figure-backend:after{background: url(' . $url . ');-moz-background-size: 100% 100% !important;-o-background-size: 100% 100% !important; background-size: 100% 100% !important;}';
+                    $this->inline_css .= '.' . $this->WRAPPER . ' .oxi-image-flipbox-hover-' . $this->oxiid . '-' . $val['id'] . ' .oxi-image-hover-figure-backend:after{background-image: url(' . $url . ') !important; background-size: cover !important; background-position: center center !important; background-repeat: no-repeat !important;}';
                 endif;
                 ?>
             </div> 
