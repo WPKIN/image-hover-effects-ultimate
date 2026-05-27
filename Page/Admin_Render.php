@@ -755,6 +755,9 @@ abstract class Admin_Render
 				<a href="<?php echo admin_url('admin.php?page=oxi-image-hover-shortcode'); ?>" class="oxi-btn-dashboard">
 					Shortcode List
 				</a>
+				<a href="https://oxilab.dev/docs/image-hover-effects/ihe-getting-started/creating-your-first-hover-effect/" target="_blank" class="oxi-btn-howto">
+					<i class="fa fa-question-circle" aria-hidden="true"></i> How to use?
+				</a>
 			</div>
 			<div class="oxi-addons-header-right">
 				<?php if (apply_filters('oxi-image-hover-plugin-version', false) == false) : ?>
@@ -768,7 +771,7 @@ abstract class Admin_Render
 				<form method="post" id="shortcode-addons-name-change-submit">
 					<input type="hidden" name="addonsstylenameid" value="<?php echo (int) $this->dbdata['id']; ?>">
 					<input type="text" class="oxi-header-name-input" name="addonsstylename" placeholder="<?php echo esc_attr__('Set Your Shortcode Name', 'image-hover-effects-ultimate'); ?>" value="<?php echo isset($this->dbdata['name']) ? esc_attr($this->dbdata['name']) : ''; ?>">
-					<button type="button" class="oxi-header-name-save-btn" id="addonsstylenamechange">Save</button>
+					<button type="button" class="oxi-header-name-save-btn" id="addonsstylenamechange">Rename</button>
 				</form>
 			</div>
 		</div>

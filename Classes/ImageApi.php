@@ -410,7 +410,13 @@ class ImageApi
 
 		$user_input = $this->validate_post();
 
-		$files = OXI_IMAGE_HOVER_PATH . $user_input['style'];
+		$base_path = realpath( OXI_IMAGE_HOVER_PATH );
+		$files     = OXI_IMAGE_HOVER_PATH . $user_input['style'];
+		$real_file = realpath( $files );
+
+		if ( false === $real_file || 0 !== strpos( $real_file, $base_path . DIRECTORY_SEPARATOR ) ) {
+			return;
+		}
 
 		if (is_file($files)) {
 			$rawdata = file_get_contents($files);
@@ -888,6 +894,7 @@ class ImageApi
 		$StyleName = sanitize_text_field($settings['image-hover-template']);
 		$stylesheet = '';
 		if ((int) $this->styleid) :
+			$this->rawdata = str_ireplace( '</style>', '', $this->rawdata );
 			$wpdb->query($wpdb->prepare('UPDATE ' . esc_sql($this->parent_table) . ' SET rawdata = %s, stylesheet = %s WHERE id = %d', $this->rawdata, $stylesheet, $this->styleid));
 			$name = explode('-', $StyleName);
 			$cls = '\OXI_IMAGE_HOVER_PLUGINS\Modules\\' . $name[0] . '\Admin\Effects' . $name[1];
@@ -904,9 +911,16 @@ class ImageApi
 	public function post_web_import()
 	{
 		global $wpdb;
-		$rawdata = $this->validate_post();
-		$files = OXI_IMAGE_HOVER_PATH . 'template/' . $rawdata . '.json';
-		$params = json_decode(file_get_contents($files), true)[$this->styleid];
+		$rawdata   = $this->validate_post();
+		$base_path = realpath( OXI_IMAGE_HOVER_PATH . 'template' );
+		$files     = OXI_IMAGE_HOVER_PATH . 'template/' . $rawdata . '.json';
+		$real_file = realpath( $files );
+
+		if ( false === $base_path || false === $real_file || 0 !== strpos( $real_file, $base_path . DIRECTORY_SEPARATOR ) ) {
+			return;
+		}
+
+		$params = json_decode( file_get_contents( $real_file ), true )[ $this->styleid ];
 
 		$style = $params['style'];
 		$child = $params['child'];
@@ -937,6 +951,10 @@ class ImageApi
 
 	public function ajax_action()
 	{
+
+		if (! $this->get_permissions_check()) {
+			wp_die();
+		}
 
 		$wpnonce = isset($_POST['_wpnonce']) ? sanitize_key(wp_unslash($_POST['_wpnonce'])) : '';
 

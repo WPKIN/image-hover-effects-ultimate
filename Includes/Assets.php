@@ -209,6 +209,7 @@ class Assets {
 			}
 		}
 		if ( $css_output ) {
+			$css_output = str_ireplace( '</style>', '', $css_output );
 			echo '<style id="oxi-iheu-late-css">' . $css_output . '</style>';
 		}
 	}

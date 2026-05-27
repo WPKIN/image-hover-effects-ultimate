@@ -78,6 +78,18 @@ transition: all 0.2s ease;
 .oxi-addons-header-left a i {
   font-size: 12px;
 }
+.oxi-btn-howto {
+  color: #1A73E8 !important;
+  font-weight: 600 !important;
+}
+.oxi-btn-howto:hover {
+  color: #1557B0 !important;
+  background: #E8F0FE !important;
+}
+.oxi-btn-howto i {
+  color: inherit !important;
+  font-size: 13px !important;
+}
 
 /* Middle-Left Side (Tooltip and Shortcode) */
 .oxi-addons-header-middle-left {
@@ -321,7 +333,7 @@ transition: all 0.2s ease;
   width: 100%;
 }
 .oxi-header-name-save-btn {
-  background: #28a745;
+  background: #1A73E8;
   color: #fff;
   border: none;
   padding: 6px 15px;
@@ -332,7 +344,7 @@ transition: all 0.2s ease;
   white-space: nowrap;
 }
 .oxi-header-name-save-btn:hover {
-  background: #218838;
+  background: #1557B0;
 }
 
 /* Layout Restructuring */
@@ -762,7 +774,7 @@ transition: all 0.2s ease;
 	color: #5F6368;
 }
 #shortcode-addons-name-change-submit .oxi-header-name-save-btn {
-	background: #0F9D58;
+	background: #1A73E8;
 	color: #fff;
 	border: none;
 	padding: 8px 16px;
@@ -773,7 +785,7 @@ transition: all 0.2s ease;
 	border-left: 1px solid #E8EAED;
 }
 #shortcode-addons-name-change-submit .oxi-header-name-save-btn:hover {
-	background: #0B8043;
+	background: #1557B0;
 }
 
 /* Preloader */

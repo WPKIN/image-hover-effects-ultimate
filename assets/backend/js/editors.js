@@ -246,7 +246,7 @@ jQuery.noConflict();
                 $("#OXIAADDONSCHANGEDPOPUP .modal-body.text-center h4").html("Superb!");
                 $("#OXIAADDONSCHANGEDPOPUP .modal-body.text-center p").html("Shortcode name has been saved successfully.");
                 $("#OXIAADDONSCHANGEDPOPUP").modal("show");
-                OxiAddonsModalConfirm("#addonsstylenamechange", "Save");
+                OxiAddonsModalConfirm("#addonsstylenamechange", "Rename");
             }
         });
     });
