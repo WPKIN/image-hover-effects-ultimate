@@ -19,4 +19,5 @@ README.md export-ignore
 webpack.config.js export-ignore
 composer.json export-ignore
 composer.lock export-ignore
+CLAUDE.md export-ignore
 
