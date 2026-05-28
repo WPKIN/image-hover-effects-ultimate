@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "iheu/image-hover",
+	"version": "1.0.0",
+	"title": "Image Hover Effects",
+	"category": "media",
+	"icon": "images-alt2",
+	"description": "Display image hover effects created with Image Hover Effects Ultimate.",
+	"keywords": [ "image", "hover", "effects", "gallery", "animation" ],
+	"textdomain": "image-hover-effects-ultimate",
+	"attributes": {
+		"styleId": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": [ "wide", "full" ]
+	}
+}

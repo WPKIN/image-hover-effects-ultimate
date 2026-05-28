@@ -4,11 +4,11 @@ Tags: image hover effects, css3 effects, image hover animation, image gallery, p
 Requires at least: 6.2
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 9.11.5
+Stable tag: 9.11.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Add stunning image hover effects to WordPress. 500+ CSS3 animations, 10 effect modules, no coding needed. Support Elementor & Gutenberg.
+Add stunning image hover effects to WordPress. 500+ CSS3 animations, 10 effect modules. Native Elementor widget, Gutenberg block & WPBakery widget.
 
 == Description ==
 
@@ -41,7 +41,9 @@ Every image hover animation is built in pure CSS3, so effects are silky smooth w
 * 🔁 **Clone any style**: duplicate an effect and customize it without starting from scratch
 * 🛠️ **Custom CSS editor**: add your own CSS for total creative control
 * ♻️ **Built-in cache system**: optimized loading even on pages with many images
-* 🧩 **Works with every major page builder**: Elementor, Gutenberg, WPBakery, Divi, Beaver Builder, SiteOrigin
+* 🔌 **Native Elementor widget**: select and embed effects directly from the Elementor editor panel, no shortcode needed
+* 🟦 **Native Gutenberg block**: insert and live-preview effects directly from the WordPress block editor, no shortcode needed
+* 🧩 **Works with every major page builder**: WPBakery, Divi, Beaver Builder, and SiteOrigin support via shortcode
 
 ---
 
@@ -61,8 +63,9 @@ The free version is genuinely capable. Here is everything included at no cost:
 * ✅ Built-in cache system
 * ✅ Custom CSS editor
 * ✅ Shortcode-based, works in any post, page, or widget
-* ✅ Gutenberg block editor support
-* ✅ Elementor, WPBakery, Divi, Beaver Builder, and SiteOrigin support
+* ✅ Native Gutenberg block: insert and preview effects directly from the block editor, no shortcode needed
+* ✅ Native Elementor widget: select and embed effects directly from the Elementor editor panel, no shortcode needed
+* ✅ WPBakery, Divi, Beaver Builder, and SiteOrigin support via shortcode
 * ✅ SEO-friendly HTML output with proper alt tag support
 
 ---
@@ -107,7 +110,7 @@ Here is why 20,000+ users choose it:
 * 📦 **All modules in one plugin**: General Effects, Caption Effects, Flipbox, Lightbox, Comparison, Magnifier, Carousel, and Filter are all built in. No separate add-ons needed.
 * 🖱️ **No coding required**: everything is configured through the visual admin panel with live preview
 * ⚡ **Lightweight**: pure CSS3 output with zero jQuery dependency keeps your pages fast
-* 🧩 **Builder ready**: shortcodes drop into Elementor, Gutenberg, Divi, or any other builder without friction
+* 🧩 **Builder ready**: native Elementor widget and Gutenberg block included; shortcodes also work in Divi, WPBakery, Beaver Builder, and any other builder
 * 🔒 **Actively maintained**: regular updates, PHP 8.4 compatibility, and security hardening with every release
 * 👨‍💻 **Developer-friendly**: custom CSS support, PSR-4 namespacing, and a clean codebase make it easy to extend
 
@@ -144,11 +147,11 @@ Here is why 20,000+ users choose it:
 
 = 🔌 Does this plugin work with Elementor? =
 
-Yes. Paste the generated shortcode into an Elementor Shortcode widget and your hover effects will display exactly as designed.
+Yes. The plugin includes a native Elementor widget. Search for "Image Hover" in the Elementor editor panel, drag it onto your page, and select your effect directly from the widget's Inspector Controls — no shortcode needed. You can also use the shortcode approach if you prefer.
 
 = 🟦 Does it work with the Gutenberg block editor? =
 
-Yes. Use the core Shortcode block in Gutenberg and paste in your shortcode. It works on any page or post.
+Yes. The plugin includes a native Gutenberg block. Search for "Image Hover" in the block inserter, add the block, and select your effect from the Inspector Controls sidebar. A live preview renders directly in the editor — no shortcode needed.
 
 = 💻 Do I need to write any code? =
 
@@ -180,6 +183,12 @@ The free version gives you access to all 10 modules and hundreds of layouts. Pro
 ---
 
 == Changelog ==
+
+= 9.11.6 =
+* 🆕 New: Added native Gutenberg block, insert and preview Image Hover Effect styles directly from the WordPress block editor without writing shortcodes
+* 🆕 New: Style selector and Edit Style button placed in the block's Inspector Controls sidebar, keeping the editor canvas clean with only the live preview
+* 🆕 New: Plugin's branded SVG icon displayed in the Gutenberg block inserter
+* ✨ Improvement: All CSS (base styles, module-specific styles, and per-shortcode stylesheet) is fully inlined during block editor REST rendering so the hover effect preview displays correctly without relying on wp_footer
 
 = 9.11.5 =
 * 🔒 Security: Fixed path traversal vulnerability in template import, file reads are now restricted within the plugin directory using realpath() validation
