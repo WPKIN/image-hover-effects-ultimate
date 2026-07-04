@@ -4,7 +4,7 @@ Tags: image hover effects, css3 effects, image hover animation, image gallery, p
 Requires at least: 6.2
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 9.11.6
+Stable tag: 9.11.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -184,9 +184,11 @@ The free version gives you access to all 10 modules and hundreds of layouts. Pro
 
 == Changelog ==
 
-= 9.11.6 =
+= 9.11.7 =
 * 🐛 Fix: Edit and rearrange modals now populate correctly for image items saved on older versions, legacy rawdata stored with extra backslash escaping is decoded with a stripslashes fallback that matches the render paths
 * 🐛 Fix: Removed Undefined array key PHP warnings on the frontend when rendering General effects created on older versions where heading, description or button fields were not stored, missing item fields are now checked safely
+
+= 9.11.6 =
 * 🆕 New: Added native Gutenberg block, insert and preview Image Hover Effect styles directly from the WordPress block editor without writing shortcodes
 * 🆕 New: Style selector and Edit Style button placed in the block's Inspector Controls sidebar, keeping the editor canvas clean with only the live preview
 * 🆕 New: Plugin's branded SVG icon displayed in the Gutenberg block inserter
