@@ -45,7 +45,7 @@ class Effects25 extends Public_Render {
                                 <div class="oxi-image-hover-figure-caption">
                                     <div class="oxi-image-hover-caption-tab   <?php echo esc_attr( $this->style['oxi-image-hover-content-alignment'] ); ?>">
                                         <?php
-                                        if ( $value['image_hover_heading'] != '' ) :
+                                        if ( ! empty( $value['image_hover_heading'] ) ) :
                                             ?>
                                             <h3 class="oxi-image-hover-heading <?php echo esc_attr( $this->style['oxi-image-hover-heading-animation'] ); ?> <?php echo esc_attr( $this->style['oxi-image-hover-heading-animation-delay'] ); ?>
                                             <?php
@@ -56,12 +56,12 @@ class Effects25 extends Public_Render {
                                             "><?php $this->text_render( $value['image_hover_heading'] ); ?></h3>
                                                 <?php
                                             endif;
-										if ( $value['image_hover_description'] != '' ) :
+										if ( ! empty( $value['image_hover_description'] ) ) :
 											?>
                                             <div class="oxi-image-hover-content <?php echo esc_attr( $this->style['oxi-image-hover-desc-animation'] ); ?> <?php echo esc_attr( $this->style['oxi-image-hover-desc-animation-delay'] ); ?>"><?php $this->text_render( $value['image_hover_description'] ); ?></div>
                                             <?php
                                         endif;
-                                        if ( $value['image_hover_button_text'] != '' && $this->checkurl_render( 'image_hover_button_link', $value ) === true ) :
+                                        if ( ! empty( $value['image_hover_button_text'] ) && $this->checkurl_render( 'image_hover_button_link', $value ) === true ) :
                                             ?>
                                             <div class="oxi-image-hover-button <?php echo esc_attr( $this->style['oxi-image-hover-button-animation'] ); ?> <?php echo esc_attr( $this->style['oxi-image-hover-button-animation-delay'] ); ?>">
                                                 <a <?php $this->url_render( 'image_hover_button_link', $value ); ?> class="oxi-image-btn"><?php $this->text_render( $value['image_hover_button_text'] ); ?></a>

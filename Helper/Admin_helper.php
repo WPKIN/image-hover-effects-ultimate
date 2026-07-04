@@ -89,6 +89,9 @@ trait Admin_helper
 						endif;
 						?>
 						<li class="saadmin-doc">
+							<a target="_blank" href="https://demos.oxilab.dev/imagehover/demos/">Demo</a>
+						</li>
+						<li class="saadmin-doc">
 							<a target="_black" href="https://oxilab.dev/docs/image-hover-effects/">Docs</a>
 						</li>
 						<li class="saadmin-doc">

@@ -171,6 +171,34 @@ class ImageApi
 		return current_user_can($transient);
 	}
 
+	/**
+	 * Tolerant JSON decode for stored rawdata.
+	 *
+	 * Legacy rows (saved before the save path started calling wp_unslash)
+	 * are stored with an extra layer of backslash-escaping, e.g.
+	 * {\"image_hover_heading\":\"Arcadis\"}. A plain json_decode() returns
+	 * null on those, which is why the edit/rearrange modals populated nothing
+	 * for users who created their shortcodes on older versions. The render
+	 * paths already fall back to stripslashes(); this mirrors that so admin
+	 * modals behave identically. New (clean) rawdata decodes on the first try
+	 * and is unaffected.
+	 *
+	 * @param string  $rawdata Raw JSON string from the database.
+	 * @param boolean $assoc   Return objects as associative arrays.
+	 * @return mixed Decoded value, or null if it cannot be decoded either way.
+	 */
+	public function decode_rawdata($rawdata, $assoc = true)
+	{
+		if ('' === $rawdata || null === $rawdata) {
+			return null;
+		}
+		$decoded = json_decode($rawdata, $assoc); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		if (null === $decoded && JSON_ERROR_NONE !== json_last_error()) {
+			$decoded = json_decode(stripslashes($rawdata), $assoc); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		}
+		return $decoded;
+	}
+
 	public function update_image_hover_plugin()
 	{
 
@@ -270,7 +298,7 @@ class ImageApi
 
 			$render = [];
 			foreach ($child as $value) {
-				$data                  = json_decode($value['rawdata']); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+				$data                  = $this->decode_rawdata($value['rawdata'], false);
 				$render[$value['id']] = $data;
 			}
 
@@ -727,7 +755,10 @@ class ImageApi
 		global $wpdb;
 		if ((int) $this->childid) :
 			$listdata = $wpdb->get_row($wpdb->prepare('SELECT * FROM ' . esc_sql($this->child_table) . ' WHERE id = %d ', $this->childid), ARRAY_A);
-			$returnfile = json_decode($listdata['rawdata'], true); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			$returnfile = $this->decode_rawdata($listdata['rawdata'], true);
+			if (! is_array($returnfile)) {
+				$returnfile = [];
+			}
 			$returnfile['shortcodeitemid'] = $this->childid;
 			return json_encode($returnfile);
 		else :

@@ -94,6 +94,8 @@ class Admin
 					'name' => 'button-effects',
 					'version' => 1.0,
 					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/button-effects.svg',
+					'demos' => 'https://demos.oxilab.dev/imagehover/elements-extension/button-effects/',
+					'doc' => 'https://oxilab.dev/docs/image-hover-effects/effect-types/button-overlay-hover-effects/',
 					'status' => 'Popular',
 					'items' => 0
 				],
@@ -101,6 +103,8 @@ class Admin
 					'name' => 'general-effects',
 					'version' => 1.0,
 					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/general-effects.svg',
+					'demos' => 'https://demos.oxilab.dev/imagehover/elements-extension/general-effects/',
+					'doc' => 'https://oxilab.dev/docs/image-hover-effects/effect-types/general-hover-effects/',
 					'status' => '',
 					'items' => 0
 				],
@@ -108,6 +112,8 @@ class Admin
 					'name' => 'square-effects',
 					'version' => 1.0,
 					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/square-effects.svg',
+					'demos' => 'https://demos.oxilab.dev/imagehover/elements-extension/square-effects/',
+					'doc' => 'https://oxilab.dev/docs/image-hover-effects/effect-types/square-image-magnifier-filter-gallery-carousel-effects/',
 					'status' => 'New',
 					'items' => 0
 				],
@@ -115,6 +121,8 @@ class Admin
 					'name' => 'caption-effects',
 					'version' => 1.0,
 					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/caption-effects.svg',
+					'demos' => 'https://demos.oxilab.dev/imagehover/elements-extension/caption-effects/',
+					'doc'    => 'https://oxilab.dev/docs/image-hover-effects/effect-types/caption-hover-effects/',
 					'status' => '',
 					'items' => 0
 				],
@@ -122,6 +130,8 @@ class Admin
 					'name' => 'flipbox-effects',
 					'version' => 1.0,
 					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/flipbox-effects.svg',
+					'demos' => 'https://demos.oxilab.dev/imagehover/elements-extension/flipbox-effects/',
+					'doc' => 'https://oxilab.dev/docs/image-hover-effects/effect-types/flip-box-hover-effects/',
 					'status' => 'Popular',
 					'items' => 0
 				],
@@ -129,6 +139,8 @@ class Admin
 					'name' => 'image-magnifier',
 					'version' => 1.0,
 					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/image-magnifier.svg',
+					'demos' => 'https://demos.oxilab.dev/imagehover/elements-extension/image-magnifier/',
+					'doc' => 'https://oxilab.dev/docs/image-hover-effects/effect-types/square-image-magnifier-filter-gallery-carousel-effects/',
 					'status' => 'Updated',
 					'items' => 0
 				],
@@ -136,6 +148,8 @@ class Admin
 					'name' => 'image-comparison',
 					'version' => 1.0,
 					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/image-comparison.svg',
+					'demos' => 'https://demos.oxilab.dev/imagehover/elements-extension/image-comparison/',
+					'doc' => 'https://oxilab.dev/docs/image-hover-effects/effect-types/before-after-image-comparison-slider/',
 					'status' => '',
 					'items' => 0
 				],
@@ -143,6 +157,8 @@ class Admin
 					'name' => 'image-lightbox',
 					'version' => 1.0,
 					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/image-lightbox.svg',
+					'demos' => 'https://demos.oxilab.dev/imagehover/elements-extension/image-lightbox/',
+					'doc' => 'https://oxilab.dev/docs/image-hover-effects/effect-types/lightbox-gallery-effects/',
 					'status' => 'Updated',
 					'items' => 0
 				],
@@ -152,6 +168,8 @@ class Admin
 					'name' => 'display-post',
 					'version' => 1.0,
 					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/display-post.svg',
+					'demos' => 'https://demos.oxilab.dev/imagehover/elements-extension/display-post/',
+					'doc' => 'https://oxilab.dev/docs/image-hover-effects/extensions/display-post-show-wordpress-posts-with-hover-effects/',
 					'status' => $is_pro,
 					'items' => ''
 				],
@@ -159,6 +177,8 @@ class Admin
 					'name' => 'carousel-slider',
 					'version' => 1.0,
 					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/carousel-slider.svg',
+					'demos' => 'https://demos.oxilab.dev/imagehover/elements-extension/carousel-slider/',
+					'doc' => 'https://oxilab.dev/docs/image-hover-effects/extensions/carousel-slider-turn-hover-effects-into-a-sliding-carousel/',
 					'status' => $is_pro,
 					'items' => ''
 				],
@@ -166,6 +186,8 @@ class Admin
 					'name' => 'filter-&-sorting',
 					'version' => 1.0,
 					'icon' => OXI_IMAGE_HOVER_URL . 'image/icons/filter-sorting.svg',
+					'demos' => 'https://demos.oxilab.dev/imagehover/elements-extension/filter-sorting/',
+					'doc' => 'https://oxilab.dev/docs/image-hover-effects/extensions/filter-sorting-create-a-filterable-image-gallery/',
 					'status' => $is_pro,
 					'items' => ''
 				],
@@ -242,6 +264,11 @@ class Admin
 										</div>
 									<?php endif; ?>
 								</a>
+								<div class="oxi-card-actions">
+									<a href="<?php echo esc_url(admin_url($oxilink)); ?>" class="oxi-card-btn oxi-btn-template addons-pre-check" sub-type="<?php echo (apply_filters('oxi-image-hover-plugin-version', false) == false && $key == 'Extension') ? 'premium' : ''; ?>">Templates</a>
+									<a href="<?php echo esc_url($value['demos']); ?>" target="_blank" rel="noopener noreferrer" class="oxi-card-btn oxi-btn-demo">Demos</a>
+									<a href="<?php echo esc_url($value['doc']); ?>" target="_blank" rel="noopener noreferrer" class="oxi-card-btn oxi-btn-doc">Docs</a>
+								</div>
 							</div>
 					<?php
 						}

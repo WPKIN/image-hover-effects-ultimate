@@ -359,7 +359,7 @@ ul.oxilab-admin-menu .oxilab-admin-menu-quick .oxi-icons {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 40px 20px;
+    padding: 50px 20px;
     overflow: hidden;
 }
 .oxi-addons-wrapper .oxi-addons-shortcode-import a:focus,
@@ -4432,4 +4432,68 @@ span.oxi-confirmation-success:after {
     font-weight: 800;
     margin: 0 4px;
     font-size: 1.1em;
+}
+
+/* Card action buttons — Demo, Doc, Templates */
+.oxi-card-actions {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    gap: 6px;
+    padding: 10px 12px 14px;
+    justify-content: center;
+    background: #fff;
+    border-radius: 0 0 10px 10px;
+    opacity: 0;
+    pointer-events: none;
+}
+.oxi-addons-shortcode-import:hover .oxi-card-actions {
+    opacity: 1;
+    pointer-events: auto;
+}
+.oxi-card-btn {
+    flex: 1;
+    text-align: center;
+    padding: 5px 6px !important;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    text-decoration: none !important;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    line-height: 1.5;
+    letter-spacing: 0.2px;
+    box-shadow: none !important;
+    cursor: pointer;
+}
+.oxi-addons-wrapper .oxi-btn-demo {
+    background: #fff4ed;
+    color: #e65c1a;
+    border: 1px solid #ffd4b8;
+}
+.oxi-addons-wrapper .oxi-btn-demo:hover {
+    background: #ff6138;
+    color: #fff !important;
+    border-color: #ff6138;
+}
+.oxi-addons-wrapper .oxi-btn-doc {
+    background: #edf4ff;
+    color: #1a73e8;
+    border: 1px solid #b8d4ff;
+}
+.oxi-addons-wrapper .oxi-btn-doc:hover {
+    background: #1a73e8;
+    color: #fff !important;
+    border-color: #1a73e8;
+}
+.oxi-addons-wrapper .oxi-btn-template {
+    background: #f3eeff;
+    color: #7c00b5;
+    border: 1px solid #d4b8ff;
+}
+.oxi-addons-wrapper .oxi-btn-template:hover {
+    background: #7c00b5;
+    color: #fff !important;
+    border-color: #7c00b5;
 }
