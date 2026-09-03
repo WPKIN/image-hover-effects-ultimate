@@ -2,9 +2,9 @@
 Contributors: oxilab, richardmallick
 Tags: image hover effects, css3 effects, image hover animation, image gallery, photo gallery
 Requires at least: 6.2
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 9.11.7
+Stable tag: 9.11.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,7 +16,7 @@ Add stunning image hover effects to WordPress. 500+ CSS3 animations, 10 effect m
 
 ✨ No coding. No jQuery. Just beautiful hover effects that work everywhere.
 
-Trusted by **20,000+ WordPress users**, the plugin is lightweight, fully responsive, and compatible with Elementor, Gutenberg, WPBakery, Divi, Beaver Builder, and SiteOrigin.
+The plugin is lightweight, fully responsive, and compatible with Elementor, Gutenberg, WPBakery, Divi, Beaver Builder, and SiteOrigin.
 
 🎬 **[Live Demos](https://demos.oxilab.dev/imagehover/demos/)** | ⭐ **[Upgrade to Pro](https://oxilab.dev/image-hover-effects/pricing/)** | 📖 **[Documentation](https://oxilab.dev/docs/image-hover-effects/)** | 🆘 **[Support](https://wordpress.org/support/plugin/image-hover-effects-ultimate#new-post)**
 
@@ -105,7 +105,7 @@ Pro unlocks the full creative toolkit and priority support:
 
 There are a few image hover plugins out there, but Image Hover Effects Ultimate is the one that covers every use case in one place.
 
-Here is why 20,000+ users choose it:
+Why you choose it:
 
 * 📦 **All modules in one plugin**: General Effects, Caption Effects, Flipbox, Lightbox, Comparison, Magnifier, Carousel, and Filter are all built in. No separate add-ons needed.
 * 🖱️ **No coding required**: everything is configured through the visual admin panel with live preview
@@ -183,6 +183,10 @@ The free version gives you access to all 10 modules and hundreds of layouts. Pro
 ---
 
 == Changelog ==
+
+= 9.11.8 =
+* ✨ Improvement: The review notice and the upgrade notice never appear at the same time, so the screen is not stacked with plugin notices
+* 🐛 Fix: Save button in the editor sidebar could be pushed below the visible screen area, forcing users to zoom the browser out to reach it, the settings panel now scrolls correctly and the Save bar stays pinned to the bottom of the sidebar on any screen height
 
 = 9.11.7 =
 * 🐛 Fix: Edit and rearrange modals now populate correctly for image items saved on older versions, legacy rawdata stored with extra backslash escaping is decoded with a stripslashes fallback that matches the render paths

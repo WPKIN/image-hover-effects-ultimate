@@ -27,63 +27,74 @@ class Support_Reviews {
     }
 
     /**
-     * First Installation Track
+     * Review request notice.
+     *
+     * Shown once the plugin has been in use for more than 7 days
+     * (gated by Admin_helper::admin_notice()).
+     *
      * @return void
      */
     public function first_install() {
 
-        $image = OXI_IMAGE_HOVER_URL . 'image/logo.png';
+        $image  = OXI_IMAGE_HOVER_URL . 'image/logo.png';
+        $review = 'https://wordpress.org/support/plugin/image-hover-effects-ultimate/reviews/?filter=5#new-post';
         ?>
-        <div class="notice notice-info put-dismiss-noticenotice-has-thumbnail shortcode-addons-review-notice oxilab-image-hover-review-notice">
-            <div class="shortcode-addons-notice-thumbnail">
-                <img src="<?php echo esc_url( $image ); ?>" alt="">
+        <div class="notice oxi-iheu-review-notice oxilab-image-hover-review-notice">
+
+            <div class="oxi-iheu-review-notice__logo">
+                <img src="<?php echo esc_url( $image ); ?>"
+                    alt="<?php esc_attr_e( 'Image Hover Effects Ultimate', 'image-hover-effects-ultimate' ); ?>">
             </div>
-            <div class="shortcode-addons--notice-message">
-                <p>
-                    <?php
-                    echo wp_kses_post(
-                        sprintf(
-                            /* translators: 1: Plugin name */
-                            __( 'Hey, You’ve been using <strong>%1$s</strong> for more than 1 week – that’s awesome! Could you please do me a BIG favor and give it a 5-star rating on WordPress? Just to help us spread the word and boost our motivation!', 'image-hover-effects-ultimate' ),
-                            'Image Hover Effects Ultimate – Captions Hover with Visual Composer Extension'
-                        )
-                    );
-                    ?>
+
+            <div class="oxi-iheu-review-notice__body">
+
+                <div class="oxi-iheu-review-notice__stars" aria-hidden="true">
+                    <span class="dashicons dashicons-star-filled"></span>
+                    <span class="dashicons dashicons-star-filled"></span>
+                    <span class="dashicons dashicons-star-filled"></span>
+                    <span class="dashicons dashicons-star-filled"></span>
+                    <span class="dashicons dashicons-star-filled"></span>
+                </div>
+
+                <h3 class="oxi-iheu-review-notice__title">
+                    <?php esc_html_e( 'Enjoying Image Hover Effects Ultimate?', 'image-hover-effects-ultimate' ); ?>
+                </h3>
+
+                <p class="oxi-iheu-review-notice__text">
+                    <?php esc_html_e( 'You have been creating hover effects with us for over a week now, and that is awesome! A quick 5-star review on WordPress.org takes less than a minute, and it genuinely helps us keep improving the plugin.', 'image-hover-effects-ultimate' ); ?>
                 </p>
-                <ul class="shortcode-addons--notice-link">
-                    <li>
-                        <a href="https://wordpress.org/support/plugin/image-hover-effects-ultimate/reviews/"
-                            target="_blank">
-                            <span class="dashicons dashicons-external"></span>
-                            <?php esc_html_e( 'Ok, you deserve it!', 'image-hover-effects-ultimate' ); ?>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="oxi-image-support-reviews" sup-data="success" href="#">
-                            <span class="dashicons dashicons-smiley"></span>
-                            <?php esc_html_e( 'I already did', 'image-hover-effects-ultimate' ); ?>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="oxi-image-support-reviews" sup-data="maybe" href="#">
-                            <span class="dashicons dashicons-calendar-alt"></span>
-                            <?php esc_html_e( 'Maybe Later', 'image-hover-effects-ultimate' ); ?>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://wordpress.org/support/plugin/image-hover-effects-ultimate/">
-                            <span class="dashicons dashicons-sos"></span>
-                            <?php esc_html_e( 'I need help', 'image-hover-effects-ultimate' ); ?>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="oxi-image-support-reviews" sup-data="never" href="#">
-                            <span class="dashicons dashicons-dismiss"></span>
-                            <?php esc_html_e( 'Never show again', 'image-hover-effects-ultimate' ); ?>
-                        </a>
-                    </li>
-                </ul>
+
+                <div class="oxi-iheu-review-notice__actions">
+                    <?php // Opens the review form only, the notice deliberately stays put. ?>
+                    <a class="oxi-iheu-review-btn oxi-iheu-review-btn--primary"
+                        href="<?php echo esc_url( $review ); ?>"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        <span class="dashicons dashicons-star-filled" aria-hidden="true"></span>
+                        <?php esc_html_e( 'Sure, you deserve it!', 'image-hover-effects-ultimate' ); ?>
+                    </a>
+
+                    <button type="button"
+                        class="oxi-iheu-review-btn oxi-iheu-review-btn--ghost oxi-image-support-reviews"
+                        sup-data="success">
+                        <span class="dashicons dashicons-yes-alt" aria-hidden="true"></span>
+                        <?php esc_html_e( 'I already did', 'image-hover-effects-ultimate' ); ?>
+                    </button>
+
+                    <button type="button"
+                        class="oxi-iheu-review-btn oxi-iheu-review-btn--quiet oxi-image-support-reviews"
+                        sup-data="never">
+                        <?php esc_html_e( 'Never show this again', 'image-hover-effects-ultimate' ); ?>
+                    </button>
+                </div>
             </div>
+
+            <button type="button"
+                class="oxi-iheu-review-notice__close oxi-image-support-reviews"
+                sup-data="maybe"
+                aria-label="<?php esc_attr_e( 'Remind me later', 'image-hover-effects-ultimate' ); ?>">
+                <span class="dashicons dashicons-no-alt" aria-hidden="true"></span>
+            </button>
         </div>
         <?php
     }
@@ -93,7 +104,7 @@ class Support_Reviews {
      * @return void
      */
     public function dismiss_button_scripts() {
-        wp_enqueue_script( 'oxi-image-admin-notice', OXI_IMAGE_HOVER_URL . 'assets/backend/js/admin-notice.js', false, OXI_IMAGE_HOVER_PLUGIN_VERSION );
+        wp_enqueue_script( 'oxi-image-admin-notice', OXI_IMAGE_HOVER_URL . 'assets/backend/js/admin-notice.js', [ 'jquery' ], filemtime( OXI_IMAGE_HOVER_PATH . 'assets/backend/js/admin-notice.js' ), true );
         wp_localize_script(
             'oxi-image-admin-notice',
             'oxi_image_admin_notice',
@@ -110,7 +121,7 @@ class Support_Reviews {
      */
     public function admin_enqueue_scripts() {
         wp_enqueue_script( 'jquery' );
-        wp_enqueue_style( 'oxi-image-admin-notice-css', OXI_IMAGE_HOVER_URL . 'assets/backend/css/notice.css', false, OXI_IMAGE_HOVER_PLUGIN_VERSION );
+        wp_enqueue_style( 'oxi-image-admin-notice-css', OXI_IMAGE_HOVER_URL . 'assets/backend/css/notice.css', false, filemtime( OXI_IMAGE_HOVER_PATH . 'assets/backend/css/notice.css' ) );
         $this->dismiss_button_scripts();
     }
 

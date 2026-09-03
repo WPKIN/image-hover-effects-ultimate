@@ -74,6 +74,8 @@ trait Admin_helper
 							</li>
 						<?php
 						}
+						// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in Docs.
+						echo \OXI_IMAGE_HOVER_PLUGINS\Classes\Docs::nav_item();
 						?>
 					</ul>
 					<ul class="oxilab-sa-admin-menu2">
@@ -165,7 +167,11 @@ trait Admin_helper
 			return;
 		endif;
 		$this->admin_recommended();
-		$this->admin_notice();
+		// Only ever one of these two at a time, so the dashboard is never stacked
+		// with plugin notices.
+		if (! $this->admin_notice()) :
+			$this->admin_upgrade_notice();
+		endif;
 	}
 
 	/**
@@ -221,12 +227,95 @@ trait Admin_helper
 	public function admin_notice()
 	{
 		if (! empty($this->admin_notice_status())) :
-			return;
+			return false;
 		endif;
 		if (strtotime('-7 days') < $this->installation_date()) :
-			return;
+			return false;
 		endif;
 		new \OXI_IMAGE_HOVER_PLUGINS\Classes\Support_Reviews();
+		return true;
+	}
+
+	/**
+	 * Pro upgrade notice gate.
+	 *
+	 * Free users only, after 10 days of use, until dismissed for good. The pro
+	 * check calls check_current_version() directly rather than through the
+	 * 'oxi-image-hover-plugin-version' filter, because Admin_Filters() has not
+	 * registered that filter yet at the point User_Reviews() runs.
+	 *
+	 * @since 9.11.8
+	 */
+	public function admin_upgrade_notice()
+	{
+		if ($this->has_pro_access()) :
+			return false;
+		endif;
+		if (! empty(get_option('oxi_image_hover_upgrade_nobug'))) :
+			return false;
+		endif;
+		if (strtotime('-10 days') > $this->upgrade_notice_date()) :
+			new \OXI_IMAGE_HOVER_PLUGINS\Classes\Support_Upgrade();
+			return true;
+		endif;
+		return false;
+	}
+
+	/**
+	 * Whether this install has a valid licence or premium code available.
+	 *
+	 * Wrapped defensively: this runs earlier than the existing pro checks, and a
+	 * missing Freemius bootstrap must never be able to fatal the admin.
+	 *
+	 * @since 9.11.8
+	 */
+	public function has_pro_access()
+	{
+		$has_pro = false;
+		try {
+			$license = get_option($this->fixed_data('696d6167655f686f7665725f756c74696d6174655f6c6963656e73655f737461747573'));
+			if ($license === $this->fixed_data('76616c6964')) :
+				$has_pro = true;
+			elseif (function_exists('oxilab_iheu_v') && oxilab_iheu_v()->can_use_premium_code()) :
+				$has_pro = true;
+			endif;
+		} catch (\Throwable $e) {
+			// Treat an unavailable licence layer as "unknown", and stay quiet
+			// rather than risk showing an upgrade prompt to a paying customer.
+			$has_pro = true;
+		}
+
+		/**
+		 * Filters whether this install counts as having Pro access.
+		 *
+		 * Only governs whether the upgrade notice is shown, it unlocks nothing.
+		 * Useful for QA, where a licenced dev site needs to preview the free
+		 * user experience.
+		 *
+		 * @since 9.11.8
+		 *
+		 * @param bool $has_pro
+		 */
+		return (bool) apply_filters('oxi_image_hover_has_pro_access', $has_pro);
+	}
+
+	/**
+	 * Clock for the upgrade notice.
+	 *
+	 * Seeded from the real installation date so existing sites are credited for
+	 * the time they have already used the plugin, then kept separate from it, so
+	 * snoozing the review notice cannot move this one.
+	 *
+	 * @since 9.11.8
+	 */
+	public function upgrade_notice_date()
+	{
+		$data = get_option('oxi_image_hover_upgrade_date');
+		if (empty($data)) :
+			$data = $this->installation_date();
+			update_option('oxi_image_hover_upgrade_date', $data);
+		endif;
+		return $data;
 	}
 
 	/**

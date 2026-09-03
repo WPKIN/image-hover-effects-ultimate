@@ -78,6 +78,84 @@ transition: all 0.2s ease;
 .oxi-addons-header-left a i {
   font-size: 12px;
 }
+/* ---- "How to use?" dropdown (Classes/Docs.php::editor_item) ---- */
+.oxi-addons-header-left .oxi-howto-item--editor {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  align-self: stretch;
+}
+.oxi-addons-header-left .oxi-howto-item--editor > a:after {
+  content: "\f347";
+  font-family: dashicons;
+  font-size: 15px;
+  line-height: 1;
+  margin-left: 4px;
+  color: #9AA0A6;
+  transition: transform 0.2s ease;
+}
+.oxi-addons-header-left .oxi-howto-item--editor:hover > a:after,
+.oxi-addons-header-left .oxi-howto-item--editor:focus-within > a:after {
+  transform: rotate(180deg);
+}
+.oxi-addons-header-left .oxi-howto-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 100001; /* above the fixed editor header */
+  min-width: 268px;
+  margin: 0;
+  padding: 6px 0;
+  list-style: none;
+  background: #fff;
+  border: 1px solid #E0E5E9;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 6px 18px rgba(29, 35, 39, 0.14);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+}
+.oxi-addons-header-left .oxi-howto-item--editor:hover > .oxi-howto-menu,
+.oxi-addons-header-left .oxi-howto-item--editor:focus-within > .oxi-howto-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.oxi-addons-header-left .oxi-howto-menu li {
+  margin: 0;
+  padding: 0;
+}
+.oxi-addons-header-left .oxi-howto-menu li a {
+  display: block;
+  padding: 9px 18px;
+  border-right: none;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #3C434A;
+  white-space: nowrap;
+}
+.oxi-addons-header-left .oxi-howto-menu li a:hover,
+.oxi-addons-header-left .oxi-howto-menu li a:focus {
+  color: #fff;
+  background: #1A73E8;
+  border-color: #1A73E8;
+  box-shadow: none;
+}
+.oxi-addons-header-left .oxi-howto-menu li:last-child {
+  margin-top: 5px;
+  padding-top: 5px;
+  border-top: 1px solid #EEF0F2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .oxi-addons-header-left .oxi-howto-menu,
+  .oxi-addons-header-left .oxi-howto-item--editor > a:after {
+    transition: none;
+  }
+}
+
 .oxi-btn-howto {
   color: #1A73E8 !important;
   font-weight: 600 !important;
@@ -481,6 +559,7 @@ transition: all 0.2s ease;
     float: none !important;
     padding-right: 0 !important;
     height: 100%;
+    min-height: 0; /* allow flex children to shrink instead of overflowing */
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -523,6 +602,7 @@ transition: all 0.2s ease;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 .oxi-sidebar-main-title {
+    flex-shrink: 0;
     background: #FDE4EC;
     color: #1d2327;
     font-size: 16px;
@@ -534,8 +614,9 @@ transition: all 0.2s ease;
 
 /* Main Form Layout */
 #oxi-addons-form-submit {
-    flex-grow: 1;
-    height: 100%;
+    flex: 1 1 auto;
+    height: auto;
+    min-height: 0; /* without this the form keeps its content height and pushes the Save bar off-screen */
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -544,11 +625,15 @@ transition: all 0.2s ease;
 .oxi-addons-style-settings {
     display: flex;
     flex-direction: column;
+    flex: 1 1 auto;
     height: 100%;
+    min-height: 0;
+    overflow: hidden;
 }
 
 .oxi-addons-tabs-wrapper {
-    flex-grow: 1;
+    flex: 1 1 0;
+    min-height: 0; /* required so overflow-y actually scrolls in a flex column */
     overflow-y: auto;
     overflow-x: hidden;
     padding: 0;
@@ -600,7 +685,9 @@ transition: all 0.2s ease;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-shrink: 0;
+    flex: 0 0 auto;
+    position: relative;
+    z-index: 2;
     border-top: 1px solid #ddd;
 }
 .oxi-addons-setting-save .btn-success {

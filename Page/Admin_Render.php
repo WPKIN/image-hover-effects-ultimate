@@ -755,9 +755,10 @@ abstract class Admin_Render
 				<a href="<?php echo admin_url('admin.php?page=oxi-image-hover-shortcode'); ?>" class="oxi-btn-dashboard">
 					Shortcode List
 				</a>
-				<a href="https://oxilab.dev/docs/image-hover-effects/ihe-getting-started/creating-your-first-hover-effect/" target="_blank" class="oxi-btn-howto">
-					<i class="fa fa-question-circle" aria-hidden="true"></i> How to use?
-				</a>
+				<?php
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in Docs.
+				echo \OXI_IMAGE_HOVER_PLUGINS\Classes\Docs::editor_item();
+				?>
 			</div>
 			<div class="oxi-addons-header-right">
 				<?php if (apply_filters('oxi-image-hover-plugin-version', false) == false) : ?>
